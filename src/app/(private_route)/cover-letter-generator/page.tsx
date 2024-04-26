@@ -14,7 +14,7 @@ import PreviouslyGeneratedList from "@/components/dashboard/PreviouslyGeneratedL
 import { setCoverLetter } from "@/store/coverLetterSlice";
 
 import CoverLetterCardSingle from "@/components/dashboard/cover-letter-generator/CoverLetterCardSingle";
-import { EditIcon } from "@/helpers/iconsProvider";
+import { EditIcon, boltIcon } from "@/helpers/iconsProvider";
 import { makeid } from "@/helpers/makeid";
 import DownloadService from "@/helpers/downloadFile";
 import { useAppContext } from "@/context/AppContext";
@@ -529,20 +529,7 @@ export default function CoverLetterPage() {
                     </div>
                   ) : (
                     <div className="flex flex-row items-center justify-center gap-2">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-3 h-3 md:w-4 md:h-4 dark:text-gray-100 text-gray-950"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
-                        />
-                      </svg>
+                      {boltIcon}
 
                       <span className="text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950 md:text-sm">
                         Generate Cover Letter
