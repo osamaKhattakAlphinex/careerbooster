@@ -1,5 +1,9 @@
 "use client";
-import { infoSmallIcon, searchIcon } from "@/helpers/iconsProvider";
+import {
+  infoSmallIcon,
+  searchIcon,
+  emptyStateIcon,
+} from "@/helpers/iconsProvider";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -60,17 +64,6 @@ const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
           )}
         </div>
 
-        {/* <div className="relative lg:w-[213px] w-[120px] flex">
-          <input
-            className="w-full pl-4 lg:h-[38px] lg:py-[8px] py-[6px]
-            placeholder:text-[#5B5B5B] rounded-full border-[1px] border-[#312E37] placeholder-gray-400 text-white lg:text-[14px] text-[10px] focus:outline-none focus:border-zinc-600 bg-transparent"
-            type="text"
-            placeholder="Search here"
-          />
-          <div className="absolute inset-y-0 items-center hidden right-3 lg:flex">
-            {searchIcon}
-          </div>
-        </div> */}
         <span className="cursor-pointer" onClick={() => setShowDrop(!showDrop)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -138,20 +131,7 @@ const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
           </Swiper>
         ) : (
           <div className="flex flex-col items-center justify-center w-full p-5 text-gray-100/50">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5m6 4.125 2.25 2.25m0 0 2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z"
-              />
-            </svg>
+            {emptyStateIcon}
             <p>No Data Found</p>
           </div>
         )}
