@@ -51,7 +51,7 @@ const Experience = ({
   }, [streamedJDData]);
   return (
     <>
-      <h2 className="text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2">
+      <h2 className={`${styles?.experienceHeading_temp_2}`}>
         {resumeWorkExpIcon}
 
         <EditableField

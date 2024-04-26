@@ -6,16 +6,17 @@ import React from "react";
 type Props = {
   name: string;
   jobTitle: string;
-  fullNameStyle: string;
-  jobTitleStyle: string;
+  styles: any;
+  conditionStyleHeader: any;
 };
 
-const Header = ({ name, jobTitle, fullNameStyle, jobTitleStyle }: Props) => {
+const Header = ({ name, jobTitle, styles, conditionStyleHeader }: Props) => {
   const { updateSaveHook } = useUpdateAndSave();
+  console.log("conditionStyleHeader", conditionStyleHeader);
 
   return (
     <>
-      <h2 className={`${fullNameStyle}`}>
+      <h2 className={`${styles?.full_Name_Style}`}>
         <EditableField
           value={name ? name : "FULL NAME"}
           style={{ width: "fit-content" }}
@@ -26,7 +27,7 @@ const Header = ({ name, jobTitle, fullNameStyle, jobTitleStyle }: Props) => {
           }}
         />
       </h2>
-      <h3 className={`${jobTitleStyle}`}>
+      <h3 className={`${styles?.jobTitle_temp_2}`}>
         <EditableField
           value={jobTitle ? jobTitle : "JOB TITLE"}
           onSave={(value: string) => {

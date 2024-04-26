@@ -14,9 +14,10 @@ type Props = {
   heading: any;
   publications: any;
   styles: any;
+  customStyle?: any;
 };
 
-const Publication = ({ heading, publications, styles }: Props) => {
+const Publication = ({ heading, publications, styles, customStyle }: Props) => {
   const [pulicationIndex, setPulicationIndex] = useState<number>();
   const { handlers } = useHandler();
   const { updateSaveHook } = useUpdateAndSave();
@@ -32,8 +33,16 @@ const Publication = ({ heading, publications, styles }: Props) => {
 
   return (
     <>
-      <span className={styles?.span1}></span>
-      <h3 className={styles?.publication_h3}>
+      <span
+        className={`${styles?.span1} ${
+          customStyle?.borderTopBottom ? "block" : "hidden"
+        }`}
+      ></span>
+      <h3
+        className={`${styles?.publication_h3}  ${
+          customStyle?.centeredHeading ? "justify-center" : ""
+        } ${customStyle?.bgColor} `}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
@@ -60,7 +69,13 @@ const Publication = ({ heading, publications, styles }: Props) => {
           }}
         />
       </h3>
-      <span className={styles?.span2}></span>
+      <span
+        className={`${styles?.span2} ${
+          customStyle?.borderTopBottom || customStyle?.borderBottom
+            ? "block"
+            : "hidden"
+        }`}
+      ></span>
       {publications.map((rec: any, i: number) => {
         return (
           <Toolbar
@@ -251,7 +266,7 @@ const Publication = ({ heading, publications, styles }: Props) => {
                       />
                       <div className="flex w-full gap-2 my-2">
                         <button
-                          className="achievement-save-btn"
+                          className="save_btn"
                           onClick={() => {
                             // Save the new achievement to the state and possibly the database
                             handlers.handleAddOthersAchivement(
@@ -270,7 +285,7 @@ const Publication = ({ heading, publications, styles }: Props) => {
                             setPulicationIndex(-1);
                             setNewBulletSection(null);
                           }}
-                          className="achievement-delete-btn"
+                          className="delete_btn"
                         >
                           Cancel
                         </button>

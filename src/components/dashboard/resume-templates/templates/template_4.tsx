@@ -30,7 +30,25 @@ import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import useHandler from "@/hooks/useHandler";
 import ColorPicker from "../colorPicker";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
-
+import AddItemToCustomSection from "../../resume-builder/AddItemToCustomSection";
+import Publication from "./resume-sections/publication";
+import {
+  award,
+  certification,
+  customStyle_4,
+  interest,
+  language,
+  publicationStyles,
+  reference,
+  training,
+} from "@/helpers/templateStylesObj";
+import Certification from "./resume-sections/certification";
+import Training from "./resume-sections/trainings";
+import Award from "./resume-sections/award";
+import Interest from "./resume-sections/interest";
+import Reference from "./resume-sections/reference";
+import Language from "./resume-sections/language";
+// import CustomResumeSection from "../../resume-builder/CustomResumeSection";
 const ResumeTemplate4 = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
@@ -103,7 +121,7 @@ const ResumeTemplate4 = () => {
     <div className="first-page ">
       <div className="flex ">
         <div
-          className="template4_sidebar"
+          className="flex flex-col w-3/12 bg-[#323B4C] h-auto pt-6 pb-8 pl-3 pr-6 text-gray-100 xs:w-1/3 md:w-3/12 md:pl-4 md:pr-4 xs:pt-2"
           // style={{ backgroundColor: color }}
         >
           {/* <div className="w-full">
@@ -120,9 +138,9 @@ const ResumeTemplate4 = () => {
           </div> */}
           <div
             // style={{ backgroundColor: color_second }}
-            className="shortName"
+            className=" w-28 h-28 xs:w-[72px] bg-[#111827] relative xs:h-[72px] sm:w-24 sm:h-24 md:w-28 md:h-28 text-white  text-center flex  items-center border-[1px] border-white  rounded-full mx-auto xs:mx-0 md:mx-auto mt-4  md:mt-5 mb-4 justify-center md:mb-2"
           >
-            <span className="shortName_Text">
+            <span className="text-3xl font-semibold border-2 border-transparent xs:text-2xl md:text-3xl hover:shadow-md hover:bg-gray-500 hover:border-dashed hover:border-gray-500 ">
               <EditableField
                 value={resume?.shortName ? resume?.shortName : "CPH"}
                 style={{ width: "60px" }}
@@ -145,7 +163,7 @@ const ResumeTemplate4 = () => {
           </div>
           {/* contacts */}
 
-          <h3 className="contact_heading">
+          <h3 className="flex flex-row items-center gap-2 mb-2 -mr-6 text-base font-semibold uppercase border-2 border-transparent md:-mr-6 md:mt-4 hover:border-dashed hover:border-gray-500 hover:w-full">
             {resumeContactIcon}
 
             <EditableField
@@ -162,9 +180,9 @@ const ResumeTemplate4 = () => {
               }}
             />
           </h3>
-          <span className="bottom_border"></span>
-          <ul className="contact_ul">
-            <li className="contact_li">
+          <span className="w-full mb-2 border-b-2 border-gray-100 !block"></span>
+          <ul className="flex flex-col gap-2 pl-0 mb-4 text-xs break-all ">
+            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500  flex flex-row gap-2  justify-start items-center">
               <div className="p-1">{phoneIcon}</div>
 
               <EditableField
@@ -181,7 +199,7 @@ const ResumeTemplate4 = () => {
               />
             </li>
 
-            <li className="contact_li">
+            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 flex flex-row gap-2  justify-start items-center">
               <div className="p-1">{emailIcon}</div>
 
               <EditableField
@@ -198,7 +216,7 @@ const ResumeTemplate4 = () => {
               />
             </li>
 
-            <li className="contact_li">
+            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-gray-100 flex flex-row gap-2  justify-start items-center ">
               <div className="p-1">
                 <svg
                   width="16"
@@ -232,7 +250,7 @@ const ResumeTemplate4 = () => {
               />
               {/* </a> */}
             </li>
-            <li className="contact_li  ">
+            <li className="hover:shadow-md mb-[8px] hover:bg-gray-500 text-gray-100 flex flex-row gap-2  justify-start items-center  ">
               <div className="p-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -265,7 +283,7 @@ const ResumeTemplate4 = () => {
             <>
               {resume?.primarySkills && resume?.primarySkills.length > 0 && (
                 <>
-                  <h3 className="skills_h3 ">
+                  <h3 className="flex flex-row items-center gap-2 mb-2 -mr-6 text-base font-semibold uppercase border-2 border-transparent md:-mr-6 md:text-md hover:border-dashed hover:border-gray-500 hover:w-full ">
                     {resumeSkillsIcon}
 
                     <EditableField
@@ -284,7 +302,7 @@ const ResumeTemplate4 = () => {
                       }}
                     />
                   </h3>
-                  <span className="bottom_border"></span>
+                  <span className="border-b-2 border-white w-full h-2 mb-2 !block"></span>
                 </>
               )}
               {resume?.primarySkills &&
@@ -294,7 +312,7 @@ const ResumeTemplate4 = () => {
                   addSkill={handleAddSkills}
                   regenerateSkills={getPrimarySkills}
                 >
-                  <ol className="skill_ul ">
+                  <ol className="border-2 border-transparent hover:border-dashed hover:border-gray-500  pl-0 flex list-styled flex-col gap-3 mb-4 text-xs xs:text-[12px] md:text-xs">
                     {resume?.primarySkills.map((skill: string, i: number) => (
                       <li
                         className="hover:shadow-md hover:cursor-move parent border-transparent border-[1px] hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-500 flex  items-center gap-3"
@@ -371,9 +389,9 @@ const ResumeTemplate4 = () => {
             </>
           )}
         </div>
-        <div className="template_right_section">
+        <div className="flex flex-col flex-wrap w-9/12 px-4 pt-10 pb-10 md:px-8 text-gray-950 xs:pt-16">
           <div className="flex flex-col ">
-            <h2 className="full_name">
+            <h2 className="text-4xl font-bold border-2 border-transparent hover:border-dashed hover:border-gray-500 xs:text-2xl md:4xl lg:text-4xl hover:shadow-md hover:bg-gray-100">
               <EditableField
                 value={resume?.name ? resume?.name : "FULL NAME"}
                 style={{ width: "full" }}
@@ -384,7 +402,7 @@ const ResumeTemplate4 = () => {
                 }}
               />
             </h2>
-            <h3 className="job_title">
+            <h3 className="text-lg border-2 border-transparent xs:text-xs md:text-2xl lg:text-2xl hover:shadow-md hover:bg-gray-100 hover:border-dashed hover:border-gray-500 ">
               <EditableField
                 value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
                 onSave={(value: string) => {
@@ -397,7 +415,7 @@ const ResumeTemplate4 = () => {
           </div>
           {/* Executive Summary */}
 
-          <h3 className="resume_main_headings">
+          <h3 className="mt-4 text-base font-semibold uppercase border-2 border-transparent md:mt-5 hover:border-dashed hover:border-gray-500  flex items-center gap-2">
             {resumeSummaryIcon}
 
             <EditableField
@@ -416,10 +434,10 @@ const ResumeTemplate4 = () => {
               }}
             />
           </h3>
-          <span className="bottom_border_black"></span>
+          <span className="w-full h-0 border-[1px] !border-gray-500 mt-2 mb-4 !block"></span>
 
           <Toolbar regenrateSummary={getSummary}>
-            <div className="summary_text ">
+            <div className="pr-4 text-xs text-justify border-2 border-transparent hover:shadow-md hover:border-gray-500 hover:border-dashed ">
               <EditableField
                 type="textarea"
                 value={
@@ -444,7 +462,7 @@ const ResumeTemplate4 = () => {
 
           {/* work experience */}
 
-          <h3 className="resume_main_headings">
+          <h3 className="text-base font-semibold uppercase border-2 border-transparent lg:mt-4 hover:border-dashed hover:border-gray-500 flex items-center gap-2">
             {resumeWorkExpIcon}
 
             <EditableField
@@ -463,7 +481,7 @@ const ResumeTemplate4 = () => {
               }}
             />
           </h3>
-          <span className="bottom_border_black"></span>
+          <span className="border-stylee w-full h-0 border-[1px] !border-gray-500 my-3 !block"></span>
 
           {resume?.workExperienceArray &&
           resume?.workExperienceArray.length > 0 ? (
@@ -491,7 +509,7 @@ const ResumeTemplate4 = () => {
                     >
                       <div
                         key={i}
-                        className="work_exp_hover_style"
+                        className="border-2 border-transparent hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2"
                         onDragStart={(e) =>
                           e.dataTransfer.setData("text/plain", i.toString())
                         }
@@ -499,7 +517,7 @@ const ResumeTemplate4 = () => {
                         onDrop={(e) => handleDropExperience(e, i)}
                         draggable
                       >
-                        <h2 className="work_exp_heading">
+                        <h2 className="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">
                           <EditableField
                             value={rec?.title}
                             style={{ width: "100%" }}
@@ -511,7 +529,7 @@ const ResumeTemplate4 = () => {
                             }}
                           />
                         </h2>
-                        <h2 className="work_exp_sub_heading">
+                        <h2 className="flex gap-1 text-xs font-semibold leading-relaxed hover:cursor-default ">
                           {/* {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                           {rec?.isContinue
                             ? "Present"
@@ -578,8 +596,7 @@ const ResumeTemplate4 = () => {
                               }}
                             />
                           )}
-                          |
-                          <span className="work_exp_sub_heading_hover_style">
+                          <span className="hover:shadow-md hover:cursor-text hover:bg-gray-100">
                             <EditableField
                               value={rec?.company}
                               onSave={(value: string) => {
@@ -591,7 +608,7 @@ const ResumeTemplate4 = () => {
                             />
                           </span>{" "}
                           |{" "}
-                          <span className="work_exp_sub_heading_hover_style">
+                          <span className="hover:shadow-md hover:bg-gray-100">
                             <EditableField
                               value={rec?.cityState}
                               onSave={(value: string) => {
@@ -603,7 +620,7 @@ const ResumeTemplate4 = () => {
                             />
                           </span>{" "}
                           {rec?.cityState?.length > 0 && ","}
-                          <span className="work_exp_sub_heading_hover_style">
+                          <span className="hover:shadow-md hover:bg-gray-100">
                             <EditableField
                               value={rec?.country}
                               onSave={(value: string) => {
@@ -617,7 +634,7 @@ const ResumeTemplate4 = () => {
                         </h2>
                         <div className="p-4">
                           {rec?.achievements && i !== regeneratedRecordIndex ? (
-                            <ul className="work_exp_ul">
+                            <ul className="flex flex-col gap-1 pl-0 text-xs">
                               {rec?.achievements.map(
                                 (achievement: any, ind: number) =>
                                   achievement === "" ? (
@@ -635,7 +652,7 @@ const ResumeTemplate4 = () => {
                                         );
                                       }}
                                       draggable
-                                      className="work_exp_li"
+                                      className="flex flex-row items-center justify-center h-8 hover:bg-slate-200 group"
                                     >
                                       <div
                                         className="hidden text-xs font-medium text-gray-500 uppercase cursor-pointer group-hover:block"
@@ -777,11 +794,94 @@ const ResumeTemplate4 = () => {
 
           {/* Add Custom */}
           {/* <CustomResumeSection /> */}
+          {/* Publications */}
+          <div className="w-full">
+            {resume?.publications && resume?.publications.length > 0 && (
+              <Publication
+                customStyle={customStyle_4}
+                heading={resume.headings.publications}
+                publications={resume.publications}
+                styles={publicationStyles}
+              />
+            )}
+          </div>
+
+          {/* Certificates */}
+          <div className="w-full">
+            {resume?.certifications && resume?.certifications.length > 0 && (
+              <Certification
+                customStyle={customStyle_4}
+                heading={resume.headings.certifications}
+                certificates={resume.certifications}
+                styles={certification}
+              />
+            )}
+          </div>
+
+          {/* Trainings */}
+          <div className="w-full">
+            {resume?.trainings && resume?.trainings.length > 0 && (
+              <Training
+                customStyle={customStyle_4}
+                heading={resume.headings.trainings}
+                trainings={resume.trainings}
+                styles={training}
+              />
+            )}
+          </div>
+
+          {/* Awards */}
+          <div className="w-full">
+            {resume?.awards && resume?.awards.length > 0 && (
+              <Award
+                customStyle={customStyle_4}
+                heading={resume.headings.awards}
+                awards={resume.awards}
+                styles={award}
+              />
+            )}
+          </div>
+
+          {/* Interests & Hobbies */}
+          <div className="w-full">
+            {resume?.interests && resume?.interests.length > 0 && (
+              <Interest
+                customStyle={customStyle_4}
+                heading={resume.headings.interests}
+                interests={resume.interests}
+                styles={interest}
+              />
+            )}
+          </div>
+
+          {/* References */}
+          <div className="w-full">
+            {resume?.references && resume?.references.length > 0 && (
+              <Reference
+                customStyle={customStyle_4}
+                heading={resume.headings.references}
+                references={resume.references}
+                styles={reference}
+              />
+            )}
+          </div>
+
+          {/* Languages */}
+          <div className="w-full">
+            {resume?.languages && resume?.languages.length > 0 && (
+              <Language
+                customStyle={customStyle_4}
+                heading={resume.headings.languages}
+                languages={resume.languages}
+                styles={language}
+              />
+            )}
+          </div>
           {/* Education */}
 
           {resume?.education.length > 0 && (
             <>
-              <h3 className="resume_main_headings">
+              <h3 className="flex flex-row items-center gap-2 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
                 {resumeEductionIcon}
 
                 <EditableField
@@ -800,7 +900,7 @@ const ResumeTemplate4 = () => {
                   }}
                 />
               </h3>
-              <span className=" bottom_border_black"></span>
+              <span className="border-stylee  h-0 border-[1px] !border-gray-500 my-3 !block"></span>
               <ul className="flex flex-wrap justify-between w-full pl-0 md:flex-row lg:flex-row ">
                 {resume?.education.map((education: Education, ind: number) => (
                   <React.Fragment key={education?.id || ind}>

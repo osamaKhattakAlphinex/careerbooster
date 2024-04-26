@@ -12,8 +12,10 @@ import React, { useState } from "react";
 type Props = {
   heading: any;
   interests: any;
+  styles: any;
+  customStyle?: any;
 };
-const Interest = ({ heading, interests }: Props) => {
+const Interest = ({ heading, interests, styles, customStyle }: Props) => {
   const { handlers } = useHandler();
   const { updateSaveHook } = useUpdateAndSave();
   const [newWorkExperience, setNewWorkExperience] = useState<number>();
@@ -28,8 +30,18 @@ const Interest = ({ heading, interests }: Props) => {
 
   return (
     <>
-      <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-      <h3 className="flex items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 md:text-base hover:border-dashed hover:border-gray-500">
+      <span
+        className={`${styles?.span1} ${
+          customStyle?.borderTopBottom ? "block" : "hidden"
+        }`}
+      ></span>
+      <h3
+        className={`${styles?.interest_h3} ${
+          customStyle?.centeredHeading ? "justify-center" : ""
+        }
+          ${customStyle?.bgColor}
+        `}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
@@ -51,7 +63,13 @@ const Interest = ({ heading, interests }: Props) => {
           }}
         />
       </h3>
-      <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
+      <span
+        className={`${styles?.span2} ${
+          customStyle?.borderTopBottom || customStyle?.borderBottom
+            ? "block"
+            : "hidden"
+        }`}
+      ></span>
       {interests.map((rec: any, i: number) => {
         return (
           <Toolbar
@@ -69,7 +87,7 @@ const Interest = ({ heading, interests }: Props) => {
           >
             <div
               key={i}
-              className="border-2 border-transparent md:w-full hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2"
+              className={`${styles?.interest_div}`}
               onDragStart={(e) =>
                 e.dataTransfer.setData("text/plain", i.toString())
               }
@@ -93,7 +111,7 @@ const Interest = ({ heading, interests }: Props) => {
 
               <div className="px-4 py-1">
                 {rec?.description && i !== regeneratedRecordIndex ? (
-                  <ul className="flex flex-col gap-1 pl-0 text-xs">
+                  <ul className={` ${styles?.interest?.ul}`}>
                     {rec?.description.map((achievement: any, ind: number) =>
                       achievement === "" ? (
                         <li
@@ -111,10 +129,10 @@ const Interest = ({ heading, interests }: Props) => {
                             );
                           }}
                           draggable
-                          className="flex flex-row items-center justify-center h-8 hover:bg-slate-200 group"
+                          className={`group ${styles?.interest_li}`}
                         >
                           <div
-                            className="hidden text-xs font-medium text-gray-500 uppercase cursor-pointer group-hover:block"
+                            className={`${styles?.interest_line}`}
                             onClick={() => {
                               handlers.handleRemoveExtraOthersSpace(
                                 i,
@@ -141,7 +159,7 @@ const Interest = ({ heading, interests }: Props) => {
                             );
                           }}
                           draggable
-                          className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative parent hover:bg-gray-100"
+                          className={`${styles?.interest_delete1} parent`}
                           key={ind}
                         >
                           <EditableField
@@ -164,7 +182,7 @@ const Interest = ({ heading, interests }: Props) => {
                                 "interests"
                               )
                             }
-                            className="w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
+                            className={`${styles?.interest_delete} child`}
                           >
                             {crossIcon1}
                           </div>
@@ -188,9 +206,9 @@ const Interest = ({ heading, interests }: Props) => {
 
                 {newWorkExperience === i && newBulletSection === "Interests" ? (
                   <>
-                    <div className="flex flex-wrap w-full gap-1 mt-4">
+                    <div className={`${styles?.interest_div_input}`}>
                       <input
-                        className="w-full py-[4px] border-2 rounded-md  text bg-transparent " // Apply Tailwind CSS classes
+                        className={`${styles?.interest_new_input}`} // Apply Tailwind CSS classes
                         onChange={(e) => setNewAchievement(e.target.value)}
                         value={newAchievement}
                         name="newAchievement"
@@ -211,7 +229,7 @@ const Interest = ({ heading, interests }: Props) => {
                       />
                       <div className="flex w-full gap-2 my-2">
                         <button
-                          className="w-1/12 text-white bg-green-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12 h-9 "
+                          className="save_btn"
                           onClick={() => {
                             // Save the new achievement to the state and possibly the database
                             handlers.handleAddOthersAchivement(
@@ -230,7 +248,7 @@ const Interest = ({ heading, interests }: Props) => {
                             setNewWorkExperience(-1);
                             setNewBulletSection(null);
                           }}
-                          className="w-1/12 py-1 text-white bg-red-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12"
+                          className="delete_btn"
                         >
                           Cancel
                         </button>

@@ -34,7 +34,16 @@ import Award from "./resume-sections/award";
 import Interest from "./resume-sections/interest";
 import Reference from "./resume-sections/reference";
 import Language from "./resume-sections/language";
-import { certification, publicationStyles } from "@/helpers/templateStylesObj";
+import {
+  award,
+  certification,
+  customStyle_6_9,
+  interest,
+  language,
+  publicationStyles,
+  reference,
+  training,
+} from "@/helpers/templateStylesObj";
 const ResumeTemplate6 = () => {
   const resume = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
@@ -721,11 +730,13 @@ const ResumeTemplate6 = () => {
                 heading={resume.headings.publications}
                 publications={resume.publications}
                 styles={publicationStyles}
+                customStyle={customStyle_6_9}
               />
             )}
             {/* Certification */}
             {resume?.certifications && resume?.certifications.length > 0 && (
               <Certification
+                customStyle={customStyle_6_9}
                 heading={resume.headings.certifications}
                 certificates={resume.certifications}
                 styles={certification}
@@ -736,12 +747,19 @@ const ResumeTemplate6 = () => {
               <Training
                 heading={resume.headings.trainings}
                 trainings={resume.trainings}
+                styles={training}
+                customStyle={customStyle_6_9}
               />
             )}
 
             {/* Awards */}
             {resume?.awards && resume?.awards.length > 0 && (
-              <Award heading={resume.headings.awards} awards={resume.awards} />
+              <Award
+                heading={resume.headings.awards}
+                awards={resume.awards}
+                styles={award}
+                customStyle={customStyle_6_9}
+              />
             )}
 
             {/* Interests & Hobbies */}
@@ -749,6 +767,8 @@ const ResumeTemplate6 = () => {
               <Interest
                 heading={resume.headings.interests}
                 interests={resume.interests}
+                styles={interest}
+                customStyle={customStyle_6_9}
               />
             )}
 
@@ -757,6 +777,8 @@ const ResumeTemplate6 = () => {
               <Reference
                 heading={resume.headings.references}
                 references={resume.references}
+                styles={reference}
+                customStyle={customStyle_6_9}
               />
             )}
 
@@ -765,6 +787,8 @@ const ResumeTemplate6 = () => {
               <Language
                 heading={resume.headings.languages}
                 languages={resume.languages}
+                styles={language}
+                customStyle={customStyle_6_9}
               />
             )}
 

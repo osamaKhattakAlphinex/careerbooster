@@ -10,17 +10,29 @@ import React from "react";
 type Props = {
   heading: any;
   references: any;
+  styles: any;
+  customStyle?: any;
 };
 
-const Reference = ({ heading, references }: Props) => {
+const Reference = ({ heading, references, styles, customStyle }: Props) => {
   const { handleDropOthersAchievement, handleDropOthers } = useDragAndDrop();
   const { handlers } = useHandler();
   const { updateSaveHook } = useUpdateAndSave();
 
   return (
     <>
-      <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-      <h3 className="flex items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 md:text-base hover:border-dashed hover:border-gray-500">
+      <span
+        className={`${styles?.span1} ${
+          customStyle?.borderTopBottom ? "block" : "hidden"
+        }`}
+      ></span>
+      <h3
+        className={`${styles?.reference_h3} ${
+          customStyle?.centeredHeading ? "justify-center" : ""
+        }
+          ${customStyle?.bgColor}
+        `}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
@@ -46,14 +58,17 @@ const Reference = ({ heading, references }: Props) => {
           }}
         />
       </h3>
-      <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
-      <ul className="flex flex-wrap w-full pl-0 md:flex-row lg:flex-row ">
+      <span
+        className={`${styles?.span2} ${
+          customStyle?.borderTopBottom || customStyle?.borderBottom
+            ? "block"
+            : "hidden"
+        }`}
+      ></span>
+      <ul className={`${styles?.reference_ul}`}>
         {references.map((rec: any, i: number) => {
           return (
-            <li
-              key={i}
-              className="w-[45%] md:w-[30%] md m-2  xs:m-0 relative group border-transparent border-2 hover:border-dashed hover:border-gray-500"
-            >
+            <li key={i} className={`${styles?.reference_li} group`}>
               <Toolbar
                 // addAchivement={() => {
                 //   setNewWorkExperience(i)
@@ -77,7 +92,7 @@ const Reference = ({ heading, references }: Props) => {
                   onDrop={(e) => handleDropOthers(e, i, "references")}
                   draggable
                 >
-                  <h2 className="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">
+                  <h2 className={`${styles?.reference_h2}`}>
                     <EditableField
                       value={rec?.name}
                       style={{ width: "100%" }}
@@ -90,9 +105,9 @@ const Reference = ({ heading, references }: Props) => {
                       }}
                     />
                   </h2>
-                  <h2 className="flex flex-wrap gap-1 text-xs font-semibold leading-relaxed hover:cursor-default ">
+                  <h2 className={`${styles?.reference_h2_1}`}>
                     {rec?.position && (
-                      <span className="hover:shadow-md hover:bg-gray-100">
+                      <span className={`${styles?.reference_date}`}>
                         <EditableField
                           value={rec?.position}
                           onSave={(value: string) => {
@@ -106,7 +121,7 @@ const Reference = ({ heading, references }: Props) => {
                       </span>
                     )}
                     |
-                    <span className="hover:shadow-md hover:bg-gray-100">
+                    <span className={`${styles?.reference_date}`}>
                       <EditableField
                         value={rec?.company}
                         onSave={(value: string) => {
@@ -119,10 +134,10 @@ const Reference = ({ heading, references }: Props) => {
                       />
                     </span>
                   </h2>
-                  <h2 className="flex flex-wrap gap-1 text-xs font-semibold leading-relaxed hover:cursor-default ">
+                  <h2 className={`${styles?.reference_h2_1}`}>
                     Contact Info:
                     {rec?.contactInformation && (
-                      <span className="hover:shadow-md hover:bg-gray-100">
+                      <span className={`${styles?.reference_date}`}>
                         <EditableField
                           value={rec.contactInformation}
                           onSave={(value: string) => {

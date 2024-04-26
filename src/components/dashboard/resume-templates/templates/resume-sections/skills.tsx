@@ -13,19 +13,9 @@ import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 type Props = {
   heading: any;
   skills: any;
-  skillHeading: string;
-  skill_ul: string;
-  skill_li: string;
-  skillNewStyle: string;
+  styles: any;
 };
-const Skill = ({
-  heading,
-  skills,
-  skillHeading,
-  skill_ul,
-  skill_li,
-  skillNewStyle,
-}: Props) => {
+const Skill = ({ heading, skills, styles }: Props) => {
   const [primarySkill, setPrimarySkill] = useState<string>("");
   const [regenerating, setRegenerating] = useState(false);
   const { updateSaveHook } = useUpdateAndSave();
@@ -49,7 +39,7 @@ const Skill = ({
   return (
     <>
       {skills && skills.length > 0 && (
-        <h2 className={`${skillHeading}`}>
+        <h2 className={`${styles?.skill_heading}`}>
           {resumeSkillsIcon}
           <EditableField
             value={heading ? heading : "Skills"}
@@ -66,10 +56,10 @@ const Skill = ({
       )}
       {skills && skills.length > 0 && !regenerating ? (
         <Toolbar addSkill={handleAddSkills} regenerateSkills={getPrimarySkills}>
-          <ul className={`${skill_ul}`}>
+          <ul className={`${styles?.skill_ul}`}>
             {skills.map((skill: string, i: number) => (
               <li
-                className={`${skill_li} parent`}
+                className={`${styles?.skill_li} parent`}
                 key={i}
                 onDragStart={(e) =>
                   e.dataTransfer.setData("text/plain", i.toString())
@@ -94,7 +84,7 @@ const Skill = ({
             ))}
             {newPrimarySkill ? (
               <>
-                <div className={`${skillNewStyle}`}>
+                <div className={`${styles?.skill_New}`}>
                   <input
                     type="text"
                     value={primarySkill}

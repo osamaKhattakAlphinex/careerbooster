@@ -11,20 +11,24 @@ import React from "react";
 
 type Props = {
   contact: any;
-  contactStyle: string;
-  contactStyle_li: string;
+  styles: any;
 };
 
-const Contact = ({ contact, contactStyle, contactStyle_li }: Props) => {
+const Contact = ({ contact, styles }: Props) => {
   const { updateSaveHook } = useUpdateAndSave();
 
   return (
     <ul
-      className={`${contactStyle}`}
+      className={`${styles?.contact_ul}`}
       // style={{ backgroundColor: color_second }}
     >
+<<<<<<< HEAD
       <li className={`${contactStyle_li}`}>
         {phoneIconFilled}
+=======
+      <li className={`${styles?.contact_li}`}>
+        {phoneIcon}
+>>>>>>> b05f0c661062b2d08e3ff03b3bbe72bfcd39e234
         <EditableField
           value={contact?.phone ? contact?.phone : "(555) 555-1234"}
           onSave={(value: string) => {
@@ -34,8 +38,13 @@ const Contact = ({ contact, contactStyle, contactStyle_li }: Props) => {
           }}
         />
       </li>
+<<<<<<< HEAD
       <li className={`${contactStyle_li}`}>
         {emailIconFilled}
+=======
+      <li className={`${styles?.contact_li}`}>
+        {emailIcon}
+>>>>>>> b05f0c661062b2d08e3ff03b3bbe72bfcd39e234
         <EditableField
           value={contact?.email ? contact?.email : "your@email.com"}
           onSave={(value: string) => {
@@ -46,9 +55,15 @@ const Contact = ({ contact, contactStyle, contactStyle_li }: Props) => {
         />
       </li>
 
+<<<<<<< HEAD
       <li className={`${contactStyle_li}`}>
         <div className="grid place-content-center">
           {/* <svg
+=======
+      <li className={`${styles?.contact_li}`}>
+        <div className="">
+          <svg
+>>>>>>> b05f0c661062b2d08e3ff03b3bbe72bfcd39e234
             width="16"
             height="16"
             viewBox="0 0 19 19"
@@ -79,8 +94,28 @@ const Contact = ({ contact, contactStyle, contactStyle_li }: Props) => {
           }}
         />
       </li>
+<<<<<<< HEAD
       <li className={`${contactStyle_li}`}>
         <div className="">{homeIconFilled}</div>
+=======
+      <li className={`${styles?.contact_li}`}>
+        <div className="">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-4 h-4"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+            />
+          </svg>
+        </div>
+>>>>>>> b05f0c661062b2d08e3ff03b3bbe72bfcd39e234
         <EditableField
           value={contact?.address ? contact.address : ""}
           onSave={(value: string) => {

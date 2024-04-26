@@ -10,18 +10,23 @@ import { resumeSummaryIcon } from "@/helpers/iconsProvider";
 type Props = {
   heading: any;
   summary: any;
-  headingStyle: string;
-  textStyle: string;
+
+  styles: any;
 };
 
-const Summary = ({ summary, heading, headingStyle, textStyle }: Props) => {
+const Summary = ({
+  summary,
+  heading,
+
+  styles,
+}: Props) => {
   const { updateSaveHook } = useUpdateAndSave();
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const { getSummary } = useGetSummary(setStreamedSummaryData);
 
   return (
     <>
-      <h2 className={`${headingStyle}`}>
+      <h2 className={`${styles?.summary_heading}`}>
         {resumeSummaryIcon}
         <EditableField
           value={heading?.summary ? heading.summary : "Execuitve summary"}
@@ -37,7 +42,7 @@ const Summary = ({ summary, heading, headingStyle, textStyle }: Props) => {
       </h2>
 
       <Toolbar regenrateSummary={getSummary}>
-        <div className={`${textStyle}`}>
+        <div className={`${styles?.summary_text}`}>
           <EditableField
             type="textarea"
             value={
