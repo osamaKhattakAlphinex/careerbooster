@@ -22,13 +22,8 @@ const Contact = ({ contact, styles }: Props) => {
       className={`${styles?.contact_ul}`}
       // style={{ backgroundColor: color_second }}
     >
-<<<<<<< HEAD
-      <li className={`${contactStyle_li}`}>
-        {phoneIconFilled}
-=======
       <li className={`${styles?.contact_li}`}>
         {phoneIcon}
->>>>>>> b05f0c661062b2d08e3ff03b3bbe72bfcd39e234
         <EditableField
           value={contact?.phone ? contact?.phone : "(555) 555-1234"}
           onSave={(value: string) => {
@@ -38,13 +33,8 @@ const Contact = ({ contact, styles }: Props) => {
           }}
         />
       </li>
-<<<<<<< HEAD
-      <li className={`${contactStyle_li}`}>
-        {emailIconFilled}
-=======
       <li className={`${styles?.contact_li}`}>
         {emailIcon}
->>>>>>> b05f0c661062b2d08e3ff03b3bbe72bfcd39e234
         <EditableField
           value={contact?.email ? contact?.email : "your@email.com"}
           onSave={(value: string) => {
@@ -55,15 +45,9 @@ const Contact = ({ contact, styles }: Props) => {
         />
       </li>
 
-<<<<<<< HEAD
-      <li className={`${contactStyle_li}`}>
-        <div className="grid place-content-center">
-          {/* <svg
-=======
       <li className={`${styles?.contact_li}`}>
         <div className="">
           <svg
->>>>>>> b05f0c661062b2d08e3ff03b3bbe72bfcd39e234
             width="16"
             height="16"
             viewBox="0 0 19 19"
@@ -94,10 +78,6 @@ const Contact = ({ contact, styles }: Props) => {
           }}
         />
       </li>
-<<<<<<< HEAD
-      <li className={`${contactStyle_li}`}>
-        <div className="">{homeIconFilled}</div>
-=======
       <li className={`${styles?.contact_li}`}>
         <div className="">
           <svg
@@ -115,7 +95,6 @@ const Contact = ({ contact, styles }: Props) => {
             />
           </svg>
         </div>
->>>>>>> b05f0c661062b2d08e3ff03b3bbe72bfcd39e234
         <EditableField
           value={contact?.address ? contact.address : ""}
           onSave={(value: string) => {
