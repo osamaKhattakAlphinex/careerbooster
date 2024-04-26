@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
-import { redirect } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import AdminSidebar from "@/components/admin/sidebar/adminSidebar";
 import { AppContextsProvider } from "@/context/AppContext";
 
@@ -21,7 +21,7 @@ export default async function AdminLayout({ children }: Props) {
     <AppContextsProvider>
       <div className="grid items-start justify-start w-screen grid-cols-12 overflow-x-hidden overflow-y-hidden">
         <div className="max-h-screen col-span-3">
-          <div className="h-screen p-3 overflow-y-auto bg-gray-800 no-scrollbar">
+          <div className="h-screen overflow-y-auto bg-gray-800 no-scrollbar">
             <AdminSidebar />
           </div>
         </div>

@@ -81,7 +81,7 @@ const ProfileReview = () => {
       references: register.stepTwelve.list,
       trainings: register.stepSeven.list,
       languages: register.stepEleven.list,
-      interests:register.stepTen.list ,
+      interests: register.stepTen.list,
       certifications: register.stepSix.list,
       awards: register.stepNine.list,
       publications: register.stepEight.list,
@@ -97,6 +97,9 @@ const ProfileReview = () => {
           dispatch(setUserData(obj));
           // showSuccessToast("Updated Successfully")
         }
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
   const handleSaveDetails = async () => {
@@ -122,7 +125,7 @@ const ProfileReview = () => {
       references: register.stepTwelve.list,
       trainings: register.stepSeven.list,
       languages: register.stepEleven.list,
-      interests:register.stepTen.list ,
+      interests: register.stepTen.list,
       certifications: register.stepSix.list,
       awards: register.stepNine.list,
       publications: register.stepEight.list,
@@ -145,6 +148,9 @@ const ProfileReview = () => {
         dispatch(setActiveStep(1));
 
         dispatch(setField({ name: "isSubmitting", value: false }));
+      })
+      .catch((err) => {
+        console.log(err);
       })
       .finally(() => {
         router.push("/dashboard?success=1");

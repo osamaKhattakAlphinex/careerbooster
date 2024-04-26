@@ -60,18 +60,18 @@ export async function POST(req: any) {
     promptDB: any,
     args: any
   ) => {
-    const { jobDescription, emailText, firstFollowUpText} = args
+    const { jobDescription, emailText, firstFollowUpText } = args;
     if (generationType === "email") {
-      return promptDB.replaceAll(
-        "{{jobDescription}}",
-        jobDescription
-      );
+      return promptDB.replaceAll("{{jobDescription}}", jobDescription);
     } else if (generationType === "firstFollowUp") {
-      return promptDB.replaceAll("{{emailText}}",emailText);
+      return promptDB.replaceAll("{{emailText}}", emailText);
     } else if (generationType === "secondFollowUp") {
-      promptDB =  promptDB.replaceAll("{{emailText}}", emailText);
-      promptDB = promptDB.replaceAll("{{firstFollowUpEmailText}}", firstFollowUpText)
-      return promptDB    
+      promptDB = promptDB.replaceAll("{{emailText}}", emailText);
+      promptDB = promptDB.replaceAll(
+        "{{firstFollowUpEmailText}}",
+        firstFollowUpText
+      );
+      return promptDB;
     }
   };
 
@@ -98,7 +98,7 @@ export async function POST(req: any) {
         );
       }
     }
-    let dataset:string ="" 
+    let dataset: string = "";
 
     if (generationType === "email") {
       dataset = "email.followupSequence";
@@ -110,7 +110,7 @@ export async function POST(req: any) {
       dataset = "email.secondFollowUpSequence";
     }
     const model = await getTrainedModel(dataset);
-  
+
     await startDB();
     const promptRec = await Prompt.findOne({
       type: "email",
@@ -124,8 +124,6 @@ export async function POST(req: any) {
       emailText,
       firstFollowUpText,
     });
-
-
 
     let fileContent;
     // CREATING LLM MODAL
@@ -142,17 +140,19 @@ export async function POST(req: any) {
     }
     // this will run for both TYPES aiResume and profile
     const inputPrompt = `${
-      generationType === "email" ?
-      `Following are the content of the resume (in JSON format): 
-    JSON user/resume data: ${type === "file" ? fileContent : JSON.stringify(userData)}`
-    : ''} 
+      generationType === "email"
+        ? `Following are the content of the resume (in JSON format): 
+    JSON user/resume data: ${
+      type === "file" ? fileContent : JSON.stringify(userData)
+    }`
+        : ""
+    } 
   
             ${prompt}
             `;
 
-            console.log("model------------ ", model);
     const response: any = await openai.chat.completions.create({
-      model: model? model : "gpt-3.5-turbo",
+      model: model ? model : "gpt-3.5-turbo",
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],
     });
@@ -169,7 +169,6 @@ export async function POST(req: any) {
       },
       onFinal: async (completions) => {
         try {
-
           if (completionTokens > 0) {
             await updateUserTokens(email, completionTokens);
           }
@@ -197,15 +196,17 @@ export async function POST(req: any) {
               Instructions: `Generate Email for ${trainBotData.userEmail}`,
             };
             await makeTrainedBotEntry(entry);
-          } else if(generationType === "firstFollowUp" || generationType === "secondFollowUp"){
-            
+          } else if (
+            generationType === "firstFollowUp" ||
+            generationType === "secondFollowUp"
+          ) {
             const payload = {
               id: savedId,
               generationType: generationType,
               emailText: completions,
               userEmail: email,
             };
-            await putEmail(payload)
+            await putEmail(payload);
             let entry: TrainBotEntryType = {
               entryId: savedId,
               type: `email.${generationType}Sequence`,

@@ -202,42 +202,46 @@ const ResumeBuilder = () => {
           fileAddress: userData.uploadedResume.fileName,
         },
       }),
-    }).then(async (resp: any) => {
-      const res = await resp.json();
+    })
+      .then(async (resp: any) => {
+        const res = await resp.json();
 
-      if (res.success && res?.result) {
-        let myJSON;
-        if (typeof res.result === "object") {
-          myJSON = res.result;
+        if (res.success && res?.result) {
+          let myJSON;
+          if (typeof res.result === "object") {
+            myJSON = res.result;
+          } else {
+            myJSON = await JSON.parse(res.result);
+          }
+
+          const basicObj = {
+            ...myJSON,
+            name: userData?.firstName + " " + userData?.lastName,
+            contact: {
+              ...myJSON?.contact,
+              email: userData?.email,
+              phone: userData?.phone,
+              address:
+                userData?.contact?.street +
+                " " +
+                userData?.contact?.cityState +
+                " " +
+                userData?.contact?.country +
+                " " +
+                userData?.contact?.postalCode,
+            },
+            education: userData?.education,
+          };
+          dispatch(setBasicInfo(basicObj));
         } else {
-          myJSON = await JSON.parse(res.result);
+          setShowConfettiRunning(false);
+
+          showErrorToast("Something Went Wrong");
         }
-
-        const basicObj = {
-          ...myJSON,
-          name: userData?.firstName + " " + userData?.lastName,
-          contact: {
-            ...myJSON?.contact,
-            email: userData?.email,
-            phone: userData?.phone,
-            address:
-              userData?.contact?.street +
-              " " +
-              userData?.contact?.cityState +
-              " " +
-              userData?.contact?.country +
-              " " +
-              userData?.contact?.postalCode,
-          },
-          education: userData?.education,
-        };
-        dispatch(setBasicInfo(basicObj));
-      } else {
-        setShowConfettiRunning(false);
-
-        showErrorToast("Something Went Wrong");
-      }
-    });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     // });
   };
 
@@ -442,18 +446,22 @@ const ResumeBuilder = () => {
           fileAddress: userData.uploadedResume.fileName,
         },
       }),
-    }).then(async (resp: any) => {
-      const res = await resp.json();
-      if (res.success) {
-        if (res?.result) {
-          let myJSON = JSON.parse(JSON.stringify(res.result));
-          myJSON = JSON.parse(myJSON);
-          dispatch(setPrimarySkills({ primarySkills: myJSON }));
+    })
+      .then(async (resp: any) => {
+        const res = await resp.json();
+        if (res.success) {
+          if (res?.result) {
+            let myJSON = JSON.parse(JSON.stringify(res.result));
+            myJSON = JSON.parse(myJSON);
+            dispatch(setPrimarySkills({ primarySkills: myJSON }));
+          }
+        } else {
+          setShowConfettiRunning(false);
         }
-      } else {
-        setShowConfettiRunning(false);
-      }
-    });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     // });
   };
 

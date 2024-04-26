@@ -7,37 +7,52 @@ import TrainBot from "@/db/schemas/TrainBot";
 import { updateTrainedBotEntry } from "@/helpers/updateTrainBotEntry";
 
 export async function postCoverLetter(payload: any) {
-  await startDB();
-  const user = await User.findOne({ email: payload.userEmail });
-  if (!user) {
-    return NextResponse.json({ success: false }, { status: 404 });
-  } else if (!user.coverLetters || user.coverLetters.length === 0) {
-    user.coverLetters = [payload];
-  } else {
-    user.coverLetters.unshift(payload)
-    // user.coverLetters.push(payload);
+  try {
+    await startDB();
+    const user = await User.findOne({ email: payload.userEmail });
+    if (!user) {
+      return NextResponse.json({ success: false }, { status: 404 });
+    } else if (!user.coverLetters || user.coverLetters.length === 0) {
+      user.coverLetters = [payload];
+    } else {
+      user.coverLetters.unshift(payload);
+      // user.coverLetters.push(payload);
+    }
+    await user.save();
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      { result: "Internal Server Error", success: false },
+      { status: 404 }
+    );
   }
-  await user.save();
 }
-
 async function updateCoverLetter(payload: any) {
-  await startDB();
+  try {
+    await startDB();
 
-  await User.findOneAndUpdate(
-    { email: payload.email, "coverLetters.id": payload.id },
-    {
-      $set: {
-        "coverLetters.$.coverLetterText": payload.text,
+    await User.findOneAndUpdate(
+      { email: payload.email, "coverLetters.id": payload.id },
+      {
+        $set: {
+          "coverLetters.$.coverLetterText": payload.text,
+        },
       },
-    },
-    { new: true }
-  );
-  await updateTrainedBotEntry({
-    entryId: payload.id,
-    type: "coverLetter.write",
-    output: payload.text,
-  });
-  return "ok";
+      { new: true }
+    );
+    await updateTrainedBotEntry({
+      entryId: payload.id,
+      type: "coverLetter.write",
+      output: payload.text,
+    });
+    return "ok";
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      { result: "Internal Server Error", success: false },
+      { status: 404 }
+    );
+  }
 }
 export async function POST(request: any) {
   const session = await getServerSession(authOptions);

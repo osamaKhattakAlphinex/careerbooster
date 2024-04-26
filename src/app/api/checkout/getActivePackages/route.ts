@@ -13,18 +13,25 @@ export async function GET() {
       { status: 400 }
     );
   }
+  try {
+    await startDB();
 
-  await startDB();
-
-  const packages = await UserPackage.find({ status }).sort({ amount: 1 });
-  if (!packages) {
+    const packages = await UserPackage.find({ status }).sort({ amount: 1 });
+    if (!packages) {
+      return NextResponse.json(
+        { result: "Packages not found", success: false },
+        { status: 404 }
+      );
+    }
     return NextResponse.json(
-      { result: "Packages not found", success: false },
+      { result: packages, success: true },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      { result: "Internal Server Error", success: false },
       { status: 404 }
     );
   }
-  return NextResponse.json(
-    { result: packages, success: true },
-    { status: 200 }
-  );
 }

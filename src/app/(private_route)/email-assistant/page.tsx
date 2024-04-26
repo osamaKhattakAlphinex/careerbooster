@@ -323,6 +323,9 @@ const PersonalizedEmailBot = () => {
               }
             }
           })
+          .catch((err) => {
+            console.log(err);
+          })
           .finally(() => {
             setEmailLoading(false);
           });
@@ -418,6 +421,9 @@ const PersonalizedEmailBot = () => {
               }
             }
           })
+          .catch((err) => {
+            console.log(err);
+          })
           .finally(() => {
             setFirstFollowUpLoading(false);
           });
@@ -508,6 +514,9 @@ const PersonalizedEmailBot = () => {
                 showErrorToast("Failed to generate Email");
               }
             }
+          })
+          .catch((err) => {
+            console.log(err);
           })
           .finally(() => {
             setSecondFollowUpLoading(false);

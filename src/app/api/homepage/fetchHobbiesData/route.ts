@@ -89,7 +89,13 @@ export async function POST(req: any) {
 
             await TrainBot.create({ ...obj });
           }
-        } catch (error) {}
+        } catch (error) {
+          console.log(error);
+          return NextResponse.json(
+            { result: "Internal Server Error", success: false },
+            { status: 404 }
+          );
+        }
 
         return NextResponse.json(
           { success: true, result: response.choices[0].message.content },
