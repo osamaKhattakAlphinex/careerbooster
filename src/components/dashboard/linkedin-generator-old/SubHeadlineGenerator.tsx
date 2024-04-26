@@ -1,22 +1,20 @@
 "use client";
 import Image from "next/image";
 import Svg1 from "@/../public/icon/headline-icon.svg";
-import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
-import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
+import { setUserData } from "@/store/userDataSlice";
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
 import PreviouslyGeneratedList from "@/components/dashboard/PreviouslyGeneratedList";
 import LinkedInHeadlineCardSingle from "./LinkedInHeadeLineCardSingle";
-import { makeid } from "@/helpers/makeid";
 import useGetUserData from "@/hooks/useGetUserData";
 import { useAppContext } from "@/context/AppContext";
 import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 import DownloadService from "@/helpers/downloadFile";
-import { EditIcon } from "@/helpers/iconsProvider";
+import { EditIcon, newViewIcon } from "@/helpers/iconsProvider";
 import { setLinkedInHeadline } from "@/store/linkedInHeadLineSlice";
 import TourBot from "../TourBot";
 import { useTourContext } from "@/context/TourContext";
@@ -31,7 +29,6 @@ const SubHeadlineGenerator = () => {
   const { setAvailableCredits } = useAppContext();
   const [isEditing, setIsEditing] = useState(false);
   const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
-  const { abortController } = useAppContext();
 
   const [isHeadlineCopied, setIsHeadlineCopied] = useState<boolean>(false);
   const copyHeadline = async (text: string) => {
@@ -98,7 +95,6 @@ const SubHeadlineGenerator = () => {
 
   const handleGenerate = async () => {
     setStreamedData("");
-    const signal = abortController.signal;
 
     // await getUserDataIfNotExists();
     //change condition
@@ -118,7 +114,6 @@ const SubHeadlineGenerator = () => {
       fetch("/api/linkedInBots/headlineGenerator", {
         method: "POST",
         body: JSON.stringify(obj),
-        signal: signal,
       })
         .then(async (resp: any) => {
           if (resp.ok) {
@@ -180,12 +175,6 @@ const SubHeadlineGenerator = () => {
   const handleClick = () => {
     setIsEditing((prevState) => !prevState);
   };
-
-  useEffect(() => {
-    return () => {
-      abortController.abort();
-    };
-  }, []);
 
   const handleSave = async () => {
     let _linkedinHeadlineText = "";
@@ -316,12 +305,7 @@ const SubHeadlineGenerator = () => {
                   />
                 </svg>
               ) : (
-                <Image
-                  src={buttonIconSrc}
-                  alt="bold icon"
-                  height={18}
-                  width={18}
-                />
+                newViewIcon
               )}
             </span>
             <span className="text-xs font-semibold md:text-sm ">

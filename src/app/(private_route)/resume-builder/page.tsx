@@ -14,7 +14,7 @@ import {
   setState,
   setWorkExperienceArray,
   resetResume,
-  setQuantifyingExperience,
+  // setQuantifyingExperience,
   setTrainings,
   setAwards,
   setPublications,
@@ -107,57 +107,52 @@ const ResumeBuilder = () => {
 
   const { getSummary } = useGetSummary(setStreamedSummaryData, setOutOfCredits);
 
-  const getConsent = () => {
-    if (creditsInfoRef.current) {
-      creditsInfoRef.current.openModal(true);
+  // const getConsent = () => {
+  //   if (creditsInfoRef.current) {
+  //     creditsInfoRef.current.openModal(true);
+  //   }
+  // };
+
+  const handleGenerate = useCallback(async () => {
+    await getUserDataIfNotExists();
+    await getCreditLimitsIfNotExists();
+
+    // reset resume
+    dispatch(resetResume(resumeData.state));
+
+    if (session?.user?.email) {
+      setResumeGenerated(false);
+      dispatch(setState({ name: "resumeLoading", value: true }));
+      // dispatch(setQuantifyingExperience(quantifyingExperience));
+      dispatch(setTrainings({ trainings: userData.trainings }));
+      dispatch(setProjects({ projects: userData.projects }));
+      dispatch(setAwards({ awards: userData.awards }));
+      dispatch(setPublications({ publications: userData.publications }));
+      dispatch(setReferences({ references: userData.references }));
+      dispatch(setInterests({ interests: userData.interests }));
+      dispatch(setCertifications({ certifications: userData.certifications }));
+      dispatch(setLanguages({ languages: userData.languages }));
+
+      dispatch(setId(""));
+      await getBasicInfo();
+      console.log("geenrtaing summary next");
+      await getSummary();
+      await getPrimarySkills();
+      await getWorkExperienceNew();
+
+      // await getPublications();
+      // await addCustomSection();
+      // adding custom sections
+      runConfetti();
+    } else {
+      setShowPopup(true);
+
+      // Hide the popup after 3 seconds
+      setTimeout(() => {
+        setShowPopup(false);
+      }, 3000);
     }
-  };
-
-  const handleGenerate = useCallback(
-    async (quantifyingExperience: boolean) => {
-      await getUserDataIfNotExists();
-      await getCreditLimitsIfNotExists();
-
-      // reset resume
-      dispatch(resetResume(resumeData.state));
-
-      if (session?.user?.email) {
-        setResumeGenerated(false);
-        dispatch(setState({ name: "resumeLoading", value: true }));
-        dispatch(setQuantifyingExperience(quantifyingExperience));
-        dispatch(setTrainings({ trainings: userData.trainings }));
-        dispatch(setProjects({ projects: userData.projects }));
-        dispatch(setAwards({ awards: userData.awards }));
-        dispatch(setPublications({ publications: userData.publications }));
-        dispatch(setReferences({ references: userData.references }));
-        dispatch(setInterests({ interests: userData.interests }));
-        dispatch(
-          setCertifications({ certifications: userData.certifications })
-        );
-        dispatch(setLanguages({ languages: userData.languages }));
-
-        dispatch(setId(""));
-        await getBasicInfo();
-
-        await getSummary();
-        await getPrimarySkills();
-        await getWorkExperienceNew(quantifyingExperience);
-
-        // await getPublications();
-        // await addCustomSection();
-        // adding custom sections
-        runConfetti();
-      } else {
-        setShowPopup(true);
-
-        // Hide the popup after 3 seconds
-        setTimeout(() => {
-          setShowPopup(false);
-        }, 3000);
-      }
-    },
-    [resumeData.state]
-  );
+  }, [resumeData.state]);
 
   // const makeAPICallWithRetry: any = async (
   //   apiFunction: any,
@@ -245,7 +240,7 @@ const ResumeBuilder = () => {
     // });
   };
 
-  const getWorkExperienceNew = async (quantifyingExperience: boolean) => {
+  const getWorkExperienceNew = async () => {
     // return makeAPICallWithRetry(async () => {
     await getCreditLimitsIfNotExists();
     await getUserDataIfNotExists();
@@ -292,9 +287,9 @@ const ResumeBuilder = () => {
         const res: any = await fetch("/api/resumeBots/jdGeneratorSingle", {
           method: "POST",
           body: JSON.stringify({
-            quantifyingExperience: quantifyingExperience,
+            // quantifyingExperience: quantifyingExperience,
             experience: experience,
-
+            detailedResume: resumeData.state.detailedResume,
             creditsUsed: creditLimits.resume_individualWorkExperience,
             trainBotData: {
               userEmail: userData.email,
@@ -555,7 +550,7 @@ const ResumeBuilder = () => {
 
   return (
     <>
-      <CreditInfoModal ref={creditsInfoRef} handleGenerate={handleGenerate} />
+      {/* <CreditInfoModal ref={creditsInfoRef} handleGenerate={handleGenerate} /> */}
       {showTemplatePopup && (
         <div className="fixed top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-black/90">
           <div className="flex flex-col items-center gap-4 py-4 bg-gray-800 rounded-lg">
@@ -599,7 +594,7 @@ const ResumeBuilder = () => {
             </div>
           )}
           <div>
-            <GenerateResume getConsent={getConsent} />
+            <GenerateResume handleGenerate={handleGenerate} />
           </div>
           <div className="fixed bottom-0 flex items-center justify-center">
             <Confetti active={confettingRunning} config={confettiConfig} />

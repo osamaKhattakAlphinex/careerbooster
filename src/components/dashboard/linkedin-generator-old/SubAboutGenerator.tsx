@@ -5,7 +5,7 @@ import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
-import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
+import { setUserData } from "@/store/userDataSlice";
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
@@ -16,7 +16,7 @@ import { useAppContext } from "@/context/AppContext";
 import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 import { setLinkedInAbout } from "@/store/linkedInAboutSlice";
 import DownloadService from "@/helpers/downloadFile";
-import { EditIcon } from "@/helpers/iconsProvider";
+import { EditIcon, newViewIcon } from "@/helpers/iconsProvider";
 import { useTourContext } from "@/context/TourContext";
 import TourBot from "../TourBot";
 const SubAboutGenerator = () => {
@@ -52,7 +52,6 @@ const SubAboutGenerator = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
   const { tourBotRef, availableCreditsRef } = useTourContext();
-  const { abortController } = useAppContext();
 
   useEffect(() => {
     if (userData && userData?.email) {
@@ -125,7 +124,6 @@ const SubAboutGenerator = () => {
 
   const handleGenerate = async () => {
     setStreamedData("");
-    const signal = abortController.signal;
 
     await getUserDataIfNotExists();
     if (session?.user?.email && aiInputUserData) {
@@ -145,7 +143,6 @@ const SubAboutGenerator = () => {
       fetch("/api/linkedInBots/aboutGenerator", {
         method: "POST",
         body: JSON.stringify(obj),
-        signal: signal,
       })
         .then(async (resp: any) => {
           if (resp.ok) {
@@ -241,12 +238,6 @@ const SubAboutGenerator = () => {
     }
   }, [isEditing]);
 
-  useEffect(() => {
-    return () => {
-      abortController.abort();
-    };
-  }, []);
-
   // when page (session) loads, fetch user data if not exists
   useEffect(() => {
     if (session?.user?.email) {
@@ -313,13 +304,7 @@ const SubAboutGenerator = () => {
                   />
                 </svg>
               ) : (
-                <Image
-                  src={buttonIconSrc}
-                  alt="bold icon"
-                  height={18}
-                  width={18}
-                  className=""
-                />
+                newViewIcon
               )}
             </span>
             <span className="text-xs font-semibold md:text-sm ">

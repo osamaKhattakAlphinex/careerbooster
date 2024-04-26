@@ -36,7 +36,8 @@ export async function POST(req: any) {
     const reqBody = await req.json();
     const experience = reqBody?.experience;
     const trainBotData = reqBody?.trainBotData;
-    const quantifyingExperience = reqBody?.quantifyingExperience;
+    // const quantifyingExperience = reqBody?.quantifyingExperience;
+    const detailedResume = reqBody?.detailedResume;
     const personName = reqBody?.personName;
     const jobTitle = reqBody?.jobTitle;
     const userCredits = await getUserCreditsByEmail(session?.user?.email);
@@ -56,13 +57,13 @@ export async function POST(req: any) {
     let promptRec;
     let prompt;
     await startDB();
-    if (quantifyingExperience) {
+
+    if (detailedResume) {
       promptRec = await Prompt.findOne({
-        type: "resume",
-        name: "QuantifyingjdSingle",
+        type: "linkedin",
+        name: "jobDescription",
         active: true,
       });
-
       prompt = promptRec.value;
       prompt = await prompt.replaceAll("{{PersonName}}", personName);
       prompt = await prompt.replaceAll("{{JobTitle}}", jobTitle);
@@ -111,7 +112,11 @@ export async function POST(req: any) {
           id: workId,
         };
         // postConsultingBid(payload);
-        await updateUserTotalCredits(session?.user?.email, creditsUsed,"resume");
+        await updateUserTotalCredits(
+          session?.user?.email,
+          creditsUsed,
+          "resume"
+        );
         await updateToolUsage("Resume Tool", creditsUsed);
       },
       onToken: async (content) => {

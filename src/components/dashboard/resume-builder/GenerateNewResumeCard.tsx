@@ -11,9 +11,10 @@ import { infoSmallIcon } from "@/helpers/iconsProvider";
 import { useTourContext } from "@/context/TourContext";
 
 interface Props {
-  getConsent: () => void;
+  // getConsent: () => void;
+  handleGenerate: () => Promise<void>;
 }
-const GenerateResume = ({ getConsent }: Props) => {
+const GenerateResume = ({ handleGenerate }: Props) => {
   const radiosResumeType: { labelText: string; value: string }[] = [
     {
       labelText: "Generate Basic Resume",
@@ -33,9 +34,6 @@ const GenerateResume = ({ getConsent }: Props) => {
   const [resumeType, setResumeType] = useState<
     "resume-basic" | "resume-job-title" | "resume-job-description"
   >("resume-basic");
-  // const [quantifyingExperience, setQuantifyingExperience] =
-  //   useState<boolean>(true);
-  // Redux
   const { data: session } = useSession();
   const dispatch = useDispatch();
   const state = useSelector((state: any) => state.resume.state);
@@ -190,7 +188,6 @@ const GenerateResume = ({ getConsent }: Props) => {
               )
             )}
           </div>
-
           {resumeType === "resume-job-title" ? (
             <>
               <label
@@ -270,6 +267,24 @@ const GenerateResume = ({ getConsent }: Props) => {
           ) : (
             ""
           )}
+          <label htmlFor="resume-size" className="">
+            <input
+              className="mr-1"
+              type="checkbox"
+              name=""
+              id="resume-size"
+              checked={memoizedState.detailedResume}
+              onChange={() =>
+                dispatch(
+                  setState({
+                    name: "detailedResume",
+                    value: !memoizedState.detailedResume,
+                  })
+                )
+              }
+            />
+            Detailed Resume
+          </label>
         </div>
         {/* <label className="relative inline-flex items-center cursor-pointer">
         <input
@@ -300,7 +315,7 @@ const GenerateResume = ({ getConsent }: Props) => {
             //memoizedState.jobPosition === "" ||
             memoizedState.resumeLoading || !session?.user?.email
           }
-          onClick={() => getConsent()}
+          onClick={() => handleGenerate()}
           className={` dark:bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 from-[#b324d7]  to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2  px-4 py-2  rounded-full ${
             // memoizedState.jobPosition === "" ||
             memoizedState.resumeLoading || !session?.user?.email

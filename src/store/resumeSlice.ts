@@ -67,6 +67,7 @@ export interface Resume {
   state: {
     resumeType: "resume-basic" | "resume-job-title" | "resume-job-description";
     jobDescription: string;
+    detailedResume: boolean; // Whether
     jobPosition: string;
     resumeLoading: boolean;
     componentRef: any;
@@ -124,7 +125,7 @@ export interface Resume {
 
   summary: string;
   workExperienceArray: WorkExperience[];
-  quantifyingExperience: boolean;
+  // quantifyingExperience: boolean;
   workExperience: "";
   primarySkills: [];
   professionalSkills: [];
@@ -144,6 +145,7 @@ const initialState: Resume = {
     resumeType: "resume-basic",
     jobDescription: "",
     jobPosition: "",
+    detailedResume: true,
     resumeLoading: false,
     componentRef: null,
   },
@@ -199,7 +201,7 @@ const initialState: Resume = {
   },
   summary: "",
   workExperienceArray: [],
-  quantifyingExperience: true,
+  // quantifyingExperience: true,
   workExperience: "",
   primarySkills: [],
   professionalSkills: [],
@@ -241,12 +243,12 @@ const resumeSlice = createSlice({
         [action.payload.name]: action.payload.value,
       };
     },
-    setQuantifyingExperience(state, action) {
-      return {
-        ...state,
-        quantifyingExperience: action.payload,
-      };
-    },
+    // setQuantifyingExperience(state, action) {
+    //   return {
+    //     ...state,
+    //     quantifyingExperience: action.payload,
+    //   };
+    // },
     setState(state, action) {
       return {
         ...state,
@@ -409,7 +411,7 @@ export const {
   setWorkExperienceArray,
   resetResume,
   emptyResume,
-  setQuantifyingExperience,
+  // setQuantifyingExperience,
   setTrainings,
   setAwards,
   setPublications,

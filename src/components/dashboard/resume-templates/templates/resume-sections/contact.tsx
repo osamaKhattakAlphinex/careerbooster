@@ -1,6 +1,11 @@
 "use client";
 import EditableField from "@/components/dashboard/EditableField";
-import { emailIcon, phoneIcon } from "@/helpers/iconsProvider";
+import {
+  emailIconFilled,
+  phoneIconFilled,
+  linkedInIconFilled,
+  homeIconFilled,
+} from "@/helpers/iconsProvider";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import React from "react";
 
@@ -19,7 +24,7 @@ const Contact = ({ contact, contactStyle, contactStyle_li }: Props) => {
       // style={{ backgroundColor: color_second }}
     >
       <li className={`${contactStyle_li}`}>
-        {phoneIcon}
+        {phoneIconFilled}
         <EditableField
           value={contact?.phone ? contact?.phone : "(555) 555-1234"}
           onSave={(value: string) => {
@@ -30,7 +35,7 @@ const Contact = ({ contact, contactStyle, contactStyle_li }: Props) => {
         />
       </li>
       <li className={`${contactStyle_li}`}>
-        {emailIcon}
+        {emailIconFilled}
         <EditableField
           value={contact?.email ? contact?.email : "your@email.com"}
           onSave={(value: string) => {
@@ -42,8 +47,8 @@ const Contact = ({ contact, contactStyle, contactStyle_li }: Props) => {
       </li>
 
       <li className={`${contactStyle_li}`}>
-        <div className="">
-          <svg
+        <div className="grid place-content-center">
+          {/* <svg
             width="16"
             height="16"
             viewBox="0 0 19 19"
@@ -59,7 +64,8 @@ const Contact = ({ contact, contactStyle, contactStyle_li }: Props) => {
               d="M6.15572 13V7.54545H6.99379V13H6.15572ZM6.58185 6.63636C6.4185 6.63636 6.27764 6.58073 6.15927 6.46946C6.04326 6.35819 5.98526 6.22443 5.98526 6.06818C5.98526 5.91193 6.04326 5.77817 6.15927 5.6669C6.27764 5.55563 6.4185 5.5 6.58185 5.5C6.74521 5.5 6.88488 5.55563 7.00089 5.6669C7.11926 5.77817 7.17844 5.91193 7.17844 6.06818C7.17844 6.22443 7.11926 6.35819 7.00089 6.46946C6.88488 6.58073 6.74521 6.63636 6.58185 6.63636ZM9.36683 9.71875V13H8.52876V7.54545H9.33842V8.39773H9.40945C9.53729 8.12074 9.73142 7.8982 9.99183 7.73011C10.2522 7.55966 10.5884 7.47443 11.0004 7.47443C11.3697 7.47443 11.6928 7.55019 11.9698 7.7017C12.2468 7.85085 12.4622 8.07812 12.6161 8.38352C12.77 8.68655 12.8469 9.07008 12.8469 9.53409V13H12.0089V9.59091C12.0089 9.16241 11.8976 8.8286 11.6751 8.58949C11.4525 8.34801 11.1471 8.22727 10.7589 8.22727C10.4914 8.22727 10.2522 8.28527 10.0415 8.40128C9.83321 8.51728 9.66868 8.68655 9.54794 8.90909C9.4272 9.13163 9.36683 9.40152 9.36683 9.71875Z"
               fill="black"
             />
-          </svg>
+          </svg> */}
+          {linkedInIconFilled}
         </div>
         <EditableField
           value={
@@ -74,22 +80,7 @@ const Contact = ({ contact, contactStyle, contactStyle_li }: Props) => {
         />
       </li>
       <li className={`${contactStyle_li}`}>
-        <div className="">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-4 h-4"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
-            />
-          </svg>
-        </div>
+        <div className="">{homeIconFilled}</div>
         <EditableField
           value={contact?.address ? contact.address : ""}
           onSave={(value: string) => {

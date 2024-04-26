@@ -6,7 +6,6 @@ import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { WorkExperience, setUserData } from "@/store/userDataSlice";
 import axios from "axios";
-import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
 import PreviouslyGeneratedList from "@/components/dashboard/PreviouslyGeneratedList";
@@ -16,6 +15,8 @@ import useGetUserData from "@/hooks/useGetUserData";
 import { useAppContext } from "@/context/AppContext";
 import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 import Toolbar from "../Toolbar";
+import { newViewIcon } from "@/helpers/iconsProvider";
+
 import Loader from "@/components/common/Loader";
 import { setLinkedInJobDescription } from "@/store/linkedInJobDescriptionSlice";
 import DownloadService from "@/helpers/downloadFile";
@@ -34,8 +35,6 @@ const SubJDGenerator = () => {
   const [isEditing, setIsEditing] = useState({ isEdit: false, editIndex: -1 });
   const { tourBotRef, availableCreditsRef } = useTourContext();
   const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
-
-  const { abortController } = useAppContext();
 
   const [generatedWorkExperience, setGeneratedWorkExperience] = useState<
     string[]
@@ -248,7 +247,6 @@ const SubJDGenerator = () => {
 
   const handleGenerate = async () => {
     setGeneratedWorkExperience([]);
-    const signal = abortController.signal;
 
     await getUserDataIfNotExists();
     //change condition
@@ -295,7 +293,6 @@ const SubJDGenerator = () => {
         const res: any = await fetch("/api/linkedInBots/jdGeneratorSingle", {
           method: "POST",
           body: JSON.stringify(obj),
-          signal: signal,
         });
 
         if (res.ok) {
@@ -393,12 +390,6 @@ const SubJDGenerator = () => {
     }
   };
 
-  useEffect(() => {
-    return () => {
-      abortController.abort();
-    };
-  }, []);
-
   const saveToDB = async (obj: any, text: any) => {
     const id = obj?.jobDescriptionId;
     const email = obj?.email;
@@ -484,12 +475,7 @@ const SubJDGenerator = () => {
                     />
                   </svg>
                 ) : (
-                  <Image
-                    src={buttonIconSrc}
-                    alt="bold icon"
-                    height={18}
-                    width={18}
-                  />
+                  newViewIcon
                 )}
               </span>
               <span className="text-xs font-semibold md:text-sm ">

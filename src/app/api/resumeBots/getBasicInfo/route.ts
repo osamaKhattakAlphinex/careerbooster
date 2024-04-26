@@ -225,6 +225,8 @@ export async function POST(req: any) {
           inputPrompt = `Read ${personName}'s Resume data: ${JSON.stringify(
             userData
           )} and write exective summary`;
+
+          console.log(resumeType, inputPrompt);
         }
 
         const response: any = await openai.chat.completions.create({

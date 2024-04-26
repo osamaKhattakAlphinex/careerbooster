@@ -43,7 +43,7 @@ export default function CoverLetterPage() {
   const [jobDescription, setJobDescription] = useState<string>("");
   const [isEditing, setIsEditing] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-  const { setAvailableCredits, abortController } = useAppContext();
+  const { setAvailableCredits } = useAppContext();
   const [confirmationModal, setConfirmationModal] = useState(false);
   const creditLimits = useSelector((state: any) => state.creditLimits);
   const router = useRouter();
@@ -67,10 +67,6 @@ export default function CoverLetterPage() {
     // else {
     //   dispatch(resetCoverLetter());
     // }
-
-    return () => {
-      abortController.abort();
-    };
   }, [isEditing]);
 
   // Function to save the edited content and exit editing mode
@@ -144,8 +140,6 @@ export default function CoverLetterPage() {
   };
 
   const handleGenerate = async () => {
-    const signal = abortController.signal;
-
     if (session?.user?.email && aiInputUserData) {
       setMsgLoading(true);
       setShow(true);
@@ -198,7 +192,6 @@ export default function CoverLetterPage() {
       fetch("/api/coverLetterBot/coverLetterGenerator", {
         method: "POST",
         body: JSON.stringify(obj),
-        signal: signal,
       })
         .then(async (resp: any) => {
           // const response = await resp.json();
@@ -292,9 +285,6 @@ export default function CoverLetterPage() {
         skills: userData?.skills,
       });
     }
-    return () => {
-      abortController.abort();
-    };
   }, [userData]);
 
   useEffect(() => {
