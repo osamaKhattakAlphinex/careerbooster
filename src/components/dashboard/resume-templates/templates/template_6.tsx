@@ -37,6 +37,7 @@ import Language from "./resume-sections/language";
 import {
   award,
   certification,
+  customStyle_6_9,
   interest,
   language,
   publicationStyles,
@@ -729,13 +730,13 @@ const ResumeTemplate6 = () => {
                 heading={resume.headings.publications}
                 publications={resume.publications}
                 styles={publicationStyles}
-                customStyle={{ borderTopBottom: true, centeredHeading: false }}
+                customStyle={customStyle_6_9}
               />
             )}
             {/* Certification */}
             {resume?.certifications && resume?.certifications.length > 0 && (
               <Certification
-                customStyle={{ borderTopBottom: true, centeredHeading: false }}
+                customStyle={customStyle_6_9}
                 heading={resume.headings.certifications}
                 certificates={resume.certifications}
                 styles={certification}
@@ -747,7 +748,7 @@ const ResumeTemplate6 = () => {
                 heading={resume.headings.trainings}
                 trainings={resume.trainings}
                 styles={training}
-                customStyle={{ borderTopBottom: true, centeredHeading: false }}
+                customStyle={customStyle_6_9}
               />
             )}
 
@@ -757,7 +758,7 @@ const ResumeTemplate6 = () => {
                 heading={resume.headings.awards}
                 awards={resume.awards}
                 styles={award}
-                customStyle={{ borderTopBottom: true, centeredHeading: false }}
+                customStyle={customStyle_6_9}
               />
             )}
 
@@ -767,7 +768,7 @@ const ResumeTemplate6 = () => {
                 heading={resume.headings.interests}
                 interests={resume.interests}
                 styles={interest}
-                customStyle={{ borderTopBottom: true, centeredHeading: false }}
+                customStyle={customStyle_6_9}
               />
             )}
 
@@ -777,7 +778,7 @@ const ResumeTemplate6 = () => {
                 heading={resume.headings.references}
                 references={resume.references}
                 styles={reference}
-                customStyle={{ borderTopBottom: true, centeredHeading: false }}
+                customStyle={customStyle_6_9}
               />
             )}
 
@@ -787,7 +788,7 @@ const ResumeTemplate6 = () => {
                 heading={resume.headings.languages}
                 languages={resume.languages}
                 styles={language}
-                customStyle={{ borderTopBottom: true, centeredHeading: false }}
+                customStyle={customStyle_6_9}
               />
             )}
 

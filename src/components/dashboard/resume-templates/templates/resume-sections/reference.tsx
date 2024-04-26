@@ -29,7 +29,9 @@ const Reference = ({ heading, references, styles, customStyle }: Props) => {
       <h3
         className={`${styles?.reference_h3} ${
           customStyle?.centeredHeading ? "justify-center" : ""
-        }`}
+        }
+          ${customStyle?.bgColor}
+        `}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
