@@ -65,7 +65,7 @@ const Page = () => {
           </div>
           {creditsData && (
             <>
-              <div className="flex flex-row items-center justify-between ">
+              {/* <div className="flex flex-row items-center justify-between ">
                 <div className="flex-1 dark:text-gray-100 text-gray-950">
                   <strong className="text-sm font-semibold md:text-lg">
                     Amount
@@ -76,7 +76,7 @@ const Page = () => {
                     $ {creditsData?.amount}{" "}
                   </span>
                 </div>
-              </div>
+              </div> */}
               <div className="flex flex-row items-center justify-between ">
                 <div className="flex-1 dark:text-gray-100 text-gray-950">
                   <strong className="text-sm font-semibold md:text-lg">
@@ -101,7 +101,7 @@ const Page = () => {
                   </strong>
                 </div>
                 <div className="flex-1 dark:text-gray-100 text-gray-950">
-                  <span className="text-sm md:text-base">
+                  <span className="text-sm md:text-base capitalize">
                     {creditsData?.category}
                   </span>
                 </div>
