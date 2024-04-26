@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setStepTwo } from "@/store/registerSlice";
 import { useEffect } from "react";
-import { linkedInIcon, newLinkedInIcon } from "@/helpers/iconsProvider";
 import { setUserData } from "@/store/userDataSlice";
 
 const StepTwo = () => {
