@@ -1,12 +1,9 @@
 import { NextResponse } from "next/server";
 import Prompt from "@/db/schemas/Prompt";
 import OpenAI from "openai";
-
 import { OpenAIStream, StreamingTextResponse } from "ai";
-
 import TrainBot from "@/db/schemas/TrainBot";
 import startDB from "@/lib/db";
-
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import { getTrainedModel } from "@/helpers/getTrainedModel";

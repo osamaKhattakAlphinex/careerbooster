@@ -215,8 +215,6 @@ const RegistrationForm = () => {
                 removeDashesFromString(userData.registeredPhone)
               );
             }
-            // dispatch(setUploadedFileName(userData.files));
-            // formik.setFieldValue("file", fileName);
           } else {
             setFileError("Something went wrong");
           }
