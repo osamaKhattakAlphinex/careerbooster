@@ -168,6 +168,11 @@ const ResumeTemplate2 = () => {
             heading={resume.headings.interests}
             interests={resume.interests}
             styles={interest}
+            customStyle={{
+              borderTopBottom: false,
+              borderBottom: false,
+              centeredHeading: false,
+            }}
           />
         )}
       </div>
@@ -204,6 +209,11 @@ const ResumeTemplate2 = () => {
             heading={resume.headings.education}
             educations={resume.education}
             styles={education}
+            customStyle={{
+              borderTopBottom: false,
+              borderBottom: false,
+              centeredHeading: false,
+            }}
           />
         )}
       </div>

@@ -39,19 +39,22 @@ const Certification = ({
     <>
       <span
         className={`${styles?.span1} ${
-          customStyle.borderTopBottom ? "block" : "hidden"
+          customStyle?.borderTopBottom ? "block" : "hidden"
         }`}
       ></span>
       <h3
         className={`${styles?.certification_h3} ${
-          customStyle.centeredHeading ? "justify-center" : ""
-        }`}
+          customStyle?.centeredHeading ? "justify-center" : ""
+        }
+          ${customStyle?.bgColor}
+        `}
       >
         <svg
           width="20px"
           height="20px"
           viewBox="0 0 48 48"
           xmlns="http://www.w3.org/2000/svg"
+          className="text-white"
         >
           <title>certificate-ribbon-solid</title>
           <g id="Layer_2" data-name="Layer 2">
