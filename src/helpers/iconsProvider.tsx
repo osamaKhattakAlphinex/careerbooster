@@ -1650,7 +1650,7 @@ export const emptyStateIcon = (
     fill="none"
     viewBox="0 0 24 24"
     strokeWidth={1.5}
-    stroke="currentColor"
+    stroke="#b324d7"
     className="w-6 h-6"
   >
     <path

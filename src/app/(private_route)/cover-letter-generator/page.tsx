@@ -385,7 +385,7 @@ export default function CoverLetterPage() {
           <>
             <div
               ref={(ref: any) => (coverLetterElementRef.current = ref)}
-              className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-[20px] px-4 lg:px-[30px] py-6  flex flex-col gap-3 "
+              className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-lg px-4 lg:px-[30px] py-6  flex flex-col gap-3 "
             >
               {/* header */}
               <div className="flex flex-col items-center justify-between gap-2 md:flex-row">

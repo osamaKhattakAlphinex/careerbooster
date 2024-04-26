@@ -34,8 +34,8 @@ const EmailCardSingle = ({ card, componentRef, source }: EmailType) => {
   };
 
   const handleOnDelete = async (card: any) => {
+    setDeleting(true);
     try {
-      setDeleting(true);
       await axios.delete(`/api/emailBot/${card.id}`).then((res) => {
         if (res.data.success) {
           showSuccessToast("Email deleted Successfully");
@@ -116,7 +116,7 @@ const EmailCardSingle = ({ card, componentRef, source }: EmailType) => {
           >
             {trashIcon}
             <span className="text-[13px] mx-2">
-              {deleting ? "deleting" : "Delete"}
+              {deleting ? "Deleting..." : "Delete"}
             </span>
           </button>
           {/* {pathname == "/dashboard"

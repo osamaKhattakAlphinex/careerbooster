@@ -45,7 +45,7 @@ const GenerateResume = ({ handleGenerate }: Props) => {
   return (
     <div
       ref={(ref: any) => (resumeElementRef.current = ref)}
-      className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-[20px] py-6 px-4 md:px-[30px] flex flex-col gap-4 "
+      className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-lg py-6 px-4 md:px-[30px] flex flex-col gap-4 "
     >
       {/* header */}
       <div className="flex flex-col items-center justify-between gap-2 md:flex-row">

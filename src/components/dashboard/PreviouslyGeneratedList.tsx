@@ -19,7 +19,34 @@ const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
   const userData = useSelector((state: any) => state.userData);
   const { historyCardRef } = useTourContext();
 
+  const getDataSourceText = (dataSource: string) => {
+    switch (dataSource) {
+      case "linkedInHeadlines":
+        return "linkedin headlines";
+      case "linkedInAbouts":
+        return "linkedin abouts";
+      case "linkedInJobDescriptions":
+        return "linkedin job descriptions";
+      case "linkedInKeywords":
+        return "linkedin keywords";
+      case "resume":
+        return "resume";
+      case "consultingBids":
+        return "consulting bids";
+      case "emails":
+        return "emails";
+      case "coverLetters":
+        return "cover letters";
+      case "resumes":
+        return "resumes";
+      default:
+        return dataSource;
+    }
+  };
+
   const [showDrop, setShowDrop] = useState(true);
+  const sourceText = getDataSourceText(dataSource);
+
   if (!userData) return;
   const pagination = {
     clickable: true,
@@ -31,19 +58,12 @@ const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
   return (
     <div
       ref={(ref: any) => (historyCardRef.current = ref)}
-      className="dark:bg-[#17151b] dark:text-white  bg-[#00000015] text-gray-950  rounded-[20px]  mb-7 px-4 lg:px-[24px] pt-[20px] pb-[20px] z-0"
+      className="dark:bg-[#17151b] dark:text-white  bg-[#00000015] text-gray-950  rounded-lg  mb-7 px-4 lg:px-[24px] pt-[20px] pb-[20px] z-0"
     >
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          <h1 className=" flex justify-center text-[14px] md:text-sm font-semibold lg:pr-0 pr-4">
-            {dataSource === "coverLetters" && "RECENT COVER LETTERS"}
-            {dataSource === "emails" && "RECENT EMAILS"}
-            {dataSource === "consultingBids" && "RECENT BIDS"}
-            {dataSource === "resume" && "RECENT RESUME"}
-            {dataSource === "linkedInHeadlines" && "RECENT HEADLINES"}
-            {dataSource === "linkedInAbouts" && "RECENT ABOUTS"}
-            {dataSource === "linkedInJobDescriptions" && "RECENT DESCRIPTIONS"}
-            {dataSource === "linkedInKeywords" && "RECENT KEYWORDS"}
+          <h1 className=" flex justify-center uppercase text-[14px] md:text-sm font-semibold lg:pr-0 pr-4">
+            RECENT {sourceText}
           </h1>
           {dataSource === "coverLetters" && (
             <div className="relative inset-0 flex cursor-pointer group md:ml-1">
@@ -130,9 +150,15 @@ const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
               })}
           </Swiper>
         ) : (
-          <div className="flex flex-col items-center justify-center w-full p-5 text-gray-100/50">
+          <div className="flex flex-col items-center justify-center w-full p-5 mt-1 space-y-2 text-gray-100/50">
             {emptyStateIcon}
-            <p>No Data Found</p>
+            <p className="mt-4 text-sm font-semibold uppercase">
+              No {sourceText} found
+            </p>
+            <p className="text-xs">
+              You do not have any {sourceText} yet. Your created {sourceText}{" "}
+              will list here.
+            </p>
           </div>
         )}
       </div>

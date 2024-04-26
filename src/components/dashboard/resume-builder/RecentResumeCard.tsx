@@ -30,7 +30,7 @@ const RecentResumeCard = ({
     <>
       <div
         ref={(ref: any) => (historyCardRef.current = ref)}
-        className="dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-[20px]  mb-4 px-4 md:px-[24px] pt-[20px] pb-[20px] "
+        className="dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-lg  mb-4 px-4 md:px-[24px] pt-[20px] pb-[20px] "
       >
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-2">

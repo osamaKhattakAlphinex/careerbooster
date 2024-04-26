@@ -57,7 +57,7 @@ const Page = () => {
           <div className="p-3 bg-slate-300 dark:bg-gray-800">
             <div className="flex flex-col items-center justify-center divide-y-[1px] divide-gray-400">
               <div className="flex flex-row items-center justify-between w-full py-1">
-                <h3 className="text-xs text-gray-600 dark:text-gray-400 md:text-sm">
+                <h3 className="text-xs text-gray-600 uppercase dark:text-gray-400 md:text-sm">
                   Package Category
                 </h3>
                 <span className="text-xs font-semibold text-gray-600 capitalize dark:text-gray-400 md:text-sm">
@@ -65,24 +65,24 @@ const Page = () => {
                 </span>
               </div>
               <div className="flex flex-row items-center justify-between w-full py-1">
-                <h3 className="text-xs text-gray-600 dark:text-gray-400 md:text-sm">
+                <h3 className="text-xs text-gray-600 uppercase dark:text-gray-400 md:text-sm">
                   Status
                 </h3>
                 <span className="text-xs font-semibold text-gray-600 capitalize dark:text-gray-400 md:text-sm">
                   {creditsData?.status}
                 </span>
               </div>
-              <div className="flex flex-row items-center justify-between w-full py-1">
-                <h3 className="text-xs text-gray-600 dark:text-gray-400 md:text-sm">
-                  Total Credit
+              <div className="flex flex-row items-center justify-between w-full py-1 ">
+                <h3 className="text-xs text-gray-600 uppercase dark:text-gray-400 md:text-sm">
+                  Total Credits
                 </h3>
                 <span className="text-xs font-semibold text-gray-600 dark:text-gray-400 md:text-sm">
                   {totalCredits}
                 </span>
               </div>
               <div className="flex flex-row items-center justify-between w-full py-1">
-                <h3 className="text-xs text-gray-600 dark:text-gray-400 md:text-sm">
-                  Remaining Credit
+                <h3 className="text-xs text-gray-600 uppercase dark:text-gray-400 md:text-sm">
+                  Remaining Credits
                 </h3>
                 <span className="text-xs font-semibold text-gray-600 dark:text-gray-400 md:text-sm">
                   {remainingCredits}
