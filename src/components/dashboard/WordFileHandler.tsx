@@ -1,4 +1,4 @@
-"use-client";
+"use client";
 import React, { useEffect, useState } from "react";
 import PizZip from "pizzip";
 import { DOMParser } from "@xmldom/xmldom";
@@ -46,6 +46,7 @@ const WordFileHandler = ({
 
   useEffect(() => {
     if (file) {
+      console.log(file)
       const reader = new FileReader();
       reader.onload = (e) => {
         const content = e?.target?.result;

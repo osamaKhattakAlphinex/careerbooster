@@ -44,9 +44,6 @@ const RegistrationForm = () => {
       lastName: "",
       email: "",
       phone: "",
-      // password: "",
-      // confirmpassword: "",
-      // status: "pending",
       terms: false,
       alertConsent: false,
       file: "",
@@ -59,11 +56,6 @@ const RegistrationForm = () => {
         .email("Invalid Email Address")
         .required("Email is Required"),
       phone: Yup.string().required("Phone number is Required"),
-      // password: Yup.string().required("Password is Required"),
-      // confirmpassword: Yup.string()
-      //   .required("Enter Password again")
-      //   .oneOf([Yup.ref("password"), "null"], "Passwords must match"),
-      // file: Yup.string().required("PDF Resume/CV is Required"),
     }),
 
     onSubmit: async (values) => {
@@ -238,13 +230,6 @@ const RegistrationForm = () => {
     }
   };
 
-  // useEffect(() => {
-  //   const data: any = localStorage.getItem("pdfText");
-  //   console.log("first text in registration form", data.pdfText);
-  //   //  if (data) {
-  //   //    dispatch(setField({ name: "scrappedContent", value: data.pdfText }));
-  //   //  }
-  // }, [text]);
   useEffect(() => {
     const firstName = params?.get("firstName");
     const lastName = params?.get("lastName");
@@ -357,7 +342,10 @@ const RegistrationForm = () => {
                       }
                     />
                   ) : (
-                    file !== null && (
+                    file !== null &&
+                    (file.type === "application/msword" ||
+                      file.type ===
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document") && (
                       <WordFileHandler
                         file={file}
                         text={text}
