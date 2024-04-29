@@ -4,18 +4,11 @@ interface Props {
   children: ReactNode;
 }
 
-
-
 export const metadata: Metadata = {
   title: "Change Password - CareerBooster.ai",
   description: "Change Password - CareerBooster.ai | Developed by NausalTech",
 };
 
-
 export default async function Coverletterlayout({ children }: Props) {
-  
-
-  return (
-<>{children}</>
-  );
+  return <>{children}</>;
 }

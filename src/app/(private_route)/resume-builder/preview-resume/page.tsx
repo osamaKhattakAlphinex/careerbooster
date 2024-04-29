@@ -825,7 +825,7 @@ const Page = () => {
       </div>
       <div
         ref={cvRef}
-        className="cv-container text-[#000] origin-top-left"
+        className="cv-container text-[#000] origin-top-left space-y-4"
         style={{ scale: scale < 1 ? scale : 1 }}
       ></div>
     </div>
