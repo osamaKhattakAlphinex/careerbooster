@@ -21,7 +21,10 @@ import {
   certification,
   conditionStyleHeader,
   contact,
+  customStyle_2,
+  customStyle_4,
   education,
+  experience,
   header,
   interest,
   language,
@@ -29,7 +32,6 @@ import {
   reference,
   skill,
   summary,
-  template_2,
   training,
 } from "@/helpers/templateStylesObj";
 
@@ -52,7 +54,7 @@ const ResumeTemplate2 = () => {
     // You can do whatever you need with the selected color here
   };
   return (
-    <div className="flex flex-col py-2 items-start justify-start w-full px-6 space-y-4 text-gray-900 first-page">
+    <div className="flex flex-col py-2 items-start justify-start w-full px-6 space-y-1 text-gray-900 first-page">
       {/* Name and Title */}
       <div className="flex flex-col items-center w-full px-8 py-4 mt-1 text-center bg-gray-300  rounded-xl">
         <Header
@@ -91,11 +93,12 @@ const ResumeTemplate2 = () => {
         </div> */}
       </div>
       {/* summary objective */}
-      <div className="w-full space-y-3 ">
+      <div className="w-full ">
         <Summary
           heading={resume.headings.summary}
           summary={resume.summary}
           styles={summary}
+          customStyle={customStyle_2}
         />
       </div>
       {/* Skills  */}
@@ -113,7 +116,7 @@ const ResumeTemplate2 = () => {
           heading={resume.headings.workExperienceArray}
           workExperienceArray={resume.workExperienceArray}
           workExperience={resume.workExperience}
-          styles={template_2}
+          styles={experience}
         />
       </div>
 

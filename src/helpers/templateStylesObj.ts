@@ -1,13 +1,6 @@
 import { sparkleIcon } from "./iconsProvider";
 
-const template_2 = {
-  experienceHeading_temp_2: "experienceHeading_temp_2",
-  achievement_div: "achievement_div",
-  achievement_h2: "achievement_h2",
-  achievement_h1: "achievement_h1",
-  achievement_save_btn: "achievement-save-btn",
-  achievement_delete_btn: "achievement-delete-btn",
-};
+
 
 // Header Styles
 
@@ -50,6 +43,19 @@ export const templates = {
 const summary = {
   summary_heading: "summary_heading",
   summary_text: "summary_text",
+  publication_h3 : "publication_h3",
+  span1: "span1",
+  span2: "span2",
+};
+//work Experience 
+
+ export const experience = {
+  experienceHeading_temp_2: "experienceHeading_temp_2",
+  achievement_div: "achievement_div",
+  achievement_h2: "achievement_h2",
+  achievement_h1: "achievement_h1",
+  achievement_save_btn: "achievement-save-btn",
+  achievement_delete_btn: "achievement-delete-btn",
   span1: "span1",
   span2: "span2",
 };
@@ -207,15 +213,21 @@ const education = {
   education_h3: "publication_h3",
   span1: "span1",
   span2: "span2",
-};
+}
 export const customStyle_4 = {
-  
     borderTopBottom: false,
     borderBottom: true,
     centeredHeading: false,
   
 }
-export const customStyle_8 = { borderTopBottom: true, centeredHeading: true }
+export const customStyle_2 = {
+
+    borderTopBottom: false,
+    borderBottom: false,
+    centeredHeading: false,
+  
+}
+export const customStyle_8 = { borderTopBottom: true, centeredHeading: true  }
 export const customStyle_6_9 = { borderTopBottom: true, centeredHeading: false }
 export const customStyle_10 = {
     borderTopBottom: false,
@@ -236,4 +248,4 @@ export const customStyle_15 = {
 
 
 
-export {template_2,publicationStyles,conditionStylePublication,certification,training,interest,award,reference,language,education,summary,skill,header,conditionStyleHeader,contact}
+export {publicationStyles,conditionStylePublication,certification,training,interest,award,reference,language,education,summary,skill,header,conditionStyleHeader,contact}

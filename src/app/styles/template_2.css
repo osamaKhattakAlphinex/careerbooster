@@ -23,7 +23,7 @@
 
 .skill_heading,
 .experienceHeading_temp_2 {
-  @apply text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2;
+  @apply text-base font-semibold uppercase border-2 my-1 border-transparent hover:border-dashed hover:border-gray-500 flex items-center gap-2;
 }
 
 .skill_ul {

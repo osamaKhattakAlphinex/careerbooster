@@ -13,15 +13,15 @@ type Props = {
   heading: any;
   workExperienceArray: any;
   workExperience: any;
-
   styles: any;
+  customStyle?: any;
 };
 
 const Experience = ({
   heading,
   workExperienceArray,
   workExperience,
-
+  customStyle,
   styles,
 }: Props) => {
   const [newAchievement, setNewAchievement] = useState("");
@@ -51,7 +51,16 @@ const Experience = ({
   }, [streamedJDData]);
   return (
     <>
-      <h2 className={`${styles?.experienceHeading_temp_2}`}>
+      <span
+        className={`${styles?.span1} ${
+          customStyle?.borderTopBottom ? "block" : "hidden"
+        }`}
+      ></span>
+      <h2
+        className={`${styles?.experienceHeading_temp_2} ${
+          customStyle?.centeredHeading ? "justify-center" : ""
+        }  ${customStyle?.bgColor} `}
+      >
         {resumeWorkExpIcon}
 
         <EditableField
@@ -66,6 +75,13 @@ const Experience = ({
           }}
         />
       </h2>
+      <span
+        className={`${styles?.span2} ${
+          customStyle?.borderTopBottom || customStyle?.borderBottom
+            ? "block"
+            : "hidden"
+        }`}
+      ></span>
       {workExperienceArray && workExperienceArray.length > 0 ? (
         <>
           {workExperienceArray.map((rec: any, i: number) => {
