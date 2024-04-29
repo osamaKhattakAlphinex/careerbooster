@@ -5,7 +5,8 @@ import React, { createContext, useContext,  ReactNode, useState } from "react";
 interface AppContexts {
   availableCredits: boolean;
   setAvailableCredits:any;
-  abortController: AbortController ;
+  abortController: AbortController | null;
+  setAbortController: any;
   // Add more references as needed
 }
 
@@ -22,12 +23,13 @@ const AppContextsProvider: React.FC<AppContextsProvider> = ({
 }) => {
   // Create refs for each reference
 const [availableCredits,setAvailableCredits] = useState<boolean>(false)
-const [abortController, setAbortController] = useState<AbortController>(new AbortController());
+const [abortController, setAbortController] = useState<AbortController | null>(new AbortController());
   // Define the context value
   const contextValue: AppContexts = {
     availableCredits,
     setAvailableCredits,
     abortController,
+    setAbortController,
   };
 
   return (

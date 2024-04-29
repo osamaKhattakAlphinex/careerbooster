@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useSaveResumeToDB from "./useSaveToDB";
 import { usePathname } from "next/navigation";
 import { showErrorToast, showSuccessToast } from "@/helpers/toast";
+import { useAppContext } from "@/context/AppContext";
 
 const useGetSummary = (
   setStreamedSummaryData: any,
@@ -18,6 +19,7 @@ const useGetSummary = (
   const creditLimits = useSelector((state: any) => state.creditLimits);
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const path = usePathname();
+  const {abortController} = useAppContext()
   useEffect(() => {
     if (userData && userData?.email) {
       setAiInputUserData({
@@ -56,6 +58,7 @@ const useGetSummary = (
           fileAddress: userData.uploadedResume.fileName,
         },
       }),
+      signal: abortController?.signal
     })
       .then(async (resp: any) => {
         if (resp.ok) {

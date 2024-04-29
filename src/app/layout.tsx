@@ -12,7 +12,7 @@ import { ToastContainer } from "react-toastify";
 import MicrosoftClarity from "./metrics/MicrosoftClarity";
 export const metadata: Metadata = {
   title: "Dashboard - CareerBooster.ai",
-  description: "Dashboard - CareerBooster.ai | Developed by NausalTech",
+  description: "AI Resume Builder | Developed by NausalTech ",
 };
 
 export default function RootLayout({

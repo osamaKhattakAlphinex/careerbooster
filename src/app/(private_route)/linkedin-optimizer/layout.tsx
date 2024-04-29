@@ -7,7 +7,7 @@ interface Props {
 export const metadata: Metadata = {
   title: "Linkedin Optimizer - CareerBooster.ai",
   description:
-    "Linkedin Optimizer - CareerBooster.ai | Developed by NausalTech",
+    "Linkedin Optimizer - CareerBooster.ai| AI Resume Builder | Developed by NausalTech",
 };
 
 export default async function Coverletterlayout({ children }: Props) {

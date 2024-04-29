@@ -6,7 +6,7 @@ interface Props {
 
 export const metadata: Metadata = {
   title: "Change Password - CareerBooster.ai",
-  description: "Change Password - CareerBooster.ai | Developed by NausalTech",
+  description: "Change Password - CareerBooster.ai| AI Resume Builder | Developed by NausalTech",
 };
 
 export default async function Coverletterlayout({ children }: Props) {
