@@ -139,10 +139,6 @@ const ResumeBuilder = () => {
       await getSummary();
       await getPrimarySkills();
       await getWorkExperienceNew();
-
-      // await getPublications();
-      // await addCustomSection();
-      // adding custom sections
       runConfetti();
     } else {
       setShowPopup(true);
