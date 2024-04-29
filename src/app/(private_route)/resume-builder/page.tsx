@@ -111,7 +111,7 @@ const ResumeBuilder = () => {
   // };
 
   const runConfetti = () => {
-    if (showConfettiRunning && resumeGenerated) {
+    if (showConfettiRunning) {
       showSuccessToast("Generated Successfully");
       setConfettiRunning(true);
       setTimeout(() => {
@@ -145,7 +145,7 @@ const ResumeBuilder = () => {
       await getSummary();
       await getPrimarySkills();
       await getWorkExperienceNew();
-      await runConfetti();
+      //  runConfetti();
     } else {
       setShowPopup(true);
 
@@ -477,6 +477,7 @@ const ResumeBuilder = () => {
       resumeData?.name &&
       !outOfCredits
     ) {
+      runConfetti()
       saveResumeToDB();
     }
   }, [resumeData?.state?.resumeLoading]);
