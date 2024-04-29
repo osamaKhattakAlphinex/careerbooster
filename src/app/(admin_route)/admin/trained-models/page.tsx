@@ -18,7 +18,6 @@ const TrainedModel = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const columnHelper = createColumnHelper<TrainedModelType>();
-  const { abortController } = useAppContext();
 
   const columns = [
     columnHelper.accessor("dataset", {
@@ -43,10 +42,9 @@ const TrainedModel = () => {
   const fetchmodels = async () => {
     setLoading(true);
 
-    const signal = abortController.signal;
     if (!loading) {
       axios
-        .get("/api/trainBot/trainedModel", { signal: signal })
+        .get("/api/trainBot/trainedModel")
         .then(async (res: any) => {
           if (res.data.success) {
             const result = await res.data;
@@ -64,9 +62,6 @@ const TrainedModel = () => {
 
   useEffect(() => {
     fetchmodels();
-    return () => {
-      abortController.abort();
-    };
   }, []);
 
   return (

@@ -133,7 +133,6 @@ const LeadsAdminPage = () => {
   const fetchRecords = async (startIndex: number, endIndex: number) => {
     setLoading(true);
 
-    const signal = abortController.signal;
     if (!loading) {
       axios
         .get("/api/leads", {
@@ -141,7 +140,6 @@ const LeadsAdminPage = () => {
             startIndex: startIndex,
             endIndex: endIndex,
           },
-          signal: signal,
         })
         .then(async (res: any) => {
           if (res.data.success) {
@@ -160,15 +158,11 @@ const LeadsAdminPage = () => {
   };
 
   const getlinkedInToolUsersCount = async () => {
-    const signal = abortController.signal;
-
-    axios
-      .get("/api/leads/getLinkedInToolUserCount", { signal: signal })
-      .then((res) => {
-        if (res.data.success) {
-          setCounts(res.data);
-        }
-      });
+    axios.get("/api/leads/getLinkedInToolUserCount").then((res) => {
+      if (res.data.success) {
+        setCounts(res.data);
+      }
+    });
   };
 
   useEffect(() => {

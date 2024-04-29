@@ -68,8 +68,6 @@ const TrainRegistrationBotAdminPage = () => {
   const fetchRecords = async () => {
     setLoading(true);
 
-    const signal = abortController.signal;
-
     if (!loading) {
       axios
         .get(`/api/trainBot?limit=${limitOfRecords}&page=${currentPage}`, {
@@ -78,7 +76,6 @@ const TrainRegistrationBotAdminPage = () => {
             type: showRecordsType,
             dataType: dataType,
           },
-          signal: signal,
         })
         .then((res: any) => {
           if (res.data.success) {

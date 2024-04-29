@@ -16,7 +16,6 @@ import DataTable, {
 } from "@/components/admin/DataTable";
 import { debug } from "console";
 import CreditsUpdationModal from "@/components/creditsUpdationModal";
-import { useAppContext } from "@/context/AppContext";
 
 type User = {
   alertConsent: any;
@@ -58,8 +57,6 @@ const UsersPage = () => {
   const [counts, setCounts] = useState<any>(null);
   const [userStats, setUserStats] = useState<any>("total");
   const columnHelper = createColumnHelper<User>();
-
-  const { abortController } = useAppContext();
 
   const creditsUpdationModelRef: React.MutableRefObject<any> = useRef(null);
 
@@ -370,13 +367,10 @@ const UsersPage = () => {
   };
   const getUserDeatils = () => {
     setshowTableLoader(true);
-    const signal = abortController.signal;
 
     setLoading(true);
     if (!loading) {
-      fetch(`/api/users?limit=${limitOfUser}&page=${currentPage}`, {
-        signal: signal,
-      })
+      fetch(`/api/users?limit=${limitOfUser}&page=${currentPage}`)
         .then(async (resp) => {
           const res = await resp.json();
           setLoadingId("");
@@ -420,9 +414,6 @@ const UsersPage = () => {
     getAllPackages();
     getUserDeatils();
     getUsersCount();
-    return () => {
-      abortController.abort();
-    };
   }, []);
 
   useEffect(() => {

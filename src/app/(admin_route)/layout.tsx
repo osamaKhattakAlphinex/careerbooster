@@ -19,13 +19,10 @@ export default async function AdminLayout({ children }: Props) {
 
   return (
     <AppContextsProvider>
-      <div className="grid items-start justify-start w-screen grid-cols-12 overflow-x-hidden overflow-y-hidden">
-        <div className="max-h-screen col-span-3">
-          <div className="h-screen overflow-y-auto bg-gray-800 no-scrollbar">
-            <AdminSidebar />
-          </div>
-        </div>
-        <main className="h-screen col-span-9 p-10 overflow-y-scroll bg-gray-100 max-w-7xl dark:bg-gray-950">
+      <div className="absolute grid items-start justify-start w-screen grid-cols-12 overflow-x-hidden overflow-y-hidden">
+        <AdminSidebar />
+
+        <main className="h-screen col-span-12 p-10 overflow-y-scroll bg-gray-100 sm:col-span-9 max-w-7xl dark:bg-gray-950">
           {children}
         </main>
       </div>
