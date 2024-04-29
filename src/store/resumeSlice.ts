@@ -107,22 +107,7 @@ export interface Resume {
       year: string;
     }
   ];
-  sections: {
-    contact: boolean;
-    summary: boolean;
-    shortName: boolean;
-    name: boolean;
-    jobTitle: boolean;
-    workExperience: boolean;
-    primarySkills: boolean;
-    languages: boolean;
-    certifications: boolean;
-    awards: boolean;
-    publications: boolean;
-    references: boolean;
-    interests: boolean;
-  };
-
+  
   summary: string;
   workExperienceArray: WorkExperience[];
   // quantifyingExperience: boolean;
@@ -184,21 +169,6 @@ const initialState: Resume = {
       year: "",
     },
   ],
-  sections: {
-    contact: true,
-    summary: true,
-    shortName: true,
-    name: true,
-    jobTitle: true,
-    workExperience: true,
-    primarySkills: true,
-    languages: false,
-    certifications: false,
-    awards: false,
-    publications: false,
-    references: false,
-    interests: false,
-  },
   summary: "",
   workExperienceArray: [],
   // quantifyingExperience: true,

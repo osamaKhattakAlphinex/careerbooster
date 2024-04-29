@@ -1,5 +1,5 @@
 "use client";
-import { memo, useEffect, useState } from "react";
+import { memo, useState } from "react";
 import React from "react";
 import { useSelector } from "react-redux";
 import { ColorResult } from "react-color";
@@ -34,6 +34,7 @@ import {
   summary,
   training,
 } from "@/helpers/templateStylesObj";
+import Project from "./resume-sections/project";
 
 const ResumeTemplate2 = () => {
   const resume = useSelector((state: any) => state.resume);
@@ -160,6 +161,17 @@ const ResumeTemplate2 = () => {
             heading={resume.headings.awards}
             awards={resume.awards}
             styles={award}
+          />
+        )}
+      </div>
+
+      {/* Projects */}
+      <div className="w-full">
+        {resume?.projects && resume?.projects.length > 0 && (
+          <Project
+            heading={resume.headings.projects}
+            projects={resume.projects}
+            // styles={award}
           />
         )}
       </div>

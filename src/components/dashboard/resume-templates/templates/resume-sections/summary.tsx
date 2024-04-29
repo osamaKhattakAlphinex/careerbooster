@@ -35,7 +35,7 @@ const Summary = ({ summary, heading, customStyle, styles }: Props) => {
       >
         {resumeSummaryIcon}
         <EditableField
-          value={heading?.summary ? heading.summary : "Execuitve summary"}
+          value={heading ? heading : "Execuitve summary"}
           style={{ width: "fit-content " }}
           onSave={(value: string) => {
             if (value !== heading?.summary) {

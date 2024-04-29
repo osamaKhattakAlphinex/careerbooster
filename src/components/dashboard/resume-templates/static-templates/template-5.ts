@@ -208,15 +208,7 @@ const templateLayout: any = {
         },
       ],
     },
-    languages: {
-      styles:
-        "ml-8 text-black gap-2 flex flex-row flex-wrap justify-start items-start px-8",
-      elements: [
-        {
-          id: "languages",
-        },
-      ],
-    },
+   
     interests: {
       styles:
         "ml-8 text-black gap-2 flex flex-col flex-wrap justify-start items-start px-8",
@@ -232,6 +224,15 @@ const templateLayout: any = {
       elements: [
         {
           id: "references",
+        },
+      ],
+    },
+    languages: {
+      styles:
+        "ml-8 text-black gap-2 flex flex-row flex-wrap justify-start items-start px-8",
+      elements: [
+        {
+          id: "languages",
         },
       ],
     },
@@ -619,10 +620,10 @@ const GenerationOrder = [
   "certifications",
   "awards",
   "trainings",
-  "languages",
   "interests",
   "projects",
   "references",
+  "languages",
   "education",
 ];
 export const template = {

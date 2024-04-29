@@ -793,7 +793,7 @@ const Page = () => {
         <div className="flex flex-row items-center justify-between gap-3 ">
           <button
             onClick={handlePrintClick}
-            className="w-full sm:max-w-max sm:w-48 lg:px-6 px-4 py-2 rounded-full dark:bg-[#18181b]  border-[1.5px] border-gray-950/80 hover:dark:bg-[#2f2f35]"
+            className="w-full hidden md:block sm:max-w-max sm:w-48 lg:px-6 px-4 py-2 rounded-full dark:bg-[#18181b]  border-[1.5px] border-gray-950/80 hover:dark:bg-[#2f2f35]"
           >
             <div className="flex flex-row items-center justify-center gap-2">
               <svg
