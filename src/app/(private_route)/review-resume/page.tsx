@@ -89,6 +89,9 @@ const ReviewResumeBot = () => {
             setStreamedData("Error! Something went wrong");
           }
         })
+        .catch((err) => {
+          console.log(err);
+        })
         .finally(() => {
           setMsgLoading(false);
         });
@@ -133,11 +136,11 @@ const ReviewResumeBot = () => {
         </Link>
         <div className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-[20px] px-4 lg:px-[30px] py-8 lg:py-[41px] flex flex-col gap-5 ">
           {/* header */}
-          <div className="flex flex-col gap-2 md:flex-row  justify-between items-center">
+          <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
             <h3 className=" text-[16px] md:text-sm uppercase dark:text-gray-100 text-gray-950 font-bold">
               Get Your Resume Reviewed by AI
             </h3>
-            <div className=" text-sm dark:text-gray-100 text-gray-950 uppercase font-bold">
+            <div className="text-sm font-bold uppercase  dark:text-gray-100 text-gray-950">
               {/* <LimitCard
                 title="Review Availble"
                 limit={userData?.userPackageData?.limit?.review_resume}
@@ -184,7 +187,7 @@ const ReviewResumeBot = () => {
               ""
             )}
           </div>
-          <div className="flex flex-wrap gap-5 items-start">
+          <div className="flex flex-wrap items-start gap-5">
             {!isNaN(availablePercentage) && availablePercentage !== 0 && (
               <button
                 type="button"
@@ -276,7 +279,7 @@ const ReviewResumeBot = () => {
                   <div dangerouslySetInnerHTML={{ __html: streamedData }}></div>
                 </div>
               </div>
-              <div className="buttons mt-5 flex flex-col flex-wrap md:flex-row gap-3">
+              <div className="flex flex-col flex-wrap gap-3 mt-5 buttons md:flex-row">
                 <button
                   type="button"
                   disabled={

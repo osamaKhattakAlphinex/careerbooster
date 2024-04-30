@@ -26,11 +26,9 @@ export async function POST(req: any) {
       const reqBody = body;
       const content = reqBody.content.substring(0, 12000);
 
-
       const trainBotData = reqBody.trainBotData;
 
       if (content) {
-
         const openai = new OpenAI({
           apiKey: process.env.OPENAI_API_KEY,
         });
@@ -94,7 +92,13 @@ export async function POST(req: any) {
             await TrainBot.create({ ...obj });
           }
           // const resp = await chain4.call({ query: input });
-        } catch (error) { }
+        } catch (error) {
+          console.log(error);
+          return NextResponse.json(
+            { result: "Internal Server Error", success: false },
+            { status: 404 }
+          );
+        }
 
         return NextResponse.json(
           { success: true, result: response.choices[0].message.content },

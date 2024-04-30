@@ -37,7 +37,7 @@ const useSingleJDGenerate = (
 
     await getUserDataIfNotExists();
     await getCreditLimitsIfNotExists();
-    const { quantifyingExperience } = resumeData;
+    const { detailedResume } = resumeData.state;
     if (userData.isFetched) {
       let workExpArrObj: any = {};
 
@@ -56,7 +56,7 @@ const useSingleJDGenerate = (
       const res: any = await fetch("/api/resumeBots/jdGeneratorSingle", {
         method: "POST",
         body: JSON.stringify({
-          quantifyingExperience: quantifyingExperience,
+          detailedResume: detailedResume,
           experience: experience,
 
           creditsUsed: creditLimits.resume_individualWorkExperience,

@@ -79,7 +79,7 @@ const ToolsCard = ({
       className="dark:bg-transparent dark:border-none dark:rounded-none rounded-md bg-[#ffffff94] border-[#b6b8b6]"
     >
       {action === "coming soon" ? (
-        <div className="flex flex-row items-start justify-between gap-2 md:p-3 xs:px-0 py-1 text-white no-underline">
+        <div className="flex flex-row items-start justify-start gap-2 py-1 text-white no-underline md:p-3 xs:px-0">
           <div className="">
             <div
               className={`rounded-full flex justify-center items-center bg-gradient-to-b ${bgColor1} ${bgColor2} md:w-12 md:h-12 xs:w-8 xs:h-8 `}
@@ -106,7 +106,7 @@ const ToolsCard = ({
             </div>
           </div>
           <div className="flex flex-col items-start justify-start">
-            <h2 className="md:text-base xs:text-sm font-semibold dark:text-white text-gray-950">
+            <h2 className="font-semibold md:text-base xs:text-sm dark:text-white text-gray-950">
               {title}
             </h2>
             <p className=" flex-1 dark:text-[#959595]  text-gray-950 mt-[6px] font-normal md:text-sm xs:text-xs ">
@@ -129,17 +129,17 @@ const ToolsCard = ({
                   aria-hidden="true"
                   className=" overflow-y-auto overflow-x-hidden fixed !top-20 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
                 >
-                  <div className="relative p-4 w-full max-w-md max-h-full m-auto">
+                  <div className="relative w-full max-w-md max-h-full p-4 m-auto">
                     {/* <!-- Modal content --> */}
                     <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
                       {/* <!-- Modal header --> */}
-                      <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                      <div className="flex items-center justify-between p-4 border-b rounded-t md:p-5 dark:border-gray-600">
                         <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
                           Feature In Development
                         </h3>
                         <button
                           type="button"
-                          className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                          className="inline-flex items-center justify-center w-8 h-8 text-sm text-gray-400 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 ms-auto dark:hover:bg-gray-600 dark:hover:text-white"
                           data-modal-hide="default-modal"
                           onClick={() => {
                             setConfirmationModal(!confirmationModal);
@@ -164,8 +164,8 @@ const ToolsCard = ({
                         </button>
                       </div>
                       {/* <!-- Modal body --> */}
-                      <div className="p-4 md:p-5 space-y-4">
-                        <p className="text-base leading-relaxed text-gray-500   dark:text-gray-400">
+                      <div className="p-4 space-y-4 md:p-5">
+                        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                           This particular feature is still under construction
                           and will be available soon. We appreciate your
                           patience and enthusiasm. Stay tuned for updates and
@@ -183,7 +183,7 @@ const ToolsCard = ({
       ) : (
         <Link
           href={link}
-          className="flex flex-row items-start justify-between gap-2 md:p-3 xs:px-0 xs:py-1 text-white no-underline"
+          className="flex flex-row items-start justify-start gap-2 text-white no-underline md:p-3 xs:px-0 xs:py-1"
         >
           <div className="">
             <div
@@ -211,7 +211,7 @@ const ToolsCard = ({
             </div>
           </div>
           <div className="flex flex-col items-start justify-start">
-            <h2 className="md:text-base xs:text-sm font-semibold dark:text-white text-gray-950">
+            <h2 className="font-semibold md:text-base xs:text-sm dark:text-white text-gray-950">
               {title}
             </h2>
             <p className=" flex-1 dark:text-[#959595]  text-gray-950 mt-[6px] font-normal md:text-sm xs:text-xs ">

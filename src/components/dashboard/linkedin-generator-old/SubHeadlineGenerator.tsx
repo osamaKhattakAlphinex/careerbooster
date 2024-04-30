@@ -1,22 +1,20 @@
 "use client";
 import Image from "next/image";
 import Svg1 from "@/../public/icon/headline-icon.svg";
-import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
-import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
+import { setUserData } from "@/store/userDataSlice";
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
 import PreviouslyGeneratedList from "@/components/dashboard/PreviouslyGeneratedList";
 import LinkedInHeadlineCardSingle from "./LinkedInHeadeLineCardSingle";
-import { makeid } from "@/helpers/makeid";
 import useGetUserData from "@/hooks/useGetUserData";
 import { useAppContext } from "@/context/AppContext";
 import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 import DownloadService from "@/helpers/downloadFile";
-import { EditIcon } from "@/helpers/iconsProvider";
+import { EditIcon, newViewIcon } from "@/helpers/iconsProvider";
 import { setLinkedInHeadline } from "@/store/linkedInHeadLineSlice";
 import TourBot from "../TourBot";
 import { useTourContext } from "@/context/TourContext";
@@ -50,7 +48,7 @@ const SubHeadlineGenerator = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const linkedinHeadline = useSelector((state: any) => state.linkedinHeadline);
-  const { tourBotRef,availableCreditsRef } = useTourContext();
+  const { tourBotRef, availableCreditsRef } = useTourContext();
 
   const creditLimits = useSelector((state: any) => state.creditLimits);
 
@@ -97,6 +95,7 @@ const SubHeadlineGenerator = () => {
 
   const handleGenerate = async () => {
     setStreamedData("");
+
     // await getUserDataIfNotExists();
     //change condition
     if (session?.user?.email && aiInputUserData) {
@@ -148,11 +147,11 @@ const SubHeadlineGenerator = () => {
             );
           } else {
             const res = await resp.json();
-            if(resp.status === 429){
+            if (resp.status === 429) {
               setStreamedData(res.result + "! You ran out of Credits");
-              showErrorToast("You ran out of Credits!")
+              showErrorToast("You ran out of Credits!");
               setOutOfCredits(true);
-            }else{
+            } else {
               showErrorToast("Failed to generate linkedin Headline");
             }
           }
@@ -239,8 +238,6 @@ const SubHeadlineGenerator = () => {
     }
   }, [isEditing]);
 
-  
-
   // when page (session) loads, fetch user data if not exists
   useEffect(() => {
     if (session?.user?.email) {
@@ -259,7 +256,7 @@ const SubHeadlineGenerator = () => {
   return (
     <>
       <PreviouslyGeneratedList {...historyProps} />
-      <div className=" dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] md:justify-between text-gray-950 p-5 sm:p-8 flex flex-col md:flex-row md:align-center xs:gap-3 justify-center items-center rounded-xl">
+      <div className=" dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] md:justify-between text-gray-950 p-5 sm:p-8 flex flex-col md:flex-row md:align-center xs:gap-3 justify-center items-center rounded-lg">
         <div className="hidden aspect-square rounded-full bg-gradient-to-b from-[#255CE7] to-[#7FA0E0] md:flex justify-center items-center w-16 h-16">
           <Image alt="Svg1" src={Svg1} width={24} height={24} />
         </div>
@@ -308,12 +305,7 @@ const SubHeadlineGenerator = () => {
                   />
                 </svg>
               ) : (
-                <Image
-                  src={buttonIconSrc}
-                  alt="bold icon"
-                  height={18}
-                  width={18}
-                />
+                newViewIcon
               )}
             </span>
             <span className="text-xs font-semibold md:text-sm ">
@@ -506,7 +498,9 @@ const SubHeadlineGenerator = () => {
           Credit Limit Reached !
         </div>
       )}
-      {outOfCredits &&  <TourBot config={tourBotConfig2} setOutOfCredits={setOutOfCredits}/>}
+      {outOfCredits && (
+        <TourBot config={tourBotConfig2} setOutOfCredits={setOutOfCredits} />
+      )}
     </>
   );
 };

@@ -6,7 +6,6 @@ import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 import { WorkExperience, setUserData } from "@/store/userDataSlice";
 import axios from "axios";
-import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
 import PreviouslyGeneratedList from "@/components/dashboard/PreviouslyGeneratedList";
@@ -16,6 +15,8 @@ import useGetUserData from "@/hooks/useGetUserData";
 import { useAppContext } from "@/context/AppContext";
 import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 import Toolbar from "../Toolbar";
+import { newViewIcon } from "@/helpers/iconsProvider";
+
 import Loader from "@/components/common/Loader";
 import { setLinkedInJobDescription } from "@/store/linkedInJobDescriptionSlice";
 import DownloadService from "@/helpers/downloadFile";
@@ -32,7 +33,7 @@ const SubJDGenerator = () => {
   const { setAvailableCredits } = useAppContext();
   const [existingJDId, setExistingJDId] = useState("");
   const [isEditing, setIsEditing] = useState({ isEdit: false, editIndex: -1 });
-  const { tourBotRef,availableCreditsRef } = useTourContext();
+  const { tourBotRef, availableCreditsRef } = useTourContext();
   const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
 
   const [generatedWorkExperience, setGeneratedWorkExperience] = useState<
@@ -246,6 +247,7 @@ const SubJDGenerator = () => {
 
   const handleGenerate = async () => {
     setGeneratedWorkExperience([]);
+
     await getUserDataIfNotExists();
     //change condition
     if (session?.user?.email && userData.isFetched) {
@@ -313,11 +315,11 @@ const SubJDGenerator = () => {
             showSuccessToast("Job Description generated successfully");
           }
         } else {
-          if(res.status === 429){
+          if (res.status === 429) {
             setStreamedData(" You ran out of Credits");
-            showErrorToast("You ran out of Credits!")
+            showErrorToast("You ran out of Credits!");
             setOutOfCredits(true);
-          }else{
+          } else {
             showErrorToast("Failed to generate linkedin Headline");
           }
           setMsgLoading(false);
@@ -431,7 +433,7 @@ const SubJDGenerator = () => {
     <>
       <PreviouslyGeneratedList {...historyProps} />
       <>
-        <div className=" dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] md:justify-between text-gray-950 p-5 sm:p-8 flex flex-col md:flex-row md:align-center xs:gap-3 justify-center items-center rounded-xl">
+        <div className=" dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] md:justify-between text-gray-950 p-5 sm:p-8 flex flex-col md:flex-row md:align-center xs:gap-3 justify-center items-center rounded-lg">
           <div className="hidden aspect-square rounded-full bg-gradient-to-b from-[#255CE7] to-[#7FA0E0] md:flex justify-center items-center w-16 h-16">
             <Image alt="Svg1" src={Svg1} width={24} height={24} />
           </div>
@@ -473,12 +475,7 @@ const SubJDGenerator = () => {
                     />
                   </svg>
                 ) : (
-                  <Image
-                    src={buttonIconSrc}
-                    alt="bold icon"
-                    height={18}
-                    width={18}
-                  />
+                  newViewIcon
                 )}
               </span>
               <span className="text-xs font-semibold md:text-sm ">
@@ -597,8 +594,9 @@ const SubJDGenerator = () => {
             Credit Limit Reached !
           </div>
         )}
-      {outOfCredits &&  <TourBot config={tourBotConfig2} setOutOfCredits={setOutOfCredits}/>}
-
+        {outOfCredits && (
+          <TourBot config={tourBotConfig2} setOutOfCredits={setOutOfCredits} />
+        )}
       </>
     </>
   );

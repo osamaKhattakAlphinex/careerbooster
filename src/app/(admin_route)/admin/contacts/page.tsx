@@ -22,18 +22,15 @@ const Contacts = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const messageViewerRef: React.MutableRefObject<any> = useRef(null);
   const [message, setMessage] = useState<string>("");
-  //  const { abortController } = useAppContext();
+  const { abortController } = useAppContext();
 
   const fetchRecords = async () => {
     setLoading(true);
 
-    //  const signal = abortController.signal;
+    const signal = abortController.signal;
     if (!loading) {
       axios
-        .get(
-          "/api/contacts"
-          //  { signal: signal }
-        )
+        .get("/api/contacts", { signal: signal })
         .then((res: any) => {
           if (res.data.success) {
             setRecords(res.data.emails);
@@ -98,7 +95,7 @@ const Contacts = () => {
   useEffect(() => {
     fetchRecords();
     return () => {
-      //  abortController.abort();
+      abortController.abort();
     };
   }, []);
 

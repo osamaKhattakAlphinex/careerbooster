@@ -1,12 +1,9 @@
 import { NextResponse } from "next/server";
 import Prompt from "@/db/schemas/Prompt";
 import OpenAI from "openai";
-
 import { OpenAIStream, StreamingTextResponse } from "ai";
-
 import TrainBot from "@/db/schemas/TrainBot";
 import startDB from "@/lib/db";
-
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import { getTrainedModel } from "@/helpers/getTrainedModel";
@@ -225,6 +222,8 @@ export async function POST(req: any) {
           inputPrompt = `Read ${personName}'s Resume data: ${JSON.stringify(
             userData
           )} and write exective summary`;
+
+          console.log(resumeType, inputPrompt);
         }
 
         const response: any = await openai.chat.completions.create({

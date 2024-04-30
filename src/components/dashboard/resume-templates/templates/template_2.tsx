@@ -79,8 +79,6 @@ const ResumeTemplate2 = () => {
         <Contact contact={resume.contact} styles={contact} />
         {/* <div className="absolute top-0 left-12">
           <ColorPicker\
-
-
             defaultColor="#e9e8e8"
             resetColor="#e9e8e8"
             setColor={setColor}
@@ -170,6 +168,11 @@ const ResumeTemplate2 = () => {
             heading={resume.headings.interests}
             interests={resume.interests}
             styles={interest}
+            customStyle={{
+              borderTopBottom: false,
+              borderBottom: false,
+              centeredHeading: false,
+            }}
           />
         )}
       </div>
@@ -206,6 +209,11 @@ const ResumeTemplate2 = () => {
             heading={resume.headings.education}
             educations={resume.education}
             styles={education}
+            customStyle={{
+              borderTopBottom: false,
+              borderBottom: false,
+              centeredHeading: false,
+            }}
           />
         )}
       </div>

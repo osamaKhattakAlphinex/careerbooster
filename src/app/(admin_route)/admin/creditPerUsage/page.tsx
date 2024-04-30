@@ -1,12 +1,7 @@
 "use client";
 
-import { EditIcon, deleteIcon, pencilIcon } from "@/helpers/iconsProvider";
 import React, { useEffect, useRef, useState } from "react";
-
 import axios from "axios";
-import { createColumnHelper } from "@tanstack/react-table";
-import DataTable, { TableAction } from "@/components/admin/DataTable";
-import CreditsModal from "@/components/admin/creditsModal";
 import CreditsPerUsageModal from "@/components/admin/creditsPerUsageModal";
 import { useAppContext } from "@/context/AppContext";
 
@@ -37,8 +32,6 @@ const CreditPerUsagePage = () => {
   const [credits, setCredits] = useState<CreditPerUsage | null>(null);
   const creditModalRef: React.MutableRefObject<any> = useRef(null);
 
-  //  const { abortController } = useAppContext();
-
   const handleUpdate = () => {
     if (creditModalRef.current) {
       creditModalRef.current.openModal(true, credits);
@@ -48,7 +41,6 @@ const CreditPerUsagePage = () => {
   const getCredits = async () => {
     setLoading(true);
 
-    //  const signal = abortController.signal;
     if (!loading) {
       try {
         let response: any = await axios.get("/api/users/CreditLimits");
@@ -64,9 +56,6 @@ const CreditPerUsagePage = () => {
 
   useEffect(() => {
     getCredits();
-    return () => {
-      //  abortController.abort();
-    };
   }, []);
 
   return (

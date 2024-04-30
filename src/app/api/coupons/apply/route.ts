@@ -19,16 +19,15 @@ export async function POST(request: any) {
     // await startDB();
     const { coupon } = await request.json();
 
-    console.log(coupon);
     let fetchedCoupon = await Coupon.findOne({ coupon_code: coupon });
 
     // get the coupan details from the db
     if (fetchedCoupon) {
-      if(fetchedCoupon.valid){
+      if (fetchedCoupon.valid) {
         if (session.user?.email) {
           updateUserCreditsByAdmin(session.user?.email, fetchedCoupon.credits);
         }
-      }else{
+      } else {
         return NextResponse.json(
           { result: "Coupon Not Valid", success: false },
           { status: 404 }

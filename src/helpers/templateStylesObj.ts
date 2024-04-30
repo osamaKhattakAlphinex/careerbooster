@@ -18,7 +18,9 @@ const header = {
 
 const conditionStyleHeader = {
   line: false,
-};
+  span1: false,
+  
+}
 
 //contact styles
 
@@ -83,6 +85,9 @@ const publicationStyles = {
   publication_div_input: "publication_div_input",
 };
 
+const conditionStylePublication = {
+  span1_2 : false
+}
 //certification styles
 
 const certification = {
@@ -203,20 +208,32 @@ const education = {
   span1: "span1",
   span2: "span2",
 };
+export const customStyle_4 = {
+  
+    borderTopBottom: false,
+    borderBottom: true,
+    centeredHeading: false,
+  
+}
+export const customStyle_8 = { borderTopBottom: true, centeredHeading: true }
+export const customStyle_6_9 = { borderTopBottom: true, centeredHeading: false }
+export const customStyle_10 = {
+    borderTopBottom: false,
+    centeredHeading: false,
+    bgColor: "bg_color_9",
+ }
+export const customStyle_15 = {
+    borderTopBottom: false,
+    centeredHeading: false,
+    bgColor: "bg_color",
+}
+ export const customStyle_16 = {
+  borderTopBottom: false,
+  centeredHeading: false,
+  borderBottom: true,
+}
 
-export {
-  template_2,
-  publicationStyles,
-  certification,
-  training,
-  interest,
-  award,
-  reference,
-  language,
-  education,
-  summary,
-  skill,
-  conditionStyleHeader,
-  header,
-  contact,
-};
+
+
+
+export {template_2,publicationStyles,conditionStylePublication,certification,training,interest,award,reference,language,education,summary,skill,header,conditionStyleHeader,contact}

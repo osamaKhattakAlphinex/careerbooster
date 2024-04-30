@@ -1,8 +1,7 @@
 "use client";
 
-import { EditIcon, deleteIcon, pencilIcon } from "@/helpers/iconsProvider";
+import { EditIcon, deleteIcon } from "@/helpers/iconsProvider";
 import React, { useEffect, useRef, useState } from "react";
-
 import axios from "axios";
 import { createColumnHelper } from "@tanstack/react-table";
 import DataTable, { TableAction } from "@/components/admin/DataTable";
@@ -24,7 +23,6 @@ const ViewPackage = ({}) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [credits, setCredits] = useState<Credit[]>([]);
   const creditModalRef: React.MutableRefObject<any> = useRef(null);
-  // const { abortController } = useAppContext();
 
   const handleOpenConfirmationModal = (credit: Credit) => {
     if (creditModalRef.current) {
@@ -95,13 +93,11 @@ const ViewPackage = ({}) => {
 
   const getCredits = async () => {
     setLoading(true);
-    // const signal = abortController.signal;
 
     if (!loading) {
       try {
         let response: any = await axios.get(
           "/api/checkout/getActiveCreditPackages"
-          // { signal: signal }
         );
         if (response?.data.success) {
           setCredits(response.data.result);
@@ -112,13 +108,6 @@ const ViewPackage = ({}) => {
       }
     }
   };
-
-  useEffect(() => {
-    getCredits();
-    return () => {
-      // abortController.abort();
-    };
-  }, []);
 
   return (
     <>

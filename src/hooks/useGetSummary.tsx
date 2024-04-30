@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import useSaveResumeToDB from "./useSaveToDB";
 import { usePathname } from "next/navigation";
 import { showErrorToast, showSuccessToast } from "@/helpers/toast";
-import { useAppContext } from "@/context/AppContext";
 
 const useGetSummary = (
   setStreamedSummaryData: any,
@@ -19,7 +18,6 @@ const useGetSummary = (
   const creditLimits = useSelector((state: any) => state.creditLimits);
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const path = usePathname();
-  const { abortController } = useAppContext();
   useEffect(() => {
     if (userData && userData?.email) {
       setAiInputUserData({
@@ -33,17 +31,14 @@ const useGetSummary = (
         skills: userData?.skills,
       });
     }
-    return () => {
-      abortController.abort();
-    };
   }, []);
 
   const getSummary = async () => {
     // return aiInputUserData
-    const signal = abortController.signal;
     // dispatch(setLoadingState("summary"));
     setStreamedSummaryData("");
     dispatch(setSummary(""));
+    console.log(resumeData);
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
       body: JSON.stringify({
@@ -61,7 +56,6 @@ const useGetSummary = (
           fileAddress: userData.uploadedResume.fileName,
         },
       }),
-      signal: signal,
     })
       .then(async (resp: any) => {
         if (resp.ok) {

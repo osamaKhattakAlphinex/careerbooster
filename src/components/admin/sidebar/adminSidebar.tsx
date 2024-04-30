@@ -1,7 +1,12 @@
 "use client";
 import ThemeToggler from "@/components/Themetoggler";
 import ThemeChanger from "@/components/common/themeSwitcher";
-import { IconUsersicon, antIcon, xMark } from "@/helpers/iconsProvider";
+import {
+  IconUsersicon,
+  antIcon,
+  hamburgerIcon,
+  crossIcon,
+} from "@/helpers/iconsProvider";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -12,55 +17,23 @@ type SidebarItemsType = {
   users: boolean;
 };
 
-const AdminSidebar = () => {
+const Menu = () => {
   const [sidebarToggler, setSideBarToggler] = useState<SidebarItemsType>({
     training: false,
     prompts: false,
     users: false,
   });
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
-    <>
-      <div
-        className={`flex w-10 cursor-pointer  dark:text-gray-100 text-gray-950 lg:hidden ${
-          isOpen ? "dark:bg-[#121212]" : "dark:bg-gray-950 "
-        } bg-gray-100`}
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        {/* Use your icon here for mobile menu toggle */}
-        {isOpen ? (
-          xMark
-        ) : (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
-            />
-          </svg>
-        )}
-      </div>
-      <div
-        className={`w-[270px] p-4 text-center ${
-          isOpen ? "block" : "hidden"
-        } lg:block`}
-      >
-        <div className="p-4 text-center">
-          <h1 className="text-2xl  dark:dark:text-white text-gray-950 ">
+    <div className="h-screen overflow-y-auto bg-gray-800 no-scrollbar">
+      <div className="w-full h-full ">
+        <div className="p-3 text-center sm:p-4">
+          <h1 className="text-base font-bold text-white sm:text-2xl">
             CareerBooster.AI
           </h1>
-          <div className="flex flex-row justify-center items-center gap-2">
+          <div className="flex flex-row items-center justify-center gap-2 mt-3">
             <Link href="/">
-              <div className="h-8 w-8 bg-indigo-700 rounded-md shadow-md grid place-content-center">
-                <span className="dark:dark:text-white text-gray-950 ">
+              <div className="grid w-6 h-6 bg-indigo-700 rounded-md shadow-md sm:w-8 sm:h-8 place-content-center">
+                <span className="text-white">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -78,13 +51,13 @@ const AdminSidebar = () => {
                 </span>
               </div>
             </Link>
-            <div className="h-8 w-8 bg-green-700 rounded-md shadow-md grid place-content-center">
+            <div className="grid w-6 h-6 bg-green-700 rounded-md shadow-md sm:w-8 sm:h-8 place-content-center">
               {/* <ThemeToggler /> */}
               <ThemeChanger />
             </div>
-            <div className="h-8 w-8 bg-rose-700 rounded-md shadow-md grid place-content-center">
+            <div className="grid w-6 h-6 rounded-md shadow-md sm:w-8 sm:h-8 bg-rose-700 place-content-center">
               <button onClick={() => signOut()}>
-                <span className="dark:dark:text-white text-gray-950 ">
+                <span className="text-white">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -105,20 +78,20 @@ const AdminSidebar = () => {
           </div>
         </div>
         {/* Sidebar */}
-        <ul className="flex-col flex p-0">
-          <li className="mb-1 p-4">
+        <ul className="flex flex-col h-full p-0 pb-4 overflow-y-scroll text-sm sm:text-base">
+          <li className="p-2 mb-1 sm:p-4">
             <Link
               href="/admin"
-              className="dark:text-white text-gray-950 no-underline hover:no-underline  "
+              className="text-white no-underline hover:no-underline hover:text-white/80"
             >
-              <span className="cursor-pointer dark:text-white text-gray-950 flex flex-row gap-2 justify-start items-center">
+              <span className="flex flex-row items-center justify-start gap-2 text-white cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6"
+                  className="w-4 h-4 sm:w-6 sm:h-6"
                 >
                   <path
                     strokeLinecap="round"
@@ -138,7 +111,7 @@ const AdminSidebar = () => {
 
           {/* Training Model */}
 
-          <li className="mb-1 p-4 ">
+          <li className="p-2 mb-1 sm:p-4 ">
             <span
               onClick={() =>
                 setSideBarToggler({
@@ -146,7 +119,7 @@ const AdminSidebar = () => {
                   training: !sidebarToggler.training,
                 })
               }
-              className="flex flex-row items-center justify-between cursor-pointer dark:text-white/80 text-black/80"
+              className="flex flex-row items-center justify-between cursor-pointer text-white/80"
             >
               <span className="flex flex-row items-center">
                 <span className="mr-2">{antIcon}</span>
@@ -159,7 +132,7 @@ const AdminSidebar = () => {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6"
+                  className="w-4 h-4 sm:w-6 sm:h-6"
                 >
                   <path
                     strokeLinecap="round"
@@ -168,14 +141,14 @@ const AdminSidebar = () => {
                   />
                 </svg>
               ) : (
-                <span className=" self-end">
+                <span className="self-end ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-6 h-6"
+                    className="w-4 h-4 sm:w-6 sm:h-6"
                   >
                     <path
                       strokeLinecap="round"
@@ -194,7 +167,7 @@ const AdminSidebar = () => {
               <li className="px-5 py-2">
                 <Link
                   href="/admin/trained-models"
-                  className=" dark:text-white text-gray-950 no-underline hover:no-underline  /80"
+                  className="text-white no-underline hover:no-underline hover:text-white/80"
                 >
                   Trained Models
                 </Link>
@@ -202,7 +175,7 @@ const AdminSidebar = () => {
               <li className="px-5 py-2">
                 <Link
                   href="/admin/train-bot"
-                  className=" dark:text-white text-gray-950 no-underline hover:no-underline  /80"
+                  className="text-white no-underline hover:no-underline hover:text-white/80"
                 >
                   Start Training Model (new)
                 </Link>
@@ -210,7 +183,7 @@ const AdminSidebar = () => {
               <li className="px-5 py-2">
                 <Link
                   href="/admin/fine-tuning"
-                  className=" dark:text-white text-gray-950 no-underline hover:no-underline  /80"
+                  className="text-white no-underline hover:no-underline hover:text-white/80"
                 >
                   Fine-Tuning Models
                 </Link>
@@ -219,9 +192,9 @@ const AdminSidebar = () => {
           </li>
 
           {/* Prompts */}
-          <li className="mb-1 p-4">
+          <li className="p-2 mb-1 sm:p-4">
             <span
-              className="flex flex-row items-center justify-between cursor-pointer dark:text-white/80 text-black/80"
+              className="flex flex-row items-center justify-between cursor-pointer text-white/80"
               onClick={() =>
                 setSideBarToggler({
                   ...sidebarToggler,
@@ -237,7 +210,7 @@ const AdminSidebar = () => {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-6 h-6"
+                    className="w-4 h-4 sm:w-6 sm:h-6"
                   >
                     <path
                       strokeLinecap="round"
@@ -255,7 +228,7 @@ const AdminSidebar = () => {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6"
+                  className="w-4 h-4 sm:w-6 sm:h-6"
                 >
                   <path
                     strokeLinecap="round"
@@ -264,14 +237,14 @@ const AdminSidebar = () => {
                   />
                 </svg>
               ) : (
-                <span className=" self-end">
+                <span className="self-end ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-6 h-6"
+                    className="w-4 h-4 sm:w-6 sm:h-6"
                   >
                     <path
                       strokeLinecap="round"
@@ -290,7 +263,7 @@ const AdminSidebar = () => {
               <li className="px-5 py-2">
                 <Link
                   href="/linkedin-prompts-configuration"
-                  className=" dark:text-white text-gray-950 no-underline hover:no-underline  /80"
+                  className="text-white no-underline hover:no-underline hover:text-white/80"
                 >
                   linkedIn
                 </Link>
@@ -298,7 +271,7 @@ const AdminSidebar = () => {
               {/* <li className="px-5 py-2">
               <Link
                 href="/linkedin-tools-prompts-configuration"
-                className=" dark:text-white text-gray-950 no-underline hover:no-underline  /80"
+                className="text-white no-underline hover:no-underline hover:text-white/80"
               >
                 linkedIn Tools
               </Link>
@@ -306,7 +279,7 @@ const AdminSidebar = () => {
               <li className="px-5 py-2">
                 <Link
                   href="/resume-prompts-configuration"
-                  className=" dark:text-white text-gray-950 no-underline hover:no-underline  /80"
+                  className="text-white no-underline hover:no-underline hover:text-white/80"
                 >
                   Resume
                 </Link>
@@ -314,7 +287,7 @@ const AdminSidebar = () => {
               <li className="px-5 py-2">
                 <Link
                   href="/review-resume-configuration"
-                  className=" dark:text-white text-gray-950 no-underline hover:no-underline  /80"
+                  className="text-white no-underline hover:no-underline hover:text-white/80"
                 >
                   Review Resume
                 </Link>
@@ -322,7 +295,7 @@ const AdminSidebar = () => {
               <li className="px-5 py-2">
                 <Link
                   href="/cover-letter-prompt-configuration"
-                  className=" dark:text-white text-gray-950 no-underline hover:no-underline  /80"
+                  className="text-white no-underline hover:no-underline hover:text-white/80"
                 >
                   Cover Letter
                 </Link>
@@ -330,7 +303,7 @@ const AdminSidebar = () => {
               <li className="px-5 py-2">
                 <Link
                   href="/biography-prompts-configuration"
-                  className=" dark:text-white text-gray-950 no-underline hover:no-underline  /80"
+                  className="text-white no-underline hover:no-underline hover:text-white/80"
                 >
                   Biography
                 </Link>
@@ -338,7 +311,7 @@ const AdminSidebar = () => {
               <li className="px-5 py-2">
                 <Link
                   href="/consulting-bid-prompt-configuration"
-                  className=" dark:text-white text-gray-950 no-underline hover:no-underline  /80"
+                  className="text-white no-underline hover:no-underline hover:text-white/80"
                 >
                   Consulting Bids
                 </Link>
@@ -346,7 +319,7 @@ const AdminSidebar = () => {
               <li className="px-5 py-2">
                 <Link
                   href="/email-prompt-configuration"
-                  className=" dark:text-white text-gray-950 no-underline hover:no-underline  /80"
+                  className="text-white no-underline hover:no-underline hover:text-white/80"
                 >
                   Personalized Emails
                 </Link>
@@ -355,9 +328,9 @@ const AdminSidebar = () => {
           </li>
 
           {/* Users */}
-          <li className="mb-1 p-4">
+          <li className="p-2 mb-1 sm:p-4">
             <span
-              className="flex flex-row items-center justify-between cursor-pointer dark:text-white/80 text-black/80"
+              className="flex flex-row items-center justify-between cursor-pointer text-white/80"
               onClick={() =>
                 setSideBarToggler({
                   ...sidebarToggler,
@@ -373,7 +346,7 @@ const AdminSidebar = () => {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-6 h-6"
+                    className="w-4 h-4 sm:w-6 sm:h-6"
                   >
                     <path
                       strokeLinecap="round"
@@ -391,7 +364,7 @@ const AdminSidebar = () => {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6"
+                  className="w-4 h-4 sm:w-6 sm:h-6"
                 >
                   <path
                     strokeLinecap="round"
@@ -400,14 +373,14 @@ const AdminSidebar = () => {
                   />
                 </svg>
               ) : (
-                <span className=" self-end">
+                <span className="self-end ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-6 h-6"
+                    className="w-4 h-4 sm:w-6 sm:h-6"
                   >
                     <path
                       strokeLinecap="round"
@@ -426,7 +399,7 @@ const AdminSidebar = () => {
               <li className="px-5 py-2">
                 <Link
                   href="/admin/users"
-                  className=" dark:text-white text-gray-950 no-underline hover:no-underline  /80"
+                  className="text-white no-underline hover:no-underline hover:text-white/80"
                 >
                   Users
                 </Link>
@@ -434,7 +407,7 @@ const AdminSidebar = () => {
               <li className="px-5 py-2">
                 <Link
                   href="/admin/leads"
-                  className=" dark:text-white text-gray-950 no-underline hover:no-underline  /80"
+                  className="text-white no-underline hover:no-underline hover:text-white/80"
                 >
                   LinkedIn Users (leads)
                 </Link>
@@ -443,19 +416,19 @@ const AdminSidebar = () => {
           </li>
 
           {/* Other Menu Items */}
-          <li className="mb-1 p-4">
+          <li className="p-2 mb-1 sm:p-4">
             <Link
               href="/admin/user-packages"
-              className="dark:text-white text-gray-950 no-underline hover:no-underline  /80"
+              className="text-white no-underline hover:no-underline hover:text-white/80"
             >
-              <span className="cursor-pointer dark:text-white text-gray-950 flex flex-row gap-2 justify-start items-center">
+              <span className="flex flex-row items-center justify-start gap-2 text-white cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6"
+                  className="w-4 h-4 sm:w-6 sm:h-6"
                 >
                   <path
                     strokeLinecap="round"
@@ -467,19 +440,20 @@ const AdminSidebar = () => {
               </span>
             </Link>
           </li>
-          <li className="mb-1 p-4">
+
+          <li className="p-2 mb-1 sm:p-4">
             <Link
               href="/admin/credits"
-              className="dark:text-white text-gray-950 no-underline hover:no-underline  /80"
+              className="text-white no-underline hover:no-underline hover:text-white/80"
             >
-              <span className="cursor-pointer dark:text-white text-gray-950 flex flex-row gap-2 justify-start items-center">
+              <span className="flex flex-row items-center justify-start gap-2 text-white cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6"
+                  className="w-4 h-4 sm:w-6 sm:h-6"
                 >
                   <path
                     strokeLinecap="round"
@@ -492,19 +466,19 @@ const AdminSidebar = () => {
             </Link>
           </li>
 
-          <li className="mb-1 p-4">
+          <li className="p-2 mb-1 sm:p-4">
             <Link
               href="/admin/creditPerUsage"
-              className="dark:text-white text-gray-950 no-underline hover:no-underline  /80"
+              className="text-white no-underline hover:no-underline hover:text-white/80"
             >
-              <span className="cursor-pointer dark:text-white text-gray-950 flex flex-row gap-2 justify-start items-center">
+              <span className="flex flex-row items-center justify-start gap-2 text-white cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6"
+                  className="w-4 h-4 sm:w-6 sm:h-6"
                 >
                   <path
                     strokeLinecap="round"
@@ -516,19 +490,20 @@ const AdminSidebar = () => {
               </span>
             </Link>
           </li>
-          <li className="mb-1 p-4">
+
+          <li className="p-2 mb-1 sm:p-4">
             <Link
               href="/admin/coupons"
-              className="dark:text-white text-gray-950 no-underline hover:no-underline  /80"
+              className="text-white no-underline hover:no-underline hover:text-white/80"
             >
-              <span className="cursor-pointer dark:text-white text-gray-950 flex flex-row gap-2 justify-start items-center">
+              <span className="flex flex-row items-center justify-start gap-2 text-white cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6"
+                  className="w-4 h-4 sm:w-6 sm:h-6"
                 >
                   <path
                     strokeLinecap="round"
@@ -540,19 +515,20 @@ const AdminSidebar = () => {
               </span>
             </Link>
           </li>
-          <li className="mb-1 p-4">
+
+          <li className="p-2 mb-1 sm:p-4">
             <Link
               href="/admin/notifications"
-              className="dark:text-white text-gray-950 no-underline hover:no-underline  /80"
+              className="text-white no-underline hover:no-underline hover:text-white/80"
             >
-              <span className="cursor-pointer dark:text-white text-gray-950 flex flex-row gap-2 justify-start items-center">
+              <span className="flex flex-row items-center justify-start gap-2 text-white cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6"
+                  className="w-4 h-4 sm:w-6 sm:h-6"
                 >
                   <path
                     strokeLinecap="round"
@@ -564,19 +540,20 @@ const AdminSidebar = () => {
               </span>
             </Link>
           </li>
-          <li className="mb-1 p-4">
+
+          <li className="p-2 mb-1 sm:p-4">
             <Link
               href="/admin/payments"
-              className="dark:text-white text-gray-950 no-underline hover:no-underline  /80"
+              className="text-white no-underline hover:no-underline hover:text-white/80"
             >
-              <span className="cursor-pointer dark:text-white text-gray-950 flex flex-row gap-2 justify-start items-center">
+              <span className="flex flex-row items-center justify-start gap-2 text-white cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6"
+                  className="w-4 h-4 sm:w-6 sm:h-6"
                 >
                   <path
                     strokeLinecap="round"
@@ -588,19 +565,20 @@ const AdminSidebar = () => {
               </span>
             </Link>
           </li>
-          <li className="mb-1 p-4">
+
+          <li className="p-2 mb-1 sm:p-4">
             <Link
               href="/admin/contacts"
-              className="dark:text-white text-gray-950 no-underline hover:no-underline  /80"
+              className="text-white no-underline hover:no-underline hover:text-white/80"
             >
-              <span className="cursor-pointer dark:text-white text-gray-950 flex flex-row gap-2 justify-start items-center">
+              <span className="flex flex-row items-center justify-start gap-2 text-white cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6"
+                  className="w-4 h-4 sm:w-6 sm:h-6"
                 >
                   <path
                     strokeLinecap="round"
@@ -612,19 +590,20 @@ const AdminSidebar = () => {
               </span>
             </Link>
           </li>
-          <li className="mb-1 p-4">
+
+          <li className="p-2 mb-1 sm:p-4">
             <Link
               href="/admin/toolsUsage"
-              className="dark:text-white text-gray-950 no-underline hover:no-underline  /80"
+              className="text-white no-underline hover:no-underline hover:text-white/80"
             >
-              <span className="cursor-pointer dark:text-white text-gray-950 flex flex-row gap-2 justify-start items-center">
+              <span className="flex flex-row items-center justify-start gap-2 text-white cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6"
+                  className="w-4 h-4 sm:w-6 sm:h-6"
                 >
                   <path
                     strokeLinecap="round"
@@ -639,10 +618,40 @@ const AdminSidebar = () => {
         </ul>
         <div className="text-center">
           <hr />
-          <span className="dark:text-white/70 text-black/70">
-            &copy; careerbooster.ai
-          </span>
+          <span className="text-white/70">&copy; careerbooster.ai</span>
         </div>
+      </div>
+    </div>
+  );
+};
+
+const AdminSidebar = () => {
+  const [menuToggler, setMenuToggler] = useState<boolean>(false);
+
+  const handleMenu = () => {
+    setMenuToggler(!menuToggler);
+  };
+
+  return (
+    <>
+      <button
+        onClick={handleMenu}
+        className="absolute p-2 text-gray-200 rounded-full sm:hidden top-3 right-3"
+      >
+        {menuToggler ? crossIcon : hamburgerIcon}
+      </button>
+
+      <div
+        className={`absolute sm:relative max-h-screen sm:hidden w-9/12 ${
+          menuToggler
+            ? "transition-left transition-all duration-500 left-0"
+            : "-left-[100%]"
+        }`}
+      >
+        <Menu />
+      </div>
+      <div className="relative max-h-screen xs:hidden sm:block sm:col-span-3 ">
+        <Menu />
       </div>
     </>
   );

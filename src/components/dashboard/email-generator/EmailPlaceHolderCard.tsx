@@ -91,7 +91,7 @@ type EmailPlaceHolderCardProps = {
 
 export const EmailPlaceHolderCard = (props: EmailPlaceHolderCardProps) => {
   return (
-    <div className="relative py-4 bg-white shadow-md card_1 rounded-2xl md:px-8 xs:px-3 md:text-base xs:text-sm">
+    <div className="relative py-4 rounded-md shadow-md bg-white/50 card_1 md:px-8 xs:px-3 md:text-base xs:text-sm">
       <GenerateEmailsButton {...props} />
       <div className="flex flex-col text-gray-950 blur">
         <div className="flex">

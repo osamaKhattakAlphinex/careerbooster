@@ -18,6 +18,7 @@ const DeleteConfirmationModal = ({
       title: upgrade ? "Upgrade Your Package" : "Are you sure?",
       text: message,
       icon: "warning",
+      allowOutsideClick: false,
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",

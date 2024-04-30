@@ -34,14 +34,18 @@ const Training = ({ heading, trainings, styles, customStyle }: Props) => {
     <>
       <span
         className={`${styles?.span1} ${
-          customStyle.borderTopBottom ? "block" : "hidden"
-        }`}
+          customStyle?.borderTopBottom ? "block" : "hidden"
+        }
+         
+        `}
       ></span>
 
       <h3
         className={`${styles?.training_h3} ${
-          customStyle.centeredHeading ? "justify-center" : ""
-        }`}
+          customStyle?.centeredHeading ? "justify-center" : ""
+        }
+          ${customStyle?.bgColor}
+        `}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

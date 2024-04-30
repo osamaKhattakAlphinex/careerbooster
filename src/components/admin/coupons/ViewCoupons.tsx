@@ -1,21 +1,14 @@
 "use client";
 
-import { leftArrowIcon, deleteIcon } from "@/helpers/iconsProvider";
-import Link from "next/link";
+import { deleteIcon } from "@/helpers/iconsProvider";
 import React, { useEffect, useRef, useState } from "react";
 import AddCoupon from "./AddCoupon";
-
-import ReadCoupon from "./ReadCoupon";
-// import { Link } from 'react-router-dom'; // Import Link from React Router if you're using it
-// import AddProduct from './AddProduct'; // Import the AddProduct component
 import axios from "axios";
-import UpdateCoupon from "./UpdateCoupon";
 import ConfirmationModal from "@/components/admin/ConfirmationModal";
 import { createColumnHelper } from "@tanstack/react-table";
 import DataTable, { TableAction } from "@/components/admin/DataTable";
 
 type Coupon = {
-  // id: string;
   coupon_code: string;
   coupon_type: string;
   name?: string;
@@ -39,11 +32,6 @@ const ViewCoupons = ({}) => {
   const [coupons, setCoupons] = useState<Coupon[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const confirmationModalRef: React.MutableRefObject<any> = useRef(null);
-  const handleOpenConfirmationModal = (record: Coupon) => {
-    if (confirmationModalRef.current) {
-      confirmationModalRef.current.openModal(true, record.coupon_code);
-    }
-  };
 
   const columnHelper = createColumnHelper<Coupon>();
 
@@ -151,6 +139,7 @@ const ViewCoupons = ({}) => {
 
   const getCoupons = async () => {
     setLoading(true);
+
     if (!loading) {
       try {
         let response: any = await axios.get("/api/coupons");
@@ -202,4 +191,3 @@ const ViewCoupons = ({}) => {
 };
 
 export default ViewCoupons;
-

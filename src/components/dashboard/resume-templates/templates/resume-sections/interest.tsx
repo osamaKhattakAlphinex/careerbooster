@@ -38,7 +38,9 @@ const Interest = ({ heading, interests, styles, customStyle }: Props) => {
       <h3
         className={`${styles?.interest_h3} ${
           customStyle?.centeredHeading ? "justify-center" : ""
-        }`}
+        }
+          ${customStyle?.bgColor}
+        `}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +67,7 @@ const Interest = ({ heading, interests, styles, customStyle }: Props) => {
         className={`${styles?.span2} ${
           customStyle?.borderTopBottom || customStyle?.borderBottom
             ? "block"
-            : "block"
+            : "hidden"
         }`}
       ></span>
       {interests.map((rec: any, i: number) => {

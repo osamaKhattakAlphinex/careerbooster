@@ -14,7 +14,7 @@ import PreviouslyGeneratedList from "@/components/dashboard/PreviouslyGeneratedL
 import { setCoverLetter } from "@/store/coverLetterSlice";
 
 import CoverLetterCardSingle from "@/components/dashboard/cover-letter-generator/CoverLetterCardSingle";
-import { EditIcon } from "@/helpers/iconsProvider";
+import { EditIcon, boltIcon } from "@/helpers/iconsProvider";
 import { makeid } from "@/helpers/makeid";
 import DownloadService from "@/helpers/downloadFile";
 import { useAppContext } from "@/context/AppContext";
@@ -43,7 +43,7 @@ export default function CoverLetterPage() {
   const [jobDescription, setJobDescription] = useState<string>("");
   const [isEditing, setIsEditing] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-  const { setAvailableCredits, abortController } = useAppContext();
+  const { setAvailableCredits } = useAppContext();
   const [confirmationModal, setConfirmationModal] = useState(false);
   const creditLimits = useSelector((state: any) => state.creditLimits);
   const router = useRouter();
@@ -67,10 +67,6 @@ export default function CoverLetterPage() {
     // else {
     //   dispatch(resetCoverLetter());
     // }
-
-    return () => {
-      abortController.abort();
-    };
   }, [isEditing]);
 
   // Function to save the edited content and exit editing mode
@@ -144,8 +140,6 @@ export default function CoverLetterPage() {
   };
 
   const handleGenerate = async () => {
-    const signal = abortController.signal;
-
     if (session?.user?.email && aiInputUserData) {
       setMsgLoading(true);
       setShow(true);
@@ -198,7 +192,6 @@ export default function CoverLetterPage() {
       fetch("/api/coverLetterBot/coverLetterGenerator", {
         method: "POST",
         body: JSON.stringify(obj),
-        signal: signal,
       })
         .then(async (resp: any) => {
           // const response = await resp.json();
@@ -392,7 +385,7 @@ export default function CoverLetterPage() {
           <>
             <div
               ref={(ref: any) => (coverLetterElementRef.current = ref)}
-              className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-[20px] px-4 lg:px-[30px] py-6  flex flex-col gap-3 "
+              className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-lg px-4 lg:px-[30px] py-6  flex flex-col gap-3 "
             >
               {/* header */}
               <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
@@ -536,20 +529,7 @@ export default function CoverLetterPage() {
                     </div>
                   ) : (
                     <div className="flex flex-row items-center justify-center gap-2">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-3 h-3 md:w-4 md:h-4 dark:text-gray-100 text-gray-950"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
-                        />
-                      </svg>
+                      {boltIcon}
 
                       <span className="text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950 md:text-sm">
                         Generate Cover Letter

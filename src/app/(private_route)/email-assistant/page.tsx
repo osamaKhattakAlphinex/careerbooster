@@ -52,6 +52,7 @@ const PersonalizedEmailBot = () => {
     useState<boolean>(false);
   const [secondFollowUpLoading, setSecondFollowUpLoading] =
     useState<boolean>(false);
+
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
@@ -311,6 +312,9 @@ const PersonalizedEmailBot = () => {
               }
             }
           })
+          .catch((err) => {
+            console.log(err);
+          })
           .finally(() => {
             setEmailLoading(false);
           });
@@ -403,6 +407,9 @@ const PersonalizedEmailBot = () => {
               }
             }
           })
+          .catch((err) => {
+            console.log(err);
+          })
           .finally(() => {
             setFirstFollowUpLoading(false);
           });
@@ -490,6 +497,9 @@ const PersonalizedEmailBot = () => {
                 showErrorToast("Failed to generate Email");
               }
             }
+          })
+          .catch((err) => {
+            console.log(err);
           })
           .finally(() => {
             setSecondFollowUpLoading(false);
@@ -699,7 +709,7 @@ const PersonalizedEmailBot = () => {
           <PreviouslyGeneratedList {...historyProps} />
           <div
             ref={(ref: any) => (emailElementRef.current = ref)}
-            className=" my-4 dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950  rounded-[20px] px-4 lg:px-[30px] py-[30px] flex flex-col gap-3 "
+            className=" my-4 dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950  rounded-lg px-4 lg:px-[30px] py-[30px] flex flex-col gap-3 "
           >
             {/* header */}
             <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
@@ -829,7 +839,7 @@ const PersonalizedEmailBot = () => {
             </div>
           </div>
           <div
-            className="my-4   dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950  rounded-[20px] px-4 lg:px-[30px] py-[30px] flex flex-col gap-3 "
+            className="my-4   dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950  rounded-lg px-4 lg:px-[30px] py-[30px] flex flex-col gap-3 "
             ref={(ref: any) => (emailCardsElementRef.current = ref)}
           >
             {show ? (

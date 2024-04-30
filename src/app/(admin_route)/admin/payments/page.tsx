@@ -1,13 +1,9 @@
 "use client";
 import DataTable from "@/components/admin/DataTable";
-import FineTuningSettingModel from "@/components/admin/fineTuning/fineTuningSettingModels";
 import PaymentsDecryptionModal from "@/components/admin/payments/paymentsDecryptionModal";
 import { useAppContext } from "@/context/AppContext";
-import { getFormattedDate } from "@/helpers/getFormattedDateTime";
-import { leftArrowIcon } from "@/helpers/iconsProvider";
 import { createColumnHelper } from "@tanstack/react-table";
 import axios from "axios";
-import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 
 type Payment = {
@@ -21,7 +17,7 @@ const Payments = () => {
   const showTransactionModelRef: React.MutableRefObject<any> = useRef(null);
   const [isDecrypted, setIsDecrypted] = useState<boolean>(false);
 
-  // const { abortController } = useAppContext();
+  const { abortController } = useAppContext();
 
   const columnHelper = createColumnHelper<Payment>();
 
@@ -43,13 +39,9 @@ const Payments = () => {
   const fetchPayments = async () => {
     setLoading(true);
 
-    // const signal = abortController.signal;
     if (!loading) {
       axios
-        .get(
-          "/api/payment"
-          // { signal }
-        )
+        .get("/api/payment")
         .then((res: any) => {
           if (res.data.success) {
             const payments = res.data.payments;
@@ -82,9 +74,6 @@ const Payments = () => {
 
   useEffect(() => {
     fetchPayments();
-    return () => {
-      // abortController.abort();
-    };
   }, []);
 
   return (

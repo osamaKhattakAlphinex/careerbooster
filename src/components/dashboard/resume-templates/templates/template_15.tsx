@@ -34,6 +34,7 @@ import Publication from "./resume-sections/publication";
 import {
   award,
   certification,
+  customStyle_15,
   interest,
   language,
   publicationStyles,
@@ -796,7 +797,7 @@ const ResumeTemplate15 = () => {
           <div className="w-full">
             {resume?.publications && resume?.publications.length > 0 && (
               <Publication
-                customStyle={{ borderTopBottom: true, centeredHeading: false }}
+                customStyle={customStyle_15}
                 heading={resume.headings.publications}
                 publications={resume.publications}
                 styles={publicationStyles}
@@ -808,7 +809,7 @@ const ResumeTemplate15 = () => {
           <div className="w-full">
             {resume?.certifications && resume?.certifications.length > 0 && (
               <Certification
-                customStyle={{ borderTopBottom: true, centeredHeading: false }}
+                customStyle={customStyle_15}
                 heading={resume.headings.certifications}
                 certificates={resume.certifications}
                 styles={certification}
@@ -820,7 +821,7 @@ const ResumeTemplate15 = () => {
           <div className="w-full">
             {resume?.trainings && resume?.trainings.length > 0 && (
               <Training
-                customStyle={{ borderTopBottom: true, centeredHeading: false }}
+                customStyle={customStyle_15}
                 heading={resume.headings.trainings}
                 trainings={resume.trainings}
                 styles={training}
@@ -832,7 +833,7 @@ const ResumeTemplate15 = () => {
           <div className="w-full">
             {resume?.awards && resume?.awards.length > 0 && (
               <Award
-                customStyle={{ borderTopBottom: true, centeredHeading: false }}
+                customStyle={customStyle_15}
                 heading={resume.headings.awards}
                 awards={resume.awards}
                 styles={award}
@@ -844,7 +845,7 @@ const ResumeTemplate15 = () => {
           <div className="w-full">
             {resume?.interests && resume?.interests.length > 0 && (
               <Interest
-                customStyle={{ borderTopBottom: true, centeredHeading: false }}
+                customStyle={customStyle_15}
                 heading={resume.headings.interests}
                 interests={resume.interests}
                 styles={interest}
@@ -856,7 +857,7 @@ const ResumeTemplate15 = () => {
           <div className="w-full">
             {resume?.references && resume?.references.length > 0 && (
               <Reference
-                customStyle={{ borderTopBottom: true, centeredHeading: false }}
+                customStyle={customStyle_15}
                 heading={resume.headings.references}
                 references={resume.references}
                 styles={reference}
@@ -868,7 +869,7 @@ const ResumeTemplate15 = () => {
           <div className="w-full">
             {resume?.languages && resume?.languages.length > 0 && (
               <Language
-                customStyle={{ borderTopBottom: true, centeredHeading: false }}
+                customStyle={customStyle_15}
                 heading={resume.headings.languages}
                 languages={resume.languages}
                 styles={language}
