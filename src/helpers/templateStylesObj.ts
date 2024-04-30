@@ -1,7 +1,5 @@
 import { educationIcon, sparkleIcon } from "./iconsProvider";
 
-
-
 // Header Styles
 
 const header = {
@@ -12,8 +10,7 @@ const header = {
 const conditionStyleHeader = {
   line: false,
   span1: false,
-  
-}
+};
 
 //contact styles
 
@@ -43,13 +40,13 @@ export const templates = {
 const summary = {
   summary_heading: "summary_heading",
   summary_text: "summary_text",
-  publication_h3 : "publication_h3",
+  publication_h3: "publication_h3",
   span1: "span1",
   span2: "span2",
 };
-//work Experience 
+//work Experience
 
- export const experience = {
+export const experience = {
   experienceHeading_temp_2: "experienceHeading_temp_2",
   achievement_div: "achievement_div",
   achievement_h2: "achievement_h2",
@@ -108,8 +105,8 @@ export const projectStyles = {
 };
 
 const conditionStylePublication = {
-  span1_2 : false
-}
+  span1_2: false,
+};
 //certification styles
 
 const certification = {
@@ -233,47 +230,59 @@ const education = {
   education_delete: "education_delete",
   education_li_2: "education_li_2",
   education_li_italic: "education_li_italic",
-  education_li_date : "education_li_date",
+  education_li_date: "education_li_date",
   span1: "span1",
   span2: "span2",
-}
+};
 export const customStyle_4 = {
-    borderTopBottom: false,
-    borderBottom: true,
-    centeredHeading: false,
-  
-}
+  borderTopBottom: false,
+  borderBottom: true,
+  centeredHeading: false,
+};
 export const customStyle_2 = {
-    borderTopBottom: false,
-    borderBottom: false,
-    centeredHeading: false,
-  
-}
-export const customStyle_8 = { borderTopBottom: true, centeredHeading: true  }
-export const customStyle_6 =
-  { borderTopBottom: true, centeredHeading: false}
-export const customStyle_9 =
-  { borderTopBottom: true, centeredHeading: false, education_bg: "education_bg" }
+  borderTopBottom: false,
+  borderBottom: false,
+  centeredHeading: false,
+};
+export const customStyle_8 = { borderTopBottom: true, centeredHeading: true };
+export const customStyle_6 = { borderTopBottom: true, centeredHeading: false };
+export const customStyle_9 = {
+  borderTopBottom: true,
+  centeredHeading: false,
+  education_bg: "education_bg",
+};
 export const customStyle_10 = {
-    borderTopBottom: false,
-    centeredHeading: false,
-  bgColor: "bg_color_9",
-    education_bg : "education_bg"
- }
-export const customStyle_15 = {
-    borderTopBottom: false,
-    centeredHeading: false,
-  bgColor: "bg_color",
-  education_bg : "education_bg"
-}
- export const customStyle_16 = {
   borderTopBottom: false,
   centeredHeading: false,
-   borderBottom: true,
-   education_bg : "education_bg"
-}
+  bgColor: "bg_color_9",
+  education_bg: "education_bg",
+};
+export const customStyle_15 = {
+  borderTopBottom: false,
+  centeredHeading: false,
+  bgColor: "bg_color",
+  education_bg: "education_bg",
+};
+export const customStyle_16 = {
+  borderTopBottom: false,
+  centeredHeading: false,
+  borderBottom: true,
+  education_bg: "education_bg",
+};
 
-
-
-
-export {publicationStyles,conditionStylePublication,certification,training,interest,award,reference,language,education,summary,skill,header,conditionStyleHeader,contact}
+export {
+  publicationStyles,
+  conditionStylePublication,
+  certification,
+  training,
+  interest,
+  award,
+  reference,
+  language,
+  education,
+  summary,
+  skill,
+  header,
+  conditionStyleHeader,
+  contact,
+};
