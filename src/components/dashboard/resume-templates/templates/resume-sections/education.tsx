@@ -29,7 +29,11 @@ const Education = ({ heading, educations, styles, customStyle }: Props) => {
           customStyle?.borderTopBottom ? "block" : "hidden"
         }`}
       ></span>
-      <h3 className="flex flex-row items-center gap-2 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
+      <h3
+        className={`${styles?.education_h3} ${
+          customStyle?.centeredHeading ? "justify-center" : ""
+        } ${customStyle?.bgColor}`}
+      >
         {resumeEductionIcon}
 
         <EditableField
@@ -51,11 +55,13 @@ const Education = ({ heading, educations, styles, customStyle }: Props) => {
             : "hidden"
         }`}
       ></span>
-      <ul className="grid grid-cols-3 gap-2 xs:grid-cols-3 md:grid-cols-3 ">
+      <ul className={`${styles?.education_ul}`}>
         {educations.map((education: EducationType, i: number) => (
           <React.Fragment key={education?.id || i}>
-            <div className="relative px-4 py-2 bg-gray-300 border-2 border-transparent rounded-md group hover:border-dashed hover:border-gray-500">
-              <li className="flex items-center justify-between text-base font-semibold uppercase hover:shadow-md hover:cursor-move parent hover:border-2 hover:bg-gray-100 ">
+            <div
+              className={`${styles?.education_div} ${customStyle?.education_bg} group`}
+            >
+              <li className={`${styles?.education_li} parent`}>
                 <EditableField
                   value={education?.educationLevel}
                   onSave={(value: string) => {
@@ -68,11 +74,11 @@ const Education = ({ heading, educations, styles, customStyle }: Props) => {
               </li>
               <div
                 onClick={() => setConfirmationModal(true)}
-                className="absolute z-10 hidden w-4 h-4 cursor-pointer group-hover:block right-2 top-2 child"
+                className={`${styles?.education_delete}`}
               >
                 {crossIcon1}
               </div>
-              <li className="text-xs font-semibold hover:shadow-md hover:bg-gray-100">
+              <li className={`${styles?.education_li_2}`}>
                 <EditableField
                   value={`${education?.fieldOfStudy}`}
                   style={{ width: "100%" }}
@@ -84,7 +90,7 @@ const Education = ({ heading, educations, styles, customStyle }: Props) => {
                   }}
                 />{" "}
               </li>
-              <li className="text-xs italic text-gray-800 hover:shadow-md hover:bg-gray-100">
+              <li className={`${styles?.education_li_italic}`}>
                 <EditableField
                   value={`${education?.schoolName}`}
                   onSave={(value: string) => {
@@ -93,7 +99,7 @@ const Education = ({ heading, educations, styles, customStyle }: Props) => {
                 />
               </li>
               {(education.fromYear !== "" || education.toYear !== "") && (
-                <li className="flex mb-4 text-xs italic text-gray-700">
+                <li className={`${styles?.education_li_date}`}>
                   {education.fromMonth && (
                     <EditableField
                       value={`${education?.fromMonth}`}

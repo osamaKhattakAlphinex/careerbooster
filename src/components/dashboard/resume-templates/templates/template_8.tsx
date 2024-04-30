@@ -1,6 +1,5 @@
 "use client";
 import { memo, useEffect, useState } from "react";
-import { Education } from "@/store/userDataSlice";
 import React from "react";
 import { useSelector } from "react-redux";
 
@@ -31,9 +30,11 @@ import {
   award,
   certification,
   customStyle_8,
+  education,
   experience,
   interest,
   language,
+  projectStyles,
   publicationStyles,
   reference,
   summary,
@@ -47,6 +48,8 @@ import Reference from "./resume-sections/reference";
 import Language from "./resume-sections/language";
 import Summary from "./resume-sections/summary";
 import Experience from "./resume-sections/experience";
+import Education from "./resume-sections/education";
+import Project from "./resume-sections/project";
 // import CustomResumeSection from "../../resume-builder/CustomResumeSection";
 const ResumeTemplate8 = () => {
   const resume = useSelector((state: any) => state.resume);
@@ -411,7 +414,17 @@ const ResumeTemplate8 = () => {
               />
             )}
           </div>
-
+          {/* Projects */}
+          <div className="w-full">
+            {resume?.projects && resume?.projects.length > 0 && (
+              <Project
+                heading={resume.headings.projects}
+                projects={resume.projects}
+                styles={projectStyles}
+                customStyle={customStyle_8}
+              />
+            )}
+          </div>
           {/* Interests & Hobbies */}
           <div className="w-full">
             {resume?.interests && resume?.interests.length > 0 && (
@@ -448,161 +461,16 @@ const ResumeTemplate8 = () => {
             )}
           </div>
           {/* Education */}
-          {resume?.education.length > 0 && (
-            <>
-              <span className="span1"></span>
-              <h3 className="flex items-center justify-center gap-2 my-1  text-base font-semibold text-center uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 ">
-                {resumeEductionIcon}
-                <EditableField
-                  value={
-                    resume?.headings?.education
-                      ? resume.headings.education
-                      : "Education"
-                  }
-                  style={{ width: "fit-content" }}
-                  onSave={(value: string) => {
-                    if (value !== resume?.headings?.education) {
-                      updateSaveHook.updateAndSaveHeadings({
-                        education: value,
-                      });
-                    }
-                  }}
-                />
-              </h3>
-              <span className="span2"></span>
-              <ul className="grid grid-cols-3 gap-2 xs:grid-cols-3 md:grid-cols-3  ">
-                {resume?.education.map((education: Education, ind: number) => (
-                  <React.Fragment key={education?.id || ind}>
-                    <div className="md:m-2 relative group border-transparent border-2 hover:border-dashed hover:border-gray-500">
-                      <li className="flex items-center justify-between text-base font-bold uppercase hover:shadow-md hover:cursor-move parent hover:bg-gray-100">
-                        <EditableField
-                          value={education?.educationLevel}
-                          onSave={(value: string) => {
-                            handlers.handleSaveEductionDetail(
-                              { educationLevel: value },
-                              ind
-                            );
-                          }}
-                        />
-                      </li>
-                      <div
-                        onClick={() => setConfirmationModal(true)}
-                        className="absolute z-10 hidden w-4 h-4 cursor-pointer group-hover:block right-2 top-2 child"
-                      >
-                        {crossIcon1}
-                      </div>
-                      <li className="text-xs font-medium hover:shadow-md hover:bg-gray-100">
-                        <EditableField
-                          value={`${education?.fieldOfStudy}`}
-                          style={{ width: "100%" }}
-                          onSave={(value: string) => {
-                            handlers.handleSaveEductionDetail(
-                              { fieldOfStudy: value },
-                              ind
-                            );
-                          }}
-                        />{" "}
-                      </li>
-                      <li className="text-xs italic text-gray-800 hover:shadow-md hover:bg-gray-100">
-                        <EditableField
-                          value={`${education?.schoolName}`}
-                          onSave={(value: string) => {
-                            handlers.handleSaveEductionDetail(
-                              { schoolName: value },
-                              ind
-                            );
-                          }}
-                        />
-                      </li>
-                      {(education.fromYear !== "" ||
-                        education.toYear !== "") && (
-                        <li className="flex mb-4 text-xs italic text-gray-700">
-                          {education.fromMonth && (
-                            <EditableField
-                              value={`${education?.fromMonth}`}
-                              onSave={(value: string) => {
-                                handlers.handleSaveEductionDetail(
-                                  { fromMonth: value },
-                                  ind
-                                );
-                              }}
-                            />
-                          )}
-                          {education.fromMonth && <span>&nbsp;</span>}
-                          {education.fromYear && (
-                            <EditableField
-                              value={`${education?.fromYear}`}
-                              onSave={(value: string) => {
-                                handlers.handleSaveEductionDetail(
-                                  { fromYear: value },
-                                  ind
-                                );
-                              }}
-                            />
-                          )}
-                          {education.fromYear && <span>&nbsp; - &nbsp;</span>}
-                          {education.toMonth && !education.isContinue && (
-                            <EditableField
-                              value={`${education?.toMonth}`}
-                              onSave={(value: string) => {
-                                handlers.handleSaveEductionDetail(
-                                  { toMonth: value },
-                                  ind
-                                );
-                              }}
-                            />
-                          )}
-                          {education.toMonth && <span>&nbsp;</span>}
-                          {education.toYear && !education.isContinue && (
-                            <EditableField
-                              value={`${education?.toYear}`}
-                              onSave={(value: string) => {
-                                handlers.handleSaveEductionDetail(
-                                  { toYear: value },
-                                  ind
-                                );
-                              }}
-                            />
-                          )}
-                          {education.isContinue && (
-                            <EditableField
-                              value={`${education?.isContinue && "Present"}`}
-                              onSave={(value: string) => {
-                                handlers.handleSaveEductionDetail(
-                                  { toYear: value },
-                                  ind
-                                );
-                                handlers.handleSaveEductionDetail(
-                                  { isContinue: false },
-                                  ind
-                                );
-                              }}
-                            />
-                          )}
-                        </li>
-                      )}
-                      {/* <li className="mb-4 text-xs italic text-gray-700 ">
-                        {education?.fromMonth + " " + education.fromYear} -{" "}
-                        {education?.isContinue
-                          ? "Present"
-                          : education?.toMonth + " " + education.toYear}
-                      </li> */}
-                    </div>
-                    {confirmationModal && (
-                      <DeleteConfirmationModal
-                        onCancel={() => setConfirmationModal(false)}
-                        message="Are you sure you want to delete ?"
-                        onConfirm={() => {
-                          setConfirmationModal(false);
-                          handlers.handleDeleteEductionDetail(ind);
-                        }}
-                      />
-                    )}
-                  </React.Fragment>
-                ))}
-              </ul>
-            </>
-          )}
+          <div className="w-full  mb-2">
+            {resume?.education.length > 0 && (
+              <Education
+                heading={resume.headings.education}
+                educations={resume.education}
+                styles={education}
+                customStyle={customStyle_8}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>

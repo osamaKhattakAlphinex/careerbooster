@@ -28,10 +28,8 @@ const Summary = ({ summary, heading, customStyle, styles }: Props) => {
       ></span>
       <h2
         className={`${styles?.publication_h3} ${
-          customStyle?.borderTopBottom ? "block" : "hidden"
-        } 
-          ${customStyle?.centeredHeading ? "justify-center" : ""}
-        ${customStyle?.bgColor}`}
+          customStyle?.centeredHeading ? "justify-center" : ""
+        }${customStyle?.bgColor}`}
       >
         {resumeSummaryIcon}
         <EditableField
