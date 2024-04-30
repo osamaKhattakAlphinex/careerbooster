@@ -422,6 +422,10 @@ const Page = () => {
         for (const element of template.elements) {
           if (value.hasOwnProperty(element.id) && value[element.id] !== "") {
             const _element = document.createElement(element.tag);
+            if(element.tag === "a"){
+              _element.setAttribute("href", value[element.id]);
+              _element.setAttribute("target", "_blank");
+            }
             const styles = element.styles;
             setStylesToElement(_element, styles);
             setAttributesToElem(attr, _element);

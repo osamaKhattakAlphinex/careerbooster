@@ -144,7 +144,7 @@ const components: any = {
         id: "linkedIn",
         styles:
           "text-xs mt-2 flex break-all before:aspect-square before:break-normal text-gray-950/80 items-center before:w-7 before:h-7 items-center flex before:justify-center before:rounded-full before:items-center flex before:content-[url('data:image/svg+xml;base64,ICAgPHN2ZwogICAgdmlld0JveD0iMCAwIDI0IDI0IgogICAgY2xhc3NOYW1lPSJ3LTUgaC01IgogICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICAgZmlsbD0iY3VycmVudENvbG9yIgogID4KICAgIDxnIGlkPSJTVkdSZXBvX2JnQ2FycmllciIgc3Ryb2tlLXdpZHRoPSIwIj48L2c+CiAgICA8ZwogICAgICBpZD0iU1ZHUmVwb190cmFjZXJDYXJyaWVyIgogICAgICBzdHJva2UtbGluZWNhcD0icm91bmQiCiAgICAgIHN0cm9rZS1saW5lam9pbj0icm91bmQiCiAgICA+PC9nPgogICAgPGcgaWQ9IlNWR1JlcG9faWNvbkNhcnJpZXIiPgogICAgICA8cGF0aAogICAgICAgIGZpbGw9IiM0NDQ0NDAiCiAgICAgICAgZD0iTTEyLjIyNSAxMi4yMjVoLTEuNzc4VjkuNDRjMC0uNjY0LS4wMTItMS41MTktLjkyNS0xLjUxOS0uOTI2IDAtMS4wNjguNzI0LTEuMDY4IDEuNDd2Mi44MzRINi42NzZWNi40OThoMS43MDd2Ljc4M2guMDI0Yy4zNDgtLjU5NC45OTYtLjk1IDEuNjg0LS45MjUgMS44MDIgMCAyLjEzNSAxLjE4NSAyLjEzNSAyLjcyOGwtLjAwMSAzLjE0ek00LjY3IDUuNzE1YTEuMDM3IDEuMDM3IDAgMDEtMS4wMzItMS4wMzFjMC0uNTY2LjQ2Ni0xLjAzMiAxLjAzMi0xLjAzMi41NjYgMCAxLjAzMS40NjYgMS4wMzIgMS4wMzIgMCAuNTY2LS40NjYgMS4wMzItMS4wMzIgMS4wMzJ6bS44ODkgNi41MWgtMS43OFY2LjQ5OGgxLjc4djUuNzI3ek0xMy4xMSAySDIuODg1QS44OC44OCAwIDAwMiAyLjg2NnYxMC4yNjhhLjg4Ljg4IDAgMDAuODg1Ljg2NmgxMC4yMjZhLjg4Mi44ODIgMCAwMC44ODktLjg2NlYyLjg2NWEuODguODggMCAwMC0uODg5LS44NjR6IgogICAgICA+PC9wYXRoPgogICAgPC9nPgogIDwvc3ZnPg==')]",
-        tag: "span",
+        tag: "a",
       },
       {
         id: "address",
