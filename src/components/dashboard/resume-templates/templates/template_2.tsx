@@ -1,5 +1,5 @@
 "use client";
-import { memo, useEffect, useState } from "react";
+import { memo, useState } from "react";
 import React from "react";
 import { useSelector } from "react-redux";
 import { ColorResult } from "react-color";
@@ -28,12 +28,14 @@ import {
   header,
   interest,
   language,
+  projectStyles,
   publicationStyles,
   reference,
   skill,
   summary,
   training,
 } from "@/helpers/templateStylesObj";
+import Project from "./resume-sections/project";
 
 const ResumeTemplate2 = () => {
   const resume = useSelector((state: any) => state.resume);
@@ -77,7 +79,7 @@ const ResumeTemplate2 = () => {
         </div> */}
       </div>
       {/* contacts */}
-      <div className="relative w-full py-1">
+      <div className="relative w-full">
         <Contact contact={resume.contact} styles={contact} />
         {/* <div className="absolute top-0 left-12">
           <ColorPicker\
@@ -163,6 +165,28 @@ const ResumeTemplate2 = () => {
           />
         )}
       </div>
+      {/* Projects */}
+      <div className="w-full">
+        {resume?.projects && resume?.projects.length > 0 && (
+          <Project
+            heading={resume.headings.projects}
+            projects={resume.projects}
+            styles={projectStyles}
+            customStyle={customStyle_2}
+          />
+        )}
+      </div>
+
+      {/* Projects */}
+      <div className="w-full">
+        {resume?.projects && resume?.projects.length > 0 && (
+          <Project
+            heading={resume.headings.projects}
+            projects={resume.projects}
+            // styles={award}
+          />
+        )}
+      </div>
 
       {/* Interests & Hobbies */}
       <div className="w-full">
@@ -171,11 +195,7 @@ const ResumeTemplate2 = () => {
             heading={resume.headings.interests}
             interests={resume.interests}
             styles={interest}
-            customStyle={{
-              borderTopBottom: false,
-              borderBottom: false,
-              centeredHeading: false,
-            }}
+            customStyle={customStyle_2}
           />
         )}
       </div>
@@ -212,11 +232,7 @@ const ResumeTemplate2 = () => {
             heading={resume.headings.education}
             educations={resume.education}
             styles={education}
-            customStyle={{
-              borderTopBottom: false,
-              borderBottom: false,
-              centeredHeading: false,
-            }}
+            customStyle={customStyle_2}
           />
         )}
       </div>

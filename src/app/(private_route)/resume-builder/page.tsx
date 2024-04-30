@@ -49,6 +49,7 @@ import TemplateSlider from "@/components/dashboard/resume-templates/templateSlid
 import TourBot from "@/components/dashboard/TourBot";
 import { useTourContext } from "@/context/TourContext";
 import { formatDate } from "@/helpers/getFormattedDateTime";
+import { useAppContext } from "@/context/AppContext";
 
 const ResumeBuilder = () => {
   const [confettingRunning, setConfettiRunning] = useState(false);
@@ -71,21 +72,12 @@ const ResumeBuilder = () => {
   const { resumeElementRef, tourBotRef, historyCardRef, availableCreditsRef } =
     useTourContext();
 
-  const runConfetti = () => {
-    if (showConfettiRunning) {
-      showSuccessToast("Generated Successfully");
-      setConfettiRunning(true);
-      setTimeout(() => {
-        setConfettiRunning(false);
-        setShowTemplatePopup(true);
-      }, 3000); // Adjust the duration as needed
-    }
-  };
+
 
   const { getUserDataIfNotExists } = useGetUserData();
   const componentRef = useRef<any>(null);
   const { data: session } = useSession();
-
+  const { abortController,setAbortController } = useAppContext();
   // Local States
   const [finished, setFinished] = useState<boolean>(false);
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
@@ -97,7 +89,6 @@ const ResumeBuilder = () => {
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [resumeGenerated, setResumeGenerated] = useState<boolean>(false);
   const { saveResumeToDB } = useSaveResumeToDB();
-  // const { createAbortController, abort } = useAbortController();
   // Redux
   const dispatch = useDispatch();
   const resumeData = useSelector((state: any) => state.resume);
@@ -105,6 +96,12 @@ const ResumeBuilder = () => {
   const creditLimits = useSelector((state: any) => state.creditLimits);
   const { getCreditLimitsIfNotExists } = useGetCreditLimits();
 
+  useEffect(() => {
+    return () => {
+      abortController?.abort();
+      setAbortController(new AbortController())
+    };
+  }, []);
   const { getSummary } = useGetSummary(setStreamedSummaryData, setOutOfCredits);
 
   // const getConsent = () => {
@@ -113,6 +110,16 @@ const ResumeBuilder = () => {
   //   }
   // };
 
+  const runConfetti = () => {
+    if (showConfettiRunning) {
+      showSuccessToast("Generated Successfully");
+      setConfettiRunning(true);
+      setTimeout(() => {
+        setConfettiRunning(false);
+        setShowTemplatePopup(true);
+      }, 3000); // Adjust the duration as needed
+    }
+  };
   const handleGenerate = useCallback(async () => {
     await getUserDataIfNotExists();
     await getCreditLimitsIfNotExists();
@@ -135,11 +142,10 @@ const ResumeBuilder = () => {
 
       dispatch(setId(""));
       await getBasicInfo();
-      console.log("geenrtaing summary next");
       await getSummary();
       await getPrimarySkills();
       await getWorkExperienceNew();
-      runConfetti();
+      //  runConfetti();
     } else {
       setShowPopup(true);
 
@@ -180,7 +186,6 @@ const ResumeBuilder = () => {
         type: "basicDetails",
         inputType: "userData",
         personName: userData.firstName + " " + userData.lastName,
-
         creditsUsed: creditLimits.resume_basicInfo,
         userData: aiInputUserData,
 
@@ -193,6 +198,7 @@ const ResumeBuilder = () => {
           fileAddress: userData.uploadedResume.fileName,
         },
       }),
+      signal: abortController?.signal,
     })
       .then(async (resp: any) => {
         const res = await resp.json();
@@ -279,47 +285,51 @@ const ResumeBuilder = () => {
         temp += html;
         let achievementTemp = "";
         setStreamedJDData((prev: any) => prev + html);
+        try {
+          const res: any = await fetch("/api/resumeBots/jdGeneratorSingle", {
+            method: "POST",
+            body: JSON.stringify({
+              // quantifyingExperience: quantifyingExperience,
+              experience: experience,
+              detailedResume: resumeData.state.detailedResume,
+              creditsUsed: creditLimits.resume_individualWorkExperience,
+              trainBotData: {
+                userEmail: userData.email,
+                // fileAddress: userData.files[0].fileName,
+                fileAddress: userData.uploadedResume.fileName,
+              },
+              personName: userData.firstName + " " + userData.lastName,
+              jobTitle: resumeData.state.jobPosition,
+            }),
+            signal: abortController?.signal,
+          });
 
-        const res: any = await fetch("/api/resumeBots/jdGeneratorSingle", {
-          method: "POST",
-          body: JSON.stringify({
-            // quantifyingExperience: quantifyingExperience,
-            experience: experience,
-            detailedResume: resumeData.state.detailedResume,
-            creditsUsed: creditLimits.resume_individualWorkExperience,
-            trainBotData: {
-              userEmail: userData.email,
-              // fileAddress: userData.files[0].fileName,
-              fileAddress: userData.uploadedResume.fileName,
-            },
-            personName: userData.firstName + " " + userData.lastName,
-            jobTitle: resumeData.state.jobPosition,
-          }),
-        });
+          if (res.ok) {
+            const reader = res.body.getReader();
+            while (true) {
+              const { done, value } = await reader.read();
 
-        if (res.ok) {
-          const reader = res.body.getReader();
-          while (true) {
-            const { done, value } = await reader.read();
+              if (done) {
+                break;
+              }
 
-            if (done) {
-              break;
+              const text = new TextDecoder().decode(value);
+              setStreamedJDData((prev: any) => prev + text);
+              temp += text;
+              achievementTemp += text;
             }
 
-            const text = new TextDecoder().decode(value);
-            setStreamedJDData((prev: any) => prev + text);
-            temp += text;
-            achievementTemp += text;
+            setStreamedJDData((prev: any) => prev + `</div> <br /> `);
+            temp += `</div> <br /> `;
+            const achivementsArray = fetchLIstOfStrings(achievementTemp);
+            workExpArrObj.achievements = achivementsArray;
+            workExpArr.push(workExpArrObj);
+          } else {
+            setShowConfettiRunning(false);
+            setStreamedJDData("You ran out of credits!");
           }
-
-          setStreamedJDData((prev: any) => prev + `</div> <br /> `);
-          temp += `</div> <br /> `;
-          const achivementsArray = fetchLIstOfStrings(achievementTemp);
-          workExpArrObj.achievements = achivementsArray;
-          workExpArr.push(workExpArrObj);
-        } else {
-          setShowConfettiRunning(false);
-          setStreamedJDData("You ran out of credits!");
+        } catch (error) {
+          console.log(error);
         }
       }
       setFinished(true);
@@ -437,6 +447,7 @@ const ResumeBuilder = () => {
           fileAddress: userData.uploadedResume.fileName,
         },
       }),
+      signal: abortController?.signal,
     })
       .then(async (resp: any) => {
         const res = await resp.json();
@@ -466,6 +477,7 @@ const ResumeBuilder = () => {
       resumeData?.name &&
       !outOfCredits
     ) {
+      runConfetti()
       saveResumeToDB();
     }
   }, [resumeData?.state?.resumeLoading]);

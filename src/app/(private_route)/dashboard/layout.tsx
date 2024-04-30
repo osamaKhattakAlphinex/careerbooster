@@ -6,7 +6,7 @@ interface Props {
 
 export const metadata: Metadata = {
   title: "Dashboard - CareerBooster.ai",
-  description: "Dashboard - CareerBooster.ai | Developed by NausalTech",
+  description: "Dashboard - CareerBooster.ai| AI Resume Builder | Developed by NausalTech",
 };
 
 export default async function Dashboardlayout({ children }: Props) {

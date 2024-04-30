@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   keywords: [
     "CareerBooster.AI",
     "AI-powered tools",
+    "AI Resume Builder",
     "ATS-friendly resumes",
     "Executive resumes",
     "Professional image",

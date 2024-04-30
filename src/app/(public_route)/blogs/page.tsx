@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     "Explore insightful articles on career growth, job hunting, and resume optimization at CareerBooster's blog. Stay updated with expert tips and strategies to supercharge your professional journey. Unleash your potential with our informative blog posts",
   keywords: [
     "CareerBooster.AI",
+    "AI Resume Builder",
     "AI-powered tools",
     "ATS-friendly resumes",
     "Executive resumes",

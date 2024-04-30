@@ -422,6 +422,10 @@ const Page = () => {
         for (const element of template.elements) {
           if (value.hasOwnProperty(element.id) && value[element.id] !== "") {
             const _element = document.createElement(element.tag);
+            if(element.tag === "a"){
+              _element.setAttribute("href", value[element.id]);
+              _element.setAttribute("target", "_blank");
+            }
             const styles = element.styles;
             setStylesToElement(_element, styles);
             setAttributesToElem(attr, _element);
@@ -793,7 +797,7 @@ const Page = () => {
         <div className="flex flex-row items-center justify-between gap-3 ">
           <button
             onClick={handlePrintClick}
-            className="w-full sm:max-w-max sm:w-48 lg:px-6 px-4 py-2 rounded-full dark:bg-[#18181b]  border-[1.5px] border-gray-950/80 hover:dark:bg-[#2f2f35]"
+            className="w-full hidden md:block sm:max-w-max sm:w-48 lg:px-6 px-4 py-2 rounded-full dark:bg-[#18181b]  border-[1.5px] border-gray-950/80 hover:dark:bg-[#2f2f35]"
           >
             <div className="flex flex-row items-center justify-center gap-2">
               <svg

@@ -1,4 +1,4 @@
-import { sparkleIcon } from "./iconsProvider";
+import { educationIcon, sparkleIcon } from "./iconsProvider";
 
 
 
@@ -89,6 +89,22 @@ const publicationStyles = {
   publication_ul: "publication_ul",
   publication_li: "publication_li",
   publication_div_input: "publication_div_input",
+};
+export const projectStyles = {
+  project_h3: "publication_h3",
+  project_div: "publication_div",
+  project_h2: "publication_h2",
+  project_h2_1: "publication_h2_1",
+  project_new_input: "publication_new_input",
+  project_delete: "publication_delete",
+  project_delete1: "publication_delete1 ",
+  project_line: "publication_line",
+  project_date: "publication_date",
+  span1: "span1",
+  span2: "span2",
+  project_ul: "publication_ul",
+  project_li: "publication_li",
+  project_div_input: "publication_div_input",
 };
 
 const conditionStylePublication = {
@@ -210,7 +226,14 @@ const language = {
 // education style
 
 const education = {
-  education_h3: "publication_h3",
+  education_h3: "education_h3",
+  education_ul: "education_ul",
+  education_div: "education_div",
+  education_li: "education_li",
+  education_delete: "education_delete",
+  education_li_2: "education_li_2",
+  education_li_italic: "education_li_italic",
+  education_li_date : "education_li_date",
   span1: "span1",
   span2: "span2",
 }
@@ -221,28 +244,33 @@ export const customStyle_4 = {
   
 }
 export const customStyle_2 = {
-
     borderTopBottom: false,
     borderBottom: false,
     centeredHeading: false,
   
 }
 export const customStyle_8 = { borderTopBottom: true, centeredHeading: true  }
-export const customStyle_6_9 = { borderTopBottom: true, centeredHeading: false }
+export const customStyle_6 =
+  { borderTopBottom: true, centeredHeading: false}
+export const customStyle_9 =
+  { borderTopBottom: true, centeredHeading: false, education_bg: "education_bg" }
 export const customStyle_10 = {
     borderTopBottom: false,
     centeredHeading: false,
-    bgColor: "bg_color_9",
+  bgColor: "bg_color_9",
+    education_bg : "education_bg"
  }
 export const customStyle_15 = {
     borderTopBottom: false,
     centeredHeading: false,
-    bgColor: "bg_color",
+  bgColor: "bg_color",
+  education_bg : "education_bg"
 }
  export const customStyle_16 = {
   borderTopBottom: false,
   centeredHeading: false,
-  borderBottom: true,
+   borderBottom: true,
+   education_bg : "education_bg"
 }
 
 

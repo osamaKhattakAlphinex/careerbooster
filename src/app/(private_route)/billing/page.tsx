@@ -33,7 +33,7 @@ const Page = () => {
           {/* Heading */}
           <div>
             <h1 className="text-lg font-bold text-center text-gray-600 dark:text-gray-400 md:text-xl">
-              Billing Detail
+              Billing Details
             </h1>
           </div>
           {/* user data */}

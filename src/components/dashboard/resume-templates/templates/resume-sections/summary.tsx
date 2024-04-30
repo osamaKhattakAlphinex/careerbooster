@@ -28,14 +28,12 @@ const Summary = ({ summary, heading, customStyle, styles }: Props) => {
       ></span>
       <h2
         className={`${styles?.publication_h3} ${
-          customStyle?.borderTopBottom ? "block" : "hidden"
-        } 
-          ${customStyle?.centeredHeading ? "justify-center" : ""}
-        ${customStyle?.bgColor}`}
+          customStyle?.centeredHeading ? "justify-center" : ""
+        }${customStyle?.bgColor}`}
       >
         {resumeSummaryIcon}
         <EditableField
-          value={heading?.summary ? heading.summary : "Execuitve summary"}
+          value={heading ? heading : "Execuitve summary"}
           style={{ width: "fit-content " }}
           onSave={(value: string) => {
             if (value !== heading?.summary) {

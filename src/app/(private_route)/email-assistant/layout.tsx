@@ -6,7 +6,7 @@ interface Props {
 
 export const metadata: Metadata = {
   title: "Email Assistant - CareerBooster.ai",
-  description: "Email Assistant - CareerBooster.ai | Developed by NausalTech",
+  description: "Email Assistant - CareerBooster.ai| AI Resume Builder | Developed by NausalTech",
 };
 
 export default async function Coverletterlayout({ children }: Props) {
