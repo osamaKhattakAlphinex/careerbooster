@@ -14,9 +14,10 @@ type Props = {
   heading: any;
   projects: any;
   customStyle?: any;
+  styles?: any;
 };
 
-const Project = ({ heading, projects, customStyle }: Props) => {
+const Project = ({ heading, projects, styles, customStyle }: Props) => {
   const [rewardIndex, setRewardIndex] = useState<number>();
   const { handlers } = useHandler();
   const [newReward, setNewReward] = useState("");
@@ -32,11 +33,15 @@ const Project = ({ heading, projects, customStyle }: Props) => {
 
   return (
     <>
-      <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-      <h3
-        className={`flex items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 md:text-base hover:border-dashed hover:border-gray-500 ${
-          customStyle?.centeredHeading ? "justify-center" : ""
+      <span
+        className={`${styles?.span1} ${
+          customStyle?.borderTopBottom ? "block" : "hidden"
         }`}
+      ></span>
+      <h3
+        className={`${styles?.project_h3}  ${
+          customStyle?.centeredHeading ? "justify-center" : ""
+        } ${customStyle?.bgColor} `}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +73,13 @@ const Project = ({ heading, projects, customStyle }: Props) => {
           }}
         />
       </h3>
-      <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
+      <span
+        className={`${styles?.span2} ${
+          customStyle?.borderTopBottom || customStyle?.borderBottom
+            ? "block"
+            : "hidden"
+        }`}
+      ></span>
       {projects.map((rec: any, i: number) => {
         return (
           <Toolbar
@@ -86,7 +97,7 @@ const Project = ({ heading, projects, customStyle }: Props) => {
           >
             <div
               key={i}
-              className="border-2 border-transparent md:w-full hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2"
+              className={`${styles?.project_div}`}
               onDragStart={(e) =>
                 e.dataTransfer.setData("text/plain", i.toString())
               }
@@ -94,7 +105,7 @@ const Project = ({ heading, projects, customStyle }: Props) => {
               onDrop={(e) => handleDropOthers(e, i, "projects")}
               draggable
             >
-              <h2 className="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">
+              <h2 className={`${styles?.project_h2}`}>
                 <EditableField
                   value={rec?.title}
                   style={{ width: "100%" }}
@@ -110,7 +121,7 @@ const Project = ({ heading, projects, customStyle }: Props) => {
 
               <div className="px-4 py-1">
                 {rec?.description && i !== regeneratedRecordIndex ? (
-                  <ul className="flex flex-col gap-1 pl-0 text-xs">
+                  <ul className={styles?.project_ul}>
                     {rec?.description.map((achievement: any, ind: number) =>
                       achievement === "" ? (
                         <li
@@ -128,10 +139,10 @@ const Project = ({ heading, projects, customStyle }: Props) => {
                             );
                           }}
                           draggable
-                          className="flex flex-row items-center justify-center h-8 hover:bg-slate-200 group"
+                          className={`group ${styles?.project_li}`}
                         >
                           <div
-                            className="hidden text-xs font-medium text-gray-500 uppercase cursor-pointer group-hover:block"
+                            className={styles?.project_line}
                             onClick={() => {
                               handlers.handleRemoveExtraOthersSpace(
                                 i,
@@ -158,7 +169,7 @@ const Project = ({ heading, projects, customStyle }: Props) => {
                             );
                           }}
                           draggable
-                          className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative parent hover:bg-gray-100"
+                          className={`parent ${styles?.project_delete1}`}
                           key={ind}
                         >
                           <EditableField
@@ -181,7 +192,7 @@ const Project = ({ heading, projects, customStyle }: Props) => {
                                 "projects"
                               )
                             }
-                            className="w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
+                            className={`${styles?.project_delete} child`}
                           >
                             {crossIcon1}
                           </div>
@@ -205,9 +216,9 @@ const Project = ({ heading, projects, customStyle }: Props) => {
 
                 {rewardIndex === i && newBulletSection === "Projects" ? (
                   <>
-                    <div className="flex flex-wrap w-full gap-1 mt-4">
+                    <div className={styles?.project_div_input}>
                       <input
-                        className="w-full py-[4px] border-2 rounded-md  text bg-transparent " // Apply Tailwind CSS classes
+                        className={styles?.project_new_input} // Apply Tailwind CSS classes
                         onChange={(e) => setNewReward(e.target.value)}
                         value={newReward}
                         name="newReward"
@@ -228,7 +239,7 @@ const Project = ({ heading, projects, customStyle }: Props) => {
                       />
                       <div className="flex w-full gap-2 my-2">
                         <button
-                          className="w-1/12 text-white bg-green-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12 h-9 "
+                          className="save_btn"
                           onClick={() => {
                             // Save the new achievement to the state and possibly the database
                             handlers.handleAddOthersAchivement(
@@ -247,7 +258,7 @@ const Project = ({ heading, projects, customStyle }: Props) => {
                             setRewardIndex(-1);
                             setNewBulletSection(null);
                           }}
-                          className="w-1/12 py-1 text-white bg-red-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12"
+                          className="delete_btn"
                         >
                           Cancel
                         </button>

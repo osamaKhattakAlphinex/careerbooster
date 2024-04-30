@@ -38,6 +38,7 @@ import {
   experience,
   interest,
   language,
+  projectStyles,
   publicationStyles,
   reference,
   summary,
@@ -52,6 +53,7 @@ import Language from "./resume-sections/language";
 import Education from "./resume-sections/education";
 import Summary from "./resume-sections/summary";
 import Experience from "./resume-sections/experience";
+import Project from "./resume-sections/project";
 
 const ResumeTemplate16 = () => {
   const dispatch = useDispatch();
@@ -488,7 +490,17 @@ const ResumeTemplate16 = () => {
               />
             )}
           </div>
-
+          {/* Project */}
+          <div className="w-full">
+            {resume?.projects && resume?.projects.length > 0 && (
+              <Project
+                heading={resume.headings.projects}
+                projects={resume.projects}
+                styles={projectStyles}
+                customStyle={customStyle_16}
+              />
+            )}
+          </div>
           {/* Interests & Hobbies */}
           <div className="w-full">
             {resume?.interests && resume?.interests.length > 0 && (
@@ -526,7 +538,7 @@ const ResumeTemplate16 = () => {
           </div>
 
           {/* education */}
-          <div className="w-full space-y-2 mb-2">
+          <div className="w-full  mb-2">
             {resume?.education.length > 0 && (
               <Education
                 heading={resume.headings.education}

@@ -121,3 +121,30 @@
 .language_div {
   @apply border-2 border-transparent md:w-full hover:cursor-move;
 }
+.education_h3 {
+  @apply flex flex-row my-1 items-center gap-2 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500 
+}
+.education_ul {
+  @apply grid grid-cols-3 gap-2 xs:grid-cols-3 md:grid-cols-3 mt-1
+}
+.education_div {
+  @apply relative px-4 py-2  border-2 border-transparent rounded-md  hover:border-dashed hover:border-gray-500
+}
+.education_bg {
+  @apply bg-gray-300
+}
+.education_li {
+  @apply flex items-center justify-between text-base font-semibold uppercase hover:shadow-md hover:cursor-move  hover:border-2 hover:bg-gray-100
+}
+.education_delete {
+  @apply absolute z-10 hidden w-4 h-4 cursor-pointer group-hover:block right-2 top-2
+}
+.education_li_2 {
+  @apply text-xs font-semibold hover:shadow-md hover:bg-gray-100
+}
+.education_li_italic {
+  @apply text-xs italic text-gray-800 hover:shadow-md hover:bg-gray-100
+}
+.education_li_date {
+  @apply flex mb-4 text-xs italic text-gray-700
+}
