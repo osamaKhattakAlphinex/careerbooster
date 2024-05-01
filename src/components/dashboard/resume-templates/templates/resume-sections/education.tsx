@@ -16,8 +16,15 @@ type Props = {
   educations: any;
   styles: any;
   customStyle: any;
+  bgColor?: any;
 };
-const Education = ({ heading, educations, styles, customStyle }: Props) => {
+const Education = ({
+  heading,
+  educations,
+  styles,
+  customStyle,
+  bgColor,
+}: Props) => {
   const [confirmationModal, setConfirmationModal] = useState(false);
   const { handlers } = useHandler();
   const { updateSaveHook } = useUpdateAndSave();
@@ -32,7 +39,7 @@ const Education = ({ heading, educations, styles, customStyle }: Props) => {
       <h3
         className={`${styles?.education_h3} ${
           customStyle?.centeredHeading ? "justify-center" : ""
-        } ${customStyle?.bgColor}`}
+        } ${bgColor}`}
       >
         {resumeEductionIcon}
 

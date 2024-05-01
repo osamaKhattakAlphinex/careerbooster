@@ -81,11 +81,10 @@ const Skill = ({
       )}
       {skills && skills.length > 0 && !regenerating ? (
         <Toolbar addSkill={handleAddSkills} regenerateSkills={getPrimarySkills}>
-          <ul className={`${styles?.skill_ul} mt-2`}>
+          <ul className={`${styles?.skill_ul} mt-2 !list-disc`}>
             {skills.map((skill: string, i: number) => (
               <li
-                className={`${styles?.skill_li} parent before:text-white before:text-base before:h-4 before:w-1 items-center
-                  before:aspect-square before:flex before:items-center before:content-['•']
+                className={`${styles?.skill_li} parent 
                 `}
                 key={i}
                 onDragStart={(e) =>

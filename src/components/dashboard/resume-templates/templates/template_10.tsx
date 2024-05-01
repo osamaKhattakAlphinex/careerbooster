@@ -244,23 +244,29 @@ const ResumeTemplate10 = () => {
             />
           )}
         </div>
-        <div className="w-full flex flex-wrap flex-col px-4 sm:px-2 xs:px-2 md:px-8 lg:px-8  text-gray-950 pb-10 pt-[140px] ">
+        <div className="w-full flex flex-wrap flex-col px-4 sm:px-2 xs:px-2 md:px-8 lg:px-8  text-gray-950 pb-10 pt-[160px] ">
           {/* Executive Summary */}
-          <Summary
-            heading={resume.headings.summary}
-            summary={resume.summary}
-            styles={template_10_styles}
-            customStyle={customStyle_10}
-          />
+          <div className="">
+            <Summary
+              heading={resume.headings.summary}
+              summary={resume.summary}
+              styles={template_10_styles}
+              customStyle={customStyle_10}
+              bgColor="rounded-3xl xs:-mx-1 md:mx-0 text-gray-100 bg-[#043382] py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-fit"
+            />
+          </div>
 
           {/* Work Experience */}
-          <Experience
-            heading={resume.headings.workExperienceArray}
-            workExperienceArray={resume.workExperienceArray}
-            workExperience={resume.workExperience}
-            customStyle={customStyle_10}
-            styles={template_10_styles}
-          />
+          <div className="my-4">
+            <Experience
+              heading={resume.headings.workExperienceArray}
+              workExperienceArray={resume.workExperienceArray}
+              workExperience={resume.workExperience}
+              bgColor="rounded-3xl xs:-mx-1 md:mx-0 text-gray-100 bg-[#043382] py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-fit"
+              customStyle={customStyle_10}
+              styles={template_10_styles}
+            />
+          </div>
 
           {/* Add Custom */}
           {/* <CustomResumeSection /> */}
@@ -272,6 +278,7 @@ const ResumeTemplate10 = () => {
                 heading={resume.headings.publications}
                 publications={resume.publications}
                 styles={template_10_styles}
+                bgColor="rounded-3xl xs:-mx-1 md:mx-0 text-gray-100 bg-[#043382] py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-fit"
               />
             )}
           </div>
@@ -284,6 +291,7 @@ const ResumeTemplate10 = () => {
                 heading={resume.headings.certifications}
                 certificates={resume.certifications}
                 styles={template_10_styles}
+                bgColor="rounded-3xl xs:-mx-1 md:mx-0 text-gray-100 bg-[#043382] py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-fit"
               />
             )}
           </div>
@@ -296,6 +304,7 @@ const ResumeTemplate10 = () => {
                 heading={resume.headings.trainings}
                 trainings={resume.trainings}
                 styles={template_10_styles}
+                bgColor="rounded-3xl xs:-mx-1 md:mx-0 text-gray-100 bg-[#043382] py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-fit"
               />
             )}
           </div>
@@ -308,6 +317,7 @@ const ResumeTemplate10 = () => {
                 heading={resume.headings.awards}
                 awards={resume.awards}
                 styles={template_10_styles}
+                bgColor="rounded-3xl xs:-mx-1 md:mx-0 text-gray-100 bg-[#043382] py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-fit"
               />
             )}
           </div>
@@ -319,6 +329,7 @@ const ResumeTemplate10 = () => {
                 projects={resume.projects}
                 styles={template_10_styles}
                 customStyle={customStyle_10}
+                bgColor="rounded-3xl xs:-mx-1 md:mx-0 text-gray-100 bg-[#043382] py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-fit"
               />
             )}
           </div>
@@ -331,18 +342,20 @@ const ResumeTemplate10 = () => {
                 heading={resume.headings.references}
                 references={resume.references}
                 styles={template_10_styles}
+                bgColor="rounded-3xl xs:-mx-1 md:mx-0 text-gray-100 bg-[#043382] py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-fit"
               />
             )}
           </div>
 
           {/* Education */}
-          <div className="w-full  mb-2">
+          <div className="w-full  my-4">
             {resume?.education.length > 0 && (
               <Education
                 heading={resume.headings.education}
                 educations={resume.education}
                 styles={template_10_styles}
                 customStyle={customStyle_10}
+                bgColor="rounded-3xl xs:-mx-1 md:mx-0 text-gray-100 bg-[#043382] py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-fit"
               />
             )}
           </div>

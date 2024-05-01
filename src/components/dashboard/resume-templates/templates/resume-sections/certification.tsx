@@ -15,6 +15,7 @@ type Props = {
   certificates: any;
   styles: any;
   customStyle?: any;
+  bgColor?: any;
 };
 
 const Certification = ({
@@ -22,6 +23,7 @@ const Certification = ({
   certificates,
   styles,
   customStyle,
+  bgColor,
 }: Props) => {
   const [certificationIndex, setCertificationIndex] = useState<number>();
   const { handlers } = useHandler();
@@ -46,7 +48,7 @@ const Certification = ({
         className={`${styles?.certification_h3} ${
           customStyle?.centeredHeading ? "justify-center" : ""
         }
-          ${customStyle?.bgColor}
+          ${bgColor}
         `}
       >
         <svg

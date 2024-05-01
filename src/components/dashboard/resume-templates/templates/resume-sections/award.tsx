@@ -15,9 +15,10 @@ type Props = {
   awards: any;
   styles: any;
   customStyle?: any;
+  bgColor?: any;
 };
 
-const Award = ({ heading, awards, styles, customStyle }: Props) => {
+const Award = ({ heading, awards, styles, customStyle, bgColor }: Props) => {
   const [rewardIndex, setRewardIndex] = useState<number>();
   const { handlers } = useHandler();
   const [newReward, setNewReward] = useState("");
@@ -42,7 +43,7 @@ const Award = ({ heading, awards, styles, customStyle }: Props) => {
         className={`${styles?.award_h3} ${
           customStyle?.centeredHeading ? "justify-center" : ""
         }
-          ${customStyle?.bgColor}
+          ${bgColor}
         `}
       >
         <svg

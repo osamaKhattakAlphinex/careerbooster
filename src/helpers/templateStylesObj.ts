@@ -62,7 +62,7 @@ export const template_4_styles = {
   skill_ul:
     "border-2 border-transparent hover:border-dashed hover:border-gray-500  pl-0 flex list-styled flex-col gap-3 mb-4 text-xs xs:text-[12px] md:text-xs list-disc",
   skill_li:
-    "hover:shadow-md hover:cursor-move  border-transparent border-[1px] hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-500 flex  items-center gap-3 list-disc",
+    "hover:shadow-md hover:cursor-move  border-transparent border-[1px] hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-500 flex  items-center gap-3 before:text-white before:text-base before:h-4 before:w-1 items-center before:aspect-square before:flex before:items-center before:content-['•']",
   skill_New: "skill_New",
   span1: "span1",
   span2: "span2",
@@ -90,7 +90,7 @@ export const template_6_styles = {
   skill_ul:
     "border-2 border-transparent hover:border-dashed hover:border-gray-500  pl-0 flex flex-row  flex-wrap gap-1 h-[20%] text-xs !list-disc",
   skill_li:
-    "hover:shadow-md  w-[32%]  sm:w-[32%]  hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex  items-center !list-disc",
+    "hover:shadow-md  w-[32%]  sm:w-[32%]  hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex  items-center before:text-black before:text-base before:h-4 before:w-1 items-center before:aspect-square before:flex before:items-center before:content-['•'] before:mr-2",
   training_h3: "publication_h3",
   training_div: "publication_div",
   training_h1: "achievement_h1",
@@ -221,7 +221,7 @@ export const template_8_styles = {
   skill_ul:
     "border-2 border-transparent hover:border-dashed hover:border-gray-500  pl-0 flex flex-row  flex-wrap gap-1 h-[20%]  mb-4 text-xs  !list-disc",
   skill_li:
-    "hover:shadow-md w-[30%] xs:w-[45%] xs:pr-4 md:w-[30%] hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex  items-center !list-disc",
+    "hover:shadow-md w-[30%] xs:w-[45%] xs:pr-4 md:w-[30%] hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex  items-center before:text-black before:text-base before:h-4 before:w-1 items-center before:aspect-square before:flex before:items-center before:content-['•'] before:mr-2",
   training_h3: "publication_h3",
   training_div: "publication_div",
   training_h1: "achievement_h1",
@@ -353,7 +353,7 @@ export const template_9_styles = {
   skill_ul:
     "border-2 border-transparent hover:border-dashed hover:border-gray-500  pl-0 flex flex-row  flex-wrap gap-1 h-[20%]  mb-4 text-xs !list-disc",
   skill_li:
-    "hover:shadow-md w-[30%] xs:w-full md:w-[30%]  hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex  items-center",
+    "hover:shadow-md w-[30%] xs:w-full md:w-[30%]  hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex  items-center before:text-black  before:mr-2 before:text-base before:h-4 before:w-1 items-center before:aspect-square before:flex before:items-center before:content-['•']",
   training_h3: "publication_h3",
   training_div: "publication_div",
   training_h1: "achievement_h1",
@@ -483,7 +483,7 @@ export const template_10_styles = {
   skill_ul:
     "flex flex-col gap-3 mb-4 text-xs border-2 border-transparent hover:border-dashed hover:border-gray-500 !list-disc",
   skill_li:
-    "hover:shadow-md hover:cursor-move parent border-transparent border-[1px] hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-500 flex gap-2  items-center",
+    "hover:shadow-md hover:cursor-move parent border-transparent border-[1px] hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-500 flex gap-2  items-center before:text-black before:mr-2 before:text-base before:h-4 before:w-1 items-center before:aspect-square before:flex before:items-center before:content-['•']",
   training_h3: "publication_h3",
   training_div: "publication_div",
   training_h1: "achievement_h1",
@@ -623,7 +623,7 @@ export const template_15_styles = {
   skill_ul:
     "flex flex-col w-full gap-1 pl-0 mb-4 text-xs border-2 border-transparent hover:border-dashed hover:border-gray-500 mt-4",
   skill_li:
-    "hover:shadow-md hover:cursor-move px-0 xs:px-2 md:px-0 parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex items-center gap-2 ",
+    "hover:shadow-md hover:cursor-move px-0 xs:px-2 md:px-0 parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex items-center gap-2 before:text-black before:text-base before:h-4 before:w-1 items-center before:mr-2 before:aspect-square before:flex before:items-center before:content-['•']",
   training_h3: "publication_h3",
   training_div: "publication_div",
   training_h1: "achievement_h1",
@@ -766,7 +766,7 @@ export const template_16_styles = {
   skill_ul:
     "flex flex-col w-full gap-2 pl-0 mb-4 text-xs text-gray-300 border-2 border-transparent hover:border-dashed hover:border-gray-500",
   skill_li:
-    "hover:shadow-md hover:cursor-move parent hover:text-black hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex items-center",
+    "hover:shadow-md hover:cursor-move parent hover:text-black hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex items-center before:text-white before:text-base before:h-4 before:w-1 items-center before:mr-2 before:aspect-square before:flex before:items-center before:content-['•'] ",
   training_h3: "publication_h3",
   training_div: "publication_div",
   training_h1: "achievement_h1",
@@ -848,7 +848,7 @@ export const template_16_styles = {
     "m-2 xs:m-0 relative border-transparent border-2 hover:border-dashed hover:border-gray-100 text-gray-100",
   interest_line: "publication_line",
   interest_delete1:
-    "hover:border-dashed list-disc hover:cursor-move hover:border-gray-100 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative hover:bg-gray-500 text-gray-100",
+    "hover:border-dashed list-disc hover:cursor-move hover:border-gray-100 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative hover:bg-gray-500 text-gray-100 justify-between",
   interest_delete: "publication_delete",
   interest_div_input: "publication_div_input",
   interest_new_input: "publication_new_input",

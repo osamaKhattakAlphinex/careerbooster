@@ -12,9 +12,16 @@ type Props = {
   references: any;
   styles: any;
   customStyle?: any;
+  bgColor?: any;
 };
 
-const Reference = ({ heading, references, styles, customStyle }: Props) => {
+const Reference = ({
+  heading,
+  references,
+  styles,
+  customStyle,
+  bgColor,
+}: Props) => {
   const { handleDropOthersAchievement, handleDropOthers } = useDragAndDrop();
   const { handlers } = useHandler();
   const { updateSaveHook } = useUpdateAndSave();
@@ -30,7 +37,7 @@ const Reference = ({ heading, references, styles, customStyle }: Props) => {
         className={`${styles?.reference_h3} ${
           customStyle?.centeredHeading ? "justify-center" : ""
         }
-          ${customStyle?.bgColor}
+          ${bgColor}
         `}
       >
         <svg
