@@ -97,10 +97,10 @@ const ResumeBuilder = () => {
   const { getCreditLimitsIfNotExists } = useGetCreditLimits();
 
   useEffect(() => {
-    return () => {
+    return (() => {
       abortController?.abort();
       setAbortController(new AbortController())
-    };
+    });
   }, []);
   const { getSummary } = useGetSummary(setStreamedSummaryData, setOutOfCredits);
 

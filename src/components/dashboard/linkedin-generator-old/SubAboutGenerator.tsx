@@ -27,9 +27,15 @@ const SubAboutGenerator = () => {
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [option, setOption] = useState<string>("about");
   const [showPopup, setShowPopup] = useState(false);
-  const { setAvailableCredits } = useAppContext();
-
+  const { setAvailableCredits, abortController,setAbortController } = useAppContext();
   const [isAboutCopied, setIsAboutCopied] = useState<boolean>(false);
+  useEffect(() => {
+    return (() => {
+      abortController?.abort();
+      setAbortController(new AbortController())
+    });
+  }, []);
+
   const copyAbout = async (text: string) => {
     try {
       const option = htmlToPlainText(text);
@@ -94,11 +100,11 @@ const SubAboutGenerator = () => {
     await axios.post(
       `/api/linkedInBots/aboutGenerator/linkedInAbout`,
       payLoad,
-      { headers: { "Content-Type": "application/json" } }
+      { headers: { "Content-Type": "application/json" },signal: abortController?.signal }
     );
 
     const AboutResponse = await axios.get(
-      "/api/linkedInBots/linkedinAboutGenerator/getAllAbout"
+      "/api/linkedInBots/linkedinAboutGenerator/getAllAbout", {signal: abortController?.signal}
     );
     const updatedObject = {
       ...userData,
@@ -143,6 +149,7 @@ const SubAboutGenerator = () => {
       fetch("/api/linkedInBots/aboutGenerator", {
         method: "POST",
         body: JSON.stringify(obj),
+        signal: abortController?.signal,
       })
         .then(async (resp: any) => {
           if (resp.ok) {
@@ -164,7 +171,7 @@ const SubAboutGenerator = () => {
             }
 
             const AboutResponse = await axios.get(
-              "/api/linkedInBots/linkedinAboutGenerator/getAllAbout"
+              "/api/linkedInBots/linkedinAboutGenerator/getAllAbout", {signal: abortController?.signal}
             );
             const updatedObject = {
               ...userData,

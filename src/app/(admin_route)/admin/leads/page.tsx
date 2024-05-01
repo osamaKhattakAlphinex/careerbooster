@@ -39,7 +39,7 @@ const LeadsAdminPage = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { abortController } = useAppContext();
+  const { abortController, setAbortController } = useAppContext();
 
   const columnHelper = createColumnHelper<Lead>();
 
@@ -140,6 +140,7 @@ const LeadsAdminPage = () => {
             startIndex: startIndex,
             endIndex: endIndex,
           },
+          signal: abortController?.signal,
         })
         .then(async (res: any) => {
           if (res.data.success) {
@@ -169,7 +170,8 @@ const LeadsAdminPage = () => {
     getlinkedInToolUsersCount();
 
     return () => {
-      abortController.abort();
+      abortController?.abort();
+      setAbortController(new AbortController());
     };
   }, []);
 
@@ -195,9 +197,6 @@ const LeadsAdminPage = () => {
 
     router.replace(pathname + `?r=${limitOfRecords}&p=${currentPage}`);
 
-    return () => {
-      abortController.abort();
-    };
   }, [currentPage, limitOfRecords]);
 
   return (
