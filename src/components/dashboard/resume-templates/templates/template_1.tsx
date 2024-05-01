@@ -296,12 +296,60 @@ const ResumeTemplate1 = ({
 
           <div className="flex flex-col flex-wrap w-full ">
             {/* EXECUTIVE SUMMARY */}
-            <Summary
-              heading={resume.headings.summary}
-              summary={resume.summary}
-              styles={summary}
-              customStyle={customStyle_6}
-            />
+            <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 md:mt-3"></span>
+            <h3 className="flex items-center gap-2 font-semibold uppercase border-2 border-transparent md:my-1 xs:text-xs md:text-base hover:border-dashed hover:border-gray-500">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-4 h-4"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+
+              <EditableField
+                value={
+                  resume?.headings?.summary
+                    ? resume.headings.summary
+                    : " executive summary"
+                }
+                style={{ width: "fit-content" }}
+                onSave={(value: string) => {
+                  if (value !== resume?.headings.summary) {
+                    updateSaveHook.updateAndSaveHeadings({ summary: value });
+                  }
+                }}
+              />
+            </h3>
+            <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
+
+            <Toolbar regenrateSummary={getSummary}>
+              <div className="my-2 text-xs text-justify border-2 border-transparent h-fit hover:shadow-md hover:border-gray-500 hover:border-dashed ">
+                <EditableField
+                  type="textarea"
+                  value={
+                    resume?.summary !== "" ? (
+                      resume?.summary
+                    ) : streamedSummaryData ? (
+                      streamedSummaryData
+                    ) : (
+                      <div className="text-center">
+                        <div role="status">
+                          <Loader />
+                        </div>
+                      </div>
+                    )
+                  }
+                  onSave={(value: string) => {
+                    updateSaveHook.updateAndSaveSummary(value);
+                  }}
+                />
+              </div>
+            </Toolbar>
 
             {/* Skills */}
 
@@ -431,13 +479,356 @@ const ResumeTemplate1 = ({
             )}
 
             {/* Work Experience */}
-            <Experience
-              heading={resume.headings.workExperienceArray}
-              workExperienceArray={resume.workExperienceArray}
-              workExperience={resume.workExperience}
-              customStyle={customStyle_6}
-              styles={experience}
-            />
+            <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
+            <h3 className="flex items-center gap-2 text-xs font-semibold uppercase border-2 border-transparent md:my-1 md:text-base hover:border-dashed hover:border-gray-500">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-4 h-4"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M7.5 5.25a3 3 0 0 1 3-3h3a3 3 0 0 1 3 3v.205c.933.085 1.857.197 2.774.334 1.454.218 2.476 1.483 2.476 2.917v3.033c0 1.211-.734 2.352-1.936 2.752A24.726 24.726 0 0 1 12 15.75c-2.73 0-5.357-.442-7.814-1.259-1.202-.4-1.936-1.541-1.936-2.752V8.706c0-1.434 1.022-2.7 2.476-2.917A48.814 48.814 0 0 1 7.5 5.455V5.25Zm7.5 0v.09a49.488 49.488 0 0 0-6 0v-.09a1.5 1.5 0 0 1 1.5-1.5h3a1.5 1.5 0 0 1 1.5 1.5Zm-3 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+                  clipRule="evenodd"
+                />
+                <path d="M3 18.4v-2.796a4.3 4.3 0 0 0 .713.31A26.226 26.226 0 0 0 12 17.25c2.892 0 5.68-.468 8.287-1.335.252-.084.49-.189.713-.311V18.4c0 1.452-1.047 2.728-2.523 2.923-2.12.282-4.282.427-6.477.427a49.19 49.19 0 0 1-6.477-.427C4.047 21.128 3 19.852 3 18.4Z" />
+              </svg>
+
+              <EditableField
+                value={
+                  resume?.headings?.workExperienceArray
+                    ? resume.headings.workExperienceArray
+                    : "work experience"
+                }
+                style={{ width: "fit-content" }}
+                onSave={(value: string) => {
+                  if (value !== resume?.headings?.workExperienceArray) {
+                    updateSaveHook.updateAndSaveHeadings({
+                      workExperienceArray: value,
+                    });
+                  }
+                }}
+              />
+            </h3>
+            <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500"></span>
+
+            {resume?.workExperienceArray &&
+            resume?.workExperienceArray.length > 0 ? (
+              <>
+                {resume?.workExperienceArray.map((rec: any, i: number) => {
+                  return (
+                    <Toolbar
+                      key={i}
+                      addAchivement={() => {
+                        setNewWorkExperience(i);
+                        setNewBulletSection("WorkExperience");
+                      }}
+                      deleteExperience={() =>
+                        handlers.handleDeleteExperience(i)
+                      }
+                      regenrateAchivements={() => handleRegenrate(rec, i)}
+                      addNewLine={() => {
+                        handlers.handleAddSpace(i, newAchievement);
+                        setNewAchievement("");
+                      }}
+                    >
+                      <div
+                        key={i}
+                        className="border-2 border-transparent md:w-full hover:border-dashed hover:border-gray-500 hover:cursor-move hover:border-2"
+                        onDragStart={(e) =>
+                          e.dataTransfer.setData("text/plain", i.toString())
+                        }
+                        onDragOver={(e) => e.preventDefault()}
+                        onDrop={(e) => handleDropExperience(e, i)}
+                        draggable
+                      >
+                        <h2 className="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">
+                          <EditableField
+                            value={rec?.title}
+                            style={{ width: "100%" }}
+                            onSave={(value: string) => {
+                              handlers.handleSaveExperienceDetail(
+                                { title: value },
+                                i
+                              );
+                            }}
+                          />
+                        </h2>
+                        <h2 className="flex flex-wrap gap-1 text-xs font-semibold leading-relaxed hover:cursor-default ">
+                          {/* {rec?.fromMonth + " " + rec?.fromYear} -{" "}
+                          {rec?.isContinue
+                            ? "Present"
+                            : `${rec?.toMonth} ${rec?.toYear}`}{" "}
+                          |{" "} */}
+                          {rec.fromMonth && (
+                            <span className="hover:shadow-md hover:bg-gray-100">
+                              <EditableField
+                                value={`${rec?.fromMonth}`}
+                                onSave={(value: string) => {
+                                  handlers.handleSaveExperienceDetail(
+                                    { fromMonth: value },
+                                    i
+                                  );
+                                }}
+                              />
+                            </span>
+                          )}
+                          {rec.fromYear && (
+                            <span className="hover:shadow-md hover:bg-gray-100">
+                              <EditableField
+                                value={`${rec?.fromYear}`}
+                                onSave={(value: string) => {
+                                  handlers.handleSaveExperienceDetail(
+                                    { fromYear: value },
+                                    i
+                                  );
+                                }}
+                              />
+                            </span>
+                          )}
+                          {rec.fromYear && <span>-</span>}
+                          {rec.toMonth && !rec.isContinue && (
+                            <span className="hover:shadow-md hover:bg-gray-100">
+                              <EditableField
+                                value={`${rec?.toMonth}`}
+                                onSave={(value: string) => {
+                                  handlers.handleSaveExperienceDetail(
+                                    { toMonth: value },
+                                    i
+                                  );
+                                }}
+                              />
+                            </span>
+                          )}
+                          {rec.toYear && !rec.isContinue && (
+                            <span className="hover:shadow-md hover:bg-gray-100">
+                              <EditableField
+                                value={`${rec?.toYear}`}
+                                onSave={(value: string) => {
+                                  handlers.handleSaveExperienceDetail(
+                                    { toYear: value },
+                                    i
+                                  );
+                                }}
+                              />
+                            </span>
+                          )}
+                          {rec.isContinue && (
+                            <span className="hover:shadow-md hover:bg-gray-100">
+                              <EditableField
+                                value={`${rec?.isContinue && "Present"}`}
+                                onSave={(value: string) => {
+                                  handlers.handleSaveExperienceDetail(
+                                    { toYear: value },
+                                    i
+                                  );
+                                  handlers.handleSaveExperienceDetail(
+                                    { isContinue: false },
+                                    i
+                                  );
+                                }}
+                              />
+                            </span>
+                          )}
+                          |{" "}
+                          <span className="hover:shadow-md hover:cursor-text hover:bg-gray-100">
+                            <EditableField
+                              value={rec?.company}
+                              onSave={(value: string) => {
+                                handlers.handleSaveExperienceDetail(
+                                  { company: value },
+                                  i
+                                );
+                              }}
+                            />
+                          </span>{" "}
+                          |{" "}
+                          <span className="hover:shadow-md hover:bg-gray-100">
+                            <EditableField
+                              value={rec?.cityState}
+                              onSave={(value: string) => {
+                                handlers.handleSaveExperienceDetail(
+                                  { cityState: value },
+                                  i
+                                );
+                              }}
+                            />
+                          </span>{" "}
+                          {rec?.cityState?.length > 0 && ","}
+                          <span className="hover:shadow-md hover:bg-gray-100">
+                            <EditableField
+                              value={rec?.country}
+                              onSave={(value: string) => {
+                                handlers.handleSaveExperienceDetail(
+                                  { country: value },
+                                  i
+                                );
+                              }}
+                            />
+                          </span>
+                        </h2>
+                        <div className="px-4 py-1">
+                          {rec?.achievements && i !== regeneratedRecordIndex ? (
+                            <ul className="flex flex-col gap-1 pl-0 text-xs">
+                              {rec?.achievements.map(
+                                (achievement: any, ind: number) =>
+                                  achievement === "" ? (
+                                    <li
+                                      key={ind}
+                                      onDragStart={(e) => {
+                                        setInsideIndex(ind);
+                                      }}
+                                      onDragOver={(e) => e.preventDefault()}
+                                      onDrop={(e) => {
+                                        handleDropAchievement(
+                                          i,
+                                          ind,
+                                          insideIndex
+                                        );
+                                      }}
+                                      draggable
+                                      className="flex flex-row items-center justify-center h-8 hover:bg-slate-200 group"
+                                    >
+                                      <div
+                                        className="hidden text-xs font-medium text-gray-500 uppercase cursor-pointer group-hover:block"
+                                        onClick={() => {
+                                          handlers.handleRemoveExtraSpace(
+                                            i,
+                                            ind
+                                          );
+                                        }}
+                                      >
+                                        Remove This Extra Space
+                                      </div>
+                                    </li>
+                                  ) : (
+                                    <li
+                                      onDragStart={(e) => {
+                                        setInsideIndex(ind);
+                                      }}
+                                      onDragOver={(e) => e.preventDefault()}
+                                      onDrop={(e) => {
+                                        handleDropAchievement(
+                                          i,
+                                          ind,
+                                          insideIndex
+                                        );
+                                      }}
+                                      draggable
+                                      className="list-disc hover:border-dashed hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative parent hover:bg-gray-100"
+                                      key={ind}
+                                    >
+                                      <EditableField
+                                        type="textarea"
+                                        value={achievement}
+                                        onSave={(value: string) => {
+                                          handlers.handleUpdateAchivement(
+                                            i,
+                                            ind,
+                                            value
+                                          );
+                                        }}
+                                      />
+                                      <div
+                                        onClick={() =>
+                                          handlers.handleDeleteAchivement(
+                                            i,
+                                            ind
+                                          )
+                                        }
+                                        className="w-4 h-4 absolute right-0.5 top-0.5 text-red-500 cursor-pointer child"
+                                      >
+                                        {crossIcon1}
+                                      </div>
+                                    </li>
+                                  )
+                              )}
+                            </ul>
+                          ) : streamedJDData ? (
+                            <div
+                              dangerouslySetInnerHTML={{
+                                __html: streamedJDData,
+                              }}
+                            ></div>
+                          ) : (
+                            <div className="text-center">
+                              <div role="status">
+                                <Loader />
+                              </div>
+                            </div>
+                          )}
+
+                          {newWorkExperience === i &&
+                          newBulletSection === "WorkExperience" ? (
+                            <>
+                              <div className="flex flex-wrap w-full gap-1 mt-4">
+                                <input
+                                  className="w-full py-[4px] border-2 rounded-md  text bg-transparent " // Apply Tailwind CSS classes
+                                  onChange={(e) =>
+                                    setNewAchievement(e.target.value)
+                                  }
+                                  value={newAchievement}
+                                  name="newAchievement"
+                                  id="newAchievement"
+                                  autoComplete="off"
+                                  onKeyDown={(e) => {
+                                    if (e.key === "Enter") {
+                                      e.preventDefault(); // Prevent the default Enter key behavior (typically adding a new line)
+                                      // Save the new achievement to the state and possibly the database
+                                      handlers.handleAddAchivement(
+                                        i,
+                                        newAchievement
+                                      );
+                                      setNewAchievement("");
+                                    }
+                                  }}
+                                />
+                                <div className="flex w-full gap-2 my-2">
+                                  <button
+                                    className="w-1/12 text-white bg-green-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12 h-9 "
+                                    onClick={() => {
+                                      // Save the new achievement to the state and possibly the database
+                                      handlers.handleAddAchivement(
+                                        i,
+                                        newAchievement
+                                      );
+                                      setNewAchievement("");
+                                    }}
+                                  >
+                                    Save
+                                  </button>
+                                  <button
+                                    onClick={() => {
+                                      setNewAchievement("");
+                                      setNewWorkExperience(-1);
+                                      setNewBulletSection(null);
+                                    }}
+                                    className="w-1/12 py-1 text-white bg-red-500 rounded-md xs:w-full md:w-1/12 lg:w-1/12"
+                                  >
+                                    Cancel
+                                  </button>
+                                </div>
+                              </div>
+                            </>
+                          ) : null}
+                        </div>
+                      </div>
+                    </Toolbar>
+                  );
+                })}
+              </>
+            ) : (
+              <div
+                className="list-disc "
+                dangerouslySetInnerHTML={{
+                  __html:
+                    resume?.workExperience !== ""
+                      ? resume?.workExperience
+                      : streamedJDData,
+                }}
+              ></div>
+            )}
 
             {/* Publications */}
             {resume?.publications && resume?.publications.length > 0 && (

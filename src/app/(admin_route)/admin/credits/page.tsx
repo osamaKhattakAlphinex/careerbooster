@@ -113,7 +113,7 @@ const ViewPackage = ({}) => {
     <>
       <CreditsModal ref={creditModalRef} refresh={getCredits} />
 
-      <div className="flex flex-col items-start justify-start">
+      <div className="flex flex-col items-start justify-start ">
         <h2 className="text-xl uppercase dark:text-white/70 text-black/70">
           Credits
         </h2>
@@ -128,7 +128,7 @@ const ViewPackage = ({}) => {
           Add New Credits
         </button>
 
-        <div className="w-full mt-4 overflow-x-auto">
+        <div className="flex-1 w-full mt-4 overflow-x-auto">
           <DataTable
             loading={loading}
             columns={columns}

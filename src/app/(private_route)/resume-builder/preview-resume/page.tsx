@@ -65,29 +65,29 @@ const Page = () => {
   `,
   });
 
-  const normalizeLinkedInURL =(url:string)=> {
+  const normalizeLinkedInURL = (url: string) => {
     // Remove leading/trailing whitespace
     url = url.trim();
-    if (url.endsWith('/')) {
+    if (url.endsWith("/")) {
       url = url.slice(0, -1);
     }
     // Ensure the URL contains the LinkedIn profile path
     const linkedInPattern = /linkedin\.com\/in\/([\w-]+)/;
     const match = url.match(linkedInPattern);
-  
+
     if (match) {
       const username = match[1];
       return `https://www.linkedin.com/in/${username}`;
     }
-  
+
     // If no LinkedIn profile pattern is found, assume it's just a username
     if (url.match(/^[\w-]+$/)) {
       return `https://www.linkedin.com/in/${url}`;
     }
-  
+
     // If it's not recognizable, return the original URL (optionally, you could throw an error or handle it differently)
     return url;
-  }
+  };
   const getAllSettings = () => {
     if (cvRef.current) {
       const scaling =
@@ -112,7 +112,7 @@ const Page = () => {
       "primarySkills",
       "name",
       "jobTitle",
-      "summary",
+      // "summary",
       "interests",
       "languages",
     ];
@@ -120,7 +120,7 @@ const Page = () => {
     const containerNames = [
       "header",
       "skills",
-      "summary",
+      // "summary",
       "contact",
       "education",
       "sideBar",
@@ -215,8 +215,12 @@ const Page = () => {
     }
   };
 
-  const canFitEducation = (page: any, educationHeading: any) => {
-    return educationHeading.offsetTop + 140 < page.clientHeight;
+  const canFitEducation = (
+    page: any,
+    educationHeading: any,
+    height: number
+  ) => {
+    return educationHeading.offsetTop + height < page.clientHeight;
   };
 
   const referencesDivs = (page: any, nextPage?: any) => {
@@ -244,7 +248,12 @@ const Page = () => {
         indicatorDiv,
         getReferencesHeading.nextSibling
       );
-      let isSpaceAvailable = canFitEducation(page, indicatorDiv);
+      if(nextPage){
+        cleanUpHTML(nextPage)
+      }
+      const heights = Array.from(referencesDivs).map((div) => div.clientHeight);
+      const maxHeight = Math.max(...heights);
+      let isSpaceAvailable = canFitEducation(page, indicatorDiv, maxHeight);
       let rowItemCount = 1;
       for (const singleReferences of Array.from(referencesDivs)) {
         if (isSpaceAvailable && rowItemCount <= 3) {
@@ -261,7 +270,7 @@ const Page = () => {
           );
           rowItemCount++;
         } else {
-          isSpaceAvailable = canFitEducation(page, indicatorDiv);
+          isSpaceAvailable = canFitEducation(page, indicatorDiv, maxHeight);
           if (isSpaceAvailable) {
             rowItemCount = 1;
             newDiv.appendChild(singleReferences);
@@ -324,7 +333,13 @@ const Page = () => {
         indicatorDiv,
         getEducationHeading.nextSibling
       );
-      let isSpaceAvailable = canFitEducation(page, indicatorDiv);
+      if(nextPage){
+        cleanUpHTML(nextPage)
+      }
+      const heights = Array.from(educationDivs).map((div) => div.clientHeight);
+
+      const maxHeight = Math.max(...heights);
+      let isSpaceAvailable = canFitEducation(page, indicatorDiv, maxHeight);
       let rowItemCount = 1;
       for (const singleEducation of Array.from(educationDivs)) {
         if (isSpaceAvailable && rowItemCount <= 3) {
@@ -341,7 +356,7 @@ const Page = () => {
           );
           rowItemCount++;
         } else {
-          isSpaceAvailable = canFitEducation(page, indicatorDiv);
+          isSpaceAvailable = canFitEducation(page, indicatorDiv, maxHeight);
           if (isSpaceAvailable) {
             rowItemCount = 1;
             newDiv.appendChild(singleEducation);
@@ -446,7 +461,7 @@ const Page = () => {
         for (const element of template.elements) {
           if (value.hasOwnProperty(element.id) && value[element.id] !== "") {
             const _element = document.createElement(element.tag);
-            if(element.tag === "a"){
+            if (element.tag === "a") {
               const normalizedLink = normalizeLinkedInURL(value[element.id]);
               _element.setAttribute("href", normalizedLink);
               _element.setAttribute("target", "_blank");
@@ -455,7 +470,7 @@ const Page = () => {
             setStylesToElement(_element, styles);
             setAttributesToElem(attr, _element);
             setAttributesToElem([{ name: element.id }], _element);
-            _element.textContent = value[element.id];
+            _element.textContent = value[element.id].trim();
             spans.push(_element);
           }
         }
@@ -762,6 +777,7 @@ const Page = () => {
     });
     spans.forEach((span: any) => {
       setTimeout(() => {
+  
         const gen = FinalizeGeneration(span, pages[currentPageIndex]);
 
         if (gen) {

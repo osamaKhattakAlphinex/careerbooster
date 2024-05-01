@@ -62,7 +62,7 @@ const Contact = ({ contact, styles }: Props) => {
       <li className={`${styles?.contact_li}`}>
         <div className="">{homeIconFilled}</div>
         <EditableField
-          value={contact?.address ? contact.address : ""}
+          value={contact?.address.trim() ? contact.address : "Address"}
           onSave={(value: string) => {
             if (value !== contact.address) {
               updateSaveHook.updateAndSaveBasicInfo({ address: value });
