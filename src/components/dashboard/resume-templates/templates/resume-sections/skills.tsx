@@ -62,7 +62,7 @@ const Skill = ({ heading, skills, styles, customStyle }: Props) => {
           </h2>
 
           <span
-            className={`${styles?.span1} ${
+            className={`${styles?.span2} ${
               customStyle?.borderTopBottom || customStyle?.borderBottom
                 ? "block"
                 : "hidden"

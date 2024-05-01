@@ -29,12 +29,47 @@ export const skill_temp_8 = {
   skill_8_New: "skill_New",
 };
 export const template_6_styles = {
+  full_Name_Style:
+    "text-4xl font-bold border-2 border-transparent xs:text-2xl md:4xl lg:text-4xl hover:shadow-md hover:bg-gray-100 hover:border-dashed hover:border-gray-500     ",
+  jobTitle:
+    "w-full text-lg border-2 border-transparent xs:text-xs md:text-2xl lg:text-2xl xs:leading-none hover:shadow-md hover:bg-gray-100 hover:border-dashed hover:border-gray-500",
+  conatact_heading:
+    "flex flex-row items-center gap-2 mb-2 -mr-6 text-base font-semibold uppercase border-2 border-transparent md:-mr-6 md:mt-4 hover:border-dashed hover:border-gray-500 hover:w-full",
+  contact_ul:
+    "flex  flex-col xs:flex-col justify-between  pl-0 my-2 text-xs break-all md:flex-row",
+  contact_li:
+    "hover:shadow-md hover:bg-gray-100 text-xs   flex flex-row gap-1  items-center justify-start md:w-[20%] xs:w-full ",
   skill_heading:
     "flex flex-row flex-wrap items-center gap-2 my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500",
   skill_ul:
-    "border-2 border-transparent hover:border-dashed hover:border-gray-500  pl-0 flex flex-row  flex-wrap gap-1 h-[20%] text-xs ",
+    "border-2 border-transparent hover:border-dashed hover:border-gray-500  pl-0 flex flex-row  flex-wrap gap-1 h-[20%] text-xs !list-disc",
   skill_li:
-    "hover:shadow-md  w-[32%]  sm:w-[32%]  hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex  items-center",
+    "hover:shadow-md  w-[32%]  sm:w-[32%]  hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex  items-center !list-disc",
+  training_h3: "publication_h3",
+  training_div: "publication_div",
+  training_h1: "achievement_h1",
+  training_h2: "publication_h2",
+  training_h2_1: "publication_h2_1",
+  training_date: "publication_date",
+  training_ul: "publication_ul",
+  training_li: "publication_li",
+  training_line: "publication_line",
+  training_delete1: "publication_delete1",
+  training_delete: "publication_delete",
+  training_div_input: "publication_div_input",
+  training_new_input: "publication_new_input",
+  certification_h3: "publication_h3",
+  certification_div: "publication_div",
+  certification_h1: "achievement_h1",
+  certification_h2_1: "publication_h2_1",
+  certification_date: "publication_date",
+  certification_ul: "publication_ul",
+  certification_li: "publication_li",
+  certification_line: "publication_line",
+  certification_delete1: "publication_delete1",
+  certification_delete: "publication_delete",
+  certification_div_input: "publication_div_input",
+  certification_new_input: "publication_new_input",
   experienceHeading_temp_2: "experienceHeading_temp_2",
   summary_heading: "summary_heading",
   summary_text: "summary_text",

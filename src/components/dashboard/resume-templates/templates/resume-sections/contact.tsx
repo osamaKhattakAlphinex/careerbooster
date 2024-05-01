@@ -13,9 +13,10 @@ import React from "react";
 type Props = {
   contact: any;
   styles: any;
+  iconColor?: any;
 };
 
-const Contact = ({ contact, styles }: Props) => {
+const Contact = ({ contact, styles, iconColor }: Props) => {
   const { updateSaveHook } = useUpdateAndSave();
 
   return (
@@ -48,7 +49,9 @@ const Contact = ({ contact, styles }: Props) => {
         </li>
 
         <li className={`${styles?.contact_li}`}>
-          <div className="bg-transparent ">{linkedInIconFilled}</div>
+          <div className={`bg-transparent ${iconColor ? iconColor : ""} `}>
+            {linkedInIconFilled}
+          </div>
           <EditableField
             value={
               contact?.linkedIn

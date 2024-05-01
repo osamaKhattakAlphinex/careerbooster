@@ -194,7 +194,11 @@ const ResumeTemplate4 = () => {
             />
           </h3>
           <span className="w-full mb-4 border-b-2 border-gray-500 !block "></span>
-          <Contact contact={resume.contact} styles={template_4_styles} />
+          <Contact
+            contact={resume.contact}
+            styles={template_4_styles}
+            iconColor="text-white"
+          />
 
           {/* Skills */}
           <Skill
