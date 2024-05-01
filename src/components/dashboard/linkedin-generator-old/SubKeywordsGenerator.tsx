@@ -27,11 +27,18 @@ const SubKeywordsGenerator = () => {
   const [showPopup, setShowPopup] = useState(false);
 
   const [aiInputUserData, setAiInputUserData] = useState<any>();
-  const { setAvailableCredits } = useAppContext();
+  const { setAvailableCredits, abortController, setAbortController } = useAppContext();
   const [isEditing, setIsEditing] = useState(false);
 
   const [isKeywordsCopied, setIsKeywordsCopied] = useState<boolean>(false);
   const { getUserDataIfNotExists: getUserData } = useGetUserData(); //using hook function with different name/alias
+
+  useEffect(() => {
+    return (() => {
+      abortController?.abort();
+      setAbortController(new AbortController())
+    });
+  }, []);
 
   const copyKeyword = async (text: string) => {
     try {
@@ -103,11 +110,11 @@ const SubKeywordsGenerator = () => {
     await axios.post(
       `/api/linkedInBots/keywordsGenerator/linkedInKeywords`,
       payLoad,
-      { headers: { "Content-Type": "application/json" } }
+      { headers: { "Content-Type": "application/json" },signal: abortController?.signal }
     );
 
     const KeywordsResponse = await axios.get(
-      "/api/linkedInBots/keywordsGenerator/getAllLinkedInKeyword"
+      "/api/linkedInBots/keywordsGenerator/getAllLinkedInKeyword",{signal: abortController?.signal}
     );
     const updatedObject = {
       ...userData,
@@ -161,6 +168,7 @@ const SubKeywordsGenerator = () => {
       fetch("/api/linkedInBots/keywordsGenerator", {
         method: "POST",
         body: JSON.stringify(obj),
+        signal: abortController?.signal
       })
         .then(async (resp: any) => {
           if (resp.ok) {
@@ -180,7 +188,7 @@ const SubKeywordsGenerator = () => {
             }
 
             const KeywordsResponse = await axios.get(
-              "/api/linkedInBots/keywordsGenerator/getAllLinkedInKeyword"
+              "/api/linkedInBots/keywordsGenerator/getAllLinkedInKeyword",{signal: abortController?.signal}
             );
             const updatedObject = {
               ...userData,

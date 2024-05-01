@@ -43,11 +43,20 @@ export default function CoverLetterPage() {
   const [jobDescription, setJobDescription] = useState<string>("");
   const [isEditing, setIsEditing] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-  const { setAvailableCredits } = useAppContext();
+  const { setAvailableCredits,abortController,setAbortController } = useAppContext();
   const [confirmationModal, setConfirmationModal] = useState(false);
   const creditLimits = useSelector((state: any) => state.creditLimits);
   const router = useRouter();
+
+  useEffect(() => {
+    return (() => {
+      abortController?.abort();
+      setAbortController(new AbortController())
+    });
+  }, []);
   // Function to toggle editing mode on double-click
+
+
   const handleClick = () => {
     setIsEditing((prevState) => !prevState);
   };
@@ -100,7 +109,7 @@ export default function CoverLetterPage() {
     const updatedCoverLetters = await axios.put(
       `/api/coverLetterBot/${coverLetter.id}`,
       payLoad,
-      { headers: { "Content-Type": "application/json" } }
+      { headers: { "Content-Type": "application/json" }, signal:abortController?.signal }
     );
 
     const updatedObject = {
@@ -127,7 +136,7 @@ export default function CoverLetterPage() {
     const updatedCoverLetters = await axios.put(
       `/api/coverLetterBot/${coverLetter.id}`,
       payload,
-      { headers: { "Content-Type": "application/json" } }
+      { headers: { "Content-Type": "application/json" }, signal:abortController?.signal }
     );
 
     const updatedObject = {
@@ -188,10 +197,10 @@ export default function CoverLetterPage() {
         obj.userData = aiInputUserData;
       }
 
-      // Fetch keywords
       fetch("/api/coverLetterBot/coverLetterGenerator", {
         method: "POST",
         body: JSON.stringify(obj),
+        signal: abortController?.signal,
       })
         .then(async (resp: any) => {
           // const response = await resp.json();
@@ -213,7 +222,7 @@ export default function CoverLetterPage() {
             setStreamedData((prev) => prev.replace("```html", ""));
             setStreamedData((prev) => prev.replace("```", ""));
             const coverLetterResponse = await axios.get(
-              "/api/coverLetterBot/getAllCoverLetters"
+              "/api/coverLetterBot/getAllCoverLetters",{signal: abortController?.signal}
             );
 
             if (coverLetterResponse.data.success) {

@@ -13,6 +13,7 @@ const useGetPrimarySkills = (
   setOutOfCredits: any = ""
 ) => {
   const dispatch = useDispatch();
+  const {abortController} = useAppContext();
   const userData = useSelector((state: any) => state.userData);
   const resumeData = useSelector((state: any) => state.resume);
   const { getUserDataIfNotExists } = useGetUserData();
@@ -59,6 +60,7 @@ const useGetPrimarySkills = (
           fileAddress: userData.uploadedResume.fileName,
         },
       }),
+      signal: abortController?.signal,
     })
       .then(async (resp: any) => {
         const res = await resp.json();

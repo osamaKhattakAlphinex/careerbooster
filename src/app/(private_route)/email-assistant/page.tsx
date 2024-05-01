@@ -46,7 +46,7 @@ const PersonalizedEmailBot = () => {
   const [setSelectedResumeId, setSetSelectedResumeId] = useState<string>("");
   const [jobDescription, setJobDescription] = useState<string>("");
   const [showPopup, setShowPopup] = useState(false);
-  const { setAvailableCredits } = useAppContext();
+  const { setAvailableCredits,abortController, setAbortController } = useAppContext();
   const [emailLoading, setEmailLoading] = useState<boolean>(false);
   const [firstFollowUpLoading, setFirstFollowUpLoading] =
     useState<boolean>(false);
@@ -57,9 +57,13 @@ const PersonalizedEmailBot = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const email = useSelector((state: any) => state.email);
-
   const creditLimits = useSelector((state: any) => state.creditLimits);
-
+  useEffect(() => {
+    return () => {
+      abortController?.abort();
+      setAbortController(new AbortController());
+    };
+  }, []);
   const { resumes } = userData;
   const copyEmail = async (text: string, type: string) => {
     try {
@@ -257,10 +261,11 @@ const PersonalizedEmailBot = () => {
         } else {
           obj.userData = aiInputUserData;
         }
-        // Fetch keywords
+ 
         fetch("/api/emailBot/emailGenerator", {
           method: "POST",
           body: JSON.stringify(obj),
+          signal: abortController?.signal
         })
           .then(async (resp: any) => {
             if (resp.ok) {
@@ -283,7 +288,7 @@ const PersonalizedEmailBot = () => {
               setStreamedData((prev) => prev.replace("```", ""));
 
               const emailsResponse = await axios.get(
-                "/api/emailBot/getAllEmails"
+                "/api/emailBot/getAllEmails",{signal: abortController?.signal}
               );
 
               if (emailsResponse.data.success) {
@@ -345,10 +350,10 @@ const PersonalizedEmailBot = () => {
         };
         obj.userData = aiInputUserData;
 
-        // Fetch keywords
         fetch("/api/emailBot/emailGenerator", {
           method: "POST",
           body: JSON.stringify(obj),
+          signal: abortController?.signal,
         })
           .then(async (resp: any) => {
             if (resp.ok) {
@@ -375,8 +380,7 @@ const PersonalizedEmailBot = () => {
               );
 
               const emailsResponse = await axios.get(
-                "/api/emailBot/getAllEmails"
-                // payload
+                "/api/emailBot/getAllEmails",{signal: abortController?.signal}
               );
 
               if (emailsResponse.data.success) {
@@ -441,10 +445,10 @@ const PersonalizedEmailBot = () => {
         };
         obj.userData = aiInputUserData;
 
-        // Fetch keywords
         fetch("/api/emailBot/emailGenerator", {
           method: "POST",
           body: JSON.stringify(obj),
+          signal: abortController?.signal,
         })
           .then(async (resp: any) => {
             if (resp.ok) {
@@ -472,8 +476,7 @@ const PersonalizedEmailBot = () => {
               );
 
               const emailsResponse = await axios.get(
-                "/api/emailBot/getAllEmails"
-                // payload
+                "/api/emailBot/getAllEmails",{signal: abortController?.signal}
               );
 
               if (emailsResponse.data.success) {
@@ -543,7 +546,7 @@ const PersonalizedEmailBot = () => {
       const updatedEmails = await axios.put(
         `/api/emailBot/${email.id}`,
         payLoad,
-        { headers: { "Content-Type": "application/json" } }
+        { headers: { "Content-Type": "application/json" },signal: abortController?.signal }
       );
 
       const updatedObject = {
@@ -578,7 +581,7 @@ const PersonalizedEmailBot = () => {
       const updatedEmails = await axios.put(
         `/api/emailBot/${email.id}`,
         payLoad,
-        { headers: { "Content-Type": "application/json" } }
+        { headers: { "Content-Type": "application/json" },signal: abortController?.signal }
       );
 
       const updatedObject = {
@@ -613,7 +616,7 @@ const PersonalizedEmailBot = () => {
       const updatedEmails = await axios.put(
         `/api/emailBot/${email.id}`,
         payLoad,
-        { headers: { "Content-Type": "application/json" } }
+        { headers: { "Content-Type": "application/json" },signal: abortController?.signal }
       );
 
       const updatedObject = {

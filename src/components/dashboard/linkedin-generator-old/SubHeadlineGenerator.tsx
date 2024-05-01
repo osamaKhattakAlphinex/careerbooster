@@ -26,11 +26,16 @@ const SubHeadlineGenerator = () => {
   const [aiInputUserData, setAiInputUserData] = useState<any>(null);
   const [showPopup, setShowPopup] = useState(false);
   const componentRef = useRef<any>();
-  const { setAvailableCredits } = useAppContext();
+  const { setAvailableCredits, abortController,setAbortController } = useAppContext();
   const [isEditing, setIsEditing] = useState(false);
   const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
-
   const [isHeadlineCopied, setIsHeadlineCopied] = useState<boolean>(false);
+  useEffect(() => {
+    return (() => {
+      abortController?.abort();
+      setAbortController(new AbortController())
+    });
+  }, []);
   const copyHeadline = async (text: string) => {
     try {
       const headlineData = htmlToPlainText(text);
@@ -114,6 +119,7 @@ const SubHeadlineGenerator = () => {
       fetch("/api/linkedInBots/headlineGenerator", {
         method: "POST",
         body: JSON.stringify(obj),
+        signal: abortController?.signal,
       })
         .then(async (resp: any) => {
           if (resp.ok) {
@@ -133,7 +139,7 @@ const SubHeadlineGenerator = () => {
             }
 
             const HeadlineResponse = await axios.get(
-              "/api/linkedInBots/linkedinHeadlineGenerator/getAllHeadlines"
+              "/api/linkedInBots/linkedinHeadlineGenerator/getAllHeadlines",{signal: abortController?.signal}
             );
             const updatedObject = {
               ...userData,
@@ -198,11 +204,11 @@ const SubHeadlineGenerator = () => {
     await axios.post(
       `/api/linkedInBots/headlineGenerator/linkedInHeadline`,
       payLoad,
-      { headers: { "Content-Type": "application/json" } }
+      { headers: { "Content-Type": "application/json" },signal: abortController?.signal }
     );
 
     const HeadlineResponse = await axios.get(
-      "/api/linkedInBots/linkedinHeadlineGenerator/getAllHeadlines"
+      "/api/linkedInBots/linkedinHeadlineGenerator/getAllHeadlines", {signal: abortController?.signal}
     );
     const updatedObject = {
       ...userData,

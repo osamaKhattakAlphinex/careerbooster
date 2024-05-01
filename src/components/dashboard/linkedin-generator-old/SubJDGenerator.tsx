@@ -30,7 +30,7 @@ const SubJDGenerator = () => {
   const { data: session } = useSession();
   const [streamedData, setStreamedData] = useState("");
   const [showPopup, setShowPopup] = useState(false);
-  const { setAvailableCredits } = useAppContext();
+  const { setAvailableCredits, abortController, setAbortController } = useAppContext();
   const [existingJDId, setExistingJDId] = useState("");
   const [isEditing, setIsEditing] = useState({ isEdit: false, editIndex: -1 });
   const { tourBotRef, availableCreditsRef } = useTourContext();
@@ -40,6 +40,12 @@ const SubJDGenerator = () => {
     string[]
   >([]);
 
+  useEffect(() => {
+    return (() => {
+      abortController?.abort();
+      setAbortController(new AbortController())
+    });
+  }, []);
   const handleClick = (experienceIndex: any) => {
     setIsEditing({ isEdit: true, editIndex: experienceIndex });
   };
@@ -73,7 +79,7 @@ const SubJDGenerator = () => {
     await saveToDB(jdObj, tempText);
 
     const JDResponse = await axios.get(
-      "/api/linkedInBots/jdGeneratorSingle/getAllJD"
+      "/api/linkedInBots/jdGeneratorSingle/getAllJD",{signal: abortController?.signal}
     );
     const updatedObject = {
       ...userData,
@@ -106,7 +112,7 @@ const SubJDGenerator = () => {
     await saveToDB(jdObj, tempText);
 
     const JDResponse = await axios.get(
-      "/api/linkedInBots/jdGeneratorSingle/getAllJD"
+      "/api/linkedInBots/jdGeneratorSingle/getAllJD",{signal: abortController?.signal}
     );
     const updatedObject = {
       ...userData,
@@ -194,6 +200,7 @@ const SubJDGenerator = () => {
     const res: any = await fetch("/api/linkedInBots/jdGeneratorSingle", {
       method: "POST",
       body: JSON.stringify(obj),
+      signal: abortController?.signal
     });
 
     if (res.ok) {
@@ -232,7 +239,7 @@ const SubJDGenerator = () => {
       await saveToDB(jdObj, tempText);
     }
     const JDResponse = await axios.get(
-      "/api/linkedInBots/jdGeneratorSingle/getAllJD"
+      "/api/linkedInBots/jdGeneratorSingle/getAllJD",{signal: abortController?.signal}
     );
     const updatedObject = {
       ...userData,
@@ -293,6 +300,7 @@ const SubJDGenerator = () => {
         const res: any = await fetch("/api/linkedInBots/jdGeneratorSingle", {
           method: "POST",
           body: JSON.stringify(obj),
+          signal: abortController?.signal
         });
 
         if (res.ok) {
@@ -357,6 +365,7 @@ const SubJDGenerator = () => {
           await fetch("/api/linkedInBots/jdGeneratorSave", {
             method: "POST",
             body: JSON.stringify(jdObj),
+            signal: abortController?.signal
           }).then(async (response: any) => {
             const res = await response.json();
             if (res.success) {
@@ -367,7 +376,7 @@ const SubJDGenerator = () => {
       }
 
       const JDResponse = await axios.get(
-        "/api/linkedInBots/jdGeneratorSingle/getAllJD"
+        "/api/linkedInBots/jdGeneratorSingle/getAllJD",{signal: abortController?.signal}
       );
 
       const updatedObject = {
@@ -402,6 +411,7 @@ const SubJDGenerator = () => {
     await fetch("/api/linkedInBots/jdGeneratorSingle/linkedInJobDescription", {
       method: "POST",
       body: JSON.stringify(payload),
+      signal: abortController?.signal,
     });
   };
 

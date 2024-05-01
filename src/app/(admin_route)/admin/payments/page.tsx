@@ -17,8 +17,6 @@ const Payments = () => {
   const showTransactionModelRef: React.MutableRefObject<any> = useRef(null);
   const [isDecrypted, setIsDecrypted] = useState<boolean>(false);
 
-  const { abortController } = useAppContext();
-
   const columnHelper = createColumnHelper<Payment>();
 
   const columns = [
