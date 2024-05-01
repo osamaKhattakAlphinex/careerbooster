@@ -65,29 +65,29 @@ const Page = () => {
   `,
   });
 
-  const normalizeLinkedInURL =(url:string)=> {
+  const normalizeLinkedInURL = (url: string) => {
     // Remove leading/trailing whitespace
     url = url.trim();
-    if (url.endsWith('/')) {
+    if (url.endsWith("/")) {
       url = url.slice(0, -1);
     }
     // Ensure the URL contains the LinkedIn profile path
     const linkedInPattern = /linkedin\.com\/in\/([\w-]+)/;
     const match = url.match(linkedInPattern);
-  
+
     if (match) {
       const username = match[1];
       return `https://www.linkedin.com/in/${username}`;
     }
-  
+
     // If no LinkedIn profile pattern is found, assume it's just a username
     if (url.match(/^[\w-]+$/)) {
       return `https://www.linkedin.com/in/${url}`;
     }
-  
+
     // If it's not recognizable, return the original URL (optionally, you could throw an error or handle it differently)
     return url;
-  }
+  };
   const getAllSettings = () => {
     if (cvRef.current) {
       const scaling =
@@ -446,7 +446,7 @@ const Page = () => {
         for (const element of template.elements) {
           if (value.hasOwnProperty(element.id) && value[element.id] !== "") {
             const _element = document.createElement(element.tag);
-            if(element.tag === "a"){
+            if (element.tag === "a") {
               const normalizedLink = normalizeLinkedInURL(value[element.id]);
               _element.setAttribute("href", normalizedLink);
               _element.setAttribute("target", "_blank");
