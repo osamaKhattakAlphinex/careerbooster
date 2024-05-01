@@ -123,104 +123,104 @@ const ResumeTemplate2 = () => {
       </div>
 
       {/* Publications */}
-      <div className="w-full">
-        {resume?.publications && resume?.publications.length > 0 && (
+      {resume?.publications && resume?.publications.length > 0 && (
+        <div className="w-full">
           <Publication
             heading={resume.headings.publications}
             publications={resume.publications}
             styles={publicationStyles}
           />
-        )}
-      </div>
+        </div>
+      )}
 
       {/* Certificates */}
-      <div className="w-full">
-        {resume?.certifications && resume?.certifications.length > 0 && (
+      {resume?.certifications && resume?.certifications.length > 0 && (
+        <div className="w-full">
           <Certification
             heading={resume.headings.certifications}
             certificates={resume.certifications}
             styles={certification}
           />
-        )}
-      </div>
+        </div>
+      )}
 
       {/* Trainings */}
-      <div className="w-full">
-        {resume?.trainings && resume?.trainings.length > 0 && (
+      {resume?.trainings && resume?.trainings.length > 0 && (
+        <div className="w-full">
           <Training
             heading={resume.headings.trainings}
             trainings={resume.trainings}
             styles={training}
           />
-        )}
-      </div>
+        </div>
+      )}
 
       {/* Awards */}
-      <div className="w-full">
-        {resume?.awards && resume?.awards.length > 0 && (
+      {resume?.awards && resume?.awards.length > 0 && (
+        <div className="w-full">
           <Award
             heading={resume.headings.awards}
             awards={resume.awards}
             styles={award}
           />
-        )}
-      </div>
+        </div>
+      )}
       {/* Projects */}
-      <div className="w-full">
-        {resume?.projects && resume?.projects.length > 0 && (
+      {resume?.projects && resume?.projects.length > 0 && (
+        <div className="w-full">
           <Project
             heading={resume.headings.projects}
             projects={resume.projects}
             styles={projectStyles}
             customStyle={customStyle_2}
           />
-        )}
-      </div>
+        </div>
+      )}
 
       {/* Projects */}
-      <div className="w-full">
-        {resume?.projects && resume?.projects.length > 0 && (
+      {resume?.projects && resume?.projects.length > 0 && (
+        <div className="w-full">
           <Project
             heading={resume.headings.projects}
             projects={resume.projects}
             // styles={award}
           />
-        )}
-      </div>
+        </div>
+      )}
 
       {/* Interests & Hobbies */}
-      <div className="w-full">
-        {resume?.interests && resume?.interests.length > 0 && (
+      {resume?.interests && resume?.interests.length > 0 && (
+        <div className="w-full">
           <Interest
             heading={resume.headings.interests}
             interests={resume.interests}
             styles={interest}
             customStyle={customStyle_2}
           />
-        )}
-      </div>
+        </div>
+      )}
 
       {/* References */}
-      <div className="w-full">
-        {resume?.references && resume?.references.length > 0 && (
+      {resume?.references && resume?.references.length > 0 && (
+        <div className="w-full">
           <Reference
             heading={resume.headings.references}
             references={resume.references}
             styles={reference}
           />
-        )}
-      </div>
+        </div>
+      )}
 
       {/* Languages */}
-      <div className="w-full">
-        {resume?.languages && resume?.languages.length > 0 && (
+      {resume?.languages && resume?.languages.length > 0 && (
+        <div className="w-full">
           <Language
             heading={resume.headings.languages}
             languages={resume.languages}
             styles={language}
           />
-        )}
-      </div>
+        </div>
+      )}
 
       {/* Add Custom */}
       {/* <CustomResumeSection /> */}

@@ -43,7 +43,7 @@ const Skill = ({ heading, skills, styles, customStyle }: Props) => {
         <>
           <span
             className={`${styles?.span1} ${
-              customStyle?.borderTopBottom ? "block" : "hidden"
+              customStyle?.borderTopBottom ? "!block" : "hidden"
             }`}
           ></span>
           <h2 className={`${styles?.skill_heading} `}>
@@ -64,7 +64,7 @@ const Skill = ({ heading, skills, styles, customStyle }: Props) => {
           <span
             className={`${styles?.span2} ${
               customStyle?.borderTopBottom || customStyle?.borderBottom
-                ? "block"
+                ? "!block"
                 : "hidden"
             }`}
           ></span>
@@ -72,10 +72,12 @@ const Skill = ({ heading, skills, styles, customStyle }: Props) => {
       )}
       {skills && skills.length > 0 && !regenerating ? (
         <Toolbar addSkill={handleAddSkills} regenerateSkills={getPrimarySkills}>
-          <ul className={`${styles?.skill_ul} `}>
+          <ul className={`${styles?.skill_ul} as`}>
             {skills.map((skill: string, i: number) => (
               <li
-                className={`${styles?.skill_li} parent`}
+                className={`${styles?.skill_li} parent before:text-white before:text-base before:h-4 before:w-4
+                  before:aspect-square before:mr-1 before:content-['\\2022\']
+                `}
                 key={i}
                 onDragStart={(e) =>
                   e.dataTransfer.setData("text/plain", i.toString())

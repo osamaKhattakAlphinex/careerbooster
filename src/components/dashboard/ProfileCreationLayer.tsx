@@ -1113,8 +1113,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       register.scrapped.basic &&
       register.scrapped.education &&
       register.scrapped.workExperience &&
-      register.scrapped.skills &&
-      register.scrapped.certifications
+      register.scrapped.skills
     ) {
       updateUser();
     }

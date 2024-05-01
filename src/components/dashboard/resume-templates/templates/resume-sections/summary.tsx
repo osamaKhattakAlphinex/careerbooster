@@ -23,7 +23,7 @@ const Summary = ({ summary, heading, customStyle, styles }: Props) => {
     <>
       <span
         className={`${styles?.span1} ${
-          customStyle?.borderTopBottom ? "block" : "hidden"
+          customStyle?.borderTopBottom ? "!block" : "hidden"
         }`}
       ></span>
       <h2
@@ -47,7 +47,7 @@ const Summary = ({ summary, heading, customStyle, styles }: Props) => {
       <span
         className={`${styles?.span2} ${
           customStyle?.borderTopBottom || customStyle?.borderBottom
-            ? "block"
+            ? "!block"
             : "hidden"
         }  mb-2`}
       ></span>

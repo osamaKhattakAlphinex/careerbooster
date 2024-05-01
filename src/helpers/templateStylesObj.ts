@@ -197,9 +197,9 @@ export const template_4_styles = {
   skill_heading:
     "flex flex-row items-center gap-2 mb-2 -mr-6 text-base font-semibold uppercase border-2 border-transparent md:-mr-6 md:text-md hover:border-dashed hover:border-gray-500 hover:w-full",
   skill_ul:
-    "border-2 border-transparent hover:border-dashed hover:border-gray-500  pl-0 flex list-styled flex-col gap-3 mb-4 text-xs xs:text-[12px] md:text-xs list-disc",
+    "border-2 border-transparent hover:border-dashed hover:border-gray-500 flex flex-col pl-0 gap-3 !mb-4 text-xs xs:text-[12px] md:text-xs",
   skill_li:
-    "hover:shadow-md hover:cursor-move  border-transparent border-[1px] hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-500 flex  items-center gap-3 list-disc",
+    "hover:shadow-md hover:cursor-move border-transparent border-[1px] hover:border-dashed hover:border-gray-500 hover:border !list-disc hover:bg-gray-500 flex justify-between items-center gap-3",
   skill_New: "skill_New",
   span1: "span1",
   span2: "span2",
