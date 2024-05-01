@@ -108,7 +108,6 @@ const Language = ({ heading, languages, styles, customStyle }: Props) => {
                     />
                   </h2>
                   <h2 className={`${styles?.language_h2_1}`}>
-                    Proficiency:
                     {rec?.proficiency && (
                       <span className={`${styles?.language_date}`}>
                         <EditableField

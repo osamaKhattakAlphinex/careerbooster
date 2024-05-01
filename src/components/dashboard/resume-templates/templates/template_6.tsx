@@ -46,12 +46,14 @@ import {
   publicationStyles,
   reference,
   summary,
+  template_6_styles,
   training,
 } from "@/helpers/templateStylesObj";
 import Summary from "./resume-sections/summary";
 import Experience from "./resume-sections/experience";
 import Education from "./resume-sections/education";
 import Project from "./resume-sections/project";
+import Skill from "./resume-sections/skills";
 const ResumeTemplate6 = () => {
   const resume = useSelector((state: any) => state.resume);
   const userData = useSelector((state: any) => state.userData);
@@ -260,119 +262,23 @@ const ResumeTemplate6 = () => {
               customStyle={customStyle_6}
             />
 
-            {resume?.primarySkills && resume?.primarySkills.length > 0 && (
-              <>
-                <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mt-3"></span>
-                <h3 className="flex flex-row flex-wrap items-center gap-2 my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500">
-                  {resumeSkillsIcon}
-                  <EditableField
-                    value={
-                      resume?.headings?.primarySkills
-                        ? resume.headings.primarySkills
-                        : " skills"
-                    }
-                    style={{ width: "fit-content" }}
-                    onSave={(value: string) => {
-                      if (value !== resume?.headings?.primarySkills) {
-                        updateSaveHook.updateAndSaveHeadings({
-                          primarySkills: value,
-                        });
-                      }
-                    }}
-                  />
-                </h3>
-                <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 mb-2"></span>
-                {resume?.primarySkills &&
-                resume?.primarySkills.length > 0 &&
-                !regenerating ? (
-                  <Toolbar
-                    addSkill={handleAddSkills}
-                    regenerateSkills={getPrimarySkills}
-                  >
-                    <ul className="border-2 border-transparent hover:border-dashed hover:border-gray-500  pl-0 flex flex-row  flex-wrap gap-1 h-[20%] text-xs ">
-                      {" "}
-                      {/* <li className="font-semibold uppercase">primary</li> */}
-                      {resume?.primarySkills.map((skill: string, i: number) => (
-                        <li
-                          className="hover:shadow-md  w-[32%]  sm:w-[32%]  hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex  items-center"
-                          key={i}
-                          onDragStart={(e) =>
-                            e.dataTransfer.setData("text/plain", i.toString())
-                          }
-                          onDragOver={(e) => e.preventDefault()}
-                          onDrop={(e) => handleDropPrimary(e, i)}
-                          draggable
-                        >
-                          <div className="!w-1 !h-1 !mr-3 !bg-black !rounded-full"></div>
-                          <div className="flex items-center justify-between w-full">
-                            <EditableField
-                              value={skill}
-                              onSave={(value: string) => {
-                                handlers.handleUpdateSkill(value, i);
-                              }}
-                            />
-                            <div
-                              onClick={() => handlers.handleDeleteSkill(i)}
-                              className="w-4 h-4 cursor-pointer child"
-                            >
-                              {crossIcon1}
-                            </div>
-                          </div>
-                        </li>
-                      ))}
-                      {newPrimarySkill ? (
-                        <>
-                          <div className="w-full rounded-2xl border-[1px] border-black flex h-9.5">
-                            <input
-                              type="text"
-                              value={primarySkill}
-                              placeholder="Please add Skill"
-                              className="w-full px-2 bg-white outline-none rounded-2xl"
-                              autoFocus
-                              onChange={(e) => setPrimarySkill(e.target.value)}
-                              onKeyPress={(e) => {
-                                if (e.key === "Enter") {
-                                  handleSaveSkills();
-                                }
-                              }}
-                            />
-                            <button
-                              className="px-2 text-white uppercase bg-green-500 h-9 rounded-r-2xl"
-                              onClick={handleSaveSkills}
-                            >
-                              save
-                            </button>
-                          </div>
-                          <button
-                            onClick={() => {
-                              setNewPrimarySkill(false);
-                            }}
-                            className="px-2 py-1 text-white bg-red-500 rounded-full"
-                          >
-                            Cancel
-                          </button>
-                        </>
-                      ) : (
-                        " "
-                      )}
-                    </ul>
-                  </Toolbar>
-                ) : (
-                  <div className="text-center">
-                    <div role="status">
-                      <Loader />
-                    </div>
-                  </div>
-                )}
-              </>
-            )}
+            <Skill
+              heading={resume.headings.primarySkills}
+              skills={resume.primarySkills}
+              styles={template_6_styles}
+              customStyle={{
+                borderTopBottom: true,
+                borderBottom: false,
+                centeredHeading: false,
+              }}
+            />
             {/* Work Experience */}
             <Experience
               heading={resume.headings.workExperienceArray}
               workExperienceArray={resume.workExperienceArray}
               workExperience={resume.workExperience}
               customStyle={customStyle_6}
-              styles={experience}
+              styles={template_6_styles}
             />
 
             {/* Add Custom */}
@@ -382,7 +288,7 @@ const ResumeTemplate6 = () => {
               <Publication
                 heading={resume.headings.publications}
                 publications={resume.publications}
-                styles={publicationStyles}
+                styles={template_6_styles}
                 customStyle={customStyle_6}
               />
             )}
@@ -392,7 +298,7 @@ const ResumeTemplate6 = () => {
                 customStyle={customStyle_6}
                 heading={resume.headings.certifications}
                 certificates={resume.certifications}
-                styles={certification}
+                styles={template_6_styles}
               />
             )}
             {/* Trainings */}
@@ -400,7 +306,7 @@ const ResumeTemplate6 = () => {
               <Training
                 heading={resume.headings.trainings}
                 trainings={resume.trainings}
-                styles={training}
+                styles={template_6_styles}
                 customStyle={customStyle_6}
               />
             )}
@@ -410,7 +316,7 @@ const ResumeTemplate6 = () => {
               <Award
                 heading={resume.headings.awards}
                 awards={resume.awards}
-                styles={award}
+                styles={template_6_styles}
                 customStyle={customStyle_6}
               />
             )}
@@ -420,7 +326,7 @@ const ResumeTemplate6 = () => {
                 <Project
                   heading={resume.headings.projects}
                   projects={resume.projects}
-                  styles={projectStyles}
+                  styles={template_6_styles}
                   customStyle={customStyle_6}
                 />
               )}
@@ -430,7 +336,7 @@ const ResumeTemplate6 = () => {
               <Interest
                 heading={resume.headings.interests}
                 interests={resume.interests}
-                styles={interest}
+                styles={template_6_styles}
                 customStyle={customStyle_6}
               />
             )}
@@ -440,7 +346,7 @@ const ResumeTemplate6 = () => {
               <Reference
                 heading={resume.headings.references}
                 references={resume.references}
-                styles={reference}
+                styles={template_6_styles}
                 customStyle={customStyle_6}
               />
             )}
@@ -450,7 +356,7 @@ const ResumeTemplate6 = () => {
               <Language
                 heading={resume.headings.languages}
                 languages={resume.languages}
-                styles={language}
+                styles={template_6_styles}
                 customStyle={customStyle_6}
               />
             )}
@@ -461,7 +367,7 @@ const ResumeTemplate6 = () => {
                 <Education
                   heading={resume.headings.education}
                   educations={resume.education}
-                  styles={education}
+                  styles={template_6_styles}
                   customStyle={customStyle_6}
                 />
               )}

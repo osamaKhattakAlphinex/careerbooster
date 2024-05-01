@@ -27,7 +27,7 @@ const Header = ({ name, jobTitle, styles, conditionStyleHeader }: Props) => {
           }}
         />
       </h2>
-      <h3 className={`${styles?.jobTitle_temp_2}`}>
+      <h3 className={`${styles?.jobTitle}`}>
         <EditableField
           value={jobTitle ? jobTitle : "JOB TITLE"}
           onSave={(value: string) => {

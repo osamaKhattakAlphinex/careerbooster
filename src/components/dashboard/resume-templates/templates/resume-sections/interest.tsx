@@ -111,7 +111,7 @@ const Interest = ({ heading, interests, styles, customStyle }: Props) => {
 
               <div className="px-4 py-1">
                 {rec?.description && i !== regeneratedRecordIndex ? (
-                  <ul className={` ${styles?.interest?.ul}`}>
+                  <ul className={` ${styles?.interest_ul}`}>
                     {rec?.description.map((achievement: any, ind: number) =>
                       achievement === "" ? (
                         <li

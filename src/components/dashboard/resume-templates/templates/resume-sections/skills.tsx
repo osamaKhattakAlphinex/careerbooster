@@ -14,8 +14,9 @@ type Props = {
   heading: any;
   skills: any;
   styles: any;
+  customStyle?: any;
 };
-const Skill = ({ heading, skills, styles }: Props) => {
+const Skill = ({ heading, skills, styles, customStyle }: Props) => {
   const [primarySkill, setPrimarySkill] = useState<string>("");
   const [regenerating, setRegenerating] = useState(false);
   const { updateSaveHook } = useUpdateAndSave();
@@ -39,24 +40,39 @@ const Skill = ({ heading, skills, styles }: Props) => {
   return (
     <>
       {skills && skills.length > 0 && (
-        <h2 className={`${styles?.skill_heading}`}>
-          {resumeSkillsIcon}
-          <EditableField
-            value={heading ? heading : "Skills"}
-            style={{ width: "fit-content" }}
-            onSave={(value: string) => {
-              if (value !== heading) {
-                updateSaveHook.updateAndSaveHeadings({
-                  primarySkills: value,
-                });
-              }
-            }}
-          />
-        </h2>
+        <>
+          <span
+            className={`${styles?.span1} ${
+              customStyle?.borderTopBottom ? "block" : "hidden"
+            }`}
+          ></span>
+          <h2 className={`${styles?.skill_heading} `}>
+            {resumeSkillsIcon}
+            <EditableField
+              value={heading ? heading : "Skills"}
+              style={{ width: "fit-content" }}
+              onSave={(value: string) => {
+                if (value !== heading) {
+                  updateSaveHook.updateAndSaveHeadings({
+                    primarySkills: value,
+                  });
+                }
+              }}
+            />
+          </h2>
+
+          <span
+            className={`${styles?.span1} ${
+              customStyle?.borderTopBottom || customStyle?.borderBottom
+                ? "block"
+                : "hidden"
+            }`}
+          ></span>
+        </>
       )}
       {skills && skills.length > 0 && !regenerating ? (
         <Toolbar addSkill={handleAddSkills} regenerateSkills={getPrimarySkills}>
-          <ul className={`${styles?.skill_ul}`}>
+          <ul className={`${styles?.skill_ul} `}>
             {skills.map((skill: string, i: number) => (
               <li
                 className={`${styles?.skill_li} parent`}
