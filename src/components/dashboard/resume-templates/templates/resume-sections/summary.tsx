@@ -55,13 +55,14 @@ const Summary = ({ summary, heading, customStyle, styles }: Props) => {
         <div className={`${styles?.summary_text}`}>
           <EditableField
             type="textarea"
+            text="justify"
             value={
               summary !== "" ? (
                 summary
               ) : streamedSummaryData ? (
                 streamedSummaryData
               ) : (
-                <div className="text-center">
+                <div className="text-center ">
                   <div role="status">
                     <Loader />
                   </div>
