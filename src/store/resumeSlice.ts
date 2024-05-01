@@ -107,7 +107,7 @@ export interface Resume {
       year: string;
     }
   ];
-  
+
   summary: string;
   workExperienceArray: WorkExperience[];
   // quantifyingExperience: boolean;
@@ -130,7 +130,7 @@ const initialState: Resume = {
     resumeType: "resume-basic",
     jobDescription: "",
     jobPosition: "",
-    detailedResume: true,
+    detailedResume: false,
     resumeLoading: false,
     componentRef: null,
   },
