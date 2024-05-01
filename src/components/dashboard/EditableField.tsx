@@ -17,6 +17,7 @@ const EditableField = ({
   className,
   onSave,
   style,
+  text,
 }: {
   value: string;
   overrideValue?: string;
@@ -24,12 +25,15 @@ const EditableField = ({
   style?: any;
   className?: any;
   onSave: (value: string) => void;
+  text?: any;
 }) => {
+  console.log("Text", text);
+
   const [isEditing, setIsEditing] = useState(false);
   let new_value: any = normalizeValue(value);
   const [editedValue, setEditedValue] = useState<any>(new_value);
-  const [inputWidth,setInputWidth] = useState<any>(null);
-  const [textAreaHeight,setTextAreaHeight] = useState<any>(null);
+  const [inputWidth, setInputWidth] = useState<any>(null);
+  const [textAreaHeight, setTextAreaHeight] = useState<any>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const spanRef = useRef<HTMLInputElement>(null);
@@ -49,14 +53,13 @@ const EditableField = ({
     if (inputRef.current) {
       inputRef.current.style.width = `${inputWidth}px`; // Set width to scrollWidth
     }
-    
   }, [value, isEditing]);
   useEffect(() => {
-    if(spanRef.current?.scrollWidth){
-      setInputWidth(spanRef.current?.scrollWidth+10)
-      setTextAreaHeight(spanRef.current?.scrollHeight+1)
+    if (spanRef.current?.scrollWidth) {
+      setInputWidth(spanRef.current?.scrollWidth + 10);
+      setTextAreaHeight(spanRef.current?.scrollHeight + 1);
     }
-  },[spanRef.current?.scrollWidth]);
+  }, [spanRef.current?.scrollWidth]);
 
   return (
     <>
@@ -102,12 +105,13 @@ const EditableField = ({
             </a> */}
             <span
               ref={spanRef}
-              className=" w-fit xs:block md:block hover:cursor-text text-justify"
+              className={`w-fit xs:block md:block hover:cursor-text `}
               title="Click to Edit"
+              style={{ textAlign: text }}
             >
               {value}
             </span>
-            </>
+          </>
         )}
       </span>
     </>
