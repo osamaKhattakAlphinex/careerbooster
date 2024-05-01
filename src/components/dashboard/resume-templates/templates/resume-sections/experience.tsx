@@ -263,6 +263,7 @@ const Experience = ({
                               >
                                 <EditableField
                                   type="textarea"
+                                  text="justify"
                                   value={achievement}
                                   onSave={(value: string) => {
                                     handlers.handleUpdateAchivement(

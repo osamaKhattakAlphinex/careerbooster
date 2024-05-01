@@ -1,7 +1,7 @@
 const cvHeadings: any = [
   {
     text: "contact",
-    section: "phone",
+    section: "email",
     headingKey: "contact",
 
     styles:
@@ -128,12 +128,7 @@ const components: any = {
   contact: {
     styles: "",
     elements: [
-      {
-        id: "phone",
-        styles:
-          "text-xs mt-2 flex break-all before:aspect-square before:break-normal items-center before:mr-2 text-gray-950/80 before:w-4 before:h-4 before:bg-no-repeat before:bg-[url('data:image/svg+xml;base64,IDxzdmcKICAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgIHZpZXdCb3g9IjAgMCAyNCAyNCIKICAgIGZpbGw9IiM0NDQ0NDAiCiAgICBjbGFzc05hbWU9InctNCBoLTQiCiAgPgogICAgPHBhdGgKICAgICAgZmlsbFJ1bGU9ImV2ZW5vZGQiCiAgICAgIGQ9Ik0xLjUgNC41YTMgMyAwIDAgMSAzLTNoMS4zNzJjLjg2IDAgMS42MS41ODYgMS44MTkgMS40MmwxLjEwNSA0LjQyM2ExLjg3NSAxLjg3NSAwIDAgMS0uNjk0IDEuOTU1bC0xLjI5My45N2MtLjEzNS4xMDEtLjE2NC4yNDktLjEyNi4zNTJhMTEuMjg1IDExLjI4NSAwIDAgMCA2LjY5NyA2LjY5N2MuMTAzLjAzOC4yNS4wMDkuMzUyLS4xMjZsLjk3LTEuMjkzYTEuODc1IDEuODc1IDAgMCAxIDEuOTU1LS42OTRsNC40MjMgMS4xMDVjLjgzNC4yMDkgMS40Mi45NTkgMS40MiAxLjgyVjE5LjVhMyAzIDAgMCAxLTMgM2gtMi4yNUM4LjU1MiAyMi41IDEuNSAxNS40NDggMS41IDYuNzVWNC41WiIKICAgICAgY2xpcFJ1bGU9ImV2ZW5vZGQiCiAgICAvPgogIDwvc3ZnPg==')]",
-        tag: "span",
-      },
+     
       {
         id: "email",
         styles:
@@ -141,9 +136,15 @@ const components: any = {
         tag: "span",
       },
       {
+        id: "phone",
+        styles:
+          "text-xs mt-2 flex break-all before:aspect-square before:break-normal items-center before:mr-2 text-gray-950/80 before:w-4 before:h-4 before:bg-no-repeat before:bg-[url('data:image/svg+xml;base64,IDxzdmcKICAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgIHZpZXdCb3g9IjAgMCAyNCAyNCIKICAgIGZpbGw9IiM0NDQ0NDAiCiAgICBjbGFzc05hbWU9InctNCBoLTQiCiAgPgogICAgPHBhdGgKICAgICAgZmlsbFJ1bGU9ImV2ZW5vZGQiCiAgICAgIGQ9Ik0xLjUgNC41YTMgMyAwIDAgMSAzLTNoMS4zNzJjLjg2IDAgMS42MS41ODYgMS44MTkgMS40MmwxLjEwNSA0LjQyM2ExLjg3NSAxLjg3NSAwIDAgMS0uNjk0IDEuOTU1bC0xLjI5My45N2MtLjEzNS4xMDEtLjE2NC4yNDktLjEyNi4zNTJhMTEuMjg1IDExLjI4NSAwIDAgMCA2LjY5NyA2LjY5N2MuMTAzLjAzOC4yNS4wMDkuMzUyLS4xMjZsLjk3LTEuMjkzYTEuODc1IDEuODc1IDAgMCAxIDEuOTU1LS42OTRsNC40MjMgMS4xMDVjLjgzNC4yMDkgMS40Mi45NTkgMS40MiAxLjgyVjE5LjVhMyAzIDAgMCAxLTMgM2gtMi4yNUM4LjU1MiAyMi41IDEuNSAxNS40NDggMS41IDYuNzVWNC41WiIKICAgICAgY2xpcFJ1bGU9ImV2ZW5vZGQiCiAgICAvPgogIDwvc3ZnPg==')]",
+        tag: "span",
+      },
+      {
         id: "linkedIn",
         styles:
-          "text-xs mt-2 flex break-all before:aspect-square before:break-normal text-gray-950/80 items-center before:w-7 before:h-7 items-center flex before:justify-center before:rounded-full before:items-center flex before:content-[url('data:image/svg+xml;base64,ICAgPHN2ZwogICAgdmlld0JveD0iMCAwIDI0IDI0IgogICAgY2xhc3NOYW1lPSJ3LTUgaC01IgogICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICAgZmlsbD0iY3VycmVudENvbG9yIgogID4KICAgIDxnIGlkPSJTVkdSZXBvX2JnQ2FycmllciIgc3Ryb2tlLXdpZHRoPSIwIj48L2c+CiAgICA8ZwogICAgICBpZD0iU1ZHUmVwb190cmFjZXJDYXJyaWVyIgogICAgICBzdHJva2UtbGluZWNhcD0icm91bmQiCiAgICAgIHN0cm9rZS1saW5lam9pbj0icm91bmQiCiAgICA+PC9nPgogICAgPGcgaWQ9IlNWR1JlcG9faWNvbkNhcnJpZXIiPgogICAgICA8cGF0aAogICAgICAgIGZpbGw9IiM0NDQ0NDAiCiAgICAgICAgZD0iTTEyLjIyNSAxMi4yMjVoLTEuNzc4VjkuNDRjMC0uNjY0LS4wMTItMS41MTktLjkyNS0xLjUxOS0uOTI2IDAtMS4wNjguNzI0LTEuMDY4IDEuNDd2Mi44MzRINi42NzZWNi40OThoMS43MDd2Ljc4M2guMDI0Yy4zNDgtLjU5NC45OTYtLjk1IDEuNjg0LS45MjUgMS44MDIgMCAyLjEzNSAxLjE4NSAyLjEzNSAyLjcyOGwtLjAwMSAzLjE0ek00LjY3IDUuNzE1YTEuMDM3IDEuMDM3IDAgMDEtMS4wMzItMS4wMzFjMC0uNTY2LjQ2Ni0xLjAzMiAxLjAzMi0xLjAzMi41NjYgMCAxLjAzMS40NjYgMS4wMzIgMS4wMzIgMCAuNTY2LS40NjYgMS4wMzItMS4wMzIgMS4wMzJ6bS44ODkgNi41MWgtMS43OFY2LjQ5OGgxLjc4djUuNzI3ek0xMy4xMSAySDIuODg1QS44OC44OCAwIDAwMiAyLjg2NnYxMC4yNjhhLjg4Ljg4IDAgMDAuODg1Ljg2NmgxMC4yMjZhLjg4Mi44ODIgMCAwMC44ODktLjg2NlYyLjg2NWEuODguODggMCAwMC0uODg5LS44NjR6IgogICAgICA+PC9wYXRoPgogICAgPC9nPgogIDwvc3ZnPg==')]",
+          "text-xs mt-2 flex break-all before:aspect-square before:break-normal text-gray-950/80 items-center before:w-4 before:h-4 before:mr-2 items-center flex before:justify-center before:rounded-full before:items-center flex before:content-[url('data:image/svg+xml;base64,IDxzdmcKICAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgIHdpZHRoPSIxNnB4IgogICAgaGVpZ2h0PSIxNnB4IgogICAgdmlld0JveD0iMCAwIDE2IDE2IgogICAgdmVyc2lvbj0iMS4xIgogICAgZmlsbD0iY3VycmVudENvbG9yIgogID4KICAgIDxnPgogICAgICA8cGF0aAogICAgICAgIHN0cm9rZT0ibm9uZSIKICAgICAgICBmaWxsUnVsZT0ibm9uemVybyIKICAgICAgICBmaWxsPSIjNDQ0NDQwIgogICAgICAgIGZpbGxPcGFjaXR5PSIxIgogICAgICAgIGQ9Ik0gMTQuMzkwNjI1IDAuNTAzOTA2IEwgMS41OTM3NSAwLjUwMzkwNiBDIDAuOTk2MDk0IDAuNSAwLjUwNzgxMiAwLjk4NDM3NSAwLjUwMzkwNiAxLjU4MjAzMSBMIDAuNTAzOTA2IDE0LjQxNzk2OSBDIDAuNTA3ODEyIDE1LjAxNTYyNSAwLjk5NjA5NCAxNS40OTYwOTQgMS41OTM3NSAxNS40OTYwOTQgTCAxNC40MDIzNDQgMTUuNDk2MDk0IEMgMTUgMTUuNDk2MDk0IDE1LjQ4ODI4MSAxNS4wMTU2MjUgMTUuNSAxNC40MTc5NjkgTCAxNS41IDEuNTgyMDMxIEMgMTUuNDg4MjgxIDAuOTg0Mzc1IDE1IDAuNSAxNC40MDIzNDQgMC41MDM5MDYgTCAxNC4zODY3MTkgMC41MDM5MDYgWiBNIDQuOTQ5MjE5IDEzLjI4MTI1IEwgMi43MjI2NTYgMTMuMjgxMjUgTCAyLjcyMjY1NiA2LjEyNSBMIDQuOTQ5MjE5IDYuMTI1IFogTSAzLjgzNTkzOCA1LjE0ODQzOCBDIDMuMTI1IDUuMTQ4NDM4IDIuNTQ2ODc1IDQuNTcwMzEyIDIuNTQ2ODc1IDMuODU1NDY5IEMgMi41NDY4NzUgMy4xNDQ1MzEgMy4xMjUgMi41NjY0MDYgMy44MzU5MzggMi41NjY0MDYgQyA0LjU0Njg3NSAyLjU2NjQwNiA1LjEyNSAzLjE0NDUzMSA1LjEyNSAzLjg1NTQ2OSBMIDUuMTI1IDMuODU5Mzc1IEMgNS4xMjUgNC41NzAzMTIgNC41NTA3ODEgNS4xNDg0MzggMy44Mzk4NDQgNS4xNDg0MzggWiBNIDEzLjI3NzM0NCAxMy4yODEyNSBMIDExLjA1ODU5NCAxMy4yODEyNSBMIDExLjA1ODU5NCA5LjgwMDc4MSBDIDExLjA1ODU5NCA4Ljk3MjY1NiAxMS4wMzkwNjIgNy45MDIzNDQgOS45MDIzNDQgNy45MDIzNDQgQyA4Ljc0MjE4OCA3LjkwMjM0NCA4LjU2NjQwNiA4LjgwODU5NCA4LjU2NjQwNiA5Ljc0MjE4OCBMIDguNTY2NDA2IDEzLjI4MTI1IEwgNi4zNDM3NSAxMy4yODEyNSBMIDYuMzQzNzUgNi4xMjUgTCA4LjQ3NjU2MiA2LjEyNSBMIDguNDc2NTYyIDcuMTAxNTYyIEwgOC41MDc4MTIgNy4xMDE1NjIgQyA4Ljk0NTMxMiA2LjM1NTQ2OSA5Ljc1MzkwNiA1LjkxNDA2MiAxMC42MTcxODggNS45NDUzMTIgTCAxMC42MTMyODEgNS45NDUzMTIgQyAxMi44NjMyODEgNS45NDUzMTIgMTMuMjc3MzQ0IDcuNDI1NzgxIDEzLjI3NzM0NCA5LjM1NTQ2OSBaIE0gMTMuMjc3MzQ0IDEzLjI4MTI1ICIKICAgICAgLz4KICAgIDwvZz4KICA8L3N2Zz4=')]",
         tag: "a",
       },
       {
@@ -464,7 +465,8 @@ const components: any = {
     elements: [
       {
         tag: "div",
-        styles: "flex flex-col w-[31%] p-1 rounded-md text-gray-950/80",
+        styles:
+          "flex flex-row justify-between w-full p-1 rounded-md text-gray-950/80",
         container: [
           {
             id: "language",
@@ -473,8 +475,7 @@ const components: any = {
           },
           {
             id: "proficiency",
-            styles:
-              "text-xs font-normal text-gray-950/80 before:w-max before:content-['Proficiency:'] before:mr-1 before:font-semibold",
+            styles: "text-xs font-normal text-gray-950/80 ",
             tag: "span",
           },
         ],
@@ -494,10 +495,10 @@ const templateLayout: any = {
           id: "shortName",
         },
         {
-          id: "phone",
+          id: "email",
         },
         {
-          id: "email",
+          id: "phone",
         },
         {
           id: "linkedIn",
