@@ -36,7 +36,7 @@ const Contact = ({ contact, styles, iconColor }: Props) => {
             }}
           />
         </li>
-        <li className={`${styles?.contact_li}`}>
+        <li className={`${styles?.contact_li} `}>
           {emailIconFilled}
           <EditableField
             value={contact?.email ? contact?.email : "your@email.com"}
@@ -48,7 +48,7 @@ const Contact = ({ contact, styles, iconColor }: Props) => {
           />
         </li>
 
-        <li className={`${styles?.contact_li}`}>
+        <li className={`${styles?.contact_li} `}>
           <div className={`bg-transparent ${iconColor ? iconColor : ""} `}>
             {linkedInIconFilled}
           </div>
@@ -66,7 +66,7 @@ const Contact = ({ contact, styles, iconColor }: Props) => {
             }}
           />
         </li>
-        <li className={`${styles?.contact_li}`}>
+        <li className={`${styles?.contact_li} `}>
           <div className="">{homeIconFilled}</div>
           <EditableField
             value={contact?.address.trim() ? contact.address : "Address"}

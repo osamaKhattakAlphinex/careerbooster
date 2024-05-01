@@ -15,8 +15,15 @@ type Props = {
   skills: any;
   styles: any;
   customStyle?: any;
+  rounded_style?: any;
 };
-const Skill = ({ heading, skills, styles, customStyle }: Props) => {
+const Skill = ({
+  heading,
+  skills,
+  styles,
+  customStyle,
+  rounded_style,
+}: Props) => {
   const [primarySkill, setPrimarySkill] = useState<string>("");
   const [regenerating, setRegenerating] = useState(false);
   const { updateSaveHook } = useUpdateAndSave();
@@ -36,7 +43,7 @@ const Skill = ({ heading, skills, styles, customStyle }: Props) => {
     }
   };
   const { handlers } = useHandler();
-
+  console.log(customStyle);
   return (
     <>
       {skills && skills.length > 0 && (
@@ -46,20 +53,22 @@ const Skill = ({ heading, skills, styles, customStyle }: Props) => {
               customStyle?.borderTopBottom ? "!block" : "hidden"
             }`}
           ></span>
-          <h2 className={`${styles?.skill_heading} `}>
-            {resumeSkillsIcon}
-            <EditableField
-              value={heading ? heading : "Skills"}
-              style={{ width: "fit-content" }}
-              onSave={(value: string) => {
-                if (value !== heading) {
-                  updateSaveHook.updateAndSaveHeadings({
-                    primarySkills: value,
-                  });
-                }
-              }}
-            />
-          </h2>
+          <div className={` ${rounded_style ? rounded_style : ""} `}>
+            <h2 className={` ${styles?.skill_heading} `}>
+              {resumeSkillsIcon}
+              <EditableField
+                value={heading ? heading : "Skills"}
+                style={{ width: "fit-content" }}
+                onSave={(value: string) => {
+                  if (value !== heading) {
+                    updateSaveHook.updateAndSaveHeadings({
+                      primarySkills: value,
+                    });
+                  }
+                }}
+              />
+            </h2>
+          </div>
 
           <span
             className={`${styles?.span2} ${
@@ -72,11 +81,11 @@ const Skill = ({ heading, skills, styles, customStyle }: Props) => {
       )}
       {skills && skills.length > 0 && !regenerating ? (
         <Toolbar addSkill={handleAddSkills} regenerateSkills={getPrimarySkills}>
-          <ul className={`${styles?.skill_ul} as`}>
+          <ul className={`${styles?.skill_ul} mt-2`}>
             {skills.map((skill: string, i: number) => (
               <li
-                className={`${styles?.skill_li} parent before:text-white before:text-base before:h-4 before:w-4
-                  before:aspect-square before:mr-1 before:content-['\\2022\']
+                className={`${styles?.skill_li} parent before:text-white before:text-base before:h-4 before:w-1 items-center
+                  before:aspect-square before:flex before:items-center before:content-['•']
                 `}
                 key={i}
                 onDragStart={(e) =>
