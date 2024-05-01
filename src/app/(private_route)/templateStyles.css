@@ -144,6 +144,7 @@ h2[data-name="projects"][data-icon-color="white"][data-type-heading="true"]::bef
   background-color: var(--decor-color);
 }
 
+
 [data-primarySkills-index]::before,
 [data-achievements-index]::before,
 [data-description-index]::before {
@@ -166,10 +167,10 @@ body {
 .page div:empty {
   display: none;
 }
+
 .page {
   position: relative;
   height: 29.62cm !important;
   width: 21.01cm !important;
   background-color: #fff;
-  /* margin: 10px; */
 }

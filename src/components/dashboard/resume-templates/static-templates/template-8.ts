@@ -1,7 +1,7 @@
 const cvHeadings: any = [
   {
     text: "",
-    section: "phone",
+    section: "email",
     headingKey: "contact",
     styles: "",
     attributes: [],
