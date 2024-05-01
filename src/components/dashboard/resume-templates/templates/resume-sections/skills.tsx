@@ -15,8 +15,15 @@ type Props = {
   skills: any;
   styles: any;
   customStyle?: any;
+  rounded_style?: any;
 };
-const Skill = ({ heading, skills, styles, customStyle }: Props) => {
+const Skill = ({
+  heading,
+  skills,
+  styles,
+  customStyle,
+  rounded_style,
+}: Props) => {
   const [primarySkill, setPrimarySkill] = useState<string>("");
   const [regenerating, setRegenerating] = useState(false);
   const { updateSaveHook } = useUpdateAndSave();
@@ -36,7 +43,7 @@ const Skill = ({ heading, skills, styles, customStyle }: Props) => {
     }
   };
   const { handlers } = useHandler();
-
+  console.log(customStyle);
   return (
     <>
       {skills && skills.length > 0 && (
@@ -46,20 +53,22 @@ const Skill = ({ heading, skills, styles, customStyle }: Props) => {
               customStyle?.borderTopBottom ? "block" : "hidden"
             }`}
           ></span>
-          <h2 className={`${styles?.skill_heading} `}>
-            {resumeSkillsIcon}
-            <EditableField
-              value={heading ? heading : "Skills"}
-              style={{ width: "fit-content" }}
-              onSave={(value: string) => {
-                if (value !== heading) {
-                  updateSaveHook.updateAndSaveHeadings({
-                    primarySkills: value,
-                  });
-                }
-              }}
-            />
-          </h2>
+          <div className={` ${rounded_style ? rounded_style : ""} `}>
+            <h2 className={` ${styles?.skill_heading} `}>
+              {resumeSkillsIcon}
+              <EditableField
+                value={heading ? heading : "Skills"}
+                style={{ width: "fit-content" }}
+                onSave={(value: string) => {
+                  if (value !== heading) {
+                    updateSaveHook.updateAndSaveHeadings({
+                      primarySkills: value,
+                    });
+                  }
+                }}
+              />
+            </h2>
+          </div>
 
           <span
             className={`${styles?.span2} ${

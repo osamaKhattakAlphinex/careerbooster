@@ -33,6 +33,7 @@ import Publication from "./resume-sections/publication";
 import {
   award,
   certification,
+  conditionStyleHeader,
   customStyle_15,
   education,
   experience,
@@ -42,6 +43,7 @@ import {
   publicationStyles,
   reference,
   summary,
+  template_15_styles,
   training,
 } from "@/helpers/templateStylesObj";
 import Certification from "./resume-sections/certification";
@@ -54,6 +56,9 @@ import Summary from "./resume-sections/summary";
 import Experience from "./resume-sections/experience";
 import Education from "./resume-sections/education";
 import Project from "./resume-sections/project";
+import Header from "./resume-sections/header";
+import Contact from "./resume-sections/contact";
+import Skill from "./resume-sections/skills";
 
 const ResumeTemplate15 = () => {
   const dispatch = useDispatch();
@@ -192,231 +197,47 @@ const ResumeTemplate15 = () => {
             />
           </h3>
           <span className="w-full h-0 my-3 border-stylee"></span>
-          <ul className="flex flex-col mt-4 w-full gap-3 pl-0 mb-4 text-xs break-all ">
-            <li className="flex flex-row items-start justify-start gap-3 text-xs hover:shadow-md hover:bg-gray-100 ">
-              <div>{phoneIcon}</div>
-              <EditableField
-                value={
-                  resume?.contact?.phone
-                    ? resume?.contact?.phone
-                    : "(555) 555-1234"
-                }
-                onSave={(value: string) => {
-                  if (value !== resume?.contact?.phone) {
-                    updateSaveHook.updateAndSaveBasicInfo({ phone: value });
-                  }
-                }}
-              />
-            </li>
-            <li className="flex flex-row items-start justify-start gap-3 text-xs hover:shadow-md hover:bg-gray-100">
-              <div>{emailIcon}</div>
-
-              <EditableField
-                value={
-                  resume?.contact?.email
-                    ? resume?.contact?.email
-                    : "your@email.com"
-                }
-                onSave={(value: string) => {
-                  if (value !== resume?.contact?.email) {
-                    updateSaveHook.updateAndSaveBasicInfo({ email: value });
-                  }
-                }}
-              />
-            </li>
-            <li className="flex flex-row items-start justify-start gap-2 text-xs hover:shadow-md hover:bg-gray-100 text-gray-950">
-              <div>
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 19 19"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M9.5 18.4C14.4153 18.4 18.4 14.4153 18.4 9.5C18.4 4.58467 14.4153 0.6 9.5 0.6C4.58467 0.6 0.6 4.58467 0.6 9.5C0.6 14.4153 4.58467 18.4 9.5 18.4Z"
-                    stroke="black"
-                    strokeWidth="0.8"
-                  />
-                  <path
-                    d="M6.15572 13V7.54545H6.99379V13H6.15572ZM6.58185 6.63636C6.4185 6.63636 6.27764 6.58073 6.15927 6.46946C6.04326 6.35819 5.98526 6.22443 5.98526 6.06818C5.98526 5.91193 6.04326 5.77817 6.15927 5.6669C6.27764 5.55563 6.4185 5.5 6.58185 5.5C6.74521 5.5 6.88488 5.55563 7.00089 5.6669C7.11926 5.77817 7.17844 5.91193 7.17844 6.06818C7.17844 6.22443 7.11926 6.35819 7.00089 6.46946C6.88488 6.58073 6.74521 6.63636 6.58185 6.63636ZM9.36683 9.71875V13H8.52876V7.54545H9.33842V8.39773H9.40945C9.53729 8.12074 9.73142 7.8982 9.99183 7.73011C10.2522 7.55966 10.5884 7.47443 11.0004 7.47443C11.3697 7.47443 11.6928 7.55019 11.9698 7.7017C12.2468 7.85085 12.4622 8.07812 12.6161 8.38352C12.77 8.68655 12.8469 9.07008 12.8469 9.53409V13H12.0089V9.59091C12.0089 9.16241 11.8976 8.8286 11.6751 8.58949C11.4525 8.34801 11.1471 8.22727 10.7589 8.22727C10.4914 8.22727 10.2522 8.28527 10.0415 8.40128C9.83321 8.51728 9.66868 8.68655 9.54794 8.90909C9.4272 9.13163 9.36683 9.40152 9.36683 9.71875Z"
-                    fill="black"
-                  />
-                </svg>
-              </div>
-              <EditableField
-                value={
-                  resume?.contact?.linkedIn
-                    ? resume?.contact?.linkedIn
-                    : "https://www.linkedin.com/"
-                }
-                onSave={(value: string) => {
-                  if (value !== resume.contact.linkedIn) {
-                    updateSaveHook.updateAndSaveBasicInfo({ linkedIn: value });
-                  }
-                }}
-              />
-            </li>
-            <li className="flex flex-row items-start justify-start gap-2 text-xs hover:shadow-md hover:bg-gray-100 text-gray-950 ">
-              <div className="">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-4 h-4"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
-                  />
-                </svg>
-              </div>
-              <EditableField
-                value={resume?.contact?.address ? resume.contact.address : ""}
-                onSave={(value: string) => {
-                  if (value !== resume.contact.address) {
-                    updateSaveHook.updateAndSaveBasicInfo({ address: value });
-                  }
-                }}
-              />
-            </li>
-          </ul>
+          <Contact contact={resume.contact} styles={template_15_styles} />
 
           {/* Skills */}
-          {resume?.primarySkills && resume?.primarySkills.length > 0 && (
-            <>
-              <span className="w-full h-0 my-1 border-stylee"></span>
-              <h3
-                className="uppercase text-base bg-[#444440] xs:px-2 font-semibold text-white w-full xs:w-full md:w-full lg:w-full py-1 rounded-sm flex justify-center xs:justify-center md:justify-center  flex-row gap-2 items-center border-2 border-transparent hover:border-dashed hover:border-gray-500  "
-                // style={{ backgroundColor: color_second }}
-              >
-                {resumeSkillsIcon}
-                <EditableField
-                  value={
-                    resume?.headings?.primarySkills
-                      ? resume.headings.primarySkills
-                      : "Skills"
-                  }
-                  style={{ width: "fit-content" }}
-                  onSave={(value: string) => {
-                    if (value !== resume?.headings?.primarySkills) {
-                      updateSaveHook.updateAndSaveHeadings({
-                        primarySkills: value,
-                      });
-                    }
-                  }}
-                />
-              </h3>
-              <span className="w-full h-0 my-3 border-stylee"></span>
-              {resume?.primarySkills &&
-              resume?.primarySkills.length > 0 &&
-              !regenerating ? (
-                <Toolbar
-                  addSkill={handleAddSkills}
-                  regenerateSkills={getPrimarySkills}
-                >
-                  <ul className="flex flex-col w-full gap-1 pl-0 mb-4 text-xs border-2 border-transparent hover:border-dashed hover:border-gray-500 mt-4">
-                    {resume?.primarySkills.map((skill: string, i: number) => (
-                      <li
-                        className="hover:shadow-md hover:cursor-move px-0 xs:px-2 md:px-0 parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex items-center gap-2 "
-                        key={i}
-                        onDragStart={(e) =>
-                          e.dataTransfer.setData("text/plain", i.toString())
-                        }
-                        onDragOver={(e) => e.preventDefault()}
-                        onDrop={(e) => handleDropPrimary(e, i)}
-                        draggable
-                      >
-                        <span className="w-1 h-1 !block bg-gray-900 rounded-full "></span>
-                        <div className="flex  w-full justify-between">
-                          <EditableField
-                            value={skill}
-                            onSave={(value: string) => {
-                              handlers.handleUpdateSkill(value, i);
-                            }}
-                          />
-                          <div
-                            onClick={() => handlers.handleDeleteSkill(i)}
-                            className="w-4 h-4 cursor-pointer child"
-                          >
-                            {crossIcon1}
-                          </div>
-                        </div>
-                      </li>
-                    ))}
-                    {newPrimarySkill ? (
-                      <>
-                        <div className="w-full rounded-2xl border-[1px] border-black flex h-9.5">
-                          <input
-                            type="text"
-                            value={primarySkill}
-                            placeholder="Please add Skill"
-                            className="w-full px-2 bg-white outline-none rounded-2xl"
-                            autoFocus
-                            onChange={(e) => setPrimarySkill(e.target.value)}
-                            onKeyPress={(e) => {
-                              if (e.key === "Enter") {
-                                handleSaveSkills();
-                              }
-                            }}
-                          />
-                          <button
-                            className="px-2 text-white uppercase bg-green-500 h-9 rounded-r-2xl"
-                            onClick={handleSaveSkills}
-                          >
-                            save
-                          </button>
-                        </div>
-                        <button
-                          onClick={() => {
-                            setNewPrimarySkill(false);
-                          }}
-                          className="px-2 py-1 text-white bg-red-500 rounded-full"
-                        >
-                          Cancel
-                        </button>
-                      </>
-                    ) : (
-                      " "
-                    )}
-                  </ul>
-                </Toolbar>
-              ) : (
-                <div className="text-center">
-                  <div role="status">
-                    <Loader />
-                  </div>
-                </div>
-              )}
-            </>
+
+          <Skill
+            heading={resume.headings.primarySkills}
+            skills={resume.primarySkills}
+            styles={template_15_styles}
+            rounded_style="bg-[#444440] w-full xs:w-full md:w-full lg:w-full flex justify-center xs:justify-center md:justify-center  flex-row gap-2 items-center"
+          />
+
+          {/* Interests & Hobbies */}
+
+          {resume?.interests && resume?.interests.length > 0 && (
+            <Interest
+              // customStyle={customStyle_4}
+              heading={resume.headings.interests}
+              interests={resume.interests}
+              styles={template_15_styles}
+              rounded_style="bg-[#444440] w-full xs:w-full md:w-full lg:w-full flex justify-center xs:justify-center md:justify-center  flex-row gap-2 items-center"
+            />
+          )}
+          {/* Languages */}
+          {resume?.languages && resume?.languages.length > 0 && (
+            <Language
+              // customStyle={customStyle_4}
+              heading={resume.headings.languages}
+              languages={resume.languages}
+              styles={template_15_styles}
+              rounded_style="bg-[#444440] w-full xs:w-full md:w-full lg:w-full flex justify-center xs:justify-center md:justify-center  flex-row gap-2 items-center"
+            />
           )}
         </div>
         <div className="w-full flex flex-col  px-8 xs:mt-[25px]  xs:px-8 lg:px-8 pt-[1rem] xs:pt-[1rem] ">
           <div className="flex flex-col items-center justify-center py-4 xs:px-0">
-            <h2 className="text-4xl font-bold text-center xs:text-4xl hover:shadow-md hover:bg-gray-100 border-2 border-transparent hover:border-dashed hover:border-gray-500">
-              <EditableField
-                value={resume?.name ? resume?.name : "FULL NAME"}
-                style={{ width: "fit-content" }}
-                onSave={(value: string) => {
-                  if (value !== resume?.name) {
-                    updateSaveHook.updateAndSaveName(value);
-                  }
-                }}
-              />
-            </h2>
-            <h3 className="my-2 text-xl leading-none text-center border-2 border-transparent hover:shadow-md hover:bg-gray-100 hover:border-dashed hover:border-gray-500">
-              <EditableField
-                value={resume?.jobTitle ? resume?.jobTitle : "JOB TITLE"}
-                onSave={(value: string) => {
-                  if (value !== resume?.jobTitle) {
-                    updateSaveHook.updateAndSaveJobTitle(value);
-                  }
-                }}
-              />
-            </h3>
+            <Header
+              name={resume.name}
+              jobTitle={resume.jobTitle}
+              styles={template_15_styles}
+              conditionStyleHeader={conditionStyleHeader}
+            />
           </div>
 
           {/* Executive Summary */}
@@ -497,17 +318,6 @@ const ResumeTemplate15 = () => {
               />
             )}
           </div>
-          {/* Interests & Hobbies */}
-          <div className="w-full">
-            {resume?.interests && resume?.interests.length > 0 && (
-              <Interest
-                customStyle={customStyle_15}
-                heading={resume.headings.interests}
-                interests={resume.interests}
-                styles={interest}
-              />
-            )}
-          </div>
 
           {/* References */}
           <div className="w-full">
@@ -521,17 +331,6 @@ const ResumeTemplate15 = () => {
             )}
           </div>
 
-          {/* Languages */}
-          <div className="w-full">
-            {resume?.languages && resume?.languages.length > 0 && (
-              <Language
-                customStyle={customStyle_15}
-                heading={resume.headings.languages}
-                languages={resume.languages}
-                styles={language}
-              />
-            )}
-          </div>
           {/* education */}
           <div className="w-full  mb-2">
             {resume?.education.length > 0 && (
