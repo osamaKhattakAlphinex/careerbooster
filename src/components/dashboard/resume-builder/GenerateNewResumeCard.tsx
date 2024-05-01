@@ -149,6 +149,9 @@ const GenerateResume = ({ handleGenerate }: Props) => {
       <div className="flex flex-col items-start justify-between gap-5">
         <div className="flex flex-col w-full gap-4">
           <div className="flex flex-col items-start justify-center gap-2">
+            <h2 className="text-sm font-semibold text-gray-300 uppercase">
+              Resume Type
+            </h2>
             {radiosResumeType.map(
               ({ labelText, value }: { labelText: string; value: string }) => (
                 <label className="text-sm cursor-pointer" key={value}>
@@ -267,24 +270,48 @@ const GenerateResume = ({ handleGenerate }: Props) => {
           ) : (
             ""
           )}
-          <label htmlFor="resume-size" className="">
-            <input
-              className="mr-1"
-              type="checkbox"
-              name=""
-              id="resume-size"
-              checked={memoizedState.detailedResume}
-              onChange={() =>
-                dispatch(
-                  setState({
-                    name: "detailedResume",
-                    value: !memoizedState.detailedResume,
-                  })
-                )
-              }
-            />
-            Detailed Resume
-          </label>
+
+          <h2 className="text-sm font-semibold text-gray-300 uppercase">
+            Content Type
+          </h2>
+          <div className="flex flex-row items-center justify-start gap-2 ">
+            <label htmlFor="resume-short" className="text-sm cursor-pointer">
+              <input
+                className="mr-1"
+                type="radio"
+                name="resume-size"
+                id="resume-short"
+                checked={!memoizedState?.detailedResume}
+                onChange={() =>
+                  dispatch(
+                    setState({
+                      name: "detailedResume",
+                      value: false,
+                    })
+                  )
+                }
+              />
+              Short and Crisp
+            </label>
+            <label htmlFor="resume-detailed" className="text-sm cursor-pointer">
+              <input
+                className="mr-1"
+                type="radio"
+                name="resume-size"
+                id="resume-detailed"
+                checked={memoizedState?.detailedResume}
+                onChange={() =>
+                  dispatch(
+                    setState({
+                      name: "detailedResume",
+                      value: true,
+                    })
+                  )
+                }
+              />
+              Detailed
+            </label>
+          </div>
         </div>
         {/* <label className="relative inline-flex items-center cursor-pointer">
         <input
