@@ -26,14 +26,12 @@ const DidYouKnowCard = () => {
   }, []);
 
   return (
-    <div className="w-full p-6  border-[1px] border-gray-200 rounded-lg shadow ">
-      <div className="inline-flex gap-2 ">
+    <div className="w-full p-6  border-[1px] border-secondray rounded-lg shadow ">
+      <div className="d-inline-flex gap-2 ">
         <span className="pt-1">{bulbIcon}</span>
-        <h5 className="mb-2 text-2xl font-semibold tracking-tight ">
-          Did you know?
-        </h5>
+        <h5 className="mb-2 text-2xl font-semibold  ">Did you know?</h5>
       </div>
-      <p className="mb-3 font-normal text-gray-500">
+      <p className="mb-3 font-normal text-secondary">
         {resumeQuotes[currentIndex] && resumeQuotes[currentIndex]}
       </p>
     </div>
