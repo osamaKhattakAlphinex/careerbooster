@@ -62,7 +62,7 @@ export const template_4_styles = {
   skill_ul:
     "border-2 border-transparent hover:border-dashed hover:border-gray-500  pl-0 flex list-styled flex-col gap-3 mb-4 text-xs xs:text-[12px] md:text-xs list-disc",
   skill_li:
-    "hover:shadow-md hover:cursor-move  border-transparent border-[1px] hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-500 flex  items-center gap-3 before:text-white before:text-base before:h-4 before:w-1 items-center before:aspect-square before:flex before:items-center before:content-['•']",
+    "hover:shadow-md hover:cursor-move  border-transparent border-[1px] hover:border-dashed hover:border-gray-500 hover:border hover:bg-gray-500 flex items-center gap-3 before:text-white before:text-base before:h-4 before:w-1 items-center before:aspect-square before:flex before:items-center before:content-['•']",
   skill_New: "skill_New",
   span1: "span1",
   span2: "span2",
