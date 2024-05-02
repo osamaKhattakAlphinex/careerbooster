@@ -28,7 +28,7 @@ import { ColorResult } from "react-color";
 import ColorPicker from "../colorPicker";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import { useColorContext } from "@/context/ResumeColorContext";
-import Publication from "./resume-sections/publication";
+
 import {
   award,
   certification,
@@ -45,19 +45,21 @@ import {
   template_10_styles,
   training,
 } from "@/helpers/templateStylesObj";
-import Certification from "./resume-sections/certification";
-import Training from "./resume-sections/trainings";
-import Award from "./resume-sections/award";
-import Interest from "./resume-sections/interest";
-import Reference from "./resume-sections/reference";
-import Language from "./resume-sections/language";
-import Summary from "./resume-sections/summary";
-import Experience from "./resume-sections/experience";
-import Education from "./resume-sections/education";
-import Project from "./resume-sections/project";
+
+import Publication from "./resume-sections/publication";
 import Header from "./resume-sections/header";
 import Contact from "./resume-sections/contact";
 import Skill from "./resume-sections/skills";
+import Interest from "./resume-sections/interest";
+import Language from "./resume-sections/language";
+import Summary from "./resume-sections/summary";
+import Experience from "./resume-sections/experience";
+import Certification from "./resume-sections/certification";
+import Training from "./resume-sections/trainings";
+import Award from "./resume-sections/award";
+import Project from "./resume-sections/project";
+import Reference from "./resume-sections/reference";
+import Education from "./resume-sections/education";
 
 const ResumeTemplate10 = () => {
   const resume = useSelector((state: any) => state.resume);
@@ -237,6 +239,7 @@ const ResumeTemplate10 = () => {
           {resume?.languages && resume?.languages.length > 0 && (
             <Language
               // customStyle={customStyle_4}
+
               heading={resume.headings.languages}
               languages={resume.languages}
               styles={template_10_styles}
