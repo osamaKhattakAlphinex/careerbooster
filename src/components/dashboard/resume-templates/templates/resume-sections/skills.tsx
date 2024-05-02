@@ -94,17 +94,19 @@ const Skill = ({
                 onDrop={(e) => handleDropPrimary(e, i)}
                 draggable
               >
-                <EditableField
-                  value={skill}
-                  onSave={(value: string) => {
-                    handlers.handleUpdateSkill(value, i);
-                  }}
-                />
-                <div
-                  onClick={() => handlers.handleDeleteSkill(i)}
-                  className="w-4 h-4 cursor-pointer child"
-                >
-                  {crossIcon1}
+                <div className="flex flex-row items-center justify-between">
+                  <EditableField
+                    value={skill}
+                    onSave={(value: string) => {
+                      handlers.handleUpdateSkill(value, i);
+                    }}
+                  />
+                  <div
+                    onClick={() => handlers.handleDeleteSkill(i)}
+                    className="w-4 h-4 cursor-pointer child"
+                  >
+                    {crossIcon1}
+                  </div>
                 </div>
               </li>
             ))}

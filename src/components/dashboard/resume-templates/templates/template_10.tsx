@@ -3,40 +3,34 @@ import { memo, useEffect, useState } from "react";
 import React from "react";
 import { useSelector } from "react-redux";
 import { resumeContactIcon } from "@/helpers/iconsProvider";
-import useGetSummary from "@/hooks/useGetSummary";
 import EditableField from "@/components/dashboard/EditableField";
-import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
-import useDragAndDrop from "@/hooks/useDragAndDrop";
-import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
-import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
-import useHandler from "@/hooks/useHandler";
 
-import { useColorContext } from "@/context/ResumeColorContext";
-import Publication from "./resume-sections/publication";
 import {
   conditionStyleHeader,
   customStyle_10,
   template_10_styles,
 } from "@/helpers/templateStylesObj";
-import Certification from "./resume-sections/certification";
-import Training from "./resume-sections/trainings";
-import Award from "./resume-sections/award";
-import Interest from "./resume-sections/interest";
-import Reference from "./resume-sections/reference";
-import Language from "./resume-sections/language";
-import Summary from "./resume-sections/summary";
-import Experience from "./resume-sections/experience";
-import Education from "./resume-sections/education";
-import Project from "./resume-sections/project";
+
+import Publication from "./resume-sections/publication";
 import Header from "./resume-sections/header";
 import Contact from "./resume-sections/contact";
 import Skill from "./resume-sections/skills";
 import { useAppContext } from "@/context/AppContext";
 import useSaveResumeToDB from "@/hooks/useSaveToDB";
+import Interest from "./resume-sections/interest";
+import Language from "./resume-sections/language";
+import Summary from "./resume-sections/summary";
+import Experience from "./resume-sections/experience";
+import Certification from "./resume-sections/certification";
+import Training from "./resume-sections/trainings";
+import Award from "./resume-sections/award";
+import Project from "./resume-sections/project";
+import Reference from "./resume-sections/reference";
+import Education from "./resume-sections/education";
+
 const ResumeTemplate10 = () => {
   const { updateSaveHook } = useUpdateAndSave();
-  const { saveResumeToDB } = useSaveResumeToDB();
   const { setIsSidebar } = useAppContext();
   const resume = useSelector((state: any) => state.resume);
   //New code end

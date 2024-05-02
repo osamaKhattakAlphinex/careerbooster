@@ -699,7 +699,6 @@ export const InterestsForm = ({
 
   const formik = useFormik({
     initialValues: {
-      name: "",
       description: "",
     },
 
@@ -744,10 +743,6 @@ export const InterestsForm = ({
         formCloseHandler();
       }
     },
-
-    validationSchema: Yup.object().shape({
-      name: Yup.string().required("name is required"),
-    }),
   });
   const pathname = usePathname();
   return (

@@ -88,13 +88,13 @@ const CustomForm = ({ setShowCustomForm, recName }: Props) => {
       {recName === "interests" && (
         <InterestsForm
           formCloseHandler={() => setShowCustomForm(false)}
-          formSubmitHandler={formHandlers.interest}
+          formSubmitHandler={formHandlers.interests}
         />
       )}
       {recName === "references" && (
         <ReferencesForm
           formCloseHandler={() => setShowCustomForm(false)}
-          formSubmitHandler={formHandlers.refrence}
+          formSubmitHandler={formHandlers.references}
         />
       )}
       {recName === "languages" && (

@@ -39,16 +39,16 @@ const Page = () => {
           {/* user data */}
           <div className="p-3 space-y-2">
             <div className="flex flex-col items-start justify-start">
-              <h3 className="text-sm font-bold text-gray-500 uppercase dark:text-gray-300 md:text-base">
+              <h3 className="text-xs text-gray-500 uppercase dark:text-gray-300 md:text-sm">
                 Name
               </h3>
-              <span className="text-xs text-gray-500 dark:text-gray-400 md:text-sm ">{`${userData.firstName} ${userData?.lastName}`}</span>
+              <span className="text-sm font-bold text-gray-500 dark:text-gray-400 md:text-lg ">{`${userData.firstName} ${userData?.lastName}`}</span>
             </div>
             <div>
-              <h3 className="text-sm font-bold text-gray-500 uppercase dark:text-gray-300 md:text-base">
+              <h3 className="text-xs text-gray-500 uppercase dark:text-gray-300 md:text-sm">
                 Email
               </h3>
-              <span className="text-xs text-gray-500 dark:text-gray-400 md:text-sm">
+              <span className="text-sm font-bold text-gray-500 dark:text-gray-400 md:text-lg">
                 {userData?.email}
               </span>
             </div>
