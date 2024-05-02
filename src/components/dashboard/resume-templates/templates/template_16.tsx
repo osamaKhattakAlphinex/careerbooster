@@ -4,47 +4,20 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { setField } from "@/store/resumeSlice";
-import {
-  crossIcon1,
-  emailIcon,
-  phoneIcon,
-  resumeContactIcon,
-  resumeEductionIcon,
-  resumeSkillsIcon,
-  resumeSummaryIcon,
-  resumeWorkExpIcon,
-} from "@/helpers/iconsProvider";
-import Loader from "@/components/common/Loader";
+import { resumeContactIcon } from "@/helpers/iconsProvider";
 
-import useGetSummary from "@/hooks/useGetSummary";
 import EditableField from "@/components/dashboard/EditableField";
-import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
+
 import useSaveResumeToDB from "@/hooks/useSaveToDB";
-import Toolbar from "@/components/dashboard/Toolbar";
-import useDragAndDrop from "@/hooks/useDragAndDrop";
-import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
-import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
+
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
-import useHandler from "@/hooks/useHandler";
-import { ColorResult } from "react-color";
-import ColorPicker from "../colorPicker";
-import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import Publication from "./resume-sections/publication";
 import {
-  award,
-  certification,
   conditionStyleHeader,
   customStyle_16,
-  education,
   experience,
-  interest,
-  language,
-  projectStyles,
-  publicationStyles,
-  reference,
   summary,
   template_16_styles,
-  training,
 } from "@/helpers/templateStylesObj";
 import Certification from "./resume-sections/certification";
 import Training from "./resume-sections/trainings";
@@ -59,75 +32,20 @@ import Project from "./resume-sections/project";
 import Header from "./resume-sections/header";
 import Contact from "./resume-sections/contact";
 import Skill from "./resume-sections/skills";
+import { useAppContext } from "@/context/AppContext";
 
 const ResumeTemplate16 = () => {
+  const { setIsSidebar } = useAppContext();
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
-  const [newPrimarySkill, setNewPrimarySkill] = useState(false);
-  const [confirmationModal, setConfirmationModal] = useState(false);
-  const [newWorkExperience, setNewWorkExperience] = useState<number>();
-  const [newAchievement, setNewAchievement] = useState("");
-  const [streamedSummaryData, setStreamedSummaryData] = useState("");
-
-  const [regenerating, setRegenerating] = useState(false);
-  const { getPrimarySkills } = useGetPrimarySkills(setRegenerating);
-
-  const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
-    number | null
-  >(null);
-  const { getSummary } = useGetSummary(setStreamedSummaryData);
-  const [streamedJDData, setStreamedJDData] = useState<any>("");
   const { saveResumeToDB } = useSaveResumeToDB();
-  // const [color, setColor] = useState("#1F1E1E");
-  // const [color_second, setColor_second] = useState("#383636");
-
-  //add new code
-
-  const { getOneWorkExperienceNew } = useSingleJDGenerate(setStreamedJDData);
-  const { handleDropPrimary, handleDropAchievement, handleDropExperience } =
-    useDragAndDrop();
-
   //New code end
-  const [primarySkill, setPrimarySkill] = useState<string>("");
-
-  const [insideIndex, setInsideIndex] = useState<number>(0);
-  const { addPrimarySkill } = useAddPrimarySkill();
-  const { updateSaveHook } = useUpdateAndSave();
-  const { handlers } = useHandler();
-
   useEffect(() => {
-    if (streamedJDData === "") {
-      setStreamedJDData(null);
-      setRegeneratedRecordIndex(null);
-    }
-  }, [streamedJDData]);
+    setIsSidebar(true);
+    return () => setIsSidebar(false);
+  }, []);
+  const { updateSaveHook } = useUpdateAndSave();
 
-  // handle regenrate
-  const handleRegenrate = (rec: any, i: number) => {
-    getOneWorkExperienceNew(rec);
-    setRegeneratedRecordIndex(i);
-  };
-
-  //add Skills
-  const handleAddSkills = () => {
-    setNewPrimarySkill(true);
-  };
-
-  //save skills
-  const handleSaveSkills = () => {
-    if (primarySkill.trim() !== "") {
-      addPrimarySkill(primarySkill);
-      setPrimarySkill("");
-    }
-  };
-  // const saveColor = (color: ColorResult) => {
-  //   setColor(color.hex);
-
-  // };
-  // const saveColor_second = (color: ColorResult) => {
-  //   setColor_second(color.hex);
-
-  // };
   return (
     <div className="relative w-full text-gray-900 first-page">
       <div className="flex">
@@ -151,35 +69,11 @@ const ResumeTemplate16 = () => {
                     }}
                   />
                 </span>
-                {/* <ColorPicker
-                  defaultColor="#1F1E1E"
-                  resetColor="#383636"
-                  styles_pin="absolute text-white top-5 right-5"
-                  styles_div="absolute top-3 -left-1"
-                  setColor={setColor}
-                  secondDefaultColor="#383636"
-                  setColor_second={setColor_second}
-                  saveColor={saveColor_second}
-                /> */}
               </div>
             </div>
           </div>
-          {/* <div className="absolute top-0 -left-12 xs:w-4/12">
-            <div className="flex justify-end">
-              <ColorPicker
-                defaultColor="#1F1E1E"
-                resetColor="#1F1E1E"
-                setColor={setColor}
-                styles_pin="relative text-white top-[6px]  -left-9"
-                styles_div="absolute top-3 left-0"
-                secondDefaultColor="#383636"
-                setColor_second={setColor_second}
-                saveColor={saveColor}
-              />
-            </div>
-          </div> */}
+
           {/* contacts */}
-          {/* <span className="w-full h-0 my-3 border border-gray-500"></span> */}
           <h3 className="flex flex-rosw items-center w-full gap-2 my-1 text-base font-semibold text-white uppercase border-2 border-transparent rounded-sm hover:border-dashed hover:border-gray-500">
             {resumeContactIcon}
             <EditableField
@@ -273,7 +167,7 @@ const ResumeTemplate16 = () => {
                 customStyle={customStyle_16}
                 heading={resume.headings.publications}
                 publications={resume.publications}
-                styles={publicationStyles}
+                styles={template_16_styles}
               />
             )}
           </div>
@@ -285,7 +179,7 @@ const ResumeTemplate16 = () => {
                 customStyle={customStyle_16}
                 heading={resume.headings.certifications}
                 certificates={resume.certifications}
-                styles={certification}
+                styles={template_16_styles}
               />
             )}
           </div>
@@ -297,7 +191,7 @@ const ResumeTemplate16 = () => {
                 customStyle={customStyle_16}
                 heading={resume.headings.trainings}
                 trainings={resume.trainings}
-                styles={training}
+                styles={template_16_styles}
               />
             )}
           </div>
@@ -309,7 +203,7 @@ const ResumeTemplate16 = () => {
                 customStyle={customStyle_16}
                 heading={resume.headings.awards}
                 awards={resume.awards}
-                styles={award}
+                styles={template_16_styles}
               />
             )}
           </div>
@@ -319,7 +213,7 @@ const ResumeTemplate16 = () => {
               <Project
                 heading={resume.headings.projects}
                 projects={resume.projects}
-                styles={projectStyles}
+                styles={template_16_styles}
                 customStyle={customStyle_16}
               />
             )}
@@ -332,7 +226,7 @@ const ResumeTemplate16 = () => {
                 customStyle={customStyle_16}
                 heading={resume.headings.references}
                 references={resume.references}
-                styles={reference}
+                styles={template_16_styles}
               />
             )}
           </div>
@@ -343,7 +237,7 @@ const ResumeTemplate16 = () => {
               <Education
                 heading={resume.headings.education}
                 educations={resume.education}
-                styles={education}
+                styles={template_16_styles}
                 customStyle={customStyle_16}
               />
             )}

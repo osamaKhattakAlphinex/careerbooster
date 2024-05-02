@@ -3,48 +3,13 @@ import { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { setField } from "@/store/resumeSlice";
-import {
-  crossIcon1,
-  emailIcon,
-  phoneIcon,
-  resumeEductionIcon,
-  resumeSkillsIcon,
-  resumeSummaryIcon,
-  resumeWorkExpIcon,
-} from "@/helpers/iconsProvider";
-import Loader from "@/components/common/Loader";
 
-import useGetSummary from "@/hooks/useGetSummary";
-import Toolbar from "@/components/dashboard/Toolbar";
 import EditableField from "@/components/dashboard/EditableField";
-import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
-import useSaveResumeToDB from "@/hooks/useSaveToDB";
-import useDragAndDrop from "@/hooks/useDragAndDrop";
-import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
-import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
-import useUpdateAndSave from "@/hooks/useUpdateAndSave";
-import useHandler from "@/hooks/useHandler";
-import ColorPicker from "../colorPicker";
-import { ColorResult } from "react-color";
-import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
-import AddItemToCustomSection from "../../resume-builder/AddItemToCustomSection";
 import Publication from "./resume-sections/publication";
 import {
-  award,
-  certification,
+  template_9_styles,
   conditionStyleHeader,
   customStyle_9,
-  education,
-  experience,
-  interest,
-  language,
-  projectStyles,
-  publicationStyles,
-  reference,
-  summary,
-  template_8_styles,
-  template_9_styles,
-  training,
 } from "@/helpers/templateStylesObj";
 import Certification from "./resume-sections/certification";
 import Training from "./resume-sections/trainings";
@@ -59,74 +24,13 @@ import Project from "./resume-sections/project";
 import Header from "./resume-sections/header";
 import Contact from "./resume-sections/contact";
 import Skill from "./resume-sections/skills";
+import useSaveResumeToDB from "@/hooks/useSaveToDB";
 // import CustomResumeSection from "../../resume-builder/CustomResumeSection";
 const ResumeTemplate9 = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state: any) => state.resume);
-  const [newPrimarySkill, setNewPrimarySkill] = useState(false);
-  const [newWorkExperience, setNewWorkExperience] = useState<number>();
-  const [newAchievement, setNewAchievement] = useState("");
-
-  const [primarySkill, setPrimarySkill] = useState<string>("");
-  const [confirmationModal, setConfirmationModal] = useState(false);
-  const [insideIndex, setInsideIndex] = useState<number>(0);
-
-  const [regenerating, setRegenerating] = useState(false);
-  const { getPrimarySkills } = useGetPrimarySkills(setRegenerating);
-
-  const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
-    number | null
-  >(null);
-  const [streamedSummaryData, setStreamedSummaryData] = useState("");
-  const { getSummary } = useGetSummary(setStreamedSummaryData);
-  const [streamedJDData, setStreamedJDData] = useState<any>("");
   const { saveResumeToDB } = useSaveResumeToDB();
-  const userData = useSelector((state: any) => state.userData);
 
-  //add new code
-
-  const { getOneWorkExperienceNew } = useSingleJDGenerate(setStreamedJDData);
-  const { handleDropPrimary, handleDropAchievement, handleDropExperience } =
-    useDragAndDrop();
-
-  //New code end
-
-  useEffect(() => {
-    if (streamedJDData === "") {
-      setStreamedJDData(null);
-      setRegeneratedRecordIndex(null);
-    }
-  }, [streamedJDData]);
-
-  // handle regenrate
-  const handleRegenrate = (rec: any, i: number) => {
-    getOneWorkExperienceNew(rec);
-    setRegeneratedRecordIndex(i);
-  };
-
-  //add Skills
-  const handleAddSkills = () => {
-    setNewPrimarySkill(true);
-  };
-
-  //save skills
-  const handleSaveSkills = () => {
-    if (primarySkill.trim() !== "") {
-      addPrimarySkill(primarySkill);
-      setPrimarySkill("");
-    }
-  };
-
-  const { addPrimarySkill } = useAddPrimarySkill();
-  const { updateSaveHook } = useUpdateAndSave();
-  const { handlers } = useHandler();
-  // const [color, setColor] = useState("#1a202c");
-  // const saveColor = (color: ColorResult) => {
-  // Access the selected color value from the 'color' parameter
-  // setColor(color.hex);
-
-  // You can do whatever you need with the selected color here
-  // };
   return (
     <div className="w-full text-gray-900 first-page">
       <div className="flex flex-row items-center justify-between px-8 pt-2 xs:pt-4">
@@ -175,7 +79,7 @@ const ResumeTemplate9 = () => {
           <Summary
             heading={resume.headings.summary}
             summary={resume.summary}
-            styles={summary}
+            styles={template_9_styles}
             customStyle={customStyle_9}
           />
           {/* Skills */}
@@ -195,7 +99,7 @@ const ResumeTemplate9 = () => {
             workExperienceArray={resume.workExperienceArray}
             workExperience={resume.workExperience}
             customStyle={customStyle_9}
-            styles={experience}
+            styles={template_9_styles}
           />
 
           {/* Add Custom */}
@@ -207,7 +111,7 @@ const ResumeTemplate9 = () => {
                 customStyle={customStyle_9}
                 heading={resume.headings.publications}
                 publications={resume.publications}
-                styles={publicationStyles}
+                styles={template_9_styles}
               />
             )}
           </div>
@@ -218,7 +122,7 @@ const ResumeTemplate9 = () => {
                 customStyle={customStyle_9}
                 heading={resume.headings.certifications}
                 certificates={resume.certifications}
-                styles={certification}
+                styles={template_9_styles}
               />
             )}
           </div>
@@ -230,7 +134,7 @@ const ResumeTemplate9 = () => {
                 customStyle={customStyle_9}
                 heading={resume.headings.trainings}
                 trainings={resume.trainings}
-                styles={training}
+                styles={template_9_styles}
               />
             )}
           </div>
@@ -242,7 +146,7 @@ const ResumeTemplate9 = () => {
                 customStyle={customStyle_9}
                 heading={resume.headings.awards}
                 awards={resume.awards}
-                styles={award}
+                styles={template_9_styles}
               />
             )}
           </div>
@@ -252,7 +156,7 @@ const ResumeTemplate9 = () => {
               <Project
                 heading={resume.headings.projects}
                 projects={resume.projects}
-                styles={projectStyles}
+                styles={template_9_styles}
                 customStyle={customStyle_9}
               />
             )}
@@ -264,7 +168,7 @@ const ResumeTemplate9 = () => {
                 customStyle={customStyle_9}
                 heading={resume.headings.interests}
                 interests={resume.interests}
-                styles={interest}
+                styles={template_9_styles}
               />
             )}
           </div>
@@ -276,7 +180,7 @@ const ResumeTemplate9 = () => {
                 customStyle={customStyle_9}
                 heading={resume.headings.references}
                 references={resume.references}
-                styles={reference}
+                styles={template_9_styles}
               />
             )}
           </div>
@@ -288,7 +192,7 @@ const ResumeTemplate9 = () => {
                 customStyle={customStyle_9}
                 heading={resume.headings.languages}
                 languages={resume.languages}
-                styles={language}
+                styles={template_9_styles}
               />
             )}
           </div>
@@ -299,7 +203,7 @@ const ResumeTemplate9 = () => {
               <Education
                 heading={resume.headings.education}
                 educations={resume.education}
-                styles={education}
+                styles={template_9_styles}
                 customStyle={customStyle_9}
               />
             )}

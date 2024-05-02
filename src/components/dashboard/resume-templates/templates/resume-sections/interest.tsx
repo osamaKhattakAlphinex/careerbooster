@@ -15,6 +15,7 @@ type Props = {
   styles: any;
   customStyle?: any;
   rounded_style?: any;
+  isSidebar?: boolean;
 };
 const Interest = ({
   heading,
@@ -22,6 +23,7 @@ const Interest = ({
   styles,
   customStyle,
   rounded_style,
+  isSidebar,
 }: Props) => {
   const { handlers } = useHandler();
   const { updateSaveHook } = useUpdateAndSave();
@@ -271,7 +273,7 @@ const Interest = ({
         );
       })}
 
-      <AddItemToCustomSection recName="interests" />
+      <AddItemToCustomSection recName="interests" isSidebar={isSidebar} />
     </>
   );
 };

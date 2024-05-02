@@ -1,5 +1,6 @@
 "use client";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
+import { useAppContext } from "@/context/AppContext";
 import { EditIcon, deleteIcon } from "@/helpers/iconsProvider";
 import { makeid } from "@/helpers/makeid";
 import { showSuccessToast, showWarningToast } from "@/helpers/toast";
@@ -337,13 +338,13 @@ export const PublicationsForm = ({
         <div className="flex flex-row-reverse items-center justify-end gap-2 ">
           <input
             type="submit"
-            className="form-btn"
+            className="form-btn cursor-pointer"
             value={isEditing ? "Update Publication" : "Add Publication"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="form-btn "
+            className="form-btn cursor-pointer "
             value="Cancel"
           />
         </div>
@@ -500,12 +501,12 @@ export const CertificationsForm = ({
         <div className="flex flex-row-reverse items-center justify-end gap-2 mb-4">
           <input
             type="submit"
-            className="form-btn "
+            className="form-btn cursor-pointer "
             value={isEditing ? "Update Certification" : "Add Certification"}
           />
           <input
             type="button"
-            className="form-btn"
+            className="form-btn cursor-pointer"
             value="Cancel"
             onClick={formCloseHandler}
           />
@@ -666,13 +667,13 @@ export const AwardsForm = ({
         <div className="flex flex-row-reverse items-center justify-end gap-2 ">
           <input
             type="submit"
-            className="form-btn"
+            className="form-btn cursor-pointer"
             value={isEditing ? "Update Awards" : "Add Awards"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="form-btn"
+            className="form-btn cursor-pointer"
             value="Cancel"
           />
         </div>
@@ -689,7 +690,7 @@ export const InterestsForm = ({
   const dispatch = useDispatch();
   const stepTen = useSelector((state: any) => state.register.stepTen);
   const { list, state } = stepTen;
-
+  const { isSidebar } = useAppContext();
   useEffect(() => {
     if (rec) {
       formik.setValues(rec);
@@ -756,7 +757,9 @@ export const InterestsForm = ({
           <label
             htmlFor="name"
             className={`block mb-2 text-sm font-bold  ${
-              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+              pathname == "/profile-review" || isSidebar
+                ? "text-gray-200"
+                : "text-gray-950"
             }`}
           >
             Name
@@ -774,7 +777,9 @@ export const InterestsForm = ({
           <label
             htmlFor="description"
             className={`block mb-2 text-sm font-bold  ${
-              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+              pathname == "/profile-review" || isSidebar
+                ? "text-gray-200"
+                : "text-gray-950"
             }`}
           >
             Description
@@ -790,13 +795,13 @@ export const InterestsForm = ({
         <div className="flex flex-row-reverse items-center justify-end gap-2">
           <input
             type="submit"
-            className="form-btn"
+            className="form-btn cursor-pointer"
             value={isEditing ? "Update Interest" : "Add Interest"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="form-btn"
+            className="form-btn cursor-pointer cursor-pointer"
             value="Cancel"
           />
         </div>
@@ -941,13 +946,13 @@ export const ReferencesForm = ({
         <div className="flex flex-row-reverse items-center justify-end gap-2 ">
           <input
             type="submit"
-            className="form-btn"
+            className="form-btn cursor-pointer "
             value={isEditing ? "Update Preference" : "Add Reference"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="form-btn"
+            className="form-btn cursor-pointer"
             value="Cancel"
           />{" "}
         </div>
@@ -1125,13 +1130,13 @@ export const TrainingForm = ({
         <div className="flex flex-row-reverse items-center justify-end gap-2 ">
           <input
             type="submit"
-            className="form-btn"
+            className="form-btn cursor-pointer"
             value={isEditing ? "Update Training" : "Add Training"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="form-btn"
+            className="form-btn cursor-pointer"
             value="Cancel"
           />
         </div>
@@ -1146,6 +1151,7 @@ export const LangaugesForm = ({
   formSubmitHandler = null,
 }: any) => {
   const dispatch = useDispatch();
+  const { isSidebar } = useAppContext();
   const stepEleven = useSelector((state: any) => state.register.stepEleven);
   const { list, state } = stepEleven;
 
@@ -1190,6 +1196,7 @@ export const LangaugesForm = ({
     //   company: Yup.string().required("company is required"),
     // }),
   });
+
   const pathname = usePathname();
   return (
     <div>
@@ -1198,7 +1205,9 @@ export const LangaugesForm = ({
           <label
             htmlFor="language"
             className={`block mb-2 text-sm font-bold  ${
-              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+              pathname == "/profile-review" || isSidebar
+                ? "text-gray-200"
+                : "text-gray-950"
             }`}
           >
             Language
@@ -1216,7 +1225,9 @@ export const LangaugesForm = ({
           <label
             htmlFor="proficiency"
             className={`block mb-2 text-sm font-bold  ${
-              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
+              pathname == "/profile-review" || isSidebar
+                ? "text-gray-200"
+                : "text-gray-950"
             }`}
           >
             Proficiency
@@ -1225,7 +1236,11 @@ export const LangaugesForm = ({
             id="proficiency"
             value={formik.values.proficiency}
             onChange={formik.handleChange}
-            className="form-control"
+            className={`form-control ${
+              pathname == "/profile-review" || isSidebar
+                ? "text-gray-200"
+                : "text-gray-950"
+            }`}
           >
             <option value="Beginner">Beginner</option>
             <option value="Intermediate">Intermediate</option>
@@ -1235,13 +1250,13 @@ export const LangaugesForm = ({
         <div className="flex flex-row-reverse items-center justify-end gap-2 ">
           <input
             type="submit"
-            className="form-btn"
+            className="form-btn cursor-pointer"
             value={isEditing ? "Update Language" : "Add Language"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="form-btn"
+            className="form-btn cursor-pointer"
             value="Cancel"
           />
         </div>
@@ -1256,7 +1271,7 @@ export const ProjectsForm = ({
   formSubmitHandler = null,
 }: any) => {
   const dispatch = useDispatch();
-  const stepFourteen= useSelector((state: any) => state.register.stepFourteen);
+  const stepFourteen = useSelector((state: any) => state.register.stepFourteen);
   const { list, state } = stepFourteen;
 
   useEffect(() => {
@@ -1272,7 +1287,6 @@ export const ProjectsForm = ({
     },
 
     onSubmit: async (values) => {
-
       if (formSubmitHandler !== null) {
         const { description } = values;
         const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings
@@ -1360,13 +1374,13 @@ export const ProjectsForm = ({
         <div className="flex flex-row-reverse items-center justify-end gap-2">
           <input
             type="submit"
-            className="form-btn"
+            className="form-btn cursor-pointer"
             value={isEditing ? "Update Project" : "Add Project"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="form-btn"
+            className="form-btn cursor-pointer"
             value="Cancel"
           />
         </div>

@@ -1,46 +1,12 @@
 "use client";
-import { memo, useEffect, useState } from "react";
+import { memo } from "react";
 import React from "react";
 import { useSelector } from "react-redux";
-
-import {
-  crossIcon1,
-  emailIcon,
-  phoneIcon,
-  resumeEductionIcon,
-  resumeSkillsIcon,
-  resumeSummaryIcon,
-  resumeWorkExpIcon,
-} from "@/helpers/iconsProvider";
-import Loader from "@/components/common/Loader";
-
-import useGetSummary from "@/hooks/useGetSummary";
-import Toolbar from "@/components/dashboard/Toolbar";
-import EditableField from "@/components/dashboard/EditableField";
-import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
-import useDragAndDrop from "@/hooks/useDragAndDrop";
-import useGetPrimarySkills from "@/hooks/useGetPrimarySkills";
-import useAddPrimarySkill from "@/hooks/useAddPrimarySkill";
-import useUpdateAndSave from "@/hooks/useUpdateAndSave";
-import useHandler from "@/hooks/useHandler";
-import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
-import AddItemToCustomSection from "../../resume-builder/AddItemToCustomSection";
 import Publication from "./resume-sections/publication";
 import {
-  award,
-  certification,
+  template_8_styles,
   conditionStyleHeader,
   customStyle_8,
-  education,
-  experience,
-  interest,
-  language,
-  projectStyles,
-  publicationStyles,
-  reference,
-  summary,
-  template_8_styles,
-  training,
 } from "@/helpers/templateStylesObj";
 import Certification from "./resume-sections/certification";
 import Training from "./resume-sections/trainings";
@@ -58,59 +24,6 @@ import Skill from "./resume-sections/skills";
 // import CustomResumeSection from "../../resume-builder/CustomResumeSection";
 const ResumeTemplate8 = () => {
   const resume = useSelector((state: any) => state.resume);
-  const [newPrimarySkill, setNewPrimarySkill] = useState(false);
-  const [newWorkExperience, setNewWorkExperience] = useState<number>();
-
-  const [newAchievement, setNewAchievement] = useState("");
-  const [confirmationModal, setConfirmationModal] = useState(false);
-  const [primarySkill, setPrimarySkill] = useState<string>("");
-  const [regenerating, setRegenerating] = useState(false);
-  const { getPrimarySkills } = useGetPrimarySkills(setRegenerating);
-  const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
-    number | null
-  >(null);
-  const [streamedSummaryData, setStreamedSummaryData] = useState("");
-  const { getSummary } = useGetSummary(setStreamedSummaryData);
-  const [streamedJDData, setStreamedJDData] = useState<any>("");
-
-  //add new code
-
-  const { getOneWorkExperienceNew } = useSingleJDGenerate(setStreamedJDData);
-  const { handleDropPrimary, handleDropAchievement, handleDropExperience } =
-    useDragAndDrop();
-
-  //New code end
-
-  const [insideIndex, setInsideIndex] = useState<number>(0);
-  const { addPrimarySkill } = useAddPrimarySkill();
-  const { updateSaveHook } = useUpdateAndSave();
-  const { handlers } = useHandler();
-
-  useEffect(() => {
-    if (streamedJDData === "") {
-      setStreamedJDData(null);
-      setRegeneratedRecordIndex(null);
-    }
-  }, [streamedJDData]);
-
-  // handle regenrate
-  const handleRegenrate = (rec: any, i: number) => {
-    getOneWorkExperienceNew(rec);
-    setRegeneratedRecordIndex(i);
-  };
-
-  //add Skills
-  const handleAddSkills = () => {
-    setNewPrimarySkill(true);
-  };
-
-  //save skills
-  const handleSaveSkills = () => {
-    if (primarySkill.trim() !== "") {
-      addPrimarySkill(primarySkill);
-      setPrimarySkill("");
-    }
-  };
 
   return (
     <div className="w-full text-gray-900 first-page">
@@ -137,7 +50,7 @@ const ResumeTemplate8 = () => {
           <Summary
             heading={resume.headings.summary}
             summary={resume.summary}
-            styles={summary}
+            styles={template_8_styles}
             customStyle={customStyle_8}
           />
           {/* Skills */}
@@ -157,7 +70,7 @@ const ResumeTemplate8 = () => {
             workExperienceArray={resume.workExperienceArray}
             workExperience={resume.workExperience}
             customStyle={customStyle_8}
-            styles={experience}
+            styles={template_8_styles}
           />
 
           {/* Add Custom */}
@@ -169,7 +82,7 @@ const ResumeTemplate8 = () => {
                 customStyle={customStyle_8}
                 heading={resume.headings.publications}
                 publications={resume.publications}
-                styles={publicationStyles}
+                styles={template_8_styles}
               />
             )}
           </div>
@@ -181,7 +94,7 @@ const ResumeTemplate8 = () => {
                 customStyle={customStyle_8}
                 heading={resume.headings.certifications}
                 certificates={resume.certifications}
-                styles={certification}
+                styles={template_8_styles}
               />
             )}
           </div>
@@ -193,7 +106,7 @@ const ResumeTemplate8 = () => {
                 customStyle={customStyle_8}
                 heading={resume.headings.trainings}
                 trainings={resume.trainings}
-                styles={training}
+                styles={template_8_styles}
               />
             )}
           </div>
@@ -205,7 +118,7 @@ const ResumeTemplate8 = () => {
                 customStyle={customStyle_8}
                 heading={resume.headings.awards}
                 awards={resume.awards}
-                styles={award}
+                styles={template_8_styles}
               />
             )}
           </div>
@@ -215,7 +128,7 @@ const ResumeTemplate8 = () => {
               <Project
                 heading={resume.headings.projects}
                 projects={resume.projects}
-                styles={projectStyles}
+                styles={template_8_styles}
                 customStyle={customStyle_8}
               />
             )}
@@ -227,7 +140,7 @@ const ResumeTemplate8 = () => {
                 customStyle={customStyle_8}
                 heading={resume.headings.interests}
                 interests={resume.interests}
-                styles={interest}
+                styles={template_8_styles}
               />
             )}
           </div>
@@ -239,7 +152,7 @@ const ResumeTemplate8 = () => {
                 customStyle={customStyle_8}
                 heading={resume.headings.references}
                 references={resume.references}
-                styles={reference}
+                styles={template_8_styles}
               />
             )}
           </div>
@@ -251,7 +164,7 @@ const ResumeTemplate8 = () => {
                 customStyle={customStyle_8}
                 heading={resume.headings.languages}
                 languages={resume.languages}
-                styles={language}
+                styles={template_8_styles}
               />
             )}
           </div>
@@ -261,7 +174,7 @@ const ResumeTemplate8 = () => {
               <Education
                 heading={resume.headings.education}
                 educations={resume.education}
-                styles={education}
+                styles={template_8_styles}
                 customStyle={customStyle_8}
               />
             )}

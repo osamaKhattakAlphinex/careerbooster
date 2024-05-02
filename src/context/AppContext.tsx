@@ -1,12 +1,14 @@
 "use client";
-import React, { createContext, useContext,  ReactNode, useState } from "react";
+import React, { createContext, useContext, ReactNode, useState } from "react";
 
 // Define a type for your references
 interface AppContexts {
   availableCredits: boolean;
-  setAvailableCredits:any;
+  setAvailableCredits: any;
   abortController: AbortController | null;
   setAbortController: any;
+  setIsSidebar: any;
+  isSidebar: boolean;
   // Add more references as needed
 }
 
@@ -18,14 +20,16 @@ interface AppContextsProvider {
   children: ReactNode;
 }
 
-const AppContextsProvider: React.FC<AppContextsProvider> = ({
-  children,
-}) => {
+const AppContextsProvider: React.FC<AppContextsProvider> = ({ children }) => {
   // Create refs for each reference
-const [availableCredits,setAvailableCredits] = useState<boolean>(false)
-const [abortController, setAbortController] = useState<AbortController | null>(new AbortController());
+  const [availableCredits, setAvailableCredits] = useState<boolean>(false);
+  const [isSidebar, setIsSidebar] = useState<boolean>(false);
+  const [abortController, setAbortController] =
+    useState<AbortController | null>(new AbortController());
   // Define the context value
   const contextValue: AppContexts = {
+    isSidebar,
+    setIsSidebar,
     availableCredits,
     setAvailableCredits,
     abortController,

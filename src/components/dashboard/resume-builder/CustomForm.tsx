@@ -19,8 +19,12 @@ import useHandler from "@/hooks/useHandler";
 import { makeid } from "@/helpers/makeid";
 
 const years = getYearsList();
+type Props = {
+  setShowCustomForm: any;
+  recName: any;
+};
 
-const CustomForm = ({ setShowCustomForm, recName }: any) => {
+const CustomForm = ({ setShowCustomForm, recName }: Props) => {
   const { handlers } = useHandler();
   const formHandlers: any = {
     publications: async (values: any) => {
