@@ -88,9 +88,9 @@ export const template_6_styles = {
   skill_heading:
     "flex flex-row flex-wrap items-center gap-2 my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500",
   skill_ul:
-    "border-2 border-transparent hover:border-dashed hover:border-gray-500  pl-0 flex flex-row  flex-wrap gap-1 h-[20%] text-xs !list-disc",
+    "border-2 border-transparent hover:border-dashed hover:border-gray-500 px-4 gap-1 flex flex-wrap h-[20%] text-xs",
   skill_li:
-    "hover:shadow-md  w-[32%]  sm:w-[32%]  hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex  items-center before:text-black before:text-base before:h-4 before:w-1 items-center before:aspect-square before:flex before:items-center before:content-['•'] before:mr-2",
+    "hover:shadow-md  w-[32%]  sm:w-[32%]  hover:cursor-move parent hover:border-dashed mr-2 hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px]",
   training_h3: "publication_h3",
   training_div: "publication_div",
   training_h1: "achievement_h1",
@@ -219,9 +219,9 @@ export const template_8_styles = {
   skill_heading:
     "flex items-center my-1 justify-center gap-2  text-base font-semibold uppercase wl-full border-2 border-transparent hover:border-dashed hover:border-gray-500 ",
   skill_ul:
-    "border-2 border-transparent hover:border-dashed hover:border-gray-500  pl-0 flex flex-row  flex-wrap gap-1 h-[20%]  mb-4 text-xs  !list-disc",
+    "border-2 border-transparent hover:border-dashed hover:border-gray-500  px-4 flex  flex-wrap gap-1 h-[20%] gap-4 mx-2 text-xs",
   skill_li:
-    "hover:shadow-md w-[30%] xs:w-[45%] xs:pr-4 md:w-[30%] hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex  items-center before:text-black before:text-base before:h-4 before:w-1 items-center before:aspect-square before:flex before:items-center before:content-['•'] before:mr-2",
+    "hover:shadow-md w-[30%] xs:w-[45%] xs:pr-4 md:w-[30%] hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px]",
   training_h3: "publication_h3",
   training_div: "publication_div",
   training_h1: "achievement_h1",
@@ -351,9 +351,9 @@ export const template_9_styles = {
   skill_heading:
     "flex items-center gap-2 my-1 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500",
   skill_ul:
-    "border-2 border-transparent hover:border-dashed hover:border-gray-500  pl-0 flex flex-row  flex-wrap gap-1 h-[20%]  mb-4 text-xs !list-disc",
+    "border-2 border-transparent hover:border-dashed hover:border-gray-500  px-4  flex flex-wrap  gap-1 h-[20%]  mb-4 text-xs",
   skill_li:
-    "hover:shadow-md w-[30%] xs:w-full md:w-[30%]  hover:cursor-move parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex  items-center before:text-black  before:mr-2 before:text-base before:h-4 before:w-1 items-center before:aspect-square before:flex before:items-center before:content-['•']",
+    "hover:shadow-md w-[30%] xs:w-full md:w-[30%]  hover:cursor-move hover:border-dashed mx-2 hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px]",
   training_h3: "publication_h3",
   training_div: "publication_div",
   training_h1: "achievement_h1",
@@ -483,9 +483,9 @@ export const template_10_styles = {
   skill_heading:
     "flex flex-row items-center gap-2 mb-0 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500",
   skill_ul:
-    "flex flex-col gap-3 mb-4 text-xs border-2 border-transparent hover:border-dashed hover:border-gray-500 !list-disc",
+    "flex flex-col gap-3 mb-4 text-xs border-2 px-4 border-transparent hover:border-dashed hover:border-gray-500",
   skill_li:
-    "hover:shadow-md hover:cursor-move parent border-transparent border-[1px] hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-500 flex gap-2  items-center before:text-black before:mr-2 before:text-base before:h-4 before:w-1 items-center before:aspect-square before:flex before:items-center before:content-['•']",
+    "hover:shadow-md hover:cursor-move parent border-transparent border-[1px] hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-500",
   training_h3: "publication_h3",
   training_div: "publication_div",
   training_h1: "achievement_h1",
@@ -624,9 +624,9 @@ export const template_15_styles = {
   skill_heading:
     "flex uppercase text-base xs:px-2 font-semibold text-gray-100 gap-2 items-center  py-1 rounded-sm  border-2 border-transparent hover:border-dashed hover:border-gray-500",
   skill_ul:
-    "flex flex-col w-full gap-1 pl-0 mb-4 text-xs border-2 border-transparent hover:border-dashed hover:border-gray-500 mt-4",
+    "flex flex-col w-full gap-2 px-4  mb-4 text-xs border-2 border-transparent hover:border-dashed hover:border-gray-500 mt-4",
   skill_li:
-    "hover:shadow-md hover:cursor-move px-0 xs:px-2 md:px-0 parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex items-center gap-2 before:text-black before:text-base before:h-4 before:w-1 items-center before:mr-2 before:aspect-square before:flex before:items-center before:content-['•']",
+    "hover:shadow-md hover:cursor-move px-0 xs:px-2 md:px-0 parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px]",
   training_h3: "publication_h3",
   training_div: "publication_div",
   training_h1: "achievement_h1",
@@ -767,9 +767,9 @@ export const template_16_styles = {
   skill_heading:
     "flex flex-row items-center w-full gap-2 my-1 text-base font-semibold text-white uppercase border-2 border-transparent rounded-sm hover:border-dashed hover:border-gray-500",
   skill_ul:
-    "flex flex-col w-full gap-2 pl-0 mb-4 text-xs text-gray-300 border-2 border-transparent hover:border-dashed hover:border-gray-500",
+    "flex flex-col w-full gap-2 px-4 mb-4 text-xs text-gray-300 border-2 border-transparent hover:border-dashed hover:border-gray-500",
   skill_li:
-    "hover:shadow-md hover:cursor-move parent hover:text-black hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex items-center before:text-white before:text-base before:h-4 before:w-1 items-center before:mr-2 before:aspect-square before:flex before:items-center before:content-['•'] ",
+    "hover:shadow-md hover:cursor-move parent hover:text-black hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px]",
   training_h3: "publication_h3",
   training_div: "publication_div",
   training_h1: "achievement_h1",
