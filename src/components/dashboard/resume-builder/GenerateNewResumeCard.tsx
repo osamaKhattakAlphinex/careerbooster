@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { memo, useMemo, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -39,8 +39,13 @@ const GenerateResume = ({ handleGenerate }: Props) => {
   const state = useSelector((state: any) => state.resume.state);
   const userData = useSelector((state: any) => state.userData);
   const memoizedState = useMemo(() => state, [state]);
-
   const { resumeElementRef } = useTourContext();
+
+  useEffect(() => {
+    setResumeType(memoizedState.resumeType);
+  }, [memoizedState]);
+
+  console.log("Memoized", memoizedState);
 
   return (
     <div
