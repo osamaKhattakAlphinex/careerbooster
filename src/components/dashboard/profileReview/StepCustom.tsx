@@ -698,7 +698,6 @@ export const InterestsForm = ({
 
   const formik = useFormik({
     initialValues: {
-      name: "",
       description: "",
     },
 
@@ -743,33 +742,11 @@ export const InterestsForm = ({
         formCloseHandler();
       }
     },
-
-    validationSchema: Yup.object().shape({
-      name: Yup.string().required("name is required"),
-    }),
   });
   const pathname = usePathname();
   return (
     <div>
       <form onSubmit={formik.handleSubmit} className="form">
-        <div className="mb-4">
-          <label
-            htmlFor="name"
-            className={`block mb-2 text-sm font-bold  ${
-              pathname == "/profile-review" ? "text-gray-200" : "text-gray-950"
-            }`}
-          >
-            Name
-          </label>
-          <input
-            id="name"
-            type="text"
-            className="form-control"
-            placeholder="Name"
-            value={formik.values.name}
-            onChange={formik.handleChange}
-          />
-        </div>
         <div className="mb-4">
           <label
             htmlFor="description"
@@ -1256,7 +1233,7 @@ export const ProjectsForm = ({
   formSubmitHandler = null,
 }: any) => {
   const dispatch = useDispatch();
-  const stepFourteen= useSelector((state: any) => state.register.stepFourteen);
+  const stepFourteen = useSelector((state: any) => state.register.stepFourteen);
   const { list, state } = stepFourteen;
 
   useEffect(() => {
@@ -1272,7 +1249,6 @@ export const ProjectsForm = ({
     },
 
     onSubmit: async (values) => {
-
       if (formSubmitHandler !== null) {
         const { description } = values;
         const descriptionArray = description.split("\n").filter(Boolean); // Split description by '\n' and remove empty strings

@@ -13,7 +13,6 @@ export interface Education {
   toYear?: string;
 }
 
-
 export interface Tours {
   resumeBuilder: boolean;
   coverLetter: boolean;
@@ -80,7 +79,6 @@ export interface Certification {
 
 export interface Interest {
   id?: string;
-  name?: string;
   description?: string;
 }
 
@@ -90,7 +88,7 @@ export interface Language {
   proficiency?: string; // This could be levels like beginner, intermediate, advanced, or specific proficiency scores
 }
 
-export interface Project{
+export interface Project {
   id?: string;
   title?: string;
   description?: string;
@@ -158,7 +156,7 @@ const initialState: UserDataSlice = {
   },
   education: [],
   experience: [],
-  references:[],
+  references: [],
   trainings: [],
   languages: [],
   interests: [],
