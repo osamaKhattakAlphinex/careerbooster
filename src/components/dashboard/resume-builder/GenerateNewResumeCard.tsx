@@ -45,8 +45,6 @@ const GenerateResume = ({ handleGenerate }: Props) => {
     setResumeType(memoizedState.resumeType);
   }, [memoizedState]);
 
-  console.log("Memoized", memoizedState);
-
   return (
     <div
       ref={(ref: any) => (resumeElementRef.current = ref)}
