@@ -12,10 +12,9 @@ type Props = {
   summary: any;
   customStyle?: any;
   styles: any;
-  bgColor?: any;
 };
 
-const Summary = ({ summary, heading, customStyle, styles, bgColor }: Props) => {
+const Summary = ({ summary, heading, customStyle, styles }: Props) => {
   const { updateSaveHook } = useUpdateAndSave();
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const { getSummary } = useGetSummary(setStreamedSummaryData);
@@ -30,7 +29,7 @@ const Summary = ({ summary, heading, customStyle, styles, bgColor }: Props) => {
       <h2
         className={`${styles?.publication_h3} ${
           customStyle?.centeredHeading ? "justify-center" : ""
-        } ${bgColor}`}
+        } ${styles?.bgColor}`}
       >
         {resumeSummaryIcon}
         <EditableField

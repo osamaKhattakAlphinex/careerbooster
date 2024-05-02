@@ -469,6 +469,8 @@ export const template_9_styles = {
   span2: "span2",
 };
 export const template_10_styles = {
+  bgColor:
+    "rounded-3xl xs:-mx-1 md:mx-0 text-gray-100 bg-[#043382] py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-fit",
   full_Name_Style:
     "text-4xl font-bold text-gray-100 border-2 border-transparent hover:shadow-md hover:bg-gray-500 hover:border-dashed hover:border-gray-500 flex justify-center",
   jobTitle:
@@ -609,6 +611,7 @@ export const template_10_styles = {
   span2: "span2",
 };
 export const template_15_styles = {
+  bgColor: "bg-[#444440] text-gray-100 py-1 px-4 flex gap-2 rounded-sm",
   full_Name_Style:
     "text-4xl font-bold text-center xs:text-4xl hover:shadow-md hover:bg-gray-100 border-2 border-transparent hover:border-dashed hover:border-gray-500",
   jobTitle:

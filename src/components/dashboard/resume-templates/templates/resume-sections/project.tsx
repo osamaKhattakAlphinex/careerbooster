@@ -15,16 +15,9 @@ type Props = {
   projects: any;
   customStyle?: any;
   styles?: any;
-  bgColor?: any;
 };
 
-const Project = ({
-  heading,
-  projects,
-  styles,
-  customStyle,
-  bgColor,
-}: Props) => {
+const Project = ({ heading, projects, styles, customStyle }: Props) => {
   const [rewardIndex, setRewardIndex] = useState<number>();
   const { handlers } = useHandler();
   const [newReward, setNewReward] = useState("");
@@ -48,7 +41,7 @@ const Project = ({
       <h3
         className={`${styles?.project_h3}  ${
           customStyle?.centeredHeading ? "justify-center" : ""
-        } ${bgColor} `}
+        } ${styles.bgColor} `}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

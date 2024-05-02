@@ -252,7 +252,6 @@ const ResumeTemplate10 = () => {
               summary={resume.summary}
               styles={template_10_styles}
               customStyle={customStyle_10}
-              bgColor="rounded-3xl xs:-mx-1 md:mx-0 text-gray-100 bg-[#043382] py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-fit"
             />
           </div>
 
@@ -262,7 +261,6 @@ const ResumeTemplate10 = () => {
               heading={resume.headings.workExperienceArray}
               workExperienceArray={resume.workExperienceArray}
               workExperience={resume.workExperience}
-              bgColor="rounded-3xl xs:-mx-1 md:mx-0 text-gray-100 bg-[#043382] py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-fit"
               customStyle={customStyle_10}
               styles={template_10_styles}
             />
@@ -278,7 +276,6 @@ const ResumeTemplate10 = () => {
                 heading={resume.headings.publications}
                 publications={resume.publications}
                 styles={template_10_styles}
-                bgColor="rounded-3xl xs:-mx-1 md:mx-0 text-gray-100 bg-[#043382] py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-fit"
               />
             )}
           </div>
@@ -291,7 +288,6 @@ const ResumeTemplate10 = () => {
                 heading={resume.headings.certifications}
                 certificates={resume.certifications}
                 styles={template_10_styles}
-                bgColor="rounded-3xl xs:-mx-1 md:mx-0 text-gray-100 bg-[#043382] py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-fit"
               />
             )}
           </div>
@@ -304,7 +300,6 @@ const ResumeTemplate10 = () => {
                 heading={resume.headings.trainings}
                 trainings={resume.trainings}
                 styles={template_10_styles}
-                bgColor="rounded-3xl xs:-mx-1 md:mx-0 text-gray-100 bg-[#043382] py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-fit"
               />
             )}
           </div>
@@ -317,7 +312,6 @@ const ResumeTemplate10 = () => {
                 heading={resume.headings.awards}
                 awards={resume.awards}
                 styles={template_10_styles}
-                bgColor="rounded-3xl xs:-mx-1 md:mx-0 text-gray-100 bg-[#043382] py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-fit"
               />
             )}
           </div>
@@ -329,7 +323,6 @@ const ResumeTemplate10 = () => {
                 projects={resume.projects}
                 styles={template_10_styles}
                 customStyle={customStyle_10}
-                bgColor="rounded-3xl xs:-mx-1 md:mx-0 text-gray-100 bg-[#043382] py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-fit"
               />
             )}
           </div>
@@ -342,7 +335,6 @@ const ResumeTemplate10 = () => {
                 heading={resume.headings.references}
                 references={resume.references}
                 styles={template_10_styles}
-                bgColor="rounded-3xl xs:-mx-1 md:mx-0 text-gray-100 bg-[#043382] py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-fit"
               />
             )}
           </div>
@@ -355,7 +347,6 @@ const ResumeTemplate10 = () => {
                 educations={resume.education}
                 styles={template_10_styles}
                 customStyle={customStyle_10}
-                bgColor="rounded-3xl xs:-mx-1 md:mx-0 text-gray-100 bg-[#043382] py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-fit"
               />
             )}
           </div>

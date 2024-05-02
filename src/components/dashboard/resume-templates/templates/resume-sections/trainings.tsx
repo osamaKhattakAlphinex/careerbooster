@@ -15,15 +15,8 @@ type Props = {
   trainings: any;
   styles: any;
   customStyle?: any;
-  bgColor?: any;
 };
-const Training = ({
-  heading,
-  trainings,
-  styles,
-  customStyle,
-  bgColor,
-}: Props) => {
+const Training = ({ heading, trainings, styles, customStyle }: Props) => {
   const [trainingIndex, setTrainingIndex] = useState<number>();
   const { handlers } = useHandler();
   const [newTraining, setNewTraining] = useState("");
@@ -51,7 +44,7 @@ const Training = ({
         className={`${styles?.training_h3} ${
           customStyle?.centeredHeading ? "justify-center" : ""
         }
-          ${bgColor}
+          ${styles?.bgColor}
         `}
       >
         <svg

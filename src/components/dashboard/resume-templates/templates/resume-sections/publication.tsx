@@ -15,16 +15,9 @@ type Props = {
   publications: any;
   styles: any;
   customStyle?: any;
-  bgColor?: any;
 };
 
-const Publication = ({
-  heading,
-  publications,
-  styles,
-  customStyle,
-  bgColor,
-}: Props) => {
+const Publication = ({ heading, publications, styles, customStyle }: Props) => {
   const [pulicationIndex, setPulicationIndex] = useState<number>();
   const { handlers } = useHandler();
   const { updateSaveHook } = useUpdateAndSave();
@@ -48,7 +41,7 @@ const Publication = ({
       <h3
         className={`${styles?.publication_h3}  ${
           customStyle?.centeredHeading ? "justify-center" : ""
-        } ${bgColor} `}
+        } ${styles?.bgColor} `}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

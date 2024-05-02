@@ -246,7 +246,6 @@ const ResumeTemplate15 = () => {
             summary={resume.summary}
             styles={summary}
             customStyle={customStyle_15}
-            bgColor="bg-[#444440] text-gray-100 py-1 px-4 flex gap-2 rounded-sm"
           />
           {/* Work Experience */}
           <div className="space-y-4">
@@ -256,7 +255,6 @@ const ResumeTemplate15 = () => {
               workExperience={resume.workExperience}
               customStyle={customStyle_15}
               styles={experience}
-              bgColor="bg-[#444440] text-gray-100 py-1 px-4 flex gap-2 rounded-sm"
             />
           </div>
 
@@ -270,7 +268,6 @@ const ResumeTemplate15 = () => {
                 heading={resume.headings.publications}
                 publications={resume.publications}
                 styles={publicationStyles}
-                bgColor="bg-[#444440] text-gray-100 py-1 px-4 flex gap-2 rounded-sm"
               />
             )}
           </div>
@@ -283,7 +280,6 @@ const ResumeTemplate15 = () => {
                 heading={resume.headings.certifications}
                 certificates={resume.certifications}
                 styles={certification}
-                bgColor="bg-[#444440] text-gray-100 py-1 px-4 flex gap-2 rounded-sm"
               />
             )}
           </div>
@@ -296,7 +292,6 @@ const ResumeTemplate15 = () => {
                 heading={resume.headings.trainings}
                 trainings={resume.trainings}
                 styles={training}
-                bgColor="bg-[#444440] text-gray-100 py-1 px-4 flex gap-2 rounded-sm"
               />
             )}
           </div>
@@ -309,7 +304,6 @@ const ResumeTemplate15 = () => {
                 heading={resume.headings.awards}
                 awards={resume.awards}
                 styles={award}
-                bgColor="bg-[#444440] text-gray-100 py-1 px-4 flex gap-2 rounded-sm"
               />
             )}
           </div>
@@ -321,7 +315,6 @@ const ResumeTemplate15 = () => {
                 projects={resume.projects}
                 styles={projectStyles}
                 customStyle={customStyle_15}
-                bgColor="bg-[#444440] text-gray-100 py-1 px-4 flex gap-2 rounded-sm"
               />
             )}
           </div>
@@ -334,7 +327,6 @@ const ResumeTemplate15 = () => {
                 heading={resume.headings.references}
                 references={resume.references}
                 styles={reference}
-                bgColor="bg-[#444440] text-gray-100 py-1 px-4 flex gap-2 rounded-sm"
               />
             )}
           </div>
@@ -347,7 +339,6 @@ const ResumeTemplate15 = () => {
                 educations={resume.education}
                 styles={education}
                 customStyle={customStyle_15}
-                bgColor="bg-[#444440] text-gray-100 py-1 px-4 flex gap-2 rounded-sm"
               />
             )}
           </div>

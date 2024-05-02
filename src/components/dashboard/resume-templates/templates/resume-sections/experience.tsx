@@ -15,7 +15,6 @@ type Props = {
   workExperience: any;
   styles: any;
   customStyle?: any;
-  bgColor?: any;
 };
 
 const Experience = ({
@@ -23,7 +22,7 @@ const Experience = ({
   workExperienceArray,
   workExperience,
   customStyle,
-  bgColor,
+
   styles,
 }: Props) => {
   const [newAchievement, setNewAchievement] = useState("");
@@ -61,7 +60,7 @@ const Experience = ({
       <h2
         className={`${styles?.experienceHeading_temp_2} ${
           customStyle?.centeredHeading ? "justify-center" : ""
-        }  ${bgColor} `}
+        }  ${styles?.bgColor} `}
       >
         {resumeWorkExpIcon}
 
