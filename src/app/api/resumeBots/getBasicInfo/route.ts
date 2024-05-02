@@ -367,7 +367,6 @@ export async function POST(req: any) {
         await updateToolUsage("Resume Builder", creditsUsed);
 
         // make a trainBot entry
-
         try {
           if (trainBotData) {
             await startDB();
