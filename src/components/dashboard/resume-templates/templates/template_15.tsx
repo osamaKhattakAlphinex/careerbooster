@@ -31,7 +31,6 @@ import { ColorResult } from "react-color";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import Publication from "./resume-sections/publication";
 import {
-  
   conditionStyleHeader,
   customStyle_15,
   template_15_styles,
@@ -187,7 +186,11 @@ const ResumeTemplate15 = () => {
             />
           </h3>
           <span className="w-full h-0 my-3 border-stylee"></span>
-          <Contact contact={resume.contact} styles={template_15_styles} />
+          <Contact
+            contact={resume.contact}
+            styles={template_15_styles}
+            iconColor="text-[#444440]"
+          />
 
           {/* Skills */}
 
