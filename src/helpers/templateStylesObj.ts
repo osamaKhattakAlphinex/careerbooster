@@ -1,8 +1,4 @@
 import { educationIcon, sparkleIcon } from "./iconsProvider";
-<<<<<<< HEAD
-=======
-
->>>>>>> 140198f559b3b311194ad6e8766959096d182552
 // Header Styles
 
 const header = {
@@ -13,11 +9,7 @@ const header = {
 const conditionStyleHeader = {
   line: false,
   span1: false,
-<<<<<<< HEAD
-}
-=======
 };
->>>>>>> 140198f559b3b311194ad6e8766959096d182552
 
 //contact styles
 
@@ -1204,45 +1196,6 @@ const education = {
   education_li_date: "education_li_date",
   span1: "span1",
   span2: "span2",
-<<<<<<< HEAD
-  underline: true ,
-  education_bg : "education_bg"
-}
-export const customStyle_4 = {
-    borderTopBottom: false,
-    borderBottom: true,
-    centeredHeading: false,
-  bg_color_l: true,
-  education_bg : "education_bg"
-}
-export const customStyle_2 = {
-    borderTopBottom: false,
-    borderBottom: false,
-  centeredHeading: false,
-  underline: true,
-  bg_color_l: true,
-  education_bg : "education_bg"
-}
-export const customStyle_8 = { borderTopBottom: true, centeredHeading: true  }
-export const customStyle_6 =
-  { borderTopBottom: true, centeredHeading: false}
-export const customStyle_9 =
-  { borderTopBottom: true, centeredHeading: false, bg_color_l : true, education_bg: "education_bg" }
-export const customStyle_10 = {
-    borderTopBottom: false,
-    centeredHeading: false,
-  bgColor: "bg_color_9",
-    education_bg : "education_bg"
- }
-export const customStyle_15 = {
-    borderTopBottom: false,
-    centeredHeading: false,
-  bgColor: "bg_color",
-  education_bg: "education_bg",
-  bg_color_l : true
-}
- export const customStyle_16 = {
-=======
 };
 export const customStyle_4 = {
   borderTopBottom: false,
@@ -1262,7 +1215,6 @@ export const customStyle_9 = {
   education_bg: "education_bg",
 };
 export const customStyle_10 = {
->>>>>>> 140198f559b3b311194ad6e8766959096d182552
   borderTopBottom: false,
   centeredHeading: false,
   bgColor: "bg_color_9",
