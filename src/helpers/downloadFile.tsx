@@ -262,7 +262,7 @@ h2:empty {
       // docRef.current.download = fileName;
       docRef.current.click();
       setLoading(false);
-    });
+    }).catch((error) => console.log(error));
   };
 
   return (

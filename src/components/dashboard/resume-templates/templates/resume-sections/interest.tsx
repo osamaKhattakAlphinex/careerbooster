@@ -50,6 +50,7 @@ const Interest = ({
             customStyle?.centeredHeading ? "justify-center" : ""
           }
           ${customStyle?.bgColor}
+          ${styles?.underline ? "underline" : null}
         `}
         >
           <svg

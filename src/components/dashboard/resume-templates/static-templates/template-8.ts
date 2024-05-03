@@ -254,12 +254,13 @@ const components: any = {
     tag: "span",
   },
   name: {
-    styles: "text-2xl font-bold flex text-gray-950/80 items-center w-full mx-6",
+    styles:
+      "text-2xl font-bold flex text-gray-950/80 items-center w-[70%] mx-6",
     tag: "span",
   },
   jobTitle: {
     tag: "span",
-    styles: "text-base flex text-gray-950/80 w-full mb-2 px-6",
+    styles: "text-base flex text-gray-950/80 w-[70%] mb-2 px-6 ",
   },
   contact: {
     styles: "w-full",

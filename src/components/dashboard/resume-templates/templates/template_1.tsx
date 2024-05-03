@@ -3,7 +3,15 @@ import { memo, useEffect, useState } from "react";
 import React from "react";
 import { TwitterPicker, ColorResult } from "react-color";
 import { useSelector } from "react-redux";
-import { crossIcon1, emailIcon, phoneIcon } from "@/helpers/iconsProvider";
+import {
+  crossIcon1,
+  emailIcon,
+  emailIconFilled,
+  homeIconFilled,
+  linkedInIconFilled,
+  phoneIcon,
+  phoneIconFilled,
+} from "@/helpers/iconsProvider";
 import Loader from "@/components/common/Loader";
 import useGetSummary from "@/hooks/useGetSummary";
 import Toolbar from "@/components/dashboard/Toolbar";
@@ -172,7 +180,8 @@ const ResumeTemplate1 = ({
           <ul className="flex flex-row justify-between pl-0 my-2 text-xs break-all xs:flex-wrap md:flex-nowrap md:gap-3 md:flex-row">
             <li className="xs:w-full md:w-[25%] hover:shadow-md hover:bg-gray-100 xs:text-[8px] md:text-xs flex flex-row gap-1  items-center justify-start ">
               <div className="p-1">
-                <svg
+                {phoneIconFilled}
+                {/* <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -185,7 +194,7 @@ const ResumeTemplate1 = ({
                     strokeLinejoin="round"
                     d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
                   />
-                </svg>
+                </svg> */}
               </div>
               <EditableField
                 value={
@@ -202,7 +211,8 @@ const ResumeTemplate1 = ({
             </li>
             <li className="xs:w-full md:w-[25%] hover:shadow-md hover:bg-gray-100 flex flex-row gap-1 items-center justify-start md:text-xs xs:text-[8px]">
               <div className="p-1">
-                <svg
+                {emailIconFilled}
+                {/* <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -215,7 +225,7 @@ const ResumeTemplate1 = ({
                     strokeLinejoin="round"
                     d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
                   />
-                </svg>
+                </svg> */}
               </div>
               <EditableField
                 value={
@@ -232,7 +242,7 @@ const ResumeTemplate1 = ({
             </li>
             <li className="xs:-full md:w-[25%] flex flex-row items-center justify-start gap-1 xs:text-[8px] md:text-xs hover:shadow-md hover:bg-gray-100">
               <div className="p-1">
-                <svg
+                {/* <svg
                   viewBox="0 0 19 19"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -247,7 +257,8 @@ const ResumeTemplate1 = ({
                     d="M6.15572 13V7.54545H6.99379V13H6.15572ZM6.58185 6.63636C6.4185 6.63636 6.27764 6.58073 6.15927 6.46946C6.04326 6.35819 5.98526 6.22443 5.98526 6.06818C5.98526 5.91193 6.04326 5.77817 6.15927 5.6669C6.27764 5.55563 6.4185 5.5 6.58185 5.5C6.74521 5.5 6.88488 5.55563 7.00089 5.6669C7.11926 5.77817 7.17844 5.91193 7.17844 6.06818C7.17844 6.22443 7.11926 6.35819 7.00089 6.46946C6.88488 6.58073 6.74521 6.63636 6.58185 6.63636ZM9.36683 9.71875V13H8.52876V7.54545H9.33842V8.39773H9.40945C9.53729 8.12074 9.73142 7.8982 9.99183 7.73011C10.2522 7.55966 10.5884 7.47443 11.0004 7.47443C11.3697 7.47443 11.6928 7.55019 11.9698 7.7017C12.2468 7.85085 12.4622 8.07812 12.6161 8.38352C12.77 8.68655 12.8469 9.07008 12.8469 9.53409V13H12.0089V9.59091C12.0089 9.16241 11.8976 8.8286 11.6751 8.58949C11.4525 8.34801 11.1471 8.22727 10.7589 8.22727C10.4914 8.22727 10.2522 8.28527 10.0415 8.40128C9.83321 8.51728 9.66868 8.68655 9.54794 8.90909C9.4272 9.13163 9.36683 9.40152 9.36683 9.71875Z"
                     fill="black"
                   />
-                </svg>
+                </svg> */}
+                {linkedInIconFilled}
               </div>
 
               <EditableField
@@ -268,7 +279,7 @@ const ResumeTemplate1 = ({
             </li>
             <li className="xs:w-full md:w-[25%] flex flex-row items-center justify-start gap-1 xs:text-[8px] md:text-xs text-gray-950 hover:shadow-md hover:bg-gray-100">
               <div className="p-1">
-                <svg
+                {/* <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -281,7 +292,8 @@ const ResumeTemplate1 = ({
                     strokeLinejoin="round"
                     d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
                   />
-                </svg>
+                </svg> */}
+                {homeIconFilled}
               </div>
               <EditableField
                 value={resume?.contact?.address ? resume.contact.address : ""}
@@ -909,7 +921,7 @@ const ResumeTemplate1 = ({
             )}
 
             {/* Education */}
-            <div className="w-full  mb-2">
+            <div className="w-full mb-2">
               {resume?.education.length > 0 && (
                 <Education
                   heading={resume.headings.education}

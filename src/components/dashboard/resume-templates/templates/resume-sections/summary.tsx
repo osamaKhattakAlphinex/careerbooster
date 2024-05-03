@@ -27,7 +27,7 @@ const Summary = ({ summary, heading, customStyle, styles }: Props) => {
         }`}
       ></span>
       <h2
-        className={`${styles?.publication_h3} ${
+        className={`${styles?.publication_h3} ${customStyle?.bgColor} ${
           customStyle?.centeredHeading ? "justify-center" : ""
         } ${styles?.bgColor}`}
       >

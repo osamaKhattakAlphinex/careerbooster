@@ -46,6 +46,8 @@ const Certification = ({
         className={`${styles?.certification_h3} ${
           customStyle?.centeredHeading ? "justify-center" : ""
         }
+          ${customStyle?.bgColor}
+          ${styles?.underline ? "underline" : null}
           ${styles?.bgColor}
         `}
       >

@@ -30,6 +30,7 @@
     "formik": "^2.4.3",
     "js-tiktoken": "^1.0.10",
     "jsonwebtoken": "^9.0.2",
+    "jszip": "^3.10.1",
     "mongoose": "^7.4.3",
     "next": "13.4.12",
     "next-auth": "^4.23.0",

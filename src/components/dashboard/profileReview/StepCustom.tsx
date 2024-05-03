@@ -338,13 +338,13 @@ export const PublicationsForm = ({
         <div className="flex flex-row-reverse items-center justify-end gap-2 ">
           <input
             type="submit"
-            className="form-btn cursor-pointer"
+            className="cursor-pointer form-btn"
             value={isEditing ? "Update Publication" : "Add Publication"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="form-btn cursor-pointer "
+            className="cursor-pointer form-btn "
             value="Cancel"
           />
         </div>
@@ -501,12 +501,12 @@ export const CertificationsForm = ({
         <div className="flex flex-row-reverse items-center justify-end gap-2 mb-4">
           <input
             type="submit"
-            className="form-btn cursor-pointer "
+            className="cursor-pointer form-btn "
             value={isEditing ? "Update Certification" : "Add Certification"}
           />
           <input
             type="button"
-            className="form-btn cursor-pointer"
+            className="cursor-pointer form-btn"
             value="Cancel"
             onClick={formCloseHandler}
           />
@@ -667,13 +667,13 @@ export const AwardsForm = ({
         <div className="flex flex-row-reverse items-center justify-end gap-2 ">
           <input
             type="submit"
-            className="form-btn cursor-pointer"
+            className="cursor-pointer form-btn"
             value={isEditing ? "Update Awards" : "Add Awards"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="form-btn cursor-pointer"
+            className="cursor-pointer form-btn"
             value="Cancel"
           />
         </div>
@@ -750,26 +750,6 @@ export const InterestsForm = ({
       <form onSubmit={formik.handleSubmit} className="form">
         <div className="mb-4">
           <label
-            htmlFor="name"
-            className={`block mb-2 text-sm font-bold  ${
-              pathname == "/profile-review" || isSidebar
-                ? "text-gray-200"
-                : "text-gray-950"
-            }`}
-          >
-            Name
-          </label>
-          <input
-            id="name"
-            type="text"
-            className="form-control"
-            placeholder="Name"
-            value={formik.values.name}
-            onChange={formik.handleChange}
-          />
-        </div>
-        <div className="mb-4">
-          <label
             htmlFor="description"
             className={`block mb-2 text-sm font-bold  ${
               pathname == "/profile-review" || isSidebar
@@ -790,13 +770,13 @@ export const InterestsForm = ({
         <div className="flex flex-row-reverse items-center justify-end gap-2">
           <input
             type="submit"
-            className="form-btn cursor-pointer"
+            className="cursor-pointer form-btn"
             value={isEditing ? "Update Interest" : "Add Interest"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="form-btn cursor-pointer cursor-pointer"
+            className="cursor-pointer form-btn"
             value="Cancel"
           />
         </div>
@@ -941,13 +921,13 @@ export const ReferencesForm = ({
         <div className="flex flex-row-reverse items-center justify-end gap-2 ">
           <input
             type="submit"
-            className="form-btn cursor-pointer "
+            className="cursor-pointer form-btn "
             value={isEditing ? "Update Preference" : "Add Reference"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="form-btn cursor-pointer"
+            className="cursor-pointer form-btn"
             value="Cancel"
           />{" "}
         </div>
@@ -1125,13 +1105,13 @@ export const TrainingForm = ({
         <div className="flex flex-row-reverse items-center justify-end gap-2 ">
           <input
             type="submit"
-            className="form-btn cursor-pointer"
+            className="cursor-pointer form-btn"
             value={isEditing ? "Update Training" : "Add Training"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="form-btn cursor-pointer"
+            className="cursor-pointer form-btn"
             value="Cancel"
           />
         </div>
@@ -1245,13 +1225,13 @@ export const LangaugesForm = ({
         <div className="flex flex-row-reverse items-center justify-end gap-2 ">
           <input
             type="submit"
-            className="form-btn cursor-pointer"
+            className="cursor-pointer form-btn"
             value={isEditing ? "Update Language" : "Add Language"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="form-btn cursor-pointer"
+            className="cursor-pointer form-btn"
             value="Cancel"
           />
         </div>
@@ -1369,13 +1349,13 @@ export const ProjectsForm = ({
         <div className="flex flex-row-reverse items-center justify-end gap-2">
           <input
             type="submit"
-            className="form-btn cursor-pointer"
+            className="cursor-pointer form-btn"
             value={isEditing ? "Update Project" : "Add Project"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="form-btn cursor-pointer"
+            className="cursor-pointer form-btn"
             value="Cancel"
           />
         </div>
