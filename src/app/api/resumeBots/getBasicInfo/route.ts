@@ -371,7 +371,6 @@ export async function POST(req: any) {
         try {
           if (trainBotData) {
             await startDB();
-            await startDB();
             const primarySkillsId = makeid();
 
             const payload = {
