@@ -2,9 +2,6 @@ import { educationIcon, sparkleIcon } from "./iconsProvider";
 export const conditionStyleHeader = {
   line: false,
   span1: false,
-<<<<<<< HEAD
-}
-=======
 };
 export const template_2_styles = {
   full_Name_Style: "fullName_temp_2",
@@ -1111,7 +1108,6 @@ export const customStyle_9 = {
   education_bg: "education_bg",
 };
 export const customStyle_10 = {
->>>>>>> 140198f559b3b311194ad6e8766959096d182552
   borderTopBottom: false,
   centeredHeading: false,
   bgColor: "bg_color_9",
