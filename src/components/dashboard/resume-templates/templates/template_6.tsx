@@ -23,7 +23,6 @@ import Language from "./resume-sections/language";
 import {
   conditionStyleHeader,
   customStyle_6,
-  summary,
   template_6_styles,
 } from "@/helpers/templateStylesObj";
 import Summary from "./resume-sections/summary";
@@ -53,7 +52,7 @@ const ResumeTemplate6 = () => {
             <Summary
               heading={resume.headings.summary}
               summary={resume.summary}
-              styles={summary}
+              styles={template_6_styles}
               customStyle={customStyle_6}
             />
 

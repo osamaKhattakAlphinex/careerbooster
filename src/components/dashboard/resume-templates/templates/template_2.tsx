@@ -17,23 +17,9 @@ import Skill from "./resume-sections/skills";
 import Summary from "./resume-sections/summary";
 import Header from "./resume-sections/header";
 import {
-  award,
-  certification,
   conditionStyleHeader,
-  contact,
   customStyle_2,
-  customStyle_4,
-  education,
-  experience,
-  header,
-  interest,
-  language,
-  projectStyles,
-  publicationStyles,
-  reference,
-  skill,
-  summary,
-  training,
+  template_2_styles,
 } from "@/helpers/templateStylesObj";
 import Project from "./resume-sections/project";
 
@@ -62,44 +48,20 @@ const ResumeTemplate2 = () => {
         <Header
           name={resume.name}
           jobTitle={resume.jobTitle}
-          styles={header}
+          styles={template_2_styles}
           conditionStyleHeader={conditionStyleHeader}
         />
-        {/* <div className="absolute top-0 left-12">
-          <ColorPicker
-            defaultColor="#e9e8e8"
-            resetColor="#e9e8e8"
-            setColor={setColor}
-            styles_pin="relative top-[6px]  -left-5"
-            styles_div="absolute top-3 left-0"
-            secondDefaultColor="#e9e8e8"
-            setColor_second={setColor_second}
-            saveColor={saveColor}
-          />
-        </div> */}
       </div>
       {/* contacts */}
       <div className="relative w-full">
-        <Contact contact={resume.contact} styles={contact} />
-        {/* <div className="absolute top-0 left-12">
-          <ColorPicker\
-            defaultColor="#e9e8e8"
-            resetColor="#e9e8e8"
-            setColor={setColor}
-            styles_pin="relative top-[18px]  -left-9"
-            styles_div="absolute top-3 left-0"
-            secondDefaultColor="#e9e8e8"
-            setColor_second={setColor_second}
-            saveColor={saveColor_second}
-          />
-        </div> */}
+        <Contact contact={resume.contact} styles={template_2_styles} />
       </div>
       {/* summary objective */}
       <div className="w-full ">
         <Summary
           heading={resume.headings.summary}
           summary={resume.summary}
-          styles={summary}
+          styles={template_2_styles}
           customStyle={customStyle_2}
         />
       </div>
@@ -108,7 +70,7 @@ const ResumeTemplate2 = () => {
         <Skill
           heading={resume.headings.primarySkills}
           skills={resume.primarySkills}
-          styles={skill}
+          styles={template_2_styles}
         />
       </div>
 
@@ -118,7 +80,7 @@ const ResumeTemplate2 = () => {
           heading={resume.headings.workExperienceArray}
           workExperienceArray={resume.workExperienceArray}
           workExperience={resume.workExperience}
-          styles={experience}
+          styles={template_2_styles}
         />
       </div>
 
@@ -128,7 +90,7 @@ const ResumeTemplate2 = () => {
           <Publication
             heading={resume.headings.publications}
             publications={resume.publications}
-            styles={publicationStyles}
+            styles={template_2_styles}
           />
         </div>
       )}
@@ -139,7 +101,7 @@ const ResumeTemplate2 = () => {
           <Certification
             heading={resume.headings.certifications}
             certificates={resume.certifications}
-            styles={certification}
+            styles={template_2_styles}
           />
         </div>
       )}
@@ -150,7 +112,7 @@ const ResumeTemplate2 = () => {
           <Training
             heading={resume.headings.trainings}
             trainings={resume.trainings}
-            styles={training}
+            styles={template_2_styles}
           />
         </div>
       )}
@@ -161,7 +123,7 @@ const ResumeTemplate2 = () => {
           <Award
             heading={resume.headings.awards}
             awards={resume.awards}
-            styles={award}
+            styles={template_2_styles}
           />
         </div>
       )}
@@ -171,7 +133,7 @@ const ResumeTemplate2 = () => {
           <Project
             heading={resume.headings.projects}
             projects={resume.projects}
-            styles={projectStyles}
+            styles={template_2_styles}
             customStyle={customStyle_2}
           />
         </div>
@@ -183,7 +145,7 @@ const ResumeTemplate2 = () => {
           <Project
             heading={resume.headings.projects}
             projects={resume.projects}
-            // styles={award}
+            styles={template_2_styles}
           />
         </div>
       )}
@@ -194,7 +156,7 @@ const ResumeTemplate2 = () => {
           <Interest
             heading={resume.headings.interests}
             interests={resume.interests}
-            styles={interest}
+            styles={template_2_styles}
             customStyle={customStyle_2}
           />
         </div>
@@ -206,7 +168,7 @@ const ResumeTemplate2 = () => {
           <Reference
             heading={resume.headings.references}
             references={resume.references}
-            styles={reference}
+            styles={template_2_styles}
           />
         </div>
       )}
@@ -217,7 +179,7 @@ const ResumeTemplate2 = () => {
           <Language
             heading={resume.headings.languages}
             languages={resume.languages}
-            styles={language}
+            styles={template_2_styles}
           />
         </div>
       )}
@@ -231,7 +193,7 @@ const ResumeTemplate2 = () => {
           <Education
             heading={resume.headings.education}
             educations={resume.education}
-            styles={education}
+            styles={template_2_styles}
             customStyle={customStyle_2}
           />
         )}
