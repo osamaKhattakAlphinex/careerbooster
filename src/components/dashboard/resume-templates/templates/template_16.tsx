@@ -15,8 +15,6 @@ import Publication from "./resume-sections/publication";
 import {
   conditionStyleHeader,
   customStyle_16,
-  experience,
-  summary,
   template_16_styles,
 } from "@/helpers/templateStylesObj";
 import Certification from "./resume-sections/certification";
@@ -142,7 +140,7 @@ const ResumeTemplate16 = () => {
           <Summary
             heading={resume.headings.summary}
             summary={resume.summary}
-            styles={summary}
+            styles={template_16_styles}
             customStyle={customStyle_16}
           />
 
@@ -153,7 +151,7 @@ const ResumeTemplate16 = () => {
               workExperienceArray={resume.workExperienceArray}
               workExperience={resume.workExperience}
               customStyle={customStyle_16}
-              styles={experience}
+              styles={template_16_styles}
             />
           </div>
           {/* Custom section */}

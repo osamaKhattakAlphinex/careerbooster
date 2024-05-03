@@ -27,18 +27,8 @@ import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import { formatDate } from "@/helpers/getFormattedDateTime";
 import Project from "./resume-sections/project";
 import {
-  award,
-  certification,
   customStyle_6,
-  education,
-  experience,
-  interest,
-  language,
-  projectStyles,
-  publicationStyles,
-  reference,
-  summary,
-  training,
+  template_6_styles,
 } from "@/helpers/templateStylesObj";
 import Summary from "./resume-sections/summary";
 import Experience from "./resume-sections/experience";
@@ -847,7 +837,7 @@ const ResumeTemplate1 = ({
               <Publication
                 heading={resume.headings.publications}
                 publications={resume.publications}
-                styles={publicationStyles}
+                styles={template_6_styles}
                 customStyle={customStyle_6}
               />
             )}
@@ -857,7 +847,7 @@ const ResumeTemplate1 = ({
                 customStyle={customStyle_6}
                 heading={resume.headings.certifications}
                 certificates={resume.certifications}
-                styles={certification}
+                styles={template_6_styles}
               />
             )}
             {/* Trainings */}
@@ -865,7 +855,7 @@ const ResumeTemplate1 = ({
               <Training
                 heading={resume.headings.trainings}
                 trainings={resume.trainings}
-                styles={training}
+                styles={template_6_styles}
                 customStyle={customStyle_6}
               />
             )}
@@ -875,7 +865,7 @@ const ResumeTemplate1 = ({
               <Award
                 heading={resume.headings.awards}
                 awards={resume.awards}
-                styles={award}
+                styles={template_6_styles}
                 customStyle={customStyle_6}
               />
             )}
@@ -885,7 +875,7 @@ const ResumeTemplate1 = ({
                 <Project
                   heading={resume.headings.projects}
                   projects={resume.projects}
-                  styles={projectStyles}
+                  styles={template_6_styles}
                   customStyle={customStyle_6}
                 />
               )}
@@ -895,7 +885,7 @@ const ResumeTemplate1 = ({
               <Interest
                 heading={resume.headings.interests}
                 interests={resume.interests}
-                styles={interest}
+                styles={template_6_styles}
                 customStyle={customStyle_6}
               />
             )}
@@ -905,7 +895,7 @@ const ResumeTemplate1 = ({
               <Reference
                 heading={resume.headings.references}
                 references={resume.references}
-                styles={reference}
+                styles={template_6_styles}
                 customStyle={customStyle_6}
               />
             )}
@@ -915,7 +905,7 @@ const ResumeTemplate1 = ({
               <Language
                 heading={resume.headings.languages}
                 languages={resume.languages}
-                styles={language}
+                styles={template_6_styles}
                 customStyle={customStyle_6}
               />
             )}
@@ -926,7 +916,7 @@ const ResumeTemplate1 = ({
                 <Education
                   heading={resume.headings.education}
                   educations={resume.education}
-                  styles={education}
+                  styles={template_6_styles}
                   customStyle={customStyle_6}
                 />
               )}

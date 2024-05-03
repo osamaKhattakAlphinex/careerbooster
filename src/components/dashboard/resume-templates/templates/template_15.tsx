@@ -31,20 +31,10 @@ import { ColorResult } from "react-color";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import Publication from "./resume-sections/publication";
 import {
-  award,
-  certification,
+  
   conditionStyleHeader,
   customStyle_15,
-  education,
-  experience,
-  interest,
-  language,
-  projectStyles,
-  publicationStyles,
-  reference,
-  summary,
   template_15_styles,
-  training,
 } from "@/helpers/templateStylesObj";
 import Certification from "./resume-sections/certification";
 import Training from "./resume-sections/trainings";
@@ -244,7 +234,7 @@ const ResumeTemplate15 = () => {
           <Summary
             heading={resume.headings.summary}
             summary={resume.summary}
-            styles={summary}
+            styles={template_15_styles}
             customStyle={customStyle_15}
           />
           {/* Work Experience */}
@@ -254,7 +244,7 @@ const ResumeTemplate15 = () => {
               workExperienceArray={resume.workExperienceArray}
               workExperience={resume.workExperience}
               customStyle={customStyle_15}
-              styles={experience}
+              styles={template_15_styles}
             />
           </div>
 
@@ -267,7 +257,7 @@ const ResumeTemplate15 = () => {
                 customStyle={customStyle_15}
                 heading={resume.headings.publications}
                 publications={resume.publications}
-                styles={publicationStyles}
+                styles={template_15_styles}
               />
             )}
           </div>
@@ -279,7 +269,7 @@ const ResumeTemplate15 = () => {
                 customStyle={customStyle_15}
                 heading={resume.headings.certifications}
                 certificates={resume.certifications}
-                styles={certification}
+                styles={template_15_styles}
               />
             )}
           </div>
@@ -291,7 +281,7 @@ const ResumeTemplate15 = () => {
                 customStyle={customStyle_15}
                 heading={resume.headings.trainings}
                 trainings={resume.trainings}
-                styles={training}
+                styles={template_15_styles}
               />
             )}
           </div>
@@ -303,7 +293,7 @@ const ResumeTemplate15 = () => {
                 customStyle={customStyle_15}
                 heading={resume.headings.awards}
                 awards={resume.awards}
-                styles={award}
+                styles={template_15_styles}
               />
             )}
           </div>
@@ -313,7 +303,7 @@ const ResumeTemplate15 = () => {
               <Project
                 heading={resume.headings.projects}
                 projects={resume.projects}
-                styles={projectStyles}
+                styles={template_15_styles}
                 customStyle={customStyle_15}
               />
             )}
@@ -326,7 +316,7 @@ const ResumeTemplate15 = () => {
                 customStyle={customStyle_15}
                 heading={resume.headings.references}
                 references={resume.references}
-                styles={reference}
+                styles={template_15_styles}
               />
             )}
           </div>
@@ -337,7 +327,7 @@ const ResumeTemplate15 = () => {
               <Education
                 heading={resume.headings.education}
                 educations={resume.education}
-                styles={education}
+                styles={template_15_styles}
                 customStyle={customStyle_15}
               />
             )}
