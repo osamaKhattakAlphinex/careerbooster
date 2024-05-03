@@ -83,12 +83,7 @@ const Language = ({
       <ul className={`${styles?.language_ul} `}>
         {languages.map((rec: any, i: number) => {
           return (
-            <li
-              key={i}
-              className={`${styles?.language_li} ${
-                customStyle?.bg_color_l ? "bg-gray-300 p-2 rounded-md" : null
-              }`}
-            >
+            <li key={i} className={`${styles?.language_li}`}>
               <Toolbar
                 // addAchivement={() => setNewWorkExperience(i)}
                 deleteExperience={() =>
@@ -101,7 +96,7 @@ const Language = ({
                 // }}
               >
                 <div
-                  className={`${styles?.language_div} `}
+                  className={`${styles?.language_div} border`}
                   onDragStart={(e) =>
                     e.dataTransfer.setData("text/plain", i.toString())
                   }
