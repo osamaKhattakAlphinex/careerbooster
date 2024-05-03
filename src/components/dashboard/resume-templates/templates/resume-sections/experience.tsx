@@ -59,7 +59,9 @@ const Experience = ({
       <h2
         className={`${styles?.experienceHeading_temp_2} ${
           customStyle?.centeredHeading ? "justify-center" : ""
-        }  ${customStyle?.bgColor} `}
+        }  ${customStyle?.bgColor} ${
+          customStyle?.underline ? "underline" : null
+        } `}
       >
         {resumeWorkExpIcon}
 

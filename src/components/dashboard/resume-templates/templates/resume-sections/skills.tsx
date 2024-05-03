@@ -39,7 +39,11 @@ const Skill = ({ heading, skills, styles }: Props) => {
   return (
     <>
       {skills && skills.length > 0 && (
-        <h2 className={`${styles?.skill_heading}`}>
+        <h2
+          className={`${styles?.skill_heading} ${
+            styles?.underline ? "underline" : null
+          }`}
+        >
           {resumeSkillsIcon}
           <EditableField
             value={heading ? heading : "Skills"}

@@ -31,6 +31,7 @@ const Language = ({ heading, languages, styles, customStyle }: Props) => {
           customStyle?.centeredHeading ? "justify-center" : ""
         }
           ${customStyle?.bgColor}
+          ${styles?.underline ? "underline" : null}
         `}
       >
         <svg
@@ -66,10 +67,15 @@ const Language = ({ heading, languages, styles, customStyle }: Props) => {
             : "hidden"
         }`}
       ></span>
-      <ul className={`${styles?.language_ul}`}>
+      <ul className={`${styles?.language_ul} `}>
         {languages.map((rec: any, i: number) => {
           return (
-            <li key={i} className={`${styles?.language_li}`}>
+            <li
+              key={i}
+              className={`${styles?.language_li} ${
+                customStyle?.bg_color_l ? "bg-gray-300 p-2 rounded-md" : null
+              }`}
+            >
               <Toolbar
                 // addAchivement={() => setNewWorkExperience(i)}
                 deleteExperience={() =>
@@ -82,7 +88,7 @@ const Language = ({ heading, languages, styles, customStyle }: Props) => {
                 // }}
               >
                 <div
-                  className={`${styles?.language_div}`}
+                  className={`${styles?.language_div} `}
                   onDragStart={(e) =>
                     e.dataTransfer.setData("text/plain", i.toString())
                   }

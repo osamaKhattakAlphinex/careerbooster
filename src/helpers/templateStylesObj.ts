@@ -1,7 +1,4 @@
 import { educationIcon, sparkleIcon } from "./iconsProvider";
-
-
-
 // Header Styles
 
 const header = {
@@ -12,7 +9,6 @@ const header = {
 const conditionStyleHeader = {
   line: false,
   span1: false,
-  
 }
 
 //contact styles
@@ -21,6 +17,7 @@ const contact = {
   contact_ul: "contact_ul",
   contact_li: "contact_li",
 };
+
 export const contact_temp_8 = {
   contact_8_ul: "contact_8_ul",
   contact_8_li: "contact_8_li",
@@ -57,7 +54,8 @@ const summary = {
   achievement_save_btn: "achievement-save-btn",
   achievement_delete_btn: "achievement-delete-btn",
   span1: "span1",
-  span2: "span2",
+   span2: "span2",
+  underline :true
 };
 
 //skills styles
@@ -70,6 +68,7 @@ const skill = {
   span1: "span1",
   span2: "span2",
   skill_input: "skill_input",
+  underline : true
 };
 
 //publication styles
@@ -89,6 +88,7 @@ const publicationStyles = {
   publication_ul: "publication_ul",
   publication_li: "publication_li",
   publication_div_input: "publication_div_input",
+  underline :  true 
 };
 export const projectStyles = {
   project_h3: "publication_h3",
@@ -105,6 +105,7 @@ export const projectStyles = {
   project_ul: "publication_ul",
   project_li: "publication_li",
   project_div_input: "publication_div_input",
+  underline : true
 };
 
 const conditionStylePublication = {
@@ -127,6 +128,7 @@ const certification = {
   certification_new_input: "publication_new_input",
   span1: "span1",
   span2: "span2",
+  underline : true
 };
 
 //training styles
@@ -147,6 +149,7 @@ const training = {
   training_new_input: "publication_new_input",
   span1: "span1",
   span2: "span2",
+  underline : true
 };
 
 //interest styles
@@ -167,6 +170,7 @@ const interest = {
   interest_new_input: "publication_new_input",
   span1: "span1",
   span2: "span2",
+  underline : true
 };
 
 //award styles
@@ -187,6 +191,7 @@ const award = {
   award_new_input: "publication_new_input",
   span1: "span1",
   span2: "span2",
+  underline : true
 };
 
 // reference styles
@@ -207,6 +212,7 @@ const reference = {
   reference_new_input: "publication_new_input",
   span1: "span1",
   span2: "span2",
+  underline : true
 };
 
 //language styles
@@ -215,12 +221,13 @@ const language = {
   language_h3: "publication_h3",
   language_ul: "reference_ul",
   language_li: "reference_li",
-  language_div: "language_div ",
+  language_div: "language_div",
   language_h1: "achievement_h1",
   language_h2_1: "publication_h2_1",
   language_date: "publication_date",
   span1: "span1",
   span2: "span2",
+  underline :  true 
 };
 
 // education style
@@ -236,24 +243,29 @@ const education = {
   education_li_date : "education_li_date",
   span1: "span1",
   span2: "span2",
+  underline: true ,
+  education_bg : "education_bg"
 }
 export const customStyle_4 = {
     borderTopBottom: false,
     borderBottom: true,
     centeredHeading: false,
-  
+  bg_color_l: true,
+  education_bg : "education_bg"
 }
 export const customStyle_2 = {
     borderTopBottom: false,
     borderBottom: false,
-    centeredHeading: false,
-  
+  centeredHeading: false,
+  underline: true,
+  bg_color_l: true,
+  education_bg : "education_bg"
 }
 export const customStyle_8 = { borderTopBottom: true, centeredHeading: true  }
 export const customStyle_6 =
   { borderTopBottom: true, centeredHeading: false}
 export const customStyle_9 =
-  { borderTopBottom: true, centeredHeading: false, education_bg: "education_bg" }
+  { borderTopBottom: true, centeredHeading: false, bg_color_l : true, education_bg: "education_bg" }
 export const customStyle_10 = {
     borderTopBottom: false,
     centeredHeading: false,
@@ -264,7 +276,8 @@ export const customStyle_15 = {
     borderTopBottom: false,
     centeredHeading: false,
   bgColor: "bg_color",
-  education_bg : "education_bg"
+  education_bg: "education_bg",
+  bg_color_l : true
 }
  export const customStyle_16 = {
   borderTopBottom: false,

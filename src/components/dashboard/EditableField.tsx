@@ -27,8 +27,6 @@ const EditableField = ({
   onSave: (value: string) => void;
   text?: any;
 }) => {
-  console.log("Text", text);
-
   const [isEditing, setIsEditing] = useState(false);
   let new_value: any = normalizeValue(value);
   const [editedValue, setEditedValue] = useState<any>(new_value);

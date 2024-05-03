@@ -32,7 +32,9 @@ const Education = ({ heading, educations, styles, customStyle }: Props) => {
       <h3
         className={`${styles?.education_h3} ${
           customStyle?.centeredHeading ? "justify-center" : ""
-        } ${customStyle?.bgColor}`}
+        } 
+          ${styles?.underline ? "underline" : null}
+        ${customStyle?.bgColor} `}
       >
         {resumeEductionIcon}
 
@@ -60,6 +62,9 @@ const Education = ({ heading, educations, styles, customStyle }: Props) => {
           <React.Fragment key={education?.id || i}>
             <div
               className={`${styles?.education_div} ${customStyle?.education_bg} group`}
+              // style={{
+              //   backgroundColor: customStyle?.education_bg,
+              // }}
             >
               <li className={`${styles?.education_li} parent`}>
                 <EditableField

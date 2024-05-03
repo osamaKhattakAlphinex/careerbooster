@@ -41,7 +41,7 @@ const Project = ({ heading, projects, styles, customStyle }: Props) => {
       <h3
         className={`${styles?.project_h3}  ${
           customStyle?.centeredHeading ? "justify-center" : ""
-        } ${customStyle?.bgColor} `}
+        } ${customStyle?.bgColor} ${styles?.underline ? "underline" : null} `}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

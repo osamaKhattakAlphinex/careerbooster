@@ -207,6 +207,7 @@ const ResumeTemplate2 = () => {
             heading={resume.headings.languages}
             languages={resume.languages}
             styles={language}
+            customStyle={customStyle_2}
           />
         )}
       </div>
