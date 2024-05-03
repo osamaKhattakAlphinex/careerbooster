@@ -12,7 +12,6 @@ type Props = {
 
 const Header = ({ name, jobTitle, styles, conditionStyleHeader }: Props) => {
   const { updateSaveHook } = useUpdateAndSave();
-  console.log("conditionStyleHeader", conditionStyleHeader);
 
   return (
     <>

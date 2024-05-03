@@ -236,7 +236,7 @@ const components: any = {
     ],
   },
   primarySkills: {
-    styles: "text-xs py-2 text-gray-100 flex",
+    styles: "text-xs mt-2 text-gray-100 flex",
     tag: "span",
   },
   summary: { styles: "text-justify mb-4 text-gray-950 text-xs", tag: "span" },
@@ -453,7 +453,7 @@ const components: any = {
       {
         tag: "div",
         styles:
-          "flex flex-row justify-between items-center border-b pb-2 text-gray-100",
+          "flex flex-row justify-between items-center text-gray-100",
         container: [
           {
             id: "language",
@@ -562,8 +562,8 @@ const GenerationOrder = [
   "jobTitle",
   "contact",
   "primarySkills",
-  "languages",
   "interests",
+  "languages",
   "summary",
   "workExperienceArray",
   "publications",

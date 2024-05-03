@@ -211,7 +211,7 @@ const templateLayout: any = {
 
     interests: {
       styles:
-        "ml-8 text-black gap-2 flex flex-col flex-wrap justify-start items-start px-8",
+        "ml-8 text-black gap-1 flex flex-col flex-wrap justify-start items-start px-8",
       elements: [
         {
           id: "interests",
@@ -220,7 +220,7 @@ const templateLayout: any = {
     },
     references: {
       styles:
-        "ml-8 text-black gap-2 flex flex-row flex-wrap justify-start items-start px-8",
+        "ml-8 text-black flex flex-row flex-wrap justify-start items-start px-8",
       elements: [
         {
           id: "references",
@@ -229,7 +229,7 @@ const templateLayout: any = {
     },
     languages: {
       styles:
-        "ml-8 text-black gap-2 flex flex-row flex-wrap justify-start items-start px-8",
+        "ml-8 text-black flex flex-row flex-wrap justify-start items-start px-8",
       elements: [
         {
           id: "languages",

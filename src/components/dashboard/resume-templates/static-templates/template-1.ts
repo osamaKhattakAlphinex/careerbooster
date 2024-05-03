@@ -267,17 +267,7 @@ const components: any = {
       },
     ],
   },
-  interests: {
-    styles: "my-2",
-    elements: [
-      {
-        id: "description",
-        styles:
-          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 before:mr-2 text-gray-950/80",
-        tag: "span",
-      },
-    ],
-  },
+  
   awards: {
     styles: "my-1",
     elements: [
@@ -361,6 +351,40 @@ const components: any = {
       },
     ],
   },
+  interests: {
+    styles: "my-2",
+    elements: [
+      {
+        id: "description",
+        styles:
+          "text-xs flex text-justify pb-1 before:content-['\\2022'] before:w-4 before:h-4 before:text-gray-950/80 before:mr-2 before:mr-2 text-gray-950/80",
+        tag: "span",
+      },
+    ],
+  },
+  languages: {
+    tag: "div",
+    styles: "",
+    elements: [
+      {
+        tag: "div",
+        styles:
+          "bg-gray-300 flex flex-col w-[31%] p-4 rounded-md text-gray-950/80",
+        container: [
+          {
+            id: "language",
+            styles: "font-semibold text-sm text-gray-950/80",
+            tag: "span",
+          },
+          {
+            id: "proficiency",
+            styles: "text-xs font-normal text-gray-950/80",
+            tag: "span",
+          },
+        ],
+      },
+    ],
+  },
   references: {
     tag: "div",
     styles: "",
@@ -394,6 +418,7 @@ const components: any = {
       },
     ],
   },
+  
   education: {
     tag: "div",
     styles: "",
@@ -451,29 +476,7 @@ const components: any = {
       },
     ],
   },
-  languages: {
-    tag: "div",
-    styles: "",
-    elements: [
-      {
-        tag: "div",
-        styles:
-          "bg-gray-300 flex flex-col w-[31%] p-4 rounded-md text-gray-950/80",
-        container: [
-          {
-            id: "language",
-            styles: "font-semibold text-sm text-gray-950/80",
-            tag: "span",
-          },
-          {
-            id: "proficiency",
-            styles: "text-xs font-normal text-gray-950/80",
-            tag: "span",
-          },
-        ],
-      },
-    ],
-  },
+  
 };
 const templateLayout: any = {
   styles: "w-full",
@@ -584,6 +587,15 @@ const templateLayout: any = {
         },
       ],
     },
+    languages: {
+      styles:
+        "text-black flex flex-wrap justify-start items-start gap-3 px-8 text-gray-950/80",
+      elements: [
+        {
+          id: "languages",
+        },
+      ],
+    },
 
     references: {
       styles:
@@ -594,15 +606,7 @@ const templateLayout: any = {
         },
       ],
     },
-    languages: {
-      styles:
-        "text-black flex flex-wrap justify-start items-start gap-3 px-8 text-gray-950/80",
-      elements: [
-        {
-          id: "languages",
-        },
-      ],
-    },
+    
 
     education: {
       styles:
@@ -629,8 +633,8 @@ const GenerationOrder = [
   "trainings",
   "projects",
   "awards",
-  "languages",
   "interests",
+  "languages",
   "references",
   "education",
 ];

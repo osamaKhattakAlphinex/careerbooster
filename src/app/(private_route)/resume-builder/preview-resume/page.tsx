@@ -103,35 +103,68 @@ const Page = () => {
   };
 
   const cleanUpHTML = (page: any) => {
-    const cleanUpIds = [
-      "shortName",
-      "email",
-      "linkedIn",
-      "phone",
-      "address",
-      "primarySkills",
-      "name",
-      "jobTitle",
-      // "summary",
-      "interests",
-      "languages",
-    ];
+    const templateNumber =  page.getAttribute(
+      "data-template-no"
+    );
+    let cleanUpIds
+    let containerNames
+    if(templateNumber === "2" || templateNumber === "6" || templateNumber === "7" || templateNumber === "8"){
+      cleanUpIds = [
+        "shortName",
+        "email",
+        "linkedIn",
+        "phone",
+        "address",
+        "primarySkills",
+        "name",
+        "jobTitle",
+        "summary",
+      ];
+      containerNames = [
+        "header",
+        "skills",
+        "summary",
+        "contact",
+        "education",
+        "sideBar",
+        "trainings",
+        "awards",
+        "references",
+        "certifications",
+        "body",
+      ];
+    } else {
+      cleanUpIds = [
+        "shortName",
+        "email",
+        "linkedIn",
+        "phone",
+        "address",
+        "primarySkills",
+        "name",
+        "jobTitle",
+        "summary",
+        "languages",
+        "interests"
+      ];
+      containerNames = [
+        "header",
+        "skills",
+        "summary",
+        "contact",
+        "education",
+        "sideBar",
+        "trainings",
+        "awards",
+        "references",
+        "languages",
+        "interests",
+        "certifications",
+        "body",
+      ];
+    }
 
-    const containerNames = [
-      "header",
-      "skills",
-      // "summary",
-      "contact",
-      "education",
-      "sideBar",
-      "languages",
-      "interests",
-      "trainings",
-      "awards",
-      "references",
-      "certifications",
-      "body",
-    ];
+    
 
     for (const cleanUpId of cleanUpIds) {
       let emptyIds = page.querySelectorAll(`#${cleanUpId}`);
@@ -501,8 +534,6 @@ const Page = () => {
                       _element
                     );
 
-                    // console.log("singleAchivemnt", singleAchievement);
-
                     _element.textContent = singleAchievement;
                     const styles = element.styles;
                     setStylesToElement(_element, styles);
@@ -544,7 +575,7 @@ const Page = () => {
                         singlespan.textContent = formatDate(
                           singleItem[item.id]
                         );
-                      } else {
+                      } else { 
                         singlespan.textContent = singleItem[item.id];
                       }
 
@@ -797,8 +828,8 @@ const Page = () => {
 
     setTimeout(() => {
       pages.map((page: any, index: any) => {
-        educationDivs(pages[index], pages[index + 1]);
         referencesDivs(pages[index], pages[index + 1]);
+        educationDivs(pages[index], pages[index + 1]);
         setSidebarHeight(pages[index]);
         checkOverflow(index);
         cleanUpHTML(page);
