@@ -17,8 +17,6 @@ const Payments = () => {
   const showTransactionModelRef: React.MutableRefObject<any> = useRef(null);
   const [isDecrypted, setIsDecrypted] = useState<boolean>(false);
 
-  const { abortController } = useAppContext();
-
   const columnHelper = createColumnHelper<Payment>();
 
   const columns = [
@@ -39,10 +37,9 @@ const Payments = () => {
   const fetchPayments = async () => {
     setLoading(true);
 
-    const signal = abortController.signal;
     if (!loading) {
       axios
-        .get("/api/payment", { signal: signal })
+        .get("/api/payment")
         .then((res: any) => {
           if (res.data.success) {
             const payments = res.data.payments;
@@ -60,12 +57,9 @@ const Payments = () => {
 
   const handleDecryption = async (values: any) => {
     try {
-      const signal = abortController.signal;
-
       axios
         .post("/api/payment/decrypt", {
           decryptionKey: values.decryptionKey,
-          signal: signal,
         })
         .then((resp: any) => {
           if (resp.data.success) {
@@ -78,9 +72,6 @@ const Payments = () => {
 
   useEffect(() => {
     fetchPayments();
-    return () => {
-      abortController.abort();
-    };
   }, []);
 
   return (

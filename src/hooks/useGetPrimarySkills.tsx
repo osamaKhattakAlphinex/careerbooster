@@ -13,12 +13,12 @@ const useGetPrimarySkills = (
   setOutOfCredits: any = ""
 ) => {
   const dispatch = useDispatch();
+  const {abortController} = useAppContext();
   const userData = useSelector((state: any) => state.userData);
   const resumeData = useSelector((state: any) => state.resume);
   const { getUserDataIfNotExists } = useGetUserData();
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const { saveResumeToDB } = useSaveResumeToDB();
-  const { abortController } = useAppContext();
 
   const creditLimits = useSelector((state: any) => state.creditLimits);
   const { getCreditLimitsIfNotExists } = useGetCreditLimits();
@@ -35,15 +35,10 @@ const useGetPrimarySkills = (
         skills: userData?.skills,
       });
     }
-    return () => {
-      abortController.abort();
-    };
   }, []);
 
   const getPrimarySkills = async () => {
     setRegenerating(true);
-
-    const signal = abortController.signal;
 
     // return makeAPICallWithRetry(async () => {
     // dispatch(setLoadingState("primarySkills"));
@@ -65,7 +60,7 @@ const useGetPrimarySkills = (
           fileAddress: userData.uploadedResume.fileName,
         },
       }),
-      signal,
+      signal: abortController?.signal,
     })
       .then(async (resp: any) => {
         const res = await resp.json();

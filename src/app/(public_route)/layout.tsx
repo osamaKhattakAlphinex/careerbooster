@@ -6,7 +6,7 @@ import Footer from "@/components/public-pages/layout/Footer";
 import "@/app/(private_route)/plugins.css";
 export const metadata: Metadata = {
   title: "AI Resume Bot",
-  description: "AI Resume Bot | Developed by NausalTech",
+  description: "AI Resume Builder | Developed by NausalTech",
 };
 
 export default function PublicLayout({

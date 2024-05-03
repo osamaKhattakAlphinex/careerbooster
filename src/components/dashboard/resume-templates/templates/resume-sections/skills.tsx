@@ -14,8 +14,16 @@ type Props = {
   heading: any;
   skills: any;
   styles: any;
+  customStyle?: any;
+  rounded_style?: any;
 };
-const Skill = ({ heading, skills, styles }: Props) => {
+const Skill = ({
+  heading,
+  skills,
+  styles,
+  customStyle,
+  rounded_style,
+}: Props) => {
   const [primarySkill, setPrimarySkill] = useState<string>("");
   const [regenerating, setRegenerating] = useState(false);
   const { updateSaveHook } = useUpdateAndSave();
@@ -35,35 +43,49 @@ const Skill = ({ heading, skills, styles }: Props) => {
     }
   };
   const { handlers } = useHandler();
-
+  console.log(customStyle);
   return (
     <>
       {skills && skills.length > 0 && (
-        <h2
-          className={`${styles?.skill_heading} ${
-            styles?.underline ? "underline" : null
-          }`}
-        >
-          {resumeSkillsIcon}
-          <EditableField
-            value={heading ? heading : "Skills"}
-            style={{ width: "fit-content" }}
-            onSave={(value: string) => {
-              if (value !== heading) {
-                updateSaveHook.updateAndSaveHeadings({
-                  primarySkills: value,
-                });
-              }
-            }}
-          />
-        </h2>
+        <>
+          <span
+            className={`${styles?.span1} ${
+              customStyle?.borderTopBottom ? "!block" : "hidden"
+            }`}
+          ></span>
+          <div className={` ${rounded_style ? rounded_style : ""} `}>
+            <h2 className={` ${styles?.skill_heading} `}>
+              {resumeSkillsIcon}
+              <EditableField
+                value={heading ? heading : "Skills"}
+                style={{ width: "fit-content" }}
+                onSave={(value: string) => {
+                  if (value !== heading) {
+                    updateSaveHook.updateAndSaveHeadings({
+                      primarySkills: value,
+                    });
+                  }
+                }}
+              />
+            </h2>
+          </div>
+
+          <span
+            className={`${styles?.span2} ${
+              customStyle?.borderTopBottom || customStyle?.borderBottom
+                ? "!block"
+                : "hidden"
+            }`}
+          ></span>
+        </>
       )}
       {skills && skills.length > 0 && !regenerating ? (
         <Toolbar addSkill={handleAddSkills} regenerateSkills={getPrimarySkills}>
-          <ul className={`${styles?.skill_ul}`}>
+          <ul className={`${styles?.skill_ul} mt-2 !list-disc`}>
             {skills.map((skill: string, i: number) => (
               <li
-                className={`${styles?.skill_li} parent`}
+                className={`${styles?.skill_li} parent 
+                `}
                 key={i}
                 onDragStart={(e) =>
                   e.dataTransfer.setData("text/plain", i.toString())
@@ -72,17 +94,19 @@ const Skill = ({ heading, skills, styles }: Props) => {
                 onDrop={(e) => handleDropPrimary(e, i)}
                 draggable
               >
-                <EditableField
-                  value={skill}
-                  onSave={(value: string) => {
-                    handlers.handleUpdateSkill(value, i);
-                  }}
-                />
-                <div
-                  onClick={() => handlers.handleDeleteSkill(i)}
-                  className="w-4 h-4 cursor-pointer child"
-                >
-                  {crossIcon1}
+                <div className="flex flex-row items-center justify-between">
+                  <EditableField
+                    value={skill}
+                    onSave={(value: string) => {
+                      handlers.handleUpdateSkill(value, i);
+                    }}
+                  />
+                  <div
+                    onClick={() => handlers.handleDeleteSkill(i)}
+                    className="w-4 h-4 cursor-pointer child"
+                  >
+                    {crossIcon1}
+                  </div>
                 </div>
               </li>
             ))}

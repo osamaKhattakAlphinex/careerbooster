@@ -5,7 +5,7 @@ import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
-import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
+import { setUserData } from "@/store/userDataSlice";
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
@@ -16,7 +16,7 @@ import { useAppContext } from "@/context/AppContext";
 import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 import { setLinkedInAbout } from "@/store/linkedInAboutSlice";
 import DownloadService from "@/helpers/downloadFile";
-import { EditIcon } from "@/helpers/iconsProvider";
+import { EditIcon, newViewIcon } from "@/helpers/iconsProvider";
 import { useTourContext } from "@/context/TourContext";
 import TourBot from "../TourBot";
 const SubAboutGenerator = () => {
@@ -27,9 +27,15 @@ const SubAboutGenerator = () => {
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [option, setOption] = useState<string>("about");
   const [showPopup, setShowPopup] = useState(false);
-  const { setAvailableCredits } = useAppContext();
-
+  const { setAvailableCredits, abortController,setAbortController } = useAppContext();
   const [isAboutCopied, setIsAboutCopied] = useState<boolean>(false);
+  useEffect(() => {
+    return (() => {
+      abortController?.abort();
+      setAbortController(new AbortController())
+    });
+  }, []);
+
   const copyAbout = async (text: string) => {
     try {
       const option = htmlToPlainText(text);
@@ -52,7 +58,6 @@ const SubAboutGenerator = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
   const { tourBotRef, availableCreditsRef } = useTourContext();
-  const { abortController } = useAppContext();
 
   useEffect(() => {
     if (userData && userData?.email) {
@@ -95,11 +100,11 @@ const SubAboutGenerator = () => {
     await axios.post(
       `/api/linkedInBots/aboutGenerator/linkedInAbout`,
       payLoad,
-      { headers: { "Content-Type": "application/json" } }
+      { headers: { "Content-Type": "application/json" },signal: abortController?.signal }
     );
 
     const AboutResponse = await axios.get(
-      "/api/linkedInBots/linkedinAboutGenerator/getAllAbout"
+      "/api/linkedInBots/linkedinAboutGenerator/getAllAbout", {signal: abortController?.signal}
     );
     const updatedObject = {
       ...userData,
@@ -125,7 +130,6 @@ const SubAboutGenerator = () => {
 
   const handleGenerate = async () => {
     setStreamedData("");
-    const signal = abortController.signal;
 
     await getUserDataIfNotExists();
     if (session?.user?.email && aiInputUserData) {
@@ -145,7 +149,7 @@ const SubAboutGenerator = () => {
       fetch("/api/linkedInBots/aboutGenerator", {
         method: "POST",
         body: JSON.stringify(obj),
-        signal: signal,
+        signal: abortController?.signal,
       })
         .then(async (resp: any) => {
           if (resp.ok) {
@@ -167,7 +171,7 @@ const SubAboutGenerator = () => {
             }
 
             const AboutResponse = await axios.get(
-              "/api/linkedInBots/linkedinAboutGenerator/getAllAbout"
+              "/api/linkedInBots/linkedinAboutGenerator/getAllAbout", {signal: abortController?.signal}
             );
             const updatedObject = {
               ...userData,
@@ -241,12 +245,6 @@ const SubAboutGenerator = () => {
     }
   }, [isEditing]);
 
-  useEffect(() => {
-    return () => {
-      abortController.abort();
-    };
-  }, []);
-
   // when page (session) loads, fetch user data if not exists
   useEffect(() => {
     if (session?.user?.email) {
@@ -262,7 +260,7 @@ const SubAboutGenerator = () => {
   return (
     <>
       <PreviouslyGeneratedList {...historyProps} />
-      <div className=" dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950 py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
+      <div className=" dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950 py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-lg mb-[20px]">
         <div
           className={`icon hidden rounded-full bg-gradient-to-b from-[#26A5C1] to-[#84E1E7] md:flex justify-center items-center w-16 h-16`}
         >
@@ -313,13 +311,7 @@ const SubAboutGenerator = () => {
                   />
                 </svg>
               ) : (
-                <Image
-                  src={buttonIconSrc}
-                  alt="bold icon"
-                  height={18}
-                  width={18}
-                  className=""
-                />
+                newViewIcon
               )}
             </span>
             <span className="text-xs font-semibold md:text-sm ">

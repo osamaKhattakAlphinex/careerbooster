@@ -81,7 +81,7 @@ const ProfileReview = () => {
       references: register.stepTwelve.list,
       trainings: register.stepSeven.list,
       languages: register.stepEleven.list,
-      interests:register.stepTen.list ,
+      interests: register.stepTen.list,
       certifications: register.stepSix.list,
       awards: register.stepNine.list,
       publications: register.stepEight.list,
@@ -97,6 +97,9 @@ const ProfileReview = () => {
           dispatch(setUserData(obj));
           // showSuccessToast("Updated Successfully")
         }
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
   const handleSaveDetails = async () => {
@@ -122,7 +125,7 @@ const ProfileReview = () => {
       references: register.stepTwelve.list,
       trainings: register.stepSeven.list,
       languages: register.stepEleven.list,
-      interests:register.stepTen.list ,
+      interests: register.stepTen.list,
       certifications: register.stepSix.list,
       awards: register.stepNine.list,
       publications: register.stepEight.list,
@@ -145,6 +148,9 @@ const ProfileReview = () => {
         dispatch(setActiveStep(1));
 
         dispatch(setField({ name: "isSubmitting", value: false }));
+      })
+      .catch((err) => {
+        console.log(err);
       })
       .finally(() => {
         router.push("/dashboard?success=1");
@@ -294,11 +300,12 @@ const ProfileReview = () => {
 
                     {register.activeStep === 2 && <StepFour />}
                     {register.activeStep === 3 && <StepFive />}
-                    {register.activeStep === 4 && <StepCustom />}
+                    {/* {register.activeStep === 4 && <StepCustom />} */}
 
                     {/* {register.activeStep === 4 && <StepSix />} */}
 
-                    {register.activeStep === 5 && <ProfilePreview />}
+                    {/* {register.activeStep === 5 && <ProfilePreview />} */}
+                    {register.activeStep === 4 && <ProfilePreview />}
                     {/* {register.activeStep === 6 && <StepEight />} */}
 
                     <div
@@ -328,7 +335,7 @@ const ProfileReview = () => {
                         </button>
                       )}
 
-                      {register.activeStep < 5 && (
+                      {register.activeStep < 4 && (
                         <button
                           type="submit"
                           // disabled={isNextDisabled()}
@@ -342,7 +349,7 @@ const ProfileReview = () => {
                         </button>
                       )}
 
-                      {register.activeStep === 5 && (
+                      {register.activeStep === 4 && (
                         <button
                           type="submit"
                           className="py-3 mb-3 px-6 font-medium xs:scale-75 md:scale-100 text-base rounded-lg  text-gray-900 !bg-[#e6f85e] float-right"

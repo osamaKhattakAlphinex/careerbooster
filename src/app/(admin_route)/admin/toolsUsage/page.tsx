@@ -15,8 +15,6 @@ const Page = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const columnHelper = createColumnHelper<ToolUsage>();
 
-  const { abortController } = useAppContext();
-
   const columns = [
     columnHelper.accessor("toolName", {
       id: "toolName",
@@ -33,10 +31,9 @@ const Page = () => {
   const fetchUsages = async () => {
     setLoading(true);
 
-    const signal = abortController.signal;
     if (!loading) {
       axios
-        .get("/api/usages", { signal: signal })
+        .get("/api/usages")
         .then((res: any) => {
           if (res.data.success) {
             const usages = res.data.usages;
@@ -54,9 +51,6 @@ const Page = () => {
 
   useEffect(() => {
     fetchUsages();
-    return () => {
-      abortController.abort();
-    };
   }, []);
 
   return (

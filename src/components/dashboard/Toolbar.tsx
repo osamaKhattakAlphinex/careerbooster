@@ -110,6 +110,7 @@ const Toolbar = ({
               </svg>
             </button>
           )}
+          
           {regenrateAchivements && (
             <button
               title="Regenerate Job Description"

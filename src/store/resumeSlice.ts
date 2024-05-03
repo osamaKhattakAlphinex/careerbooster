@@ -67,6 +67,7 @@ export interface Resume {
   state: {
     resumeType: "resume-basic" | "resume-job-title" | "resume-job-description";
     jobDescription: string;
+    detailedResume: boolean; // Whether
     jobPosition: string;
     resumeLoading: boolean;
     componentRef: any;
@@ -106,25 +107,10 @@ export interface Resume {
       year: string;
     }
   ];
-  sections: {
-    contact: boolean;
-    summary: boolean;
-    shortName: boolean;
-    name: boolean;
-    jobTitle: boolean;
-    workExperience: boolean;
-    primarySkills: boolean;
-    languages: boolean;
-    certifications: boolean;
-    awards: boolean;
-    publications: boolean;
-    references: boolean;
-    interests: boolean;
-  };
 
   summary: string;
   workExperienceArray: WorkExperience[];
-  quantifyingExperience: boolean;
+  // quantifyingExperience: boolean;
   workExperience: "";
   primarySkills: [];
   professionalSkills: [];
@@ -144,6 +130,7 @@ const initialState: Resume = {
     resumeType: "resume-basic",
     jobDescription: "",
     jobPosition: "",
+    detailedResume: false,
     resumeLoading: false,
     componentRef: null,
   },
@@ -182,24 +169,9 @@ const initialState: Resume = {
       year: "",
     },
   ],
-  sections: {
-    contact: true,
-    summary: true,
-    shortName: true,
-    name: true,
-    jobTitle: true,
-    workExperience: true,
-    primarySkills: true,
-    languages: false,
-    certifications: false,
-    awards: false,
-    publications: false,
-    references: false,
-    interests: false,
-  },
   summary: "",
   workExperienceArray: [],
-  quantifyingExperience: true,
+  // quantifyingExperience: true,
   workExperience: "",
   primarySkills: [],
   professionalSkills: [],
@@ -241,12 +213,12 @@ const resumeSlice = createSlice({
         [action.payload.name]: action.payload.value,
       };
     },
-    setQuantifyingExperience(state, action) {
-      return {
-        ...state,
-        quantifyingExperience: action.payload,
-      };
-    },
+    // setQuantifyingExperience(state, action) {
+    //   return {
+    //     ...state,
+    //     quantifyingExperience: action.payload,
+    //   };
+    // },
     setState(state, action) {
       return {
         ...state,
@@ -409,7 +381,7 @@ export const {
   setWorkExperienceArray,
   resetResume,
   emptyResume,
-  setQuantifyingExperience,
+  // setQuantifyingExperience,
   setTrainings,
   setAwards,
   setPublications,

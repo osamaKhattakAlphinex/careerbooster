@@ -44,6 +44,7 @@ const Award = ({ heading, awards, styles, customStyle }: Props) => {
         }
           ${customStyle?.bgColor}
           ${styles?.underline ? "underline" : null}
+          ${styles?.bgColor}
         `}
       >
         <svg

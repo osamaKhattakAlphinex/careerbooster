@@ -1,22 +1,20 @@
 "use client";
 import Image from "next/image";
 import Svg1 from "@/../public/icon/headline-icon.svg";
-import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
-import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
+import { setUserData } from "@/store/userDataSlice";
 import axios from "axios";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
 import PreviouslyGeneratedList from "@/components/dashboard/PreviouslyGeneratedList";
 import LinkedInHeadlineCardSingle from "./LinkedInHeadeLineCardSingle";
-import { makeid } from "@/helpers/makeid";
 import useGetUserData from "@/hooks/useGetUserData";
 import { useAppContext } from "@/context/AppContext";
 import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 import DownloadService from "@/helpers/downloadFile";
-import { EditIcon } from "@/helpers/iconsProvider";
+import { EditIcon, newViewIcon } from "@/helpers/iconsProvider";
 import { setLinkedInHeadline } from "@/store/linkedInHeadLineSlice";
 import TourBot from "../TourBot";
 import { useTourContext } from "@/context/TourContext";
@@ -28,12 +26,16 @@ const SubHeadlineGenerator = () => {
   const [aiInputUserData, setAiInputUserData] = useState<any>(null);
   const [showPopup, setShowPopup] = useState(false);
   const componentRef = useRef<any>();
-  const { setAvailableCredits } = useAppContext();
+  const { setAvailableCredits, abortController,setAbortController } = useAppContext();
   const [isEditing, setIsEditing] = useState(false);
   const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
-  const { abortController } = useAppContext();
-
   const [isHeadlineCopied, setIsHeadlineCopied] = useState<boolean>(false);
+  useEffect(() => {
+    return (() => {
+      abortController?.abort();
+      setAbortController(new AbortController())
+    });
+  }, []);
   const copyHeadline = async (text: string) => {
     try {
       const headlineData = htmlToPlainText(text);
@@ -98,7 +100,6 @@ const SubHeadlineGenerator = () => {
 
   const handleGenerate = async () => {
     setStreamedData("");
-    const signal = abortController.signal;
 
     // await getUserDataIfNotExists();
     //change condition
@@ -118,7 +119,7 @@ const SubHeadlineGenerator = () => {
       fetch("/api/linkedInBots/headlineGenerator", {
         method: "POST",
         body: JSON.stringify(obj),
-        signal: signal,
+        signal: abortController?.signal,
       })
         .then(async (resp: any) => {
           if (resp.ok) {
@@ -138,7 +139,7 @@ const SubHeadlineGenerator = () => {
             }
 
             const HeadlineResponse = await axios.get(
-              "/api/linkedInBots/linkedinHeadlineGenerator/getAllHeadlines"
+              "/api/linkedInBots/linkedinHeadlineGenerator/getAllHeadlines",{signal: abortController?.signal}
             );
             const updatedObject = {
               ...userData,
@@ -181,12 +182,6 @@ const SubHeadlineGenerator = () => {
     setIsEditing((prevState) => !prevState);
   };
 
-  useEffect(() => {
-    return () => {
-      abortController.abort();
-    };
-  }, []);
-
   const handleSave = async () => {
     let _linkedinHeadlineText = "";
 
@@ -209,11 +204,11 @@ const SubHeadlineGenerator = () => {
     await axios.post(
       `/api/linkedInBots/headlineGenerator/linkedInHeadline`,
       payLoad,
-      { headers: { "Content-Type": "application/json" } }
+      { headers: { "Content-Type": "application/json" },signal: abortController?.signal }
     );
 
     const HeadlineResponse = await axios.get(
-      "/api/linkedInBots/linkedinHeadlineGenerator/getAllHeadlines"
+      "/api/linkedInBots/linkedinHeadlineGenerator/getAllHeadlines", {signal: abortController?.signal}
     );
     const updatedObject = {
       ...userData,
@@ -267,7 +262,7 @@ const SubHeadlineGenerator = () => {
   return (
     <>
       <PreviouslyGeneratedList {...historyProps} />
-      <div className=" dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] md:justify-between text-gray-950 p-5 sm:p-8 flex flex-col md:flex-row md:align-center xs:gap-3 justify-center items-center rounded-xl">
+      <div className=" dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] md:justify-between text-gray-950 p-5 sm:p-8 flex flex-col md:flex-row md:align-center xs:gap-3 justify-center items-center rounded-lg">
         <div className="hidden aspect-square rounded-full bg-gradient-to-b from-[#255CE7] to-[#7FA0E0] md:flex justify-center items-center w-16 h-16">
           <Image alt="Svg1" src={Svg1} width={24} height={24} />
         </div>
@@ -316,12 +311,7 @@ const SubHeadlineGenerator = () => {
                   />
                 </svg>
               ) : (
-                <Image
-                  src={buttonIconSrc}
-                  alt="bold icon"
-                  height={18}
-                  width={18}
-                />
+                newViewIcon
               )}
             </span>
             <span className="text-xs font-semibold md:text-sm ">

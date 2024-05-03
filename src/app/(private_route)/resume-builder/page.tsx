@@ -14,7 +14,7 @@ import {
   setState,
   setWorkExperienceArray,
   resetResume,
-  setQuantifyingExperience,
+  // setQuantifyingExperience,
   setTrainings,
   setAwards,
   setPublications,
@@ -49,6 +49,7 @@ import TemplateSlider from "@/components/dashboard/resume-templates/templateSlid
 import TourBot from "@/components/dashboard/TourBot";
 import { useTourContext } from "@/context/TourContext";
 import { formatDate } from "@/helpers/getFormattedDateTime";
+import { useAppContext } from "@/context/AppContext";
 
 const ResumeBuilder = () => {
   const [confettingRunning, setConfettiRunning] = useState(false);
@@ -71,21 +72,12 @@ const ResumeBuilder = () => {
   const { resumeElementRef, tourBotRef, historyCardRef, availableCreditsRef } =
     useTourContext();
 
-  const runConfetti = () => {
-    if (showConfettiRunning) {
-      showSuccessToast("Generated Successfully");
-      setConfettiRunning(true);
-      setTimeout(() => {
-        setConfettiRunning(false);
-        setShowTemplatePopup(true);
-      }, 3000); // Adjust the duration as needed
-    }
-  };
+
 
   const { getUserDataIfNotExists } = useGetUserData();
   const componentRef = useRef<any>(null);
   const { data: session } = useSession();
-
+  const { abortController,setAbortController } = useAppContext();
   // Local States
   const [finished, setFinished] = useState<boolean>(false);
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
@@ -97,7 +89,6 @@ const ResumeBuilder = () => {
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [resumeGenerated, setResumeGenerated] = useState<boolean>(false);
   const { saveResumeToDB } = useSaveResumeToDB();
-  // const { createAbortController, abort } = useAbortController();
   // Redux
   const dispatch = useDispatch();
   const resumeData = useSelector((state: any) => state.resume);
@@ -105,59 +96,65 @@ const ResumeBuilder = () => {
   const creditLimits = useSelector((state: any) => state.creditLimits);
   const { getCreditLimitsIfNotExists } = useGetCreditLimits();
 
+  useEffect(() => {
+    return (() => {
+      abortController?.abort();
+      setAbortController(new AbortController())
+    });
+  }, []);
   const { getSummary } = useGetSummary(setStreamedSummaryData, setOutOfCredits);
 
-  const getConsent = () => {
-    if (creditsInfoRef.current) {
-      creditsInfoRef.current.openModal(true);
+  // const getConsent = () => {
+  //   if (creditsInfoRef.current) {
+  //     creditsInfoRef.current.openModal(true);
+  //   }
+  // };
+
+  const runConfetti = () => {
+    if (showConfettiRunning) {
+      showSuccessToast("Generated Successfully");
+      setConfettiRunning(true);
+      setTimeout(() => {
+        setConfettiRunning(false);
+        setShowTemplatePopup(true);
+      }, 3000); // Adjust the duration as needed
     }
   };
+  const handleGenerate = useCallback(async () => {
+    await getUserDataIfNotExists();
+    await getCreditLimitsIfNotExists();
 
-  const handleGenerate = useCallback(
-    async (quantifyingExperience: boolean) => {
-      await getUserDataIfNotExists();
-      await getCreditLimitsIfNotExists();
+    // reset resume
+    dispatch(resetResume(resumeData.state));
 
-      // reset resume
-      dispatch(resetResume(resumeData.state));
+    if (session?.user?.email) {
+      setResumeGenerated(false);
+      dispatch(setState({ name: "resumeLoading", value: true }));
+      // dispatch(setQuantifyingExperience(quantifyingExperience));
+      dispatch(setTrainings({ trainings: userData.trainings }));
+      dispatch(setProjects({ projects: userData.projects }));
+      dispatch(setAwards({ awards: userData.awards }));
+      dispatch(setPublications({ publications: userData.publications }));
+      dispatch(setReferences({ references: userData.references }));
+      dispatch(setInterests({ interests: userData.interests }));
+      dispatch(setCertifications({ certifications: userData.certifications }));
+      dispatch(setLanguages({ languages: userData.languages }));
 
-      if (session?.user?.email) {
-        setResumeGenerated(false);
-        dispatch(setState({ name: "resumeLoading", value: true }));
-        dispatch(setQuantifyingExperience(quantifyingExperience));
-        dispatch(setTrainings({ trainings: userData.trainings }));
-        dispatch(setProjects({ projects: userData.projects }));
-        dispatch(setAwards({ awards: userData.awards }));
-        dispatch(setPublications({ publications: userData.publications }));
-        dispatch(setReferences({ references: userData.references }));
-        dispatch(setInterests({ interests: userData.interests }));
-        dispatch(
-          setCertifications({ certifications: userData.certifications })
-        );
-        dispatch(setLanguages({ languages: userData.languages }));
+      dispatch(setId(""));
+      await getBasicInfo();
+      await getSummary();
+      await getPrimarySkills();
+      await getWorkExperienceNew();
+      //  runConfetti();
+    } else {
+      setShowPopup(true);
 
-        dispatch(setId(""));
-        await getBasicInfo();
-
-        await getSummary();
-        await getPrimarySkills();
-        await getWorkExperienceNew(quantifyingExperience);
-
-        // await getPublications();
-        // await addCustomSection();
-        // adding custom sections
-        runConfetti();
-      } else {
-        setShowPopup(true);
-
-        // Hide the popup after 3 seconds
-        setTimeout(() => {
-          setShowPopup(false);
-        }, 3000);
-      }
-    },
-    [resumeData.state]
-  );
+      // Hide the popup after 3 seconds
+      setTimeout(() => {
+        setShowPopup(false);
+      }, 3000);
+    }
+  }, [resumeData.state]);
 
   // const makeAPICallWithRetry: any = async (
   //   apiFunction: any,
@@ -189,7 +186,6 @@ const ResumeBuilder = () => {
         type: "basicDetails",
         inputType: "userData",
         personName: userData.firstName + " " + userData.lastName,
-
         creditsUsed: creditLimits.resume_basicInfo,
         userData: aiInputUserData,
 
@@ -202,46 +198,51 @@ const ResumeBuilder = () => {
           fileAddress: userData.uploadedResume.fileName,
         },
       }),
-    }).then(async (resp: any) => {
-      const res = await resp.json();
+      signal: abortController?.signal,
+    })
+      .then(async (resp: any) => {
+        const res = await resp.json();
 
-      if (res.success && res?.result) {
-        let myJSON;
-        if (typeof res.result === "object") {
-          myJSON = res.result;
+        if (res.success && res?.result) {
+          let myJSON;
+          if (typeof res.result === "object") {
+            myJSON = res.result;
+          } else {
+            myJSON = await JSON.parse(res.result);
+          }
+
+          const basicObj = {
+            ...myJSON,
+            name: userData?.firstName + " " + userData?.lastName,
+            contact: {
+              ...myJSON?.contact,
+              email: userData?.email,
+              phone: userData?.phone,
+              address:
+                userData?.contact?.street +
+                " " +
+                userData?.contact?.cityState +
+                " " +
+                userData?.contact?.country +
+                " " +
+                userData?.contact?.postalCode,
+            },
+            education: userData?.education,
+          };
+          dispatch(setBasicInfo(basicObj));
         } else {
-          myJSON = await JSON.parse(res.result);
+          setShowConfettiRunning(false);
+
+          showErrorToast("Something Went Wrong");
         }
-
-        const basicObj = {
-          ...myJSON,
-          name: userData?.firstName + " " + userData?.lastName,
-          contact: {
-            ...myJSON?.contact,
-            email: userData?.email,
-            phone: userData?.phone,
-            address:
-              userData?.contact?.street +
-              " " +
-              userData?.contact?.cityState +
-              " " +
-              userData?.contact?.country +
-              " " +
-              userData?.contact?.postalCode,
-          },
-          education: userData?.education,
-        };
-        dispatch(setBasicInfo(basicObj));
-      } else {
-        setShowConfettiRunning(false);
-
-        showErrorToast("Something Went Wrong");
-      }
-    });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     // });
   };
 
-  const getWorkExperienceNew = async (quantifyingExperience: boolean) => {
+  const getWorkExperienceNew = async () => {
     // return makeAPICallWithRetry(async () => {
     await getCreditLimitsIfNotExists();
     await getUserDataIfNotExists();
@@ -284,47 +285,51 @@ const ResumeBuilder = () => {
         temp += html;
         let achievementTemp = "";
         setStreamedJDData((prev: any) => prev + html);
+        try {
+          const res: any = await fetch("/api/resumeBots/jdGeneratorSingle", {
+            method: "POST",
+            body: JSON.stringify({
+              // quantifyingExperience: quantifyingExperience,
+              experience: experience,
+              detailedResume: resumeData.state.detailedResume,
+              creditsUsed: creditLimits.resume_individualWorkExperience,
+              trainBotData: {
+                userEmail: userData.email,
+                // fileAddress: userData.files[0].fileName,
+                fileAddress: userData.uploadedResume.fileName,
+              },
+              personName: userData.firstName + " " + userData.lastName,
+              jobTitle: resumeData.state.jobPosition,
+            }),
+            signal: abortController?.signal,
+          });
 
-        const res: any = await fetch("/api/resumeBots/jdGeneratorSingle", {
-          method: "POST",
-          body: JSON.stringify({
-            quantifyingExperience: quantifyingExperience,
-            experience: experience,
+          if (res.ok) {
+            const reader = res.body.getReader();
+            while (true) {
+              const { done, value } = await reader.read();
 
-            creditsUsed: creditLimits.resume_individualWorkExperience,
-            trainBotData: {
-              userEmail: userData.email,
-              // fileAddress: userData.files[0].fileName,
-              fileAddress: userData.uploadedResume.fileName,
-            },
-            personName: userData.firstName + " " + userData.lastName,
-            jobTitle: resumeData.state.jobPosition,
-          }),
-        });
+              if (done) {
+                break;
+              }
 
-        if (res.ok) {
-          const reader = res.body.getReader();
-          while (true) {
-            const { done, value } = await reader.read();
-
-            if (done) {
-              break;
+              const text = new TextDecoder().decode(value);
+              setStreamedJDData((prev: any) => prev + text);
+              temp += text;
+              achievementTemp += text;
             }
 
-            const text = new TextDecoder().decode(value);
-            setStreamedJDData((prev: any) => prev + text);
-            temp += text;
-            achievementTemp += text;
+            setStreamedJDData((prev: any) => prev + `</div> <br /> `);
+            temp += `</div> <br /> `;
+            const achivementsArray = fetchLIstOfStrings(achievementTemp);
+            workExpArrObj.achievements = achivementsArray;
+            workExpArr.push(workExpArrObj);
+          } else {
+            setShowConfettiRunning(false);
+            setStreamedJDData("You ran out of credits!");
           }
-
-          setStreamedJDData((prev: any) => prev + `</div> <br /> `);
-          temp += `</div> <br /> `;
-          const achivementsArray = fetchLIstOfStrings(achievementTemp);
-          workExpArrObj.achievements = achivementsArray;
-          workExpArr.push(workExpArrObj);
-        } else {
-          setShowConfettiRunning(false);
-          setStreamedJDData("You ran out of credits!");
+        } catch (error) {
+          console.log(error);
         }
       }
       setFinished(true);
@@ -442,18 +447,23 @@ const ResumeBuilder = () => {
           fileAddress: userData.uploadedResume.fileName,
         },
       }),
-    }).then(async (resp: any) => {
-      const res = await resp.json();
-      if (res.success) {
-        if (res?.result) {
-          let myJSON = JSON.parse(JSON.stringify(res.result));
-          myJSON = JSON.parse(myJSON);
-          dispatch(setPrimarySkills({ primarySkills: myJSON }));
+      signal: abortController?.signal,
+    })
+      .then(async (resp: any) => {
+        const res = await resp.json();
+        if (res.success) {
+          if (res?.result) {
+            let myJSON = JSON.parse(JSON.stringify(res.result));
+            myJSON = JSON.parse(myJSON);
+            dispatch(setPrimarySkills({ primarySkills: myJSON }));
+          }
+        } else {
+          setShowConfettiRunning(false);
         }
-      } else {
-        setShowConfettiRunning(false);
-      }
-    });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     // });
   };
 
@@ -467,6 +477,7 @@ const ResumeBuilder = () => {
       resumeData?.name &&
       !outOfCredits
     ) {
+      runConfetti()
       saveResumeToDB();
     }
   }, [resumeData?.state?.resumeLoading]);
@@ -547,7 +558,7 @@ const ResumeBuilder = () => {
 
   return (
     <>
-      <CreditInfoModal ref={creditsInfoRef} handleGenerate={handleGenerate} />
+      {/* <CreditInfoModal ref={creditsInfoRef} handleGenerate={handleGenerate} /> */}
       {showTemplatePopup && (
         <div className="fixed top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-black/90">
           <div className="flex flex-col items-center gap-4 py-4 bg-gray-800 rounded-lg">
@@ -591,7 +602,7 @@ const ResumeBuilder = () => {
             </div>
           )}
           <div>
-            <GenerateResume getConsent={getConsent} />
+            <GenerateResume handleGenerate={handleGenerate} />
           </div>
           <div className="fixed bottom-0 flex items-center justify-center">
             <Confetti active={confettingRunning} config={confettiConfig} />

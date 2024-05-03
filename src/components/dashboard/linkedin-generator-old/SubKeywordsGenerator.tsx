@@ -1,26 +1,21 @@
 "use client";
 import Image from "next/image";
 import Svg1 from "@/../public/icon/headline-icon.svg";
-import iconOfPackageBadge from "@/../public/icon/crown.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
-import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
-import Button from "@/components/Button";
+import { setUserData } from "@/store/userDataSlice";
 import axios from "axios";
-import buttonIconSrc from "@/../public/icon/u_bolt-alt.svg";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import copy from "clipboard-copy";
-import CoverLetterCardSingle from "../cover-letter-generator/CoverLetterCardSingle";
 import PreviouslyGeneratedList from "@/components/dashboard/PreviouslyGeneratedList";
 import LinkedInHKeywordsCardSingle from "./LinkedInKeywordsCardSingle";
-import { makeid } from "@/helpers/makeid";
 import useGetUserData from "@/hooks/useGetUserData";
 import { useAppContext } from "@/context/AppContext";
 import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 import { setLinkedKeywords } from "@/store/linkedInKeywordsSlice";
 import DownloadService from "@/helpers/downloadFile";
-import { EditIcon } from "@/helpers/iconsProvider";
+import { EditIcon, newViewIcon } from "@/helpers/iconsProvider";
 import { useTourContext } from "@/context/TourContext";
 import TourBot from "../TourBot";
 
@@ -32,11 +27,18 @@ const SubKeywordsGenerator = () => {
   const [showPopup, setShowPopup] = useState(false);
 
   const [aiInputUserData, setAiInputUserData] = useState<any>();
-  const { setAvailableCredits, abortController } = useAppContext();
+  const { setAvailableCredits, abortController, setAbortController } = useAppContext();
   const [isEditing, setIsEditing] = useState(false);
 
   const [isKeywordsCopied, setIsKeywordsCopied] = useState<boolean>(false);
   const { getUserDataIfNotExists: getUserData } = useGetUserData(); //using hook function with different name/alias
+
+  useEffect(() => {
+    return (() => {
+      abortController?.abort();
+      setAbortController(new AbortController())
+    });
+  }, []);
 
   const copyKeyword = async (text: string) => {
     try {
@@ -108,11 +110,11 @@ const SubKeywordsGenerator = () => {
     await axios.post(
       `/api/linkedInBots/keywordsGenerator/linkedInKeywords`,
       payLoad,
-      { headers: { "Content-Type": "application/json" } }
+      { headers: { "Content-Type": "application/json" },signal: abortController?.signal }
     );
 
     const KeywordsResponse = await axios.get(
-      "/api/linkedInBots/keywordsGenerator/getAllLinkedInKeyword"
+      "/api/linkedInBots/keywordsGenerator/getAllLinkedInKeyword",{signal: abortController?.signal}
     );
     const updatedObject = {
       ...userData,
@@ -147,7 +149,6 @@ const SubKeywordsGenerator = () => {
 
   const handleGenerate: any = async () => {
     setStreamedData("");
-    const signal = abortController.signal;
 
     await getUserDataIfNotExists();
     //change condition
@@ -167,7 +168,7 @@ const SubKeywordsGenerator = () => {
       fetch("/api/linkedInBots/keywordsGenerator", {
         method: "POST",
         body: JSON.stringify(obj),
-        signal: signal,
+        signal: abortController?.signal
       })
         .then(async (resp: any) => {
           if (resp.ok) {
@@ -187,7 +188,7 @@ const SubKeywordsGenerator = () => {
             }
 
             const KeywordsResponse = await axios.get(
-              "/api/linkedInBots/keywordsGenerator/getAllLinkedInKeyword"
+              "/api/linkedInBots/keywordsGenerator/getAllLinkedInKeyword",{signal: abortController?.signal}
             );
             const updatedObject = {
               ...userData,
@@ -227,12 +228,6 @@ const SubKeywordsGenerator = () => {
     }
   };
 
-  useEffect(() => {
-    return () => {
-      abortController.abort();
-    };
-  }, []);
-
   const getUserDataIfNotExists = async () => {
     if (!userData.isLoading && !userData.isFetched) {
       try {
@@ -269,7 +264,7 @@ const SubKeywordsGenerator = () => {
   return (
     <>
       <PreviouslyGeneratedList {...historyProps} />
-      <div className=" dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950 py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-[10px] mb-[20px]">
+      <div className=" dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950 py-8 px-3 md:px-6 flex flex-col md:flex-row md:align-center gap-5 lg:justify-center items-center rounded-lg mb-[20px]">
         <div
           className={`icon hidden rounded-full  bg-gradient-to-b from-[#20AA89] to-[#65D4AC]  md:flex justify-center items-center w-16 h-16`}
         >
@@ -304,7 +299,7 @@ const SubKeywordsGenerator = () => {
         <button
           type="button"
           disabled={msgLoading || !session?.user?.email}
-          onClick={() => handleGenerate()}
+          onClick={handleGenerate}
           className="rounded-full"
         >
           <div className="bg-gradient-to-r px-6 py-2 from-[#B324D7] to-[#615DFF] flex  flex-row justify-center items-center gap-2 rounded-full">
@@ -325,12 +320,7 @@ const SubKeywordsGenerator = () => {
                   />
                 </svg>
               ) : (
-                <Image
-                  src={buttonIconSrc}
-                  alt="bold icon"
-                  height={18}
-                  width={18}
-                />
+                newViewIcon
               )}
             </span>
             <span className="text-xs font-semibold md:text-sm ">

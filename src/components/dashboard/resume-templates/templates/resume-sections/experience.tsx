@@ -22,6 +22,7 @@ const Experience = ({
   workExperienceArray,
   workExperience,
   customStyle,
+
   styles,
 }: Props) => {
   const [newAchievement, setNewAchievement] = useState("");
@@ -53,15 +54,13 @@ const Experience = ({
     <>
       <span
         className={`${styles?.span1} ${
-          customStyle?.borderTopBottom ? "block" : "hidden"
+          customStyle?.borderTopBottom ? "!block" : "hidden"
         }`}
       ></span>
       <h2
         className={`${styles?.experienceHeading_temp_2} ${
           customStyle?.centeredHeading ? "justify-center" : ""
-        }  ${customStyle?.bgColor} ${
-          customStyle?.underline ? "underline" : null
-        } `}
+        }  ${styles?.bgColor} `}
       >
         {resumeWorkExpIcon}
 
@@ -80,7 +79,7 @@ const Experience = ({
       <span
         className={`${styles?.span2} ${
           customStyle?.borderTopBottom || customStyle?.borderBottom
-            ? "block"
+            ? "!block"
             : "hidden"
         }`}
       ></span>

@@ -40,7 +40,7 @@ export async function POST(req: any) {
               ${content}
     
               Now please give me a List of All Projects found from the above user data provided.
-    
+              Give me projects only where it is indicated do not add anything from any other details.
               The answer MUST be a valid JSON and formatting should be like this 
               replace the VALUE_HERE with the actual values
               {
@@ -90,7 +90,13 @@ export async function POST(req: any) {
 
             await TrainBot.create({ ...obj });
           }
-        } catch (error) {}
+        } catch (error) {
+          console.log(error);
+          return NextResponse.json(
+            { result: "Internal Server Error", success: false },
+            { status: 404 }
+          );
+        }
 
         return NextResponse.json(
           { success: true, result: response.choices[0].message.content },

@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { memo, useMemo, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,9 +11,10 @@ import { infoSmallIcon } from "@/helpers/iconsProvider";
 import { useTourContext } from "@/context/TourContext";
 
 interface Props {
-  getConsent: () => void;
+  // getConsent: () => void;
+  handleGenerate: () => Promise<void>;
 }
-const GenerateResume = ({ getConsent }: Props) => {
+const GenerateResume = ({ handleGenerate }: Props) => {
   const radiosResumeType: { labelText: string; value: string }[] = [
     {
       labelText: "Generate Basic Resume",
@@ -33,21 +34,21 @@ const GenerateResume = ({ getConsent }: Props) => {
   const [resumeType, setResumeType] = useState<
     "resume-basic" | "resume-job-title" | "resume-job-description"
   >("resume-basic");
-  // const [quantifyingExperience, setQuantifyingExperience] =
-  //   useState<boolean>(true);
-  // Redux
   const { data: session } = useSession();
   const dispatch = useDispatch();
   const state = useSelector((state: any) => state.resume.state);
   const userData = useSelector((state: any) => state.userData);
   const memoizedState = useMemo(() => state, [state]);
-
   const { resumeElementRef } = useTourContext();
+
+  useEffect(() => {
+    setResumeType(memoizedState.resumeType);
+  }, [memoizedState]);
 
   return (
     <div
       ref={(ref: any) => (resumeElementRef.current = ref)}
-      className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-[20px] py-6 px-4 md:px-[30px] flex flex-col gap-4 "
+      className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-lg py-6 px-4 md:px-[30px] flex flex-col gap-4 "
     >
       {/* header */}
       <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
@@ -151,6 +152,9 @@ const GenerateResume = ({ getConsent }: Props) => {
       <div className="flex flex-col items-start justify-between gap-5">
         <div className="flex flex-col w-full gap-4">
           <div className="flex flex-col items-start justify-center gap-2">
+            <h2 className="text-sm font-semibold text-gray-300 uppercase">
+              Resume Type
+            </h2>
             {radiosResumeType.map(
               ({ labelText, value }: { labelText: string; value: string }) => (
                 <label className="text-sm cursor-pointer" key={value}>
@@ -190,7 +194,6 @@ const GenerateResume = ({ getConsent }: Props) => {
               )
             )}
           </div>
-
           {resumeType === "resume-job-title" ? (
             <>
               <label
@@ -270,6 +273,48 @@ const GenerateResume = ({ getConsent }: Props) => {
           ) : (
             ""
           )}
+
+          <h2 className="text-sm font-semibold text-gray-300 uppercase">
+            Content Type
+          </h2>
+          <div className="flex flex-row items-center justify-start gap-2 ">
+            <label htmlFor="resume-short" className="text-sm cursor-pointer">
+              <input
+                className="mr-1"
+                type="radio"
+                name="resume-size"
+                id="resume-short"
+                checked={!memoizedState?.detailedResume}
+                onChange={() =>
+                  dispatch(
+                    setState({
+                      name: "detailedResume",
+                      value: false,
+                    })
+                  )
+                }
+              />
+              Short and Crisp
+            </label>
+            <label htmlFor="resume-detailed" className="text-sm cursor-pointer">
+              <input
+                className="mr-1"
+                type="radio"
+                name="resume-size"
+                id="resume-detailed"
+                checked={memoizedState?.detailedResume}
+                onChange={() =>
+                  dispatch(
+                    setState({
+                      name: "detailedResume",
+                      value: true,
+                    })
+                  )
+                }
+              />
+              Detailed
+            </label>
+          </div>
         </div>
         {/* <label className="relative inline-flex items-center cursor-pointer">
         <input
@@ -300,7 +345,7 @@ const GenerateResume = ({ getConsent }: Props) => {
             //memoizedState.jobPosition === "" ||
             memoizedState.resumeLoading || !session?.user?.email
           }
-          onClick={() => getConsent()}
+          onClick={() => handleGenerate()}
           className={` dark:bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 from-[#b324d7]  to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2  px-4 py-2  rounded-full ${
             // memoizedState.jobPosition === "" ||
             memoizedState.resumeLoading || !session?.user?.email

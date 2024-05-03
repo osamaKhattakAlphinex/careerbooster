@@ -13,6 +13,7 @@ const useSaveResumeToDB = () => {
   const { setAvailableCredits } = useAppContext();
   const { data: session } = useSession();
   const dispatch = useDispatch();
+  const {abortController} = useAppContext();
 
   const saveResumeToDB = async (data: any = "") => {
     // return makeAPICallWithRetry(async () => {
@@ -30,7 +31,7 @@ const useSaveResumeToDB = () => {
       .post("/api/resumeBots/saveResumeToDB", {
         email: userData.email,
         resumeData: obj,
-      })
+      }, {signal: abortController?.signal})
       .then(async (resp) => {
         if (userData.trialResume === false) {
           dispatch(setUserData({ trialResume: true }));
@@ -40,7 +41,7 @@ const useSaveResumeToDB = () => {
                 email: userData.email,
                 trialResume: true,
               },
-            })
+            }, {signal: abortController?.signal})
             .then(() => {
               setAvailableCredits(true);
             });
@@ -50,7 +51,7 @@ const useSaveResumeToDB = () => {
         dispatch(setId(obj.id));
         // update user in redux
         const res = await fetch(
-          `/api/users/getOneByEmail?email=${session?.user?.email}`
+          `/api/users/getOneByEmail?email=${session?.user?.email}`, {signal: abortController?.signal}
         );
 
         const response = await res.json();
@@ -58,7 +59,7 @@ const useSaveResumeToDB = () => {
         dispatch(setUserData(user));
         // get user package details
         const res2 = await fetch(
-          `/api/users/getCreditPackageDetails?id=${user?.creditPackage}`
+          `/api/users/getCreditPackageDetails?id=${user?.creditPackage}`, {signal: abortController?.signal}
         );
         const data = await res2.json();
         if (data.success) {

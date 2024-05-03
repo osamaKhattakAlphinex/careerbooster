@@ -48,6 +48,7 @@ const Certification = ({
         }
           ${customStyle?.bgColor}
           ${styles?.underline ? "underline" : null}
+          ${styles?.bgColor}
         `}
       >
         <svg

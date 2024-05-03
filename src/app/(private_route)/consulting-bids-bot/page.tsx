@@ -165,6 +165,9 @@ const ConsultingBidsGenerator = () => {
             setStreamedData(res.result + "! You ran out of Credits");
           }
         })
+        .catch((err) => {
+          console.log(err);
+        })
         .finally(() => {
           setMsgLoading(false);
         });
@@ -282,7 +285,7 @@ const ConsultingBidsGenerator = () => {
                 <h3 className="text-[16px] md:text-sm uppercase dark:text-gray-100 text-gray-950 font-bold">
                   Consulting Bids Generator
                 </h3>
-                <div className="text-sm font-bold uppercase  dark:text-gray-100 text-gray-950">
+                <div className="text-sm font-bold uppercase dark:text-gray-100 text-gray-950">
                   {/* <LimitCard
                     title="Email Availble"
                     limit={

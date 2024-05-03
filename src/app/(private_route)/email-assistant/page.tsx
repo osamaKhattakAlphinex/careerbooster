@@ -46,22 +46,24 @@ const PersonalizedEmailBot = () => {
   const [setSelectedResumeId, setSetSelectedResumeId] = useState<string>("");
   const [jobDescription, setJobDescription] = useState<string>("");
   const [showPopup, setShowPopup] = useState(false);
-  const { setAvailableCredits } = useAppContext();
+  const { setAvailableCredits,abortController, setAbortController } = useAppContext();
   const [emailLoading, setEmailLoading] = useState<boolean>(false);
   const [firstFollowUpLoading, setFirstFollowUpLoading] =
     useState<boolean>(false);
   const [secondFollowUpLoading, setSecondFollowUpLoading] =
     useState<boolean>(false);
 
-  const { abortController } = useAppContext();
-
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
   const email = useSelector((state: any) => state.email);
-
   const creditLimits = useSelector((state: any) => state.creditLimits);
-
+  useEffect(() => {
+    return () => {
+      abortController?.abort();
+      setAbortController(new AbortController());
+    };
+  }, []);
   const { resumes } = userData;
   const copyEmail = async (text: string, type: string) => {
     try {
@@ -166,12 +168,6 @@ const PersonalizedEmailBot = () => {
   }, [tourBotRef]);
 
   useEffect(() => {
-    return () => {
-      abortController.abort();
-    };
-  }, []);
-
-  useEffect(() => {
     if (outOfCredits) {
       setTimeout(() => {
         tourBotRef?.current?.click();
@@ -231,8 +227,6 @@ const PersonalizedEmailBot = () => {
   const handleGenerate = async (emailType: string = "email") => {
     // await getUserDataIfNotExists();
 
-    const signal = abortController.signal;
-
     if (emailType === "email") {
       if (session?.user?.email && aiInputUserData) {
         setEmailLoading(true);
@@ -267,11 +261,11 @@ const PersonalizedEmailBot = () => {
         } else {
           obj.userData = aiInputUserData;
         }
-        // Fetch keywords
+ 
         fetch("/api/emailBot/emailGenerator", {
           method: "POST",
           body: JSON.stringify(obj),
-          signal: signal,
+          signal: abortController?.signal
         })
           .then(async (resp: any) => {
             if (resp.ok) {
@@ -294,7 +288,7 @@ const PersonalizedEmailBot = () => {
               setStreamedData((prev) => prev.replace("```", ""));
 
               const emailsResponse = await axios.get(
-                "/api/emailBot/getAllEmails"
+                "/api/emailBot/getAllEmails",{signal: abortController?.signal}
               );
 
               if (emailsResponse.data.success) {
@@ -323,6 +317,9 @@ const PersonalizedEmailBot = () => {
               }
             }
           })
+          .catch((err) => {
+            console.log(err);
+          })
           .finally(() => {
             setEmailLoading(false);
           });
@@ -335,8 +332,6 @@ const PersonalizedEmailBot = () => {
         }, 3000);
       }
     } else if (emailType === "firstFollowUp") {
-      const signal = abortController.signal;
-
       if (session?.user?.email && aiInputUserData) {
         setFirstFollowUpLoading(true);
         setFirstShow(true);
@@ -355,11 +350,10 @@ const PersonalizedEmailBot = () => {
         };
         obj.userData = aiInputUserData;
 
-        // Fetch keywords
         fetch("/api/emailBot/emailGenerator", {
           method: "POST",
           body: JSON.stringify(obj),
-          signal: signal,
+          signal: abortController?.signal,
         })
           .then(async (resp: any) => {
             if (resp.ok) {
@@ -386,8 +380,7 @@ const PersonalizedEmailBot = () => {
               );
 
               const emailsResponse = await axios.get(
-                "/api/emailBot/getAllEmails"
-                // payload
+                "/api/emailBot/getAllEmails",{signal: abortController?.signal}
               );
 
               if (emailsResponse.data.success) {
@@ -418,6 +411,9 @@ const PersonalizedEmailBot = () => {
               }
             }
           })
+          .catch((err) => {
+            console.log(err);
+          })
           .finally(() => {
             setFirstFollowUpLoading(false);
           });
@@ -430,8 +426,6 @@ const PersonalizedEmailBot = () => {
         }, 3000);
       }
     } else if (emailType === "secondFollowUp") {
-      const signal = abortController.signal;
-
       if (session?.user?.email && aiInputUserData) {
         setSecondFollowUpLoading(true);
         setSecondShow(true);
@@ -451,11 +445,10 @@ const PersonalizedEmailBot = () => {
         };
         obj.userData = aiInputUserData;
 
-        // Fetch keywords
         fetch("/api/emailBot/emailGenerator", {
           method: "POST",
           body: JSON.stringify(obj),
-          signal: signal,
+          signal: abortController?.signal,
         })
           .then(async (resp: any) => {
             if (resp.ok) {
@@ -483,8 +476,7 @@ const PersonalizedEmailBot = () => {
               );
 
               const emailsResponse = await axios.get(
-                "/api/emailBot/getAllEmails"
-                // payload
+                "/api/emailBot/getAllEmails",{signal: abortController?.signal}
               );
 
               if (emailsResponse.data.success) {
@@ -508,6 +500,9 @@ const PersonalizedEmailBot = () => {
                 showErrorToast("Failed to generate Email");
               }
             }
+          })
+          .catch((err) => {
+            console.log(err);
           })
           .finally(() => {
             setSecondFollowUpLoading(false);
@@ -551,7 +546,7 @@ const PersonalizedEmailBot = () => {
       const updatedEmails = await axios.put(
         `/api/emailBot/${email.id}`,
         payLoad,
-        { headers: { "Content-Type": "application/json" } }
+        { headers: { "Content-Type": "application/json" },signal: abortController?.signal }
       );
 
       const updatedObject = {
@@ -586,7 +581,7 @@ const PersonalizedEmailBot = () => {
       const updatedEmails = await axios.put(
         `/api/emailBot/${email.id}`,
         payLoad,
-        { headers: { "Content-Type": "application/json" } }
+        { headers: { "Content-Type": "application/json" },signal: abortController?.signal }
       );
 
       const updatedObject = {
@@ -621,7 +616,7 @@ const PersonalizedEmailBot = () => {
       const updatedEmails = await axios.put(
         `/api/emailBot/${email.id}`,
         payLoad,
-        { headers: { "Content-Type": "application/json" } }
+        { headers: { "Content-Type": "application/json" },signal: abortController?.signal }
       );
 
       const updatedObject = {
@@ -717,7 +712,7 @@ const PersonalizedEmailBot = () => {
           <PreviouslyGeneratedList {...historyProps} />
           <div
             ref={(ref: any) => (emailElementRef.current = ref)}
-            className=" my-4 dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950  rounded-[20px] px-4 lg:px-[30px] py-[30px] flex flex-col gap-3 "
+            className=" my-4 dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950  rounded-lg px-4 lg:px-[30px] py-[30px] flex flex-col gap-3 "
           >
             {/* header */}
             <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
@@ -847,7 +842,7 @@ const PersonalizedEmailBot = () => {
             </div>
           </div>
           <div
-            className="my-4   dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950  rounded-[20px] px-4 lg:px-[30px] py-[30px] flex flex-col gap-3 "
+            className="my-4   dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950  rounded-lg px-4 lg:px-[30px] py-[30px] flex flex-col gap-3 "
             ref={(ref: any) => (emailCardsElementRef.current = ref)}
           >
             {show ? (

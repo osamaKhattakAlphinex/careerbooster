@@ -5,7 +5,7 @@ const TrainBotSchema = new Schema(
   {
     entryId: {
       type: String,
-      required: true,
+      // required: true,
     },
 
     type: {

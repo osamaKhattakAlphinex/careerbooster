@@ -23,17 +23,17 @@ const Summary = ({ summary, heading, customStyle, styles }: Props) => {
     <>
       <span
         className={`${styles?.span1} ${
-          customStyle?.borderTopBottom ? "block" : "hidden"
+          customStyle?.borderTopBottom ? "!block" : "hidden"
         }`}
       ></span>
       <h2
         className={`${styles?.publication_h3} ${customStyle?.bgColor} ${
           customStyle?.centeredHeading ? "justify-center" : ""
-        } ${customStyle?.underline ? "underline" : null} `}
+        } ${styles?.bgColor}`}
       >
         {resumeSummaryIcon}
         <EditableField
-          value={heading?.summary ? heading.summary : "Execuitve summary"}
+          value={heading ? heading : "Execuitve summary"}
           style={{ width: "fit-content " }}
           onSave={(value: string) => {
             if (value !== heading?.summary) {
@@ -47,7 +47,7 @@ const Summary = ({ summary, heading, customStyle, styles }: Props) => {
       <span
         className={`${styles?.span2} ${
           customStyle?.borderTopBottom || customStyle?.borderBottom
-            ? "block"
+            ? "!block"
             : "hidden"
         }  mb-2`}
       ></span>

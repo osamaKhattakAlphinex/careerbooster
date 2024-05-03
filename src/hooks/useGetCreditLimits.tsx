@@ -9,16 +9,12 @@ const useGetCreditLimits = () => {
   const { data: session } = useSession();
   const creditLimits = useSelector((state: any) => state.creditLimits);
 
-  const { abortController } = useAppContext();
-
   // Redux
   const dispatch = useDispatch();
   const getCreditLimitsIfNotExists = async () => {
-    const signal = abortController.signal;
-
     if (!creditLimits.isFetched) {
       try {
-        const res = await fetch(`/api/users/CreditLimits`, { signal: signal });
+        const res = await fetch(`/api/users/CreditLimits`);
         const response = await res.json();
         dispatch(setCredits(response.result));
         dispatch(setField({ name: "isFetched", value: true }));
@@ -32,9 +28,6 @@ const useGetCreditLimits = () => {
     if (session?.user?.email) {
       getCreditLimitsIfNotExists();
     }
-    return () => {
-      abortController.abort();
-    };
   }, [session?.user?.email]);
   return { getCreditLimitsIfNotExists };
 };
