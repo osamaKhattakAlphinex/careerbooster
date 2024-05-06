@@ -12,6 +12,8 @@ export const POST = async (
   });
 
   try {
+    await startDB();
+
     const formData = await req.formData();
 
     const file = formData.get("traing-file") as Blob | null;
