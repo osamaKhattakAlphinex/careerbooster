@@ -127,6 +127,18 @@ const ResumeTemplate9 = () => {
             )}
           </div>
 
+          {/* Awards */}
+          <div className="w-full">
+            {resume?.awards && resume?.awards.length > 0 && (
+              <Award
+                customStyle={customStyle_9}
+                heading={resume.headings.awards}
+                awards={resume.awards}
+                styles={template_9_styles}
+              />
+            )}
+          </div>
+
           {/* Trainings */}
           <div className="w-full">
             {resume?.trainings && resume?.trainings.length > 0 && (
@@ -139,17 +151,18 @@ const ResumeTemplate9 = () => {
             )}
           </div>
 
-          {/* Awards */}
+          {/* Languages */}
           <div className="w-full">
-            {resume?.awards && resume?.awards.length > 0 && (
-              <Award
+            {resume?.languages && resume?.languages.length > 0 && (
+              <Language
                 customStyle={customStyle_9}
-                heading={resume.headings.awards}
-                awards={resume.awards}
+                heading={resume.headings.languages}
+                languages={resume.languages}
                 styles={template_9_styles}
               />
             )}
           </div>
+
           {/* Projects */}
           <div className="w-full">
             {resume?.projects && resume?.projects.length > 0 && (
@@ -185,20 +198,9 @@ const ResumeTemplate9 = () => {
             )}
           </div>
 
-          {/* Languages */}
-          <div className="w-full">
-            {resume?.languages && resume?.languages.length > 0 && (
-              <Language
-                customStyle={customStyle_9}
-                heading={resume.headings.languages}
-                languages={resume.languages}
-                styles={template_9_styles}
-              />
-            )}
-          </div>
           {/* Education */}
 
-          <div className="w-full  mb-2">
+          <div className="w-full mb-2">
             {resume?.education.length > 0 && (
               <Education
                 heading={resume.headings.education}

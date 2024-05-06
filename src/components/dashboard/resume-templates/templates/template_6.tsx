@@ -95,15 +95,6 @@ const ResumeTemplate6 = () => {
                 styles={template_6_styles}
               />
             )}
-            {/* Trainings */}
-            {resume?.trainings && resume?.trainings.length > 0 && (
-              <Training
-                heading={resume.headings.trainings}
-                trainings={resume.trainings}
-                styles={template_6_styles}
-                customStyle={customStyle_6}
-              />
-            )}
 
             {/* Awards */}
             {resume?.awards && resume?.awards.length > 0 && (
@@ -114,6 +105,16 @@ const ResumeTemplate6 = () => {
                 customStyle={customStyle_6}
               />
             )}
+            {/* Trainings */}
+            {resume?.trainings && resume?.trainings.length > 0 && (
+              <Training
+                heading={resume.headings.trainings}
+                trainings={resume.trainings}
+                styles={template_6_styles}
+                customStyle={customStyle_6}
+              />
+            )}
+
             {/* Projects */}
             <div className="w-full">
               {resume?.projects && resume?.projects.length > 0 && (
@@ -156,7 +157,7 @@ const ResumeTemplate6 = () => {
             )}
 
             {/* Education */}
-            <div className="w-full  mb-2">
+            <div className="w-full mb-2">
               {resume?.education.length > 0 && (
                 <Education
                   heading={resume.headings.education}
