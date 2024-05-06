@@ -171,7 +171,7 @@ const Interest = ({
                             );
                           }}
                           draggable
-                          className={`${styles?.interest_delete1} parent`}
+                          className={`${styles?.interest_delete1} `}
                           key={ind}
                         >
                           <EditableField
@@ -194,7 +194,7 @@ const Interest = ({
                                 "interests"
                               )
                             }
-                            className={`${styles?.interest_delete} child`}
+                            className={`${styles?.interest_delete} `}
                           >
                             {crossIcon1}
                           </div>

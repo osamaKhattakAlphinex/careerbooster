@@ -78,8 +78,8 @@ export const template_2_styles = {
   interest_ul: "publication_ul",
   interest_li: "publication_li",
   interest_line: "publication_line",
-  interest_delete1: "publication_delete1",
-  interest_delete: "publication_delete",
+  interest_delete1: "publication_delete1 parent",
+  interest_delete: "publication_delete hidden",
   interest_div_input: "publication_div_input",
   interest_new_input: "publication_new_input",
   award_h3: "publication_h3",
@@ -140,7 +140,7 @@ export const template_4_styles = {
   language_date: "hover:shadow-md hover:bg-gray-500",
   interest_h3: "publication_h3",
   interest_div:
-    "flex justify-between items-center border-2 border-transparent md:w-full hover:cursor-move ",
+    "flex justify-between items-center md:w-full hover:cursor-move border-2 border-transparent hover:border-dashed hover:border-gray-500 ",
   interest_h1:
     "flex text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-500",
   interest_h2:
@@ -150,11 +150,11 @@ export const template_4_styles = {
   interest_date: "hover:shadow-md hover:bg-gray-500",
   interest_ul: "flex flex-col flex-wrap pl-0 text-xs xs:text-[12px] md:text-xs",
   interest_li:
-    "m-2 xs:m-0 relative border-transparent border-2 hover:border-dashed hover:border-gray-500",
+    "m-2 xs:m-0 relative hover:shadow-md hover:cursor-move      hover:bg-gray-500",
   interest_line: "publication_line",
   interest_delete1:
-    "hover:border-dashed list-disc hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative hover:bg-gray-500",
-  interest_delete: "publication_delete",
+    "hover:shadow-md hover:cursor-move  hover:bg-gray-500 relative list-disc w-auto parent",
+  interest_delete: "publication_delete hidden",
   interest_div_input: "publication_div_input",
   interest_new_input: "publication_new_input",
   full_Name_Style:
@@ -166,7 +166,7 @@ export const template_4_styles = {
   skill_ul:
     "border-2 border-transparent hover:border-dashed hover:border-gray-500 px-4 flex flex-col  gap-3 mb-4 text-xs xs:text-[12px] md:text-xs",
   skill_li:
-    "hover:shadow-md hover:cursor-move  border-transparent border-[1px] hover:border-dashed hover:border-gray-500 hover:border hover:bg-gray-500",
+    "hover:shadow-md hover:cursor-move  hover:border-[1px] hover:border-dashed     hover:bg-gray-500",
   skill_New: "skill_New",
   span1: "span1",
   span2: "span2",
@@ -359,8 +359,8 @@ export const template_6_styles = {
   interest_ul: "publication_ul",
   interest_li: "publication_li",
   interest_line: "publication_line",
-  interest_delete1: "publication_delete1",
-  interest_delete: "publication_delete",
+  interest_delete1: "publication_delete1 parent",
+  interest_delete: "publication_delete hidden",
   interest_div_input: "publication_div_input",
   interest_new_input: "publication_new_input",
   award_h3: "publication_h3",
@@ -490,8 +490,8 @@ export const template_8_styles = {
   interest_ul: "publication_ul",
   interest_li: "publication_li",
   interest_line: "publication_line",
-  interest_delete1: "publication_delete1",
-  interest_delete: "publication_delete",
+  interest_delete1: "publication_delete1 parent",
+  interest_delete: "publication_delete hidden",
   interest_div_input: "publication_div_input",
   interest_new_input: "publication_new_input",
   award_h3: "publication_h3",
@@ -621,8 +621,8 @@ export const template_9_styles = {
   interest_ul: "publication_ul",
   interest_li: "publication_li",
   interest_line: "publication_line",
-  interest_delete1: "publication_delete1",
-  interest_delete: "publication_delete",
+  interest_delete1: "publication_delete1 parent",
+  interest_delete: "publication_delete hidden",
   interest_div_input: "publication_div_input",
   interest_new_input: "publication_new_input",
   award_h3: "publication_h3",
@@ -672,13 +672,13 @@ export const template_10_styles = {
     "flex flex-row items-center gap-2 mb-2 -mr-6 text-base font-semibold uppercase border-2 border-transparent md:-mr-6 md:mt-4 hover:border-dashed hover:border-gray-500 hover:w-full",
   contact_ul: "flex flex-col gap-2 pl-0 mt-4 text-xs break-all",
   contact_li:
-    "flex items-center hover:shadow-md mb-[8px] hover:bg-gray-500 text-xs flex-row gap-1 justify-start",
+    "flex items-center hover:shadow-md mb-[8px] hover:bg-gray-500 text-xs flex-row gap-1 justify-start   hover:border-[1px] hover:border-dashed     ",
   skill_heading:
     "flex flex-row items-center gap-2 mb-0 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500",
   skill_ul:
     "flex flex-col gap-3 mb-4 text-xs border-2 px-4 border-transparent hover:border-dashed hover:border-gray-500",
   skill_li:
-    "hover:shadow-md hover:cursor-move parent border-transparent border-[1px] hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-500",
+    "hover:shadow-md hover:cursor-move parent      hover:border-[1px] hover:border-dashed     hover:bg-gray-500",
   training_h3: "publication_h3",
   training_div: "publication_div",
   training_h1: "achievement_h1",
@@ -746,7 +746,7 @@ export const template_10_styles = {
   project_div_input: "publication_div_input",
   interest_h3: "publication_h3",
   interest_div:
-    "flex justify-between items-center border-2 border-transparent md:w-full hover:cursor-move ",
+    "flex justify-between items-center hover:border-2 hover:border-dashed hover:border-gray-500 hover:border-2 md:w-full hover:cursor-move ",
   interest_h1:
     "flex text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-500",
   interest_h2:
@@ -754,13 +754,14 @@ export const template_10_styles = {
   interest_h2_1:
     "flex flex-wrap gap-1 text-[10px] font-semibold leading-relaxed hover:cursor-default",
   interest_date: "hover:shadow-md hover:bg-gray-500",
-  interest_ul: "flex flex-col flex-wrap pl-0 text-xs xs:text-[12px] md:text-xs",
+  interest_ul:
+    "flex flex-col flex-wrap pl-0 text-xs xs:text-[12px] md:text-xs  h",
   interest_li:
     "m-2 xs:m-0 relative border-transparent border-2 hover:border-dashed hover:border-gray-500",
   interest_line: "publication_line",
   interest_delete1:
-    "hover:border-dashed list-disc hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative hover:bg-gray-500",
-  interest_delete: "publication_delete",
+    " list-disc hover:cursor-move hover:shadow-md hover:cursor-move  hover:border-[1px] hover:border-dashed     hover:bg-gray-500 relative ",
+  interest_delete: "publication_delete hidden",
   interest_div_input: "publication_div_input",
   interest_new_input: "publication_new_input",
   award_h3: "publication_h3",
@@ -813,7 +814,7 @@ export const template_15_styles = {
     "flex flex-row items-center gap-2 mb-2 -mr-6 text-base font-semibold uppercase border-2 border-transparent md:-mr-6 md:mt-4 hover:border-dashed hover:border-gray-500 hover:w-full",
   contact_ul: "flex flex-col mt-4 w-full gap-3 pl-0 mb-4 text-xs break-all",
   contact_li:
-    "flex flex-row items-start justify-start gap-3 text-xs hover:shadow-md hover:bg-gray-100",
+    "flex flex-row items-start justify-start gap-3 text-xs hover:shadow-md hover:bg-gray-100 hover:border-[1px] hover:border-dashed hover:border-black",
   skill_heading:
     "flex uppercase text-base xs:px-2 font-semibold text-gray-100 gap-2 items-center  py-1 rounded-sm  border-2 border-transparent hover:border-dashed hover:border-gray-500",
   skill_ul:
@@ -888,7 +889,7 @@ export const template_15_styles = {
   interest_h3:
     "flex uppercase text-base xs:px-2 font-semibold text-gray-100 gap-2 items-center  py-1 rounded-sm  border-2 border-transparent hover:border-dashed hover:border-gray-500",
   interest_div:
-    "flex justify-between items-center border-2 border-transparent md:w-full hover:cursor-move ",
+    "flex justify-between items-center border-2 border-transparent md:w-full hover:cursor-move border-2 border-transparent hover:border-dashed hover:border-gray-500",
   interest_h1:
     "flex text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-500",
   interest_h2:
@@ -901,8 +902,8 @@ export const template_15_styles = {
     "hover:shadow-md hover:cursor-move px-0 xs:px-2 md:px-0 parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex items-center gap-2 justify-between",
   interest_line: "publication_line",
   interest_delete1:
-    "hover:border-dashed list-disc hover:cursor-move hover:border-gray-100 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative hover:bg-gray-100",
-  interest_delete: "publication_delete",
+    "hover:border-dashed list-disc hover:cursor-move hover:border-gray-100 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative hover:bg-gray-100 parent",
+  interest_delete: "publication_delete hidden",
   interest_div_input: "publication_div_input",
   interest_new_input: "publication_new_input",
   award_h3: "publication_h3",
@@ -937,7 +938,7 @@ export const template_15_styles = {
   language_li:
     "m-2 xs:m-0 relative border-transparent border-2 hover:border-dashed hover:border-gray-100 ",
   language_div:
-    "flex justify-between items-center border-2 border-transparent md:w-full hover:cursor-move ",
+    "flex justify-between items-center border-2  md:w-full hover:cursor-move border-2 border-transparent hover:border-dashed hover:border-gray-500 ",
   language_h1:
     "flex text-[14px] xs:text-[12px] md:text-xs font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100",
   language_h2_1:
@@ -1031,7 +1032,7 @@ export const template_16_styles = {
   interest_h3:
     "flex uppercase text-base xs:px-2 font-semibold text-gray-100 gap-2 items-center  py-1 rounded-sm  border-2 border-transparent hover:border-dashed hover:border-gray-500",
   interest_div:
-    "flex justify-between items-center border-2 border-transparent md:w-full hover:cursor-move ",
+    "flex justify-between items-center border-2 border-transparent md:w-full hover:cursor-move border-2 border-transparent hover:border-dashed hover:border-gray-500",
   interest_h1:
     "flex text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-500",
   interest_h2:
@@ -1041,11 +1042,11 @@ export const template_16_styles = {
   interest_date: "hover:shadow-md hover:bg-gray-500",
   interest_ul: "flex flex-col flex-wrap pl-0 text-xs xs:text-[12px] md:text-xs",
   interest_li:
-    "m-2 xs:m-0 relative border-transparent border-2 hover:border-dashed hover:border-gray-100 text-gray-100",
+    "m-2 xs:m-0 relative  hover:border-2 hover:border-dashed  text-gray-100",
   interest_line: "publication_line",
   interest_delete1:
-    "hover:border-dashed list-disc hover:cursor-move hover:border-gray-100 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative hover:bg-gray-500 text-gray-100 justify-between",
-  interest_delete: "publication_delete",
+    "hover:border-dashed list-disc hover:cursor-move  hover:bg-gray-500  text-gray-100 parent",
+  interest_delete: "publication_delete hidden",
   interest_div_input: "publication_div_input",
   interest_new_input: "publication_new_input",
   award_h3: "publication_h3",
