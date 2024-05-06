@@ -148,6 +148,7 @@ const ResumeTemplate10 = () => {
                 heading={resume.headings.certifications}
                 certificates={resume.certifications}
                 styles={template_10_styles}
+                iconColor={"text-white"}
               />
             )}
           </div>

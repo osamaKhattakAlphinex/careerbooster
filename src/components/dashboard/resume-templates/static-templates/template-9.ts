@@ -453,7 +453,7 @@ const components: any = {
       {
         tag: "div",
         styles:
-          "flex flex-row justify-between items-center text-gray-100",
+          "flex flex-row justify-between items-center text-gray-100 w-full",
         container: [
           {
             id: "language",
