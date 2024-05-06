@@ -201,6 +201,16 @@ const ResumeTemplate15 = () => {
             rounded_style="bg-[#444440] w-full xs:w-full md:w-full lg:w-full flex justify-center xs:justify-center md:justify-center  flex-row gap-2 items-center"
           />
 
+          {/* Languages */}
+          {resume?.languages && resume?.languages.length > 0 && (
+            <Language
+              // customStyle={customStyle_4}
+              heading={resume.headings.languages}
+              languages={resume.languages}
+              styles={template_15_styles}
+              rounded_style="bg-[#444440] w-full xs:w-full md:w-full lg:w-full flex justify-center xs:justify-center md:justify-center  flex-row gap-2 items-center"
+            />
+          )}
           {/* Interests & Hobbies */}
 
           {resume?.interests && resume?.interests.length > 0 && (
@@ -208,16 +218,6 @@ const ResumeTemplate15 = () => {
               // customStyle={customStyle_4}
               heading={resume.headings.interests}
               interests={resume.interests}
-              styles={template_15_styles}
-              rounded_style="bg-[#444440] w-full xs:w-full md:w-full lg:w-full flex justify-center xs:justify-center md:justify-center  flex-row gap-2 items-center"
-            />
-          )}
-          {/* Languages */}
-          {resume?.languages && resume?.languages.length > 0 && (
-            <Language
-              // customStyle={customStyle_4}
-              heading={resume.headings.languages}
-              languages={resume.languages}
               styles={template_15_styles}
               rounded_style="bg-[#444440] w-full xs:w-full md:w-full lg:w-full flex justify-center xs:justify-center md:justify-center  flex-row gap-2 items-center"
             />
@@ -277,18 +277,6 @@ const ResumeTemplate15 = () => {
             )}
           </div>
 
-          {/* Trainings */}
-          <div className="w-full">
-            {resume?.trainings && resume?.trainings.length > 0 && (
-              <Training
-                customStyle={customStyle_15}
-                heading={resume.headings.trainings}
-                trainings={resume.trainings}
-                styles={template_15_styles}
-              />
-            )}
-          </div>
-
           {/* Awards */}
           <div className="w-full">
             {resume?.awards && resume?.awards.length > 0 && (
@@ -296,6 +284,17 @@ const ResumeTemplate15 = () => {
                 customStyle={customStyle_15}
                 heading={resume.headings.awards}
                 awards={resume.awards}
+                styles={template_15_styles}
+              />
+            )}
+          </div>
+          {/* Trainings */}
+          <div className="w-full">
+            {resume?.trainings && resume?.trainings.length > 0 && (
+              <Training
+                customStyle={customStyle_15}
+                heading={resume.headings.trainings}
+                trainings={resume.trainings}
                 styles={template_15_styles}
               />
             )}
@@ -325,7 +324,7 @@ const ResumeTemplate15 = () => {
           </div>
 
           {/* education */}
-          <div className="w-full  mb-2">
+          <div className="w-full mb-2">
             {resume?.education.length > 0 && (
               <Education
                 heading={resume.headings.education}

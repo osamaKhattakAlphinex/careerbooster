@@ -86,20 +86,20 @@ const ResumeTemplate10 = () => {
             }}
             rounded_style="rounded-3xl border-2 border-[#043382] xs:py-2 py-[6px] my-3  flex justify-center"
           />
-          {/* Interests & Hobbies */}
-          {resume?.interests && resume?.interests.length > 0 && (
-            <Interest
-              heading={resume.headings.interests}
-              interests={resume.interests}
-              styles={template_10_styles}
-              rounded_style="rounded-3xl border-2 border-[#043382] xs:py-2 py-[6px] my-3  flex justify-center"
-            />
-          )}
           {/* Languages */}
           {resume?.languages && resume?.languages.length > 0 && (
             <Language
               heading={resume.headings.languages}
               languages={resume.languages}
+              styles={template_10_styles}
+              rounded_style="rounded-3xl border-2 border-[#043382] xs:py-2 py-[6px] my-3  flex justify-center"
+            />
+          )}
+          {/* Interests & Hobbies */}
+          {resume?.interests && resume?.interests.length > 0 && (
+            <Interest
+              heading={resume.headings.interests}
+              interests={resume.interests}
               styles={template_10_styles}
               rounded_style="rounded-3xl border-2 border-[#043382] xs:py-2 py-[6px] my-3  flex justify-center"
             />
@@ -152,6 +152,18 @@ const ResumeTemplate10 = () => {
             )}
           </div>
 
+          {/* Awards */}
+          <div className="w-full">
+            {resume?.awards && resume?.awards.length > 0 && (
+              <Award
+                customStyle={customStyle_10}
+                heading={resume.headings.awards}
+                awards={resume.awards}
+                styles={template_10_styles}
+              />
+            )}
+          </div>
+
           {/* Trainings */}
           <div className="w-full">
             {resume?.trainings && resume?.trainings.length > 0 && (
@@ -164,17 +176,6 @@ const ResumeTemplate10 = () => {
             )}
           </div>
 
-          {/* Awards */}
-          <div className="w-full">
-            {resume?.awards && resume?.awards.length > 0 && (
-              <Award
-                customStyle={customStyle_10}
-                heading={resume.headings.awards}
-                awards={resume.awards}
-                styles={template_10_styles}
-              />
-            )}
-          </div>
           {/* Projects */}
           <div className="w-full">
             {resume?.projects && resume?.projects.length > 0 && (
@@ -200,7 +201,7 @@ const ResumeTemplate10 = () => {
           </div>
 
           {/* Education */}
-          <div className="w-full  my-4">
+          <div className="w-full my-4">
             {resume?.education.length > 0 && (
               <Education
                 heading={resume.headings.education}
