@@ -288,17 +288,6 @@ const ResumeTemplate15 = () => {
               />
             )}
           </div>
-          {/* Trainings */}
-          <div className="w-full">
-            {resume?.trainings && resume?.trainings.length > 0 && (
-              <Training
-                customStyle={customStyle_15}
-                heading={resume.headings.trainings}
-                trainings={resume.trainings}
-                styles={template_15_styles}
-              />
-            )}
-          </div>
           {/* Project */}
           <div className="w-full">
             {resume?.projects && resume?.projects.length > 0 && (
@@ -307,6 +296,18 @@ const ResumeTemplate15 = () => {
                 projects={resume.projects}
                 styles={template_15_styles}
                 customStyle={customStyle_15}
+              />
+            )}
+          </div>
+
+          {/* Trainings */}
+          <div className="w-full">
+            {resume?.trainings && resume?.trainings.length > 0 && (
+              <Training
+                customStyle={customStyle_15}
+                heading={resume.headings.trainings}
+                trainings={resume.trainings}
+                styles={template_15_styles}
               />
             )}
           </div>

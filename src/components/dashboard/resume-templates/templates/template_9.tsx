@@ -163,17 +163,6 @@ const ResumeTemplate9 = () => {
             )}
           </div>
 
-          {/* Projects */}
-          <div className="w-full">
-            {resume?.projects && resume?.projects.length > 0 && (
-              <Project
-                heading={resume.headings.projects}
-                projects={resume.projects}
-                styles={template_9_styles}
-                customStyle={customStyle_9}
-              />
-            )}
-          </div>
           {/* Interests & Hobbies */}
           <div className="w-full">
             {resume?.interests && resume?.interests.length > 0 && (
@@ -185,7 +174,17 @@ const ResumeTemplate9 = () => {
               />
             )}
           </div>
-
+          {/* Projects */}
+          <div className="w-full">
+            {resume?.projects && resume?.projects.length > 0 && (
+              <Project
+                heading={resume.headings.projects}
+                projects={resume.projects}
+                styles={template_9_styles}
+                customStyle={customStyle_9}
+              />
+            )}
+          </div>
           {/* References */}
           <div className="w-full">
             {resume?.references && resume?.references.length > 0 && (

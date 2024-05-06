@@ -30,7 +30,7 @@ const Language = ({
     <>
       <span
         className={`${styles?.span1} ${
-          customStyle?.borderTopBottom ? "block" : "hidden"
+          customStyle?.borderTopBottom ? "!block" : "hidden"
         }`}
       ></span>
       <div className={`${rounded_style ? rounded_style : ""}`}>
@@ -76,7 +76,7 @@ const Language = ({
       <span
         className={`${styles?.span2} ${
           customStyle?.borderTopBottom || customStyle?.borderBottom
-            ? "block"
+            ? "!block"
             : "hidden"
         }`}
       ></span>
@@ -117,6 +117,7 @@ const Language = ({
                       }}
                     />
                   </h2>
+                  -
                   <h2 className={`${styles?.language_h2_1}`}>
                     {rec?.proficiency && (
                       <span className={`${styles?.language_date}`}>
