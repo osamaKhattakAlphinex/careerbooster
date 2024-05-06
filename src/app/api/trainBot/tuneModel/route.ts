@@ -26,8 +26,6 @@ export const POST = async (
 
     const _file = await toFile(file, "my-traing-file");
 
-    console.log(_file);
-
     const uploadedfile = await openai.files.create({
       file: _file,
       purpose: "fine-tune",
