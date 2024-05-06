@@ -84,7 +84,7 @@ const Reference = ({ heading, references, styles, customStyle }: Props) => {
                 // }}
               >
                 <div
-                  className=""
+                  className={styles?.reference_div}
                   onDragStart={(e) =>
                     e.dataTransfer.setData("text/plain", i.toString())
                   }

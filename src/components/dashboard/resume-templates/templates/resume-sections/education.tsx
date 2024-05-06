@@ -59,7 +59,7 @@ const Education = ({ heading, educations, styles, customStyle }: Props) => {
         {educations.map((education: EducationType, i: number) => (
           <React.Fragment key={education?.id || i}>
             <div
-              className={`${styles?.education_div} ${customStyle?.education_bg} group`}
+              className={`${styles?.education_div} ${styles?.education_bg} group`}
               // style={{
               //   backgroundColor: customStyle?.education_bg,
               // }}
