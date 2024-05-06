@@ -86,22 +86,22 @@ const ResumeTemplate10 = () => {
             }}
             rounded_style="rounded-3xl border-2 border-[#043382] xs:py-2 py-[6px] my-3  flex justify-center"
           />
-          {/* Languages */}
-          {resume?.languages && resume?.languages.length > 0 && (
-            <Language
-              heading={resume.headings.languages}
-              languages={resume.languages}
-              styles={template_10_styles}
-              rounded_style="rounded-3xl border-2 border-[#043382] xs:py-2 py-[6px] my-3  flex justify-center"
-            />
-          )}
           {/* Interests & Hobbies */}
           {resume?.interests && resume?.interests.length > 0 && (
             <Interest
               heading={resume.headings.interests}
               interests={resume.interests}
               styles={template_10_styles}
-              rounded_style="rounded-3xl border-2 border-[#043382] xs:py-2 py-[6px] my-3  flex justify-center"
+              rounded_style="rounded-full border-2 border-[#043382] xs:py-1  my-3  flex justify-center"
+            />
+          )}
+          {/* Languages */}
+          {resume?.languages && resume?.languages.length > 0 && (
+            <Language
+              heading={resume.headings.languages}
+              languages={resume.languages}
+              styles={template_10_styles}
+              rounded_style="rounded-full border-2 border-[#043382] xs:py-1 my-3  flex justify-center"
             />
           )}
         </div>

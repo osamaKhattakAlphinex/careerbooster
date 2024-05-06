@@ -23,7 +23,7 @@ const Reference = ({ heading, references, styles, customStyle }: Props) => {
     <>
       <span
         className={`${styles?.span1} ${
-          customStyle?.borderTopBottom ? "block" : "hidden"
+          customStyle?.borderTopBottom ? "!block" : "hidden"
         }`}
       ></span>
       <h3
@@ -61,7 +61,7 @@ const Reference = ({ heading, references, styles, customStyle }: Props) => {
       <span
         className={`${styles?.span2} ${
           customStyle?.borderTopBottom || customStyle?.borderBottom
-            ? "block"
+            ? "!block"
             : "hidden"
         }`}
       ></span>

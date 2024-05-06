@@ -116,17 +116,6 @@ const ResumeTemplate2 = () => {
           />
         </div>
       )}
-
-      {/* Awards */}
-      {resume?.awards && resume?.awards.length > 0 && (
-        <div className="w-full">
-          <Award
-            heading={resume.headings.awards}
-            awards={resume.awards}
-            styles={template_2_styles}
-          />
-        </div>
-      )}
       {/* Projects */}
       {resume?.projects && resume?.projects.length > 0 && (
         <div className="w-full">
@@ -139,12 +128,12 @@ const ResumeTemplate2 = () => {
         </div>
       )}
 
-      {/* Projects */}
-      {resume?.projects && resume?.projects.length > 0 && (
+      {/* Awards */}
+      {resume?.awards && resume?.awards.length > 0 && (
         <div className="w-full">
-          <Project
-            heading={resume.headings.projects}
-            projects={resume.projects}
+          <Award
+            heading={resume.headings.awards}
+            awards={resume.awards}
             styles={template_2_styles}
           />
         </div>
@@ -161,6 +150,16 @@ const ResumeTemplate2 = () => {
           />
         </div>
       )}
+      {/* Languages */}
+      {resume?.languages && resume?.languages.length > 0 && (
+        <div className="w-full">
+          <Language
+            heading={resume.headings.languages}
+            languages={resume.languages}
+            styles={template_2_styles}
+          />
+        </div>
+      )}
 
       {/* References */}
       {resume?.references && resume?.references.length > 0 && (
@@ -168,17 +167,6 @@ const ResumeTemplate2 = () => {
           <Reference
             heading={resume.headings.references}
             references={resume.references}
-            styles={template_2_styles}
-          />
-        </div>
-      )}
-
-      {/* Languages */}
-      {resume?.languages && resume?.languages.length > 0 && (
-        <div className="w-full">
-          <Language
-            heading={resume.headings.languages}
-            languages={resume.languages}
             styles={template_2_styles}
           />
         </div>

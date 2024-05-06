@@ -134,18 +134,6 @@ const ResumeTemplate8 = () => {
               />
             )}
           </div>
-
-          {/* Projects */}
-          <div className="w-full">
-            {resume?.projects && resume?.projects.length > 0 && (
-              <Project
-                heading={resume.headings.projects}
-                projects={resume.projects}
-                styles={template_8_styles}
-                customStyle={customStyle_8}
-              />
-            )}
-          </div>
           {/* Interests & Hobbies */}
           <div className="w-full">
             {resume?.interests && resume?.interests.length > 0 && (
@@ -157,7 +145,6 @@ const ResumeTemplate8 = () => {
               />
             )}
           </div>
-
           {/* References */}
           <div className="w-full">
             {resume?.references && resume?.references.length > 0 && (
@@ -166,6 +153,17 @@ const ResumeTemplate8 = () => {
                 heading={resume.headings.references}
                 references={resume.references}
                 styles={template_8_styles}
+              />
+            )}
+          </div>
+          {/* Projects */}
+          <div className="w-full">
+            {resume?.projects && resume?.projects.length > 0 && (
+              <Project
+                heading={resume.headings.projects}
+                projects={resume.projects}
+                styles={template_8_styles}
+                customStyle={customStyle_8}
               />
             )}
           </div>

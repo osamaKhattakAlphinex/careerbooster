@@ -195,18 +195,6 @@ const ResumeTemplate4 = () => {
               />
             )}
           </div>
-
-          {/* Awards */}
-          <div className="w-full">
-            {resume?.awards && resume?.awards.length > 0 && (
-              <Award
-                customStyle={customStyle_4}
-                heading={resume.headings.awards}
-                awards={resume.awards}
-                styles={template_4_styles}
-              />
-            )}
-          </div>
           {/* Projects */}
           <div className="w-full">
             {resume?.projects && resume?.projects.length > 0 && (
@@ -215,6 +203,17 @@ const ResumeTemplate4 = () => {
                 projects={resume.projects}
                 styles={template_4_styles}
                 customStyle={customStyle_4}
+              />
+            )}
+          </div>
+          {/* Awards */}
+          <div className="w-full">
+            {resume?.awards && resume?.awards.length > 0 && (
+              <Award
+                customStyle={customStyle_4}
+                heading={resume.headings.awards}
+                awards={resume.awards}
+                styles={template_4_styles}
               />
             )}
           </div>

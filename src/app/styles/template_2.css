@@ -113,13 +113,13 @@
   @apply flex flex-row items-center justify-center h-8 hover:bg-slate-200;
 }
 .reference_ul {
-  @apply flex flex-wrap w-full pl-0 md:flex-row lg:flex-row;
+  @apply flex flex-wrap w-full gap-3 pl-0 md:flex-row lg:flex-row;
 }
 .reference_li {
   @apply w-[45%] md:w-[30%] m-2 xs:m-0 relative border-transparent border-2 hover:border-dashed hover:border-gray-500;
 }
 .language_div {
-  @apply border-2 border-transparent md:w-full hover:cursor-move;
+  @apply border-2 border-transparent md:w-full flex items-center gap-2 hover:cursor-move;
 }
 .education_h3 {
   @apply flex flex-row my-1 items-center gap-2 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500;
