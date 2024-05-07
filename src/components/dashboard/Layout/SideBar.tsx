@@ -54,7 +54,7 @@ const SideBar = () => {
   const router = useRouter();
   const imageRef = useRef<any>();
   const [image, setImage] = useState<any>(null);
-  const { availableCreditsRef } =   useTourContext();
+  const { availableCreditsRef } = useTourContext();
 
   const imageCroperRef = useRef<any>();
 
@@ -276,9 +276,10 @@ const SideBar = () => {
               ))}
             </ul>
 
-            <div 
-            ref={(ref: any) => (availableCreditsRef.current = ref)}
-            className="flex  flex-col justify-center mx-auto mt-6 p-2 rounded-md">
+            <div
+              ref={(ref: any) => (availableCreditsRef.current = ref)}
+              className="flex  flex-col justify-center mx-auto mt-6 p-2 rounded-md"
+            >
               <AvailableCredits />
 
               <div className="flex items-center justify-center">

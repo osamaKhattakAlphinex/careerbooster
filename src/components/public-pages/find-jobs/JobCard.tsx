@@ -4,14 +4,14 @@ import Link from "next/link";
 export default function JobCard() {
   return (
     <>
-      <div className="card flex  border border-gray-100 bg-black mx-14 px-8 py-10 rounded-md mt-4 shadow-lg">
+      <div className="card flex  dark:border dark:border-gray-100 dark:bg-black bg-gray-100  mx-14 px-8 py-10 rounded-md mt-4 shadow-lg">
         <div className="flex flex-col gap-6">
           <div className="flex gap-6 items-center">
-            <h2 className="text-gray-100 text-xl font-bold">
+            <h2 className="dark:text-gray-100 text-gray-950 text-xl font-bold">
               Senior Flutter Developer
             </h2>
             <div className="flex gap-4 items-center">
-              <div className="remote flex items-center bg-gray-100 px-2 py-1 rounded-md text-gray-950 text-sm font-bold">
+              <div className="remote flex items-center dark:bg-gray-100 bg-gray-950 px-2 py-1 rounded-md dark:text-gray-950 text-gray-100 text-sm font-bold">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -28,12 +28,12 @@ export default function JobCard() {
                 </svg>
                 Remote
               </div>
-              <div className="full_time bg-gray-100 text-gray-950 px-2 py-1 rounded-md text-sm font-bold">
+              <div className="full_time dark:bg-gray-100 bg-gray-950 dark:text-gray-950 text-gray-100 px-2 py-1 rounded-md text-sm font-bold">
                 Full Time
               </div>
             </div>
           </div>
-          <div className="flex text-gray-100 gap-3 items-center">
+          <div className="flex dark:text-gray-100 text-gray-950 gap-3 items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -53,16 +53,16 @@ export default function JobCard() {
                 d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
               />
             </svg>
-            <span className="country text-gray-100 font-medium text-base">
+            <span className="country dark:text-gray-100 text-gray-950 font-medium text-base">
               Country
             </span>
             |
-            <span className="state text-gray-100 font-medium text-base">
+            <span className="state dark:text-gray-100 text-gray-950 font-medium text-base">
               State
             </span>
           </div>
           <div className="description flex flex-wrap">
-            <p className="text-gray-100">
+            <p className="dark:text-gray-100 text-gray-950">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui saepe
               iste inventore consequuntur nemo quam veritatis adipisci? At
               aliquid amet, libero perspiciatis dolor hic, voluptatem, veritatis
@@ -72,14 +72,14 @@ export default function JobCard() {
           <div className="buttons flex items-center gap-2 ml-auto">
             <Link
               href="#"
-              className="flex items-center gap-2 w-fit rounded-md bg-gray-100 text-gray-950 font-semibold px-3 text-base py-1 hover:bg-transparent hover:text-gray-100 "
+              className="flex items-center gap-2 w-fit rounded-md dark:bg-gray-100 dark:text-gray-950 bg-gray-950 text-gray-100 font-semibold px-3 text-base py-1 dark:hover:bg-transparent dark:hover:text-gray-100  "
             >
               {eyeIcon}
               View Job
             </Link>
             <Link
               href="#"
-              className="flex items-center gap-2 w-fit rounded-md bg-gray-100 text-gray-950 font-semibold px-3 text-base py-1 hover:bg-transparent hover:text-gray-100"
+              className="flex items-center gap-2 w-fit rounded-md dark:bg-gray-100 dark:text-gray-950 bg-gray-950 text-gray-100 font-semibold px-3 text-base py-1 dark:hover:bg-transparent dark:hover:text-gray-100 "
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

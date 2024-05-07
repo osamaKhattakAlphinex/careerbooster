@@ -250,7 +250,13 @@ const Header = () => {
                           {userData.firstName + " " + userData.lastName}
                         </Link>
                         <Link
-                          href={role === "admin" ? "/admin" : "/dashboard"}
+                          href={
+                            role === "admin" || role === "deo"
+                              ? role === "admin"
+                                ? "/admin"
+                                : "/deo"
+                              : "/dashboard"
+                          }
                           className="block px-2 py-2 text-sm no-underline rounded-sm dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
                           role="menuitem"
                           id="menu-item-0"

@@ -11,11 +11,11 @@ export default function JobSearchForm() {
   return (
     <>
       <section id="JobSearchForm" className="mb-10">
-        <h1 className="text-gray-100 font-extrabold text-[24px] text-center mb-4">
+        <h1 className="dark:text-gray-100 text-gray-950 font-extrabold text-[24px] text-center mb-4">
           Find Your Next Career Job
         </h1>
         <div
-          className="form rounded-md bg-black mx-20 "
+          className="form rounded-md dark:bg-black bg-gray-100 shadow-md mx-20 "
           // style={{ width: "max-content" }}
         >
           <form action="" className="flex gap-6 px-10 py-6 mx-auto w-full">
