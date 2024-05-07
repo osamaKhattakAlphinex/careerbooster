@@ -63,7 +63,7 @@ const HeroArea = () => {
             <div className="w-full mb-3  flex flex-col justify-center items-center rounded-2xl mt-4 md:mt-14 bg-gradient-to-r to-fuchsia-600 from-indigo-500  border-gray-800 lg:px-10">
               <div className="lg:w-10/12 flex justify-center items-center flex-col lg:my-4 my-[28px] lg:mx-0 mx-5 ">
                 <h3 className="lg:text-[35px] text-[16px] text-normal text-center font-bold md:mt-2">
-                  Free AI Cover letter Generator
+                  Free AI Resume Builder
                 </h3>
                 <p className="text-[12px] md:text-xl text-normal text-center">
                   Simply Upload your Existing Resume
