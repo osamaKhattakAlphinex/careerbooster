@@ -38,8 +38,9 @@ type Job = {
 const Jobs = () => {
   const [records, setRecords] = useState<[] | any>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [open,setOpen] = useState<boolean>(false)
+  const [open, setOpen] = useState<boolean>(false);
   const [deo, setDeo] = useState<any>({});
+  const [status, setStatus] = useState<string>("");
   const { data: session } = useSession();
 
   const getUserDataIfNotExists = async () => {
@@ -75,24 +76,58 @@ const Jobs = () => {
   };
 
   const viewMessageHandler = (rec: any) => {};
+  const statusHandler = (rec: any, newStatus: string) => {
+    axios
+      .put(`/api/deo?jobId=${rec._id}`, {
+        status: newStatus,
+      })
+      .then((res: any) => {
+        if (res.data.success) {
+          fetchRecords();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+  const featuredHandler = (featured:boolean, rec: any) => {
+    axios
+      .put(`/api/deo?jobId=${rec._id}`, {
+        featured:  featured? 1 : 0,
+      })
+      .then((res: any) => {
+        if (res.data.success) {
+          fetchRecords();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   const deleteJobHandler = (rec: any) => {
     if (window.confirm("Are you sure to Delete this job ?")) {
       axios
-       .delete(`/api/deo?jobId=${rec._id}`)
-       .then((res: any) => {
+        .delete(`/api/deo?jobId=${rec._id}`)
+        .then((res: any) => {
           if (res.data.success) {
-            console.log("deleted")
+            console.log("deleted");
           }
         })
-       .catch((err) => {
+        .catch((err) => {
           console.log(err);
         })
-       .finally(() => {
+        .finally(() => {
           fetchRecords();
         });
     }
-  }
+  };
   const columnHelper = createColumnHelper<Job>();
 
   const columns = [
@@ -148,15 +183,36 @@ const Jobs = () => {
     columnHelper.accessor("status", {
       id: "status",
       header: () => "status",
-      cell: (info) => (
-        <span
-          className={`inline-block text-xs uppercase text-white p-2 rounded-md ${
-            info.renderValue() === "active" ? "bg-green-600" : "bg-red-600"
-          }`}
-        >
-          {info.renderValue()}
-        </span>
-      ),
+      cell: (info) => {
+        setStatus(info.getValue());
+        return (
+          <select
+            className="p-1 bg-transparent border rounded-md"
+            value={status}
+            onChange={(e) => {
+              e.preventDefault();
+              setStatus(e.target.value);
+              statusHandler(info.cell.row.original, e.target.value);
+            }}
+          >
+            <option value="active">Active</option>
+            <option value="pending">Pending</option>
+            <option value="started">Started</option>
+            <option value="rejected">Rejected</option>
+            <option value="completed">Completed</option>
+          </select>
+        );
+      },
+    }),
+
+    columnHelper.accessor("featured", {
+      id: "featured",
+      header: () => "featured",
+      cell: (info) => {
+        return(
+          <input type="checkbox" onChange={(e)=>featuredHandler(e.target.checked, info.cell.row.original)} checked={info.getValue() === 1}/>
+        )
+      }
     }),
 
     columnHelper.accessor("createdAt", {
@@ -202,7 +258,6 @@ const Jobs = () => {
     fetchRecords();
   }, [deo]);
 
-
   return (
     <>
       <div className="flex flex-col items-start justify-start">
@@ -216,14 +271,15 @@ const Jobs = () => {
             </span>
           </div>
           <div>
-            <button 
-            onClick={() => setOpen(true)}
-            className="px-4 py-2 text-sm font-semibold text-gray-500 border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            <button
+              onClick={() => setOpen(true)}
+              className="px-4 py-2 text-sm font-semibold text-gray-500 border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            >
               Add New Job
             </button>
           </div>
         </div>
-      {open ? <JobForm setOpen={setOpen} /> : null}
+        {open ? <JobForm setOpen={setOpen} /> : null}
         <div className="w-full mt-4 overflow-x-auto">
           {records?.length > 0 ? (
             <DataTable

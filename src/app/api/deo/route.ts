@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     let payload = await request.json();
 
     const job = new Job({ ...payload });
-    const response = job.save();
+    const response = await job.save();
 
     return NextResponse.json({ success: true, response: job }, { status: 200 });
   } catch (error) {
@@ -35,15 +35,15 @@ export async function POST(request: NextRequest) {
   }
 }
 export async function PUT(req: NextRequest) {
-  let payload = await req.json();
+  let body = await req.json();
   const url = new URL(req.url);
-  const jobId = url.searchParams.get("id");
+  const jobId = url.searchParams.get("jobId");
   try {
     await startDB();
 
-    let job = await Job.findOneAndUpdate({ _id: jobId }, payload, {
-      new: true,
-    });
+    let job = await Job.findOneAndUpdate( { _id: jobId },
+      body,
+      { new: true });
 
     return NextResponse.json({ data: job, success: true });
   } catch (error) {
