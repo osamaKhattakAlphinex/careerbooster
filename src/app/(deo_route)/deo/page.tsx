@@ -98,17 +98,17 @@ const Jobs = () => {
     columnHelper.accessor("jobTitle", {
       id: "jobTitle",
       header: () => "jobTitle",
-      cell: (info) => info.renderValue(),
+      cell: (info: any) => info.renderValue(),
     }),
     columnHelper.accessor("location", {
       id: "location",
       header: () => "location",
-      cell: (info) => info.renderValue(),
+      cell: (info: any) => info.renderValue(),
     }),
     columnHelper.accessor("employer", {
       id: "employer",
       header: () => "employer",
-      cell: (info) => info.renderValue(),
+      cell: (info: any) => info.renderValue(),
     }),
 
     columnHelper.accessor("link", {
