@@ -20,7 +20,8 @@ export default async function AdminLayout({ children }: Props) {
   return (
     <AppContextsProvider>
       <div className="absolute grid items-start justify-start w-screen grid-cols-12 overflow-x-hidden overflow-y-hidden">
-        <DeoSidebar/>
+        <DeoSidebar />
+
         <main className="h-screen col-span-12 p-10 overflow-y-scroll bg-gray-100 sm:col-span-9 max-w-7xl dark:bg-gray-950">
           {children}
         </main>
