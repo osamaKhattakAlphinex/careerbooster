@@ -58,7 +58,6 @@ const Jobs = () => {
       axios
         .get(`/api/deo?deoId=${deo._id}`)
         .then((res: any) => {
-          console.log(res)
           if (res.data.success) {
             setRecords(res.data.data);
           }
@@ -74,6 +73,23 @@ const Jobs = () => {
 
   const viewMessageHandler = (rec: any) => {};
 
+  const deleteJobHandler = (rec: any) => {
+    if (window.confirm("Are you sure to Delete this job ?")) {
+      axios
+       .delete(`/api/deo?jobId=${rec._id}`)
+       .then((res: any) => {
+          if (res.data.success) {
+            console.log("deleted")
+          }
+        })
+       .catch((err) => {
+          console.log(err);
+        })
+       .finally(() => {
+          fetchRecords();
+        });
+    }
+  }
   const columnHelper = createColumnHelper<Job>();
 
   const columns = [
@@ -176,7 +192,7 @@ const Jobs = () => {
     {
       name: "Delete",
       type: "handler",
-      element: (rec: any) => viewMessageHandler(rec),
+      element: (rec: any) => deleteJobHandler(rec),
       styles:
         "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 no-underline",
       icon: trashIcon,
@@ -193,7 +209,6 @@ const Jobs = () => {
     fetchRecords();
   },[deo])
 
-  console.log(records);
 
   return (
     <>

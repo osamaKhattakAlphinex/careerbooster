@@ -55,13 +55,13 @@ export async function PUT(req: NextRequest) {
 }
 export async function DELETE(req: NextRequest) {
   const url = new URL(req.url);
-  const jobId = url.searchParams.get("id");
+  const jobId = url.searchParams.get("jobId");
   try {
     await startDB();
 
     let job = await Job.findByIdAndDelete({ _id: jobId });
 
-    return NextResponse.json({ data: job, success: true });
+    return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json(
       { result: "Internal Server Error", success: false },
