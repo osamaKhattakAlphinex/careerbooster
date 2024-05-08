@@ -4,6 +4,10 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect, usePathname } from "next/navigation";
 import { AppContextsProvider } from "@/context/AppContext";
 import DeoSidebar from "@/components/deo/sidebar/DeoSidebar";
+import Link from "next/link";
+import ThemeChanger from "@/components/common/themeSwitcher";
+import { signOut } from "next-auth/react";
+import DeoNavbar from "@/components/deo/deoNavbar";
 
 interface Props {
   children: ReactNode;
@@ -19,9 +23,9 @@ export default async function AdminLayout({ children }: Props) {
 
   return (
     <AppContextsProvider>
-      <div className="absolute grid items-start justify-start w-screen grid-cols-12 overflow-x-hidden overflow-y-hidden">
-        <DeoSidebar/>
-        <main className="h-screen col-span-12 p-10 overflow-y-scroll bg-gray-100 sm:col-span-9 max-w-7xl dark:bg-gray-950">
+      <div className="absolute items-start justify-start w-screen overflow-x-hidden overflow-y-hidden">
+        <DeoNavbar />
+        <main className="h-screen p-10 overflow-y-scroll bg-gray-100 dark:bg-gray-950">
           {children}
         </main>
       </div>
