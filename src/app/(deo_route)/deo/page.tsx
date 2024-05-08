@@ -67,22 +67,22 @@ const Jobs = () => {
     columnHelper.accessor("jobTitle", {
       id: "jobTitle",
       header: () => "jobTitle",
-      cell: (info) => info.renderValue(),
+      cell: (info: any) => info.renderValue(),
     }),
     columnHelper.accessor("location", {
       id: "location",
       header: () => "location",
-      cell: (info) => info.renderValue(),
+      cell: (info: any) => info.renderValue(),
     }),
     columnHelper.accessor("employer", {
       id: "employer",
       header: () => "employer",
-      cell: (info) => info.renderValue(),
+      cell: (info: any) => info.renderValue(),
     }),
     columnHelper.accessor("category", {
       id: "category",
       header: () => "category",
-      cell: (info) => (
+      cell: (info: any) => (
         <span className="inline-block max-w-sm truncate">
           {info.renderValue()}
         </span>
