@@ -39,7 +39,7 @@ const Jobs = () => {
 
     if (!loading) {
       axios
-        .get("/api/contacts")
+        .get("/api/deo")
         .then((res: any) => {
           if (res.data.success) {
             setRecords(res.data.emails);
@@ -158,7 +158,7 @@ const Jobs = () => {
       <MessageViewer ref={messageViewerRef} message={message} />
       <div className="flex flex-col items-start justify-start">
         <h2 className="text-xl uppercase dark:text-white/70 text-black/70">
-          Emails
+          {}
         </h2>
         <span className="text-base dark:text-white/70 text-black/70">
           List of emails you recieved in in your email.
@@ -167,7 +167,7 @@ const Jobs = () => {
           <DataTable
             columns={columns}
             data={records}
-            source="contacts"
+            source="deo"
             actions={actions}
             loading={loading}
           />
