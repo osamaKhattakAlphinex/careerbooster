@@ -130,6 +130,15 @@ const Jobs = () => {
     columnHelper.accessor("status", {
       id: "status",
       header: () => "status",
+      cell: (info) => (
+        <span
+          className={`inline-block text-xs uppercase text-white p-2 rounded-md ${
+            info.renderValue() === "active" ? "bg-green-600" : "bg-red-600"
+          }`}
+        >
+          {info.renderValue()}
+        </span>
+      ),
     }),
     columnHelper.accessor("featured", {
       id: "featured",
