@@ -9,7 +9,6 @@ import {
   // getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import JobForm from "../deo/JobForm";
 
 export type TableAction = {
   name: string;
@@ -140,7 +139,6 @@ const DataTable = <C, D>({
   const [datacolumns] = React.useState<any>(() => [...columns]);
 
   const [columnVisibility, setColumnVisibility] = React.useState({});
-  const [open, setOpen] = useState<boolean>(false);
   const table = useReactTable({
     columns: columns as ColumnDef<D, any>[],
     data,
@@ -206,12 +204,6 @@ const DataTable = <C, D>({
         <div className="grid grid-cols-5  my-3">
           <div className="col-span-1">
             <ColumnSelector table={table} columns={datacolumns} />
-            <button
-              onClick={() => setOpen(true)}
-              className="flex flex-row justify-start items-center gap-2 py-2 mt-1 px-3 bg-green-600 rounded-full"
-            >
-              Add New Job
-            </button>
           </div>
           <div className="col-span-4">
             {Object.entries(rowSelection).length > 0 && (
@@ -296,7 +288,6 @@ const DataTable = <C, D>({
           </tbody>
         </table>
       </div>
-      {open ? <JobForm setOpen={setOpen} /> : null}
       {/* PAGINATION
       <div className="h-2" />
       {data && data.length > 0 && (

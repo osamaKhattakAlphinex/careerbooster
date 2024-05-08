@@ -44,10 +44,6 @@ const JobSchema = new Schema(
       type: Number,
       default: 0,
     },
-    author: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: "User",
-    },
   },
   { timestamps: true }
 );

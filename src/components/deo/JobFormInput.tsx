@@ -1,9 +1,10 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 const JobFormInput = () => {
+  const [jobCategories, setJobCategories] = useState<any>([])
   const validationSchema = Yup.object().shape({
     job: Yup.string().required("Job Title is required"),
     employer: Yup.string().required("Employer is required"),
@@ -13,6 +14,17 @@ const JobFormInput = () => {
     skills: Yup.string().required("Skills are required"),
     description: Yup.string().required("Job Description is required"),
   });
+
+  useEffect(()=>{
+    fetch("/api/deo/jobCategories",{
+      method: "GET",
+    }).then((response)=>{
+      const res:any = response.json()
+      if (res.data.success) {
+        setJobCategories(res.data.data)
+      }
+    })
+  },[])
 
   return (
     <div className="w-9/12">

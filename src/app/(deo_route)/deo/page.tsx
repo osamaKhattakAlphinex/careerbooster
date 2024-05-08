@@ -2,6 +2,7 @@
 
 import DataTable, { TableAction } from "@/components/admin/DataTable";
 import MessageViewer from "@/components/admin/messageViewer";
+import JobForm from "@/components/deo/JobForm";
 import { formatDate, getFormattedDate } from "@/helpers/getFormattedDateTime";
 import {
   EditIcon,
@@ -9,6 +10,7 @@ import {
   pencilIcon,
   trashIcon,
 } from "@/helpers/iconsProvider";
+
 import { createColumnHelper } from "@tanstack/react-table";
 import axios from "axios";
 import { useSession } from "next-auth/react";
@@ -36,8 +38,7 @@ type Job = {
 const Jobs = () => {
   const [records, setRecords] = useState<[] | any>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const messageViewerRef: React.MutableRefObject<any> = useRef(null);
-  const [message, setMessage] = useState<string>("");
+  const [open,setOpen] = useState<boolean>(false)
   const [deo, setDeo] = useState<any>({});
   const { data: session } = useSession();
 
@@ -215,11 +216,14 @@ const Jobs = () => {
             </span>
           </div>
           <div>
-            <button className="px-4 py-2 text-sm font-semibold text-gray-500 border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            <button 
+            onClick={() => setOpen(true)}
+            className="px-4 py-2 text-sm font-semibold text-gray-500 border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
               Add New Job
             </button>
           </div>
         </div>
+      {open ? <JobForm setOpen={setOpen} /> : null}
         <div className="w-full mt-4 overflow-x-auto">
           {records?.length > 0 ? (
             <DataTable
