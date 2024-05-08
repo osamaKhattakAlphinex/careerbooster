@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { crossIcon1 } from "@/helpers/iconsProvider";
 
 const JobFormInput = ({ data }: { data?: any }) => {
+  const [newSkill, setNewSkill] = useState("");
   const formik = useFormik({
     initialValues: {
       job: "",
@@ -32,11 +34,24 @@ const JobFormInput = ({ data }: { data?: any }) => {
     }),
     onSubmit: (values, { setSubmitting }) => {
       // Handle form submission here
-      console.log(values);
+      console.log("value", values);
       setSubmitting(false);
     },
   });
-
+  const addSkills = (value: any) => {
+    if (!formik.values.skills.includes(value)) {
+      formik.setFieldValue("skills", [...formik.values.skills, value]);
+      formik.setFieldError("skills", ""); // Clear any existing error
+    } else {
+      formik.setFieldError("skills", "Skill already exists"); // Set error message
+    }
+  };
+  const removeSkill = (indexToRemove: any) => {
+    formik.setFieldValue(
+      "skills",
+      formik.values.skills.filter((_, index) => index !== indexToRemove)
+    );
+  };
   return (
     <div className="w-9/12">
       <h1 className="dark:text-gray-100 text-gray-100 bg-gray-500 px-4 py-3 rounded-lg font-semibold text-lg">
@@ -127,7 +142,7 @@ const JobFormInput = ({ data }: { data?: any }) => {
             <div className="text-red-500">{formik.errors.joblink}</div>
           )}
         </div>
-        <div className="w-full">
+        <div className="w-full relative">
           <label htmlFor="skills" className="text-gray-100 py-2 text-lg">
             Skills
           </label>
@@ -135,13 +150,45 @@ const JobFormInput = ({ data }: { data?: any }) => {
             type="text"
             id="skills"
             placeholder="Enter required skills"
+            name="skills"
             className="bg-gray-500 text-gray-100 px-2 py-3 w-full rounded-lg outline-none"
-            {...formik.getFieldProps("skills")}
+            onChange={(e) => setNewSkill(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                addSkills(newSkill);
+              }
+            }}
           />
+          <div className="absolute top-9 right-1">
+            <button
+              onClick={() => addSkills(newSkill)}
+              className="bg-green-600 py-1 px-1 rounded-sm"
+            >
+              Add Skill
+            </button>
+          </div>
           {formik.touched.skills && formik.errors.skills && (
             <div className="text-red-500">{formik.errors.skills}</div>
           )}
+          <div className="flex flex-wrap gap-2 mt-2">
+            {formik.values.skills.map((skill, index) => (
+              <div
+                key={index}
+                className="!bg-gray-700 text-gray-100  px-2 pr-6 py-2 relative rounded-lg"
+              >
+                {skill}{" "}
+                <button
+                  onClick={() => removeSkill(index)}
+                  className="ml-2 absolute right-1 top-[1px]"
+                >
+                  {crossIcon1}
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
+
         <div className="w-full col-span-2">
           <label htmlFor="description" className="text-gray-100 py-2 text-lg">
             Job Description
