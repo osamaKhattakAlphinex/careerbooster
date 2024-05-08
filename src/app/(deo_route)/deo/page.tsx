@@ -11,6 +11,7 @@ import {
 import { createColumnHelper } from "@tanstack/react-table";
 import axios from "axios";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -71,12 +72,7 @@ const Jobs = () => {
     }
   };
 
-  const viewMessageHandler = (rec: any) => {
-    if (messageViewerRef.current) {
-      setMessage(rec.message);
-      messageViewerRef.current.openModal(true);
-    }
-  };
+  const viewMessageHandler = (rec: any) => {};
 
   const columnHelper = createColumnHelper<Job>();
 
@@ -109,13 +105,34 @@ const Jobs = () => {
       id: "jobDescription",
       header: () => "jobDescription",
     }),
-    columnHelper.accessor("addedByUserId", {
-      id: "addedByUserId",
-      header: () => "addedByUserId",
-    }),
+
     columnHelper.accessor("link", {
       id: "link",
       header: () => "link",
+      cell: (info:any) => {
+        if (info.renderValue()) {
+          return (
+            <Link href={info.renderValue()} className="text-blue-400 ">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"
+                />
+              </svg>
+            </Link>
+          );
+        } else {
+          ("No link");
+        }
+      },
     }),
     columnHelper.accessor("skills", {
       id: "skills",
@@ -176,24 +193,29 @@ const Jobs = () => {
     fetchRecords();
   },[deo])
 
+  console.log(records);
+
   return (
     <>
-      <MessageViewer ref={messageViewerRef} message={message} />
       <div className="flex flex-col items-start justify-start">
         <h2 className="text-xl uppercase dark:text-white/70 text-black/70">
-          {}
+          Deo Name Here
         </h2>
         <span className="text-base dark:text-white/70 text-black/70">
           List of emails you recieved in in your email.
         </span>
         <div className="w-full mt-4 overflow-x-auto">
-          <DataTable
-            columns={columns}
-            data={records}
-            source="deo"
-            actions={actions}
-            loading={loading}
-          />
+          {records?.length > 0 ? (
+            <DataTable
+              columns={columns}
+              data={records}
+              source="deo"
+              actions={actions}
+              loading={loading}
+            />
+          ) : (
+            "No records found"
+          )}
         </div>
       </div>
     </>
