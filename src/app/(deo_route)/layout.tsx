@@ -3,10 +3,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect, usePathname } from "next/navigation";
 import { AppContextsProvider } from "@/context/AppContext";
-import DeoSidebar from "@/components/deo/sidebar/DeoSidebar";
-import Link from "next/link";
-import ThemeChanger from "@/components/common/themeSwitcher";
-import { signOut } from "next-auth/react";
 import DeoNavbar from "@/components/deo/deoNavbar";
 
 interface Props {
