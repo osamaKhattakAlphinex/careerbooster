@@ -12,7 +12,7 @@ const JobFormInput = ({ data }: { data?: any }) => {
       location: "",
       category: "",
       joblink: "",
-      skills: [],
+      skills: [] as string[], // Specify the type as string[]
       description: "",
     },
     validationSchema: Yup.object().shape({
