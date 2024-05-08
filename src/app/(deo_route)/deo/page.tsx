@@ -2,6 +2,7 @@
 
 import DataTable, { TableAction } from "@/components/admin/DataTable";
 import MessageViewer from "@/components/admin/messageViewer";
+import { formatDate, getFormattedDate } from "@/helpers/getFormattedDateTime";
 import {
   EditIcon,
   eyeIcon,
@@ -29,6 +30,7 @@ type Job = {
   noOfProposals: number;
   status: string;
   featured: number;
+  createdAt: string;
 };
 
 const Jobs = () => {
@@ -58,7 +60,7 @@ const Jobs = () => {
       axios
         .get(`/api/deo?deoId=${deo._id}`)
         .then((res: any) => {
-          console.log(res)
+          console.log(res);
           if (res.data.success) {
             setRecords(res.data.data);
           }
@@ -92,27 +94,18 @@ const Jobs = () => {
       header: () => "employer",
       cell: (info) => info.renderValue(),
     }),
-    columnHelper.accessor("category", {
-      id: "category",
-      header: () => "category",
-      cell: (info) => (
-        <span className="inline-block max-w-sm truncate">
-          {info.renderValue()}
-        </span>
-      ),
-    }),
-    columnHelper.accessor("jobDescription", {
-      id: "jobDescription",
-      header: () => "jobDescription",
-    }),
 
     columnHelper.accessor("link", {
       id: "link",
       header: () => "link",
-      cell: (info:any) => {
+      cell: (info: any) => {
         if (info.renderValue()) {
           return (
-            <Link href={info.renderValue()} className="text-blue-400 ">
+            <Link
+              href={info.renderValue()}
+              className="text-blue-400"
+              target="_blank"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -134,18 +127,7 @@ const Jobs = () => {
         }
       },
     }),
-    columnHelper.accessor("skills", {
-      id: "skills",
-      header: () => "skills",
-    }),
-    columnHelper.accessor("rejectMsg", {
-      id: "rejectMsg",
-      header: () => "rejectMsg",
-    }),
-    columnHelper.accessor("noOfProposals", {
-      id: "noOfProposals",
-      header: () => "noOfProposals",
-    }),
+
     columnHelper.accessor("status", {
       id: "status",
       header: () => "status",
@@ -159,9 +141,11 @@ const Jobs = () => {
         </span>
       ),
     }),
-    columnHelper.accessor("featured", {
-      id: "featured",
-      header: () => "featured",
+
+    columnHelper.accessor("createdAt", {
+      id: "createdAt",
+      header: () => "createdAt",
+      cell: (info) => getFormattedDate(info.renderValue()),
     }),
   ];
 
@@ -193,26 +177,34 @@ const Jobs = () => {
   ];
 
   useEffect(() => {
-    if(session?.user?.email){
+    if (session?.user?.email) {
       getUserDataIfNotExists();
     }
-  
   }, [session]);
-  useEffect(()=>{
+  useEffect(() => {
     fetchRecords();
-  },[deo])
+  }, [deo]);
 
   console.log(records);
 
   return (
     <>
       <div className="flex flex-col items-start justify-start">
-        <h2 className="text-xl uppercase dark:text-white/70 text-black/70">
-          Deo Name Here
-        </h2>
-        <span className="text-base dark:text-white/70 text-black/70">
-          List of emails you recieved in in your email.
-        </span>
+        <div className="flex flex-row items-end justify-between w-full">
+          <div className="flex-1">
+            <h2 className="text-xl uppercase dark:text-white/70 text-black/70">
+              {`${deo.firstName} ${deo.lastName}`}
+            </h2>
+            <span className="text-base dark:text-white/70 text-black/70">
+              List of jobs created by {`${deo.firstName} ${deo.lastName}`}.
+            </span>
+          </div>
+          <div>
+            <button className="px-4 py-2 text-sm font-semibold text-gray-500 border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+              Add New Job
+            </button>
+          </div>
+        </div>
         <div className="w-full mt-4 overflow-x-auto">
           {records?.length > 0 ? (
             <DataTable
