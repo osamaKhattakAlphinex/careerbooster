@@ -10,7 +10,9 @@ import {
 } from "@/helpers/iconsProvider";
 import { createColumnHelper } from "@tanstack/react-table";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 
 type Job = {
   _id: string;
@@ -33,16 +35,31 @@ const Jobs = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const messageViewerRef: React.MutableRefObject<any> = useRef(null);
   const [message, setMessage] = useState<string>("");
+  const [deo, setDeo] = useState<any>({});
+  const { data: session } = useSession();
 
+  const getUserDataIfNotExists = async () => {
+    try {
+      // Fetch userdata if not exists in Redux
+      const res = await fetch(
+        `/api/users/getOneByEmail?email=${session?.user?.email}`
+      );
+      const response = await res.json();
+      const user = response.result;
+      setDeo(user);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const fetchRecords = async () => {
     setLoading(true);
-
     if (!loading) {
       axios
-        .get("/api/deo")
+        .get(`/api/deo?deoId=${deo._id}`)
         .then((res: any) => {
+          console.log(res)
           if (res.data.success) {
-            setRecords(res.data.emails);
+            setRecords(res.data.data);
           }
         })
         .catch((err) => {
@@ -150,8 +167,14 @@ const Jobs = () => {
   ];
 
   useEffect(() => {
+    if(session?.user?.email){
+      getUserDataIfNotExists();
+    }
+  
+  }, [session]);
+  useEffect(()=>{
     fetchRecords();
-  }, []);
+  },[deo])
 
   return (
     <>
