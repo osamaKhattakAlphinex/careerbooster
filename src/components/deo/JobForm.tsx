@@ -8,7 +8,7 @@ type Props = {
 };
 const JobForm = ({ setOpen, deoId, singleRec }: Props) => {
   return (
-    <div className="absolute inset-0 z-30 w-full h-full bg-black/90">
+    <div className="absolute inset-0 z-30 w-full h-full bg-black/90 overflow-y-scroll">
       <div className="flex justify-center w-full h-full mt-12">
         <JobFormInput deoId={deoId} setOpen={setOpen} singleRec={singleRec} />
         <div
