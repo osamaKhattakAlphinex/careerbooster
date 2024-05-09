@@ -8,11 +8,11 @@ type Props = {
 };
 const JobForm = ({ setOpen, deoId, singleRec }: Props) => {
   return (
-    <div className="absolute inset-0 w-full h-full bg-black/90 z-30 overflow-y-scroll ">
-      <div className="w-full h-full flex justify-center mt-12">
+    <div className="absolute inset-0 z-30 w-full h-full bg-black/90 overflow-y-scroll">
+      <div className="flex justify-center w-full h-full mt-12">
         <JobFormInput deoId={deoId} setOpen={setOpen} singleRec={singleRec} />
         <div
-          className="absolute right-28 top-7 cursor-pointer"
+          className="absolute cursor-pointer right-28 top-7"
           onClick={() => setOpen(false)}
         >
           {crossIcon}
