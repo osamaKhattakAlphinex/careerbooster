@@ -25,24 +25,24 @@ export default function ViewJobPage({ params }: { params: { id: string } }) {
           FIND YOUR NEXT CAREER GIG
         </h1>
       </div>
-      <div className="flex flex-col gap-4 mx-20 rounded-md shadow-md text-gray-100 bg-black mt-[-100px] mb-10 p-10">
+      <div className="flex flex-col gap-4 mx-10 rounded-md shadow-md text-gray-100 bg-black mt-[-100px] mb-10 p-10">
         <h2 className="text-gray-100 font-extrabold text-2xl">
           {singleJob?.jobTitle}
         </h2>
-        <div className="flex border-b-[1px] border-white pb-4">
-          <div className="flex items-center gap-10 text-lg ">
-            <span>
+        <div className="flex w-full border-b-[1px] border-white pb-4">
+          <div className=" w-3/4 flex items-center gap-10 text-base ">
+            <div className="w-[60%]">
               Employer :{" "}
               <span className="font-medium"> {singleJob?.employer}</span>{" "}
-            </span>
-            <span>
+            </div>
+            <div className="w-[30%]">
               Date Posted :{" "}
               <span className="font-medium">
                 {" "}
                 {getFormattedDate(singleJob?.updatedAt)}
               </span>
-            </span>
-            <span className="flex items-center gap-2">
+            </div>
+            <div className="flex items-center gap-2 w-[25%]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -63,9 +63,9 @@ export default function ViewJobPage({ params }: { params: { id: string } }) {
                 />
               </svg>
               : <span className="font-medium">{singleJob?.location}</span>
-            </span>
+            </div>
           </div>
-          <div className="flex ml-auto ">
+          <div className="w-1/4 flex justify-end ml-auto ">
             {singleJob?.link && (
               <Link
                 href={singleJob?.link}

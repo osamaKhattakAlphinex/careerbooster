@@ -15,7 +15,7 @@ import { createColumnHelper } from "@tanstack/react-table";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -41,9 +41,18 @@ const Jobs = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const [currentRecord, setCurrentRecord] = useState<any>(null);
+  const [limitOfRecords, setLimitOfRecords] = useState<number>(10);
+  const [showTableLoader, setshowTableLoader] = useState(false);
+  const [loadingId, setLoadingId] = useState("");
+  const [pageStart, setPageStart] = useState<number>(0);
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
   const [deo, setDeo] = useState<any>({});
-  const router = useRouter()
   const { data: session } = useSession();
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const getUserDataIfNotExists = async () => {
     try {
@@ -59,13 +68,23 @@ const Jobs = () => {
     }
   };
   const fetchRecords = async () => {
+    setshowTableLoader(true);
     setLoading(true);
     if (!loading) {
       axios
-        .get(`/api/deo?deoId=${deo._id}`)
+        .get(
+          `/api/deo?deoId=${deo._id}&limit=${limitOfRecords}&page=${currentPage}`
+        )
         .then((res: any) => {
+          setLoadingId("");
           if (res.data.success) {
             setRecords(res.data.data);
+
+            setTotalPages(Math.ceil(res.data.total / limitOfRecords));
+            setshowTableLoader(false);
+            setLoading(false);
+          } else {
+            setRecords([]);
           }
         })
         .catch((err) => {
@@ -73,6 +92,7 @@ const Jobs = () => {
         })
         .finally(() => {
           setLoading(false);
+          setshowTableLoader(false);
         });
     }
   };
@@ -256,7 +276,9 @@ const Jobs = () => {
     {
       name: "Preview",
       type: "handler",
-      element: (rec:any) => {router.push(`/find-jobs/${rec._id}`)},
+      element: (rec: any) => {
+        router.push(`/find-jobs/${rec._id}`);
+      },
       styles:
         "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 no-underline",
       icon: eyeIcon,
@@ -270,6 +292,10 @@ const Jobs = () => {
       icon: trashIcon,
     },
   ];
+  const selectUsersLimit = (e: any) => {
+    setCurrentPage(1);
+    setLimitOfRecords(e.target.value);
+  };
 
   useEffect(() => {
     if (session?.user?.email) {
@@ -279,6 +305,25 @@ const Jobs = () => {
   useEffect(() => {
     fetchRecords();
   }, [deo, open]);
+
+  useEffect(() => {
+    setRecords([]);
+    fetchRecords();
+    const startIndex = (currentPage - 1) * limitOfRecords;
+
+    setPageStart(startIndex);
+    router.replace(pathname + `?r=${limitOfRecords}&p=${currentPage}`);
+  }, [limitOfRecords, currentPage]);
+  useEffect(() => {
+    const existingNumberOfRecords = searchParams?.get("r");
+    const existingPage = searchParams?.get("p");
+    if (existingNumberOfRecords) {
+      setLimitOfRecords(parseInt(existingNumberOfRecords, 10));
+    }
+    if (existingPage) {
+      setCurrentPage(parseInt(existingPage, 10));
+    }
+  }, [searchParams?.get("r"), searchParams?.get("p")]);
 
   return (
     <>
@@ -292,16 +337,37 @@ const Jobs = () => {
               List of jobs created by {`${deo.firstName} ${deo.lastName}`}.
             </span>
           </div>
-          <div>
+          <div className="flex flex-col gap-6 justify-end">
             <button
               onClick={() => {
                 setCurrentRecord(null);
                 setOpen(true);
               }}
-              className="px-4 py-2 text-sm font-semibold text-gray-500 border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              className="px-4 py-2 text-sm font-semibold text-gray-500 border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white w-fit ml-auto"
             >
               Add New Job
             </button>
+            <div className="flex flex-row items-center gap-2">
+              <label htmlFor="userPerPage" className="text-sm font-medium">
+                Number of records per page:
+              </label>
+              <select
+                name="userPerPage"
+                id="userPerPage"
+                className="rounded-md px-2 py-1 border-[1px] border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
+                onChange={selectUsersLimit}
+                value={limitOfRecords}
+              >
+                <>
+                  <option value={10}>10</option>
+                  <option value={20}>20</option>
+                  <option value={30}>30</option>
+                  <option value={40}>40</option>
+                  <option value={100}>100</option>
+                  <option value={500}>500</option>
+                </>
+              </select>
+            </div>
           </div>
         </div>
         {open ? (
@@ -323,6 +389,61 @@ const Jobs = () => {
           ) : (
             "No records found"
           )}
+        </div>
+        <div className="flex flex-row items-center justify-end w-full ">
+          <div className="flex justify-end mt-4 ">
+            <nav aria-label="Page navigation example">
+              <ul className="inline-flex -space-x-px">
+                <li>
+                  <button
+                    className={` border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 ml-0 rounded-l-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white disabled:hover:text-gray-500 disabled:hover:dark:bg-gray-800 disabled:hover:dark:text-gray-400`}
+                    onClick={() => {
+                      setRecords([]);
+                      setCurrentPage(currentPage - 1);
+                    }}
+                    disabled={currentPage == 1 ? true : false}
+                  >
+                    Previous
+                  </button>
+                </li>
+                {[currentPage - 1, currentPage, currentPage + 1].map(
+                  (number) => {
+                    if (number < 1 || number > totalPages) return null;
+                    return (
+                      <li key={number}>
+                        <button
+                          onClick={(e) => {
+                            setRecords([]);
+                            setCurrentPage(number);
+                          }}
+                          className={`border-gray-300 text-gray-500 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 ${
+                            currentPage === number
+                              ? "bg-gray-100 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white"
+                              : "hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white"
+                          }`}
+                        >
+                          {number}
+                        </button>
+                      </li>
+                    );
+                  }
+                )}
+
+                <li>
+                  <button
+                    onClick={() => {
+                      setRecords([]);
+                      setCurrentPage(currentPage + 1);
+                    }}
+                    disabled={currentPage === totalPages}
+                    className={`px-3 py-2 leading-tight text-gray-500 border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white disabled:hover:text-gray-500 disabled:hover:dark:bg-gray-800 disabled:hover:dark:text-gray-400`}
+                  >
+                    Next
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </div>
         </div>
       </div>
     </>

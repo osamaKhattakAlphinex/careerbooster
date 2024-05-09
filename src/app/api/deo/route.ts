@@ -6,27 +6,41 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
 export async function GET(req: NextRequest) {
-
   try {
     await startDB();
     const url = new URL(req.url);
     const deoId: any = url.searchParams.get("deoId");
     const jobToShow: any = url.searchParams.get("jobs");
     const findOne: any = url.searchParams.get("findOne");
+    const limit = Number(url.searchParams.get("limit"));
+    const page = Number(url.searchParams.get("page"));
+    const skip = (page - 1) * limit;
     let jobs;
-    if (findOne){
+    let total;
+
+    if (findOne) {
       jobs = await Job.findOne({ _id: findOne });
-    }
-    else if (jobToShow === "featured") {
-      jobs = await Job.find({ featured: 1 }).sort({
-        createdAt: -1,
-      });
+    } else if (jobToShow === "featured") {
+      jobs = await Job.find({ featured: 1 })
+        .sort({
+          createdAt: -1,
+        })
+        .limit(limit)
+        .skip(skip);
+      total = await Job.count();
     } else {
-      jobs = await Job.find({ addedByUserId: deoId }).sort({
-        createdAt: -1,
-      });
+      jobs = await Job.find({ addedByUserId: deoId })
+        .sort({
+          createdAt: -1,
+        })
+        .limit(limit)
+        .skip(skip);
+      total = await Job.count();
     }
-    return NextResponse.json({ success: true, data: jobs }, { status: 200 });
+    return NextResponse.json(
+      { success: true, data: jobs, total: total },
+      { status: 200 }
+    );
   } catch (error) {
     return NextResponse.json(
       { result: "Internal Server Error", success: false },
