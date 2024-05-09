@@ -1,13 +1,27 @@
 "use client";
 import Link from "next/link";
 import { useFormik } from "formik";
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import path from "path";
 
 export default function JobSearchForm() {
-  const [isVerified, setIsverified] = useState<boolean>(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [successAlert, setSuccessAlert] = useState("");
-
+  const [loading, setLoading] = useState(false);
+  const [records, setRecords] = useState<[] | any>([]);
+  const [search, setSearch] = useState("");
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+  const handleserach = (term: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (term) {
+      params.set("query", term);
+    } else {
+      params.delete("query");
+    }
+    replace(`${pathname}?${params.toString()}`);
+  };
   return (
     <>
       <section id="JobSearchForm" className="mb-10">
@@ -18,7 +32,13 @@ export default function JobSearchForm() {
           className="form rounded-md dark:bg-black bg-gray-100 shadow-md mx-20 "
           // style={{ width: "max-content" }}
         >
-          <form action="" className="flex gap-6 px-10 py-6 mx-auto w-full">
+          <form
+            action=""
+            className="flex gap-6 px-10 py-6 mx-auto w-full"
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+          >
             <div className="group flex flex-row justify-start items-center gap-3 p-3 border-[1px] border-gray-600 rounded-lg w-1/2 dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff]">
               <span className="text-gray-800 dark:text-gray-100">
                 <svg
@@ -40,6 +60,8 @@ export default function JobSearchForm() {
                 type="text"
                 id="name"
                 name="name"
+                onChange={(e) => handleserach(e.target.value)}
+                defaultValue={searchParams.get("query")?.toString()}
                 className="w-full text-base text-gray-900 bg-transparent outline-none dark:text-gray-100"
                 placeholder="Job title or search keyword"
               />

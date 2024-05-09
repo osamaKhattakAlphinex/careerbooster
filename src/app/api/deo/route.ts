@@ -3,14 +3,33 @@ import startDB from "@/lib/db";
 import { useSearchParams } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]/route";
 export async function GET(req: NextRequest) {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return NextResponse.json(
+      { result: "Not Authorised", success: false },
+      { status: 401 }
+    );
+  }
   try {
     await startDB();
     const url = new URL(req.url);
     const deoId: any = url.searchParams.get("deoId");
-    const jobs = await Job.find({ addedByUserId: deoId }).sort({
-      createdAt: -1,
-    });
+    const jobToShow: any = url.searchParams.get("jobs");
+
+    let jobs = [];
+    if (jobToShow === "featured") {
+      jobs = await Job.find({ featured: 1 }).sort({
+        createdAt: -1,
+      });
+    } else {
+      jobs = await Job.find({ addedByUserId: deoId }).sort({
+        createdAt: -1,
+      });
+    }
     return NextResponse.json({ success: true, data: jobs }, { status: 200 });
   } catch (error) {
     return NextResponse.json(
@@ -21,6 +40,14 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return NextResponse.json(
+      { result: "Not Authorised", success: false },
+      { status: 401 }
+    );
+  }
   try {
     await startDB();
     let { payload } = await request.json();
