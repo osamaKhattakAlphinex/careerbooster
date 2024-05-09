@@ -8,7 +8,9 @@ export async function GET(req: NextRequest) {
     await startDB();
     const url = new URL(req.url);
     const deoId: any = url.searchParams.get("deoId");
-    const jobs = await Job.find({ addedByUserId: deoId });
+    const jobs = await Job.find({ addedByUserId: deoId }).sort({
+      createdAt: -1,
+    });
     return NextResponse.json({ success: true, data: jobs }, { status: 200 });
   } catch (error) {
     return NextResponse.json(
@@ -21,8 +23,7 @@ export async function GET(req: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     await startDB();
-    let payload = await request.json();
-
+    let { payload } = await request.json();
     const job = new Job({ ...payload });
     const response = await job.save();
 
@@ -41,9 +42,7 @@ export async function PUT(req: NextRequest) {
   try {
     await startDB();
 
-    let job = await Job.findOneAndUpdate( { _id: jobId },
-      body,
-      { new: true });
+    let job = await Job.findOneAndUpdate({ _id: jobId }, body, { new: true });
 
     return NextResponse.json({ data: job, success: true });
   } catch (error) {

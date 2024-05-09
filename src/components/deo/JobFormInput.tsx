@@ -1,21 +1,33 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { crossIcon1 } from "@/helpers/iconsProvider";
+import axios from "axios";
 
-const JobFormInput = ({ data }: { data?: any }) => {
-  const [jobCategories, setJobCategories] = useState<any>([])
-  useEffect(()=>{
-    fetch("/api/deo/jobCategories",{
+const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
+  const [jobCategories, setJobCategories] = useState<any>([]);
+  const [updateJob, setUpdateJob] = useState<boolean>(false);
+  useEffect(() => {
+    fetch("/api/deo/jobCategories", {
       method: "GET",
-    }).then(async (response)=>{
-      const res =await response.json()
+    }).then(async (response) => {
+      const res = await response.json();
       if (res.success) {
-        setJobCategories(res.data)
+        setJobCategories(res.data);
       }
-    })
-  },[])
+    });
+    if (singleRec) {
+      formik.setFieldValue("category", singleRec.category);
+      formik.setFieldValue("joblink", singleRec.link);
+      formik.setFieldValue("skills", singleRec.skills);
+      formik.setFieldValue("description", singleRec.jobDescription);
+      formik.setFieldValue("employer", singleRec.employer);
+      formik.setFieldValue("job", singleRec.jobTitle);
+      formik.setFieldValue("location", singleRec.location);
+      setUpdateJob(true);
+    }
+  }, []);
   const [newSkill, setNewSkill] = useState("");
   const formik = useFormik({
     initialValues: {
@@ -44,10 +56,50 @@ const JobFormInput = ({ data }: { data?: any }) => {
         ),
       description: Yup.string().required("Job Description is required"),
     }),
-    onSubmit: (values, { setSubmitting }) => {
+    onSubmit: async (values) => {
       // Handle form submission here
-      console.log("value", values);
-      setSubmitting(false);
+      if (updateJob) {
+        const formData = {
+          ...singleRec,
+          jobTitle: values.job,
+          location: values.location,
+          employer: values.employer,
+          category: values.category,
+          jobDescription: values.description,
+          link: values.joblink,
+          skills: values.skills,
+        };
+        const upadteJob = await axios.put(`/api/deo?jobId=${singleRec._id}`, {
+          ...formData,
+        });
+        if (upadteJob.data.success) {
+          formik.resetForm();
+          setOpen(false);
+        } else {
+          console.log("Something went wrong");
+        }
+      } else {
+        const formData = {
+          jobTitle: values.job,
+          location: values.location,
+          employer: values.employer,
+          category: values.category,
+          jobDescription: values.description,
+          addedByUserId: deoId,
+          link: values.joblink,
+          skills: values.skills,
+          status: "active",
+        };
+        const addJob = await axios.post("/api/deo", {
+          payload: formData,
+        });
+        if (addJob.data.success) {
+          formik.resetForm();
+          setOpen(false);
+        } else {
+          console.log("Something went wrong");
+        }
+      }
     },
   });
   const addSkills = (value: any) => {
@@ -130,10 +182,13 @@ const JobFormInput = ({ data }: { data?: any }) => {
             <option value="" disabled>
               Select a category
             </option>
-            {jobCategories.map((category:any) =>{
-              return <option key={category._id} value={category.name}>{category.name}</option>
+            {jobCategories.map((category: any) => {
+              return (
+                <option key={category._id} value={category.name}>
+                  {category.name}
+                </option>
+              );
             })}
-            
           </select>
           {formik.touched.category && formik.errors.category && (
             <div className="text-red-500">{formik.errors.category}</div>
@@ -175,7 +230,10 @@ const JobFormInput = ({ data }: { data?: any }) => {
           />
           <div className="absolute top-9 right-1">
             <button
-              onClick={() => addSkills(newSkill)}
+              onClick={(e) => {
+                e.preventDefault();
+                addSkills(newSkill);
+              }}
               className="bg-green-600 py-1 px-1 rounded-sm"
             >
               Add Skill
@@ -221,9 +279,9 @@ const JobFormInput = ({ data }: { data?: any }) => {
           <button
             type="submit"
             disabled={formik.isSubmitting}
-            className="!bg-red-500 w-fit rounded-lg p-3 my-1"
+            className="!bg-red-500 w-fit rounded-lg p-3 my-1 cursor-pointer"
           >
-            Save Job
+            {updateJob ? "Update Job" : "Save Job"}
           </button>
         </div>
       </form>

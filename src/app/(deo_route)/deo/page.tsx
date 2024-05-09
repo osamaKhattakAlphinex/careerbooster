@@ -39,8 +39,8 @@ const Jobs = () => {
   const [records, setRecords] = useState<[] | any>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
+  const [currentRecord, setCurrentRecord] = useState<any>(null)
   const [deo, setDeo] = useState<any>({});
-  const [status, setStatus] = useState<string>("");
   const { data: session } = useSession();
 
   const getUserDataIfNotExists = async () => {
@@ -76,6 +76,10 @@ const Jobs = () => {
   };
 
   const viewMessageHandler = (rec: any) => {};
+  const editJobHandler = (rec: any) => {
+    setCurrentRecord(rec)
+    setOpen(true)
+  };
   const statusHandler = (rec: any, newStatus: string) => {
     axios
       .put(`/api/deo?jobId=${rec._id}`, {
@@ -93,10 +97,10 @@ const Jobs = () => {
         setLoading(false);
       });
   };
-  const featuredHandler = (featured:boolean, rec: any) => {
+  const featuredHandler = (featured: boolean, rec: any) => {
     axios
       .put(`/api/deo?jobId=${rec._id}`, {
-        featured:  featured? 1 : 0,
+        featured: featured ? 1 : 0,
       })
       .then((res: any) => {
         if (res.data.success) {
@@ -184,14 +188,12 @@ const Jobs = () => {
       id: "status",
       header: () => "status",
       cell: (info) => {
-        setStatus(info.getValue());
         return (
           <select
             className="p-1 bg-transparent border rounded-md"
-            value={status}
+            value={info.getValue()}
             onChange={(e) => {
               e.preventDefault();
-              setStatus(e.target.value);
               statusHandler(info.cell.row.original, e.target.value);
             }}
           >
@@ -209,10 +211,16 @@ const Jobs = () => {
       id: "featured",
       header: () => "featured",
       cell: (info) => {
-        return(
-          <input type="checkbox" onChange={(e)=>featuredHandler(e.target.checked, info.cell.row.original)} checked={info.getValue() === 1}/>
-        )
-      }
+        return (
+          <input
+            type="checkbox"
+            onChange={(e) =>
+              featuredHandler(e.target.checked, info.cell.row.original)
+            }
+            checked={info.getValue() === 1}
+          />
+        );
+      },
     }),
 
     columnHelper.accessor("createdAt", {
@@ -226,7 +234,7 @@ const Jobs = () => {
     {
       name: "Edit",
       type: "handler",
-      element: (rec: any) => viewMessageHandler(rec),
+      element: (rec: any) => editJobHandler(rec),
       styles:
         "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline",
       icon: EditIcon,
@@ -256,7 +264,7 @@ const Jobs = () => {
   }, [session]);
   useEffect(() => {
     fetchRecords();
-  }, [deo]);
+  }, [deo, open]);
 
   return (
     <>
@@ -272,14 +280,17 @@ const Jobs = () => {
           </div>
           <div>
             <button
-              onClick={() => setOpen(true)}
+              onClick={() => {
+                setCurrentRecord(null);
+                setOpen(true)
+              }}
               className="px-4 py-2 text-sm font-semibold text-gray-500 border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             >
               Add New Job
             </button>
           </div>
         </div>
-        {open ? <JobForm setOpen={setOpen} /> : null}
+        {open ? <JobForm setOpen={setOpen} deoId={deo._id} singleRec={currentRecord} /> : null}
         <div className="w-full mt-4 overflow-x-auto">
           {records?.length > 0 ? (
             <DataTable
