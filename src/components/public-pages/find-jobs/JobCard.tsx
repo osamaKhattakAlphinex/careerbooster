@@ -16,7 +16,6 @@ export default function JobCard({ query }: { query: string }) {
       axios
         .get(`/api/deo?jobs=featured&query=${query}`)
         .then((res: any) => {
-          console.log(res);
           if (res.data.success) {
             setRecords(res.data.data);
           }
@@ -49,6 +48,8 @@ export default function JobCard({ query }: { query: string }) {
               employer={items.employer}
               jobDescription={items.jobDescription}
               applyJobLink={items.link}
+              jobId={items._id}
+              key={items._id}
             />
           );
         })}

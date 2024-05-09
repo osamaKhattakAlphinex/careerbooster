@@ -6,22 +6,18 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
 export async function GET(req: NextRequest) {
-  const session = await getServerSession(authOptions);
 
-  if (!session) {
-    return NextResponse.json(
-      { result: "Not Authorised", success: false },
-      { status: 401 }
-    );
-  }
   try {
     await startDB();
     const url = new URL(req.url);
     const deoId: any = url.searchParams.get("deoId");
     const jobToShow: any = url.searchParams.get("jobs");
-
-    let jobs = [];
-    if (jobToShow === "featured") {
+    const findOne: any = url.searchParams.get("findOne");
+    let jobs;
+    if (findOne){
+      jobs = await Job.findOne({ _id: findOne });
+    }
+    else if (jobToShow === "featured") {
       jobs = await Job.find({ featured: 1 }).sort({
         createdAt: -1,
       });
@@ -63,6 +59,14 @@ export async function POST(request: NextRequest) {
   }
 }
 export async function PUT(req: NextRequest) {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return NextResponse.json(
+      { result: "Not Authorised", success: false },
+      { status: 401 }
+    );
+  }
   let body = await req.json();
   const url = new URL(req.url);
   const jobId = url.searchParams.get("jobId");
@@ -80,6 +84,14 @@ export async function PUT(req: NextRequest) {
   }
 }
 export async function DELETE(req: NextRequest) {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return NextResponse.json(
+      { result: "Not Authorised", success: false },
+      { status: 401 }
+    );
+  }
   const url = new URL(req.url);
   const jobId = url.searchParams.get("jobId");
   try {

@@ -7,6 +7,7 @@ type Props = {
   jobDescription: string;
   viewjoblink?: any;
   applyJobLink: any;
+  jobId: string;
 };
 export default function SinglejobCard({
   jobTitle,
@@ -15,6 +16,7 @@ export default function SinglejobCard({
   jobDescription,
   viewjoblink,
   applyJobLink,
+  jobId,
 }: Props) {
   // const [seeMore, se]
   return (
@@ -103,7 +105,7 @@ export default function SinglejobCard({
         </div>
         <div className="buttons flex items-center gap-2 ml-auto">
           <Link
-            href="#"
+            href={`/find-jobs/${jobId}`}
             className="flex items-center gap-2 w-fit rounded-md dark:bg-gray-100 dark:text-gray-950 bg-gray-950 text-gray-100 font-semibold px-3 text-base py-1 dark:hover:bg-transparent dark:hover:text-gray-100  "
           >
             {eyeIcon}
