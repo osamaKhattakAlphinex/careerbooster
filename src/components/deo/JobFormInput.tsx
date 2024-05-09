@@ -276,7 +276,22 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
             <div className="text-red-500">{formik.errors.skills}</div>
           )}
         </div>
-
+        <div className="col-span-2 flex flex-wrap  gap-2 mt-2">
+          {formik.values.skills.map((skill, index) => (
+            <div
+              key={index}
+              className="!bg-gray-700 text-gray-100  px-2 pr-6 py-2 relative rounded-lg"
+            >
+              {skill}{" "}
+              <button
+                onClick={() => removeSkill(index)}
+                className="ml-2 absolute right-1 top-[1px]"
+              >
+                {crossIcon1}
+              </button>
+            </div>
+          ))}
+        </div>
         <div className="w-full col-span-2 space-y-1">
           <label htmlFor="description" className="py-2 text-sm text-gray-100">
             Job Description
