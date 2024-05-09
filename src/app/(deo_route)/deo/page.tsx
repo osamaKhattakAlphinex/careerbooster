@@ -77,7 +77,8 @@ const Jobs = () => {
     console.log(rec);
   };
   const feturedHandler = (e: any, rec: any) => {
-    console.log(rec);
+    debugger;
+    console.log(e);
   };
 
   const columnHelper = createColumnHelper<Job>();
@@ -85,18 +86,18 @@ const Jobs = () => {
   const columns = [
     columnHelper.accessor("jobTitle", {
       id: "jobTitle",
-      header: () => "jobTitle",
-      cell: (info) => info.renderValue(),
+      header: () => "Job Title",
+      // cell: (info) => info.renderValue(),
     }),
     columnHelper.accessor("location", {
       id: "location",
-      header: () => "location",
-      cell: (info) => info.renderValue(),
+      header: () => "Location",
+      // cell: (info) => info.renderValue(),
     }),
     columnHelper.accessor("employer", {
       id: "employer",
       header: () => "employer",
-      cell: (info) => info.renderValue(),
+      // cell: (info) => info.renderValue(),
     }),
 
     columnHelper.accessor("link", {
@@ -155,7 +156,10 @@ const Jobs = () => {
       header: () => "featured",
       cell: (info) => {
         return (
-          <label htmlFor="featured-job">
+          <label
+            htmlFor="featured-job"
+            className="grid p-1 bg-white place-content-center"
+          >
             {info.renderValue() === 1 ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -163,7 +167,7 @@ const Jobs = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="white"
-                className="w-6 h-6"
+                className="w-6 h-6 pointer-events-none"
               >
                 <path
                   strokeLinecap="round"
@@ -178,7 +182,7 @@ const Jobs = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="#FFD700"
-                className="w-6 h-6"
+                className="w-6 h-6 pointer-events-none"
               >
                 <path
                   strokeLinecap="round"
@@ -201,7 +205,7 @@ const Jobs = () => {
 
     columnHelper.accessor("createdAt", {
       id: "createdAt",
-      header: () => "createdAt",
+      header: () => "Created At",
       cell: (info) => getFormattedDate(info.renderValue()),
     }),
   ];
@@ -241,8 +245,6 @@ const Jobs = () => {
   useEffect(() => {
     fetchRecords();
   }, [deo]);
-
-  console.log(records);
 
   return (
     <>
