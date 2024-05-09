@@ -63,14 +63,15 @@ const FineTuningModel = forwardRef((props: FineTuningModelType, ref: any) => {
   useEffect(() => {
     console.log("values", formik.values);
   }, [openFineTuneModel]);
-  const handleDeletionOk = async () => { };
+  const handleDeletionOk = async () => {};
 
   return (
     <div
       tabIndex={-1}
       aria-hidden="true"
-      className={`overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ${openFineTuneModel ? "flex" : "hidden"
-        }`}
+      className={`overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full ${
+        openFineTuneModel ? "flex" : "hidden"
+      }`}
     >
       <div className="relative p-4 w-full max-w-xl max-h-full">
         <div className="relative p-4 text-center rounded-lg shadow dark:bg-gray-800 sm:p-5">
@@ -212,5 +213,7 @@ const FineTuningModel = forwardRef((props: FineTuningModelType, ref: any) => {
     </div>
   );
 });
+// Assign display name
+FineTuningModel.displayName = 'FineTuningModel'; 
 
 export default FineTuningModel;
