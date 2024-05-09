@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { crossIcon1 } from "@/helpers/iconsProvider";
+import { crossIcon, crossIcon1, crossIconSmall } from "@/helpers/iconsProvider";
 import axios from "axios";
 
 const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
@@ -71,7 +71,9 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
       employer: Yup.string().required("Employer is required"),
       location: Yup.string().required("Location is required"),
       category: Yup.string().required("Job Category is required"),
-      joblink: Yup.string().required("Job Link is required"),
+      joblink: Yup.string()
+        .url("Invalid URL format")
+        .required("Job Link is required"),
       skills: Yup.array()
         .of(Yup.string())
         .test(
@@ -145,9 +147,17 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
   };
   return (
     <div className="w-9/12">
-      <h1 className="py-2 text-sm font-semibold text-gray-900 dark:text-gray-100">
-        Add New Job
-      </h1>
+      <div className="flex justify-between">
+        <h1 className="py-2 text-sm font-semibold text-gray-100 dark:text-gray-100">
+          Add New Job
+        </h1>
+        <div
+          className="mt-5 cursor-pointer text-gray-100 dark:text-gray-100"
+          onClick={() => setOpen(false)}
+        >
+          {crossIconSmall}
+        </div>
+      </div>
       <form
         className="grid grid-cols-2 gap-2 mt-2"
         onSubmit={formik.handleSubmit}
@@ -241,36 +251,52 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
             <div className="text-red-500">{formik.errors.joblink}</div>
           )}
         </div>
-        <div className="flex flex-row items-end justify-between gap-2">
-          <div className="flex-1 w-full">
-            <label htmlFor="skills" className="py-2 text-sm text-gray-100">
-              Skills
-            </label>
-            <input
-              type="text"
-              id="skills"
-              placeholder="Enter required skills"
-              name="skills"
-              className="w-full px-2 py-1 text-sm text-gray-100 bg-gray-500 rounded-sm outline-none placeholder:text-gray-200"
-              onChange={(e) => setNewSkill(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
+        <div className="flex flex-col">
+          <div className="flex flex-row items-end justify-between gap-2">
+            <div className="flex-1 w-full">
+              <label htmlFor="skills" className="py-2 text-sm text-gray-100">
+                Skills
+              </label>
+              <input
+                type="text"
+                id="skills"
+                placeholder="Enter required skills"
+                name="skills"
+                className="w-full px-2 py-1 text-sm text-gray-100 bg-gray-500 rounded-sm outline-none placeholder:text-gray-200"
+                onChange={(e) => setNewSkill(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    if (newSkill.trim() !== "") {
+                      addSkills(newSkill);
+                    }
+                  } else {
+                    formik.setFieldError(
+                      "skills",
+                      "At least one skill is required"
+                    );
+                  }
+                }}
+              />
+            </div>
+            <div className="">
+              <button
+                onClick={(e) => {
                   e.preventDefault();
-                  addSkills(newSkill);
-                }
-              }}
-            />
-          </div>
-          <div className="">
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                addSkills(newSkill);
-              }}
-              className="h-full px-3 py-1 text-sm text-gray-100 bg-green-600 rounded-sm"
-            >
-              Add Skill
-            </button>
+                  if (newSkill.trim() !== "") {
+                    addSkills(newSkill);
+                  } else {
+                    formik.setFieldError(
+                      "skills",
+                      "At least one skill is required"
+                    );
+                  }
+                }}
+                className="h-full px-3 py-1 text-sm text-gray-100 bg-green-600 rounded-sm"
+              >
+                Add Skill
+              </button>
+            </div>
           </div>
           {formik.touched.skills && formik.errors.skills && (
             <div className="text-red-500">{formik.errors.skills}</div>
