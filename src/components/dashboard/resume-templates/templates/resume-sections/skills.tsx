@@ -43,7 +43,6 @@ const Skill = ({
     }
   };
   const { handlers } = useHandler();
-  console.log(customStyle);
   return (
     <>
       {skills && skills.length > 0 && (

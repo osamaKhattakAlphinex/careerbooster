@@ -41,7 +41,7 @@ const Interest = ({
     <>
       <span
         className={`${styles?.span1} ${
-          customStyle?.borderTopBottom ? "block" : "hidden"
+          customStyle?.borderTopBottom ? "!block" : "hidden"
         }`}
       ></span>
       <div className={`${rounded_style ? rounded_style : ""}`}>
@@ -50,6 +50,7 @@ const Interest = ({
             customStyle?.centeredHeading ? "justify-center" : ""
           }
           ${customStyle?.bgColor}
+          ${styles?.underline ? "underline" : null}
         `}
         >
           <svg
@@ -77,7 +78,7 @@ const Interest = ({
       <span
         className={`${styles?.span2} ${
           customStyle?.borderTopBottom || customStyle?.borderBottom
-            ? "block"
+            ? "!block"
             : "hidden"
         }`}
       ></span>
@@ -170,7 +171,7 @@ const Interest = ({
                             );
                           }}
                           draggable
-                          className={`${styles?.interest_delete1} parent`}
+                          className={`${styles?.interest_delete1} `}
                           key={ind}
                         >
                           <EditableField
@@ -193,7 +194,7 @@ const Interest = ({
                                 "interests"
                               )
                             }
-                            className={`${styles?.interest_delete} child`}
+                            className={`${styles?.interest_delete} `}
                           >
                             {crossIcon1}
                           </div>

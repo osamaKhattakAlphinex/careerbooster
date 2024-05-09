@@ -31,8 +31,10 @@ export default async function Privatelayout({ children }: Props) {
   const user = session?.user as { role: string } | undefined;
 
   const isAdmin = user?.role === "admin";
+  const isDeo = user?.role === "deo";
 
   if (isAdmin) redirect("/admin");
+  if (isDeo) redirect("/deo");
   if (!session?.user) {
     return (
         <Onboard/>

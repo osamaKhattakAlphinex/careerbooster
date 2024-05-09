@@ -15,8 +15,6 @@ import Publication from "./resume-sections/publication";
 import {
   conditionStyleHeader,
   customStyle_16,
-  experience,
-  summary,
   template_16_styles,
 } from "@/helpers/templateStylesObj";
 import Certification from "./resume-sections/certification";
@@ -74,7 +72,7 @@ const ResumeTemplate16 = () => {
           </div>
 
           {/* contacts */}
-          <h3 className="flex flex-rosw items-center w-full gap-2 my-1 text-base font-semibold text-white uppercase border-2 border-transparent rounded-sm hover:border-dashed hover:border-gray-500">
+          <h3 className="flex items-center w-full gap-2 my-1 text-base font-semibold text-white uppercase border-2 border-transparent rounded-sm flex-rosw hover:border-dashed hover:border-gray-500">
             {resumeContactIcon}
             <EditableField
               value={
@@ -104,17 +102,7 @@ const ResumeTemplate16 = () => {
               centeredHeading: false,
             }}
           />
-          {/* Interests & Hobbies */}
-          <div className="w-full">
-            {resume?.interests && resume?.interests.length > 0 && (
-              <Interest
-                customStyle={customStyle_16}
-                heading={resume.headings.interests}
-                interests={resume.interests}
-                styles={template_16_styles}
-              />
-            )}
-          </div>
+
           {/* Languages */}
           <div className="w-full">
             {resume?.languages && resume?.languages.length > 0 && (
@@ -122,6 +110,17 @@ const ResumeTemplate16 = () => {
                 customStyle={customStyle_16}
                 heading={resume.headings.languages}
                 languages={resume.languages}
+                styles={template_16_styles}
+              />
+            )}
+          </div>
+          {/* Interests & Hobbies */}
+          <div className="w-full">
+            {resume?.interests && resume?.interests.length > 0 && (
+              <Interest
+                customStyle={customStyle_16}
+                heading={resume.headings.interests}
+                interests={resume.interests}
                 styles={template_16_styles}
               />
             )}
@@ -142,7 +141,7 @@ const ResumeTemplate16 = () => {
           <Summary
             heading={resume.headings.summary}
             summary={resume.summary}
-            styles={summary}
+            styles={template_16_styles}
             customStyle={customStyle_16}
           />
 
@@ -153,7 +152,7 @@ const ResumeTemplate16 = () => {
               workExperienceArray={resume.workExperienceArray}
               workExperience={resume.workExperience}
               customStyle={customStyle_16}
-              styles={experience}
+              styles={template_16_styles}
             />
           </div>
           {/* Custom section */}
@@ -184,6 +183,18 @@ const ResumeTemplate16 = () => {
             )}
           </div>
 
+          {/* Awards */}
+          <div className="w-full">
+            {resume?.awards && resume?.awards.length > 0 && (
+              <Award
+                customStyle={customStyle_16}
+                heading={resume.headings.awards}
+                awards={resume.awards}
+                styles={template_16_styles}
+              />
+            )}
+          </div>
+
           {/* Trainings */}
           <div className="w-full">
             {resume?.trainings && resume?.trainings.length > 0 && (
@@ -196,17 +207,6 @@ const ResumeTemplate16 = () => {
             )}
           </div>
 
-          {/* Awards */}
-          <div className="w-full">
-            {resume?.awards && resume?.awards.length > 0 && (
-              <Award
-                customStyle={customStyle_16}
-                heading={resume.headings.awards}
-                awards={resume.awards}
-                styles={template_16_styles}
-              />
-            )}
-          </div>
           {/* Project */}
           <div className="w-full">
             {resume?.projects && resume?.projects.length > 0 && (
@@ -232,7 +232,7 @@ const ResumeTemplate16 = () => {
           </div>
 
           {/* education */}
-          <div className="w-full  mb-2">
+          <div className="w-full mb-2">
             {resume?.education.length > 0 && (
               <Education
                 heading={resume.headings.education}

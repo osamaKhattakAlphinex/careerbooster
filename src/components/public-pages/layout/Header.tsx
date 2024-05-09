@@ -153,6 +153,20 @@ const Header = () => {
                 <Link
                   className={`
                          ${
+                           active === "find-jobs"
+                             ? "text-[#6A4DFF] font-bold   dark:text-[#e6f85e]  "
+                             : " dark:text-gray-100 text-gray-900 font-semibold "
+                         }
+                  capitalize font-semibold text-sm whitespace-nowrap no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	`}
+                  href="/find-jobs"
+                >
+                  Find Jobs
+                </Link>
+              </li>
+              <li className="px-3 mt-0 ">
+                <Link
+                  className={`
+                         ${
                            active === "pricing"
                              ? "text-[#6A4DFF] font-bold  dark:text-[#e6f85e]  "
                              : " dark:text-gray-100 text-gray-900 font-semibold "
@@ -236,7 +250,13 @@ const Header = () => {
                           {userData.firstName + " " + userData.lastName}
                         </Link>
                         <Link
-                          href={role === "admin" ? "/admin" : "/dashboard"}
+                          href={
+                            role === "admin" || role === "deo"
+                              ? role === "admin"
+                                ? "/admin"
+                                : "/deo"
+                              : "/dashboard"
+                          }
                           className="block px-2 py-2 text-sm no-underline rounded-sm dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
                           role="menuitem"
                           id="menu-item-0"

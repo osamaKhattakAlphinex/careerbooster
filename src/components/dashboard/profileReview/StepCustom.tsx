@@ -757,13 +757,13 @@ export const InterestsForm = ({
                 : "text-gray-950"
             }`}
           >
-            Description
+            Interest
           </label>
           <textarea
             id="description"
             className="form-control"
             onChange={formik.handleChange}
-            placeholder="Description"
+            placeholder="Interest"
             value={formik.values.description}
           ></textarea>
         </div>

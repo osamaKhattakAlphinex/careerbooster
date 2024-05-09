@@ -26,7 +26,10 @@ const Contact = ({ contact, styles, iconColor }: Props) => {
         // style={{ backgroundColor: color_second }}
       >
         <li className={`${styles?.contact_li}`}>
-          {phoneIconFilled}
+          <div className={`bg-transparent ${iconColor ? iconColor : ""} `}>
+            {phoneIconFilled}
+          </div>
+
           <EditableField
             value={contact?.phone ? contact?.phone : "(555) 555-1234"}
             onSave={(value: string) => {
@@ -37,7 +40,10 @@ const Contact = ({ contact, styles, iconColor }: Props) => {
           />
         </li>
         <li className={`${styles?.contact_li} `}>
-          {emailIconFilled}
+          <div className={`bg-transparent ${iconColor ? iconColor : ""} `}>
+            {emailIconFilled}
+          </div>
+
           <EditableField
             value={contact?.email ? contact?.email : "your@email.com"}
             onSave={(value: string) => {
@@ -67,7 +73,10 @@ const Contact = ({ contact, styles, iconColor }: Props) => {
           />
         </li>
         <li className={`${styles?.contact_li} `}>
-          <div className="">{homeIconFilled}</div>
+          <div className={`bg-transparent ${iconColor ? iconColor : ""} `}>
+            {homeIconFilled}
+          </div>
+
           <EditableField
             value={contact?.address.trim() ? contact.address : "Address"}
             onSave={(value: string) => {

@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 "use client";
 
 import { ErrorMessage, Field, Form, Formik, useFormik } from "formik";

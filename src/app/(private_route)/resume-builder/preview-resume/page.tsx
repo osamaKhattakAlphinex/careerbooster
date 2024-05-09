@@ -103,35 +103,68 @@ const Page = () => {
   };
 
   const cleanUpHTML = (page: any) => {
-    const cleanUpIds = [
-      "shortName",
-      "email",
-      "linkedIn",
-      "phone",
-      "address",
-      "primarySkills",
-      "name",
-      "jobTitle",
-      // "summary",
-      "interests",
-      "languages",
-    ];
+    const templateNumber =  page.getAttribute(
+      "data-template-no"
+    );
+    let cleanUpIds
+    let containerNames
+    if(templateNumber === "2" || templateNumber === "6" || templateNumber === "7" || templateNumber === "8"){
+      cleanUpIds = [
+        "shortName",
+        "email",
+        "linkedIn",
+        "phone",
+        "address",
+        "primarySkills",
+        "name",
+        "jobTitle",
+        "summary",
+      ];
+      containerNames = [
+        "header",
+        "skills",
+        "summary",
+        "contact",
+        "education",
+        "sideBar",
+        "trainings",
+        "awards",
+        "references",
+        "certifications",
+        "body",
+      ];
+    } else {
+      cleanUpIds = [
+        "shortName",
+        "email",
+        "linkedIn",
+        "phone",
+        "address",
+        "primarySkills",
+        "name",
+        "jobTitle",
+        "summary",
+        "languages",
+        "interests"
+      ];
+      containerNames = [
+        "header",
+        "skills",
+        "summary",
+        "contact",
+        "education",
+        "sideBar",
+        "trainings",
+        "awards",
+        "references",
+        "languages",
+        "interests",
+        "certifications",
+        "body",
+      ];
+    }
 
-    const containerNames = [
-      "header",
-      "skills",
-      // "summary",
-      "contact",
-      "education",
-      "sideBar",
-      "languages",
-      "interests",
-      "trainings",
-      "awards",
-      "references",
-      "certifications",
-      "body",
-    ];
+    
 
     for (const cleanUpId of cleanUpIds) {
       let emptyIds = page.querySelectorAll(`#${cleanUpId}`);
@@ -221,6 +254,93 @@ const Page = () => {
     height: number
   ) => {
     return educationHeading.offsetTop + height < page.clientHeight;
+  };
+
+  const languagesDivs = (page: any, nextPage?: any) => {
+    const languagesDivs = document.querySelectorAll(
+      "[data-languages-container-index]"
+    );
+    const pageId = page.getAttribute("id");
+    let newDiv;
+    newDiv = document.createElement("div");
+    newDiv.setAttribute("data-container-name", "languages");
+    setStylesToElement(newDiv, "m-2 flex gap-4 flex-wrap w-full");
+    let newNextDiv;
+    newNextDiv = document.createElement("div");
+    newNextDiv.setAttribute("data-container-name", "languages");
+    setStylesToElement(newNextDiv, "px-6 m-2 flex flex-wrap gap-4 w-full");
+    const getLanguagesHeading = page.querySelector(
+      "h2[data-name='languages']"
+    );
+    if (getLanguagesHeading) {
+      let indicatorDiv = document.createElement("span");
+      indicatorDiv.setAttribute("data-container-name", "languages-indicator");
+      indicatorDiv.textContent = "indicator";
+      setStylesToElement(indicatorDiv, "w-full h-2 bg-red-600");
+      getLanguagesHeading.parentNode.insertBefore(
+        indicatorDiv,
+        getLanguagesHeading.nextSibling
+      );
+      if(nextPage){
+        cleanUpHTML(nextPage)
+      }
+      const heights = Array.from(languagesDivs).map((div) => div.clientHeight);
+      const maxHeight = Math.max(...heights);
+      let isSpaceAvailable = canFitEducation(page, indicatorDiv, maxHeight);
+      let rowItemCount = 1;
+      for (const singleLanguages of Array.from(languagesDivs)) {
+        if (isSpaceAvailable && rowItemCount <= 3) {
+          if (pageId === "page-0") {
+            singleLanguages.className = singleLanguages.className.replace(
+              "w-[30%]",
+              "w-[45%]"
+            );
+          }
+          newDiv.appendChild(singleLanguages);
+          getLanguagesHeading.parentNode.insertBefore(
+            newDiv,
+            getLanguagesHeading.nextSibling
+          );
+          rowItemCount++;
+        } else {
+          isSpaceAvailable = canFitEducation(page, indicatorDiv, maxHeight);
+          if (isSpaceAvailable) {
+            rowItemCount = 1;
+            newDiv.appendChild(singleLanguages);
+            getLanguagesHeading.parentNode.insertBefore(
+              newDiv,
+              getLanguagesHeading.nextSibling
+            );
+
+            rowItemCount++;
+          } else {
+            if (nextPage) {
+              let referenceDiv = nextPage.querySelector(
+                '[data-container-name="languages"]'
+              );
+              if (referenceDiv) {
+                referenceDiv.appendChild(singleLanguages);
+              } else {
+                newNextDiv.appendChild(singleLanguages);
+                nextPage.append(newNextDiv);
+              }
+            }
+          }
+        }
+      }
+
+      let elementsToRemove = document.querySelectorAll(
+        '[data-container-name="languages-indicator"]'
+      );
+
+      if (nextPage) {
+        cleanUpLastPageHTML(nextPage);
+      }
+      // Loop through each matching element and remove it from the DOM
+      elementsToRemove.forEach((element: any) => {
+        element.parentNode.removeChild(element);
+      });
+    }
   };
 
   const referencesDivs = (page: any, nextPage?: any) => {
@@ -501,8 +621,6 @@ const Page = () => {
                       _element
                     );
 
-                    // console.log("singleAchivemnt", singleAchievement);
-
                     _element.textContent = singleAchievement;
                     const styles = element.styles;
                     setStylesToElement(_element, styles);
@@ -544,7 +662,7 @@ const Page = () => {
                         singlespan.textContent = formatDate(
                           singleItem[item.id]
                         );
-                      } else {
+                      } else { 
                         singlespan.textContent = singleItem[item.id];
                       }
 
@@ -797,8 +915,9 @@ const Page = () => {
 
     setTimeout(() => {
       pages.map((page: any, index: any) => {
-        educationDivs(pages[index], pages[index + 1]);
+        languagesDivs(pages[index], pages[index + 1]);
         referencesDivs(pages[index], pages[index + 1]);
+        educationDivs(pages[index], pages[index + 1]);
         setSidebarHeight(pages[index]);
         checkOverflow(index);
         cleanUpHTML(page);

@@ -16,8 +16,7 @@ const JobSchema = new Schema(
       required: true,
     },
     category: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: "JobCategory",
+      type:String,
       required: true,
     },
     jobDescription: {
@@ -43,10 +42,6 @@ const JobSchema = new Schema(
     featured: {
       type: Number,
       default: 0,
-    },
-    author: {
-      type: mongoose.SchemaTypes.ObjectId,
-      ref: "User",
     },
   },
   { timestamps: true }

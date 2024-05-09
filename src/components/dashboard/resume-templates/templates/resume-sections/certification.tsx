@@ -15,6 +15,7 @@ type Props = {
   certificates: any;
   styles: any;
   customStyle?: any;
+  iconColor?: any;
 };
 
 const Certification = ({
@@ -22,6 +23,7 @@ const Certification = ({
   certificates,
   styles,
   customStyle,
+  iconColor,
 }: Props) => {
   const [certificationIndex, setCertificationIndex] = useState<number>();
   const { handlers } = useHandler();
@@ -39,36 +41,41 @@ const Certification = ({
     <>
       <span
         className={`${styles?.span1} ${
-          customStyle?.borderTopBottom ? "block" : "hidden"
+          customStyle?.borderTopBottom ? "!block" : "hidden"
         }`}
       ></span>
       <h3
         className={`${styles?.certification_h3} ${
           customStyle?.centeredHeading ? "justify-center" : ""
         }
+          ${customStyle?.bgColor}
+          ${styles?.underline ? "underline" : null}
           ${styles?.bgColor}
         `}
       >
-        <svg
-          width="20px"
-          height="20px"
-          viewBox="0 0 48 48"
-          xmlns="http://www.w3.org/2000/svg"
-          className="text-white"
-        >
-          <title>certificate-ribbon-solid</title>
-          <g id="Layer_2" data-name="Layer 2">
-            <g id="invisible_box" data-name="invisible box">
-              <rect width="48" height="48" fill="none" />
-            </g>
-            <g id="icons_Q2" data-name="icons Q2">
-              <g>
-                <circle cx="24" cy="18" r="7" />
-                <path d="M40,18A16,16,0,1,0,15,31.2V43.9a2,2,0,0,0,3.1,1.7L24,41l5.9,4.6A2,2,0,0,0,33,43.9V31.2A16,16,0,0,0,40,18ZM12,18A12,12,0,1,1,24,30,12,12,0,0,1,12,18Z" />
+        <div className={`${iconColor}`}>
+          <svg
+            width="20px"
+            height="20px"
+            viewBox="0 0 48 48"
+            xmlns="http://www.w3.org/2000/svg"
+            className=""
+            fill="currentColor"
+          >
+            <title>certificate-ribbon-solid</title>
+            <g id="Layer_2" data-name="Layer 2">
+              <g id="invisible_box" data-name="invisible box">
+                <rect width="48" height="48" fill="none" />
+              </g>
+              <g id="icons_Q2" data-name="icons Q2">
+                <g>
+                  <circle cx="24" cy="18" r="7" />
+                  <path d="M40,18A16,16,0,1,0,15,31.2V43.9a2,2,0,0,0,3.1,1.7L24,41l5.9,4.6A2,2,0,0,0,33,43.9V31.2A16,16,0,0,0,40,18ZM12,18A12,12,0,1,1,24,30,12,12,0,0,1,12,18Z" />
+                </g>
               </g>
             </g>
-          </g>
-        </svg>
+          </svg>
+        </div>
 
         <EditableField
           value={heading ? heading : "certifications"}
@@ -85,7 +92,7 @@ const Certification = ({
       <span
         className={`${styles?.span2} ${
           customStyle?.borderTopBottom || customStyle?.borderBottom
-            ? "block"
+            ? "!block"
             : "hidden"
         }`}
       ></span>

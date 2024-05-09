@@ -30,7 +30,7 @@ const Language = ({
     <>
       <span
         className={`${styles?.span1} ${
-          customStyle?.borderTopBottom ? "block" : "hidden"
+          customStyle?.borderTopBottom ? "!block" : "hidden"
         }`}
       ></span>
       <div className={`${rounded_style ? rounded_style : ""}`}>
@@ -39,6 +39,7 @@ const Language = ({
             customStyle?.centeredHeading ? "justify-center" : ""
           }
           ${customStyle?.bgColor}
+          ${styles?.underline ? "underline" : null}
         `}
         >
           <svg
@@ -75,11 +76,11 @@ const Language = ({
       <span
         className={`${styles?.span2} ${
           customStyle?.borderTopBottom || customStyle?.borderBottom
-            ? "block"
+            ? "!block"
             : "hidden"
         }`}
       ></span>
-      <ul className={`${styles?.language_ul}`}>
+      <ul className={`${styles?.language_ul} `}>
         {languages.map((rec: any, i: number) => {
           return (
             <li key={i} className={`${styles?.language_li}`}>
@@ -95,7 +96,7 @@ const Language = ({
                 // }}
               >
                 <div
-                  className={`${styles?.language_div}`}
+                  className={`${styles?.language_div} border`}
                   onDragStart={(e) =>
                     e.dataTransfer.setData("text/plain", i.toString())
                   }
@@ -116,6 +117,7 @@ const Language = ({
                       }}
                     />
                   </h2>
+                  -
                   <h2 className={`${styles?.language_h2_1}`}>
                     {rec?.proficiency && (
                       <span className={`${styles?.language_date}`}>

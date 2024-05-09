@@ -31,20 +31,9 @@ import { ColorResult } from "react-color";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import Publication from "./resume-sections/publication";
 import {
-  award,
-  certification,
   conditionStyleHeader,
   customStyle_15,
-  education,
-  experience,
-  interest,
-  language,
-  projectStyles,
-  publicationStyles,
-  reference,
-  summary,
   template_15_styles,
-  training,
 } from "@/helpers/templateStylesObj";
 import Certification from "./resume-sections/certification";
 import Training from "./resume-sections/trainings";
@@ -197,7 +186,11 @@ const ResumeTemplate15 = () => {
             />
           </h3>
           <span className="w-full h-0 my-3 border-stylee"></span>
-          <Contact contact={resume.contact} styles={template_15_styles} />
+          <Contact
+            contact={resume.contact}
+            styles={template_15_styles}
+            iconColor="text-[#444440]"
+          />
 
           {/* Skills */}
 
@@ -208,6 +201,16 @@ const ResumeTemplate15 = () => {
             rounded_style="bg-[#444440] w-full xs:w-full md:w-full lg:w-full flex justify-center xs:justify-center md:justify-center  flex-row gap-2 items-center"
           />
 
+          {/* Languages */}
+          {resume?.languages && resume?.languages.length > 0 && (
+            <Language
+              // customStyle={customStyle_4}
+              heading={resume.headings.languages}
+              languages={resume.languages}
+              styles={template_15_styles}
+              rounded_style="bg-[#444440] w-full xs:w-full md:w-full lg:w-full flex justify-center xs:justify-center md:justify-center  flex-row gap-2 items-center"
+            />
+          )}
           {/* Interests & Hobbies */}
 
           {resume?.interests && resume?.interests.length > 0 && (
@@ -215,16 +218,6 @@ const ResumeTemplate15 = () => {
               // customStyle={customStyle_4}
               heading={resume.headings.interests}
               interests={resume.interests}
-              styles={template_15_styles}
-              rounded_style="bg-[#444440] w-full xs:w-full md:w-full lg:w-full flex justify-center xs:justify-center md:justify-center  flex-row gap-2 items-center"
-            />
-          )}
-          {/* Languages */}
-          {resume?.languages && resume?.languages.length > 0 && (
-            <Language
-              // customStyle={customStyle_4}
-              heading={resume.headings.languages}
-              languages={resume.languages}
               styles={template_15_styles}
               rounded_style="bg-[#444440] w-full xs:w-full md:w-full lg:w-full flex justify-center xs:justify-center md:justify-center  flex-row gap-2 items-center"
             />
@@ -244,7 +237,7 @@ const ResumeTemplate15 = () => {
           <Summary
             heading={resume.headings.summary}
             summary={resume.summary}
-            styles={summary}
+            styles={template_15_styles}
             customStyle={customStyle_15}
           />
           {/* Work Experience */}
@@ -254,7 +247,7 @@ const ResumeTemplate15 = () => {
               workExperienceArray={resume.workExperienceArray}
               workExperience={resume.workExperience}
               customStyle={customStyle_15}
-              styles={experience}
+              styles={template_15_styles}
             />
           </div>
 
@@ -267,7 +260,7 @@ const ResumeTemplate15 = () => {
                 customStyle={customStyle_15}
                 heading={resume.headings.publications}
                 publications={resume.publications}
-                styles={publicationStyles}
+                styles={template_15_styles}
               />
             )}
           </div>
@@ -279,19 +272,7 @@ const ResumeTemplate15 = () => {
                 customStyle={customStyle_15}
                 heading={resume.headings.certifications}
                 certificates={resume.certifications}
-                styles={certification}
-              />
-            )}
-          </div>
-
-          {/* Trainings */}
-          <div className="w-full">
-            {resume?.trainings && resume?.trainings.length > 0 && (
-              <Training
-                customStyle={customStyle_15}
-                heading={resume.headings.trainings}
-                trainings={resume.trainings}
-                styles={training}
+                styles={template_15_styles}
               />
             )}
           </div>
@@ -303,7 +284,7 @@ const ResumeTemplate15 = () => {
                 customStyle={customStyle_15}
                 heading={resume.headings.awards}
                 awards={resume.awards}
-                styles={award}
+                styles={template_15_styles}
               />
             )}
           </div>
@@ -313,8 +294,20 @@ const ResumeTemplate15 = () => {
               <Project
                 heading={resume.headings.projects}
                 projects={resume.projects}
-                styles={projectStyles}
+                styles={template_15_styles}
                 customStyle={customStyle_15}
+              />
+            )}
+          </div>
+
+          {/* Trainings */}
+          <div className="w-full">
+            {resume?.trainings && resume?.trainings.length > 0 && (
+              <Training
+                customStyle={customStyle_15}
+                heading={resume.headings.trainings}
+                trainings={resume.trainings}
+                styles={template_15_styles}
               />
             )}
           </div>
@@ -326,18 +319,18 @@ const ResumeTemplate15 = () => {
                 customStyle={customStyle_15}
                 heading={resume.headings.references}
                 references={resume.references}
-                styles={reference}
+                styles={template_15_styles}
               />
             )}
           </div>
 
           {/* education */}
-          <div className="w-full  mb-2">
+          <div className="w-full mb-2">
             {resume?.education.length > 0 && (
               <Education
                 heading={resume.headings.education}
                 educations={resume.education}
-                styles={education}
+                styles={template_15_styles}
                 customStyle={customStyle_15}
               />
             )}

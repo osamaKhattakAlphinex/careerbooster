@@ -1,26 +1,131 @@
 import { educationIcon, sparkleIcon } from "./iconsProvider";
-
-// Header Styles
-
-const header = {
-  full_Name_Style: "fullName_temp_2",
-  jobTitle: "jobTitle_temp_2",
-};
-
-const conditionStyleHeader = {
+export const conditionStyleHeader = {
   line: false,
   span1: false,
 };
-
-//contact styles
-
-const contact = {
+export const template_2_styles = {
+  full_Name_Style: "fullName_temp_2",
+  jobTitle: "jobTitle_temp_2",
   contact_ul: "contact_ul",
   contact_li: "contact_li",
-};
-export const contact_temp_8 = {
-  contact_8_ul: "contact_8_ul",
-  contact_8_li: "contact_8_li",
+  summary_heading: "summary_heading",
+  summary_text: "summary_text",
+  publication_h3: "publication_h3 underline",
+  experienceHeading_temp_2: "experienceHeading_temp_2 underline",
+  achievement_div: "achievement_div",
+  achievement_h2: "achievement_h2",
+  achievement_h1: "achievement_h1",
+  achievement_save_btn: "achievement-save-btn",
+  achievement_delete_btn: "achievement-delete-btn",
+  skill_heading: "skill_heading underline",
+  skill_ul: "skill_ul",
+  skill_li: "skill_li",
+  skill_New: "skill_New",
+  skill_input: "skill_input",
+  publication_div: "publication_div",
+  publication_h2: "publication_h2",
+  publication_h2_1: "publication_h2_1",
+  publication_new_input: "publication_new_input",
+  publication_delete: "publication_delete",
+  publication_delete1: "publication_delete1 ",
+  publication_line: "publication_line",
+  publication_date: "publication_date",
+  publication_ul: "publication_ul",
+  publication_li: "publication_li",
+  publication_div_input: "publication_div_input",
+  project_h3: "publication_h3 underline",
+  project_div: "publication_div",
+  project_h2: "publication_h2",
+  project_h2_1: "publication_h2_1",
+  project_new_input: "publication_new_input",
+  project_delete: "publication_delete",
+  project_delete1: "publication_delete1 ",
+  project_line: "publication_line",
+  project_date: "publication_date",
+  project_ul: "publication_ul",
+  project_li: "publication_li",
+  project_div_input: "publication_div_input",
+  certification_h3: "publication_h3 underline",
+  certification_div: "publication_div",
+  certification_h1: "achievement_h1",
+  certification_h2_1: "publication_h2_1",
+  certification_date: "publication_date",
+  certification_ul: "publication_ul",
+  certification_li: "publication_li",
+  certification_line: "publication_line",
+  certification_delete1: "publication_delete1",
+  certification_delete: "publication_delete",
+  certification_div_input: "publication_div_input",
+  certification_new_input: "publication_new_input",
+  training_h3: "publication_h3 underline",
+  training_div: "publication_div",
+  training_h1: "achievement_h1",
+  training_h2: "publication_h2",
+  training_h2_1: "publication_h2_1",
+  training_date: "publication_date",
+  training_ul: "publication_ul",
+  training_li: "publication_li",
+  training_line: "publication_line",
+  training_delete1: "publication_delete1",
+  training_delete: "publication_delete",
+  training_div_input: "publication_div_input",
+  training_new_input: "publication_new_input",
+  interest_h3: "publication_h3 underline",
+  interest_div: "publication_div",
+  interest_h1: "achievement_h1",
+  interest_h2: "publication_h2",
+  interest_h2_1: "publication_h2_1",
+  interest_date: "publication_date",
+  interest_ul: "publication_ul",
+  interest_li: "publication_li",
+  interest_line: "publication_line",
+  interest_delete1: "publication_delete1 parent",
+  interest_delete: "publication_delete hidden",
+  interest_div_input: "publication_div_input",
+  interest_new_input: "publication_new_input",
+  award_h3: "publication_h3 underline",
+  award_div: "publication_div",
+  award_h1: "achievement_h1",
+  award_h2: "publication_h2",
+  award_h2_1: "publication_h2_1",
+  award_date: "publication_date",
+  award_ul: "publication_ul",
+  award_li: "publication_li",
+  award_line: "publication_line",
+  award_delete1: "publication_delete1",
+  award_delete: "publication_delete",
+  award_div_input: "publication_div_input",
+  award_new_input: "publication_new_input",
+  reference_h3: "publication_h3 underline",
+  reference_ul: "reference_ul gap-3",
+  reference_li: "reference_li bg-gray-300 rounded-md",
+  reference_div: "  p-2 ",
+  reference_h1: "achievement_h1",
+  reference_h2: "publication_h2",
+  reference_h2_1: "publication_h2_1",
+  reference_date: "publication_date",
+  reference_line: "publication_line",
+  reference_delete1: "publication_delete1",
+  reference_delete: "publication_delete",
+  reference_div_input: "publication_div_input",
+  reference_new_input: "publication_new_input",
+  language_h3: "publication_h3 underline",
+  language_ul: "reference_ul gap-3",
+  language_li: "reference_li bg-gray-300 rounded-md ",
+  language_div: "language_div p-2 ",
+  language_h1: "achievement_h1",
+  language_h2_1: "publication_h2_1",
+  language_date: "publication_date",
+  education_h3: "education_h3 underline",
+  education_ul: "education_ul",
+  education_div: "education_div bg-gray-300",
+  education_li: "education_li",
+  education_delete: "education_delete",
+  education_li_2: "education_li_2",
+  education_li_italic: "education_li_italic",
+  education_li_date: "education_li_date",
+  span1: "span1",
+  span2: "span2",
 };
 export const template_4_styles = {
   language_ul: "flex flex-col flex-wrap pl-0 ",
@@ -36,7 +141,7 @@ export const template_4_styles = {
   language_date: "hover:shadow-md hover:bg-gray-500",
   interest_h3: "publication_h3",
   interest_div:
-    "flex justify-between items-center border-2 border-transparent md:w-full hover:cursor-move ",
+    "flex justify-between items-center md:w-full hover:cursor-move border-2 border-transparent hover:border-dashed hover:border-gray-500 ",
   interest_h1:
     "flex text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-500",
   interest_h2:
@@ -46,11 +151,11 @@ export const template_4_styles = {
   interest_date: "hover:shadow-md hover:bg-gray-500",
   interest_ul: "flex flex-col flex-wrap pl-0 text-xs xs:text-[12px] md:text-xs",
   interest_li:
-    "m-2 xs:m-0 relative border-transparent border-2 hover:border-dashed hover:border-gray-500",
+    "m-2 xs:m-0 relative hover:shadow-md hover:cursor-move      hover:bg-gray-500",
   interest_line: "publication_line",
   interest_delete1:
-    "hover:border-dashed list-disc hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative hover:bg-gray-500",
-  interest_delete: "publication_delete",
+    "hover:shadow-md hover:cursor-move  hover:bg-gray-500 relative list-disc w-auto parent",
+  interest_delete: "publication_delete hidden",
   interest_div_input: "publication_div_input",
   interest_new_input: "publication_new_input",
   full_Name_Style:
@@ -62,7 +167,7 @@ export const template_4_styles = {
   skill_ul:
     "border-2 border-transparent hover:border-dashed hover:border-gray-500 px-4 flex flex-col  gap-3 mb-4 text-xs xs:text-[12px] md:text-xs",
   skill_li:
-    "hover:shadow-md hover:cursor-move  border-transparent border-[1px] hover:border-dashed hover:border-gray-500 hover:border hover:bg-gray-500",
+    "hover:shadow-md hover:cursor-move  hover:border-[1px] hover:border-dashed     hover:bg-gray-500",
   skill_New: "skill_New",
   span1: "span1",
   span2: "span2",
@@ -164,7 +269,6 @@ export const template_4_styles = {
   reference_div_input: "publication_div_input",
   reference_new_input: "publication_new_input",
 };
-
 export const template_6_styles = {
   full_Name_Style:
     "text-4xl font-bold border-2 border-transparent xs:text-2xl md:4xl lg:text-4xl hover:shadow-md hover:bg-gray-100 hover:border-dashed hover:border-gray-500     ",
@@ -256,8 +360,8 @@ export const template_6_styles = {
   interest_ul: "publication_ul",
   interest_li: "publication_li",
   interest_line: "publication_line",
-  interest_delete1: "publication_delete1",
-  interest_delete: "publication_delete",
+  interest_delete1: "publication_delete1 parent",
+  interest_delete: "publication_delete hidden",
   interest_div_input: "publication_div_input",
   interest_new_input: "publication_new_input",
   award_h3: "publication_h3",
@@ -276,7 +380,7 @@ export const template_6_styles = {
   reference_h3: "publication_h3",
   reference_ul: "reference_ul",
   reference_li: "reference_li",
-  reference_div: "publication_div",
+  reference_div: "p-2",
   reference_h1: "achievement_h1",
   reference_h2: "publication_h2",
   reference_h2_1: "publication_h2_1",
@@ -387,8 +491,8 @@ export const template_8_styles = {
   interest_ul: "publication_ul",
   interest_li: "publication_li",
   interest_line: "publication_line",
-  interest_delete1: "publication_delete1",
-  interest_delete: "publication_delete",
+  interest_delete1: "publication_delete1 parent",
+  interest_delete: "publication_delete hidden",
   interest_div_input: "publication_div_input",
   interest_new_input: "publication_new_input",
   award_h3: "publication_h3",
@@ -407,7 +511,7 @@ export const template_8_styles = {
   reference_h3: "publication_h3",
   reference_ul: "reference_ul",
   reference_li: "reference_li",
-  reference_div: "publication_div",
+  reference_div: "p-2",
   reference_h1: "achievement_h1",
   reference_h2: "publication_h2",
   reference_h2_1: "publication_h2_1",
@@ -427,7 +531,6 @@ export const template_8_styles = {
   span1: "span1",
   span2: "span2",
 };
-
 export const template_9_styles = {
   full_Name_Style:
     "text-4xl font-bold border-2 border-transparent xs:text-2xl md:4xl lg:text-4xl hover:shadow-md hover:bg-gray-100 hover:border-dashed hover:border-gray-500",
@@ -481,7 +584,7 @@ export const template_9_styles = {
   achievement_delete_btn: "achievement-delete-btn",
   education_h3: "education_h3",
   education_ul: "education_ul",
-  education_div: "education_div",
+  education_div: "education_div bg-gray-200 rounded-md",
   education_li: "education_li",
   education_delete: "education_delete",
   education_li_2: "education_li_2",
@@ -519,8 +622,8 @@ export const template_9_styles = {
   interest_ul: "publication_ul",
   interest_li: "publication_li",
   interest_line: "publication_line",
-  interest_delete1: "publication_delete1",
-  interest_delete: "publication_delete",
+  interest_delete1: "publication_delete1 parent",
+  interest_delete: "publication_delete hidden",
   interest_div_input: "publication_div_input",
   interest_new_input: "publication_new_input",
   award_h3: "publication_h3",
@@ -537,9 +640,9 @@ export const template_9_styles = {
   award_div_input: "publication_div_input",
   award_new_input: "publication_new_input",
   reference_h3: "publication_h3",
-  reference_ul: "reference_ul",
-  reference_li: "reference_li",
-  reference_div: "publication_div",
+  reference_ul: "reference_ul gap-1 mt-1",
+  reference_li: "reference_li rounded-md bg-gray-200",
+  reference_div: "p-2",
   reference_h1: "achievement_h1",
   reference_h2: "publication_h2",
   reference_h2_1: "publication_h2_1",
@@ -550,9 +653,9 @@ export const template_9_styles = {
   reference_div_input: "publication_div_input",
   reference_new_input: "publication_new_input",
   language_h3: "publication_h3",
-  language_ul: "reference_ul",
-  language_li: "reference_li",
-  language_div: "language_div ",
+  language_ul: "reference_ul mt-1 gap-1",
+  language_li: "reference_li ",
+  language_div: "language_div p-2",
   language_h1: "achievement_h1",
   language_h2_1: "publication_h2_1",
   language_date: "publication_date",
@@ -570,13 +673,13 @@ export const template_10_styles = {
     "flex flex-row items-center gap-2 mb-2 -mr-6 text-base font-semibold uppercase border-2 border-transparent md:-mr-6 md:mt-4 hover:border-dashed hover:border-gray-500 hover:w-full",
   contact_ul: "flex flex-col gap-2 pl-0 mt-4 text-xs break-all",
   contact_li:
-    "flex items-center hover:shadow-md mb-[8px] hover:bg-gray-500 text-xs flex-row gap-1 justify-start",
+    "flex items-center hover:shadow-md mb-[8px] hover:bg-gray-500 text-xs flex-row gap-1 justify-start   hover:border-[1px] hover:border-dashed     ",
   skill_heading:
     "flex flex-row items-center gap-2 mb-0 text-base font-semibold uppercase border-2 border-transparent hover:border-dashed hover:border-gray-500",
   skill_ul:
     "flex flex-col gap-3 mb-4 text-xs border-2 px-4 border-transparent hover:border-dashed hover:border-gray-500",
   skill_li:
-    "hover:shadow-md hover:cursor-move parent border-transparent border-[1px] hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-500",
+    "hover:shadow-md hover:cursor-move parent hover:border-[1px] hover:border-dashed     hover:bg-gray-500",
   training_h3: "publication_h3",
   training_div: "publication_div",
   training_h1: "achievement_h1",
@@ -612,8 +715,8 @@ export const template_10_styles = {
   achievement_save_btn: "achievement-save-btn",
   achievement_delete_btn: "achievement-delete-btn",
   education_h3: "education_h3",
-  education_ul: "education_ul",
-  education_div: "education_div",
+  education_ul: "education_ul gap-3",
+  education_div: "education_div p-2 mt-4 bg-gray-200 rounded-md",
   education_li: "education_li",
   education_delete: "education_delete",
   education_li_2: "education_li_2",
@@ -644,7 +747,7 @@ export const template_10_styles = {
   project_div_input: "publication_div_input",
   interest_h3: "publication_h3",
   interest_div:
-    "flex justify-between items-center border-2 border-transparent md:w-full hover:cursor-move ",
+    "flex justify-between items-center hover:border-2 hover:border-dashed hover:border-gray-500 hover:border-2 md:w-full hover:cursor-move ",
   interest_h1:
     "flex text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-500",
   interest_h2:
@@ -652,13 +755,14 @@ export const template_10_styles = {
   interest_h2_1:
     "flex flex-wrap gap-1 text-[10px] font-semibold leading-relaxed hover:cursor-default",
   interest_date: "hover:shadow-md hover:bg-gray-500",
-  interest_ul: "flex flex-col flex-wrap pl-0 text-xs xs:text-[12px] md:text-xs",
+  interest_ul:
+    "flex flex-col flex-wrap pl-0 text-xs xs:text-[12px] md:text-xs  h",
   interest_li:
     "m-2 xs:m-0 relative border-transparent border-2 hover:border-dashed hover:border-gray-500",
   interest_line: "publication_line",
   interest_delete1:
-    "hover:border-dashed list-disc hover:cursor-move hover:border-gray-500 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative hover:bg-gray-500",
-  interest_delete: "publication_delete",
+    " list-disc hover:cursor-move hover:shadow-md hover:cursor-move  hover:border-[1px] hover:border-dashed     hover:bg-gray-500 relative ",
+  interest_delete: "publication_delete hidden",
   interest_div_input: "publication_div_input",
   interest_new_input: "publication_new_input",
   award_h3: "publication_h3",
@@ -675,9 +779,9 @@ export const template_10_styles = {
   award_div_input: "publication_div_input",
   award_new_input: "publication_new_input",
   reference_h3: "publication_h3",
-  reference_ul: "reference_ul",
-  reference_li: "reference_li",
-  reference_div: "publication_div",
+  reference_ul: "reference_ul mt-4 gap-3",
+  reference_li: "reference_li bg-gray-200 rounded-md",
+  reference_div: "p-2",
   reference_h1: "achievement_h1",
   reference_h2: "publication_h2",
   reference_h2_1: "publication_h2_1",
@@ -711,7 +815,7 @@ export const template_15_styles = {
     "flex flex-row items-center gap-2 mb-2 -mr-6 text-base font-semibold uppercase border-2 border-transparent md:-mr-6 md:mt-4 hover:border-dashed hover:border-gray-500 hover:w-full",
   contact_ul: "flex flex-col mt-4 w-full gap-3 pl-0 mb-4 text-xs break-all",
   contact_li:
-    "flex flex-row items-start justify-start gap-3 text-xs hover:shadow-md hover:bg-gray-100",
+    "flex flex-row items-start justify-start gap-3 text-xs hover:shadow-md hover:bg-gray-100 hover:border-[1px] hover:border-dashed hover:border-black",
   skill_heading:
     "flex uppercase text-base xs:px-2 font-semibold text-gray-100 gap-2 items-center  py-1 rounded-sm  border-2 border-transparent hover:border-dashed hover:border-gray-500",
   skill_ul:
@@ -753,8 +857,8 @@ export const template_15_styles = {
   achievement_save_btn: "achievement-save-btn",
   achievement_delete_btn: "achievement-delete-btn",
   education_h3: "education_h3",
-  education_ul: "education_ul",
-  education_div: "education_div",
+  education_ul: "education_ul gap-1",
+  education_div: "education_div bg-gray-200 rounded-md ",
   education_li: "education_li",
   education_delete: "education_delete",
   education_li_2: "education_li_2",
@@ -786,7 +890,7 @@ export const template_15_styles = {
   interest_h3:
     "flex uppercase text-base xs:px-2 font-semibold text-gray-100 gap-2 items-center  py-1 rounded-sm  border-2 border-transparent hover:border-dashed hover:border-gray-500",
   interest_div:
-    "flex justify-between items-center border-2 border-transparent md:w-full hover:cursor-move ",
+    "flex justify-between items-center border-2 border-transparent md:w-full hover:cursor-move border-2 border-transparent hover:border-dashed hover:border-gray-500",
   interest_h1:
     "flex text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-500",
   interest_h2:
@@ -799,8 +903,8 @@ export const template_15_styles = {
     "hover:shadow-md hover:cursor-move px-0 xs:px-2 md:px-0 parent hover:border-dashed hover:border-gray-500 hover:border  hover:bg-gray-100 border-transparent border-[1px] flex items-center gap-2 justify-between",
   interest_line: "publication_line",
   interest_delete1:
-    "hover:border-dashed list-disc hover:cursor-move hover:border-gray-100 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative hover:bg-gray-100",
-  interest_delete: "publication_delete",
+    "hover:border-dashed list-disc hover:cursor-move hover:border-gray-100 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative hover:bg-gray-100 parent",
+  interest_delete: "publication_delete hidden",
   interest_div_input: "publication_div_input",
   interest_new_input: "publication_new_input",
   award_h3: "publication_h3",
@@ -817,9 +921,9 @@ export const template_15_styles = {
   award_div_input: "publication_div_input",
   award_new_input: "publication_new_input",
   reference_h3: "publication_h3",
-  reference_ul: "reference_ul",
-  reference_li: "reference_li",
-  reference_div: "publication_div",
+  reference_ul: "reference_ul gap-1",
+  reference_li: "reference_li bg-gray-200 rounded-md ",
+  reference_div: "p-2",
   reference_h1: "achievement_h1",
   reference_h2: "publication_h2",
   reference_h2_1: "publication_h2_1",
@@ -835,7 +939,7 @@ export const template_15_styles = {
   language_li:
     "m-2 xs:m-0 relative border-transparent border-2 hover:border-dashed hover:border-gray-100 ",
   language_div:
-    "flex justify-between items-center border-2 border-transparent md:w-full hover:cursor-move ",
+    "flex justify-between items-center border-2  md:w-full hover:cursor-move border-2 border-transparent hover:border-dashed hover:border-gray-500 ",
   language_h1:
     "flex text-[14px] xs:text-[12px] md:text-xs font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100",
   language_h2_1:
@@ -896,8 +1000,8 @@ export const template_16_styles = {
   achievement_save_btn: "achievement-save-btn",
   achievement_delete_btn: "achievement-delete-btn",
   education_h3: "education_h3",
-  education_ul: "education_ul",
-  education_div: "education_div",
+  education_ul: "education_ul gap-3",
+  education_div: "education_div mt-4 bg-gray-200 rounded-md",
   education_li: "education_li",
   education_delete: "education_delete",
   education_li_2: "education_li_2",
@@ -929,7 +1033,7 @@ export const template_16_styles = {
   interest_h3:
     "flex uppercase text-base xs:px-2 font-semibold text-gray-100 gap-2 items-center  py-1 rounded-sm  border-2 border-transparent hover:border-dashed hover:border-gray-500",
   interest_div:
-    "flex justify-between items-center border-2 border-transparent md:w-full hover:cursor-move ",
+    "flex justify-between items-center border-2 border-transparent md:w-full hover:cursor-move border-2 border-transparent hover:border-dashed hover:border-gray-500",
   interest_h1:
     "flex text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-500",
   interest_h2:
@@ -939,11 +1043,11 @@ export const template_16_styles = {
   interest_date: "hover:shadow-md hover:bg-gray-500",
   interest_ul: "flex flex-col flex-wrap pl-0 text-xs xs:text-[12px] md:text-xs",
   interest_li:
-    "m-2 xs:m-0 relative border-transparent border-2 hover:border-dashed hover:border-gray-100 text-gray-100",
+    "m-2 xs:m-0 relative  hover:border-2 hover:border-dashed  text-gray-100",
   interest_line: "publication_line",
   interest_delete1:
-    "hover:border-dashed list-disc hover:cursor-move hover:border-gray-100 border-[1px] hover:border-[1px] border-transparent hover:shadow-md relative hover:bg-gray-500 text-gray-100 justify-between",
-  interest_delete: "publication_delete",
+    "hover:border-dashed list-disc hover:cursor-move  hover:bg-gray-500  text-gray-100 parent",
+  interest_delete: "publication_delete hidden",
   interest_div_input: "publication_div_input",
   interest_new_input: "publication_new_input",
   award_h3: "publication_h3",
@@ -960,9 +1064,9 @@ export const template_16_styles = {
   award_div_input: "publication_div_input",
   award_new_input: "publication_new_input",
   reference_h3: "publication_h3",
-  reference_ul: "reference_ul",
-  reference_li: "reference_li",
-  reference_div: "publication_div",
+  reference_ul: "reference_ul gap-3 mt-4",
+  reference_li: "reference_li bg-gray-200 rounded-md",
+  reference_div: "p-2",
   reference_h1: "achievement_h1",
   reference_h2: "publication_h2",
   reference_h2_1: "publication_h2_1",
@@ -988,205 +1092,6 @@ export const template_16_styles = {
   span2: "span2",
 };
 
-//summary styles
-
-const summary = {
-  summary_heading: "summary_heading",
-  summary_text: "summary_text",
-  publication_h3: "publication_h3",
-  span1: "span1",
-  span2: "span2",
-};
-//work Experience
-
-export const experience = {
-  experienceHeading_temp_2: "experienceHeading_temp_2",
-  achievement_div: "achievement_div",
-  achievement_h2: "achievement_h2",
-  achievement_h1: "achievement_h1",
-  achievement_save_btn: "achievement-save-btn",
-  achievement_delete_btn: "achievement-delete-btn",
-  span1: "span1",
-  span2: "span2",
-};
-
-//skills styles
-
-const skill = {
-  skill_heading: "skill_heading",
-  skill_ul: "skill_ul",
-  skill_li: "skill_li",
-  skill_New: "skill_New",
-  span1: "span1",
-  span2: "span2",
-  skill_input: "skill_input",
-};
-
-//publication styles
-
-const publicationStyles = {
-  publication_h3: "publication_h3",
-  publication_div: "publication_div",
-  publication_h2: "publication_h2",
-  publication_h2_1: "publication_h2_1",
-  publication_new_input: "publication_new_input",
-  publication_delete: "publication_delete",
-  publication_delete1: "publication_delete1 ",
-  publication_line: "publication_line",
-  publication_date: "publication_date",
-  span1: "span1",
-  span2: "span2",
-  publication_ul: "publication_ul",
-  publication_li: "publication_li",
-  publication_div_input: "publication_div_input",
-};
-export const projectStyles = {
-  project_h3: "publication_h3",
-  project_div: "publication_div",
-  project_h2: "publication_h2",
-  project_h2_1: "publication_h2_1",
-  project_new_input: "publication_new_input",
-  project_delete: "publication_delete",
-  project_delete1: "publication_delete1 ",
-  project_line: "publication_line",
-  project_date: "publication_date",
-  span1: "span1",
-  span2: "span2",
-  project_ul: "publication_ul",
-  project_li: "publication_li",
-  project_div_input: "publication_div_input",
-};
-
-const conditionStylePublication = {
-  span1_2: false,
-};
-//certification styles
-
-const certification = {
-  certification_h3: "publication_h3",
-  certification_div: "publication_div",
-  certification_h1: "achievement_h1",
-  certification_h2_1: "publication_h2_1",
-  certification_date: "publication_date",
-  certification_ul: "publication_ul",
-  certification_li: "publication_li",
-  certification_line: "publication_line",
-  certification_delete1: "publication_delete1",
-  certification_delete: "publication_delete",
-  certification_div_input: "publication_div_input",
-  certification_new_input: "publication_new_input",
-  span1: "span1",
-  span2: "span2",
-};
-
-//training styles
-
-const training = {
-  training_h3: "publication_h3",
-  training_div: "publication_div",
-  training_h1: "achievement_h1",
-  training_h2: "publication_h2",
-  training_h2_1: "publication_h2_1",
-  training_date: "publication_date",
-  training_ul: "publication_ul",
-  training_li: "publication_li",
-  training_line: "publication_line",
-  training_delete1: "publication_delete1",
-  training_delete: "publication_delete",
-  training_div_input: "publication_div_input",
-  training_new_input: "publication_new_input",
-  span1: "span1",
-  span2: "span2",
-};
-
-//interest styles
-
-const interest = {
-  interest_h3: "publication_h3",
-  interest_div: "publication_div",
-  interest_h1: "achievement_h1",
-  interest_h2: "publication_h2",
-  interest_h2_1: "publication_h2_1",
-  interest_date: "publication_date",
-  interest_ul: "publication_ul",
-  interest_li: "publication_li",
-  interest_line: "publication_line",
-  interest_delete1: "publication_delete1",
-  interest_delete: "publication_delete",
-  interest_div_input: "publication_div_input",
-  interest_new_input: "publication_new_input",
-  span1: "span1",
-  span2: "span2",
-};
-
-//award styles
-
-const award = {
-  award_h3: "publication_h3",
-  award_div: "publication_div",
-  award_h1: "achievement_h1",
-  award_h2: "publication_h2",
-  award_h2_1: "publication_h2_1",
-  award_date: "publication_date",
-  award_ul: "publication_ul",
-  award_li: "publication_li",
-  award_line: "publication_line",
-  award_delete1: "publication_delete1",
-  award_delete: "publication_delete",
-  award_div_input: "publication_div_input",
-  award_new_input: "publication_new_input",
-  span1: "span1",
-  span2: "span2",
-};
-
-// reference styles
-
-const reference = {
-  reference_h3: "publication_h3",
-  reference_ul: "reference_ul",
-  reference_li: "reference_li",
-  reference_div: "publication_div",
-  reference_h1: "achievement_h1",
-  reference_h2: "publication_h2",
-  reference_h2_1: "publication_h2_1",
-  reference_date: "publication_date",
-  reference_line: "publication_line",
-  reference_delete1: "publication_delete1",
-  reference_delete: "publication_delete",
-  reference_div_input: "publication_div_input",
-  reference_new_input: "publication_new_input",
-  span1: "span1",
-  span2: "span2",
-};
-
-//language styles
-
-const language = {
-  language_h3: "publication_h3",
-  language_ul: "reference_ul",
-  language_li: "reference_li",
-  language_div: "language_div ",
-  language_h1: "achievement_h1",
-  language_h2_1: "publication_h2_1",
-  language_date: "publication_date",
-  span1: "span1",
-  span2: "span2",
-};
-
-// education style
-
-const education = {
-  education_h3: "education_h3",
-  education_ul: "education_ul",
-  education_div: "education_div",
-  education_li: "education_li",
-  education_delete: "education_delete",
-  education_li_2: "education_li_2",
-  education_li_italic: "education_li_italic",
-  education_li_date: "education_li_date",
-  span1: "span1",
-  span2: "span2",
-};
 export const customStyle_4 = {
   borderTopBottom: false,
   borderBottom: true,
@@ -1196,6 +1101,7 @@ export const customStyle_2 = {
   borderTopBottom: false,
   borderBottom: false,
   centeredHeading: false,
+
 };
 export const customStyle_8 = { borderTopBottom: true, centeredHeading: true };
 export const customStyle_6 = { borderTopBottom: true, centeredHeading: false };
@@ -1221,21 +1127,4 @@ export const customStyle_16 = {
   centeredHeading: false,
   borderBottom: true,
   education_bg: "education_bg",
-};
-
-export {
-  publicationStyles,
-  conditionStylePublication,
-  certification,
-  training,
-  interest,
-  award,
-  reference,
-  language,
-  education,
-  summary,
-  skill,
-  header,
-  conditionStyleHeader,
-  contact,
 };
