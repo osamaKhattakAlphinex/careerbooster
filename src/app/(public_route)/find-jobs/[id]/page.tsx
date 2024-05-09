@@ -1,23 +1,23 @@
-"use client"
+"use client";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function ViewJobPage({ params }: { params: { id: string } }) {
-  const [singleJob,setSingleJob] = useState<any>({})
-  useEffect(()=>{
+  const [singleJob, setSingleJob] = useState<any>({});
+  useEffect(() => {
     if (params.id) {
       fetch(`/api/deo/?findOne=${params.id}`, {
         method: "GET",
       }).then(async (response) => {
         const res = await response.json();
         if (res.success) {
-          setSingleJob(res.data)
-          console.log(res.data)
+          setSingleJob(res.data);
+          console.log(res.data);
         }
       });
     }
-  },[params])
+  }, [params]);
   return (
     <>
       <div className="flex  items-center justify-center py-40 ">
@@ -32,10 +32,15 @@ export default function ViewJobPage({ params }: { params: { id: string } }) {
         <div className="flex border-b-[1px] border-white pb-4">
           <div className="flex items-center gap-10 text-lg ">
             <span>
-              Employer : <span className="font-medium"> {singleJob?.employer}</span>{" "}
+              Employer :{" "}
+              <span className="font-medium"> {singleJob?.employer}</span>{" "}
             </span>
             <span>
-              Date Posted : <span className="font-medium"> {getFormattedDate(singleJob?.updatedAt)}</span>
+              Date Posted :{" "}
+              <span className="font-medium">
+                {" "}
+                {getFormattedDate(singleJob?.updatedAt)}
+              </span>
             </span>
             <span className="flex items-center gap-2">
               <svg
@@ -61,24 +66,26 @@ export default function ViewJobPage({ params }: { params: { id: string } }) {
             </span>
           </div>
           <div className="flex ml-auto ">
+            {singleJob?.link && (
+              <Link
+                href={singleJob?.link}
+                className=" text-base rounded-md px-4 py-2 !text-gray-950 hover:!text-gray-100 bg-white hover:bg-transparent"
+              >
+                Apply now
+              </Link>
+            )}
+          </div>
+        </div>
+        <div className="content text-gray-100">{singleJob?.jobDescription}</div>
+        <div className="my-8 ">
+          {singleJob?.link && (
             <Link
               href={singleJob?.link}
               className=" text-base rounded-md px-4 py-2 !text-gray-950 hover:!text-gray-100 bg-white hover:bg-transparent"
             >
               Apply now
             </Link>
-          </div>
-        </div>
-        <div className="content text-gray-100">
-         {singleJob?.jobDescription}
-        </div>
-        <div className="my-8 ">
-          <Link
-            href={singleJob?.link}
-            className=" text-base rounded-md px-4 py-2 !text-gray-950 hover:!text-gray-100 bg-white hover:bg-transparent"
-          >
-            Apply now
-          </Link>
+          )}
         </div>
       </div>
     </>
