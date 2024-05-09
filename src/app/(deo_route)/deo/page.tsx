@@ -75,44 +75,56 @@ const Jobs = () => {
     }
   };
 
-  const viewMessageHandler = (rec: any) => {};
   const editJobHandler = (rec: any) => {
     setCurrentRecord(rec);
     setOpen(true);
   };
   const statusHandler = (rec: any, newStatus: string) => {
-    axios
-      .put(`/api/deo?jobId=${rec._id}`, {
-        status: newStatus,
-      })
-      .then((res: any) => {
-        if (res.data.success) {
-          fetchRecords();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    const c = window.confirm(
+      "Do you want to change the status to " + newStatus
+    );
+
+    if (c) {
+      axios
+        .put(`/api/deo?jobId=${rec._id}`, {
+          status: newStatus,
+        })
+        .then((res: any) => {
+          if (res.data.success) {
+            fetchRecords();
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
   };
   const featuredHandler = (featured: boolean, rec: any) => {
-    axios
-      .put(`/api/deo?jobId=${rec._id}`, {
-        featured: featured ? 1 : 0,
-      })
-      .then((res: any) => {
-        if (res.data.success) {
-          fetchRecords();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    const c = window.confirm(
+      "Do you want to change the featured status to " +
+        (featured ? "Yes" : "No")
+    );
+
+    if (c) {
+      axios
+        .put(`/api/deo?jobId=${rec._id}`, {
+          featured: featured ? 1 : 0,
+        })
+        .then((res: any) => {
+          if (res.data.success) {
+            fetchRecords();
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
   };
 
   const deleteJobHandler = (rec: any) => {
@@ -242,7 +254,7 @@ const Jobs = () => {
     {
       name: "Preview",
       type: "handler",
-      element: (rec: any) => viewMessageHandler(rec),
+      element: () => {},
       styles:
         "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 no-underline",
       icon: eyeIcon,
