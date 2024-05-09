@@ -139,7 +139,6 @@ const DataTable = <C, D>({
   const [datacolumns] = React.useState<any>(() => [...columns]);
 
   const [columnVisibility, setColumnVisibility] = React.useState({});
-
   const table = useReactTable({
     columns: columns as ColumnDef<D, any>[],
     data,

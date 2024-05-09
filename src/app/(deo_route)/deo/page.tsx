@@ -2,6 +2,7 @@
 
 import DataTable, { TableAction } from "@/components/admin/DataTable";
 import MessageViewer from "@/components/admin/messageViewer";
+import JobForm from "@/components/deo/JobForm";
 import { formatDate, getFormattedDate } from "@/helpers/getFormattedDateTime";
 import {
   EditIcon,
@@ -9,6 +10,7 @@ import {
   pencilIcon,
   trashIcon,
 } from "@/helpers/iconsProvider";
+
 import { createColumnHelper } from "@tanstack/react-table";
 import axios from "axios";
 import { useSession } from "next-auth/react";
@@ -36,6 +38,8 @@ type Job = {
 const Jobs = () => {
   const [records, setRecords] = useState<[] | any>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
+  const [currentRecord, setCurrentRecord] = useState<any>(null)
   const [deo, setDeo] = useState<any>({});
   const { data: session } = useSession();
 
@@ -58,7 +62,6 @@ const Jobs = () => {
       axios
         .get(`/api/deo?deoId=${deo._id}`)
         .then((res: any) => {
-          console.log(res);
           if (res.data.success) {
             setRecords(res.data.data);
           }
@@ -73,19 +76,74 @@ const Jobs = () => {
   };
 
   const viewMessageHandler = (rec: any) => {};
-  const statusHandler = (e: any, rec: any) => {
-    console.log(rec);
+  const editJobHandler = (rec: any) => {
+    setCurrentRecord(rec)
+    setOpen(true)
   };
+<<<<<<< HEAD
   const feturedHandler = (e: any, rec: any) => {
     debugger;
     console.log(e);
+=======
+  const statusHandler = (rec: any, newStatus: string) => {
+    axios
+      .put(`/api/deo?jobId=${rec._id}`, {
+        status: newStatus,
+      })
+      .then((res: any) => {
+        if (res.data.success) {
+          fetchRecords();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+  const featuredHandler = (featured: boolean, rec: any) => {
+    axios
+      .put(`/api/deo?jobId=${rec._id}`, {
+        featured: featured ? 1 : 0,
+      })
+      .then((res: any) => {
+        if (res.data.success) {
+          fetchRecords();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+>>>>>>> e1f1bada11ca1a9404a6f2a9874434c105f0b4b3
   };
 
+  const deleteJobHandler = (rec: any) => {
+    if (window.confirm("Are you sure to Delete this job ?")) {
+      axios
+        .delete(`/api/deo?jobId=${rec._id}`)
+        .then((res: any) => {
+          if (res.data.success) {
+            console.log("deleted");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          fetchRecords();
+        });
+    }
+  };
   const columnHelper = createColumnHelper<Job>();
 
   const columns = [
     columnHelper.accessor("jobTitle", {
       id: "jobTitle",
+<<<<<<< HEAD
       header: () => "Job Title",
       // cell: (info) => info.renderValue(),
     }),
@@ -93,11 +151,24 @@ const Jobs = () => {
       id: "location",
       header: () => "Location",
       // cell: (info) => info.renderValue(),
+=======
+      header: () => "jobTitle",
+      cell: (info: any) => info.renderValue(),
+    }),
+    columnHelper.accessor("location", {
+      id: "location",
+      header: () => "location",
+      cell: (info: any) => info.renderValue(),
+>>>>>>> e1f1bada11ca1a9404a6f2a9874434c105f0b4b3
     }),
     columnHelper.accessor("employer", {
       id: "employer",
       header: () => "employer",
+<<<<<<< HEAD
       // cell: (info) => info.renderValue(),
+=======
+      cell: (info: any) => info.renderValue(),
+>>>>>>> e1f1bada11ca1a9404a6f2a9874434c105f0b4b3
     }),
 
     columnHelper.accessor("link", {
@@ -136,19 +207,24 @@ const Jobs = () => {
     columnHelper.accessor("status", {
       id: "status",
       header: () => "status",
-      cell: (info) => (
-        <select
-          className="p-1 bg-transparent border rounded-md"
-          value={() => info.renderValue()}
-          onChange={(e) => statusHandler(e, info.renderValue())}
-        >
-          <option value="active">Active</option>
-          <option value="pending">Pending</option>
-          <option value="started">Started</option>
-          <option value="regected">Regected</option>
-          <option value="completed">Completed</option>
-        </select>
-      ),
+      cell: (info) => {
+        return (
+          <select
+            className="p-1 bg-transparent border rounded-md"
+            value={info.getValue()}
+            onChange={(e) => {
+              e.preventDefault();
+              statusHandler(info.cell.row.original, e.target.value);
+            }}
+          >
+            <option value="active">Active</option>
+            <option value="pending">Pending</option>
+            <option value="started">Started</option>
+            <option value="rejected">Rejected</option>
+            <option value="completed">Completed</option>
+          </select>
+        );
+      },
     }),
 
     columnHelper.accessor("featured", {
@@ -156,6 +232,7 @@ const Jobs = () => {
       header: () => "featured",
       cell: (info) => {
         return (
+<<<<<<< HEAD
           <label
             htmlFor="featured-job"
             className="grid p-1 bg-white place-content-center"
@@ -199,6 +276,15 @@ const Jobs = () => {
               checked={info.renderValue() === 1 ? true : false}
             />
           </label>
+=======
+          <input
+            type="checkbox"
+            onChange={(e) =>
+              featuredHandler(e.target.checked, info.cell.row.original)
+            }
+            checked={info.getValue() === 1}
+          />
+>>>>>>> e1f1bada11ca1a9404a6f2a9874434c105f0b4b3
         );
       },
     }),
@@ -214,7 +300,7 @@ const Jobs = () => {
     {
       name: "Edit",
       type: "handler",
-      element: (rec: any) => viewMessageHandler(rec),
+      element: (rec: any) => editJobHandler(rec),
       styles:
         "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline",
       icon: EditIcon,
@@ -230,7 +316,7 @@ const Jobs = () => {
     {
       name: "Delete",
       type: "handler",
-      element: (rec: any) => viewMessageHandler(rec),
+      element: (rec: any) => deleteJobHandler(rec),
       styles:
         "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 no-underline",
       icon: trashIcon,
@@ -244,7 +330,11 @@ const Jobs = () => {
   }, [session]);
   useEffect(() => {
     fetchRecords();
+<<<<<<< HEAD
   }, [deo]);
+=======
+  }, [deo, open]);
+>>>>>>> e1f1bada11ca1a9404a6f2a9874434c105f0b4b3
 
   return (
     <>
@@ -259,11 +349,18 @@ const Jobs = () => {
             </span>
           </div>
           <div>
-            <button className="px-4 py-2 text-sm font-semibold text-gray-500 border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+            <button
+              onClick={() => {
+                setCurrentRecord(null);
+                setOpen(true)
+              }}
+              className="px-4 py-2 text-sm font-semibold text-gray-500 border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            >
               Add New Job
             </button>
           </div>
         </div>
+        {open ? <JobForm setOpen={setOpen} deoId={deo._id} singleRec={currentRecord} /> : null}
         <div className="w-full mt-4 overflow-x-auto">
           {records?.length > 0 ? (
             <DataTable
