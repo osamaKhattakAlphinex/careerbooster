@@ -8,6 +8,8 @@ import axios from "axios";
 const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
   const [jobCategories, setJobCategories] = useState<any>([]);
   const [updateJob, setUpdateJob] = useState<boolean>(false);
+  const [rewritingJob, setRewritingJob] = useState(false);
+
   useEffect(() => {
     fetch("/api/deo/jobCategories", {
       method: "GET",
@@ -28,6 +30,31 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
       setUpdateJob(true);
     }
   }, []);
+  const rewriteJob = () => {
+    setRewritingJob(true);
+    fetch("/api/deo/rewriteJob", {
+      method: "POST",
+      body: JSON.stringify({ content: formik.values.description }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(async (resp: any) => {
+        const res = await resp.json();
+        if (res.success && res?.result) {
+          let myJSON;
+          if (typeof res.result === "object") {
+            myJSON = res.result;
+          } else {
+            myJSON = await JSON.parse(res.result);
+          }
+          formik.setFieldValue("description", myJSON.jobDescription);
+          formik.setFieldValue("skills", myJSON.skills);
+        }
+      })
+      .catch((error) => setRewritingJob(false))
+      .finally(() => setRewritingJob(false));
+  };
   const [newSkill, setNewSkill] = useState("");
   const formik = useFormik({
     initialValues: {
@@ -282,6 +309,12 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
             className="!bg-red-500 w-fit rounded-lg p-3 my-1 cursor-pointer"
           >
             {updateJob ? "Update Job" : "Save Job"}
+          </button>
+          <button
+            onClick={rewriteJob}
+            className="!bg-blue-500 w-fit rounded-lg p-3 my-1 cursor-pointer"
+          >
+            {rewritingJob ? " Please wait..." : "Rewrite Job with AI"}
           </button>
         </div>
       </form>
