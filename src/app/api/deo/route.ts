@@ -12,21 +12,30 @@ export async function GET(req: NextRequest) {
     const deoId: any = url.searchParams.get("deoId");
     const jobToShow: any = url.searchParams.get("jobs");
     const findOne: any = url.searchParams.get("findOne");
+    const query: string | null = url.searchParams.get("query");
     const limit = Number(url.searchParams.get("limit"));
     const page = Number(url.searchParams.get("page"));
     const skip = (page - 1) * limit;
     let jobs;
     let total;
-
+    let searchCondition: any = {};
     if (findOne) {
       jobs = await Job.findOne({ _id: findOne });
     } else if (jobToShow === "featured") {
-      jobs = await Job.find({ featured: 1 })
-        .sort({
-          createdAt: -1,
-        })
-        .limit(limit)
-        .skip(skip);
+      if (query !== "") {
+        searchCondition.jobTitle = { $regex: query, $options: "i" };
+        jobs = await Job.find(searchCondition)
+          .sort({ createdAt: -1 })
+          .limit(limit)
+          .skip(skip);
+      } else {
+        jobs = await Job.find({ featured: 1 })
+          .sort({
+            createdAt: -1,
+          })
+          .limit(limit)
+          .skip(skip);
+      }
       total = await Job.count();
     } else {
       jobs = await Job.find({ addedByUserId: deoId })

@@ -51,14 +51,15 @@ export default function JobCard({ query }: { query: string }) {
   useEffect(() => {
     fetchRecords(query);
   }, []);
+
   useEffect(() => {
     setRecords([]);
-    fetchRecords();
+    fetchRecords(query);
     const startIndex = (currentPage - 1) * limitOfRecords;
 
     setPageStart(startIndex);
     router.replace(pathname + `?r=${limitOfRecords}&p=${currentPage}`);
-  }, [limitOfRecords, currentPage]);
+  }, [limitOfRecords, currentPage,query]);
   useEffect(() => {
     const existingNumberOfRecords = searchParams?.get("r");
     const existingPage = searchParams?.get("p");
