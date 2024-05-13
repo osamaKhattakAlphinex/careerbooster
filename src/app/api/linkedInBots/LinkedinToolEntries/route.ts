@@ -63,7 +63,7 @@ export async function POST(req: any) {
           If there is no value Leave that field blank
       `;
         const response: any = await openai.chat.completions.create({
-          model: "gpt-4-turbo",
+          model: "gpt-3.5-turbo",
           messages: [
             {
               role: "user",

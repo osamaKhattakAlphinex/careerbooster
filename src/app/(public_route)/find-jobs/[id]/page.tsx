@@ -68,6 +68,7 @@ export default function ViewJobPage({ params }: { params: { id: string } }) {
           <div className="w-1/4 flex justify-end ml-auto ">
             {singleJob?.link && (
               <Link
+                target="_blank"
                 href={singleJob?.link}
                 className=" text-base rounded-md px-4 py-2 !text-gray-950 hover:!text-gray-100 bg-white hover:bg-transparent"
               >
@@ -80,6 +81,7 @@ export default function ViewJobPage({ params }: { params: { id: string } }) {
         <div className="my-8 ">
           {singleJob?.link && (
             <Link
+              target="_blank"
               href={singleJob?.link}
               className=" text-base rounded-md px-4 py-2 !text-gray-950 hover:!text-gray-100 bg-white hover:bg-transparent"
             >
