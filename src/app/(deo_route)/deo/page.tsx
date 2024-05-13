@@ -17,7 +17,6 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
 
 type Job = {
   _id: string;
