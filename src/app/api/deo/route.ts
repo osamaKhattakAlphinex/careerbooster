@@ -1,6 +1,5 @@
 import Job from "@/db/schemas/Job";
 import startDB from "@/lib/db";
-import { useSearchParams } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 
 import { getServerSession } from "next-auth";
@@ -24,10 +23,7 @@ export async function GET(req: NextRequest) {
     } else if (jobToShow === "featured") {
       if (query !== "") {
         searchCondition.jobTitle = { $regex: query, $options: "i" };
-        jobs = await Job.find(searchCondition)
-          .sort({ createdAt: -1 })
-          .limit(limit)
-          .skip(skip);
+        jobs = await Job.find(searchCondition).sort({ createdAt: -1 });
       } else {
         jobs = await Job.find({ featured: 1 })
           .sort({

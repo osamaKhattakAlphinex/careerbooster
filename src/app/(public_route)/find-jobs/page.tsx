@@ -12,7 +12,6 @@ export default function FindJobsPage({
   };
 }) {
   const query = searchParams?.query || "";
-  const currentPage = Number(searchParams?.page) || 1;
   return (
     <>
       <main className="flex-grow-1 pb-20 pt-[120px]">
