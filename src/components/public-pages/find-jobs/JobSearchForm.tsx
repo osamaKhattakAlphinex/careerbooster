@@ -1,16 +1,8 @@
 "use client";
-import Link from "next/link";
-import { useFormik } from "formik";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
-import path from "path";
 
 export default function JobSearchForm() {
-  const [loading, setLoading] = useState(false);
-  const [records, setRecords] = useState<[] | any>([]);
-  const [search, setSearch] = useState("");
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
