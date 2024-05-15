@@ -8,15 +8,18 @@ export default function FindJobsPage({
 }: {
   searchParams?: {
     query?: string;
+    location?: any;
     page?: string;
   };
 }) {
   const query = searchParams?.query || "";
+  const locationQuery = searchParams?.location || "";
+
   return (
     <>
       <main className="flex-grow-1 pb-20 pt-[120px]">
         <JobSearchForm />
-        <JobCard query={query} />
+        <JobCard query={query} locationQuery={locationQuery} />
       </main>
     </>
   );
