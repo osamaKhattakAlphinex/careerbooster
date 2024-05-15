@@ -6,7 +6,14 @@ import { useEffect, useState } from "react";
 import SinglejobCard from "./SingleJobCard";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-export default function JobCard({ query }: { query: string }) {
+export default function JobCard({
+  query,
+  locationQuery,
+}: {
+  query: string;
+  locationQuery: any;
+}) {
+  console.log(locationQuery);
   const [loading, setLoading] = useState(false);
   const [limitOfRecords, setLimitOfRecords] = useState(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -19,13 +26,13 @@ export default function JobCard({ query }: { query: string }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const fetchRecords = async (query?: string) => {
+  const fetchRecords = async (query?: string, locationQuery?: any) => {
     setLoading(true);
     setshowTableLoader(true);
     if (!loading) {
       axios
         .get(
-          `/api/deo?jobs=featured&query=${query}&limit=${limitOfRecords}&page=${currentPage}`
+          `/api/deo?jobs=featured&query=${query}&location=${locationQuery}&limit=${limitOfRecords}&page=${currentPage}`
         )
         .then((res: any) => {
           setLoadingId("");
@@ -48,17 +55,17 @@ export default function JobCard({ query }: { query: string }) {
     }
   };
   useEffect(() => {
-    fetchRecords(query);
+    fetchRecords(query, locationQuery);
   }, []);
 
   useEffect(() => {
     setRecords([]);
-    fetchRecords(query);
+    fetchRecords(query, locationQuery);
     const startIndex = (currentPage - 1) * limitOfRecords;
 
     setPageStart(startIndex);
     router.replace(pathname + `?r=${limitOfRecords}&p=${currentPage}`);
-  }, [limitOfRecords, currentPage, query]);
+  }, [limitOfRecords, currentPage, query, locationQuery]);
   useEffect(() => {
     const existingNumberOfRecords = searchParams?.get("r");
     const existingPage = searchParams?.get("p");
@@ -78,8 +85,8 @@ export default function JobCard({ query }: { query: string }) {
   return (
     <>
       {records.length > 0 && (
-        <div className="flex flex-row items-center justify-between   mx-14">
-          <div className="flex flex-row items-center gap-2">
+        <div className="md:flex md:flex-row xs:flex-col items-center justify-between   md:mx-14 xs:mx-4">
+          <div className="md:flex md:flex-row xs:flex-col items-center gap-2">
             <label htmlFor="userPerPage" className="text-sm font-medium">
               Number of records per page:
             </label>
@@ -100,7 +107,7 @@ export default function JobCard({ query }: { query: string }) {
               </>
             </select>
           </div>
-          <div className="flex justify-end mt-4 ">
+          <div className="md:flex xs:hidden md:justify-end mt-4 ">
             <nav aria-label="Page navigation example">
               <ul className="inline-flex -space-x-px">
                 <li>
@@ -178,7 +185,7 @@ export default function JobCard({ query }: { query: string }) {
           })
         : ""}
       {records.length > 0 && (
-        <div className="flex justify-end mt-4 mx-14">
+        <div className="flex justify-end mt-4 md:mx-14 xs:mx-4">
           <nav aria-label="Page navigation example">
             <ul className="inline-flex -space-x-px">
               <li>

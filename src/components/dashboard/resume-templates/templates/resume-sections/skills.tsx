@@ -16,6 +16,7 @@ type Props = {
   styles: any;
   customStyle?: any;
   rounded_style?: any;
+
 };
 const Skill = ({
   heading,

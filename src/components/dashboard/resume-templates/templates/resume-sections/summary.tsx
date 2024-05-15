@@ -18,7 +18,7 @@ const Summary = ({ summary, heading, customStyle, styles }: Props) => {
   const { updateSaveHook } = useUpdateAndSave();
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const { getSummary } = useGetSummary(setStreamedSummaryData);
-
+ 
   return (
     <>
       <span
@@ -75,6 +75,7 @@ const Summary = ({ summary, heading, customStyle, styles }: Props) => {
           />
         </div>
       </Toolbar>
+      
     </>
   );
 };

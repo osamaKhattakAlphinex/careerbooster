@@ -93,7 +93,7 @@ const CTASection = () => {
                         <Image
                           width={758}
                           height={712}
-                          src="/assets/images/screens/cover-letter-light.png"
+                          src="/assets/images/screens/cover-letterlight.png"
                           alt=""
                           className="img-fluid w-full h-full object-cover rounded-2xl p-2"
                         />

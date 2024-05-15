@@ -27,7 +27,7 @@ const SubAboutGenerator = () => {
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [option, setOption] = useState<string>("about");
   const [showPopup, setShowPopup] = useState(false);
-  const { setAvailableCredits, abortController,setAbortController } = useAppContext();
+  const { setAvailableCredits, abortController,setAbortController, outOfCredits, setOutOfCredits } = useAppContext();
   const [isAboutCopied, setIsAboutCopied] = useState<boolean>(false);
   useEffect(() => {
     return (() => {
@@ -56,7 +56,6 @@ const SubAboutGenerator = () => {
   const { getUserDataIfNotExists: getUserData } = useGetUserData(); //using hook function with different name/alias
   const creditLimits = useSelector((state: any) => state.creditLimits);
   const [isEditing, setIsEditing] = useState(false);
-  const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
   const { tourBotRef, availableCreditsRef } = useTourContext();
 
   useEffect(() => {
@@ -597,7 +596,7 @@ const SubAboutGenerator = () => {
         </div>
       )}
       {outOfCredits && (
-        <TourBot config={tourBotConfig2} setOutOfCredits={setOutOfCredits} />
+        <TourBot config={tourBotConfig2} />
       )}
     </>
   );

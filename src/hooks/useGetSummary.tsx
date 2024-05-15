@@ -10,7 +10,6 @@ import { useAppContext } from "@/context/AppContext";
 
 const useGetSummary = (
   setStreamedSummaryData: any,
-  setOutOfCredits: any = ""
 ) => {
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
@@ -19,7 +18,7 @@ const useGetSummary = (
   const creditLimits = useSelector((state: any) => state.creditLimits);
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const path = usePathname();
-  const {abortController} = useAppContext()
+  const {abortController, setOutOfCredits} = useAppContext()
   useEffect(() => {
     if (userData && userData?.email) {
       setAiInputUserData({
@@ -40,7 +39,6 @@ const useGetSummary = (
     // dispatch(setLoadingState("summary"));
     setStreamedSummaryData("");
     dispatch(setSummary(""));
-    console.log(resumeData);
     return fetch("/api/resumeBots/getBasicInfo", {
       method: "POST",
       body: JSON.stringify({

@@ -27,7 +27,7 @@ const SubKeywordsGenerator = () => {
   const [showPopup, setShowPopup] = useState(false);
 
   const [aiInputUserData, setAiInputUserData] = useState<any>();
-  const { setAvailableCredits, abortController, setAbortController } = useAppContext();
+  const { setAvailableCredits, abortController, setAbortController,outOfCredits, setOutOfCredits } = useAppContext();
   const [isEditing, setIsEditing] = useState(false);
 
   const [isKeywordsCopied, setIsKeywordsCopied] = useState<boolean>(false);
@@ -58,7 +58,6 @@ const SubKeywordsGenerator = () => {
   const userData = useSelector((state: any) => state.userData);
   const linkedinKeywords = useSelector((state: any) => state.linkedinKeywords);
   const creditLimits = useSelector((state: any) => state.creditLimits);
-  const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
   const { tourBotRef, availableCreditsRef } = useTourContext();
 
   const handleClick = () => {
@@ -515,7 +514,7 @@ const SubKeywordsGenerator = () => {
         </div>
       )}
       {outOfCredits && (
-        <TourBot config={tourBotConfig2} setOutOfCredits={setOutOfCredits} />
+        <TourBot config={tourBotConfig2} />
       )}
     </>
   );

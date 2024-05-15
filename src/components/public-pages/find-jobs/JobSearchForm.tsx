@@ -1,19 +1,15 @@
 "use client";
-import Link from "next/link";
-import { useFormik } from "formik";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
-import path from "path";
+import { useDebouncedCallback } from "use-debounce";
 
 export default function JobSearchForm() {
-  const [loading, setLoading] = useState(false);
-  const [records, setRecords] = useState<[] | any>([]);
-  const [search, setSearch] = useState("");
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
-  const handleserach = (term: string) => {
+  // Inside the Search Component...
+  const handleSearch = useDebouncedCallback((term) => {
+    console.log(`Searching... ${term}`);
+
     const params = new URLSearchParams(searchParams.toString());
     if (term) {
       params.set("query", term);
@@ -21,25 +17,37 @@ export default function JobSearchForm() {
       params.delete("query");
     }
     replace(`${pathname}?${params.toString()}`);
-  };
+  }, 500);
+  // Debounced callback for location search
+  const handleLocationSearch = useDebouncedCallback((term) => {
+    console.log(`Searching location... ${term}`);
+
+    const params = new URLSearchParams(searchParams.toString());
+    if (term) {
+      params.set("location", term);
+    } else {
+      params.delete("location");
+    }
+    replace(`${pathname}?${params.toString()}`);
+  }, 500);
   return (
     <>
-      <section id="JobSearchForm" className="mb-10">
+      <section id="JobSearchForm" className="mb-10 xs:px-4">
         <h1 className="dark:text-gray-100 text-gray-950 font-extrabold text-[24px] text-center mb-4">
           Find Your Next Career Job
         </h1>
         <div
-          className="form rounded-md dark:bg-black bg-gray-100 shadow-md mx-20 "
+          className="form rounded-md dark:bg-black bg-gray-100 shadow-md md:mx-20 "
           // style={{ width: "max-content" }}
         >
           <form
             action=""
-            className="flex gap-6 px-10 py-6 mx-auto w-full"
+            className="md:flex xs:flex-col xs:gap-4 md:flex-row gap-6 md:px-10 py-6 mx-auto w-full"
             onSubmit={(e) => {
               e.preventDefault();
             }}
           >
-            <div className="group flex flex-row justify-start items-center gap-3 p-3 border-[1px] border-gray-600 rounded-lg w-1/2 dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff]">
+            <div className="group flex flex-row justify-start items-center gap-3 p-3 border-[1px] border-gray-600 rounded-lg md:w-1/2 xs:w-full dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff] xs:mb-4">
               <span className="text-gray-800 dark:text-gray-100">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -60,13 +68,13 @@ export default function JobSearchForm() {
                 type="text"
                 id="name"
                 name="name"
-                onChange={(e) => handleserach(e.target.value)}
+                onChange={(e) => handleSearch(e.target.value)}
                 defaultValue={searchParams.get("query")?.toString()}
                 className="w-full text-base text-gray-900 bg-transparent outline-none dark:text-gray-100"
                 placeholder="Job title or search keyword"
               />
             </div>
-            <div className="group flex flex-row justify-start items-center gap-3 p-3 border-[1px] border-gray-600 rounded-lg w-1/2 dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff]">
+            <div className="group flex flex-row justify-start items-center gap-3 p-3 border-[1px] border-gray-600 rounded-lg md:w-1/2 xs:w-full dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff] xs:mb-4">
               <span className="text-gray-800 dark:text-gray-100">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -94,6 +102,8 @@ export default function JobSearchForm() {
                 name="name"
                 className="w-full text-base text-gray-900 bg-transparent outline-none dark:text-gray-100"
                 placeholder="Location"
+                onChange={(e) => handleLocationSearch(e.target.value)}
+                defaultValue={searchParams.get("location")?.toString()}
               />
             </div>
           </form>

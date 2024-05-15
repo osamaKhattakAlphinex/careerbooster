@@ -370,6 +370,23 @@ const Header = () => {
                 <Link
                   className={`
                          ${
+                           active === "find-jobs"
+                             ? "text-[#6A4DFF] font-bold   dark:text-[#e6f85e]  "
+                             : " dark:text-gray-100 text-gray-900 font-semibold "
+                         }
+                   text-xl  capitalize no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	`}
+                  href="/find-jobs"
+                >
+                  Find Jobs
+                </Link>
+              </li>
+              <li
+                className="px-3 mt-0 "
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Link
+                  className={`
+                         ${
                            active === "pricing"
                              ? "text-[#6A4DFF] font-bold   dark:text-[#e6f85e]  "
                              : " dark:text-gray-100 text-gray-900 font-semibold "

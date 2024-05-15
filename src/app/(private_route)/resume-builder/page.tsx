@@ -67,24 +67,20 @@ const ResumeBuilder = () => {
     height: "25px",
   };
 
-  const creditsInfoRef: React.MutableRefObject<any> = useRef(null);
-
   const { resumeElementRef, tourBotRef, historyCardRef, availableCreditsRef } =
     useTourContext();
-
 
 
   const { getUserDataIfNotExists } = useGetUserData();
   const componentRef = useRef<any>(null);
   const { data: session } = useSession();
-  const { abortController,setAbortController } = useAppContext();
+  const { abortController,setAbortController, outOfCredits } = useAppContext();
   // Local States
   const [finished, setFinished] = useState<boolean>(false);
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const [streamedJDData, setStreamedJDData] = useState<any>("");
   const [streamedPublicationData, setStreamedPublicationData] =
     useState<any>("");
-  const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [resumeGenerated, setResumeGenerated] = useState<boolean>(false);
@@ -102,7 +98,7 @@ const ResumeBuilder = () => {
       setAbortController(new AbortController())
     });
   }, []);
-  const { getSummary } = useGetSummary(setStreamedSummaryData, setOutOfCredits);
+  const { getSummary } = useGetSummary(setStreamedSummaryData);
 
   // const getConsent = () => {
   //   if (creditsInfoRef.current) {
@@ -738,7 +734,6 @@ const ResumeBuilder = () => {
                     streamedJDData={streamedJDData}
                     setStreamedJDData={setStreamedJDData}
                     setStreamedSummaryData={setStreamedSummaryData}
-                    setOutOfCredits={setOutOfCredits}
                   />
                 </div>
               </div>
@@ -753,7 +748,6 @@ const ResumeBuilder = () => {
       </div>
       <TourBot
         config={outOfCredits ? tourBotConfig2 : tourBotConfig}
-        setOutOfCredits={setOutOfCredits}
       />
     </>
   );
