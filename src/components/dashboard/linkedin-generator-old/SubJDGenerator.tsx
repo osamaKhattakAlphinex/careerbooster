@@ -30,11 +30,10 @@ const SubJDGenerator = () => {
   const { data: session } = useSession();
   const [streamedData, setStreamedData] = useState("");
   const [showPopup, setShowPopup] = useState(false);
-  const { setAvailableCredits, abortController, setAbortController } = useAppContext();
+  const { setAvailableCredits, abortController, setAbortController, outOfCredits, setOutOfCredits } = useAppContext();
   const [existingJDId, setExistingJDId] = useState("");
   const [isEditing, setIsEditing] = useState({ isEdit: false, editIndex: -1 });
   const { tourBotRef, availableCreditsRef } = useTourContext();
-  const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
 
   const [generatedWorkExperience, setGeneratedWorkExperience] = useState<
     string[]
@@ -605,7 +604,7 @@ const SubJDGenerator = () => {
           </div>
         )}
         {outOfCredits && (
-          <TourBot config={tourBotConfig2} setOutOfCredits={setOutOfCredits} />
+          <TourBot config={tourBotConfig2} />
         )}
       </>
     </>

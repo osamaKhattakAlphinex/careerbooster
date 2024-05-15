@@ -23,8 +23,6 @@ const PersonalizedEmailBot = () => {
   const componentSecondRef = useRef<any>(null);
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const { data: session } = useSession();
-  const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
-
   const [show, setShow] = useState<boolean>(false);
   const [firstShow, setFirstShow] = useState<boolean>(false);
   const [secondShow, setSecondShow] = useState<boolean>(false);
@@ -46,7 +44,7 @@ const PersonalizedEmailBot = () => {
   const [setSelectedResumeId, setSetSelectedResumeId] = useState<string>("");
   const [jobDescription, setJobDescription] = useState<string>("");
   const [showPopup, setShowPopup] = useState(false);
-  const { setAvailableCredits,abortController, setAbortController } = useAppContext();
+  const { setAvailableCredits,abortController, setAbortController,outOfCredits, setOutOfCredits } = useAppContext();
   const [emailLoading, setEmailLoading] = useState<boolean>(false);
   const [firstFollowUpLoading, setFirstFollowUpLoading] =
     useState<boolean>(false);
@@ -931,7 +929,6 @@ const PersonalizedEmailBot = () => {
       </div>
       <TourBot
         config={outOfCredits ? tourBotConfig2 : tourBotConfig}
-        setOutOfCredits={setOutOfCredits}
       />
     </>
   );

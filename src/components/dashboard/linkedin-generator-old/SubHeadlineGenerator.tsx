@@ -26,9 +26,8 @@ const SubHeadlineGenerator = () => {
   const [aiInputUserData, setAiInputUserData] = useState<any>(null);
   const [showPopup, setShowPopup] = useState(false);
   const componentRef = useRef<any>();
-  const { setAvailableCredits, abortController,setAbortController } = useAppContext();
+  const { setAvailableCredits, abortController,setAbortController, outOfCredits, setOutOfCredits } = useAppContext();
   const [isEditing, setIsEditing] = useState(false);
-  const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
   const [isHeadlineCopied, setIsHeadlineCopied] = useState<boolean>(false);
   useEffect(() => {
     return (() => {
@@ -505,7 +504,7 @@ const SubHeadlineGenerator = () => {
         </div>
       )}
       {outOfCredits && (
-        <TourBot config={tourBotConfig2} setOutOfCredits={setOutOfCredits} />
+        <TourBot config={tourBotConfig2}/>
       )}
     </>
   );
