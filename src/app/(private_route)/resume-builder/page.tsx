@@ -73,7 +73,6 @@ const ResumeBuilder = () => {
     useTourContext();
 
 
-
   const { getUserDataIfNotExists } = useGetUserData();
   const componentRef = useRef<any>(null);
   const { data: session } = useSession();

@@ -223,7 +223,6 @@ export async function POST(req: any) {
             userData
           )} and write exective summary`;
 
-          console.log(resumeType, inputPrompt);
         }
 
         const response: any = await openai.chat.completions.create({

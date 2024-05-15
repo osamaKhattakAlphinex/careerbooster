@@ -12,13 +12,14 @@ type Props = {
   summary: any;
   customStyle?: any;
   styles: any;
+  setOutOfCredits:any;
 };
 
-const Summary = ({ summary, heading, customStyle, styles }: Props) => {
+const Summary = ({ summary, heading, customStyle, styles,setOutOfCredits }: Props) => {
   const { updateSaveHook } = useUpdateAndSave();
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
-  const { getSummary } = useGetSummary(setStreamedSummaryData);
-
+  const { getSummary } = useGetSummary(setStreamedSummaryData, setOutOfCredits);
+ 
   return (
     <>
       <span
@@ -75,6 +76,7 @@ const Summary = ({ summary, heading, customStyle, styles }: Props) => {
           />
         </div>
       </Toolbar>
+      
     </>
   );
 };
