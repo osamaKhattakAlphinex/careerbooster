@@ -1,5 +1,5 @@
 "use client";
-import { memo, useEffect, useState } from "react";
+import { memo, useState } from "react";
 import React from "react";
 import { useSelector } from "react-redux";
 import { ColorResult } from "react-color";
@@ -22,8 +22,6 @@ import {
   template_2_styles,
 } from "@/helpers/templateStylesObj";
 import Project from "./resume-sections/project";
-import TourBot from "../../TourBot";
-import { useTourContext } from "@/context/TourContext";
 
 const ResumeTemplate2 = () => {
   const resume = useSelector((state: any) => state.resume);
