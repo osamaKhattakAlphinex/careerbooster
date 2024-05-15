@@ -20,10 +20,10 @@ export default function SinglejobCard({
 }: Props) {
   // const [seeMore, se]
   return (
-    <div className="card flex  dark:border dark:border-gray-100 dark:bg-black bg-gray-100  mx-14 px-8 py-10 rounded-md mt-4 shadow-lg">
+    <div className="card md:flex md:flex-row xs:flex-col  dark:border dark:border-gray-100 dark:bg-black bg-gray-100  md:mx-14 md:px-8 py-10 rounded-md mt-4 shadow-lg xs:mx-4 xs:px-2">
       <div className="flex flex-col gap-6">
-        <div className="flex gap-6 items-center">
-          <h2 className="dark:text-gray-100 text-gray-950 text-xl font-bold">
+        <div className="md:flex md:flex-row xs:flex-col gap-6 items-center">
+          <h2 className="dark:text-gray-100 text-gray-950 text-xl font-bold xs:mb-3">
             {jobTitle}
           </h2>
           <div className="flex gap-4 items-center">
@@ -49,31 +49,32 @@ export default function SinglejobCard({
             </div>
           </div>
         </div>
-        <div className="flex dark:text-gray-100 text-gray-950 gap-3 items-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-5 h-5"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-            />
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
-            />
-          </svg>
-          <span className="country dark:text-gray-100 text-gray-950 font-medium text-base">
+        <div className="md:flex md:flex-row xs:flex-col dark:text-gray-100 text-gray-950 md:gap-3 xs:gap-4 items-center">
+          <span className="country flex flex-row md:items-center xs:items-start dark:text-gray-100 text-gray-950 font-medium text-base xs:gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-5 h-5"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+              />
+            </svg>
             {location}
           </span>
-          |
-          <span className="flex gap-2 items-center dark:text-gray-100 text-gray-950 font-medium text-base">
+          <span className="text-gray-100 md:block xs:hidden">|</span>
+
+          <span className="flex gap-2 md:items-center xs:items-start dark:text-gray-100 text-gray-950 font-medium text-base">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -93,7 +94,7 @@ export default function SinglejobCard({
           </span>
         </div>
         <div className="description flex flex-wrap">
-          <p className="dark:text-gray-100 text-gray-950">
+          <p className="dark:text-gray-100 text-gray-950 text-sm">
             {jobDescription
               .replace(/(<([^>]+)>)/gi, "")
               .replaceAll("&nbsp;", "")
@@ -103,10 +104,10 @@ export default function SinglejobCard({
             <br />
           </p>
         </div>
-        <div className="buttons flex items-center gap-2 ml-auto">
+        <div className="buttons flex items-center gap-2 md:ml-auto xs:mx-auto md:mx-0 xs:justify-center md:justify-end ">
           <Link
             href={`/find-jobs/${jobId}`}
-            className="flex items-center gap-2 w-fit rounded-md dark:bg-gray-100 dark:text-gray-950 bg-gray-950 text-gray-100 font-semibold px-3 text-base py-1 dark:hover:bg-transparent dark:hover:text-gray-100  "
+            className="flex items-center gap-2 w-fit rounded-md dark:bg-gray-100 dark:text-gray-950 bg-gray-950 text-gray-100 font-semibold px-3 md:text-base xs:text-sm py-1 dark:hover:bg-transparent dark:hover:text-gray-100  "
           >
             {eyeIcon}
             View Job
@@ -114,7 +115,7 @@ export default function SinglejobCard({
           <Link
             href={applyJobLink}
             target="_blank"
-            className="flex items-center gap-2 w-fit rounded-md dark:bg-gray-100 dark:text-gray-950 bg-gray-950 text-gray-100 font-semibold px-3 text-base py-1 dark:hover:bg-transparent dark:hover:text-gray-100 "
+            className="flex items-center gap-2 w-fit rounded-md dark:bg-gray-100 dark:text-gray-950 bg-gray-950 text-gray-100 font-semibold px-3 md:text-base xs:text-sm py-1 dark:hover:bg-transparent dark:hover:text-gray-100 "
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

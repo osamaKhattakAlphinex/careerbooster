@@ -11,19 +11,38 @@ export async function GET(req: NextRequest) {
     const deoId: any = url.searchParams.get("deoId");
     const jobToShow: any = url.searchParams.get("jobs");
     const findOne: any = url.searchParams.get("findOne");
-    const query: string | null = url.searchParams.get("query");
+    const jobTitlequery: string | null = url.searchParams.get("query");
+    const jobLocationquery: string | null = url.searchParams.get("location");
     const limit = Number(url.searchParams.get("limit"));
     const page = Number(url.searchParams.get("page"));
     const skip = (page - 1) * limit;
+
     let jobs;
     let total;
     let searchCondition: any = {};
     if (findOne) {
       jobs = await Job.findOne({ _id: findOne });
     } else if (jobToShow === "featured") {
-      if (query !== "") {
-        searchCondition.jobTitle = { $regex: query, $options: "i" };
-        jobs = await Job.find(searchCondition).sort({ createdAt: -1 });
+      if (jobTitlequery !== "" || jobLocationquery !== "") {
+        if (jobTitlequery !== "" && jobLocationquery == "") {
+          searchCondition.jobTitle = { $regex: jobTitlequery, $options: "i" };
+          jobs = await Job.find(searchCondition).sort({ createdAt: -1 });
+        } else if (jobTitlequery == "" && jobLocationquery !== "") {
+          searchCondition.location = {
+            $regex: jobLocationquery,
+            $options: "i",
+          };
+          jobs = await Job.find(searchCondition).sort({ createdAt: -1 });
+        }
+        // else {
+        //   console.log("inside else");
+        //   searchCondition.jobTitle = { $regex: jobTitlequery, $options: "i" };
+        //   searchCondition.location = {
+        //     $regex: jobLocationquery,
+        //     $options: "i",
+        //   };
+        //   jobs = await Job.find(searchCondition).sort({ createdAt: -1 });
+        // }
       } else {
         jobs = await Job.find({ featured: 1 })
           .sort({
