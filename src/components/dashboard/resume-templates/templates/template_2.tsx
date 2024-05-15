@@ -27,30 +27,7 @@ import { useTourContext } from "@/context/TourContext";
 
 const ResumeTemplate2 = () => {
   const resume = useSelector((state: any) => state.resume);
-  const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
-  const { availableCreditsRef, tourBotRef } = useTourContext();
-  const tourBotConfig2 = {
-    name: "resumeBuilder",
-    audios: [
-      {
-        url: "/OutOfCredits.mp3",
-        for: "history",
-      },
-    ],
-    toolRefs: [
-      {
-        ref: availableCreditsRef,
-        for: "history",
-      },
-    ],
-  };
-  useEffect(() => {
-    if (outOfCredits) {
-      setTimeout(() => {
-        tourBotRef?.current?.click();
-      }, 500);
-    }
-  }, [outOfCredits]);
+ 
   const [color, setColor] = useState("#e9e8e8");
   const [color_second, setColor_second] = useState("#e9e8e8");
 
@@ -89,7 +66,6 @@ const ResumeTemplate2 = () => {
             summary={resume.summary}
             styles={template_2_styles}
             customStyle={customStyle_2}
-            setOutOfCredits={setOutOfCredits}
           />
         </div>
         {/* Skills  */}
@@ -214,9 +190,7 @@ const ResumeTemplate2 = () => {
           )}
         </div>
       </div>
-      {outOfCredits && (
-        <TourBot config={tourBotConfig2} setOutOfCredits={setOutOfCredits} />
-      )}
+      
     </>
   );
 };

@@ -9,6 +9,8 @@ interface AppContexts {
   setAbortController: any;
   setIsSidebar: any;
   isSidebar: boolean;
+  outOfCredits: boolean;
+  setOutOfCredits:any;
   // Add more references as needed
 }
 
@@ -24,6 +26,7 @@ const AppContextsProvider: React.FC<AppContextsProvider> = ({ children }) => {
   // Create refs for each reference
   const [availableCredits, setAvailableCredits] = useState<boolean>(false);
   const [isSidebar, setIsSidebar] = useState<boolean>(false);
+  const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
   const [abortController, setAbortController] =
     useState<AbortController | null>(new AbortController());
   // Define the context value
@@ -34,6 +37,8 @@ const AppContextsProvider: React.FC<AppContextsProvider> = ({ children }) => {
     setAvailableCredits,
     abortController,
     setAbortController,
+    outOfCredits,
+    setOutOfCredits
   };
 
   return (
@@ -44,7 +49,7 @@ const AppContextsProvider: React.FC<AppContextsProvider> = ({ children }) => {
 };
 
 // Create a custom hook to access the context values
-const useAppContext = () => {
+const useAppContext:any = () => {
   const context = useContext(AppContext);
   if (!context) {
     throw new Error("useAppContext must be used within a TourContextProvider");
