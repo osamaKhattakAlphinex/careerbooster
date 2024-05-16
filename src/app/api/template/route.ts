@@ -3,10 +3,9 @@ import puppeteer from "puppeteer-core";
 import puppeteerDev from "puppeteer";
 import chromium from "@sparticuz/chromium";
 export async function POST(req: any) {
-  try {
+  // try {
     const data = await req.json();
     const html = data.htmlToDoc;
-    // console.log(html);
     let browser;
 
 
@@ -46,10 +45,10 @@ export async function POST(req: any) {
     });
     await browser.close();
     return NextResponse.json({ result: pdf, success: true }, { status: 200 });
-  } catch (error) {
-    return NextResponse.json(
-      { result: "Error Occurred", success: false },
-      { status: 500 }
-    );
-  }
+  // } catch (error) {
+  //   return NextResponse.json(
+  //     { result: "Error Occurred", success: false },
+  //     { status: 500 }
+  //   );
+  // }
 }
