@@ -12,13 +12,12 @@ type Props = {
   summary: any;
   customStyle?: any;
   styles: any;
-  setOutOfCredits:any;
 };
 
-const Summary = ({ summary, heading, customStyle, styles,setOutOfCredits }: Props) => {
+const Summary = ({ summary, heading, customStyle, styles }: Props) => {
   const { updateSaveHook } = useUpdateAndSave();
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
-  const { getSummary } = useGetSummary(setStreamedSummaryData, setOutOfCredits);
+  const { getSummary } = useGetSummary(setStreamedSummaryData);
  
   return (
     <>

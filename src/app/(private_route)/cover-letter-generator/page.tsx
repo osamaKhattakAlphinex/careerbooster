@@ -31,8 +31,6 @@ export default function CoverLetterPage() {
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session } = useSession();
-  const [outOfCredits, setOutOfCredits] = useState<boolean>(false);
-
   const [show, setShow] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>("profile"); // type
   const [streamedData, setStreamedData] = useState<string>("");
@@ -43,7 +41,7 @@ export default function CoverLetterPage() {
   const [jobDescription, setJobDescription] = useState<string>("");
   const [isEditing, setIsEditing] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-  const { setAvailableCredits,abortController,setAbortController } = useAppContext();
+  const { setAvailableCredits,abortController,setAbortController, outOfCredits, setOutOfCredits } = useAppContext();
   const [confirmationModal, setConfirmationModal] = useState(false);
   const creditLimits = useSelector((state: any) => state.creditLimits);
   const router = useRouter();
@@ -838,7 +836,6 @@ export default function CoverLetterPage() {
       )}
       <TourBot
         config={outOfCredits ? tourBotConfig2 : tourBotConfig}
-        setOutOfCredits={setOutOfCredits}
       />
     </>
   );

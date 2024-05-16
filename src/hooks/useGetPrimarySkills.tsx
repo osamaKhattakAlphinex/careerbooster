@@ -10,10 +10,9 @@ import { useAppContext } from "@/context/AppContext";
 
 const useGetPrimarySkills = (
   setRegenerating: any,
-  setOutOfCredits: any = ""
 ) => {
   const dispatch = useDispatch();
-  const {abortController} = useAppContext();
+  const {abortController, setOutOfCredits} = useAppContext();
   const userData = useSelector((state: any) => state.userData);
   const resumeData = useSelector((state: any) => state.resume);
   const { getUserDataIfNotExists } = useGetUserData();

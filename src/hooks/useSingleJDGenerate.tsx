@@ -14,7 +14,6 @@ import { useAppContext } from "@/context/AppContext";
 
 const useSingleJDGenerate = (
   setStreamedJDData: any,
-  setOutOfCredits: any = ""
 ) => {
   const { getUserDataIfNotExists } = useGetUserData();
   const dispatch = useDispatch();
@@ -24,7 +23,7 @@ const useSingleJDGenerate = (
   const { getCreditLimitsIfNotExists } = useGetCreditLimits();
   let oneWorkExpIndex: number;
   const { saveResumeToDB } = useSaveResumeToDB();
-  const {abortController}= useAppContext()
+  const {abortController,setOutOfCredits}= useAppContext()
   const getOneWorkExperienceNew = async (experience: any) => {
     dispatch(setWorkExperience(""));
     let temp = "";

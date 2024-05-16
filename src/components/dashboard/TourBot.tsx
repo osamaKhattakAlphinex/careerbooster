@@ -6,6 +6,7 @@ import { useTourContext } from "@/context/TourContext";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import { useSelector } from "react-redux";
 import { crossIconSmall } from "@/helpers/iconsProvider";
+import { useAppContext } from "@/context/AppContext";
 interface TooltipProps {
   text: string;
   children: React.ReactNode;
@@ -47,7 +48,8 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, audioPlayed }) => {
 };
 
 // const DashboardBot: React.FC<DashboardBotProps> = ({ firstName, lastName }) => {
-const TourBot = ({ config, setOutOfCredits }: any) => {
+const TourBot = ({ config }: any) => {
+  const {setOutOfCredits} = useAppContext()
   const userData = useSelector((state: any) => state.userData);
   const [toolRefs, setToolRefs] = useState<any>(null);
   const [showBot, setShowBot] = useState(true);

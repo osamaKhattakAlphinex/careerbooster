@@ -46,13 +46,11 @@ const ResumeTemplate1 = ({
   setStreamedSummaryData,
   streamedJDData,
   setStreamedJDData,
-  setOutOfCredits,
-}: {
+  }: {
   streamedSummaryData: string;
   streamedJDData: string;
   setStreamedJDData: any;
   setStreamedSummaryData: any;
-  setOutOfCredits: any;
 }) => {
   const resume = useSelector((state: any) => state.resume);
 
@@ -69,18 +67,17 @@ const ResumeTemplate1 = ({
   const [regenerating, setRegenerating] = useState(false);
   const { getPrimarySkills } = useGetPrimarySkills(
     setRegenerating,
-    setOutOfCredits
   );
   const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
     number | null
   >(null);
 
   // const [streamedSummaryData, setStreamedSummaryData] = useState("");
-  const { getSummary } = useGetSummary(setStreamedSummaryData, setOutOfCredits);
+  const { getSummary } = useGetSummary(setStreamedSummaryData);
   // const [streamedJDData, setStreamedJDData] = useState<any>("");
   const { getOneWorkExperienceNew } = useSingleJDGenerate(
-    setStreamedJDData,
-    setOutOfCredits
+    setStreamedJDData
+
   );
 
   const {
