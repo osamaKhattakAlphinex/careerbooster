@@ -149,7 +149,7 @@ const Header = () => {
                   Use cases
                 </Link>
               </li>
-              <li className="px-3 mt-0 ">
+              {/* <li className="px-3 mt-0 ">
                 <Link
                   className={`
                          ${
@@ -162,7 +162,7 @@ const Header = () => {
                 >
                   Find Jobs
                 </Link>
-              </li>
+              </li> */}
               <li className="px-3 mt-0 ">
                 <Link
                   className={`
@@ -363,7 +363,7 @@ const Header = () => {
                   Use cases
                 </Link>
               </li>
-              <li
+              {/* <li
                 className="px-3 mt-0 "
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -379,7 +379,7 @@ const Header = () => {
                 >
                   Find Jobs
                 </Link>
-              </li>
+              </li> */}
               <li
                 className="px-3 mt-0 "
                 onClick={() => setMobileMenuOpen(false)}

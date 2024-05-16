@@ -6,7 +6,7 @@ export async function POST(req: any) {
   // try {
     const data = await req.json();
     const html = data.htmlToDoc;
-    let browser;
+    let browser: any;
 
 
     if (process.env.NEXT_APP_STATE === "Development") {
@@ -19,32 +19,35 @@ export async function POST(req: any) {
         headless: chromium.headless,
       });
     }
+    console.log(browser.isConnected());
+    if(browser && browser.isConnected()){
 
-    const page = await browser.newPage();
-
-    const widthInPixels = Math.floor(3.5 * 96);
-    const heightInPixels = Math.floor(2 * 96);
-
-    const htmlContent = html;
-    await page.setViewport({
-      width: widthInPixels,
-      height: heightInPixels,
-    });
-    await page.setContent(htmlContent);
-    const pdf = await page.pdf({
-      printBackground: true,
-      width: "8.27in",
-      height: "11.68in",
-      margin: {
-        top: "0",
-        right: "0",
-        bottom: "0",
-        left: "0",
-      },
-      preferCSSPageSize: true,
-    });
-    await browser.close();
-    return NextResponse.json({ result: pdf, success: true }, { status: 200 });
+      const page = await browser.newPage();
+  
+      const widthInPixels = Math.floor(3.5 * 96);
+      const heightInPixels = Math.floor(2 * 96);
+  
+      const htmlContent = html;
+      await page.setViewport({
+        width: widthInPixels,
+        height: heightInPixels,
+      });
+      await page.setContent(htmlContent);
+      const pdf = await page.pdf({
+        printBackground: true,
+        width: "8.27in",
+        height: "11.68in",
+        margin: {
+          top: "0",
+          right: "0",
+          bottom: "0",
+          left: "0",
+        },
+        preferCSSPageSize: true,
+      });
+      await browser.close();
+      return NextResponse.json({ result: pdf, success: true }, { status: 200 });
+    }
   // } catch (error) {
   //   return NextResponse.json(
   //     { result: "Error Occurred", success: false },
