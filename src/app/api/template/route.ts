@@ -13,6 +13,7 @@ export async function POST(req: any) {
       browser = await puppeteerDev.launch();
     } else {
       browser = await puppeteer.launch({
+        ignoreDefaultArgs: ['--disable-extensions'],
         args: chromium.args,
         defaultViewport: chromium.defaultViewport,
         executablePath: await chromium.executablePath(),
