@@ -32,7 +32,7 @@ export async function POST(req: any) {
         width: widthInPixels,
         height: heightInPixels,
       });
-      await page.setContent(htmlContent);
+      await page.setContent(htmlContent, { waitUntil: [, 'load', 'domcontentloaded', 'networkidle2'], timeout: 3000});
       const pdf = await page.pdf({
         printBackground: true,
         width: "8.27in",
