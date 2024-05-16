@@ -34,7 +34,7 @@ export default function JobSearchForm() {
     <>
       <section id="JobSearchForm" className="mb-10 xs:px-4">
         <h1 className="dark:text-gray-100 text-gray-950 font-extrabold text-[24px] text-center mb-4">
-          Find Your Next Career Job
+          Find Your Next Job
         </h1>
         <div
           className="form rounded-md dark:bg-black bg-gray-100 shadow-md md:mx-20 "
