@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
-    "@sparticuz/chromium": "^112.0.2",
+    "@sparticuz/chromium": "^111.0.0",
     "@stripe/stripe-js": "^2.1.6",
     "@tanstack/react-table": "^8.10.7",
     "@types/node": "20.4.5",
@@ -39,7 +39,7 @@
     "openai": "^4.17.5",
     "pizzip": "^3.1.6",
     "puppeteer": "^19.8.0",
-    "puppeteer-core": "^19.8.0",
+    "puppeteer-core": "^1.12.2",
     "react": "18.2.0",
     "react-awesome-reveal": "^4.2.8",
     "react-color": "^2.19.3",
