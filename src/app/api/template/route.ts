@@ -20,7 +20,6 @@ export async function POST(req: any) {
         headless: chromium.headless,
       });
     }
-    console.log(browser.isConnected());
     if(browser && browser.isConnected()){
 
       const page = await browser.newPage();
