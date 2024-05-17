@@ -52,7 +52,7 @@ const CreditPackages = ({ viewOnly }: Props) => {
               }}
             />
           ))}
-         </>
+        </>
       ) : (
         packages &&
         packages?.map((pkg: CreditsPackageData) => (
