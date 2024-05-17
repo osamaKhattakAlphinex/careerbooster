@@ -28,12 +28,11 @@ export async function POST(req: any) {
       const widthInPixels = Math.floor(3.5 * 96);
       const heightInPixels = Math.floor(2 * 96);
 
-      const htmlContent = html;
       await page.setViewport({
         width: widthInPixels,
         height: heightInPixels,
       });
-      await page.setContent(htmlContent);
+      await page.setContent(html);
       pdf = await page.pdf({
         printBackground: true,
         width: "8.27in",
@@ -53,8 +52,10 @@ export async function POST(req: any) {
     if (browser !== null) {
       await browser.close();
     }
+    if (pdf){
+      return NextResponse.json({ result: pdf, success: true }, { status: 200 });
+    }
   }
-  return NextResponse.json({ result: pdf, success: true }, { status: 200 });
   // } catch (error) {
   //   return NextResponse.json(
   //     { result: "Error Occurred", success: false },
