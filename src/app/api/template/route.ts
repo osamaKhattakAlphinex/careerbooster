@@ -7,8 +7,7 @@ export const dynamic = "force-dynamic";
 
 export async function POST(req: any) {
   // try {
-  const data = await req.json();
-  const html = data.htmlToDoc;
+  const {html} = await req.json();
   let browser: any;
   let pdf: any;
   try {

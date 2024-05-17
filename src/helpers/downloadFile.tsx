@@ -246,27 +246,38 @@ h2:empty {
     await fetch(`/api/template`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        htmlToDoc,
+        html: htmlToDoc,
       }),
-    }).then(async (response: any) => {
-      const res = await response.json();
-      const arrayBufferView = new Uint8Array(res.result.data);
-      
-      const blob = new Blob([arrayBufferView], {
-        type: "application/pdf",
-      });
-      const url = URL.createObjectURL(blob);
-      docRef.current.href = url;
-      if (!preview) {
-        docRef.current.download = fileName;
-      }
-      // docRef.current.download = fileName;
-      docRef.current.click();
-      setLoading(false);
-    }).catch((error) => console.log(error));
+    })
+      .then(async (response: any) => {
+        if (!response.ok) {
+          console.log(`HTTP error! status: ${response.status}`);
+        }
+        const contentType = response.headers.get("Content-Type");
+        if (!contentType || !contentType.includes("application/json")) {
+          console.log("Invalid content type in response");
+        }
+
+        const res = await response.json();
+        console.log(res)
+        const arrayBufferView = new Uint8Array(res.result.data);
+
+        const blob = new Blob([arrayBufferView], {
+          type: "application/pdf",
+        });
+        const url = URL.createObjectURL(blob);
+        docRef.current.href = url;
+        if (!preview) {
+          docRef.current.download = fileName;
+        }
+        // docRef.current.download = fileName;
+        docRef.current.click();
+        setLoading(false);
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
