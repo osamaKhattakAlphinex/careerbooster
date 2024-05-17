@@ -53,7 +53,11 @@ export async function POST(req: any) {
       await browser.close();
     }
     if (pdf){
-      return NextResponse.json({ result: pdf, success: true }, { status: 200 });
+      const headers = {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-store', // Example of custom header
+      };
+      return NextResponse.json({ result: pdf, success: true }, { status: 200, headers });
     }
   }
   // } catch (error) {
