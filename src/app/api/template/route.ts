@@ -4,17 +4,12 @@ import puppeteerDev from "puppeteer";
 import chromium from "@sparticuz/chromium-min";
 export const maxDuration = 300; // This function can run for a maximum of 5 minutes
 export const dynamic = "force-dynamic";
-
-export async function POST(req: any) {
-  // try {
-  const { html } = await req.json();
-  let browser: any;
-  let pdf: any;
+async function getBrowser() {
   if (process.env.NEXT_APP_STATE === "Development") {
-    browser = await puppeteerDev.launch();
+    return puppeteerDev.launch();
   } else {
-    browser = await puppeteer.launch({
-      args: [...chromium.args, '--hide-scrollbars', '--disable-web-security'],
+    return puppeteer.launch({
+      args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
       defaultViewport: chromium.defaultViewport,
       executablePath: await chromium.executablePath(
         `https://github.com/Sparticuz/chromium/releases/download/v111.0.0/chromium-v111.0.0-pack.tar`
@@ -23,8 +18,21 @@ export async function POST(req: any) {
       ignoreHTTPSErrors: true,
     });
   }
-  if (browser && browser.isConnected()) {
-    const page = await browser.newPage();
+}
+
+async function getPage() {
+  let _page: any;
+  if (_page) return _page;
+
+  const browser = await getBrowser();
+  _page = await browser.newPage();
+  return _page;
+}
+export async function POST(req: any) {
+  // try {
+  const { html } = await req.json();
+ 
+    const page = await getPage();
 
     const widthInPixels = Math.floor(3.5 * 96);
     const heightInPixels = Math.floor(2 * 96);
@@ -34,7 +42,7 @@ export async function POST(req: any) {
       height: heightInPixels,
     });
     await page.setContent(html);
-    pdf = await page.pdf({
+    const pdf = await page.pdf({
       printBackground: true,
       width: "8.27in",
       height: "11.68in",
@@ -46,11 +54,9 @@ export async function POST(req: any) {
       },
       preferCSSPageSize: true,
     });
-    if (pdf && browser !== null) {
-      await browser.close();
-    }
+    
     return NextResponse.json({ result: pdf, success: true }, { status: 200 });
-  }
+  // }
 
   // } catch (error) {
   //   return NextResponse.json(
