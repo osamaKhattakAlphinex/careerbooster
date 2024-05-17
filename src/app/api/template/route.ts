@@ -17,11 +17,11 @@ export async function POST(req: any) {
         args: chromium.args,
         defaultViewport: chromium.defaultViewport,
         executablePath: await chromium.executablePath(),
-        headless: chromium.headless,
+        headless: true,
+        ignoreHTTPSErrors: true,
       });
     }
     if(browser && browser.isConnected()){
-
       const page = await browser.newPage();
   
       const widthInPixels = Math.floor(3.5 * 96);
@@ -32,7 +32,7 @@ export async function POST(req: any) {
         width: widthInPixels,
         height: heightInPixels,
       });
-      await page.setContent(htmlContent, { waitUntil: [, 'load', 'domcontentloaded', 'networkidle2'], timeout: 3000});
+      await page.setContent(htmlContent,  { waitUntil: "domcontentloaded" });
       const pdf = await page.pdf({
         printBackground: true,
         width: "8.27in",
