@@ -18,7 +18,7 @@ export async function POST(req: any) {
         args: chromium.args,
         defaultViewport: chromium.defaultViewport,
         executablePath: await chromium.executablePath(),
-        headless: chromium.headless,
+        headless: false,
       });
     }
     if (browser && browser.isConnected()) {
@@ -51,14 +51,15 @@ export async function POST(req: any) {
     if (browser !== null) {
       await browser.close();
     }
-    if (pdf){
-      const headers = {
-        'Content-Type': 'application/json',
-        'Cache-Control': 'no-store', // Example of custom header
-      };
-      return NextResponse.json({ result: pdf, success: true }, { status: 200, headers });
-    }
   }
+  if (pdf){
+    const headers = {
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-store', // Example of custom header
+    };
+    return NextResponse.json({ result: pdf, success: true }, { status: 200, headers });
+  }
+
   // } catch (error) {
   //   return NextResponse.json(
   //     { result: "Error Occurred", success: false },
