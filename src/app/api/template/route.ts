@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import puppeteer from "puppeteer-core";
 import puppeteerDev from "puppeteer";
-import chromium from "@sparticuz/chromium";
+import chromium from "@sparticuz/chromium-min";
 export const maxDuration = 300; // This function can run for a maximum of 5 minutes
 export const dynamic = "force-dynamic";
 
@@ -14,10 +14,13 @@ export async function POST(req: any) {
     browser = await puppeteerDev.launch();
   } else {
     browser = await puppeteer.launch({
-      args: chromium.args,
+      args: [...chromium.args, '--hide-scrollbars', '--disable-web-security'],
       defaultViewport: chromium.defaultViewport,
-      executablePath: await chromium.executablePath(),
+      executablePath: await chromium.executablePath(
+        `https://github.com/Sparticuz/chromium/releases/download/v111.0.0/chromium-v111.0.0-pack.tar`
+      ),
       headless: chromium.headless,
+      ignoreHTTPSErrors: true,
     });
   }
   if (browser && browser.isConnected()) {
@@ -43,7 +46,7 @@ export async function POST(req: any) {
       },
       preferCSSPageSize: true,
     });
-    if (browser !== null) {
+    if (pdf && browser !== null) {
       await browser.close();
     }
     return NextResponse.json({ result: pdf, success: true }, { status: 200 });

@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
-    "@sparticuz/chromium": "^111.0.0",
+    "@sparticuz/chromium-min": "^111.0.0",
     "@stripe/stripe-js": "^2.1.6",
     "@tanstack/react-table": "^8.10.7",
     "@types/node": "20.4.5",
