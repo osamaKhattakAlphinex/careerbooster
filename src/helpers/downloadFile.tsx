@@ -245,12 +245,16 @@ h2:empty {
     setLoading(true);
     await fetch(`/api/template`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
         htmlToDoc,
       }),
     }).then(async (response: any) => {
       const res = await response.json();
       const arrayBufferView = new Uint8Array(res.result.data);
+      
       const blob = new Blob([arrayBufferView], {
         type: "application/pdf",
       });
