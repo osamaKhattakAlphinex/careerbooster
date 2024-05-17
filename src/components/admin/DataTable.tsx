@@ -2,13 +2,16 @@
 import React, { HTMLProps, useState, useEffect } from "react";
 import {
   ColumnDef,
+  ColumnFiltersState,
   Row,
   createColumnHelper,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   // getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { DateRangeFilter } from "@/helpers/DateRangeFilter";
 
 export type TableAction = {
   name: string;
@@ -50,7 +53,7 @@ type TableConfigType<C, D> = {
 const getActions = (row: any, actions: TableAction[]) => {
   return (
     <td className="px-6 py-3">
-      <div className="flex flex-row justify-end items-center gap-2">
+      <div className="flex flex-row items-center justify-end gap-2">
         {actions.map((action: TableAction, index) =>
           action.type === "handler" ? (
             <button
@@ -74,7 +77,7 @@ const getConditionalActions = (
 ) => {
   return (
     <td className="px-6 py-3">
-      <div className="flex flex-row justify-end items-center gap-2">
+      <div className="flex flex-row items-center justify-end gap-2">
         {conditionalTableActions.map(
           (condition: ConditionalTableAction, index) =>
             row[condition.conditionKey] === condition.conditionValue &&
@@ -135,7 +138,8 @@ const DataTable = <C, D>({
 }: TableConfigType<C, D>) => {
   const [rowSelection, setRowSelection] = React.useState({});
   const [rowSelectionIds, setRowSelectionIds] = React.useState<string[]>([]);
-
+  const [showDateRangeFilter, setShowDateRangeFilter] =
+    React.useState<boolean>(false);
   const [datacolumns] = React.useState<any>(() => [...columns]);
 
   const [columnVisibility, setColumnVisibility] = React.useState({});
@@ -186,7 +190,6 @@ const DataTable = <C, D>({
     let ids: string[] = [];
     if (Object.entries(rowSelection).length > 0) {
       const selectedRows = table.getSelectedRowModel().flatRows;
-
       selectedRows.forEach((row: Row<any>) => {
         ids.push(row.original["_id"]);
       });
@@ -200,14 +203,14 @@ const DataTable = <C, D>({
 
   return (
     <>
-      <div className=" w-full">
-        <div className="grid grid-cols-5  my-3">
+      <div className="w-full ">
+        <div className="grid grid-cols-5 my-3">
           <div className="col-span-1">
             <ColumnSelector table={table} columns={datacolumns} />
           </div>
           <div className="col-span-4">
             {Object.entries(rowSelection).length > 0 && (
-              <div className="flex flex-row flex-wrap justify-end items-center gap-2">
+              <div className="flex flex-row flex-wrap items-center justify-end gap-2">
                 {showBulkDataOperations(bulkDataOperations, rowSelectionIds)}
               </div>
             )}
@@ -247,7 +250,7 @@ const DataTable = <C, D>({
             {loading && (
               <tr>
                 <td
-                  className="text-center p-6 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
+                  className="p-6 text-center text-gray-800 bg-gray-100 dark:bg-gray-700 dark:text-gray-100"
                   colSpan={10}
                 >
                   Loading ...
@@ -257,7 +260,7 @@ const DataTable = <C, D>({
             {!loading && data && data.length === 0 && (
               <tr>
                 <td
-                  className="text-center p-6 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100"
+                  className="p-6 text-center text-gray-800 bg-gray-100 dark:bg-gray-700 dark:text-gray-100"
                   colSpan={10}
                 >
                   No records found
@@ -265,56 +268,65 @@ const DataTable = <C, D>({
               </tr>
             )}
 
-            {table.getRowModel().rows.map((row: any, index: number) => (
-              <tr
-                key={row.id}
-                className="bg-gray-100 border-b text-sm dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-              >
-                {row.getVisibleCells().map((cell: any) => (
-                  <td
-                    key={cell.id}
-                    className="px-6 py-3 columns-sm whitespace-nowrap truncate"
-                  >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
-                {actions.length > 0
-                  ? getActions(row.original, actions)
-                  : conditionalTableAction && conditionalTableAction?.length > 0
-                  ? getConditionalActions(row.original, conditionalTableAction)
-                  : ""}
-              </tr>
-            ))}
+            {table.getRowModel().rows.map((row: any, index: number) => {
+              return (
+                <tr
+                  key={row.id}
+                  className="text-sm bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  {row.getVisibleCells().map((cell: any) => (
+                    <td
+                      key={cell.id}
+                      className="px-6 py-3 truncate columns-sm whitespace-nowrap"
+                    >
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </td>
+                  ))}
+                  {actions.length > 0
+                    ? getActions(row.original, actions)
+                    : conditionalTableAction &&
+                      conditionalTableAction?.length > 0
+                    ? getConditionalActions(
+                        row.original,
+                        conditionalTableAction
+                      )
+                    : ""}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
       {/* PAGINATION
       <div className="h-2" />
       {data && data.length > 0 && (
-        <div className="flex items-center gap-2 w-full">
+        <div className="flex items-center w-full gap-2">
           <button
-            className="border rounded p-1 h-8 w-8 grid place-content-center"
+            className="grid w-8 h-8 p-1 border rounded place-content-center"
             onClick={() => table.setPageIndex(0)}
             disabled={!table.getCanPreviousPage()}
           >
             {"<<"}
           </button>
           <button
-            className="border rounded p-1 h-8 w-8 grid place-content-center"
+            className="grid w-8 h-8 p-1 border rounded place-content-center"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
             {"<"}
           </button>
           <button
-            className="border rounded p-1 h-8 w-8 grid place-content-center"
+            className="grid w-8 h-8 p-1 border rounded place-content-center"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
             {">"}
           </button>
           <button
-            className="border rounded p-1 h-8 w-8 grid place-content-center"
+            className="grid w-8 h-8 p-1 border rounded place-content-center"
             onClick={() => table.setPageIndex(table.getPageCount() - 1)}
             disabled={!table.getCanNextPage()}
           >
@@ -336,7 +348,7 @@ const DataTable = <C, D>({
                 const page = e.target.value ? Number(e.target.value) - 1 : 0;
                 table.setPageIndex(page);
               }}
-              className="border p-1 rounded w-16 text-sm"
+              className="w-16 p-1 text-sm border rounded"
             />
           </span>
           <select
@@ -344,7 +356,7 @@ const DataTable = <C, D>({
             onChange={(e) => {
               table.setPageSize(Number(e.target.value));
             }}
-            className="border p-1 rounded text-sm"
+            className="p-1 text-sm border rounded"
           >
             {[10, 20, 30, 40, 50, 100, 150, 200].map((pageSize) => (
               <option key={pageSize} value={pageSize}>
@@ -392,10 +404,10 @@ const ColumnSelector = ({ table, columns }: ColumnSelectorType) => {
   if (!columns) return;
 
   return (
-    <div className="w-full relative">
+    <div className="relative w-full">
       <div className=" p-2 border-2 border-gray-200 dark:border-gray-800 bg-[#ffffff] dark:bg-[#1F2937]">
         <button
-          className="w-full  flex flex-row justify-between items-center rounded-sm"
+          className="flex flex-row items-center justify-between w-full rounded-sm"
           onClick={() => setOpen(!open)}
         >
           <span className="font-semibold text-xs dark:text-[#ffffff] text-[#000000]">
@@ -434,7 +446,7 @@ const ColumnSelector = ({ table, columns }: ColumnSelectorType) => {
             </svg>
           )}
         </button>
-        <div className=" shadow-sm">
+        <div className="shadow-sm ">
           <div
             className={`${
               open ? "block" : "hidden"
@@ -445,7 +457,7 @@ const ColumnSelector = ({ table, columns }: ColumnSelectorType) => {
                 return (
                   <div
                     key={column.id}
-                    className="p-2 border-2 border-gray-200  dark:border-gray-800"
+                    className="p-2 border-2 border-gray-200 dark:border-gray-800"
                   >
                     <label className="w-full">
                       <input

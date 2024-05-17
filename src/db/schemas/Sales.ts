@@ -3,21 +3,25 @@ const { Schema } = mongoose;
 
 const SaleSchema = new Schema(
   {
-    type: {
-      type: String,
-      required: true,
-    },
     fullname: {
       type: String,
       required: true,
     },
-    ammount: {
+    phone: {
+      type: String,
+      required: true,
+    },
+    amount: {
       type: String,
       required: true,
     },
     status: {
-      type: Boolean,
+      type: String,
       default: true,
+    },
+    service: {
+      type: String,
+      required: true,
     },
   },
 
