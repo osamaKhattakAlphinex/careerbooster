@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import puppeteer from "puppeteer-core";
 import puppeteerDev from "puppeteer";
 import chromium from "@sparticuz/chromium";
-export const maxDuration = 300; // This function can run for a maximum of 5 seconds
+export const maxDuration = 300; // This function can run for a maximum of 5 minutes
 export const dynamic = "force-dynamic";
 
 export async function POST(req: any) {
@@ -16,16 +16,10 @@ export async function POST(req: any) {
       browser = await puppeteerDev.launch();
     } else {
       browser = await puppeteer.launch({
-        ignoreDefaultArgs: [
-          "--disable-extensions",
-          "--single-process",
-          "--disable-features=AudioServiceOutOfProcess",
-        ],
         args: chromium.args,
         defaultViewport: chromium.defaultViewport,
         executablePath: await chromium.executablePath(),
         headless: chromium.headless,
-        ignoreHTTPSErrors: true,
       });
     }
     if (browser && browser.isConnected()) {
