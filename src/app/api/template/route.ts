@@ -1,14 +1,10 @@
 import { NextResponse } from "next/server";
 import puppeteer from "puppeteer-extra";
 import puppeteerDev from "puppeteer";
-import StealthPlugin from "puppeteer-extra-plugin-stealth"
-import AdblockerPlugin from "puppeteer-extra-plugin-adblocker"
 import chromium from "@sparticuz/chromium-min";
 export const maxDuration = 300; // This function can run for a maximum of 5 minutes
 export const dynamic = "force-dynamic";
 async function getBrowser() {
-  puppeteer.use(StealthPlugin())
-  puppeteer.use(AdblockerPlugin({ blockTrackers: true }))
   if (process.env.NEXT_APP_STATE === "Development") {
     return puppeteerDev.launch();
   } else {
