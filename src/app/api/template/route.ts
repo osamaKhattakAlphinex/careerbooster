@@ -7,57 +7,46 @@ export const dynamic = "force-dynamic";
 
 export async function POST(req: any) {
   // try {
-  const {html} = await req.json();
+  const { html } = await req.json();
   let browser: any;
   let pdf: any;
-  try {
-    if (process.env.NEXT_APP_STATE === "Development") {
-      browser = await puppeteerDev.launch();
-    } else {
-      browser = await puppeteer.launch({
-        args: chromium.args,
-        defaultViewport: chromium.defaultViewport,
-        executablePath: await chromium.executablePath(),
-        headless: false,
-      });
-    }
-    if (browser && browser.isConnected()) {
-      const page = await browser.newPage();
+  if (process.env.NEXT_APP_STATE === "Development") {
+    browser = await puppeteerDev.launch();
+  } else {
+    browser = await puppeteer.launch({
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath(),
+      headless: chromium.headless,
+    });
+  }
+  if (browser && browser.isConnected()) {
+    const page = await browser.newPage();
 
-      const widthInPixels = Math.floor(3.5 * 96);
-      const heightInPixels = Math.floor(2 * 96);
+    const widthInPixels = Math.floor(3.5 * 96);
+    const heightInPixels = Math.floor(2 * 96);
 
-      await page.setViewport({
-        width: widthInPixels,
-        height: heightInPixels,
-      });
-      await page.setContent(html);
-      pdf = await page.pdf({
-        printBackground: true,
-        width: "8.27in",
-        height: "11.68in",
-        margin: {
-          top: "0",
-          right: "0",
-          bottom: "0",
-          left: "0",
-        },
-        preferCSSPageSize: true,
-      });
-    }
-  } catch (error) {
-    console.log(error);
-  } finally {
+    await page.setViewport({
+      width: widthInPixels,
+      height: heightInPixels,
+    });
+    await page.setContent(html);
+    pdf = await page.pdf({
+      printBackground: true,
+      width: "8.27in",
+      height: "11.68in",
+      margin: {
+        top: "0",
+        right: "0",
+        bottom: "0",
+        left: "0",
+      },
+      preferCSSPageSize: true,
+    });
     if (browser !== null) {
       await browser.close();
     }
-  }
-  if (pdf){
-    const headers = {
-      'Content-Type': 'application/json',
-      'Cache-Control': 'no-store', // Example of custom header
-    };
-    return NextResponse.json({ result: pdf, success: true }, { status: 200, headers });
+    return NextResponse.json({ result: pdf, success: true }, { status: 200 });
   }
 
   // } catch (error) {
