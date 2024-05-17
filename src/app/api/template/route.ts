@@ -2,6 +2,9 @@ import { NextResponse } from "next/server";
 import puppeteer from "puppeteer-core";
 import puppeteerDev from "puppeteer";
 import chromium from "@sparticuz/chromium";
+
+export const maxDuration = 300; // This function can run for a maximum of 5 seconds
+export const dynamic = "force-dynamic";
 export async function POST(req: any) {
   // try {
     const data = await req.json();
@@ -23,7 +26,7 @@ export async function POST(req: any) {
     }
     if(browser && browser.isConnected()){
       const page = await browser.newPage();
-  
+      page.setDefaultNavigationTimeout(60000);
       const widthInPixels = Math.floor(3.5 * 96);
       const heightInPixels = Math.floor(2 * 96);
   
