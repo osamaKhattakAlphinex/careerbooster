@@ -92,10 +92,10 @@ const Experience = ({
                 addAchivement={() => setNewWorkExperience(i)}
                 deleteExperience={() => handlers.handleDeleteExperience(i)}
                 regenrateAchivements={() => handleRegenrate(rec, i)}
-                addNewLine={() => {
-                  handlers.handleAddSpace(i, newAchievement);
-                  setNewAchievement("");
-                }}
+                // addNewLine={() => {
+                //   handlers.handleAddSpace(i, newAchievement);
+                //   setNewAchievement("");
+                // }}
               >
                 <div
                   className={styles?.achievement_div}
