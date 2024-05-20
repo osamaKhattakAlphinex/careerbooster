@@ -170,22 +170,26 @@ const Jobs = () => {
   const columns = [
     columnHelper.accessor("jobTitle", {
       id: "jobTitle",
+
       header: () => "jobTitle",
       cell: (info: any) => info.renderValue(),
     }),
     columnHelper.accessor("location", {
       id: "location",
+
       header: () => "location",
       cell: (info: any) => info.renderValue(),
     }),
     columnHelper.accessor("employer", {
       id: "employer",
+
       header: () => "employer",
       cell: (info: any) => info.renderValue(),
     }),
 
     columnHelper.accessor("link", {
       id: "link",
+
       header: () => "link",
       cell: (info: any) => {
         if (info.renderValue()) {
@@ -219,6 +223,7 @@ const Jobs = () => {
 
     columnHelper.accessor("status", {
       id: "status",
+
       header: () => "status",
       cell: (info) => {
         return (
@@ -242,6 +247,7 @@ const Jobs = () => {
 
     columnHelper.accessor("featured", {
       id: "featured",
+
       header: () => "featured",
       cell: (info) => {
         return (
@@ -258,6 +264,7 @@ const Jobs = () => {
 
     columnHelper.accessor("createdAt", {
       id: "createdAt",
+
       header: () => "Created At",
       cell: (info) => getFormattedDate(info.renderValue()),
     }),
@@ -336,13 +343,13 @@ const Jobs = () => {
               List of jobs created by {`${deo.firstName} ${deo.lastName}`}.
             </span>
           </div>
-          <div className="flex flex-col gap-6 justify-end">
+          <div className="flex flex-col justify-end gap-6">
             <button
               onClick={() => {
                 setCurrentRecord(null);
                 setOpen(true);
               }}
-              className="px-4 py-2 text-sm font-semibold text-gray-500 border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white w-fit ml-auto"
+              className="px-4 py-2 ml-auto text-sm font-semibold text-gray-500 border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white w-fit"
             >
               Add New Job
             </button>

@@ -70,6 +70,7 @@ const LeadsAdminPage = () => {
   const columns = [
     columnHelper.accessor("name", {
       id: "name",
+
       header: () => "Name",
       cell: (info) => info.renderValue(),
     }),
@@ -196,7 +197,6 @@ const LeadsAdminPage = () => {
     fetchRecords(startIndex, endIndex);
 
     router.replace(pathname + `?r=${limitOfRecords}&p=${currentPage}`);
-
   }, [currentPage, limitOfRecords]);
 
   return (

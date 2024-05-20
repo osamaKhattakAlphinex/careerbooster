@@ -66,21 +66,25 @@ const ViewPackage = ({}) => {
   const columns = [
     columnHelper.accessor("title", {
       id: "title",
+
       header: () => "Title",
       cell: (info) => info.renderValue(),
     }),
     columnHelper.accessor("amount", {
       id: "amount",
+
       header: () => "Amount",
       cell: (info) => info.renderValue(),
     }),
     columnHelper.accessor("status", {
       id: "status",
+
       header: () => "Status",
       cell: (info) => info.renderValue(),
     }),
     columnHelper.accessor("category", {
       id: "category",
+
       header: () => "Category",
       cell: (info) => info.renderValue(),
     }),

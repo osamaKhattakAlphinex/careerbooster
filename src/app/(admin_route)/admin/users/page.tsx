@@ -92,7 +92,10 @@ const UsersPage = () => {
     columnHelper.accessor("createdAt", {
       id: "createdAt",
       header: () => "Created At",
-      cell: (info) => getFormattedDate(info.renderValue()),
+      // cell: (info) => getFormattedDate(info.renderValue()),
+      meta: {
+        filterVariant: "range",
+      },
     }),
     columnHelper.accessor((row) => row, {
       id: "status",
@@ -175,6 +178,7 @@ const UsersPage = () => {
     // }),
     columnHelper.accessor((row) => row, {
       id: "totalCredits",
+
       header: () => "Total Credits",
       cell: (info) => {
         const { totalCredits } = info.getValue();

@@ -86,6 +86,7 @@ const ViewPackage = ({}) => {
   const columns = [
     columnHelper.accessor("title", {
       id: "title",
+
       header: () => "Title",
       cell: (info) => info.renderValue(),
     }),
@@ -101,6 +102,7 @@ const ViewPackage = ({}) => {
     }),
     columnHelper.accessor("status", {
       id: "status",
+
       header: () => "Status",
       cell: (info) => info.renderValue(),
     }),
@@ -141,17 +143,17 @@ const ViewPackage = ({}) => {
         refresh={getPackages}
       />
 
-      <div className="flex flex-col justify-start items-start">
-        <h2 className=" text-xl dark:text-white/70 text-black/70 uppercase">
+      <div className="flex flex-col items-start justify-start">
+        <h2 className="text-xl uppercase  dark:text-white/70 text-black/70">
           Packages
         </h2>
-        <span className="dark:text-white/70 text-black/70 text-base">
+        <span className="text-base dark:text-white/70 text-black/70">
           List of all the packages a user can choose from.
         </span>
-        <div className="mt-4 flex flex-row justify-end items-center w-full">
+        <div className="flex flex-row items-center justify-end w-full mt-4">
           <AddPackage getPackages={getPackages} />
         </div>
-        <div className="w-full overflow-x-auto mt-4">
+        <div className="w-full mt-4 overflow-x-auto">
           <DataTable
             loading={loading}
             columns={columns}
@@ -166,16 +168,16 @@ const ViewPackage = ({}) => {
         <div className="my-5 ml-10">
           <Link
             href="/admin"
-            className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
+            className="flex flex-row items-center gap-2 transition-all hover:font-semibold"
           >
             {leftArrowIcon}
             Dashboard
           </Link>
         </div>
 
-        <div className="flex flex-col gap-2 items-center justify-center">
+        <div className="flex flex-col items-center justify-center gap-2">
           <div className=" p-8 flex flex-col gap-2 border-[1px] w-11/12">
-            <div className="w-100 flex flex-row justify-between">
+            <div className="flex flex-row justify-between w-100">
               <h2 className="text-xl ">User Packages Management</h2>
               <AddPackage getPackages={getPackages} />
             </div>
@@ -195,13 +197,13 @@ const ViewPackage = ({}) => {
     //   <div className="my-5 ml-10">
     //     <Link
     //       href="/admin"
-    //       className="flex flex-row gap-2 items-center hover:font-semibold transition-all"
+    //       className="flex flex-row items-center gap-2 transition-all hover:font-semibold"
     //     >
     //       {leftArrowIcon}
     //       Dashboard
     //     </Link>
     //   </div>
-    //   <div className="flex m-10 gap-4">
+    //   <div className="flex gap-4 m-10">
     //     <div className="w-full flex p-4 border-[1px] border-gray-200 rounded-lg shadow sm:p-6">
     //       <h2 className="text-2xl">
     //         <div className="flex flex-row gap-2">
@@ -225,14 +227,14 @@ const ViewPackage = ({}) => {
     //   </div>
 
     //   {/* <!-- Start block --> */}
-    //   <section className="dark:bg-gray-900 p-3 sm:p-5 antialiased">
-    //     <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
-    //       <div className="dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
-    //         <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
+    //   <section className="p-3 antialiased dark:bg-gray-900 sm:p-5">
+    //     <div className="max-w-screen-xl px-4 mx-auto lg:px-12">
+    //       <div className="relative overflow-hidden shadow-md dark:bg-gray-800 sm:rounded-lg">
+    //         <div className="flex flex-col items-center justify-between p-4 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
     //           {/*  <AddPackage />*/}
     //         </div>
     //         <div className="overflow-x-auto">
-    // <table className="pt-10 border-collapse w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    // <table className="w-full pt-10 text-sm text-left text-gray-500 border-collapse dark:text-gray-400">
     //   <thead className="text-[16px] text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
     //     <tr>
     //       <th scope="col" className="px-4 py-4">
@@ -256,7 +258,7 @@ const ViewPackage = ({}) => {
     //     </tr>
     //   </thead>
     //   <tbody>
-    //     <tr className=" bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+    //     <tr className="bg-gray-100 border-b  dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
     //       <th
     //         scope="row"
     //         className="px-4 py-3 font-medium whitespace-nowrap"
@@ -270,9 +272,9 @@ const ViewPackage = ({}) => {
     //         describes a product.
     //       </td>
     //       <td className="px-4 py-3">$2999</td>
-    //       <td className="px-4 py-3 flex items-center justify-end">
+    //       <td className="flex items-center justify-end px-4 py-3">
     //         <ul
-    //           className="py-1 text-sm flex"
+    //           className="flex py-1 text-sm"
     //           aria-labelledby="apple-imac-27-dropdown-button"
     //         >
     //           <li>
@@ -321,7 +323,7 @@ const ViewPackage = ({}) => {
     //         </div>
     //         {/* Pagination */}
     //         {/* <nav
-    //           className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
+    //           className="flex flex-col items-start justify-between p-4 space-y-3 md:flex-row md:items-center md:space-y-0"
     //           aria-label="Table navigation"
     //         >
     //           <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
@@ -435,7 +437,7 @@ export default ViewPackage;
 {
   /* <div className="">
               <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table className="pt-10 border-collapse w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <table className="w-full pt-10 text-sm text-left text-gray-500 border-collapse dark:text-gray-400">
                   <thead className="text-[16px] text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                       <th scope="col" className="px-4 py-4">
@@ -463,7 +465,7 @@ export default ViewPackage;
                       return (
                         <tr
                           key={index}
-                          className=" bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                          className="bg-gray-100 border-b  dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                         >
                           <th
                             scope="row"
@@ -475,9 +477,9 @@ export default ViewPackage;
                           <td className="px-4 py-3">{pckg.amount}</td>
                           <td className="px-4 py-3 ">{pckg.status}</td>
                           <td className="px-4 py-3">{pckg.category}</td>
-                          <td className="px-4 py-3 flex items-center justify-end">
+                          <td className="flex items-center justify-end px-4 py-3">
                             <ul
-                              className="py-1 text-sm flex"
+                              className="flex py-1 text-sm"
                               aria-labelledby="apple-imac-27-dropdown-button"
                             >
                               <li>

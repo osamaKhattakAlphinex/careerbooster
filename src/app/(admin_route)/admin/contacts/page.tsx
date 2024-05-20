@@ -69,6 +69,7 @@ const Contacts = () => {
     }),
     columnHelper.accessor("message", {
       id: "message",
+
       header: () => "Message",
       cell: (info) => (
         <span className="inline-block max-w-sm truncate">

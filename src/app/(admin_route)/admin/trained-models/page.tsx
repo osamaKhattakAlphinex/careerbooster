@@ -22,6 +22,7 @@ const TrainedModel = () => {
   const columns = [
     columnHelper.accessor("dataset", {
       id: "dataset",
+
       header: () => "Dataset",
       cell: (info) => {
         return info.getValue();
