@@ -29,9 +29,9 @@ async function getPage() {
   return _page;
 }
 export async function POST(req: any) {
-  // try {
-  const { html } = await req.json();
- 
+  try {
+    const { html } = await req.json();
+
     const page = await getPage();
 
     const widthInPixels = Math.floor(3.5 * 96);
@@ -54,14 +54,12 @@ export async function POST(req: any) {
       },
       preferCSSPageSize: true,
     });
-    
-    return NextResponse.json({ result: pdf, success: true }, { status: 200 });
-  // }
 
-  // } catch (error) {
-  //   return NextResponse.json(
-  //     { result: "Error Occurred", success: false },
-  //     { status: 500 }
-  //   );
-  // }
+    return NextResponse.json({ result: pdf, success: true }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { result: "Error Occurred", success: false },
+      { status: 500 }
+    );
+  }
 }
