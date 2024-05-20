@@ -24,7 +24,7 @@ const AboutCard = () => {
                 resume stands out from the crowd.
               </p>
               <Link
-                href="login.html"
+                href="/register"
                 className=" items-center gap-2 bg-gradient-to-r from-purple-700 to-pink-500 text-white p-4 rounded-lg w-auto px-[2rem] py-[1rem] text-[1.125rem] font-medium mt-4"
               >
                 Upload Resume - It{"'"}s Free
