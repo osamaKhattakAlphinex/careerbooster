@@ -12,7 +12,7 @@ async function getBrowser() {
       args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
       defaultViewport: chromium.defaultViewport,
       executablePath: await chromium.executablePath(
-        `https://github.com/Sparticuz/chromium/releases/download/v111.0.1/chromium-v111.0.1-pack.tar`
+        `https://github.com/Sparticuz/chromium/releases/download/v111.0.0/chromium-v111.0.0-pack.tar`
       ),
       headless: chromium.headless,
       ignoreHTTPSErrors: true,
