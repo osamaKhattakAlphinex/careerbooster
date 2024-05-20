@@ -19,6 +19,7 @@ type Props = {
 };
 const Education = ({ heading, educations, styles, customStyle }: Props) => {
   const [confirmationModal, setConfirmationModal] = useState(false);
+  const [deleteIndex,setDeleteIndex] =  useState(-1)
   const { handlers } = useHandler();
   const { updateSaveHook } = useUpdateAndSave();
 
@@ -76,7 +77,10 @@ const Education = ({ heading, educations, styles, customStyle }: Props) => {
                 />
               </li>
               <div
-                onClick={() => setConfirmationModal(true)}
+                onClick={() => {
+                  setConfirmationModal(true)
+                  setDeleteIndex(i)
+                }}
                 className={`${styles?.education_delete}`}
               >
                 {crossIcon1}
@@ -167,7 +171,7 @@ const Education = ({ heading, educations, styles, customStyle }: Props) => {
                 message="Are you sure you want to delete ?"
                 onConfirm={() => {
                   setConfirmationModal(false);
-                  handlers.handleDeleteEductionDetail(i);
+                  handlers.handleDeleteEductionDetail(deleteIndex);
                 }}
               />
             )}
