@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import puppeteer from "puppeteer-core";
 import puppeteerDev from "puppeteer";
 import chromium from "@sparticuz/chromium-min";
-export const maxDuration = 300;
+export const maxDuration = 300; //
 export const dynamic = "force-dynamic";
 async function getBrowser() {
   if (process.env.NEXT_APP_STATE === "Development") {
