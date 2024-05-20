@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import puppeteer from "puppeteer-extra";
+import puppeteer from "puppeteer-core";
 import puppeteerDev from "puppeteer";
 import chromium from "@sparticuz/chromium-min";
 export const maxDuration = 300; // This function can run for a maximum of 5 minutes
