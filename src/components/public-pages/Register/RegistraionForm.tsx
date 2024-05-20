@@ -615,6 +615,7 @@ const RegistrationForm = () => {
                   <Link
                     className="font-medium text-primary-600 hover:underline "
                     href="/terms-and-conditions"
+                    target="_blank"
                   >
                     Terms and Conditions
                   </Link>
@@ -625,6 +626,7 @@ const RegistrationForm = () => {
                   <Link
                     className="ml-1 font-medium text-primary-600 hover:underline "
                     href="/privacy-policy"
+                    target="_blank"
                   >
                     Privacy Policy
                   </Link>

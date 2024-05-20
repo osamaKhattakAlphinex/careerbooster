@@ -3,8 +3,8 @@ import Link from "next/link";
 
 const TeamCard = () => {
   return (
-    <section className="py-10 lg:py-20">
-      <div className="container">
+    <section className="py-10 lg:py-20  dark:bg-gray-950 bg-gray-100">
+      <div className="md:container xs:px-6">
         <div className="flex justify-center pb-16">
           <div className="flex flex-col w-9/12">
             <div>

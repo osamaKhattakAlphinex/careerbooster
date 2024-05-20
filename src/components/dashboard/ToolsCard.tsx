@@ -79,7 +79,7 @@ const ToolsCard = ({
       className="dark:bg-transparent dark:border-none dark:rounded-none rounded-md bg-[#ffffff94] border-[#b6b8b6]"
     >
       {action === "coming soon" ? (
-        <div className="flex flex-row items-start justify-start gap-2 py-1 text-white no-underline md:p-3 xs:px-0">
+        <div className="flex flex-row items-start justify-start gap-2 py-1 text-white no-underline md:p-3 xs:px-0 hover:shadow-2xl hover:rounded-md ">
           <div className="">
             <div
               className={`rounded-full flex justify-center items-center bg-gradient-to-b ${bgColor1} ${bgColor2} md:w-12 md:h-12 xs:w-8 xs:h-8 `}
@@ -183,7 +183,7 @@ const ToolsCard = ({
       ) : (
         <Link
           href={link}
-          className="flex flex-row items-start justify-start gap-2 text-white no-underline md:p-3 xs:px-0 xs:py-1"
+          className="flex flex-row items-start justify-start gap-2 text-white no-underline md:p-3 xs:px-0 xs:py-1 hover:shadow-2xl hover:rounded-md"
         >
           <div className="">
             <div
