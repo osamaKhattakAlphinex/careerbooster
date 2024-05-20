@@ -33,12 +33,12 @@ export const LinkedinProfile = () => {
       <div
         className={`bg-[#1b4972] text-[40px] text-center  px-[18.5rem] py-12 ${montserrat.className} `}
       >
-        "LinkedIn Profiles We Have Crafted for Executives"
+        {'"'}LinkedIn Profiles We Have Crafted for Executives{'"'}
       </div>
       <div className="pt-5 md:px-10 lg:px-[4rem] xl:px-36 flex flex-wrap justify-between gap-2 ">
         {user &&
           user.map((user, index) => (
-            <div className="mt-12">
+            <div key={index} className="mt-12">
               <h2
                 className={`${montserrat.className} text-[25px] capitalize ${
                   user?.title === "before" ? "text-red-700" : "text-green-700"
