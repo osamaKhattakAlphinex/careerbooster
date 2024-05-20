@@ -601,7 +601,7 @@ const Page = () => {
     if (Array.isArray(value)) {
       let i = 1;
       for (const singleItem of value) {
-        let newAttr = [];
+        let newAttr: any = [];
         if (typeof singleItem === "object" && !Array.isArray(singleItem)) {
           if (template.elements) {
             for (const element of template.elements) {

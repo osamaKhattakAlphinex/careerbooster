@@ -2,8 +2,8 @@ import Image from "next/image";
 
 const BrandsCard = () => {
   return (
-    <section className="py-10 lg:py-16">
-      <div className="container">
+    <section className="py-10 lg:py-16 dark:bg-gray-950 bg-gray-100">
+      <div className="md:container xs:px-6">
         <div className="flex justify-center">
           <div className="flex flex-col w-10/12">
             <div className="text-center">

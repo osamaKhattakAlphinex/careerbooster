@@ -58,7 +58,7 @@ const useDragAndDrop = () => {
     insideIndex: number
   ) => {
     let draggedIndex: number;
-    let updatedItems = [];
+    let updatedItems: any = [];
     draggedIndex = insideIndex;
     updatedItems = [...resume?.workExperienceArray];
     let achievements = [...updatedItems[i].achievements];
@@ -92,7 +92,7 @@ const useDragAndDrop = () => {
     section:string
   ) => {
     let draggedIndex: number;
-    let updatedItems = [];
+    let updatedItems: any = [];
     draggedIndex = insideIndex;
     updatedItems = [...resume[section]];
     let description = [...updatedItems[i].description];

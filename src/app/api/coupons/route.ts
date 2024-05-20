@@ -27,7 +27,7 @@ export async function POST(request: any) {
   try {
     await startDB();
     let payload = await request.json();
-    let response = null;
+    let response: any = null;
     if (!payload) {
       return NextResponse.json(
         { result: "Bad Request", success: false },

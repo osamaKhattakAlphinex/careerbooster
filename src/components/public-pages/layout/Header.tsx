@@ -43,7 +43,7 @@ const Header = () => {
 
         <Link
           className="m-0 xs:flex xs:justify-between xs:w-full xs:ease-in-out xs:duration-300 xs:transition-all "
-          href="#"
+          href="/"
         >
           <div className="flex items-center justify-center ">
             <Image
@@ -137,6 +137,18 @@ const Header = () => {
               </li>
               <li className="px-3 mt-0 ">
                 <Link
+                  className={` ${
+                    active === "about"
+                      ? "text-[#6A4DFF] font-bold dark:text-[#e6f85e] "
+                      : " dark:text-gray-100 text-gray-900 font-semibold "
+                  }  capitalize  text-sm  no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]`}
+                  href="/about"
+                >
+                  About
+                </Link>
+              </li>
+              <li className="px-3 mt-0 ">
+                <Link
                   className={`
                          ${
                            active === "use-cases"
@@ -149,7 +161,7 @@ const Header = () => {
                   Use cases
                 </Link>
               </li>
-              <li className="px-3 mt-0 ">
+              {/* <li className="px-3 mt-0 ">
                 <Link
                   className={`
                          ${
@@ -162,7 +174,7 @@ const Header = () => {
                 >
                   Find Jobs
                 </Link>
-              </li>
+              </li> */}
               <li className="px-3 mt-0 ">
                 <Link
                   className={`
@@ -363,7 +375,7 @@ const Header = () => {
                   Use cases
                 </Link>
               </li>
-              <li
+              {/* <li
                 className="px-3 mt-0 "
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -379,7 +391,7 @@ const Header = () => {
                 >
                   Find Jobs
                 </Link>
-              </li>
+              </li> */}
               <li
                 className="px-3 mt-0 "
                 onClick={() => setMobileMenuOpen(false)}

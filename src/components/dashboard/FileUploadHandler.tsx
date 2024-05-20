@@ -23,7 +23,7 @@ const FileUploadHandler = ({
         const pdf = await pdfjs.getDocument({ data: arrayBuffer }).promise;
         const numPages = pdf.numPages;
         // Extract text from the entire document
-        const textPromises = [];
+        const textPromises: any = [];
         for (let i = 1; i <= numPages; i++) {
           textPromises.push(
             pdf
