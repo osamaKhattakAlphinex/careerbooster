@@ -22,6 +22,7 @@ const CreditSubscriptionCard: React.FC<Props> = ({
   viewOnly,
 }) => {
   const [subscribing, setSubscribing] = useState(false);
+  const [amountOff, setAmountOff] = useState<number>(0);
   const [showPaymentDialog, setShowPaymentDialog] = useState(false);
   const [coupon, setCoupon] = useState("");
   const [couponError, setCouponError] = useState("");
@@ -59,13 +60,27 @@ const CreditSubscriptionCard: React.FC<Props> = ({
     setShowPaypalPopup(true);
   };
 
-  const handleClick = () => {
+  const handleClick = async () => {
     // Set subscribing to true
 
     if (creditPackage && creditPackage.amount === 0) {
       updateUserWithFreePackage(creditPackage._id);
     } else {
-      setShowPaypalPopup(true);
+      if (coupon !== "") {
+        const getCoupon = await fetch(
+          `/api/coupons/getOneCoupon?coupon=${coupon}`
+        );
+        const data = await getCoupon.json();
+        if (data.success) {
+          const amount_off = data.result.amount_off;
+          setAmountOff(amount_off);
+          setShowPaypalPopup(true);
+        } else {
+          setCouponError(data.result);
+        }
+      } else {
+        setShowPaypalPopup(true);
+      }
     }
   };
 
@@ -228,7 +243,9 @@ const CreditSubscriptionCard: React.FC<Props> = ({
               {userPackage.type === "yearly" && "  / Year"}
             </span> */}
             </div>
-
+            {couponError && couponError !== "" && (
+              <p className="mt-1 text-sm text-red-500">{couponError}</p>
+            )}
             {/* Apply coupon  */}
             {!viewOnly && (
               <>
@@ -244,9 +261,6 @@ const CreditSubscriptionCard: React.FC<Props> = ({
                   </div>
                 )}
                 {/* invalid coupon error */}
-                {couponError && couponError !== "" && (
-                  <p className="mt-1 text-sm text-red-500">{couponError}</p>
-                )}
 
                 <a
                   href="#"
@@ -434,7 +448,7 @@ const CreditSubscriptionCard: React.FC<Props> = ({
               </span>
               <div ref={paypalRef} className="p-10 bg-white rounded-lg">
                 <PayPalButton
-                  amount={creditPackage.amount}
+                  amount={creditPackage.amount - amountOff}
                   shippingPreference="NO_SHIPPING"
                   currency="USD"
                   onSuccess={(details: any, data: any) => {

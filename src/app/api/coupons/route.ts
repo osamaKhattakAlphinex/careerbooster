@@ -35,7 +35,7 @@ export async function POST(request: any) {
       );
     }
 
-    if (payload.coupon_type === "reward") {
+    if (payload.coupon_type === "reward" || payload.coupon_type === "paypal") {
       // generate  a a coupan code for the reward
 
       // check if the code generated is valid
@@ -66,12 +66,7 @@ export async function POST(request: any) {
       };
       response = await saveCouponToDb(payload);
     }
-    if (payload.coupon_type === "paypal") {
-      return NextResponse.json(
-        { result: "Paypal coupan are not implemented yet", success: false },
-        { status: 404 }
-      );
-    }
+    
 
     return NextResponse.json(
       { result: response, success: true },

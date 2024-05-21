@@ -12,6 +12,7 @@ const CouponSchema = new Schema(
     coupon_code: {
       type: String,
       required: true,
+      unique: true,
     },
 
     amount_off: {
