@@ -149,7 +149,7 @@ const SlidingPanel = forwardRef(({ refresh }: Props, ref: any) => {
                 <button
                   disabled={saving}
                   onClick={handleSave}
-                  className="btn btn-primary-dark !flex gap-2 mr-4 "
+                  className="bg-blue-700 px-2 py-1 items-center rounded-md text-white !flex gap-2 mr-4 "
                 >
                   {saving ? (
                     "Saving..."

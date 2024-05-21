@@ -68,7 +68,7 @@ const CreditSubscriptionCard: React.FC<Props> = ({
     } else {
       if (coupon !== "") {
         const getCoupon = await fetch(
-          `/api/coupons/getOneCoupon?coupon=${coupon}`
+          `/api/coupons/getOneCoupon?coupon=${coupon}&plan=${creditPackage.category}`
         );
         const data = await getCoupon.json();
         if (data.success) {
