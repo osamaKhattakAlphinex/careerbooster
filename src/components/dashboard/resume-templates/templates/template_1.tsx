@@ -527,10 +527,10 @@ const ResumeTemplate1 = ({
                         handlers.handleDeleteExperience(i)
                       }
                       regenrateAchivements={() => handleRegenrate(rec, i)}
-                      addNewLine={() => {
-                        handlers.handleAddSpace(i, newAchievement);
-                        setNewAchievement("");
-                      }}
+                      // addNewLine={() => {
+                      //   handlers.handleAddSpace(i, newAchievement);
+                      //   setNewAchievement("");
+                      // }}
                     >
                       <div
                         key={i}

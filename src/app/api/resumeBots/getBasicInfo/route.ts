@@ -295,7 +295,6 @@ export async function POST(req: any) {
     if (type === "primarySkills") {
       const dataset = "resume.writePrimarySkills";
       const model = await getTrainedModel(dataset);
-      //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
       try {
         if (resumeType === "resume-job-title") {
@@ -352,7 +351,7 @@ export async function POST(req: any) {
         }
 
         const response: any = await openai.chat.completions.create({
-          model: "gpt-3.5-turbo",
+          model: "gpt-3.5-turbo-1106",
           // stream: true,
           messages: [{ role: "user", content: inputPrompt }],
         });
