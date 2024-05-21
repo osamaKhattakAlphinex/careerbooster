@@ -6,11 +6,18 @@ export async function GET(request: NextRequest) {
   try {
     const url = new URL(request.url);
     const coupon_code = url?.searchParams.get("coupon");
+    const plan = url?.searchParams.get("plan");
 
     await startDB();
     const coupon = await Coupon.findOne({ coupon_type: "paypal", coupon_code });
     if (coupon) {
       if (!coupon.valid) {
+        return NextResponse.json(
+          { result: "Coupon Not Valid", success: false },
+          { status: 404 }
+        );
+      }
+      if (coupon.valid && coupon.plan !== "all" && coupon.plan !== plan) {
         return NextResponse.json(
           { result: "Coupon Not Valid", success: false },
           { status: 404 }

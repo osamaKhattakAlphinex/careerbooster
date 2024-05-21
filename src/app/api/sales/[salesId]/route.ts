@@ -3,7 +3,6 @@ import startDB from "@/lib/db";
 import { NextResponse } from "next/server";
 
 export async function DELETE(
-  req: any,
   { params }: { params: { salesId: string } }
 ) {
   try {
