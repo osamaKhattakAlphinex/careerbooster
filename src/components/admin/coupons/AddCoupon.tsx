@@ -63,7 +63,8 @@ const AddCoupon = ({ getCoupons }: Props) => {
 
       amount_off: Yup.number().when(["coupon_type", "discount_type"], {
         is: (discount_type: string, coupon_type: string) =>
-          discount_type === "amount_off" && coupon_type === "stripe",
+          discount_type === "amount_off" &&
+          (coupon_type === "stripe" || coupon_type === "paypal"),
         then: () =>
           Yup.number()
             .required("Please Enter Your amount_off amount")
@@ -147,9 +148,13 @@ const AddCoupon = ({ getCoupons }: Props) => {
         if (values.duration === "repeating") {
           payload.duration_in_months = values.duration_in_months;
         }
+      } else {
+        payload = {
+          ...payload,
+          valid: values.valid,
+          amount_off: values.amount_off,
+        };
       }
-
-      console.log(payload);
       try {
         let response: any = await axios.post("/api/coupons", payload);
         if (response?.data.success) {
@@ -360,6 +365,7 @@ const AddCoupon = ({ getCoupons }: Props) => {
                         )}
                     </div>
                   ))}
+
                 {/*  valid : yes or no  */}
                 <div>
                   <label
@@ -401,6 +407,33 @@ const AddCoupon = ({ getCoupons }: Props) => {
                     {formik.touched.credits && formik.errors.credits && (
                       <p className="pt-3 text-red-600">
                         {formik.errors.credits}
+                      </p>
+                    )}
+                  </div>
+                )}
+                {formik.values.coupon_type == "paypal" && (
+                  <div>
+                    <label
+                      htmlFor="credits"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Amount Off (in $)
+                    </label>
+
+                    <input
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.amount_off}
+                      type="number"
+                      name="amount_off"
+                      id="amount_off"
+                      className="bg-gray-50 border-[1px] border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      placeholder="0"
+                      pattern="0.0"
+                    />
+                    {formik.touched.amount_off && formik.errors.amount_off && (
+                      <p className="pt-3 text-red-600">
+                        {formik.errors.amount_off}
                       </p>
                     )}
                   </div>
