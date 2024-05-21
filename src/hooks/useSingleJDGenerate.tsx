@@ -65,7 +65,7 @@ const useSingleJDGenerate = (
             fileAddress: userData.uploadedResume.fileName,
           },
           personName: userData.firstName + " " + userData.lastName,
-          jobTitle: resumeData.state.jobPosition,
+          jobTitle: resumeData?.state?.jobPosition,
         }),
         signal: abortController?.signal,
       })

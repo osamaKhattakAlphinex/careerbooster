@@ -24,7 +24,7 @@ const SingleRecentResumeCard = ({
   const { email, resumes } = userData;
   const [confirmationModal, setConfirmationModal] = useState(false);
   const [deleting, setDeleting] = useState(false);
-
+  
   const router = useRouter();
   const dispatch = useDispatch();
   const handleOnView = async () => {

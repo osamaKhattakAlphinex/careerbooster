@@ -36,15 +36,13 @@ export async function POST(req: any) {
     const reqBody = await req.json();
     const experience = reqBody?.experience;
     const trainBotData = reqBody?.trainBotData;
-    // const quantifyingExperience = reqBody?.quantifyingExperience;
     const detailedResume = reqBody?.detailedResume;
     const personName = reqBody?.personName;
-    const jobTitle = reqBody?.jobTitle;
+    const jobTitle = reqBody.jobTitle ? reqBody.jobTitle : "his/her related field";
     const userCredits = await getUserCreditsByEmail(session?.user?.email);
     const creditsUsed = reqBody?.creditsUsed;
-    const dataset = "resume.writeJDSingle";
-    const model = await getTrainedModel(dataset);
-    //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
+    let dataset: string;
+    let model: string | null | undefined;
 
     if (userCredits) {
       if (userCredits < creditsUsed) {
@@ -54,11 +52,13 @@ export async function POST(req: any) {
         );
       }
     }
-    let promptRec;
-    let prompt;
+    let promptRec: any;
+    let prompt: any;
     await startDB();
 
     if (detailedResume) {
+      dataset = "linkedin.jobDescription";
+      model = await getTrainedModel(dataset);
       promptRec = await Prompt.findOne({
         type: "linkedin",
         name: "jobDescription",
@@ -68,6 +68,8 @@ export async function POST(req: any) {
       prompt = await prompt.replaceAll("{{PersonName}}", personName);
       prompt = await prompt.replaceAll("{{JobTitle}}", jobTitle);
     } else {
+      dataset = "resume.writeJDSingle";
+      model = await getTrainedModel(dataset);
       promptRec = await Prompt.findOne({
         type: "resume",
         name: "jdSingle",
