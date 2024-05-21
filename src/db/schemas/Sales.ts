@@ -7,6 +7,10 @@ const SaleSchema = new Schema(
       type: String,
       required: true,
     },
+    email: {
+      type: String,
+      required: true,
+    },
     phone: {
       type: String,
       required: true,
@@ -20,7 +24,7 @@ const SaleSchema = new Schema(
       default: true,
     },
     service: {
-      type: String,
+      type: [],
       required: true,
     },
   },
