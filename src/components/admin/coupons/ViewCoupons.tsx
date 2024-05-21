@@ -13,6 +13,7 @@ type Coupon = {
   coupon_type: string;
   name?: string;
   amount_off?: number;
+  plan?:string;
   currency?: string;
   duration: "once" | "repeating" | "forever";
   duration_in_months?: number;
@@ -60,8 +61,15 @@ const ViewCoupons = ({}) => {
     columnHelper.accessor("amount_off", {
       id: "amount_off",
 
-      header: () => "Disc Amount",
-      cell: (info: any) => info.renderValue() / 100,
+      header: () => "Disc Amount (in $)",
+      // cell: (info: any) => info.renderValue() / 100,
+      cell: (info: any) => info.renderValue(),
+    }),
+    columnHelper.accessor("plan", {
+      id: "plan",
+
+      header: () => "Coupon For",
+      cell: (info: any) => info.renderValue() + " users",
       // footer: (info) => info.column.id,
     }),
     columnHelper.accessor("percent_off", {

@@ -25,6 +25,11 @@ export async function POST(request: any) {
     if (fetchedCoupon) {
       if (fetchedCoupon.valid) {
         if (session.user?.email) {
+          await Coupon.findOneAndUpdate(
+            { coupon_code: coupon },
+            { $inc: { times_redeemed: 1 } },
+            { new: true, useFindAndModify: false }
+          );      
           updateUserCreditsByAdmin(session.user?.email, fetchedCoupon.credits);
         }
       } else {

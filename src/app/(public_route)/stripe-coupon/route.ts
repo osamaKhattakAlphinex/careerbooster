@@ -1,4 +1,5 @@
 // app/checkout-sessions/route.ts
+import Coupon from "@/db/schemas/Coupon";
 import { stripe } from "@/lib/stripe";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
@@ -13,6 +14,11 @@ export async function POST(req: Request) {
 
   try {
     const coupon = await stripe.coupons.retrieve(body.coupon);
+    await Coupon.findOneAndUpdate(
+      { coupon_code: body.coupon },
+      { $inc: { times_redeemed: 1 } },
+      { new: true, useFindAndModify: false }
+    );     
     return NextResponse.json(coupon);
   } catch (error) {
     if (error instanceof Stripe.errors.StripeError) {
