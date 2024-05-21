@@ -557,6 +557,9 @@ const TrainRegistrationBotAdminPage = () => {
                   <option value="write.genearteConsultingBid">
                     Write Consulting Bid
                   </option>
+                  <option value="deo.rewriteJob">
+                    Rewrite Job Desc and Skills
+                  </option>
                 </>
               )}
               {dataType === "linkedinTool" && (

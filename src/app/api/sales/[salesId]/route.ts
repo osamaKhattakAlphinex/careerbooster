@@ -1,9 +1,9 @@
 import Sales from "@/db/schemas/Sales";
 import startDB from "@/lib/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function DELETE(
-  req: any,
+  req: NextRequest,
   { params }: { params: { salesId: string } }
 ) {
   try {
