@@ -1,5 +1,7 @@
 import HeroArea from "@/components/public-pages/services/HeroArea";
+import Interests from "@/components/public-pages/services/Interests";
 import { LinkedinProfile } from "@/components/public-pages/services/LinkedinProfile";
+import OptimizedLinkedinProfile from "@/components/public-pages/services/OptimizedLinkedinProfile";
 import RecommendArea from "@/components/public-pages/services/RecommendArea";
 import ServicesForm from "@/components/public-pages/services/ServicesForm";
 import React from "react";
@@ -11,6 +13,8 @@ const Services = () => {
       <RecommendArea />
       <LinkedinProfile />
       <ServicesForm />
+      <Interests />
+      <OptimizedLinkedinProfile />
     </section>
   );
 };
