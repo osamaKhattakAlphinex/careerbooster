@@ -1,12 +1,9 @@
 "use client";
 import DataTable, { TableAction } from "@/components/admin/DataTable";
-import PaymentsDecryptionModal from "@/components/admin/payments/paymentsDecryptionModal";
-import { useAppContext } from "@/context/AppContext";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
-import { boltIcon } from "@/helpers/iconsProvider";
+import { boltIcon, deleteIcon } from "@/helpers/iconsProvider";
 import { createColumnHelper } from "@tanstack/react-table";
 import axios from "axios";
-import { stat } from "fs";
 import React, { useEffect, useRef, useState } from "react";
 
 type Sale = {
@@ -18,7 +15,7 @@ type Sale = {
   createdAt: string;
 };
 
-const ChangeStatus = ({ sale }: any) => {
+const ChangeStatus = ({ sale, refetch }: any) => {
   const [status, setStatus] = useState<boolean>(false);
 
   useEffect(() => {
@@ -44,11 +41,10 @@ const ChangeStatus = ({ sale }: any) => {
           const updatedSale = { ...sale, status: newStatus };
 
           axios
-            .put(`/api/sales/${sale.id}`, updatedSale)
+            .put(`/api/sales/${sale._id}`, updatedSale)
             .then((res: any) => {
               if (res.data.success) {
-                const sales = res.data.result;
-                console.log(sales);
+                refetch();
               }
             })
             .catch((err) => {
@@ -59,6 +55,29 @@ const ChangeStatus = ({ sale }: any) => {
       />{" "}
       Completed
     </label>
+  );
+};
+const DeleteSale = ({ sale, refetch }: any) => {
+  return (
+    <button
+      className="whitespace-nowrap p-2 text-xs font-medium text-center text-white bg-rose-700 rounded-lg hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 dark:bg-rose-600 dark:hover:bg-rose-700 dark:focus:ring-rose-800 no-underline"
+      title="Delete"
+      onClick={(e) => {
+        axios
+          .delete(`/api/sales/${sale._id}`)
+          .then((res: any) => {
+            if (res.data.success) {
+              refetch();
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+          .finally(() => {});
+      }}
+    >
+      {deleteIcon}
+    </button>
   );
 };
 
@@ -76,15 +95,15 @@ const Sales = () => {
     columnHelper.accessor("amount", {
       id: "amount",
       header: () => "Amount",
-      cell: (info) => info.renderValue()+ " $",
+      cell: (info) => info.renderValue() + " $",
     }),
     columnHelper.accessor("service", {
       id: "service",
       header: () => "Service",
       cell: (info) => {
-        const services:any = info.renderValue()
-        const labels = services.map((service:any) => service.label) 
-        return labels.join(", ")
+        const services: any = info.renderValue();
+        const labels = services.map((service: any) => service.label);
+        return labels.join(", ");
       },
     }),
     columnHelper.accessor("phone", {
@@ -96,8 +115,8 @@ const Sales = () => {
       header: () => "Status",
       cell: (info) => (
         <span
-          className={` text-gray-200 text-center text-sm font-semibold uppercase p-1 rounded-sm  ${
-            info.renderValue() === "pending" ? "bg-rose-500" : "bg-green-600"
+          className={` text-gray-200 text-center text-sm font-semibold uppercase p-1 rounded-md  ${
+            info.renderValue() === "pending" ? "bg-yellow-600" : "bg-green-600"
           }`}
         >
           {" "}
@@ -116,9 +135,16 @@ const Sales = () => {
     {
       name: "Change Status",
       type: "component",
-      element: (sale: any) => <ChangeStatus sale={sale} />,
+      element: (sale: any) => <ChangeStatus sale={sale} refetch={fetchSales} />,
       styles: "",
       icon: boltIcon,
+    },
+    {
+      name: "Delete",
+      type: "component",
+      element: (sale: any) => <DeleteSale sale={sale} refetch={fetchSales} />,
+      styles: "",
+      icon: deleteIcon,
     },
 
     // {

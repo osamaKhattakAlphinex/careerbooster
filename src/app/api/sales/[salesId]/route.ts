@@ -28,7 +28,6 @@ export async function PUT(
   try {
     await startDB();
     const { fullname, status, amount, phone, service } = await req.json();
-    console.log(status, amount, phone, service);
     const updatedSale = await Sales.findOneAndUpdate(
       { _id: params.salesId },
       {
@@ -46,7 +45,6 @@ export async function PUT(
       { status: 200 }
     );
   } catch (error) {
-    console.log(error);
 
     return NextResponse.json(
       {

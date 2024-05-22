@@ -6,7 +6,7 @@ export async function GET(req: any) {
   try {
     await startDB();
 
-    const sales = await Sales.find({});
+    const sales = await Sales.find({}).sort({createdAt: -1});
 
     return NextResponse.json({
       result: sales,
