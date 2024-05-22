@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Content, Fjalla_One, Montserrat } from "next/font/google";
 import React from "react";
 import b1 from "@/../public/assets/images/services/b1.webp";
@@ -73,10 +73,10 @@ export const LinkedinProfile = () => {
       >
         {'"'}LinkedIn Profiles We Have Crafted for Executives{'"'}
       </div>
-      <div className="pt-5 md:px-10 lg:px-[4rem] flex flex-wrap justify-between gap-2 ">
+      <div className="pt-5 w-full flex-wrap flex justify-center gap-2 ">
         {user &&
           user.map((user, index) => (
-            <div key={index} className="mt-12 flex flex-col">
+            <div key={index} className="mt-12 w-[38%] flex flex-col">
               <h2
                 className={`${montserrat.className} text-[25px] capitalize ${
                   user?.title === "before" ? "text-red-700" : "text-green-700"

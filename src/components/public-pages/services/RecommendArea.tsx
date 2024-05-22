@@ -71,18 +71,18 @@ const linked_user = [
 ];
 const RecommendArea = () => {
   return (
-    <div className="px-16 pb-5">
+    <div className="px-10 pb-5">
       <div className="">
         <h1 className="text-center px-20 py-10 leading-[4rem]">
           <strong className={`${montserrat.className} text-5xl text-[#6350C8]`}>
             Senior Executives & Recruiters Recommend Us
           </strong>
         </h1>
-        <div className="flex flex-wrap gap-3">
+        <div className="w-full flex-wrap flex justify-center gap-10 ">
           {recommendUser &&
             recommendUser.map((user, index) => (
               <div
-                className="shadow-xl rounded-lg overflow-hidden w-[38rem] bg-black/10"
+                className="w-[38%] shadow-xl rounded-lg overflow-hidden  bg-black/10"
                 key={index}
               >
                 <div className="h-[21rem]">
@@ -115,7 +115,7 @@ const RecommendArea = () => {
             ))}
         </div>
         {/* 3 User */}
-        <div className="flex gap-5 items-start py-10 ">
+        <div className="flex gap-5 items-start py-10 xl:justify-center xl:mx-auto ">
           {linked_user &&
             linked_user.map((user, index) => (
               <div
