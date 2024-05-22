@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import axios from "axios";
 
 type Coupon = {
-  coupon_type: "stripe" | "paypal" | "reward";
+  coupon_type: "stripe" | "paypal" | "reward" | "services";
 
   name?: string;
   amount_off?: number;
@@ -41,7 +41,7 @@ const AddCoupon = ({ getCoupons }: Props) => {
     percent_off: 0,
     redeem_by: new Date().toDateString(),
     valid: "true",
-    plan:"all",
+    plan: "all",
     discount_type: "amount_off",
     expirable: "false",
 
@@ -120,6 +120,12 @@ const AddCoupon = ({ getCoupons }: Props) => {
           valid: values.valid,
           credits: values.credits,
         };
+      } else if (values.coupon_type === "services") {
+        payload = {
+          ...payload,
+          valid: values.valid,
+          amount_off: values.amount_off,
+        };
       } else if (values.coupon_type === "stripe") {
         payload = {
           ...payload,
@@ -155,7 +161,7 @@ const AddCoupon = ({ getCoupons }: Props) => {
           ...payload,
           valid: values.valid,
           amount_off: values.amount_off,
-          plan: values.plan
+          plan: values.plan,
         };
       }
       try {
@@ -265,8 +271,9 @@ const AddCoupon = ({ getCoupons }: Props) => {
                     className="bg-gray-50 border-[1px] border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   >
                     <option value="reward">Reward</option>
-                    <option value="stripe">Stripe</option>
+                    {/* <option value="stripe">Stripe</option> */}
                     <option value="paypal">Paypal</option>
+                    <option value="services">Services</option>
                   </select>
                 </div>
                 {/* Name of the coupan */}
@@ -414,8 +421,7 @@ const AddCoupon = ({ getCoupons }: Props) => {
                     )}
                   </div>
                 )}
-                {formik.values.coupon_type == "paypal" && (
-                  <>
+                {formik.values.coupon_type == "services" && (
                   <div>
                     <label
                       htmlFor="credits"
@@ -441,32 +447,61 @@ const AddCoupon = ({ getCoupons }: Props) => {
                       </p>
                     )}
                   </div>
-                  <div>
-                    <label
-                      htmlFor="plan"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                      Coupon For
-                    </label>
-                    <select
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.plan}
-                      name="plan"
-                      id="plan"
-                      className="bg-gray-50 border-[1px] border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    >
-                      <option value="all">All</option>
-                      <option value="standard">Standard ($ 99)</option>
-                      <option value="premium">Premium ($ 494)</option>
-                    </select>
-                    
-                    {formik.touched.plan && formik.errors.plan && (
-                      <p className="pt-3 text-red-600">
-                        {formik.errors.plan}
-                      </p>
-                    )}
-                  </div>
+                )}
+                {formik.values.coupon_type == "paypal" && (
+                  <>
+                    <div>
+                      <label
+                        htmlFor="credits"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        Amount Off (in $)
+                      </label>
+
+                      <input
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.amount_off}
+                        type="number"
+                        name="amount_off"
+                        id="amount_off"
+                        className="bg-gray-50 border-[1px] border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        placeholder="0"
+                        pattern="0.0"
+                      />
+                      {formik.touched.amount_off &&
+                        formik.errors.amount_off && (
+                          <p className="pt-3 text-red-600">
+                            {formik.errors.amount_off}
+                          </p>
+                        )}
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="plan"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >
+                        Coupon For
+                      </label>
+                      <select
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.plan}
+                        name="plan"
+                        id="plan"
+                        className="bg-gray-50 border-[1px] border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      >
+                        <option value="all">All</option>
+                        <option value="standard">Standard ($ 99)</option>
+                        <option value="premium">Premium ($ 494)</option>
+                      </select>
+
+                      {formik.touched.plan && formik.errors.plan && (
+                        <p className="pt-3 text-red-600">
+                          {formik.errors.plan}
+                        </p>
+                      )}
+                    </div>
                   </>
                 )}
               </div>

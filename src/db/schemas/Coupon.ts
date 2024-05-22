@@ -6,7 +6,7 @@ const CouponSchema = new Schema(
     coupon_type: {
       type: String,
       required: true,
-      enum: ["reward", "stripe", "paypal"],
+      enum: ["reward", "stripe", "paypal", "services"],
     },
 
     coupon_code: {

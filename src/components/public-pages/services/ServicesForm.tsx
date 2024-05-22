@@ -16,14 +16,14 @@ type Service = {
 const SERVICES: Service[] = [
   {
     id: "linkedin-optimization",
-    label: "linkedin optimization",
-    amount: 200,
+    label: "Linkedin Optimization",
+    amount: 494,
   },
-  {
-    id: "resume-generation",
-    label: "resume generation",
-    amount: 200,
-  },
+  // {
+  //   id: "resume-generation",
+  //   label: "Resume Generation",
+  //   amount: 200,
+  // },
 ];
 
 const ServicesForm = () => {
@@ -38,6 +38,20 @@ const ServicesForm = () => {
   const [showPaypalPopup, setShowPaypalPopup] = useState(false);
 
   const paypalRef = useRef<any>(null);
+  const applyCoupon = async () =>{
+    if (coupan !== "") {
+      const getCoupon = await fetch(
+        `/api/coupons/getOneCoupon?coupon=${coupan}&type=services`
+      );
+      const data = await getCoupon.json();
+      if (data.success) {
+        console.log(data)
+        
+        const amount_off = data.result.amount_off;
+        setAmountOff(amount_off);
+      } 
+    }
+  }
 
   return (
     <div className="px-4 py-8 bg-gray-900 md:p-24">
@@ -57,16 +71,16 @@ const ServicesForm = () => {
                 &nbsp; (Valued at $2000)
               </span>
             </p>
-            <p className="text-center ">
+            {/* <p className="text-center ">
               <span className="block text-base font-semibold md:text-lg md:inline">
                 Resume Generation:
-              </span>
+              </span>{" "}
               Elevate your profile&apos;s visibility and appeal replace it for
               resume generation.
               <span className="block text-lg text-blue-300 md:text-xl md:inline">
                 &nbsp; (Valued at $2000)
               </span>
-            </p>
+            </p> */}
             <p className="text-center ">
               <span className="block text-base font-semibold md:text-lg md:inline">
                 Bonus #1:
@@ -87,7 +101,7 @@ const ServicesForm = () => {
                 &nbsp; (Valued at $100)
               </span>
             </p>
-            <p className="text-center ">
+            {/* <p className="text-center ">
               <span className="block text-base font-semibold md:text-lg md:inline">
                 Bonus #3:
               </span>{" "}
@@ -96,7 +110,7 @@ const ServicesForm = () => {
               <span className="block text-lg text-blue-300 md:text-xl md:inline">
                 &nbsp; (Valued at $100)
               </span>
-            </p>
+            </p> */}
           </div>
           <div className="self-center ">
             <span className="text-xl font-bold text-center md:text-4xl">
@@ -212,19 +226,17 @@ const ServicesForm = () => {
 
           {/* coupan */}
 
-          <div className="flex flex-col gap-2">
-            <label
-              htmlFor="coupan"
-              className="text-base font-semibold md:text-lg"
-            >
-              Coupan
-            </label>
+          <div className="flex gap-2">
             <input
               type="text"
               id="coupan"
+              placeholder="Enter Coupon Code"
               onChange={(e) => setCoupan(e.target.value)}
               className="p-2 bg-transparent border border-gray-400 rounded-md"
             />
+            <button className="self-center rounded-md bg-gray-950 py-2 px-4  font-semibold text-center text-gray-200 " onClick={applyCoupon}>
+              Apply
+            </button>
           </div>
 
           {services && services.length > 0 && (
