@@ -69,14 +69,17 @@ export const LinkedinProfile = () => {
   return (
     <div className="pb-12 ">
       <div
-        className={`bg-[#1b4972] text-[40px] text-center  px-[18.5rem] py-12 ${montserrat.className} `}
+        className={`bg-[#1b4972] lg:text-[40px] md:text-[32px] xs:text-[24px] xs:py-4 md:py-8 text-center  lg:px-[18.5rem] lg:py-12 ${montserrat.className} `}
       >
         {'"'}LinkedIn Profiles We Have Crafted for Executives{'"'}
       </div>
-      <div className="pt-5 w-full flex-wrap flex justify-center gap-2 ">
+      <div className="pt-5 md:w-full flex-wrap flex md:flex-row xs:flex-col justify-center gap-2 xs:px-4 ">
         {user &&
           user.map((user, index) => (
-            <div key={index} className="mt-12 w-[38%] flex flex-col">
+            <div
+              key={index}
+              className="lg:mt-12 md:w-[38%] xs:w-full flex flex-col"
+            >
               <h2
                 className={`${montserrat.className} text-[25px] capitalize ${
                   user?.title === "before" ? "text-red-700" : "text-green-700"
@@ -90,13 +93,13 @@ export const LinkedinProfile = () => {
                   alt=""
                   width={510}
                   height={510}
-                  className="ml-4 mt-2"
+                  className="md:ml-4 md:mt-2"
                 />
               </div>
             </div>
           ))}
       </div>
-      <div className=" mx-auto flex flex-col justify-center items-center mt-20 w-full gap-10">
+      <div className=" mx-auto flex flex-col justify-center items-center md:mt-20 xs:mt-8 w-full gap-10 xs:px-4">
         {user2.map((items) => {
           return (
             <Image
@@ -109,23 +112,23 @@ export const LinkedinProfile = () => {
           );
         })}
       </div>
-      <div className="pt-5 justify-center flex flex-wrap  gap-8 mt-20">
+      <div className="pt-5 justify-center flex flex-wrap  gap-8 lg:mt-20 md:mt-8 xs:px-4">
         {user3 &&
           user3.map((user) => (
-            <div className="">
+            <div className="md:w-[40%] xs:w-full">
               <Image
                 src={user?.image}
                 alt=""
                 width={520}
                 height={507}
-                className="ml-4 mt-2 shadow-xl border-2 border-[#E1E362]"
+                className="md:ml-4 md:mt-2 shadow-xl border-2 border-[#E1E362]"
               />
             </div>
           ))}
       </div>
-      <div className="flex flex-col mx-auto w-fit my-20">
+      <div className="flex flex-col mx-auto w-fit lg:my-20 xs:mt-10 xs:px-4">
         <button
-          className="bg-gradient-to-r to-fuchsia-600 from-indigo-500 w-fit p-4 mx-auto  hover:scale-75 hover:transition-all hover:duration-100 text-white px-4 py-2 hover:ease-in-out"
+          className="bg-gradient-to-r to-fuchsia-600 from-indigo-500 w-fit md:p-4 mx-auto  hover:scale-75 hover:transition-all hover:duration-100 text-white xs:p-2 hover:ease-in-out rounded-md"
           onClick={() => {
             const targetElement = document.querySelector(".serviceForm");
             const topOffset = 300; // Adjust this value as needed
@@ -141,10 +144,14 @@ export const LinkedinProfile = () => {
             }
           }}
         >
-          <h2 className={`text-[34px] font-bold ${fjalla_One.className}`}>
+          <h2
+            className={`lg:text-[34px] md:text-2xl xs:text-[14px] font-bold font-serif`}
+          >
             Unlock Your Profile&apos;s Potential Now
           </h2>
-          <p className={`capitalize text-[24px] text-gray-300`}>
+          <p
+            className={`capitalize font-sans lg:text-[25px] md:text-[18px] xs:text-[12px] text-gray-300`}
+          >
             click here to optimize your linkedin profile
           </p>
         </button>

@@ -73,10 +73,12 @@ const linked_user = [
 ];
 const RecommendArea = () => {
   return (
-    <div className="px-10 pb-5">
+    <div className="md:px-10 xs:px-4 pb-5">
       <div className="">
-        <h1 className="text-center px-20 py-10 leading-[4rem]">
-          <strong className={`${montserrat.className} text-5xl text-[#6350C8]`}>
+        <h1 className="text-center lg:px-20 md:py-10 xs:py-4 lg:leading-[4rem]">
+          <strong
+            className={`${montserrat.className} lg:text-5xl md:text-3xl xs:text-2xl  text-[#6350C8]`}
+          >
             Senior Executives & Recruiters Recommend Us
           </strong>
         </h1>
@@ -84,10 +86,10 @@ const RecommendArea = () => {
           {recommendUser &&
             recommendUser.map((user, index) => (
               <div
-                className="w-[38%] shadow-xl rounded-lg overflow-hidden  bg-black/10"
+                className="md:w-[38%] xs:w-full shadow-xl rounded-lg overflow-hidden  bg-black/10"
                 key={index}
               >
-                <div className="h-[21rem]">
+                <div className="lg:h-[21rem]">
                   <iframe
                     src={user?.url}
                     frameBorder="0"
@@ -96,19 +98,19 @@ const RecommendArea = () => {
                     className="w-full h-full"
                   ></iframe>
                 </div>
-                <div className="flex flex-col items-center py-3">
+                <div className="flex flex-col justify-center text-center py-3">
                   <h2
-                    className={`${montserrat.className} text-xl text-gray-300`}
+                    className={`${montserrat.className} lg:text-xl xs:text-[18px] text-gray-300`}
                   >
                     {user?.name}
                   </h2>
                   <h1
-                    className={`${montserrat.className} text-[25px] text-[#6350C8]`}
+                    className={`${montserrat.className} lg:text-[25px] xs:text-[22px] text-[#6350C8]`}
                   >
                     {user?.position}
                   </h1>
                   <h2
-                    className={`${montserrat_500.className} text-xl text-gray-300`}
+                    className={`${montserrat_500.className} lg:text-xl xs:text-[18px] text-gray-300`}
                   >
                     {user?.company}
                   </h2>
@@ -117,12 +119,12 @@ const RecommendArea = () => {
             ))}
         </div>
         {/* 3 User */}
-        <div className="flex gap-5 items-start py-10 xl:justify-center xl:mx-auto ">
+        <div className="flex md:flex-row xs:flex-col gap-5 items-start py-10 xl:justify-center xl:mx-auto ">
           {linked_user &&
             linked_user.map((user, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center w-4/12 bg-black/10  p-6 rounded-lg shadow-xl max-w-md"
+                className="flex flex-col items-center md:w-4/12 xs:w-full bg-black/10  lg:p-6 xs:p-2 rounded-lg shadow-xl max-w-md"
               >
                 <div className="flex items-center justify-center mb-6 ">
                   {/* Replace "Image" with an actual img tag if you have an image URL */}
@@ -135,23 +137,25 @@ const RecommendArea = () => {
                   />
                 </div>
                 <div className="text-center">
-                  <p className={`text-gray-400 mb-4 text-[19px] font-serif`}>
+                  <p
+                    className={`text-gray-400 mb-4 lg:text-[19px] xs:text-base  font-serif`}
+                  >
                     {'"'}
                     {user?.description}
                     {'"'}
                   </p>
                   <h1
-                    className={`${montserrat_500.className} text-gray-100 text-[32px] mt-3`}
+                    className={`${montserrat_500.className} text-gray-100 lg:text-[32px] xs:text-[22px]  mt-3`}
                   >
                     {user?.name}
                   </h1>
                   <h2
-                    className={`${montserrat_500.className} text-[23px] text-[#4b2fff]`}
+                    className={`${montserrat_500.className} lg:text-[23px] xs:text-[16px] text-[#4b2fff]`}
                   >
                     <strong>{user?.position}</strong>
                   </h2>
                   <h2
-                    className={`${montserrat_500.className} text-[23px] text-gray-400`}
+                    className={`${montserrat_500.className} lg:text-[23px] xs:text-[16px] text-gray-400`}
                   >
                     {user?.company}
                   </h2>
@@ -172,24 +176,24 @@ const RecommendArea = () => {
               />
             </div>
             <div className="flex flex-col items-center">
-              <p className="text-gray-950 font-serif px-2 text-[19px] text-center">
+              <p className="text-gray-950 font-serif px-2 lg:text-[19px] xs:text-[16px] text-center">
                 {'"'}I secured my new role as Director of Business Development
                 at OwlFinancial Technologies in March 2024, a full-time remote
                 position, just 30 days after optimization. I highly recommend
                 CareerBooster to anyone struggling to find their next role.{'"'}
               </p>
               <h1
-                className={`text-gray-950 text-[32px] mt-2 ${montserrat_500.className}`}
+                className={`text-gray-950 lg:text-[32px] xs:text-[25px] mt-2 ${montserrat_500.className} text-center`}
               >
                 Michael Borrelle
               </h1>
               <h2
-                className={`text-[#188bf6] ${montserrat.className} text-[23px]`}
+                className={`text-[#188bf6] ${montserrat.className} lg:text-[23px] xs:text[18px] text-center`}
               >
                 Director of Business Development
               </h2>
               <h2
-                className={`text-gray-950 text-[23px] ${montserrat_500.className}`}
+                className={`text-gray-950 lg:text-[23px] xs:text-[18px] ${montserrat_500.className} text-center`}
               >
                 at OwlFinancial Technologies
               </h2>
@@ -198,7 +202,7 @@ const RecommendArea = () => {
         </div>
         <div className="flex justify-center py-8">
           <button
-            className="flex flex-col cursor-pointer items-center bg-gradient-to-r to-fuchsia-600 from-indigo-500 w-fit p-4 mx-auto  hover:scale-75 hover:transition-all hover:duration-100 py-3 px-3 hover:ease-in-out"
+            className="flex flex-col cursor-pointer items-center bg-gradient-to-r to-fuchsia-600 from-indigo-500 w-fit md:p-4 xs:py-2 mx-auto  hover:scale-75 hover:transition-all hover:duration-100 py-3 px-3 hover:ease-in-out rounded-md"
             onClick={() => {
               const targetElement = document.querySelector(".serviceForm");
               const topOffset = 300; // Adjust this value as needed
@@ -214,10 +218,10 @@ const RecommendArea = () => {
               }
             }}
           >
-            <span className="text-[34px] font-serif ">
+            <span className="lg:text-[34px] md:text-2xl xs:text-[16px] font-serif ">
               Elcevate Your Professional Presence
             </span>
-            <span className="font-sans text-[25px] text-gray-300">
+            <span className="font-sans lg:text-[25px] md:text-[18px] xs:text-[12px] text-gray-300">
               Click Here to optimize your LinkedIn profile.
             </span>
           </button>

@@ -10,14 +10,16 @@ const lato_400 = Lato({
 });
 function Interests() {
   return (
-    <div className={`shadow-xl rounded-md flex flex-col gap-8 `}>
+    <div className={`shadow-xl rounded-md flex flex-col gap-8  pt-8`}>
       <h2
-        className={`text-gray-300 text-[44px] text-center px-20 ${montserrat_500.className}`}
+        className={`text-gray-300 lg:text-[44px] md:text-[32px] xs:text-[24px] text-center lg:px-20 md:px-10 ${montserrat_500.className}`}
       >
         Imagine being able to attract inquiries from headhunters without
         submitting countless job applications.
       </h2>
-      <h1 className={`${montserrat_500.className} text-center text-[46px]`}>
+      <h1
+        className={`${montserrat_500.className} text-center text-[46px] md:text-[34px] xs:text-[26px] xs:px-4`}
+      >
         <strong>Does that interest you?</strong>
       </h1>
       <div className="px-20 flex flex-col gap-8">
