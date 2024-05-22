@@ -3,12 +3,21 @@ import { crossIcon } from "@/helpers/iconsProvider";
 import React, { useEffect, useRef, useState } from "react";
 import { PayPalButton } from "react-paypal-button-v2";
 import { showErrorToast, showSuccessToast } from "@/helpers/toast";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 type Service = {
   id: string;
   label: string;
   amount: number;
 };
+interface InitialValues {
+  coupan: string;
+  fullname: string;
+  email: string;
+  phone: string;
+  services: Service[];
+}
 
 const SERVICES: Service[] = [
   {
@@ -24,17 +33,31 @@ const SERVICES: Service[] = [
 ];
 
 const ServicesForm = () => {
-  const [coupan, setCoupan] = useState<string>("");
   const [applyingCoupon, setApplyingCoupon] = useState<boolean>(false);
   const [coupanText, setCoupanText] = useState<string>("");
-  const [services, setServices] = useState<Service[]>([]);
-  const [email, setEmail] = useState<string>("");
-  const [phone, setPhone] = useState<string>("");
   const [amount, setAmount] = useState<number>(0);
   const [amountOff, setAmountOff] = useState<number>(0);
-  const [fullname, setFullname] = useState<string>("");
   const [showPaypalPopup, setShowPaypalPopup] = useState(false);
 
+  const formik = useFormik<InitialValues>({
+    initialValues: {
+      coupan: "",
+      fullname: "",
+      email: "",
+      phone: "",
+      services:[],
+    },
+    validationSchema: Yup.object({
+      fullname: Yup.string().required("Fullname is required"),
+      email: Yup.string()
+        .email("Invalid email address")
+        .required("Email is required"),
+      phone: Yup.string().required("Phone number is required"),
+    }),
+    onSubmit: async (values) => {
+      setShowPaypalPopup(true);
+    },
+  });
   const salesEntry = async () => {
     const salesEntry = await fetch("/api/sales", {
       method: "POST",
@@ -42,20 +65,17 @@ const ServicesForm = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: email,
-        phone: phone,
-        fullname: fullname,
+        email: formik.values.email,
+        phone: formik.values.phone,
+        fullname: formik.values.fullname,
         amount: amount - amountOff,
         status: "pending",
-        service: services,
+        service: formik.values.services,
       }),
     });
     const response = await salesEntry.json();
     if (response.success) {
-      setFullname("");
-      setServices([]);
-      setEmail("");
-      setPhone("");
+      formik.resetForm();
       setShowPaypalPopup(false);
       showSuccessToast("Order Added Successfully");
     } else {
@@ -65,13 +85,14 @@ const ServicesForm = () => {
 
   const paypalRef = useRef<any>(null);
   const applyCoupon = async () => {
-    if (coupan !== "") {
+    if (formik.values.coupan !== "") {
       setApplyingCoupon(true);
       const getCoupon = await fetch(
-        `/api/coupons/getOneCoupon?coupon=${coupan}&type=services`
+        `/api/coupons/getOneCoupon?coupon=${formik.values.coupan}&type=services`
       );
       const data = await getCoupon.json();
       if (data.success) {
+        formik.setFieldValue("coupan", "");
         const amount_off = data.result.amount_off;
         setAmountOff(amount_off);
         setApplyingCoupon(false);
@@ -189,13 +210,7 @@ const ServicesForm = () => {
             Enter Your Details Below to Complete Your Order.
           </span>
         </div>
-        <form
-          className="space-y-5 "
-          onSubmit={(e) => {
-            e.preventDefault();
-            setShowPaypalPopup(true);
-          }}
-        >
+        <form className="space-y-5 " onSubmit={formik.handleSubmit}>
           <div className="flex flex-col gap-2">
             <label
               htmlFor="fullname"
@@ -205,11 +220,14 @@ const ServicesForm = () => {
             </label>
             <input
               type="text"
+              value={formik.values.fullname}
               id="fullname"
-              onChange={(e) => setFullname(e.target.value)}
+              onChange={formik.handleChange}
               className="p-2 bg-transparent border border-gray-400 rounded-md"
-              required
             />
+            {formik.touched.fullname && formik.errors.fullname && (
+              <p className="text-red-700">{formik.errors.fullname}</p>
+            )}
           </div>
           <div className="flex flex-col gap-2">
             <label
@@ -221,10 +239,13 @@ const ServicesForm = () => {
             <input
               type="email"
               id="email"
-              onChange={(e) => setEmail(e.target.value)}
-              required
+              value={formik.values.email}
+              onChange={formik.handleChange}
               className="p-2 bg-transparent border border-gray-400 rounded-md"
             />
+            {formik.touched.email && formik.errors.email && (
+              <p className="text-red-700">{formik.errors.email}</p>
+            )}
           </div>
           <div className="flex flex-col gap-2">
             <label
@@ -236,10 +257,13 @@ const ServicesForm = () => {
             <input
               type="tel"
               id="phone"
-              required
-              onChange={(e) => setPhone(e.target.value)}
+              value={formik.values.phone}
+              onChange={formik.handleChange}
               className="p-2 bg-transparent border border-gray-400 rounded-md"
             />
+            {formik.touched.phone && formik.errors.phone && (
+              <p className="text-red-700">{formik.errors.phone}</p>
+            )}
           </div>
 
           <div className="flex flex-col gap-3">
@@ -251,13 +275,21 @@ const ServicesForm = () => {
               >
                 <div className="flex flex-row justify-start gap-2 ">
                   <input
+                    checked={formik.values.services.includes(service)}
                     onChange={(e) => {
-                      if (e.target.checked) {
-                        setServices([...services, service]);
+                      const { checked } = e.target;
+                      if (checked) {
+                        formik.setFieldValue("services", [
+                          ...formik.values.services,
+                          service,
+                        ]);
                         setAmount(amount + service.amount);
                       } else {
-                        setServices(
-                          services.filter((s) => s.id !== service.id)
+                        formik.setFieldValue(
+                          "services",
+                          formik.values.services.filter(
+                            (s: any) => s.id !== service.id
+                          )
                         );
                         setAmount(amount - service.amount);
                       }
@@ -275,7 +307,7 @@ const ServicesForm = () => {
             ))}
           </div>
 
-          {services && services.length > 0 && (
+          {formik.values.services && formik.values.services.length > 0 && (
             <>
               {/* coupan */}
 
@@ -283,13 +315,14 @@ const ServicesForm = () => {
                 <input
                   type="text"
                   id="coupan"
+                  value={formik.values.coupan}
                   placeholder="Enter Coupon Code"
-                  onChange={(e) => setCoupan(e.target.value)}
+                  onChange={formik.handleChange}
                   className="p-2 bg-transparent border border-gray-400 rounded-md"
                 />
                 <button
                   className="self-center rounded-md bg-gray-950 py-2 px-4  font-semibold text-center text-gray-200 "
-                  disabled={coupan === ""}
+                  disabled={formik.values.coupan === ""}
                   onClick={(e) => {
                     e.preventDefault();
                     applyCoupon();
@@ -307,7 +340,7 @@ const ServicesForm = () => {
                 </span>
                 <div className="mt-2 border-t-[1.5px]">
                   <div className="divide-gray-400 divide-y-[1.5px] py-2">
-                    {services.map((service) => (
+                    {formik.values.services.map((service:any) => (
                       <div
                         className="flex flex-row items-center justify-between gap-2 "
                         key={service.id}
@@ -346,7 +379,7 @@ const ServicesForm = () => {
                 <div className="flex flex-row items-center justify-center w-full rounded-md md:w-32 bg-gray-950">
                   <button
                     type="submit"
-                    name="Submit Form "
+                    name="Submit"
                     className="self-center w-full p-2 font-semibold text-center text-gray-200 uppercase "
                   >
                     Place Order
