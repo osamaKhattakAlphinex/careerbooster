@@ -74,7 +74,7 @@ const RecommendArea = () => {
     <div className="px-16 pb-5">
       <div className="">
         <h1 className="text-center px-20 py-10 leading-[4rem]">
-          <strong className={`${montserrat.className} text-5xl text-[#4b2fff]`}>
+          <strong className={`${montserrat.className} text-5xl text-[#6350C8]`}>
             Senior Executives & Recruiters Recommend Us
           </strong>
         </h1>
@@ -101,7 +101,7 @@ const RecommendArea = () => {
                     {user?.name}
                   </h2>
                   <h1
-                    className={`${montserrat.className} text-[25px] text-[#4b2fff]`}
+                    className={`${montserrat.className} text-[25px] text-[#6350C8]`}
                   >
                     {user?.position}
                   </h1>
@@ -195,7 +195,7 @@ const RecommendArea = () => {
           </div>
         </div>
         <div className="flex justify-center py-8">
-          <button className="flex flex-col cursor-pointer items-center bg-[#3baa07fc]/80 py-3 px-3">
+          <button className="flex flex-col cursor-pointer items-center bg-gradient-to-r to-fuchsia-600 from-indigo-500 w-fit p-4 mx-auto  hover:scale-75 hover:transition-all hover:duration-100 py-3 px-3 hover:ease-in-out">
             <span className="text-[34px] font-serif ">
               Elcevate Your Professional Presence
             </span>

@@ -1,3 +1,5 @@
+import Faqs from "@/components/public-pages/services/Faqs";
+import Gurantee from "@/components/public-pages/services/Gurantee";
 import HeroArea from "@/components/public-pages/services/HeroArea";
 import Interests from "@/components/public-pages/services/Interests";
 import { LinkedinProfile } from "@/components/public-pages/services/LinkedinProfile";
@@ -15,6 +17,8 @@ const Services = () => {
       <ServicesForm />
       <Interests />
       <OptimizedLinkedinProfile />
+      <Gurantee />
+      <Faqs />
     </section>
   );
 };
