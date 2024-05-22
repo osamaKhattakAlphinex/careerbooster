@@ -26,7 +26,6 @@ export async function POST(req: Request) {
 
     const payload = await req.json();
 
-    console.log(payload)
     const newSale = new Sales(payload);
 
     await newSale.save();

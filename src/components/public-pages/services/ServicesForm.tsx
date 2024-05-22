@@ -35,7 +35,7 @@ const ServicesForm = () => {
   const [fullname, setFullname] = useState<string>("");
   const [showPaypalPopup, setShowPaypalPopup] = useState(false);
 
-  const salesEntry =async () =>{
+  const salesEntry = async () => {
     const salesEntry = await fetch("/api/sales", {
       method: "POST",
       headers: {
@@ -45,23 +45,23 @@ const ServicesForm = () => {
         email: email,
         phone: phone,
         fullname: fullname,
-        amount: amount -amountOff,
+        amount: amount - amountOff,
         status: "pending",
         service: services,
       }),
-    })
-    const response  = await salesEntry.json()
-    if(response.success){
-      setFullname("")
-      setServices([])
-      setEmail("")
-      setPhone("")
-      setShowPaypalPopup(false)
-      showSuccessToast("Order Added Successfully")
-    }else {
-      showErrorToast(response.error)
+    });
+    const response = await salesEntry.json();
+    if (response.success) {
+      setFullname("");
+      setServices([]);
+      setEmail("");
+      setPhone("");
+      setShowPaypalPopup(false);
+      showSuccessToast("Order Added Successfully");
+    } else {
+      showErrorToast(response.error);
     }
-  } 
+  };
 
   const paypalRef = useRef<any>(null);
   const applyCoupon = async () => {
@@ -289,7 +289,11 @@ const ServicesForm = () => {
                 />
                 <button
                   className="self-center rounded-md bg-gray-950 py-2 px-4  font-semibold text-center text-gray-200 "
-                  onClick={applyCoupon}
+                  disabled={coupan === ""}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    applyCoupon();
+                  }}
                 >
                   {!applyingCoupon ? "Apply" : "Applying..."}
                 </button>
@@ -369,7 +373,7 @@ const ServicesForm = () => {
                     currency="USD"
                     onSuccess={(details: any, data: any) => {
                       if (data?.orderID) {
-                        salesEntry()
+                        salesEntry();
                       }
                     }}
                   />

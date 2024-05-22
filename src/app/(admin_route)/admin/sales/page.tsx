@@ -30,10 +30,16 @@ const Sales = () => {
     columnHelper.accessor("amount", {
       id: "amount",
       header: () => "Amount",
+      cell: (info) => info.renderValue()+ " $",
     }),
     columnHelper.accessor("service", {
       id: "service",
       header: () => "Service",
+      cell: (info) => {
+        const services:any = info.renderValue()
+        const labels = services.map((service:any) => service.label) 
+        return labels.join(", ")
+      },
     }),
     columnHelper.accessor("phone", {
       id: "phone",
@@ -44,7 +50,7 @@ const Sales = () => {
       header: () => "Status",
       cell: (info) => (
         <span
-          className={` text-gray-200 text-center font-semibold uppercase  ${
+          className={` text-gray-200 text-center text-sm font-semibold uppercase p-1 rounded-sm  ${
             info.renderValue() === "pending" ? "bg-rose-500" : "bg-green-600"
           }`}
         >
