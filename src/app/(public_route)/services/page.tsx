@@ -14,9 +14,9 @@ const Services = () => {
       <HeroArea />
       <RecommendArea />
       <LinkedinProfile />
-      <ServicesForm />
       <Interests />
       <OptimizedLinkedinProfile />
+      <ServicesForm />
       <Gurantee />
       <Faqs />
     </section>

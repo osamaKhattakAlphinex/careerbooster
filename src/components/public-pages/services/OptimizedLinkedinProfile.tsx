@@ -18,7 +18,7 @@ function OptimizedLinkedinProfile() {
     <div
       className={`mx-10 px-10 my-10 shadow-lg border-2 border-gray-100 rounded-xl  py-20`}
     >
-      <hr className="text-gray-100 pb-20" />
+      {/* <hr className="text-gray-100 pb-20" /> */}
 
       <h1
         className={`text-[54px] ${fjalla_One.className} text-center text-[#E1E361]`}

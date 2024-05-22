@@ -10,7 +10,6 @@ import "./dashboard.css";
 import "./plugins.css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import "react-toastify/dist/ReactToastify.css";
 import { TourContextProvider } from "@/context/TourContext";
 import { AppContextsProvider } from "@/context/AppContext";
 import { Metadata } from "next";
