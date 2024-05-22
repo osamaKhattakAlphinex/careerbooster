@@ -45,7 +45,7 @@ const ServicesForm = () => {
       fullname: "",
       email: "",
       phone: "",
-      services:[],
+      services: [],
     },
     validationSchema: Yup.object({
       fullname: Yup.string().required("Fullname is required"),
@@ -126,7 +126,7 @@ const ServicesForm = () => {
   }, [showPaypalPopup, paypalRef.current]);
 
   return (
-    <div className="px-4 py-8 bg-gray-900 md:p-24">
+    <div className="px-4 py-8 bg-gray-900 md:p-24 ">
       <div className="w-full mx-auto md:w-3/4 ">
         <div className="flex flex-col space-y-4">
           <h2 className="text-xl font-semibold text-center md:text-4xl">
@@ -210,7 +210,7 @@ const ServicesForm = () => {
             Enter Your Details Below to Complete Your Order.
           </span>
         </div>
-        <form className="space-y-5 " onSubmit={formik.handleSubmit}>
+        <form className="space-y-5 serviceForm" onSubmit={formik.handleSubmit}>
           <div className="flex flex-col gap-2">
             <label
               htmlFor="fullname"
@@ -340,7 +340,7 @@ const ServicesForm = () => {
                 </span>
                 <div className="mt-2 border-t-[1.5px]">
                   <div className="divide-gray-400 divide-y-[1.5px] py-2">
-                    {formik.values.services.map((service:any) => (
+                    {formik.values.services.map((service: any) => (
                       <div
                         className="flex flex-row items-center justify-between gap-2 "
                         key={service.id}

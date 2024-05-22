@@ -1,3 +1,4 @@
+"use client";
 import { Fjalla_One, Montserrat } from "next/font/google";
 import React from "react";
 const fjalla_One = Fjalla_One({
@@ -62,6 +63,20 @@ function Faqs() {
 
       <button
         className={`bg-gradient-to-r to-fuchsia-600 from-indigo-500 w-fit p-4 mx-auto  hover:scale-75 hover:transition-all hover:duration-100 hover:ease-in-out`}
+        onClick={() => {
+          const targetElement = document.querySelector(".serviceForm");
+          const topOffset = 300; // Adjust this value as needed
+          if (targetElement) {
+            const targetTop =
+              targetElement.getBoundingClientRect().top +
+              window.scrollY -
+              topOffset;
+            window.scrollTo({
+              top: targetTop,
+              behavior: "smooth",
+            });
+          }
+        }}
       >
         <h2 className={`${fjalla_One.className} text-[44px]`}>
           GET FREE BONUSES! ORDER NOW

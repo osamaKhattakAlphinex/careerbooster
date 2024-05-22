@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Fjalla_One, Montserrat, Content } from "next/font/google";
 import image1 from "@/../public/assets/images/services/1.webp";
@@ -195,7 +197,23 @@ const RecommendArea = () => {
           </div>
         </div>
         <div className="flex justify-center py-8">
-          <button className="flex flex-col cursor-pointer items-center bg-gradient-to-r to-fuchsia-600 from-indigo-500 w-fit p-4 mx-auto  hover:scale-75 hover:transition-all hover:duration-100 py-3 px-3 hover:ease-in-out">
+          <button
+            className="flex flex-col cursor-pointer items-center bg-gradient-to-r to-fuchsia-600 from-indigo-500 w-fit p-4 mx-auto  hover:scale-75 hover:transition-all hover:duration-100 py-3 px-3 hover:ease-in-out"
+            onClick={() => {
+              const targetElement = document.querySelector(".serviceForm");
+              const topOffset = 300; // Adjust this value as needed
+              if (targetElement) {
+                const targetTop =
+                  targetElement.getBoundingClientRect().top +
+                  window.scrollY -
+                  topOffset;
+                window.scrollTo({
+                  top: targetTop,
+                  behavior: "smooth",
+                });
+              }
+            }}
+          >
             <span className="text-[34px] font-serif ">
               Elcevate Your Professional Presence
             </span>
