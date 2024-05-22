@@ -118,7 +118,10 @@ const RecommendArea = () => {
         <div className="flex gap-5 items-start py-10 ">
           {linked_user &&
             linked_user.map((user, index) => (
-              <div key={index} className="flex flex-col items-center w-4/12 bg-black/10  p-6 rounded-lg shadow-xl max-w-md">
+              <div
+                key={index}
+                className="flex flex-col items-center w-4/12 bg-black/10  p-6 rounded-lg shadow-xl max-w-md"
+              >
                 <div className="flex items-center justify-center mb-6 ">
                   {/* Replace "Image" with an actual img tag if you have an image URL */}
                   <Image
@@ -131,7 +134,9 @@ const RecommendArea = () => {
                 </div>
                 <div className="text-center">
                   <p className={`text-gray-400 mb-4 text-[19px] font-serif`}>
-                    {'"'}{user?.description}{'"'}
+                    {'"'}
+                    {user?.description}
+                    {'"'}
                   </p>
                   <h1
                     className={`${montserrat_500.className} text-gray-100 text-[32px] mt-3`}
@@ -166,8 +171,8 @@ const RecommendArea = () => {
             </div>
             <div className="flex flex-col items-center">
               <p className="text-gray-950 font-serif px-2 text-[19px] text-center">
-                {'"'}I secured my new role as Director of Business Development at
-                OwlFinancial Technologies in March 2024, a full-time remote
+                {'"'}I secured my new role as Director of Business Development
+                at OwlFinancial Technologies in March 2024, a full-time remote
                 position, just 30 days after optimization. I highly recommend
                 CareerBooster to anyone struggling to find their next role.{'"'}
               </p>
