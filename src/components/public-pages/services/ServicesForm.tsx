@@ -40,7 +40,7 @@ const ServicesForm = () => {
   const paypalRef = useRef<any>(null);
 
   return (
-    <div className="p-4 bg-gray-900 md:p-24">
+    <div className="px-4 py-8 bg-gray-900 md:p-24">
       <div className="flex flex-col space-y-4">
         <h2 className="text-xl font-semibold text-center md:text-4xl">
           Here&apos;s a Recap of Everything You Get When You Sign Up for Our
@@ -247,7 +247,7 @@ const ServicesForm = () => {
                   <div className="flex flex-row justify-end w-full gap-2">
                     <h2 className="text-sm font-bold md:text-base ">Total</h2>
                     {coupan ? (
-                      <span className="text-sm  md:text-base">
+                      <span className="text-sm md:text-base">
                         <span className="text-blue-300 line-through">
                           ${amount}
                         </span>{" "}
