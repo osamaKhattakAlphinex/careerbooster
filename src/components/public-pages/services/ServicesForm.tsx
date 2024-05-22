@@ -41,7 +41,7 @@ const ServicesForm = () => {
 
   return (
     <div className="px-4 py-8 bg-gray-900 md:p-24">
-      <div className="w-3/4 mx-auto">
+      <div className="w-full mx-auto md:w-3/4 ">
         <div className="flex flex-col space-y-4">
           <h2 className="text-xl font-semibold text-center md:text-4xl">
             Here&apos;s a Recap of Everything You Get When You Sign Up for Our
