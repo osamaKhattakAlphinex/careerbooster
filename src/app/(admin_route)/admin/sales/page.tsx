@@ -42,15 +42,21 @@ const Sales = () => {
     columnHelper.accessor("status", {
       id: "status",
       header: () => "Status",
-      cell: (info) => info.renderValue(),
+      cell: (info) => (
+        <span
+          className={` text-gray-200 text-center font-semibold uppercase  ${
+            info.renderValue() === "pending" ? "bg-rose-500" : "bg-green-600"
+          }`}
+        >
+          {" "}
+          {info.renderValue()}
+        </span>
+      ),
     }),
     columnHelper.accessor("createdAt", {
       id: "createdAt",
       header: () => "Date",
       cell: (info) => getFormattedDate(info.renderValue()),
-      meta: {
-        filterVariant: "range",
-      },
     }),
   ];
 
