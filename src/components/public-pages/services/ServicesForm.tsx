@@ -1,11 +1,8 @@
 "use client";
 import { crossIcon } from "@/helpers/iconsProvider";
-import axios from "axios";
-import { useFormik } from "formik";
-import { Amiko } from "next/font/google";
 import React, { useEffect, useRef, useState } from "react";
 import { PayPalButton } from "react-paypal-button-v2";
-import * as Yup from "yup";
+import { showErrorToast, showSuccessToast } from "@/helpers/toast";
 
 type Service = {
   id: string;
@@ -28,30 +25,84 @@ const SERVICES: Service[] = [
 
 const ServicesForm = () => {
   const [coupan, setCoupan] = useState<string>("");
+  const [applyingCoupon, setApplyingCoupon] = useState<boolean>(false);
+  const [coupanText, setCoupanText] = useState<string>("");
   const [services, setServices] = useState<Service[]>([]);
   const [email, setEmail] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
   const [amount, setAmount] = useState<number>(0);
-  const [amountOff, setAmountOff] = useState<number>(50);
+  const [amountOff, setAmountOff] = useState<number>(0);
   const [fullname, setFullname] = useState<string>("");
-  const [showPaymentDialog, setShowPaymentDialog] = useState(false);
   const [showPaypalPopup, setShowPaypalPopup] = useState(false);
 
+  const salesEntry =async () =>{
+    const salesEntry = await fetch("/api/sales", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        phone: phone,
+        fullname: fullname,
+        amount: amount -amountOff,
+        status: "pending",
+        service: services,
+      }),
+    })
+    const response  = await salesEntry.json()
+    if(response.success){
+      setFullname("")
+      setServices([])
+      setEmail("")
+      setPhone("")
+      setShowPaypalPopup(false)
+      showSuccessToast("Order Added Successfully")
+    }else {
+      showErrorToast(response.error)
+    }
+  } 
+
   const paypalRef = useRef<any>(null);
-  const applyCoupon = async () =>{
+  const applyCoupon = async () => {
     if (coupan !== "") {
+      setApplyingCoupon(true);
       const getCoupon = await fetch(
         `/api/coupons/getOneCoupon?coupon=${coupan}&type=services`
       );
       const data = await getCoupon.json();
       if (data.success) {
-        console.log(data)
-        
         const amount_off = data.result.amount_off;
         setAmountOff(amount_off);
-      } 
+        setApplyingCoupon(false);
+        setCoupanText("");
+      } else {
+        setApplyingCoupon(false);
+        setCoupanText("Invalid Coupon");
+      }
     }
-  }
+  };
+
+  useEffect(() => {
+    const addPaypalScript = () => {
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src =
+        "https://www.paypal.com/sdk/js?client-id=AV4R8goafRZiY27ePTNRqCINe0C12EtQBk9bKeNuF7go3KYTv9NJqlkbjmqf4lAajJ0AfCEsdQ3ntWgt";
+      script.async = true;
+      document.body.appendChild(script);
+    };
+    addPaypalScript();
+  }, []);
+
+  useEffect(() => {
+    if (paypalRef.current) {
+      const getPaypalDiv = paypalRef.current.children[0];
+      getPaypalDiv.style.maxHeight = "500px";
+      getPaypalDiv.style.overflowY = "scroll";
+      getPaypalDiv.style.scrollbarWidth = "none";
+    }
+  }, [showPaypalPopup, paypalRef.current]);
 
   return (
     <div className="px-4 py-8 bg-gray-900 md:p-24">
@@ -224,23 +275,28 @@ const ServicesForm = () => {
             ))}
           </div>
 
-          {/* coupan */}
-
-          <div className="flex gap-2">
-            <input
-              type="text"
-              id="coupan"
-              placeholder="Enter Coupon Code"
-              onChange={(e) => setCoupan(e.target.value)}
-              className="p-2 bg-transparent border border-gray-400 rounded-md"
-            />
-            <button className="self-center rounded-md bg-gray-950 py-2 px-4  font-semibold text-center text-gray-200 " onClick={applyCoupon}>
-              Apply
-            </button>
-          </div>
-
           {services && services.length > 0 && (
             <>
+              {/* coupan */}
+
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  id="coupan"
+                  placeholder="Enter Coupon Code"
+                  onChange={(e) => setCoupan(e.target.value)}
+                  className="p-2 bg-transparent border border-gray-400 rounded-md"
+                />
+                <button
+                  className="self-center rounded-md bg-gray-950 py-2 px-4  font-semibold text-center text-gray-200 "
+                  onClick={applyCoupon}
+                >
+                  {!applyingCoupon ? "Apply" : "Applying..."}
+                </button>
+              </div>
+              {coupanText !== "" && (
+                <p className="text-red-700">{coupanText}</p>
+              )}
               <div className="w-full p-6 rounded-sm shadow-md bg-slate-700">
                 <span className="block w-full pb-2 text-base font-semibold text-center uppercase md:text-lg">
                   Order Details
@@ -268,7 +324,7 @@ const ServicesForm = () => {
                   <div className="flex flex-row items-center justify-between gap-2 ">
                     <div className="flex flex-row justify-end w-full gap-2">
                       <h2 className="text-sm font-bold md:text-base ">Total</h2>
-                      {coupan ? (
+                      {amountOff > 0 ? (
                         <span className="text-sm md:text-base">
                           <span className="text-blue-300 line-through">
                             ${amount}
@@ -308,11 +364,12 @@ const ServicesForm = () => {
                 </span>
                 <div ref={paypalRef} className="p-10 bg-white rounded-lg">
                   <PayPalButton
-                    amount={amount}
+                    amount={amount - amountOff}
                     shippingPreference="NO_SHIPPING"
                     currency="USD"
                     onSuccess={(details: any, data: any) => {
                       if (data?.orderID) {
+                        salesEntry()
                       }
                     }}
                   />

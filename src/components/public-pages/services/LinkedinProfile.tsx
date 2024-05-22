@@ -1,3 +1,4 @@
+"use client"
 import { Content, Fjalla_One, Montserrat } from "next/font/google";
 import React from "react";
 import b1 from "@/../public/assets/images/services/b1.webp";
