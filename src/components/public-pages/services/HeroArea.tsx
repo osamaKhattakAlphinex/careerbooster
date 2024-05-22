@@ -12,14 +12,16 @@ const montserrat = Montserrat({
 });
 const HeroArea = () => {
   return (
-    <div className="pt-20 md:px-10  lg:px-[4rem] xl:px-36">
-      <h1 className="text-6xl text-center">
-        <strong className={`${fjalla_One.className} font-bold leading-[5rem]`}>
+    <div className="md:pt-10 lg:pt-20 xs:px-6 xs:pt-6 md:px-10  lg:px-[4rem] xl:px-36">
+      <h1 className="lg:text-6xl md:text-4xl xs:text-3xl text-center">
+        <strong
+          className={`${fjalla_One.className} font-bold lg:leading-[5rem] xs:leading-[3rem] `}
+        >
           Transform Your LinkedIn Profile into a Magnet for Senior-Level
           Opportunities & Skyrocket Your Career Progression!
         </strong>
       </h1>
-      <div className="flex justify-center py-14 ">
+      <div className="flex justify-center lg:py-14 md:py-8 xs:py-6 ">
         <button
           className="flex flex-col items-center bg-gradient-to-r to-fuchsia-600 from-indigo-500 w-fit p-4 mx-auto  hover:scale-75 hover:transition-all hover:duration-300 hover:ease-in-out  rounded-md border border-white/40 px-5 py-1.5"
           onClick={() => {
@@ -37,10 +39,12 @@ const HeroArea = () => {
             }
           }}
         >
-          <span className={`text-[30px] font-bold ${montserrat.className}`}>
+          <span
+            className={`lg:text-[30px] md:text-[20px] font-bold ${montserrat.className}`}
+          >
             Order Now! Unlock Elite Opportunities
           </span>
-          <span className="text-[20px] font-sans">
+          <span className="lg:text-[20px] md:text-[16px] font-sans">
             Click Here to Place Your Order
           </span>
         </button>
