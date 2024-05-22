@@ -1,4 +1,5 @@
-import { Fjalla_One, Lato } from "next/font/google";
+import { Content, Fjalla_One, Lato } from "next/font/google";
+import Image from "next/image";
 import React from "react";
 const fjalla_One = Fjalla_One({
   weight: "400",
@@ -8,11 +9,17 @@ const lato_400 = Lato({
   weight: "400",
   subsets: ["latin"],
 });
+const content_font = Content({
+  weight: "400",
+  subsets: ["khmer"],
+});
 function OptimizedLinkedinProfile() {
   return (
     <div
       className={`mx-10 px-10 my-10 shadow-lg border-2 border-gray-100 rounded-xl  py-20`}
     >
+      <hr className="text-gray-100 pb-20" />
+
       <h1
         className={`text-[54px] ${fjalla_One.className} text-center text-[#E1E361]`}
       >
@@ -87,13 +94,90 @@ function OptimizedLinkedinProfile() {
         </p>
       </div>
       <h1
-        className={`text-[54px] ${fjalla_One.className} text-center text-[#6350C8] py-10`}
+        className={`text-[54px] ${fjalla_One.className} text-center text-[#6350C8] py-10 px-4`}
       >
         <strong>
           Here Are Our Exclusive Bonuses, Which You Only Get When You Sign Up
           For LinkedIn Keyword Optimization Today
         </strong>
       </h1>
+      <hr className="text-gray-100 mt-2" />
+      <h1 className={`text-[42px] ${fjalla_One.className}   py-10 pr-40`}>
+        <strong>
+          <span className="text-[#6350C8]"> Bonus #1: </span>
+        </strong>
+        Complimentary LinkedIn Profile Overhaul (Valued at $2000)
+      </h1>
+      <Image
+        alt="linkedin-cover"
+        width={666}
+        height={375}
+        src="/assets/images/services/linkedin-cover.webp"
+        className="mx-auto"
+      />
+      <div className="flex flex-col gap-4 mt-20">
+        <p className={`${lato_400.className} text-[20px]`}>
+          For a limited time, when you sign up for our LinkedIn Optimization
+          service, you'll unlock an exclusive bonus: a complete rewrite and
+          makeover of your LinkedIn profile, typically valued at $2000!
+        </p>
+        <p className={`${lato_400.className} text-[20px]`}>
+          Our team of expert writers will write an engaging summary, infuse your
+          headline and job titles with impactful keywords, and revamp your
+          experience and skills sections to highlight your expertise
+          brilliantly.
+        </p>
+        <p className={`${lato_400.className} text-[20px]`}>
+          Envision a LinkedIn profile that not only ranks high in searches but
+          also impressively exhibits your skills and expertise. With our
+          professional optimization and makeover, this vision can be your
+          reality.
+        </p>
+        <p className={`${lato_400.className} text-[20px]`}>
+          Act now! This special offer is available for a limited time. Elevate
+          your LinkedIn presence and propel your career to new heights. Claim
+          your complimentary profile makeover, a $2000 value, by ordering our
+          LinkedIn optimization services today!
+        </p>
+      </div>
+      <h1 className={`text-[42px] ${fjalla_One.className}   py-10 pr-10`}>
+        <strong>
+          <span className="text-[#6350C8]"> Bonus #2: </span>
+        </strong>
+        Make a Great First Impression with a Custom LinkedIn Cover Design (Worth
+        $100)
+      </h1>
+      <Image
+        alt="linkedin-cover"
+        width={855}
+        height={499}
+        src="/assets/images/services/linkedin-cover-2.webp"
+        className="mx-auto mt-10"
+      />
+      <div className="flex flex-col gap-4 mt-20">
+        <p className={`${lato_400.className} text-[20px]`}>
+          Enhance your LinkedIn optimization service with an additional bonus: a
+          custom-designed LinkedIn cover to create a lasting first impression.
+        </p>
+        <p className={`${lato_400.className} text-[20px]`}>
+          The cover photo is your digital front door – it should be impactful
+          and reflective of your unique professional identity.
+        </p>
+        <p className={`${lato_400.className} text-[20px]`}>
+          Our skilled designers will work closely with you to craft a cover
+          photo that is not only visually appealing but also perfectly aligns
+          with your personal brand and underscores your professional strengths.
+          This seemingly small tweak can significantly transform how others
+          perceive your profile, boosting your visibility and opening doors to
+          new opportunities.
+        </p>
+        <p className={`${lato_400.className} text-[20px]`}>
+          By choosing our LinkedIn Keyword Optimization service, you're not just
+          getting a standout profile – you're building a commanding personal
+          brand. And the best part? This valuable bonus is entirely free with
+          your service enrollment.
+        </p>
+      </div>
     </div>
   );
 }

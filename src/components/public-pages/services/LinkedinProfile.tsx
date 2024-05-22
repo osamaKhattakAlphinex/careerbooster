@@ -123,7 +123,7 @@ export const LinkedinProfile = () => {
           ))}
       </div>
       <div className="flex flex-col mx-auto w-fit my-20">
-        <button className="bg-[#3DAB0A] text-white px-4 py-2 w-fit">
+        <button className="bg-gradient-to-r to-fuchsia-600 from-indigo-500 w-fit p-4 mx-auto  hover:scale-75 hover:transition-all hover:duration-100 text-white px-4 py-2 hover:ease-in-out">
           <h2 className={`text-[34px] font-bold ${fjalla_One.className}`}>
             Unlock Your Profile&apos;s Potential Now
           </h2>
