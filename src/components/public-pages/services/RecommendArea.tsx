@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Fjalla_One, Montserrat, Content } from "next/font/google";
 import image1 from "@/../public/assets/images/services/1.webp";
@@ -71,18 +73,18 @@ const linked_user = [
 ];
 const RecommendArea = () => {
   return (
-    <div className="px-16 pb-5">
+    <div className="px-10 pb-5">
       <div className="">
         <h1 className="text-center px-20 py-10 leading-[4rem]">
           <strong className={`${montserrat.className} text-5xl text-[#6350C8]`}>
             Senior Executives & Recruiters Recommend Us
           </strong>
         </h1>
-        <div className="flex flex-wrap gap-3">
+        <div className="w-full flex-wrap flex justify-center gap-10 ">
           {recommendUser &&
             recommendUser.map((user, index) => (
               <div
-                className="shadow-xl rounded-lg overflow-hidden w-[38rem] bg-black/10"
+                className="w-[38%] shadow-xl rounded-lg overflow-hidden  bg-black/10"
                 key={index}
               >
                 <div className="h-[21rem]">
@@ -115,7 +117,7 @@ const RecommendArea = () => {
             ))}
         </div>
         {/* 3 User */}
-        <div className="flex gap-5 items-start py-10 ">
+        <div className="flex gap-5 items-start py-10 xl:justify-center xl:mx-auto ">
           {linked_user &&
             linked_user.map((user, index) => (
               <div
@@ -195,7 +197,23 @@ const RecommendArea = () => {
           </div>
         </div>
         <div className="flex justify-center py-8">
-          <button className="flex flex-col cursor-pointer items-center bg-gradient-to-r to-fuchsia-600 from-indigo-500 w-fit p-4 mx-auto  hover:scale-75 hover:transition-all hover:duration-100 py-3 px-3 hover:ease-in-out">
+          <button
+            className="flex flex-col cursor-pointer items-center bg-gradient-to-r to-fuchsia-600 from-indigo-500 w-fit p-4 mx-auto  hover:scale-75 hover:transition-all hover:duration-100 py-3 px-3 hover:ease-in-out"
+            onClick={() => {
+              const targetElement = document.querySelector(".serviceForm");
+              const topOffset = 300; // Adjust this value as needed
+              if (targetElement) {
+                const targetTop =
+                  targetElement.getBoundingClientRect().top +
+                  window.scrollY -
+                  topOffset;
+                window.scrollTo({
+                  top: targetTop,
+                  behavior: "smooth",
+                });
+              }
+            }}
+          >
             <span className="text-[34px] font-serif ">
               Elcevate Your Professional Presence
             </span>
