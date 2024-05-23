@@ -18,6 +18,12 @@ export async function getPackageID(){
 export async function getStripeKey(){
   return  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
 }
+export async function getGHLApi(){
+  return  process.env.NEXT_PUBLIC_GHL_API_URL!;
+}
+export async function getGHLApiKey(){
+  return  process.env.NEXT_PUBLIC_GHL_API_KEY!;
+}
 export async function verifyInvisibleCaptcha(token: string | null) {
   const res = await axios.post(
     `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_INVISIBLE_SECRET_KEY}&response=${token}`

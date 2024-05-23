@@ -94,7 +94,7 @@ const Sales = () => {
     }),
     columnHelper.accessor("amount", {
       id: "amount",
-      header: () => "Amount",
+      header: () => "Paid Amount",
       cell: (info) => info.renderValue() + " $",
     }),
     columnHelper.accessor("service", {
