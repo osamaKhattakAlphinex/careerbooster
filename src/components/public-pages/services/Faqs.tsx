@@ -41,19 +41,25 @@ const faqs = [
 function Faqs() {
   return (
     <div
-      className={`mx-10 rounded-md shadow-md border border0gray-1000 mt-6 flex flex-col py-10`}
+      className={`md:mx-10 xs:mx-4 rounded-md shadow-md border border0gray-1000 mt-6 flex flex-col py-10`}
     >
-      <h1 className={`text-[54px] mb-6 ${fjalla_One.className} text-center`}>
+      <h1
+        className={`lg:text-[54px] md:text-[44px] xs:text-[26px] mb-6 ${fjalla_One.className} text-center`}
+      >
         <strong>Still Have Questions?</strong>
       </h1>
-      <div className="flex flex-col px-20 gap-10 my-10">
+      <div className="flex flex-col lg:px-20 md:px-10 xs:px-2 xs:text-center md:text-left lg:gap-10 md:gap-6 xs:gap-4 md:my-10 xs:mb-4">
         {faqs.map((items) => {
           return (
             <>
-              <p className={`${fjalla_One.className} text-[32px]`}>
+              <p
+                className={`${fjalla_One.className} lg:text-[32px] md:text-[26px] xs:text-[20px]`}
+              >
                 {items.question}
               </p>
-              <p className={`${montserrat_n.className} text-[20px]`}>
+              <p
+                className={`${montserrat_n.className} lg:text-[20px] md:text-[18px] xs:text-[14px]`}
+              >
                 {items.answer}
               </p>
             </>
@@ -62,7 +68,7 @@ function Faqs() {
       </div>
 
       <button
-        className={`bg-gradient-to-r to-fuchsia-600 from-indigo-500 w-fit p-4 mx-auto  hover:scale-75 hover:transition-all hover:duration-100 hover:ease-in-out`}
+        className={`bg-gradient-to-r to-fuchsia-600 from-indigo-500 w-fit md:p-4 mx-auto  hover:scale-75 hover:transition-all hover:duration-100 text-white xs:p-2 hover:ease-in-out rounded-md`}
         onClick={() => {
           const targetElement = document.querySelector(".serviceForm");
           const topOffset = 300; // Adjust this value as needed
@@ -78,10 +84,14 @@ function Faqs() {
           }
         }}
       >
-        <h2 className={`${fjalla_One.className} text-[44px]`}>
+        <h2
+          className={`${fjalla_One.className} lg:text-[34px] md:text-2xl xs:text-[14px] font-bold font-serif`}
+        >
           GET FREE BONUSES! ORDER NOW
         </h2>
-        <p className={`text-gray-300 ${montserrat_n.className} text-[20px]`}>
+        <p
+          className={`capitalize font-sans lg:text-[25px] md:text-[18px] xs:text-[12px] text-gray-300`}
+        >
           {" "}
           Click Here To Optimize Your Linkedin
         </p>
