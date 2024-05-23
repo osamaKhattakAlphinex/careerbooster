@@ -46,7 +46,7 @@ const CTASection = () => {
 
                   <Link
                     href="/register"
-                    className="rounded-lg dark:text-gray-950 no-underline px-6 py-4 bg-[#6a4dff] text-gray-100 dark:bg-[#e6f85e] cursor-pointer"
+                    className="rounded-lg z-10 relative dark:text-gray-950 no-underline px-6 py-4 bg-[#6a4dff] text-gray-100 dark:bg-[#e6f85e] cursor-pointer"
                   >
                     Get Started Free
                   </Link>

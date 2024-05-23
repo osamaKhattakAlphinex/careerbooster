@@ -111,7 +111,7 @@ const HeroArea = () => {
   return (
     <div className="w-full ">
       {/* Hero Section */}
-      <section className="hero bg-gradient-to-r  from-[#01010D80] via-[#000A6380] to-purple-900 overflow-x-hidden md:px-0 pt-24  lg:pt-[100px] lg:npt-10">
+      <section className="hero bg-gradient-to-r  from-gray-200 via-gray-200 to-gray-200 dark:from-[#01010D80] dark:via-[#000A6380] dark:to-purple-900  overflow-x-hidden md:px-0 pt-24  lg:pt-[100px] lg:npt-10">
         <div className=" text-center lg:pt-12 lg:pb-8 pt-15 ">
           <h2
             className={`xs:text-sm md:text-[20px] lg:text-[30px] text-gray-800 dark:text-gray-300  ${montserrat_thin.className}`}
