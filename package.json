@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ducanh2912/next-pwa": "^10.2.7",
     "@reduxjs/toolkit": "^1.9.5",
     "@sparticuz/chromium-min": "^123.0.1",
     "@stripe/stripe-js": "^2.1.6",
@@ -53,6 +54,7 @@
     "react-to-print": "^2.15.1",
     "react-toastify": "^10.0.4",
     "redux": "^4.2.1",
+    "sharp": "^0.33.4",
     "stripe": "^13.7.0",
     "sweetalert2": "^11.10.5",
     "swiper": "^11.0.6",
@@ -73,6 +75,7 @@
     "@types/react-google-recaptcha": "^2.1.6",
     "@types/react-speech-recognition": "^3.9.5",
     "i": "^0.3.7",
-    "npm": "^10.8.0"
+    "npm": "^10.8.0",
+    "webpack": "^5.91.0"
   }
 }

@@ -57,7 +57,7 @@ const linked_user = [
   {
     name: "Prabhat Mandwani",
     position: "Senior Executive & Board Member",
-    company: "at Specifi Global",
+    company: "at Vinculum Group",
     description:
       "Moe Hassan's LinkedIn service is phenomenal. Before, I struggled to get noticed. Post-optimization, I am getting more meaningful connections and an incredible job offers. His service is a career accelerator!",
     image: image2,

@@ -41,7 +41,7 @@ const faqs = [
 function Faqs() {
   return (
     <div
-      className={`md:mx-10 xs:mx-4 rounded-md shadow-md border border0gray-1000 mt-6 flex flex-col py-10`}
+      className={`mb-6 md:mx-10 xs:mx-4 rounded-md shadow-md border border0gray-1000 mt-6 flex flex-col py-10`}
     >
       <h1
         className={`lg:text-[54px] md:text-[44px] xs:text-[26px] mb-6 ${fjalla_One.className} text-center`}

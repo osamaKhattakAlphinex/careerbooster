@@ -14,6 +14,7 @@ import MicrosoftClarity from "./metrics/MicrosoftClarity";
 export const metadata: Metadata = {
   title: "Dashboard - CareerBooster.ai",
   description: "AI Resume Builder | Developed by NausalTech ",
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
