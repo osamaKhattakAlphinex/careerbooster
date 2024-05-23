@@ -139,7 +139,7 @@ const ServicesForm = () => {
                 LinkedIn Keyword Optimization:
               </span>
               &nbsp;Elevate your profile&apos;s visibility and appeal.
-              <span className="block text-lg text-blue-300 md:text-xl md:inline">
+              <span className="block text-lg text-blue-700 dark:text-blue-300 md:text-xl md:inline">
                 &nbsp; (Valued at $2000)
               </span>
             </p>
@@ -149,7 +149,7 @@ const ServicesForm = () => {
               </span>{" "}
               Receive a complimentary, full-scale rewrite and makeover of your
               LinkedIn profile.
-              <span className="block text-lg text-blue-300 md:text-xl md:inline">
+              <span className="block text-lg text-blue-700 dark:text-blue-300 md:text-xl md:inline">
                 &nbsp;(Valued at $1000)
               </span>
             </p>
@@ -159,7 +159,7 @@ const ServicesForm = () => {
               </span>{" "}
               Make an unforgettable first impression with a custom LinkedIn
               cover design.
-              <span className="block text-lg text-blue-300 md:text-xl md:inline">
+              <span className="block text-lg text-blue-700 dark:text-blue-300 md:text-xl md:inline">
                 &nbsp; (Valued at $100)
               </span>
             </p>
@@ -168,7 +168,7 @@ const ServicesForm = () => {
                 Resume Generation:
               </span>{" "}
               Resume Generation Service: Craft a standout resume that lands you interviews.
-              <span className="block text-lg text-blue-300 md:text-xl md:inline">
+              <span className="block text-lg text-blue-700 dark:text-blue-300 md:text-xl md:inline">
                 &nbsp; (Valued at $2000)
               </span>
             </p>
@@ -177,7 +177,7 @@ const ServicesForm = () => {
                 Bonus #1:
               </span>{" "}
               Bonus #1: Receive a complimentary, professionally written cover letter tailored to your job search.
-              <span className="block text-lg text-blue-300 md:text-xl md:inline">
+              <span className="block text-lg text-blue-700 dark:text-blue-300 md:text-xl md:inline">
                 &nbsp; (Valued at $500)
               </span>
             </p>
@@ -186,7 +186,7 @@ const ServicesForm = () => {
                 Bonus #2:
               </span>{" "}
               Bonus #1: Gain a competitive edge with a customized resume template design.
-              <span className="block text-lg text-blue-300 md:text-xl md:inline">
+              <span className="block text-lg text-blue-700 dark:text-blue-300 md:text-xl md:inline">
                 &nbsp; (Valued at $100)
               </span>
             </p> */}
@@ -197,12 +197,12 @@ const ServicesForm = () => {
             </span>
           </div>
           <div className="self-center text-center">
-            <span className="text-lg text-center text-blue-300 md:text-2xl">
+            <span className="text-lg text-center text-blue-700 dark:text-blue-300 md:text-2xl">
               Special Limited-Time Offer: Unlock all these benefits for just
               $494!
             </span>
             <p className="pt-2 text-center">
-              <span className="text-3xl text-blue-300 line-through md:text-5xl ">
+              <span className="text-3xl text-blue-700 dark:text-blue-300 line-through md:text-5xl ">
                 $3100
               </span>
               <span className="text-3xl md:text-5xl"> $494</span>
@@ -217,7 +217,7 @@ const ServicesForm = () => {
             Enter Your Details Below to Complete Your Order.
           </span>
         </div>
-        <form className="space-y-5 serviceForm" onSubmit={formik.handleSubmit}>
+        <form className="space-y-5 serviceForm p-2 mb-4" onSubmit={formik.handleSubmit}>
           <div className="flex flex-col gap-2">
             <label
               htmlFor="fullname"
@@ -342,7 +342,7 @@ const ServicesForm = () => {
                 <p className="text-red-700">{coupanText}</p>
               )}
               <div className="w-full p-6 rounded-sm shadow-md bg-slate-700">
-                <span className="block w-full pb-2 text-base font-semibold text-center uppercase md:text-lg">
+                <span className="block w-full text-gray-100 pb-2 text-base font-semibold text-center uppercase md:text-lg">
                   Order Details
                 </span>
                 <div className="mt-2 border-t-[1.5px]">
@@ -353,10 +353,10 @@ const ServicesForm = () => {
                         key={service.id}
                       >
                         <div className="flex flex-row items-center justify-between w-full gap-2 text-sm capitalize">
-                          <h2 className="text-sm md:text-base">
+                          <h2 className="text-sm md:text-base text-gray-100 ">
                             {service.label}
                           </h2>
-                          <span className="text-sm md:text-base">
+                          <span className="text-sm md:text-base text-gray-100 ">
                             $ {service.amount}
                           </span>
                         </div>
@@ -367,16 +367,16 @@ const ServicesForm = () => {
                 <div className="border-t-[1.5px] py-2">
                   <div className="flex flex-row items-center justify-between gap-2 ">
                     <div className="flex flex-row justify-end w-full gap-2">
-                      <h2 className="text-sm font-bold md:text-base ">Total</h2>
+                      <h2 className="text-sm font-bold md:text-base text-gray-100 ">Total</h2>
                       {amountOff > 0 ? (
-                        <span className="text-sm md:text-base">
+                        <span className="text-sm md:text-base text-gray-100 ">
                           <span className="text-blue-300 line-through">
                             ${amount}
                           </span>{" "}
                           ${amount - amountOff}
                         </span>
                       ) : (
-                        <span>${amount}</span>
+                        <span className="text-gray-100 ">${amount}</span>
                       )}
                     </div>
                   </div>

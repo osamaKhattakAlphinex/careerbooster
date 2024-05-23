@@ -21,7 +21,7 @@ function OptimizedLinkedinProfile() {
       {/* <hr className="text-gray-100 pb-20" /> */}
 
       <h1
-        className={`lg:text-[54px] md:text-[40px] ${fjalla_One.className} text-center text-[#E1E361] 
+        className={`lg:text-[54px] md:text-[40px] ${fjalla_One.className} text-center text-[#A9A632] dark:text-[#E1E361] 
         xs:text-[28px]`}
       >
         <strong>
@@ -30,24 +30,24 @@ function OptimizedLinkedinProfile() {
       </h1>
       <div className="flex flex-col md:gap-8 xs:gap-4 lg:mt-20 md:mt-10 xs:mt-6">
         <p
-          className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left t text-gray-300`}
+          className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left t text-gray-800 dark:text-gray-300`}
         >
           <strong>Good question!</strong>
         </p>
         <p
-          className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-300`}
+          className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-800 dark:text-gray-300`}
         >
           Investing in our services can yield{" "}
           <strong>higher returns than even Tesla or Apple stocks.</strong>
         </p>
 
         <p
-          className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-300`}
+          className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-800 dark:text-gray-300`}
         >
           Let me explain how.
         </p>
         <p
-          className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-300`}
+          className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-800 dark:text-gray-300`}
         >
           If you're currently unemployed, consider this: with our LinkedIn
           optimization, if you land a job sooner, wouldn't you agree that it's
@@ -55,7 +55,7 @@ function OptimizedLinkedinProfile() {
           dollars?
         </p>
         <p
-          className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-300`}
+          className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-800 dark:text-gray-300`}
         >
           Similarly, if you're employed but seeking better opportunities,
           investing a small amount in our services to find a job that pays more
@@ -63,13 +63,13 @@ function OptimizedLinkedinProfile() {
           right?
         </p>
         <p
-          className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-300`}
+          className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-800 dark:text-gray-300`}
         >
           Of course, it does. That's why many service providers charge upwards
           of $2000 for this type of service.
         </p>
         <p
-          className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-300`}
+          className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-800 dark:text-gray-300`}
         >
           Given the value we provide, it would be reasonable to charge $2000 for
           LinkedIn Keyword Optimization. However, we understand that our
@@ -78,21 +78,21 @@ function OptimizedLinkedinProfile() {
           services.
         </p>
         <p
-          className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-300`}
+          className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-800 dark:text-gray-300`}
         >
           That's why we offer this service at the exclusive price of just $494.
           This investment includes personalized keyword research and profile
           optimization, ensuring your LinkedIn stands out in recruiter searches.
         </p>
         <p
-          className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-300`}
+          className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-800 dark:text-gray-300`}
         >
           This not only boosts your visibility but significantly increases your
           chances of securing better job opportunities and forming meaningful
           professional connections.
         </p>
         <p
-          className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-300`}
+          className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-800 dark:text-gray-300`}
         >
           We stand by the quality of our services{" "}
           <strong>and offer a 100% satisfaction guarantee.</strong> If you're
@@ -100,21 +100,21 @@ function OptimizedLinkedinProfile() {
           we'll provide a full refund, no questions asked.
         </p>
         <p
-          className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-300`}
+          className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-800 dark:text-gray-300`}
         >
           So, why wait to advance your career? Invest in your professional
           future today by enrolling in our LinkedIn Keyword Optimization service
           for only $494.
         </p>
         <p
-          className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-300`}
+          className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-800 dark:text-gray-300`}
         >
           So, why wait to advance your career? Invest in your professional
           future today by enrolling in our LinkedIn Keyword Optimization service
           for only $494.
         </p>
         <p
-          className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-300`}
+          className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-800 dark:text-gray-300`}
         >
           This is an offer designed to help you achieve your career goals. Don't
           miss out!

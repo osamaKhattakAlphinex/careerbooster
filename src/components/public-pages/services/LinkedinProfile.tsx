@@ -69,7 +69,7 @@ export const LinkedinProfile = () => {
   return (
     <div className="pb-12 ">
       <div
-        className={`bg-[#1b4972] lg:text-[40px] md:text-[32px] xs:text-[24px] xs:py-4 md:py-8 text-center  lg:px-[18.5rem] lg:py-12 ${montserrat.className} `}
+        className={`bg-[#1b4972] text-white lg:text-[40px] md:text-[32px] sm:text-[24px] xs:py-4 md:py-8 text-center  lg:px-[18.5rem] lg:py-12 ${montserrat.className} `}
       >
         {'"'}LinkedIn Profiles We Have Crafted for Executives{'"'}
       </div>
@@ -126,9 +126,10 @@ export const LinkedinProfile = () => {
             </div>
           ))}
       </div>
-      <div className="flex flex-col mx-auto w-fit lg:my-20 xs:mt-10 xs:px-4">
-        <button
-          className="bg-gradient-to-r to-fuchsia-600 from-indigo-500 w-fit md:p-4 mx-auto  hover:scale-75 hover:transition-all hover:duration-100 text-white xs:p-2 hover:ease-in-out rounded-md"
+
+      <div className="linkedinPdfButton flex justify-center mt-11 md:mt-11">
+        <label
+          className=" py-[12px] lg:py-[20px] text-white lg:px-[40px]  px-[28px] cursor-pointer  rounded-xl bg-gradient-to-r to-violet-500 from-fuchsia-500 hover:scale-75 hover:transition-all hover:duration-300 hover:ease-in-out"
           onClick={() => {
             const targetElement = document.querySelector(".serviceForm");
             const topOffset = 300; // Adjust this value as needed
@@ -144,17 +145,17 @@ export const LinkedinProfile = () => {
             }
           }}
         >
-          <h2
-            className={`lg:text-[34px] md:text-2xl xs:text-[14px] font-bold font-serif`}
-          >
-            Unlock Your Profile&apos;s Potential Now
-          </h2>
-          <p
-            className={`capitalize font-sans lg:text-[25px] md:text-[18px] xs:text-[12px] text-gray-300`}
-          >
-            click here to optimize your linkedin profile
-          </p>
-        </button>
+          <div className="flex gap-2 ">
+            <div className="text-center ">
+              <p className="m-0 font-semibold whitespace-nowrap lg:text-[20px] cursor-pointer text-[14px] lg:leading-6 leading-4[text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
+                Unlock Your Profile&apos;s Potential Now
+              </p>
+              <p className="lg:text-[14px] text-[10px] lg:leading-[17px] leading-[14px] pt-2">
+                Click here to optimize your Linkedin profile
+              </p>
+            </div>
+          </div>
+        </label>
       </div>
     </div>
   );

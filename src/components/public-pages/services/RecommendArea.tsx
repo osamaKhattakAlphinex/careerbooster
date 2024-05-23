@@ -77,7 +77,7 @@ const RecommendArea = () => {
       <div className="">
         <h1 className="text-center lg:px-20 md:py-10 xs:py-4 lg:leading-[4rem]">
           <strong
-            className={`${montserrat.className} lg:text-5xl md:text-3xl xs:text-2xl  text-[#6350C8]`}
+            className={`${montserrat.className} lg:text-4xl md:text-3xl xs:text-2xl  text-[#4f31f0]  dark:text-[#6350c8]`}
           >
             Senior Executives & Recruiters Recommend Us
           </strong>
@@ -100,7 +100,7 @@ const RecommendArea = () => {
                 </div>
                 <div className="flex flex-col justify-center text-center py-3">
                   <h2
-                    className={`${montserrat.className} lg:text-xl xs:text-[18px] text-gray-300`}
+                    className={`${montserrat.className} lg:text-xl xs:text-[18px] text-gray-800 dark:text-gray-300`}
                   >
                     {user?.name}
                   </h2>
@@ -110,7 +110,7 @@ const RecommendArea = () => {
                     {user?.position}
                   </h1>
                   <h2
-                    className={`${montserrat_500.className} lg:text-xl xs:text-[18px] text-gray-300`}
+                    className={`${montserrat_500.className} lg:text-xl xs:text-[18px] text-gray-800 dark:text-gray-300`}
                   >
                     {user?.company}
                   </h2>
@@ -138,14 +138,14 @@ const RecommendArea = () => {
                 </div>
                 <div className="text-center">
                   <p
-                    className={`text-gray-400 mb-4 lg:text-[19px] xs:text-base  font-serif`}
+                    className={`text-gray-700 dark:text-gray-400 mb-4 lg:text-[19px] xs:text-base  font-serif`}
                   >
                     {'"'}
                     {user?.description}
                     {'"'}
                   </p>
                   <h1
-                    className={`${montserrat_500.className} text-gray-100 lg:text-[32px] xs:text-[22px]  mt-3`}
+                    className={`${montserrat_500.className} text-gray-800 dark:text-gray-300  lg:text-[32px] xs:text-[22px]  mt-3`}
                   >
                     {user?.name}
                   </h1>
@@ -155,7 +155,7 @@ const RecommendArea = () => {
                     <strong>{user?.position}</strong>
                   </h2>
                   <h2
-                    className={`${montserrat_500.className} lg:text-[23px] xs:text-[16px] text-gray-400`}
+                    className={`${montserrat_500.className} lg:text-[23px] xs:text-[16px] text-gray-700 dark:text-gray-400`}
                   >
                     {user?.company}
                   </h2>
@@ -200,9 +200,10 @@ const RecommendArea = () => {
             </div>
           </div>
         </div>
-        <div className="flex justify-center py-8">
-          <button
-            className="flex flex-col cursor-pointer items-center bg-gradient-to-r to-fuchsia-600 from-indigo-500 w-fit md:p-4 xs:py-2 mx-auto  hover:scale-75 hover:transition-all hover:duration-100 py-3 px-3 hover:ease-in-out rounded-md"
+
+        <div className="linkedinPdfButton flex justify-center mt-11 md:mt-11 ">
+          <label
+            className=" py-[12px] lg:py-[20px] text-white lg:px-[40px]  px-[28px] cursor-pointer  rounded-xl bg-gradient-to-r to-violet-500 from-fuchsia-500 hover:scale-75 hover:transition-all hover:duration-300 hover:ease-in-out"
             onClick={() => {
               const targetElement = document.querySelector(".serviceForm");
               const topOffset = 300; // Adjust this value as needed
@@ -218,13 +219,17 @@ const RecommendArea = () => {
               }
             }}
           >
-            <span className="lg:text-[34px] md:text-2xl xs:text-[16px] font-serif ">
-              Elcevate Your Professional Presence
-            </span>
-            <span className="font-sans lg:text-[25px] md:text-[18px] xs:text-[12px] text-gray-300">
-              Click Here to optimize your LinkedIn profile.
-            </span>
-          </button>
+            <div className="flex gap-2 ">
+              <div className="text-center ">
+                <p className="m-0 font-semibold whitespace-nowrap lg:text-[20px] cursor-pointer text-[14px] lg:leading-6 leading-4[text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
+                  Elevate Your Professional Presence
+                </p>
+                <p className="lg:text-[14px] text-[10px] lg:leading-[17px] leading-[14px] pt-2">
+                  Click Here to optimize your LinkedIn profile.
+                </p>
+              </div>
+            </div>
+          </label>
         </div>
       </div>
     </div>

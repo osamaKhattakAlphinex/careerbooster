@@ -67,35 +67,36 @@ function Faqs() {
         })}
       </div>
 
-      <button
-        className={`bg-gradient-to-r to-fuchsia-600 from-indigo-500 w-fit md:p-4 mx-auto  hover:scale-75 hover:transition-all hover:duration-100 text-white xs:p-2 hover:ease-in-out rounded-md`}
-        onClick={() => {
-          const targetElement = document.querySelector(".serviceForm");
-          const topOffset = 300; // Adjust this value as needed
-          if (targetElement) {
-            const targetTop =
-              targetElement.getBoundingClientRect().top +
-              window.scrollY -
-              topOffset;
-            window.scrollTo({
-              top: targetTop,
-              behavior: "smooth",
-            });
-          }
-        }}
-      >
-        <h2
-          className={`${fjalla_One.className} lg:text-[34px] md:text-2xl xs:text-[14px] font-bold font-serif`}
+      <div className="linkedinPdfButton flex justify-center mt-11 md:mt-11">
+        <label
+          className=" py-[12px] lg:py-[20px] text-white lg:px-[40px]  px-[28px] cursor-pointer  rounded-xl bg-gradient-to-r to-violet-500 from-fuchsia-500 hover:scale-75 hover:transition-all hover:duration-300 hover:ease-in-out"
+          onClick={() => {
+            const targetElement = document.querySelector(".serviceForm");
+            const topOffset = 300; // Adjust this value as needed
+            if (targetElement) {
+              const targetTop =
+                targetElement.getBoundingClientRect().top +
+                window.scrollY -
+                topOffset;
+              window.scrollTo({
+                top: targetTop,
+                behavior: "smooth",
+              });
+            }
+          }}
         >
-          GET FREE BONUSES! ORDER NOW
-        </h2>
-        <p
-          className={`capitalize font-sans lg:text-[25px] md:text-[18px] xs:text-[12px] text-gray-300`}
-        >
-          {" "}
-          Click Here To Optimize Your Linkedin
-        </p>
-      </button>
+          <div className="flex gap-2 ">
+            <div className="text-center ">
+              <p className="m-0 font-semibold whitespace-nowrap lg:text-[20px] cursor-pointer text-[14px] lg:leading-6 leading-4[text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
+                GET FREE BONUSES! ORDER NOW
+              </p>
+              <p className="lg:text-[14px] text-[10px] lg:leading-[17px] leading-[14px] pt-2">
+                Click Here To Optimize Your Linkedin
+              </p>
+            </div>
+          </div>
+        </label>
+      </div>
     </div>
   );
 }
