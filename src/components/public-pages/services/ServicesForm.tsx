@@ -126,7 +126,7 @@ const ServicesForm = () => {
   }, [showPaypalPopup, paypalRef.current]);
 
   return (
-    <div className="px-4 py-8 lg:p-24 ">
+    <div className=" lg:px-24 lg:pb-16 ">
       <div className="w-full mx-auto md:w-3/4 ">
         <div className="flex flex-col space-y-4">
           <h2 className="text-xl font-semibold text-center md:text-4xl">
