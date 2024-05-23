@@ -9,6 +9,7 @@ import MainLoaderLayer from "@/components/MainLoaderLayer";
 import CreditLimitsProvider from "@/components/data-providers/CreditLimitsProvider";
 import "./index.css";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import MicrosoftClarity from "./metrics/MicrosoftClarity";
 export const metadata: Metadata = {
   title: "Dashboard - CareerBooster.ai",

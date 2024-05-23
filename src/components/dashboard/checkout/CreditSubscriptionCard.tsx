@@ -26,7 +26,6 @@ const CreditSubscriptionCard: React.FC<Props> = ({
   const [showPaymentDialog, setShowPaymentDialog] = useState(false);
   const [coupon, setCoupon] = useState("");
   const [couponError, setCouponError] = useState("");
-  const [msgLoading, setMsgLoading] = useState<boolean>(false);
   const router = useRouter();
   const paypalRef = useRef<any>(null);
   // Redux
@@ -221,87 +220,85 @@ const CreditSubscriptionCard: React.FC<Props> = ({
 
   return (
     <>
-      {!msgLoading && (
+      <div
+        // className={`col-md-6 col-lg-4 ${
+        //   userPackage.amount === 0 && data ? "" : ""
+        // } `}
+        className="flex flex-col "
+      >
         <div
-          // className={`col-md-6 col-lg-4 ${
-          //   userPackage.amount === 0 && data ? "" : ""
-          // } `}
-          className="flex flex-col "
+          className={`p-6  lg:px-8 w-fit  lg:py-8 rounded-xl h-full border-[1px] dark:border-gray-700 border-gray-500  hover:shadow-xl dark:hover:border-[#e6f85e]   transition-all duration-200 ease-in-out relative hover:border-blue-600 active:border-blue-600 xs:mx-2 md:mx-0`}
         >
-          <div
-            className={`p-6  lg:px-8 w-fit  lg:py-8 rounded-xl h-full border-[1px] dark:border-gray-700 border-gray-500  hover:shadow-xl dark:hover:border-[#e6f85e]   transition-all duration-200 ease-in-out relative hover:border-blue-600 active:border-blue-600 xs:mx-2 md:mx-0`}
-          >
-            <h1 className=" font-semibold text-[#6a4dff] dark:text-[#e6f85e] mb-0 mt-4 md:!text-3xl xs:text-2xl">
-              {creditPackage.title}
-            </h1>
-            <div className="flex items-center">
-              <h3 className="mt-4 mb-4 text-3xl font-normal text-gray-950 dark:text-gray-100">
-                ${creditPackage.amount}
-              </h3>
-              {/* <span className="text-2xl theme-text-2">
+          <h1 className=" font-semibold text-[#6a4dff] dark:text-[#e6f85e] mb-0 mt-4 md:!text-3xl xs:text-2xl">
+            {creditPackage.title}
+          </h1>
+          <div className="flex items-center">
+            <h3 className="mt-4 mb-4 text-3xl font-normal text-gray-950 dark:text-gray-100">
+              ${creditPackage.amount}
+            </h3>
+            {/* <span className="text-2xl theme-text-2">
               {userPackage.type === "monthly" && "  / Month"}
               {userPackage.type === "yearly" && "  / Year"}
             </span> */}
-            </div>
-            {couponError && couponError !== "" && (
-              <p className="mt-1 text-sm text-red-500">{couponError}</p>
-            )}
-            {/* Apply coupon  */}
-            {!viewOnly && (
-              <>
-                {creditPackage.amount !== 0 && (
-                  <div className="mb-6">
-                    <input
-                      type="text"
-                      className="block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-2 pl-[2rem] text-base  border-[1px] border-[#bdbfd4] bg-transparent bg-clip"
-                      placeholder="Apply coupon"
-                      value={coupon}
-                      onChange={(e) => setCoupon(e.target.value)}
-                    />
-                  </div>
-                )}
-                {/* invalid coupon error */}
-
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault(); // Prevent default anchor behavior
-                    handleClick(); // Call handleAnchorClick function
-                  }}
-                  className=" no-underline px-[1rem] font-[500] text-[1rem] py-[.75rem] rounded-md text-[#6a4dff] dark:text-[#e6f85e] border-[1px] border-[#6a4dff] hover:border-[#6a4dff] hover:bg-[#6a4dff] hover:border-none hover:text-gray-100 dark:bg-[#11121c] dark:border-[#e6f85e]  dark:hover:bg-[#e6f85e] dark:hover:border-none dark:hover:text-[#11121c]"
-                >
-                  {subscribing
-                    ? "Please wait..."
-                    : creditPackage.amount === 0
-                    ? "Select Plan"
-                    : "Select Plan"}
-                </a>
-              </>
-            )}
-
-            <ul className="flex flex-col pl-0 mb-0 text-sm md:gap-5 xs:gap-2 md:mt-9 xs:mt-4">
-              {creditPackage.features.map((feature: string, i: number) => (
-                <li
-                  key={i}
-                  className="flex items-center gap-1 text-gray-950 dark:text-gray-100"
-                >
-                  {feature}{" "}
-                  <span className="relative cursor-pointer text-gray-950 dark:text-gray-100 group">
-                    {infoSmallIcon}
-                    <div
-                      role="tooltip"
-                      className="absolute hidden w-32 p-2 text-xs text-gray-100 transform -translate-x-1/2 bg-gray-600 rounded-md -top-9 left-16 group-hover:block"
-                    >
-                      {creditPackage.featuresToolTips[i]}
-                      <div className="tooltip-arrow" data-popper-arrow></div>
-                    </div>
-                  </span>
-                </li>
-              ))}
-            </ul>
           </div>
+          {couponError && couponError !== "" && (
+            <p className="mt-1 text-sm text-red-500">{couponError}</p>
+          )}
+          {/* Apply coupon  */}
+          {!viewOnly && (
+            <>
+              {creditPackage.amount !== 0 && (
+                <div className="mb-6">
+                  <input
+                    type="text"
+                    className="block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-2 pl-[2rem] text-base  border-[1px] border-[#bdbfd4] bg-transparent bg-clip"
+                    placeholder="Apply coupon"
+                    value={coupon}
+                    onChange={(e) => setCoupon(e.target.value)}
+                  />
+                </div>
+              )}
+              {/* invalid coupon error */}
+
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault(); // Prevent default anchor behavior
+                  handleClick(); // Call handleAnchorClick function
+                }}
+                className=" no-underline px-[1rem] font-[500] text-[1rem] py-[.75rem] rounded-md text-[#6a4dff] dark:text-[#e6f85e] border-[1px] border-[#6a4dff] hover:border-[#6a4dff] hover:bg-[#6a4dff] hover:border-none hover:text-gray-100 dark:bg-[#11121c] dark:border-[#e6f85e]  dark:hover:bg-[#e6f85e] dark:hover:border-none dark:hover:text-[#11121c]"
+              >
+                {subscribing
+                  ? "Please wait..."
+                  : creditPackage.amount === 0
+                  ? "Select Plan"
+                  : "Select Plan"}
+              </a>
+            </>
+          )}
+
+          <ul className="flex flex-col pl-0 mb-0 text-sm md:gap-5 xs:gap-2 md:mt-9 xs:mt-4">
+            {creditPackage.features.map((feature: string, i: number) => (
+              <li
+                key={i}
+                className="flex items-center gap-1 text-gray-950 dark:text-gray-100"
+              >
+                {feature}{" "}
+                <span className="relative cursor-pointer text-gray-950 dark:text-gray-100 group">
+                  {infoSmallIcon}
+                  <div
+                    role="tooltip"
+                    className="absolute hidden w-32 p-2 text-xs text-gray-100 transform -translate-x-1/2 bg-gray-600 rounded-md -top-9 left-16 group-hover:block"
+                  >
+                    {creditPackage.featuresToolTips[i]}
+                    <div className="tooltip-arrow" data-popper-arrow></div>
+                  </div>
+                </span>
+              </li>
+            ))}
+          </ul>
         </div>
-      )}
+      </div>
       {showPaypalPopup && (
         <div className="fixed inset-0 z-40 flex flex-col items-center justify-center w-screen h-screen p-3 bg-black/50">
           {/* <div className="z-50 flex flex-col justify-between w-full gap-4 p-6 bg-gray-800 rounded-lg md:w-1/2 lg:w-1/3">

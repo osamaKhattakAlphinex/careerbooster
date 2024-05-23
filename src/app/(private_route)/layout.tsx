@@ -10,8 +10,6 @@ import "./dashboard.css";
 import "./plugins.css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
 import { TourContextProvider } from "@/context/TourContext";
 import { AppContextsProvider } from "@/context/AppContext";
 import { Metadata } from "next";
@@ -50,7 +48,6 @@ export default async function Privatelayout({ children }: Props) {
                 <SideBar />
                 <div className="max-w-7xl mx-auto ">{children}</div>
                 <Footer />
-                {/* <ToastContainer /> */}
               </ProfileCreationLayer>
             </ColorContextProvider>
           </AppContextsProvider>

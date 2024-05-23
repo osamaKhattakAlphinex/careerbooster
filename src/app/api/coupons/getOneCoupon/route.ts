@@ -7,9 +7,9 @@ export async function GET(request: NextRequest) {
     const url = new URL(request.url);
     const coupon_code = url?.searchParams.get("coupon");
     const plan = url?.searchParams.get("plan");
-
+    const type = url?.searchParams.get("type") || "paypal"
     await startDB();
-    const coupon = await Coupon.findOne({ coupon_type: "paypal", coupon_code });
+    const coupon = await Coupon.findOne({ coupon_type: type, coupon_code });
     if (coupon) {
       if (!coupon.valid) {
         return NextResponse.json(
@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
           { status: 404 }
         );
       }
-      if (coupon.valid && coupon.plan !== "all" && coupon.plan !== plan) {
+      if (coupon.valid && type === "paypal" && coupon.plan !== "all" && coupon.plan !== plan) {
         return NextResponse.json(
           { result: "Coupon Not Valid", success: false },
           { status: 404 }

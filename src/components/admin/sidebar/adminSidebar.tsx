@@ -79,7 +79,7 @@ const Menu = () => {
         </div>
         {/* Sidebar */}
         <ul className="flex flex-col h-full p-0 pb-4 overflow-y-scroll text-sm sm:text-base">
-          <li className="p-2 mb-1 sm:p-4">
+          <li className="p-2 mb-1 sm:p-4 hover:bg-gray-700 ">
             <Link
               href="/admin"
               className="text-white no-underline hover:no-underline hover:text-white/80"
@@ -111,7 +111,7 @@ const Menu = () => {
 
           {/* Training Model */}
 
-          <li className="p-2 mb-1 sm:p-4 ">
+          <li className="p-2 mb-1 sm:p-4 hover:bg-gray-700">
             <span
               onClick={() =>
                 setSideBarToggler({
@@ -192,7 +192,7 @@ const Menu = () => {
           </li>
 
           {/* Prompts */}
-          <li className="p-2 mb-1 sm:p-4">
+          <li className="p-2 mb-1 sm:p-4 hover:bg-gray-700">
             <span
               className="flex flex-row items-center justify-between cursor-pointer text-white/80"
               onClick={() =>
@@ -328,7 +328,7 @@ const Menu = () => {
           </li>
 
           {/* Users */}
-          <li className="p-2 mb-1 sm:p-4">
+          <li className="p-2 mb-1 sm:p-4 hover:bg-gray-700">
             <span
               className="flex flex-row items-center justify-between cursor-pointer text-white/80"
               onClick={() =>
@@ -416,7 +416,7 @@ const Menu = () => {
           </li>
 
           {/* Other Menu Items */}
-          <li className="p-2 mb-1 sm:p-4">
+          <li className="p-2 mb-1 sm:p-4 hover:bg-gray-700">
             <Link
               href="/admin/user-packages"
               className="text-white no-underline hover:no-underline hover:text-white/80"
@@ -441,7 +441,7 @@ const Menu = () => {
             </Link>
           </li>
 
-          <li className="p-2 mb-1 sm:p-4">
+          <li className="p-2 mb-1 sm:p-4 hover:bg-gray-700">
             <Link
               href="/admin/sales"
               className="text-white no-underline hover:no-underline hover:text-white/80"
@@ -466,7 +466,7 @@ const Menu = () => {
             </Link>
           </li>
 
-          <li className="p-2 mb-1 sm:p-4">
+          <li className="p-2 mb-1 sm:p-4 hover:bg-gray-700">
             <Link
               href="/admin/credits"
               className="text-white no-underline hover:no-underline hover:text-white/80"
@@ -491,7 +491,7 @@ const Menu = () => {
             </Link>
           </li>
 
-          <li className="p-2 mb-1 sm:p-4">
+          <li className="p-2 mb-1 sm:p-4 hover:bg-gray-700">
             <Link
               href="/admin/creditPerUsage"
               className="text-white no-underline hover:no-underline hover:text-white/80"
@@ -516,7 +516,7 @@ const Menu = () => {
             </Link>
           </li>
 
-          <li className="p-2 mb-1 sm:p-4">
+          <li className="p-2 mb-1 sm:p-4 hover:bg-gray-700">
             <Link
               href="/admin/coupons"
               className="text-white no-underline hover:no-underline hover:text-white/80"
@@ -541,7 +541,7 @@ const Menu = () => {
             </Link>
           </li>
 
-          <li className="p-2 mb-1 sm:p-4">
+          <li className="p-2 mb-1 sm:p-4 hover:bg-gray-700">
             <Link
               href="/admin/notifications"
               className="text-white no-underline hover:no-underline hover:text-white/80"
@@ -566,7 +566,7 @@ const Menu = () => {
             </Link>
           </li>
 
-          <li className="p-2 mb-1 sm:p-4">
+          <li className="p-2 mb-1 sm:p-4 hover:bg-gray-700">
             <Link
               href="/admin/payments"
               className="text-white no-underline hover:no-underline hover:text-white/80"
@@ -591,7 +591,7 @@ const Menu = () => {
             </Link>
           </li>
 
-          <li className="p-2 mb-1 sm:p-4">
+          <li className="p-2 mb-1 sm:p-4 hover:bg-gray-700">
             <Link
               href="/admin/contacts"
               className="text-white no-underline hover:no-underline hover:text-white/80"
@@ -616,7 +616,7 @@ const Menu = () => {
             </Link>
           </li>
 
-          <li className="p-2 mb-1 sm:p-4">
+          <li className="p-2 mb-1 sm:p-4 hover:bg-gray-700">
             <Link
               href="/admin/toolsUsage"
               className="text-white no-underline hover:no-underline hover:text-white/80"

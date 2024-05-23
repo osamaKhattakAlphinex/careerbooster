@@ -35,7 +35,7 @@ export async function POST(request: any) {
       );
     }
 
-    if (payload.coupon_type === "reward" || payload.coupon_type === "paypal") {
+    if (payload.coupon_type === "reward" || payload.coupon_type === "paypal" || payload.coupon_type === "services") {
       // generate  a a coupan code for the reward
 
       // check if the code generated is valid

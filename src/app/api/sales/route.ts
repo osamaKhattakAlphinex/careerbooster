@@ -6,7 +6,7 @@ export async function GET(req: any) {
   try {
     await startDB();
 
-    const sales = await Sales.find({});
+    const sales = await Sales.find({}).sort({createdAt: -1});
 
     return NextResponse.json({
       result: sales,
@@ -24,17 +24,9 @@ export async function POST(req: Request) {
   try {
     await startDB();
 
-    const { fullname, status, amount, phone, service } = await req.json();
+    const payload = await req.json();
 
-    console.log(fullname, status, amount, phone, service);
-
-    const newSale = new Sales({
-      fullname: fullname,
-      status: status,
-      amount: amount,
-      phone: phone,
-      service: service,
-    });
+    const newSale = new Sales(payload);
 
     await newSale.save();
 
@@ -43,11 +35,9 @@ export async function POST(req: Request) {
       { status: 200 }
     );
   } catch (error) {
-    console.log(error);
-
     return NextResponse.json(
       {
-        error: "Server Error",
+        error: "Server Error. Order Not Created",
         success: false,
       },
       { status: 500 }
