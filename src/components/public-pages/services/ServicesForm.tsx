@@ -28,7 +28,7 @@ const SERVICES: Service[] = [
   // {
   //   id: "resume-generation",
   //   label: "Resume Generation",
-  //   amount: 200,
+  //   amount: 299,
   // },
 ];
 
@@ -138,21 +138,11 @@ const ServicesForm = () => {
               <span className="block text-base font-semibold md:text-lg md:inline">
                 LinkedIn Keyword Optimization:
               </span>
-              Elevate your profile&apos;s visibility and appeal.
+              &nbsp;Elevate your profile&apos;s visibility and appeal.
               <span className="block text-lg text-blue-300 md:text-xl md:inline">
                 &nbsp; (Valued at $2000)
               </span>
             </p>
-            {/* <p className="text-center ">
-              <span className="block text-base font-semibold md:text-lg md:inline">
-                Resume Generation:
-              </span>{" "}
-              Elevate your profile&apos;s visibility and appeal replace it for
-              resume generation.
-              <span className="block text-lg text-blue-300 md:text-xl md:inline">
-                &nbsp; (Valued at $2000)
-              </span>
-            </p> */}
             <p className="text-center ">
               <span className="block text-base font-semibold md:text-lg md:inline">
                 Bonus #1:
@@ -175,10 +165,27 @@ const ServicesForm = () => {
             </p>
             {/* <p className="text-center ">
               <span className="block text-base font-semibold md:text-lg md:inline">
-                Bonus #3:
+                Resume Generation:
               </span>{" "}
-              Make an unforgettable first impression with a custom LinkedIn
-              cover design.
+              Resume Generation Service: Craft a standout resume that lands you interviews.
+              <span className="block text-lg text-blue-300 md:text-xl md:inline">
+                &nbsp; (Valued at $2000)
+              </span>
+            </p>
+            <p className="text-center ">
+              <span className="block text-base font-semibold md:text-lg md:inline">
+                Bonus #1:
+              </span>{" "}
+              Bonus #1: Receive a complimentary, professionally written cover letter tailored to your job search.
+              <span className="block text-lg text-blue-300 md:text-xl md:inline">
+                &nbsp; (Valued at $500)
+              </span>
+            </p>
+            <p className="text-center ">
+              <span className="block text-base font-semibold md:text-lg md:inline">
+                Bonus #2:
+              </span>{" "}
+              Bonus #1: Gain a competitive edge with a customized resume template design.
               <span className="block text-lg text-blue-300 md:text-xl md:inline">
                 &nbsp; (Valued at $100)
               </span>
