@@ -6,6 +6,8 @@ import { showErrorToast, showSuccessToast } from "@/helpers/toast";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Fjalla_One, Montserrat } from "next/font/google";
+import { getGHLApi, getGHLApiKey } from "@/ServerActions";
+import axios from "axios";
 const fjalla_One = Fjalla_One({
   weight: "400",
   subsets: ["latin"],
@@ -67,6 +69,10 @@ const ServicesForm = () => {
     },
   });
   const salesEntry = async () => {
+    const GHLApi: string = await getGHLApi();
+    const GHLApiKey: string = await getGHLApiKey();
+
+
     const salesEntry = await fetch("/api/sales", {
       method: "POST",
       headers: {
@@ -86,6 +92,30 @@ const ServicesForm = () => {
       formik.resetForm();
       setShowPaypalPopup(false);
       showSuccessToast("Order Added Successfully");
+      // await axios
+      // .post(
+      //   `${GHLApi}/contacts/payments`,
+      //   {
+      //     email: formik.values.email,
+      //     phone: formik.values.phone,
+      //     fullname: formik.values.fullname,
+      //     amount: amount - amountOff,
+      //     status: "pending",
+      //     tags: ["cb-services"],
+      //   },
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${GHLApiKey}`,
+      //       "Content-Type": "application/json",
+      //     },
+      //   }
+      // )
+      // .then(function (response) {
+      //   console.log("Data added to go high level successfully")
+      // })
+      // .catch(function (error) {
+      //   console.log(error);
+      // });
     } else {
       showErrorToast(response.error);
     }
