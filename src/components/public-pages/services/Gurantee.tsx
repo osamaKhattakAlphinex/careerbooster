@@ -37,8 +37,8 @@ function Gurantee() {
             className={`${lato_400.className} lg:text-[20px]  xs:text-[16px] pt-2`}
           >
             We stand behind the quality and effectiveness of our LinkedIn
-            Keyword Optimization service with utmost confidence. That's why
-            we're offering you an unconditional 30-day satisfaction guarantee.
+            Keyword Optimization service with utmost confidence. That{"'"}s why
+            we{"'"}re offering you an unconditional 30-day satisfaction guarantee.
           </p>
         </div>
       </div>
@@ -46,11 +46,11 @@ function Gurantee() {
         <p
           className={`${lato_400.className} lg:text-[20px]  xs:text-[16px] xs:text-center md:text-left`}
         >
-          If, for any reason, our service doesn't meet your expectations, simply
+          If, for any reason, our service doesn{"'"}t meet your expectations, simply
           reach out to us at support@careerbooster.ai within 30 days of your
-          purchase and we'll process your refund promptly. Our goal is for you
+          purchase and we{"'"}ll process your refund promptly. Our goal is for you
           to feel fully assured and confident in your decision to enhance your
-          LinkedIn profile with our expert services. We're committed to your
+          LinkedIn profile with our expert services. We{"'"}re committed to your
           satisfaction and back our services with a 100% guarantee.
         </p>
       </div>

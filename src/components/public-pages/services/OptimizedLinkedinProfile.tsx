@@ -49,15 +49,15 @@ function OptimizedLinkedinProfile() {
         <p
           className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-800 dark:text-gray-300`}
         >
-          If you're currently unemployed, consider this: with our LinkedIn
-          optimization, if you land a job sooner, wouldn't you agree that it's
+          If you{"'"}re currently unemployed, consider this: with our LinkedIn
+          optimization, if you land a job sooner, wouldn{"'"}t you agree that it{"'"}s
           the best investment you could make, especially for just a few hundred
           dollars?
         </p>
         <p
           className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-800 dark:text-gray-300`}
         >
-          Similarly, if you're employed but seeking better opportunities,
+          Similarly, if you{"'"}re employed but seeking better opportunities,
           investing a small amount in our services to find a job that pays more
           and aligns with your passions surely constitutes a smart investment,
           right?
@@ -65,7 +65,7 @@ function OptimizedLinkedinProfile() {
         <p
           className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-800 dark:text-gray-300`}
         >
-          Of course, it does. That's why many service providers charge upwards
+          Of course, it does. That{"'"}s why many service providers charge upwards
           of $2000 for this type of service.
         </p>
         <p
@@ -74,13 +74,13 @@ function OptimizedLinkedinProfile() {
           Given the value we provide, it would be reasonable to charge $2000 for
           LinkedIn Keyword Optimization. However, we understand that our
           clients, particularly job seekers, may have budget constraints. We
-          don't want financial challenges to be a barrier to accessing our
+          don{"'"}t want financial challenges to be a barrier to accessing our
           services.
         </p>
         <p
           className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-800 dark:text-gray-300`}
         >
-          That's why we offer this service at the exclusive price of just $494.
+          That{"'"}s why we offer this service at the exclusive price of just $494.
           This investment includes personalized keyword research and profile
           optimization, ensuring your LinkedIn stands out in recruiter searches.
         </p>
@@ -95,9 +95,9 @@ function OptimizedLinkedinProfile() {
           className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-800 dark:text-gray-300`}
         >
           We stand by the quality of our services{" "}
-          <strong>and offer a 100% satisfaction guarantee.</strong> If you're
+          <strong>and offer a 100% satisfaction guarantee.</strong> If you{"'"}re
           not satisfied with our LinkedIn Keyword Optimization for any reason,
-          we'll provide a full refund, no questions asked.
+          we{"'"}ll provide a full refund, no questions asked.
         </p>
         <p
           className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-800 dark:text-gray-300`}
@@ -116,7 +116,7 @@ function OptimizedLinkedinProfile() {
         <p
           className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center lg:text-left text-gray-800 dark:text-gray-300`}
         >
-          This is an offer designed to help you achieve your career goals. Don't
+          This is an offer designed to help you achieve your career goals. Don{"'"}t
           miss out!
         </p>
       </div>
@@ -149,7 +149,7 @@ function OptimizedLinkedinProfile() {
           className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center md:text-left`}
         >
           For a limited time, when you sign up for our LinkedIn Optimization
-          service, you'll unlock an exclusive bonus: a complete rewrite and
+          service, you{"'"}ll unlock an exclusive bonus: a complete rewrite and
           makeover of your LinkedIn profile, typically valued at $2000!
         </p>
         <p
@@ -219,8 +219,8 @@ function OptimizedLinkedinProfile() {
         <p
           className={`${lato_400.className} md:text-[20px] xs:text-[16px] xs:text-center md:text-left`}
         >
-          By choosing our LinkedIn Keyword Optimization service, you're not just
-          getting a standout profile – you're building a commanding personal
+          By choosing our LinkedIn Keyword Optimization service, you{"'"}re not just
+          getting a standout profile – you{"'"}re building a commanding personal
           brand. And the best part? This valuable bonus is entirely free with
           your service enrollment.
         </p>

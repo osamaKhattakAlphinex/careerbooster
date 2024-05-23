@@ -25,7 +25,7 @@ const HeroArea = () => {
   return (
     <div className="w-full ">
       {/* Hero Section */}
-      <section className="hero bg-gradient-to-r from-gray-200 via-gray-200 to-gray-200 dark:from-[#01010D80] dark:via-[#000A6380] dark:to-purple-900 overflow-x-hidden md:px-0 pt-[72px]  lg:pt-[90px] lg:npt-10">
+      <section className="hero bg-gradient-to-r from-gray-200 via-gray-200 to-gray-200 dark:from-[#01010D80] dark:via-[#000A6380] dark:to-purple-900 overflow-x-hidden md:px-0 pt-[72px]  lg:pt-[90px] ">
         <div className=" text-center lg:pt-12 lg:pb-8 pt-15 ">
           <div>
             <h1

@@ -26,14 +26,14 @@ function Interests() {
         <p
           className={`${lato_400.className} text-gray-800 dark:text-gray-300 md:text-[20px] xs:text-base`}
         >
-          At CareerBooster, we're dedicated to helping ambitious professionals
+          At CareerBooster, we{"'"}re dedicated to helping ambitious professionals
           like you reach their career goals swiftly and efficiently.
         </p>
         <p
           className={`${lato_400.className} text-gray-800 dark:text-gray-300 md:text-[20px] xs:text-base`}
         >
           Our expertise has guided hundreds of professionals in enhancing their
-          LinkedIn profiles with ease, bypassing years of trial and error. We've
+          LinkedIn profiles with ease, bypassing years of trial and error. We{"'"}ve
           mastered the art of transforming LinkedIn profiles into dynamic career
           tools.
         </p>
@@ -41,7 +41,7 @@ function Interests() {
           className={`${lato_400.className} text-gray-800 dark:text-gray-300 md:text-[20px] xs:text-base`}
         >
           Crafting an impactful LinkedIn profile involves deep understanding of
-          the platform's nuances and algorithms, coupled with advanced personal
+          the platform{"'"}s nuances and algorithms, coupled with advanced personal
           branding skills. With CareerBooster by your side, your profile will
           not only stand out but also capture the attention of top recruiters.
         </p>

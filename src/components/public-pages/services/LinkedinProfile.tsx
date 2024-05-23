@@ -1,5 +1,5 @@
 "use client";
-import { Content, Fjalla_One, Montserrat } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import React from "react";
 import b1 from "@/../public/assets/images/services/b1.webp";
 import b2 from "@/../public/assets/images/services/b2.webp";
@@ -13,10 +13,6 @@ import l2 from "@/../public/assets/images/services/l2.webp";
 import l3 from "@/../public/assets/images/services/l3.webp";
 import l4 from "@/../public/assets/images/services/l4.webp";
 import Image from "next/image";
-const fjalla_One = Fjalla_One({
-  weight: "400",
-  subsets: ["latin"],
-});
 const montserrat = Montserrat({
   weight: "700",
   subsets: ["latin"],
@@ -100,9 +96,10 @@ export const LinkedinProfile = () => {
           ))}
       </div>
       <div className=" mx-auto flex flex-col justify-center items-center md:mt-20 xs:mt-8 w-full gap-10 xs:px-4">
-        {user2.map((items) => {
+        {user2.map((items, index) => {
           return (
             <Image
+              key={index}
               src={items.image}
               width={833}
               height={571}
@@ -114,8 +111,8 @@ export const LinkedinProfile = () => {
       </div>
       <div className="pt-5 justify-center flex flex-wrap  gap-8 lg:mt-20 md:mt-8 xs:px-4">
         {user3 &&
-          user3.map((user) => (
-            <div className="md:w-[40%] xs:w-full">
+          user3.map((user, index) => (
+            <div className="md:w-[40%] xs:w-full" key={index}>
               <Image
                 src={user?.image}
                 alt=""

@@ -5,7 +5,15 @@ import { PayPalButton } from "react-paypal-button-v2";
 import { showErrorToast, showSuccessToast } from "@/helpers/toast";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
+import { Fjalla_One, Montserrat } from "next/font/google";
+const fjalla_One = Fjalla_One({
+  weight: "400",
+  subsets: ["latin"],
+});
+const montserrat = Montserrat({
+  weight: "500",
+  subsets: ["latin"],
+});
 type Service = {
   id: string;
   label: string;
@@ -126,15 +134,15 @@ const ServicesForm = () => {
   }, [showPaypalPopup, paypalRef.current]);
 
   return (
-    <div className=" lg:px-24 lg:pb-16 ">
+    <div className="border border-gray-10 shadow-lg rounded-md md:mx-10 xs:mx-4 mb-6 lg:py-20 md:px-10 md:py-10 xs:py-6 flex flex-col lg:px-24 lg:pb-16 ">
       <div className="w-full mx-auto md:w-3/4 ">
         <div className="flex flex-col space-y-4">
-          <h2 className="text-xl font-semibold text-center md:text-4xl">
+          <h2 className={`text-xl font-semibold text-[#4f31f0]  dark:text-[#6350c8] text-center md:text-5xl ${fjalla_One.className}`}>
             Here&apos;s a Recap of Everything You Get When You Sign Up for Our
             Services Today...
           </h2>
           <div className="flex flex-col items-center justify-center gap-4">
-            <p className="text-center ">
+            <p className={`text-center ${montserrat.className}`}>
               <span className="block text-base font-semibold md:text-lg md:inline">
                 LinkedIn Keyword Optimization:
               </span>
@@ -143,7 +151,7 @@ const ServicesForm = () => {
                 &nbsp; (Valued at $2000)
               </span>
             </p>
-            <p className="text-center ">
+            <p className={`text-center ${montserrat.className}`}>
               <span className="block text-base font-semibold md:text-lg md:inline">
                 Bonus #1:
               </span>{" "}
@@ -153,7 +161,7 @@ const ServicesForm = () => {
                 &nbsp;(Valued at $1000)
               </span>
             </p>
-            <p className="text-center ">
+            <p className={`text-center ${montserrat.className}`}>
               <span className="block text-base font-semibold md:text-lg md:inline">
                 Bonus #2:
               </span>{" "}
@@ -192,43 +200,38 @@ const ServicesForm = () => {
             </p> */}
           </div>
           <div className="self-center ">
-            <span className="text-xl font-bold text-center md:text-4xl">
+            <span className={`text-xl font-bold text-center md:text-5xl ${fjalla_One.className}`}>
               Total Package Value: $3100
             </span>
           </div>
           <div className="self-center text-center">
-            <span className="text-lg text-center text-blue-700 dark:text-blue-300 md:text-2xl">
+            <span className={`text-lg text-center text-blue-700 dark:text-blue-300 md:text-2xl ${fjalla_One.className}`}>
               Special Limited-Time Offer: Unlock all these benefits for just
               $494!
             </span>
             <p className="pt-2 text-center">
-              <span className="text-3xl text-blue-700 dark:text-blue-300 line-through md:text-5xl ">
+              <span className={`text-4xl text-blue-700 dark:text-blue-300 line-through md:text-6xl ${fjalla_One.className}`}>
                 $3100
               </span>
-              <span className="text-3xl md:text-5xl"> $494</span>
+              <span className={`text-4xl md:text-6xl ${fjalla_One.className}`}> $494</span>
             </p>
-            <p className="w-full pt-2 text-base text-center md:text-2xl">
+            <p className={`w-full pt-2 mt-4 text-base text-center md:text-2xl ${montserrat.className}`}>
               Hurry, Offer Ends Soon!
             </p>
           </div>
         </div>
-        <div className="p-4 text-center">
-          <span className="text-base md:text-xl">
-            Enter Your Details Below to Complete Your Order.
+        <div className="p-4 mt-4 text-center">
+          <span className={`text-base font-semibold md:text-xl ${montserrat.className}`}>
+            Enter Your Details Below to Complete Your Order:
           </span>
         </div>
-        <form className="space-y-5 serviceForm p-2 mb-4" onSubmit={formik.handleSubmit}>
+        <form className="mt-4 space-y-5 serviceForm py-2 px-4 mb-4" onSubmit={formik.handleSubmit}>
           <div className="flex flex-col gap-2">
-            <label
-              htmlFor="fullname"
-              className="text-base font-semibold md:text-lg"
-            >
-              Fullname
-            </label>
             <input
               type="text"
               value={formik.values.fullname}
               id="fullname"
+              placeholder="Full Name..."
               onChange={formik.handleChange}
               className="p-2 bg-transparent border border-gray-400 rounded-md"
             />
@@ -237,17 +240,12 @@ const ServicesForm = () => {
             )}
           </div>
           <div className="flex flex-col gap-2">
-            <label
-              htmlFor="email"
-              className="text-base font-semibold md:text-lg"
-            >
-              Email
-            </label>
             <input
               type="email"
               id="email"
               value={formik.values.email}
               onChange={formik.handleChange}
+              placeholder="Email Address..."
               className="p-2 bg-transparent border border-gray-400 rounded-md"
             />
             {formik.touched.email && formik.errors.email && (
@@ -255,17 +253,12 @@ const ServicesForm = () => {
             )}
           </div>
           <div className="flex flex-col gap-2">
-            <label
-              htmlFor="phone"
-              className="text-base font-semibold md:text-lg"
-            >
-              Phone
-            </label>
             <input
               type="tel"
               id="phone"
               value={formik.values.phone}
               onChange={formik.handleChange}
+              placeholder="Phone Number..."
               className="p-2 bg-transparent border border-gray-400 rounded-md"
             />
             {formik.touched.phone && formik.errors.phone && (
@@ -275,6 +268,7 @@ const ServicesForm = () => {
 
           <div className="flex flex-col gap-3">
             <span className="text-lg font-semibold ">Services</span>
+            <span className="border-b dark:border-gray-300 border-gray-800"></span>
             {SERVICES.map((service) => (
               <div
                 className="flex flex-row items-center justify-between gap-2 "
@@ -318,17 +312,17 @@ const ServicesForm = () => {
             <>
               {/* coupan */}
 
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <input
                   type="text"
                   id="coupan"
                   value={formik.values.coupan}
-                  placeholder="Enter Coupon Code"
+                  placeholder="Enter Coupon Code..."
                   onChange={formik.handleChange}
                   className="p-2 bg-transparent border border-gray-400 rounded-md"
                 />
                 <button
-                  className="self-center rounded-md bg-gray-950 py-2 px-4  font-semibold text-center text-gray-200 "
+                  className="rounded-md bg-gradient-to-r to-violet-500 from-fuchsia-500 py-2 px-4 place-self-start font-semibold text-center text-gray-200 "
                   disabled={formik.values.coupan === ""}
                   onClick={(e) => {
                     e.preventDefault();
@@ -341,9 +335,9 @@ const ServicesForm = () => {
               {coupanText !== "" && (
                 <p className="text-red-700">{coupanText}</p>
               )}
-              <div className="w-full p-6 rounded-sm shadow-md bg-slate-700">
+              <div className="w-full p-6 rounded-md shadow-md bg-slate-700">
                 <span className="block w-full text-gray-100 pb-2 text-base font-semibold text-center uppercase md:text-lg">
-                  Order Details
+                  Order Summary
                 </span>
                 <div className="mt-2 border-t-[1.5px]">
                   <div className="divide-gray-400 divide-y-[1.5px] py-2">
@@ -383,7 +377,7 @@ const ServicesForm = () => {
                 </div>
               </div>
               <div className="flex flex-row items-center justify-center ">
-                <div className="flex flex-row items-center justify-center w-full rounded-md md:w-32 bg-gray-950">
+                <div className="flex flex-row items-center justify-center w-full rounded-md md:w-32 bg-gradient-to-r to-violet-500 from-fuchsia-500">
                   <button
                     type="submit"
                     name="Submit"
