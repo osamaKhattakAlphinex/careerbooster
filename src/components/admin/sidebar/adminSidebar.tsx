@@ -265,7 +265,7 @@ const Menu = () => {
                   href="/linkedin-prompts-configuration"
                   className="text-white no-underline hover:no-underline hover:text-white/80"
                 >
-                  linkedIn
+                  LinkedIn
                 </Link>
               </li>
               {/* <li className="px-5 py-2">

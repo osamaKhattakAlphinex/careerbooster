@@ -42,7 +42,6 @@ const items = [
   { icon: dollarIcon, text: "Billing Details", url: "/billing" },
   // { icon: bid, text: "Consulting Bot", url: "/consulting-bids-bot" },
   { icon: userCircle, text: "Profile Settings ", url: "/profile-review" },
-  { icon: keyIcon, text: "Change Password", url: "/change-current-password" },
   { icon: powerIcon, text: "Sign Out", url: "/dashboard" },
 ];
 const pagesArray = ["/subscribe", "/subscribed"];
