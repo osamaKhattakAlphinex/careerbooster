@@ -24,13 +24,13 @@ export async function POST(request: NextRequest) {
             "jobDescription": "VALUE_HERE",
             "skills": []
           }
-    
+          jobDescription must be in proper html format.
     
           The output must be a valid JSON
           `;
 
       const response: any = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo-1106",
+        model: "ft:gpt-3.5-turbo-1106:careerbooster::9SLbRnyu",
         messages: [{ role: "user", content: input }],
       });
       try {

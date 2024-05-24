@@ -1,4 +1,4 @@
-import { Content, Lato, Montserrat } from "next/font/google";
+import { Lato, Montserrat } from "next/font/google";
 import React from "react";
 const montserrat_500 = Montserrat({
   weight: "500",
