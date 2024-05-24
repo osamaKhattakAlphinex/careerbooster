@@ -141,7 +141,7 @@ const Footer = () => {
                       >
                         <svg
                           className=" 
-                          text-[#000] dark:text-gray-300 w-3.5 h-3.5 border border-gray-100 p-0.5 rounded "
+                          text-[#000] dark:text-gray-300 w-3.5 h-3.5 border border-black dark:border-gray-100  p-0.5 rounded "
                           aria-hidden="true"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="currentColor"

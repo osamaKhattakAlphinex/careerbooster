@@ -4,6 +4,7 @@ import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import { boltIcon, deleteIcon } from "@/helpers/iconsProvider";
 import { createColumnHelper } from "@tanstack/react-table";
 import axios from "axios";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 
 type Sale = {
@@ -17,6 +18,7 @@ type Sale = {
 
 const ChangeStatus = ({ sale, refetch }: any) => {
   const [status, setStatus] = useState<boolean>(false);
+  
 
   useEffect(() => {
     if (sale.status === "pending") {
@@ -82,8 +84,14 @@ const DeleteSale = ({ sale, refetch }: any) => {
 };
 
 const Sales = () => {
-  const [sales, setSales] = useState<[] | any>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [records, setRecords] = useState([]);
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const [limitOfUser, setLimitOfUser] = useState<number>(10);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const columnHelper = createColumnHelper<Sale>();
 
@@ -153,13 +161,12 @@ const Sales = () => {
 
     if (!loading) {
       axios
-        .get("/api/sales")
+        .get(`/api/sales?limit=${limitOfUser}&page=${currentPage}`)
         .then((res: any) => {
           if (res.data.success) {
             const sales = res.data.result;
-
-            console.log(sales);
-            setSales(sales);
+            setRecords(sales);
+            setTotalPages(Math.ceil(res.data.total / limitOfUser));
           }
         })
         .catch((err) => {
@@ -170,10 +177,33 @@ const Sales = () => {
         });
     }
   };
+  const selectUsersLimit = (e: any) => {
+    setCurrentPage(1);
+    setLimitOfUser(e.target.value);
+  };
 
   useEffect(() => {
     fetchSales();
   }, []);
+
+  useEffect(() => {
+    setRecords([]);
+    fetchSales();
+    const startIndex = (currentPage - 1) * limitOfUser;
+
+    // setPageStart(startIndex);
+    router.replace(pathname + `?r=${limitOfUser}&p=${currentPage}`);
+  }, [limitOfUser, currentPage]);
+  useEffect(() => {
+    const existingNumberOfRecords = searchParams?.get("r");
+    const existingPage = searchParams?.get("p");
+    if (existingNumberOfRecords) {
+      setLimitOfUser(parseInt(existingNumberOfRecords, 10));
+    }
+    if (existingPage) {
+      setCurrentPage(parseInt(existingPage, 10));
+    }
+  }, [searchParams?.get("r"), searchParams?.get("p")]);
 
   return (
     <>
@@ -189,10 +219,84 @@ const Sales = () => {
           <DataTable
             loading={loading}
             columns={columns}
-            data={sales}
+            data={records}
             source="sales"
             actions={actions}
           />
+        </div>
+      </div>
+      <div className="flex flex-row items-center justify-between w-full ">
+        <div className="flex flex-row items-center gap-2">
+          <label htmlFor="userPerPage" className="text-sm font-medium">
+            Number of records per page:
+          </label>
+          <select
+            name="userPerPage"
+            id="userPerPage"
+            className="rounded-md px-2 py-1 border-[1px] border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400"
+            onChange={selectUsersLimit}
+            value={limitOfUser}
+          >
+            <>
+              <option value={10}>10</option>
+              <option value={20}>20</option>
+              <option value={30}>30</option>
+              <option value={40}>40</option>
+              <option value={100}>100</option>
+              <option value={500}>500</option>
+            </>
+          </select>
+        </div>
+        <div className="flex justify-end mt-4 ">
+          <nav aria-label="Page navigation example">
+            <ul className="inline-flex -space-x-px">
+              <li>
+                <button
+                  className={` border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 ml-0 rounded-l-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
+                  onClick={() => {
+                    setRecords([]);
+                    setCurrentPage(currentPage - 1);
+                  }}
+                  disabled={currentPage == 1 ? true : false}
+                >
+                  Previous
+                </button>
+              </li>
+              {[currentPage - 1, currentPage, currentPage + 1].map((number) => {
+                if (number < 1 || number > totalPages) return null;
+                return (
+                  <li key={number}>
+                    <button
+                      onClick={(e) => {
+                        setRecords([]);
+                        setCurrentPage(number);
+                      }}
+                      className={`border-gray-300 text-gray-500 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 ${
+                        currentPage === number
+                          ? "bg-gray-100 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white focus:bg-gray-100 focus:text-gray-700 dark:focus:bg-gray-700 dark:focus:text-white"
+                          : "hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white"
+                      }`}
+                    >
+                      {number}
+                    </button>
+                  </li>
+                );
+              })}
+
+              <li>
+                <button
+                  className="px-3 py-2 leading-tight text-gray-500 border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  onClick={() => {
+                    setRecords([]);
+                    setCurrentPage(currentPage + 1);
+                  }}
+                  disabled={currentPage === totalPages}
+                >
+                  Next
+                </button>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </>
