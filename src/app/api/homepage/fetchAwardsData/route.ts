@@ -49,14 +49,14 @@ export async function POST(req: any) {
                     title: VALUE_HERE,
                     awardingOrganization: VALUE_HERE,
                     date: VALUE_HERE,
-                    description: description of the award
+                    description: array of strings
                   },
                   .
                   .
                   .
                 ]
               }
-              If you don't see any Awards just resturn empty like
+              If you don't see any Awards just return empty like
               {
                 awards: []
               }
