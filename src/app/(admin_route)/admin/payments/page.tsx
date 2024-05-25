@@ -1,7 +1,7 @@
 "use client";
 import DataTable from "@/components/admin/DataTable";
 import PaymentsDecryptionModal from "@/components/admin/payments/paymentsDecryptionModal";
-import { useAppContext } from "@/context/AppContext";
+import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import { createColumnHelper } from "@tanstack/react-table";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
@@ -9,6 +9,7 @@ import React, { useEffect, useRef, useState } from "react";
 type Payment = {
   userEmail: string;
   amountPaid: string;
+  createdAt: string;
 };
 
 const Payments = () => {
@@ -31,6 +32,11 @@ const Payments = () => {
       id: "amountPaid",
       header: () => "Amount",
       cell: (info) => info.renderValue(),
+    }),
+    columnHelper.accessor("createdAt", {
+      id: "createdAt",
+      header: () => "Date & Time",
+      cell: (info) => getFormattedDate(info.renderValue()),
     }),
   ];
 

@@ -1,4 +1,4 @@
-import ViewPackage from "@/components/admin/linkedin-prompts/user-packages/ViewPackage";
+import ViewPackage from "@/components/admin/user-packages/ViewPackage";
 
 const AdminUserPacakges = () => {
   return (

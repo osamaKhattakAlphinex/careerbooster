@@ -1,4 +1,3 @@
-import UserPackage from "@/db/schemas/UserPackage";
 import startDB from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";

@@ -24,7 +24,6 @@ const PaymentsDecryptionModal = forwardRef(
       },
 
       onSubmit: (values) => {
-        console.log(values);
         props.formHandler(values);
         setOpenPaymentsDecryptionModal(false);
       },

@@ -15,7 +15,7 @@ export async function POST(req: any) {
       saltLength: 10,
     });
 
-    let payments = await Payment.find({});
+    let payments = await Payment.find({}).sort({createdAt: -1});
 
     payments = payments.map((pay: any) => {
       return {

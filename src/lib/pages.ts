@@ -64,12 +64,8 @@ export const getPages = () => {
       route: "/billing",
     },    
     {
-      name: "Reset Password",
-      route: "/reset-password",
-    },
-    {
-      name: "Reset Password Success",
-      route: "/reset-password-success",
-    },
+      name: "Services",
+      route: "/services",
+    },    
   ];
 };
