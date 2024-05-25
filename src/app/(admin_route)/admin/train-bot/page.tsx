@@ -510,6 +510,30 @@ const TrainRegistrationBotAdminPage = () => {
                   <option value="register.wizard.listSkills">
                     Skills List
                   </option>
+                  <option value="register.wizard.listProjects">
+                    Projects List
+                  </option>
+                  <option value="register.wizard.listCertifications">
+                    Certifications List
+                  </option>
+                  <option value="register.wizard.listAwards">
+                    Awards List
+                  </option>
+                  <option value="register.wizard.listTrainings">
+                    Trainings List
+                  </option>
+                  <option value="register.wizard.listPublications">
+                    Publications List
+                  </option>
+                  <option value="register.wizard.listLanguages">
+                    Languages List
+                  </option>
+                  <option value="register.wizard.listInterests">
+                    Interests & Hobbies List
+                  </option>
+                  <option value="register.wizard.listReferences">
+                    References List
+                  </option>
                 </>
               )}
               {dataType === "aiTools" && (

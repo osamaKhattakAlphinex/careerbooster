@@ -351,7 +351,7 @@ export async function POST(req: any) {
         }
 
         const response: any = await openai.chat.completions.create({
-          model: "gpt-3.5-turbo-1106",
+          model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8Icp5xpE",
           // stream: true,
           messages: [{ role: "user", content: inputPrompt }],
         });
