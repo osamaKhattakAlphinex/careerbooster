@@ -4,8 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { setField, setUserData } from "@/store/userDataSlice";
-import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
+import { setUserData } from "@/store/userDataSlice";
 
 const UpdateCreditPackage = ({ customer }: any) => {
   const router = useRouter();
@@ -40,7 +39,6 @@ const UpdateCreditPackage = ({ customer }: any) => {
             
         };
 
-        // TODO!! move this code to backeND
         return axios
           .post("/api/users/updateUserData", {
             data: obj,

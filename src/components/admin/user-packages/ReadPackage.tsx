@@ -1,32 +1,16 @@
 "use client";
-
-import { features } from "process";
 import { useState } from "react";
 
 interface IUserPackage {
   _id?: string;
-  type: "monthly" | "yearly";
   title: string;
   amount: number;
+  totalCredits: number;
   status: "active" | "inactive";
   features: string[];
   featuresToolTips: string[];
   category: "basic" | "standard" | "premium";
-  limit: {
-    resumes_generation: number;
-    can_edit_resume: boolean;
-    keywords_generation: number;
-    headline_generation: number;
-    about_generation: number;
-    job_desc_generation: number;
-    cover_letter_generation: number;
-    email_generation: number;
-    pdf_files_upload: number;
-    review_resume: number;
-    consulting_bids_generation: number;
-  };
 }
-
 type Props = {
   userPackage: IUserPackage;
 };
@@ -82,7 +66,7 @@ const ReadPackage = ({ userPackage }: Props) => {
                 <span className="capitalize">{userPackage.category}</span>
                 <h3 className="font-semibold text-xl ">{userPackage.title}</h3>
                 <p className="">
-                  <strong>{userPackage.amount}</strong> / {userPackage.type}
+                  <strong>$ {userPackage.amount}</strong> 
                 </p>
                 <div className="">
                   <span>{userPackage.status}</span>
@@ -115,12 +99,12 @@ const ReadPackage = ({ userPackage }: Props) => {
                 </button>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3">
               <div className="flex-1 bg-gray-200 dark:bg-gray-700 p-3 rounded-md">
                 <h3 className="text-base font-bold  dark:text-gray-300  pb-4 mb-4 rounded-t border-b  border-gray-300 dark:border-gray-600">
                   Features Included
                 </h3>
-                <ul className="flex flex-column gap-1 text-sm my-2 pl-0">
+                <ul className="flex flex-col gap-1 text-sm my-2 pl-0">
                   {userPackage.features?.map(
                     (feature: string, index: number) => {
                       return (
@@ -165,122 +149,7 @@ const ReadPackage = ({ userPackage }: Props) => {
                   )}
                 </ul>
               </div>
-              <div className="flex-1  bg-gray-200 dark:bg-gray-700 p-3 rounded-md">
-                <h3 className="text-base font-bold  dark:text-gray-300  pb-4 mb-4 rounded-t border-b  border-gray-300 dark:border-gray-600">
-                  What you will get
-                </h3>
-                <ul className="flex flex-column gap-1 text-sm my-2 pl-0">
-                  <li
-                    key={`limitaions-1`}
-                    className="flex flex-row justify-between  items-center"
-                  >
-                    <span className="block">Resume Generation</span>
-                    <span className="block">
-                      {userPackage.limit?.resumes_generation}
-                    </span>
-                  </li>
-
-                  <li
-                    key={`limitaions-2`}
-                    className="flex flex-row justify-between  items-center"
-                  >
-                    <span className="block">Keywords Generation</span>
-                    <span className="block">
-                      {userPackage.limit?.keywords_generation}
-                    </span>
-                  </li>
-
-                  <li
-                    key={`limitaions-3`}
-                    className="flex flex-row justify-between  items-center"
-                  >
-                    <span className="block">Headlines Generation</span>
-                    <span className="block">
-                      {userPackage.limit?.headline_generation}
-                    </span>
-                  </li>
-
-                  <li
-                    key={`limitaions-4`}
-                    className="flex flex-row justify-between items-center"
-                  >
-                    <span className="block">Job Descriptions</span>
-                    <span className="block">
-                      {userPackage.limit?.job_desc_generation}
-                    </span>
-                  </li>
-
-                  <li
-                    key={`limitaions-5`}
-                    className="flex flex-row justify-between  items-center"
-                  >
-                    <span className="block">About Generation</span>
-                    <span className="block">
-                      {userPackage.limit?.about_generation}
-                    </span>
-                  </li>
-
-                  <li
-                    key={`limitaions-6`}
-                    className="flex flex-row justify-between items-center"
-                  >
-                    <span className="block">Cover Letter</span>
-                    <span className="block">
-                      {userPackage.limit?.cover_letter_generation}
-                    </span>
-                  </li>
-
-                  <li
-                    key={`limitaions-7`}
-                    className="flex flex-row justify-between items-center"
-                  >
-                    <span className="block">Email Generation</span>
-                    <span className="block">
-                      {userPackage.limit?.email_generation}
-                    </span>
-                  </li>
-
-                  <li
-                    key={`limitaions-8`}
-                    className="flex flex-row justify-between  items-center"
-                  >
-                    <span className="block">Keyword Generation</span>
-                    <span className="block">
-                      {userPackage.limit?.pdf_files_upload}
-                    </span>
-                  </li>
-
-                  <li
-                    key={`limitaions-9`}
-                    className="flex flex-row justify-between  items-center"
-                  >
-                    <span className="block">Review Resume</span>
-                    <span className="block">
-                      {userPackage.limit?.review_resume}
-                    </span>
-                  </li>
-
-                  <li
-                    key={`limitaions-10`}
-                    className="flex flex-row justify-between  items-center"
-                  >
-                    <span className="block">Consulting Bids</span>
-                    <span className="block">
-                      {userPackage.limit?.consulting_bids_generation}
-                    </span>
-                  </li>
-
-                  <li
-                    key={`limitaions-11`}
-                    className="flex flex-row justify-between  items-center"
-                  >
-                    <span className="block">Can Edit Resume</span>
-                    <span className="block">
-                      {userPackage.limit?.can_edit_resume ? "Yes" : "No"}
-                    </span>
-                  </li>
-                </ul>
-              </div>
+              
             </div>
             <div className="flex flex-row justify-center items-center mt-4">
               <button

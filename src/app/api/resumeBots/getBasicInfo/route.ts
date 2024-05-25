@@ -112,7 +112,7 @@ export async function POST(req: any) {
           creditsUsed,
           "resume"
         );
-        await updateToolUsage("Resume Builder", creditsUsed);
+        await updateToolUsage("Resume Tool", creditsUsed);
         // make a trainBot entry
         try {
           if (trainBotData) {
@@ -240,7 +240,7 @@ export async function POST(req: any) {
               creditsUsed,
               "resume"
             );
-            await updateToolUsage("Resume Builder", creditsUsed);
+            await updateToolUsage("Resume Tool", creditsUsed);
           },
           onToken: async (content) => {
             const tokenList = enc.encode(content);
@@ -362,7 +362,7 @@ export async function POST(req: any) {
           creditsUsed,
           "resume"
         );
-        await updateToolUsage("Resume Builder", creditsUsed);
+        await updateToolUsage("Resume Tool", creditsUsed);
 
         // make a trainBot entry
         try {

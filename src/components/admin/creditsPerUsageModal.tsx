@@ -1,7 +1,5 @@
 /* eslint-disable react/display-name */
 "use client";
-
-import { Credit } from "@/app/(admin_route)/admin/credits/page";
 import axios from "axios";
 import * as Yup from "yup";
 import React, {
@@ -10,7 +8,6 @@ import React, {
   useImperativeHandle,
   useState,
 } from "react";
-import { FeatureRow } from "@/components/admin/linkedin-prompts/user-packages/AddPackage";
 import { useFormik } from "formik";
 import { CreditPerUsage } from "@/app/(admin_route)/admin/creditPerUsage/page";
 

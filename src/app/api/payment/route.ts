@@ -54,7 +54,7 @@ export async function GET(req: any) {
   if (session) {
     try {
       await startDB();
-      const payments = await Payment.find({});
+      const payments = await Payment.find({}).sort({createdAt : -1});
       return NextResponse.json(
         { payments: payments, success: true },
         { status: 200 }

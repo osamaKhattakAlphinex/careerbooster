@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
-import path from "path";
-import fs from "fs/promises";
+// import path from "path";
+// import fs from "fs/promises";
 export async function POST(req: any) {
   const body = await req.json();
   const { input } = body;

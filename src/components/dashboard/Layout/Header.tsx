@@ -29,7 +29,6 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
     "/linkedin-optimizer/about": "About Generator",
     "/linkedin-optimizer/job-description": "Job Description Generator",
     "/linkedin-optimizer/keywords": "Keyword Generator",
-    "/change-current-password": "Change Password",
     "/billing": "Billing Detail",
     "/review-resume": "Get Your Resume Reviewed By AI",
     "/resume-builder/templates": "Choose Design of Your Choice",
