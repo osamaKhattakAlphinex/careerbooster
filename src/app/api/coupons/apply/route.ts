@@ -30,7 +30,7 @@ export async function POST(request: any) {
             { $inc: { times_redeemed: 1 } },
             { new: true, useFindAndModify: false }
           );      
-          updateUserCreditsByAdmin(session.user?.email, fetchedCoupon.credits);
+          updateUserCreditsByAdmin(session.user?.email, fetchedCoupon.credits, coupon);
         }
       } else {
         return NextResponse.json(

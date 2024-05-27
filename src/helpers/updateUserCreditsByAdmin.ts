@@ -3,7 +3,8 @@ import startDB from "@/lib/db";
 
 export const updateUserCreditsByAdmin = async (
   email: string | null | undefined,
-  credits: number
+  credits: number,
+  coupon: string
 ) => {
   try {
     await startDB();
@@ -11,7 +12,10 @@ export const updateUserCreditsByAdmin = async (
     if (email) {
       await User.findOneAndUpdate(
         { email: email },
-        { $inc: { userCredits: +credits, totalCredits: +credits } }, // Using $inc to decrement the totalCredits
+        {
+          $inc: { userCredits: +credits, totalCredits: +credits },
+          $push: { radeemedCoupons: coupon },
+        }, // Using $inc to decrement the totalCredits
         { new: true }
       );
       console.log(`Updated totalCredits for ${email} `);
