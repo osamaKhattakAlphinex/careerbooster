@@ -16,7 +16,7 @@ const CreditPackages = ({ viewOnly }: Props) => {
   // TODO STORE PACKAGES IN REDUX AND DONOT REREQUEST THEM IF ALREADY AVAILABLE
 
   const getAllPackages = () => {
-    fetch("/api/checkout/getActiveCreditPackages", {
+    fetch("/api/getActivePackages", {
       method: "GET",
     }).then(async (resp: any) => {
       const res = await resp.json();

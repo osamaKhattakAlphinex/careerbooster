@@ -4,28 +4,32 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import CreditPackages from "@/components/dashboard/checkout/CreditPackages";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 import { useFormik } from "formik";
 import { Fade } from "react-awesome-reveal";
+import { setField } from "@/store/userDataSlice";
 
-type CoupanState = {
-  state: "initialized" | "success" | "error";
-};
 
-const COUPON_MESSAGE: any = {
+const COUPON_MESSAGE = {
   initialized: "Please wait while we apply your coupon",
   success: "Your coupon has been applied successfully",
   error: "Invalid Coupon Code",
+  existing: "Coupon code already used"
 };
 
 export default function SubscribePage() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [showExpiredAlert, setShowExpiredAlert] = useState(false);
   const [showCoupanForm, setShowCoupanForm] = useState(false);
   const [applyingCoupon, setApplyingCoupon] = useState(false);
   const [couponState, setCoupanState] = useState("initialized");
+  // check if there is ?expired=1 in the URL
+  const params = useSearchParams();
+  const userData = useSelector((state: any) => state.userData);
+
   const formik = useFormik({
     initialValues: {
       coupan: "",
@@ -34,6 +38,13 @@ export default function SubscribePage() {
     onSubmit: async (values) => {
       setApplyingCoupon(true);
       setShowCoupanForm(false);
+      if(userData.radeemedCoupons.includes(values.coupan)){
+        setCoupanState("existing");
+        setTimeout(() => {
+          setApplyingCoupon(false);
+        }, 1000);
+        return;
+      }
       try {
         let response: any = await fetch("/api/coupons/apply", {
           method: "POST",
@@ -42,6 +53,7 @@ export default function SubscribePage() {
         response = await response.json();
         if (response.success) {
           setCoupanState("success");
+          dispatch(setField({name:"radeemedCoupons", value: [...userData.radeemedCoupons, values.coupan ]}))
           formik.setFieldValue("coupon", "");
           router.push("/dashboard");
         } else {
@@ -65,9 +77,7 @@ export default function SubscribePage() {
     }),
   });
 
-  // check if there is ?expired=1 in the URL
-  const params = useSearchParams();
-  const userData = useSelector((state: any) => state.userData);
+
   useEffect(() => {
     const expired = params?.get("expired");
     if (expired) {
@@ -144,13 +154,13 @@ export default function SubscribePage() {
                           type="submit"
                           className="no-underline px-[1rem] font-[500] text-[1rem] py-[.75rem] rounded-md text-[#6a4dff] dark:text-[#e6f85e] border-[1px] border-[#6a4dff] hover:border-[#6a4dff] hover:bg-[#6a4dff] hover:border-none hover:text-gray-100 dark:bg-[#11121c] dark:border-[#e6f85e]  dark:hover:bg-[#e6f85e] dark:hover:border-none dark:hover:text-[#11121c]"
                         >
-                          Apply Coupan
+                          Apply Coupon
                         </button>
                       </form>
                     </Fade>
                   )}
 
-                  {applyingCoupon && <span>{COUPON_MESSAGE[couponState]}</span>}
+                  {applyingCoupon && <span className="text-red-500">{COUPON_MESSAGE[couponState]}</span>}
                 </div>
 
                 <div
