@@ -45,9 +45,8 @@ export async function POST(req: any) {
               replace the VALUE_HERE with the actual values
               {
                 interests: [
-                  {
-                    name: VALUE_HERE, 
-                    description: description of the interest
+                  { 
+                    description: array of strings
                   },
                   .
                   .

@@ -25,8 +25,6 @@ export async function POST(request: NextRequest) {
             "skills": []
           }
           jobDescription must be in proper html format.
-    
-          The output must be a valid JSON
           `;
 
       const response: any = await openai.chat.completions.create({

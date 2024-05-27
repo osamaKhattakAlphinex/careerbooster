@@ -49,7 +49,7 @@ export async function POST(req: any) {
                     title: VALUE_HERE,
                     publisher: VALUE_HERE,
                     date: VALUE_HERE,
-                    description: description of the publication,
+                    description: array of strings,
                   },
                   .
                   .

@@ -48,7 +48,7 @@ export async function POST(req: any) {
                 projects: [
                   {
                     title: VALUE_HERE,
-                    description:VALUE_HERE
+                    description:array of strings
                   },
                   .
                   .

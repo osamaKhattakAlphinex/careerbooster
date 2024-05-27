@@ -1,4 +1,4 @@
-import SubHeadlineGenerator from "@/components/dashboard/linkedin-generator-old/SubHeadlineGenerator";
+import SubHeadlineGenerator from "@/components/dashboard/linkedin-generator/SubHeadlineGenerator";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 import Link from "next/link";
 

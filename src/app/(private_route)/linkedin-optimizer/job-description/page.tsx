@@ -1,4 +1,4 @@
-import SubJDGenerator from "@/components/dashboard/linkedin-generator-old/SubJDGenerator";
+import SubJDGenerator from "@/components/dashboard/linkedin-generator/SubJDGenerator";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 import Link from "next/link";
 

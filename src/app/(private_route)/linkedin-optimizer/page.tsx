@@ -1,9 +1,9 @@
 "use client";
-import HeadlineGenerator from "@/components/dashboard/linkedin-generator-old/HeadlineGenerator";
+import HeadlineGenerator from "@/components/dashboard/linkedin-generator/HeadlineGenerator";
 
-import AboutGenerator from "@/components/dashboard/linkedin-generator-old/AboutGenerator";
-import JDGenerator from "@/components/dashboard/linkedin-generator-old/JDGenerator";
-import KeywordsGenerator from "@/components/dashboard/linkedin-generator-old/KeywordsGenerator";
+import AboutGenerator from "@/components/dashboard/linkedin-generator/AboutGenerator";
+import JDGenerator from "@/components/dashboard/linkedin-generator/JDGenerator";
+import KeywordsGenerator from "@/components/dashboard/linkedin-generator/KeywordsGenerator";
 import { useSelector } from "react-redux";
 import { useTourContext } from "@/context/TourContext";
 import TourBot from "@/components/dashboard/TourBot";

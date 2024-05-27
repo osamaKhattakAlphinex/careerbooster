@@ -50,7 +50,7 @@ export async function POST(req: any) {
                     position: VALUE_HERE,
                     startDate: VALUE_HERE,
                     endDate: VALUE_HERE,
-                    description: description of all trainings,
+                    description: array of strings,
                   },
                   .
                   .
