@@ -24,10 +24,6 @@ const Publication = ({ heading, publications, styles, customStyle }: Props) => {
   const [newPublication, setNewPublication] = useState("");
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const [newBulletSection, setNewBulletSection] = useState<string | null>(null);
-  const [streamedJDData, setStreamedJDData] = useState<any>("");
-  const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
-    number | null
-  >(null);
 
   const { handleDropOthersAchievement, handleDropOthers } = useDragAndDrop();
 
@@ -146,7 +142,7 @@ const Publication = ({ heading, publications, styles, customStyle }: Props) => {
                 </span>
               </h2>
               <div className="px-4 py-1">
-                {rec?.description && i !== regeneratedRecordIndex ? (
+                {rec?.description &&  (
                   <ul className={styles?.publication_ul}>
                     {rec?.description.map((achievement: any, ind: number) =>
                       achievement === "" ? (
@@ -226,18 +222,6 @@ const Publication = ({ heading, publications, styles, customStyle }: Props) => {
                       )
                     )}
                   </ul>
-                ) : streamedJDData ? (
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: streamedJDData,
-                    }}
-                  ></div>
-                ) : (
-                  <div className="text-center">
-                    <div role="status">
-                      <Loader />
-                    </div>
-                  </div>
                 )}
 
                 {pulicationIndex === i &&

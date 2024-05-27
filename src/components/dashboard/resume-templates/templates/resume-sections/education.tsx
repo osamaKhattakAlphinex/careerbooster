@@ -1,10 +1,7 @@
 "use client";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
-import Loader from "@/components/common/Loader";
 import EditableField from "@/components/dashboard/EditableField";
-import Toolbar from "@/components/dashboard/Toolbar";
 import { crossIcon1, resumeEductionIcon } from "@/helpers/iconsProvider";
-import useDragAndDrop from "@/hooks/useDragAndDrop";
 import useHandler from "@/hooks/useHandler";
 
 import React, { useState } from "react";

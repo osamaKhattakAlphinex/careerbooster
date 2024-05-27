@@ -120,7 +120,7 @@ const Project = ({ heading, projects, styles, customStyle }: Props) => {
               </h2>
 
               <div className="px-4 py-1">
-                {rec?.description && i !== regeneratedRecordIndex ? (
+                {rec?.description && (
                   <ul className={styles?.project_ul}>
                     {rec?.description.map((achievement: any, ind: number) =>
                       achievement === "" ? (
@@ -200,18 +200,6 @@ const Project = ({ heading, projects, styles, customStyle }: Props) => {
                       )
                     )}
                   </ul>
-                ) : streamedJDData ? (
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: streamedJDData,
-                    }}
-                  ></div>
-                ) : (
-                  <div className="text-center">
-                    <div role="status">
-                      <Loader />
-                    </div>
-                  </div>
                 )}
 
                 {rewardIndex === i && newBulletSection === "Projects" ? (

@@ -162,7 +162,7 @@ const Training = ({ heading, trainings, styles, customStyle }: Props) => {
                 </span>
               </h2>
               <div className="px-4 py-1">
-                {rec?.description && i !== regeneratedRecordIndex ? (
+                {rec?.description && (
                   <ul className={`${styles?.training_ul}`}>
                     {rec?.description.map((achievement: any, ind: number) =>
                       achievement === "" ? (
@@ -242,18 +242,6 @@ const Training = ({ heading, trainings, styles, customStyle }: Props) => {
                       )
                     )}
                   </ul>
-                ) : streamedJDData ? (
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: streamedJDData,
-                    }}
-                  ></div>
-                ) : (
-                  <div className="text-center">
-                    <div role="status">
-                      <Loader />
-                    </div>
-                  </div>
                 )}
 
                 {trainingIndex === i && newBulletSection === "Trainings" ? (

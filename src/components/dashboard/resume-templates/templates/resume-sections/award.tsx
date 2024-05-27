@@ -23,10 +23,6 @@ const Award = ({ heading, awards, styles, customStyle }: Props) => {
   const [newReward, setNewReward] = useState("");
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const [newBulletSection, setNewBulletSection] = useState<string | null>(null);
-  const [streamedJDData, setStreamedJDData] = useState<any>("");
-  const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
-    number | null
-  >(null);
 
   const { handleDropOthersAchievement, handleDropOthers } = useDragAndDrop();
   const { updateSaveHook } = useUpdateAndSave();
@@ -88,7 +84,6 @@ const Award = ({ heading, awards, styles, customStyle }: Props) => {
               setNewBulletSection("Awards");
             }}
             deleteExperience={() => handlers.handleDeleteOthers(i, "awards")}
-            // regenrateAchivements={() => handleRegenrate(rec, i)}
             addNewLine={() => {
               handlers.handleAddOthersSpace(i, newReward, "awards");
               setNewReward("");
@@ -147,7 +142,7 @@ const Award = ({ heading, awards, styles, customStyle }: Props) => {
                 </span>
               </h2>
               <div className="px-4 py-1">
-                {rec?.description && i !== regeneratedRecordIndex ? (
+                {rec?.description && (
                   <ul className={`${styles?.award_ul}`}>
                     {rec?.description.map((achievement: any, ind: number) =>
                       achievement === "" ? (
@@ -227,18 +222,6 @@ const Award = ({ heading, awards, styles, customStyle }: Props) => {
                       )
                     )}
                   </ul>
-                ) : streamedJDData ? (
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: streamedJDData,
-                    }}
-                  ></div>
-                ) : (
-                  <div className="text-center">
-                    <div role="status">
-                      <Loader />
-                    </div>
-                  </div>
                 )}
 
                 {rewardIndex === i && newBulletSection === "Awards" ? (

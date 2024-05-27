@@ -31,11 +31,7 @@ const Interest = ({
   const [newBulletSection, setNewBulletSection] = useState<string | null>(null);
   const [newAchievement, setNewAchievement] = useState("");
   const [insideIndex, setInsideIndex] = useState<number>(0);
-  const { handleDropOthersAchievement, handleDropOthers } = useDragAndDrop();
-  const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
-    number | null
-  >(null);
-  const [streamedJDData, setStreamedJDData] = useState<any>("");
+  const { handleDropOthersAchievement, handleDropOthers } = useDragAndDrop()
 
   return (
     <>
@@ -122,7 +118,7 @@ const Interest = ({
           </h2> */}
 
               <div className="px-4 py-1">
-                {rec?.description && i !== regeneratedRecordIndex ? (
+                {rec?.description &&  (
                   <ul className={` ${styles?.interest_ul}`}>
                     {rec?.description.map((achievement: any, ind: number) =>
                       achievement === "" ? (
@@ -202,18 +198,6 @@ const Interest = ({
                       )
                     )}
                   </ul>
-                ) : streamedJDData ? (
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: streamedJDData,
-                    }}
-                  ></div>
-                ) : (
-                  <div className="text-center">
-                    <div role="status">
-                      <Loader />
-                    </div>
-                  </div>
                 )}
 
                 {newWorkExperience === i && newBulletSection === "Interests" ? (

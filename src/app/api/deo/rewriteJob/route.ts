@@ -1,5 +1,4 @@
 import {
-  TrainBotEntryType,
   makeTrainedBotEntry,
 } from "@/helpers/makeTrainBotEntry";
 import { NextRequest, NextResponse } from "next/server";

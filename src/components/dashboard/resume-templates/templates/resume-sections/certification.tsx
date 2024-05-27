@@ -30,10 +30,6 @@ const Certification = ({
   const [newCertification, setNewCertification] = useState("");
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const [newBulletSection, setNewBulletSection] = useState<string | null>(null);
-  const [streamedJDData, setStreamedJDData] = useState<any>("");
-  const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
-    number | null
-  >(null);
   const { updateSaveHook } = useUpdateAndSave();
   const { handleDropOthersAchievement, handleDropOthers } = useDragAndDrop();
 
@@ -170,7 +166,7 @@ const Certification = ({
                 </span>
               </h2>
               <div className="px-4 py-1">
-                {rec?.description && i !== regeneratedRecordIndex ? (
+                {rec?.description &&  (
                   <ul className={styles?.certification_ul}>
                     {rec?.description.map((achievement: any, ind: number) =>
                       achievement === "" ? (
@@ -250,18 +246,6 @@ const Certification = ({
                       )
                     )}
                   </ul>
-                ) : streamedJDData ? (
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: streamedJDData,
-                    }}
-                  ></div>
-                ) : (
-                  <div className="text-center">
-                    <div role="status">
-                      <Loader />
-                    </div>
-                  </div>
                 )}
 
                 {certificationIndex === i &&
