@@ -104,6 +104,7 @@ const UserSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "CreditPackage",
     },
+    radeeemedCoupons:[],
     tours: {
       resumeBuilder: Boolean,
       coverLetter: Boolean,

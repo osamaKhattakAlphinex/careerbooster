@@ -7,7 +7,6 @@ export async function GET(req: any) {
   const limit = Number(url.searchParams.get("limit"));
   const page = Number(url.searchParams.get("page"));
   const skip = (page - 1) * limit;
-  // console.log(page);
   try {
     await startDB();
 
