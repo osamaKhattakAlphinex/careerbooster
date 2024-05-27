@@ -11,12 +11,11 @@ import { useFormik } from "formik";
 import { Fade } from "react-awesome-reveal";
 import { setField } from "@/store/userDataSlice";
 
-
 const COUPON_MESSAGE = {
   initialized: "Please wait while we apply your coupon",
   success: "Your coupon has been applied successfully",
   error: "Invalid Coupon Code",
-  existing: "Coupon code already used"
+  existing: "Coupon code already redeemed",
 };
 
 export default function SubscribePage() {
@@ -25,7 +24,7 @@ export default function SubscribePage() {
   const [showExpiredAlert, setShowExpiredAlert] = useState(false);
   const [showCoupanForm, setShowCoupanForm] = useState(false);
   const [applyingCoupon, setApplyingCoupon] = useState(false);
-  const [couponState, setCoupanState] = useState("initialized");
+  const [couponState, setCoupanState] = useState<string>("initialized");
   // check if there is ?expired=1 in the URL
   const params = useSearchParams();
   const userData = useSelector((state: any) => state.userData);
@@ -38,7 +37,7 @@ export default function SubscribePage() {
     onSubmit: async (values) => {
       setApplyingCoupon(true);
       setShowCoupanForm(false);
-      if(userData.radeemedCoupons.includes(values.coupan)){
+      if (userData.redeemedCoupons.includes(values.coupan)) {
         setCoupanState("existing");
         setTimeout(() => {
           setApplyingCoupon(false);
@@ -53,7 +52,12 @@ export default function SubscribePage() {
         response = await response.json();
         if (response.success) {
           setCoupanState("success");
-          dispatch(setField({name:"radeemedCoupons", value: [...userData.radeemedCoupons, values.coupan ]}))
+          dispatch(
+            setField({
+              name: "redeemedCoupons",
+              value: [...userData.redeemedCoupons, values.coupan],
+            })
+          );
           formik.setFieldValue("coupon", "");
           router.push("/dashboard");
         } else {
@@ -77,7 +81,6 @@ export default function SubscribePage() {
     }),
   });
 
-
   useEffect(() => {
     const expired = params?.get("expired");
     if (expired) {
@@ -87,7 +90,7 @@ export default function SubscribePage() {
 
   return (
     <>
-      <div className="ml-0  md:px-[15px] pb-[72px]">
+      <div className="ml-0 md:px-[15px] pb-[72px]">
         <Link
           href="/dashboard"
           className="ml-2 my-4 w-fit  no-underline dark:text-[#b324d7] dark:hover:text-[#e6f85e] text-gray-950 hover:text-[#b324d7] flex flex-row gap-2 items-center  hover:opacity-80 transition-all"
@@ -160,7 +163,18 @@ export default function SubscribePage() {
                     </Fade>
                   )}
 
-                  {applyingCoupon && <span className="text-red-500">{COUPON_MESSAGE[couponState]}</span>}
+                  {applyingCoupon && (
+                    <span
+                      className={`${
+                        couponState === "success" ||
+                        couponState === "initialized"
+                          ? "text-gray-950 dark:text-gray-100"
+                          : "text-red-500"
+                      }`}
+                    >
+                      {COUPON_MESSAGE[couponState]}
+                    </span>
+                  )}
                 </div>
 
                 <div

@@ -115,7 +115,7 @@ interface UserDataSlice {
   tours: Tours;
 
   trialResume?: boolean;
-  radeemedCoupons:[];
+  redeemedCoupons:[];
   linkedin?: string;
   education?: Education[];
   trainings?: Training[];
@@ -175,7 +175,7 @@ const initialState: UserDataSlice = {
   creditPackage: "",
   trialResume: false,
   profileImage: "",
-  radeemedCoupons: [],
+  redeemedCoupons: [],
   tours: {
     dashboard: false,
     resumeBuilder: false,

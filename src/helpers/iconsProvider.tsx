@@ -1186,7 +1186,7 @@ export const crossIcon = (
 );
 export const crossIconSmall = (
   <svg
-    className="w-4 h-4"
+    className="w-4 h-4 text-gray-100"
     fill="none"
     stroke="currentColor"
     viewBox="0 0 24 24"
