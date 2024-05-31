@@ -129,7 +129,7 @@ export default function SubscribePage() {
               <div className="flex flex-col items-center justify-center">
                 <div className="flex flex-col items-center justify-center w-full gap-2 text-center">
                   <span className="">
-                    Have a credit coupan ? Click{" "}
+                    Have a credit coupon ? Click{" "}
                     <button
                       className="italic underline text-[#db2777]"
                       onClick={() => setShowCoupanForm(!showCoupanForm)}
