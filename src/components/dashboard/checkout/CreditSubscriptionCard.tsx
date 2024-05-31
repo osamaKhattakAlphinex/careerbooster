@@ -288,7 +288,7 @@ const CreditSubscriptionCard: React.FC<Props> = ({
                   {infoSmallIcon}
                   <div
                     role="tooltip"
-                    className="absolute hidden w-32 p-2 text-xs text-gray-100 transform -translate-x-1/2 bg-gray-600 rounded-md -top-9 left-16 group-hover:block"
+                    className="absolute z-10 hidden w-32  p-2 text-xs text-gray-100 transform -translate-x-1/2 bg-gray-600 rounded-md -top-24 md:-top-9 md:left-20 group-hover:block"
                   >
                     {creditPackage.featuresToolTips[i]}
                     <div className="tooltip-arrow" data-popper-arrow></div>
