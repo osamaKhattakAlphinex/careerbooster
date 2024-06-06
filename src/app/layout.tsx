@@ -10,7 +10,8 @@ import CreditLimitsProvider from "@/components/data-providers/CreditLimitsProvid
 import "./index.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import MicrosoftClarity from "./metrics/MicrosoftClarity";
+import MicrosoftClarity from "@/metrics/MicrosoftClarity";
+
 export const metadata: Metadata = {
   title: "Dashboard - CareerBooster.ai",
   description: "AI Resume Builder | Developed by NausalTech ",

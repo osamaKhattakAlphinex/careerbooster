@@ -100,9 +100,8 @@ const LoginForm = () => {
       if (res?.error) {
         setSubmitting(false);
         return setSubmittingError(res.error);
-      } else {
-        showSuccessToast("Logged in successfully");
-      }
+      } 
+      showSuccessToast("Logged in successfully");
       router.replace("/dashboard");
     },
   });

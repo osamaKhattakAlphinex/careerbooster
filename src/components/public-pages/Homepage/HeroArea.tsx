@@ -14,7 +14,7 @@ const HeroArea = () => {
     "Get the Attention You Deserve from Recruiters.",
     "Get Past the ATS and Increase Your Visibility.",
     "A Top-Notch Resume Will Boost Your Confidence.",
-    "Expect a Document That Stands Out from the Competition",
+    "Expect a Document That Stands Out from the Competition.",
   ];
 
   useEffect(() => {
