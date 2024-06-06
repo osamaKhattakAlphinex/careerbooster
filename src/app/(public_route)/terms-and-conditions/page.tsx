@@ -1,3 +1,9 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Terms & Conditions - CareerBooster.ai",
+  description: "Terms & Conditions - CareerBooster.ai | Developed by NausalTech",
+};
 export default function TermsAndConditionPage() {
   return (
     <>

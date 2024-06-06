@@ -1,7 +1,11 @@
 import JobCard from "@/components/public-pages/find-jobs/JobCard";
 import JobSearchForm from "@/components/public-pages/find-jobs/JobSearchForm";
-import { eyeIcon } from "@/helpers/iconsProvider";
-import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Jobs - CareerBooster.ai",
+  description: "Jobs - CareerBooster.ai | Developed by NausalTech",
+};
 
 export default function FindJobsPage({
   searchParams,

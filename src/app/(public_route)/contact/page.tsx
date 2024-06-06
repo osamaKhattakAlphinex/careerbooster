@@ -5,7 +5,7 @@ import PageHeader from "@/components/PageHeader";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "CareerBooster.ai-Contact",
+  title: "Contact - CareerBooster.ai",
   description:
     "Contact CareerBooster today for personalized assistance in turbocharging your career. Reach out to our expert team for inquiries, support, or partnership opportunities. Your path to career success starts with a simple message.",
   keywords: [
