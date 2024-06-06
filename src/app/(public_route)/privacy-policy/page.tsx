@@ -1,4 +1,10 @@
-export default function PrivacyPloicyPage() {
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy - CareerBooster.ai",
+  description: "Privacy Policy - CareerBooster.ai | Developed by NausalTech",
+};
+export default function PrivacyPloicyPage() { 
   return (
     <>
       <main className="flex-grow-1 my-20 py-10">
