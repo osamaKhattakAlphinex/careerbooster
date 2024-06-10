@@ -49,7 +49,7 @@ const ScanScore = ({ potentialSkills }) => {
   };
   return (
     <div className="w-full ">
-      <div className=" text-center px-24 ">
+      <div className=" text-center px-4 md:px-24 ">
         <div
           className=" flex justify-center mt-11 md:mt-11"
           onClick={getResumeScore}
@@ -72,10 +72,10 @@ const ScanScore = ({ potentialSkills }) => {
           </label>
         </div>
       </div>
-      <div className="flex items-center my-4">
+      <div className="flex flex-col md:flex-row items-center my-4">
         {aiResumeScore !== 0 && (
           <>
-            <div className="w-1/2">
+            <div className="w-full md:w-1/2">
               <p className="font-semibold text-lg">Your Resume Score</p>
               <svg viewBox="0 0 36 36" className="circular-chart">
                 <path
@@ -86,13 +86,13 @@ const ScanScore = ({ potentialSkills }) => {
       a 15.9155 15.9155 0 0 1 0 31.831
       a 15.9155 15.9155 0 0 1 0 -31.831"
                 />
-                <text x="18" y="20.35" className="percentage text-gray-800 dark:text-gray-100">
+                <text x="18" y="20.35" fill="currentColor" className="percentage">
                   {aiResumeScore}%
                 </text>
               </svg>
             </div>
 
-            <div className="w-1/2">
+            <div className="w-full md:w-1/2">
               {aiResumeProblems.length > 0 && (
                 <>
                   <p className="font-semibold text-lg">Problems with Resume</p>

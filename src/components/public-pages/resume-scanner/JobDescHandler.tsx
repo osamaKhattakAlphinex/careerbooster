@@ -35,7 +35,7 @@ const JobDescHandler = () => {
   return (
     <div className="w-full ">
       <section className="hero bg-gradient-to-r from-gray-200 via-gray-200 to-gray-200 dark:from-[#01010D80] dark:via-[#000A6380] dark:to-purple-900 overflow-x-hidden md:px-0 pt-[52px]  lg:pt-[60px] ">
-        <div className=" text-center px-24 ">
+        <div className=" text-center px-4 md:px-24 ">
           <label className="flex items-center justify-between gap-1 mb-1 text-sm xs:font-semibold md:font-bold md:text-lg dark:text-gray-100 text-gray-950/80 lg:pb-4">
             <span className="text-[10px] md:text-sm dark:text-gray-100 text-gray-950 uppercase font-bold after:content-['*'] after:text-[#F04248] after:ml-1 py-4">
               Paste Job Description
@@ -90,7 +90,7 @@ const JobDescHandler = () => {
           </button>
         </div>
         {potentialSkills && potentialSkills.length > 0 && (
-          <div className=" px-24">
+          <div className="px-6 md:px-24">
             <label className="flex items-center justify-between gap-1 mb-1 text-sm xs:font-semibold md:font-bold md:text-lg dark:text-gray-100 text-gray-950/80 lg:pb-4">
               <span className="text-[10px] md:text-sm dark:text-gray-100 text-gray-950 uppercase font-bold py-4">
                 Top Keywords

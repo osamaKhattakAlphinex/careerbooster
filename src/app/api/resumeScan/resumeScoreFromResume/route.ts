@@ -1,3 +1,5 @@
+import TrainBot from "@/db/schemas/TrainBot";
+import startDB from "@/lib/db";
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
@@ -32,6 +34,23 @@ export async function POST(req: any) {
       messages: [{ role: "user", content: inputPrompt }],
     });
 
+    try {
+      await startDB();
+
+      const obj = {
+        type: "resumeScan.job.getResumeScore",
+        input: inputPrompt,
+        output: response?.choices[0]?.message?.content?.replace(
+          /(\r\n|\n|\r)/gm,
+          ""
+        ),
+        idealOutput: "",
+        status: "pending",
+        Instructions: `Get Resume Score and Potential Problems in Resume against a specific job description`,
+      };
+
+      await TrainBot.create({ ...obj });
+    } catch (error) {}
     return NextResponse.json(
       {
         result: response?.choices[0]?.message?.content?.replace(

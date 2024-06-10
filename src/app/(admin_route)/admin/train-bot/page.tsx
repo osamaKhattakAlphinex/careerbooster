@@ -455,15 +455,6 @@ const TrainRegistrationBotAdminPage = () => {
     }
   }, [searchParams?.get("r"), searchParams?.get("p")]);
 
-  // useEffect(() => {
-  //   const startIndex = (currentPage - 1) * limitOfRecords;
-  //   setStartingPage(startIndex);
-  //   const endIndex = startIndex + limitOfRecords;
-
-  //   setRecords([]); // Clear existing records before fetching new ones
-  //   fetchRecords();
-  //   router.replace(`${pathname}?r=${limitOfRecords}&p=${currentPage}`);
-  // }, [limitOfRecords, currentPage]);
 
   return (
     <>
@@ -577,6 +568,12 @@ const TrainRegistrationBotAdminPage = () => {
                   </option>
                   <option value="linkedin.jobDescription">
                     LinkedIn {"> "} Generate Job Description
+                  </option>
+                  <option value="resumeScan.job.getPotentialKeywords">
+                    Job {"> "} Get Potential Skills
+                  </option>
+                  <option value="resumeScan.job.getResumeScore">
+                    Resume {"> "} Get Score and Problems
                   </option>
                   <option value="write.genearteConsultingBid">
                     Write Consulting Bid
