@@ -19,8 +19,6 @@ export const FeatureRow = ({
   tooltip,
   onChangeFeature,
   onChangeTooltip,
-  onBlurFeature,
-  onBlurTooltip,
   onFeatureRemove,
 }: any) => {
   return (
@@ -62,14 +60,6 @@ export const FeatureRow = ({
 };
 
 const AddPackage = ({ getPackages }: Props) => {
-  const [features, setFeatures] = useState<Feature[]>([]); // State for Features
-  const [featuresToolTips, setFeaturesToolTips] = useState<FeatureTooltip[]>(
-    []
-  ); // State for Features Tool Tips
-
-  const [featureList, setFeatureList] = useState<FeatureFieldType[]>([
-    { id: 0, feature: "", tooltip: "" },
-  ]);
 
   const handleFeatureRemove = (idx: number) => {
     const newFeatures = [...formik.values.features];
@@ -83,9 +73,6 @@ const AddPackage = ({ getPackages }: Props) => {
     formik.setFieldValue("featuresToolTips", newFeatures);
   };
 
-  // const addFeatureToolTip = (toolTip: string[]) => {
-  //   setFeaturesToolTips([...featuresToolTips, toolTip]);
-  // };
   const [popUpModel, setPopUpModel] = useState(false);
   const formik = useFormik({
     initialValues: {
@@ -120,7 +107,7 @@ const AddPackage = ({ getPackages }: Props) => {
     onSubmit: async (values, action) => {
       console.log(values);
 
-      const res = await axios.post("/api/packages", {
+      await axios.post("/api/packages", {
         title: values.title,
         amount: values.amount,
         totalCredits: values.totalCredits,
@@ -129,7 +116,7 @@ const AddPackage = ({ getPackages }: Props) => {
         featuresToolTips: values.featuresToolTips,
         category: values.category,
       });
-      // console.log("api response:", res);
+
       getPackages();
       action.resetForm();
       setPopUpModel(false);

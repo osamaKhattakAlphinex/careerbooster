@@ -99,17 +99,15 @@ const ViewPackage = ({}) => {
 
   const getPackages = async () => {
     setLoading(true);
-    if (!loading) {
-      try {
-        let response: any = await axios.get("/api/packages");
-        if (response?.data.success) {
-          console.log(response.data.result)
-          setPackages(response.data.result);
-        }
-      } catch {
-      } finally {
-        setLoading(false);
+    try {
+      const response = await axios.get("/api/packages");
+      if (response?.data.success) {
+        setPackages(response.data.result);
       }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -148,9 +146,8 @@ const ViewPackage = ({}) => {
           />
         </div>
       </div>
-      </>
+    </>
   );
 };
 
 export default ViewPackage;
-

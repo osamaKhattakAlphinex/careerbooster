@@ -1,21 +1,14 @@
 "use client";
 import DataTable, { TableAction } from "@/components/admin/DataTable";
-import { Card, CardContent, CardHeader } from "@/components/admin/card";
 import { useAppContext } from "@/context/AppContext";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
-import {
-  downloadIcon,
-  exterLinkIconSmall,
-  leftArrowIcon,
-  refreshIconRotating,
-} from "@/helpers/iconsProvider";
+import { exterLinkIconSmall } from "@/helpers/iconsProvider";
 import { createColumnHelper } from "@tanstack/react-table";
 import axios from "axios";
 import Link from "next/link";
 
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import { ChangeEvent, useEffect, useState } from "react";
-import { string } from "yup";
+import { useEffect, useState } from "react";
 
 type Lead = {
   _id: string;
@@ -35,7 +28,6 @@ const LeadsAdminPage = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [numberOfRecords, setNumberOfRecords] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [pageStart, setPageStart] = useState<number>(0);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -43,29 +35,7 @@ const LeadsAdminPage = () => {
 
   const columnHelper = createColumnHelper<Lead>();
 
-  const FileViewer = (rec: any) => {
-    return (
-      <Link
-        href={`/files/linkedin-temp/${rec?.file}`}
-        target="_blank"
-        // href={`/admin/train-bot/${rec._id}`}
-        className="flex flex-row gap-1 px-3 py-2 text-xs font-medium text-center text-white no-underline bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-      >
-        Preview {exterLinkIconSmall}
-      </Link>
-    );
-  };
-
-  const actions: TableAction[] = [
-    // {
-    //   name: "view file",
-    //   type: "component",
-    //   element: (rec: any) => FileViewer(rec),
-    //   styles:
-    //     "px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline",
-    //   icon: "",
-    // },
-  ];
+  const actions: TableAction[] = [];
 
   const columns = [
     columnHelper.accessor("name", {
@@ -128,53 +98,27 @@ const LeadsAdminPage = () => {
     }),
   ];
 
-  const [counts, setCounts] = useState<any>(0);
-  const [countLabel, setCountLabel] = useState<string>("total");
 
   const fetchRecords = async (startIndex: number, endIndex: number) => {
     setLoading(true);
-
-    if (!loading) {
-      axios
-        .get("/api/leads", {
-          params: {
-            startIndex: startIndex,
-            endIndex: endIndex,
-          },
-          signal: abortController?.signal,
-        })
-        .then(async (res: any) => {
-          if (res.data.success) {
-            const result = res.data;
-            setNumberOfRecords(result.totalRecords);
-            setRecords(result.data);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+    try {
+      const response = await axios.get("/api/leads", {
+        params: {
+          startIndex: startIndex,
+          endIndex: endIndex,
+        },
+        signal: abortController?.signal,
+      });
+      if (response.data.success) {
+        setNumberOfRecords(response.data.totalRecords);
+        setRecords(response.data.result);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
-
-  const getlinkedInToolUsersCount = async () => {
-    axios.get("/api/leads/getLinkedInToolUserCount").then((res) => {
-      if (res.data.success) {
-        setCounts(res.data);
-      }
-    });
-  };
-
-  useEffect(() => {
-    getlinkedInToolUsersCount();
-
-    return () => {
-      abortController?.abort();
-      setAbortController(new AbortController());
-    };
-  }, []);
 
   useEffect(() => {
     const existingNumberOfRecords = searchParams?.get("r");
@@ -193,10 +137,14 @@ const LeadsAdminPage = () => {
 
     const startIndex = (currentPage - 1) * limitOfRecords;
     const endIndex = startIndex + limitOfRecords;
-    setPageStart(startIndex);
     fetchRecords(startIndex, endIndex);
 
     router.replace(pathname + `?r=${limitOfRecords}&p=${currentPage}`);
+
+    return () => {
+      abortController?.abort();
+      setAbortController(new AbortController());
+    };
   }, [currentPage, limitOfRecords]);
 
   return (

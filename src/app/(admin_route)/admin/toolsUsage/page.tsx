@@ -1,6 +1,5 @@
 "use client";
 import DataTable from "@/components/admin/DataTable";
-import { useAppContext } from "@/context/AppContext";
 import { createColumnHelper } from "@tanstack/react-table";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -30,22 +29,15 @@ const Page = () => {
 
   const fetchUsages = async () => {
     setLoading(true);
-
-    if (!loading) {
-      axios
-        .get("/api/usages")
-        .then((res: any) => {
-          if (res.data.success) {
-            const usages = res.data.usages;
-            setUsages(usages);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+    try {
+      const response = await axios.get("/api/usages");
+      if (response.data.success) {
+        setUsages(response.data.usages);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 

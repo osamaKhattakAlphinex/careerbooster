@@ -4,7 +4,6 @@ import {
   deleteIcon,
   downloadIcon,
   eyeIcon,
-  leftArrowIcon,
   settingIcon,
 } from "@/helpers/iconsProvider";
 import axios from "axios";
@@ -12,7 +11,6 @@ import Link from "next/link";
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import FineTuningSettingModel from "@/components/admin/fineTuning/fineTuningSettingModels";
 import { TrainBotEntryType } from "@/helpers/makeTrainBotEntry";
 import { createColumnHelper } from "@tanstack/react-table";
 import DataTable, {
@@ -20,76 +18,54 @@ import DataTable, {
   TableAction,
 } from "@/components/admin/DataTable";
 import SlidingPanel from "@/components/admin/slidingPanel";
-import useSWR from "swr";
-import { url } from "inspector";
-import { useAppContext } from "@/context/AppContext";
 
 const activeCSS =
   "p-2 text-blue-600 bg-gray-100  active dark:bg-gray-800 dark:text-blue-500";
 const inactiveCSS =
   "p-2 hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300";
 
-const Review = ({ rec }: any) => {
-  return (
-    <Link
-      href={`/admin/train-bot/${rec._id}`}
-      className="px-3 py-2 text-xs font-medium text-center text-white no-underline bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-    >
-      {eyeIcon}
-    </Link>
-  );
-};
 
 const TrainRegistrationBotAdminPage = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [totalPages, setTotalPages] = useState(0);
-  const [startingPage, setStartingPage] = useState(1);
-  const { abortController } = useAppContext();
 
   const [limitOfRecords, setLimitOfRecords] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [activeTab, setActiveTab] = useState("pending");
-  const [dataType, setDataType] = useState<string>("aiTools"); // registrationWizard, aiTools
+  const [dataType, setDataType] = useState<string>("aiTools");
   const [showRecordsType, setShowRecordsType] = useState<string>(
     "register.wizard.basicInfo"
-  ); // register.wizard.basicInfo, register.wizard.listEducation etc
+  );
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [downloading, setDownloading] = useState<boolean>(false);
-
-  const [selectAll, setSelectAll] = useState<boolean>(false);
-  const [dataSelection, setDataSelection] = useState<string[]>([]);
 
   const slidingPanelRef: React.MutableRefObject<any> = useRef(null);
   const refreshRef = useRef<any>();
 
   const fetchRecords = async () => {
     setLoading(true);
-
-    if (!loading) {
-      axios
-        .get(`/api/trainBot?limit=${limitOfRecords}&page=${currentPage}`, {
+    try {
+      const response = await axios.get(
+        `/api/trainBot?limit=${limitOfRecords}&page=${currentPage}`,
+        {
           params: {
             status: activeTab,
             type: showRecordsType,
             dataType: dataType,
           },
-        })
-        .then((res: any) => {
-          if (res.data.success) {
-            const result = res.data;
-            setTotalPages(Math.ceil(result.totalRecs / limitOfRecords));
-            setRecords(result.data);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+        }
+      );
+
+      if (response.data.success) {
+        setTotalPages(Math.ceil(response.data.totalRecs / limitOfRecords));
+        setRecords(response.data.result);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -146,7 +122,6 @@ const TrainRegistrationBotAdminPage = () => {
     {
       name: "review",
       type: "handler",
-      // element: (rec: any) => <Review rec={rec} />,
       element: (rec: any) => handleViewClick(rec),
       styles:
         "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline",
@@ -334,7 +309,6 @@ const TrainRegistrationBotAdminPage = () => {
           .post("/api/trainBot/bulkDelete", { dataSelection: ids })
           .then((res: any) => {
             if (res.data.success) {
-              // setDataSelection([]);
               fetchRecords();
             }
           })
@@ -352,8 +326,6 @@ const TrainRegistrationBotAdminPage = () => {
 
   const handleDownload = async () => {
     if (activeTab !== "reviewed") return;
-
-    setDownloading(true);
 
     if (records) {
       const data = records.map((rec: any) => {
@@ -378,7 +350,6 @@ const TrainRegistrationBotAdminPage = () => {
       link.href = url;
       link.download = "trainBot.jsonl";
       link.click();
-      setDownloading(false);
     }
   };
 
@@ -387,11 +358,8 @@ const TrainRegistrationBotAdminPage = () => {
     const c = confirm("Are you sure you want to delete this Record?");
     if (c) {
       try {
-        let result = await fetch("/api/trainBot/" + id, {
-          method: "DELETE",
-        });
-        const res = await result.json();
-        if (res.success) {
+        const response = await axios.delete("/api/trainBot/" + id)
+        if (response.data.success) {
           return fetchRecords();
         } else {
           return alert("User Not Found");
@@ -408,8 +376,6 @@ const TrainRegistrationBotAdminPage = () => {
     }
   };
 
-  // when tab changes fetch records for that tab
-  //
   useEffect(() => {
     if (
       activeTab &&
@@ -438,8 +404,7 @@ const TrainRegistrationBotAdminPage = () => {
     setRecords([]);
 
     fetchRecords();
-    const startIndex = Number((currentPage - 1) * limitOfRecords);
-    setStartingPage(startIndex);
+
     router.replace(pathname + `?r=${limitOfRecords}&p=${currentPage}`);
   }, [limitOfRecords, currentPage]);
 
@@ -454,7 +419,6 @@ const TrainRegistrationBotAdminPage = () => {
       setCurrentPage(parseInt(existingPage, 10));
     }
   }, [searchParams?.get("r"), searchParams?.get("p")]);
-
 
   return (
     <>
@@ -692,8 +656,6 @@ const TrainRegistrationBotAdminPage = () => {
                   disabled={loading}
                   onClick={() => {
                     setActiveTab("pending");
-                    setDataSelection([]);
-                    setSelectAll(false);
                   }}
                   className={activeTab === "pending" ? activeCSS : inactiveCSS}
                 >
@@ -705,8 +667,6 @@ const TrainRegistrationBotAdminPage = () => {
                   disabled={loading}
                   onClick={() => {
                     setActiveTab("reviewed");
-                    setDataSelection([]);
-                    setSelectAll(false);
                   }}
                   className={activeTab === "reviewed" ? activeCSS : inactiveCSS}
                 >
@@ -718,8 +678,6 @@ const TrainRegistrationBotAdminPage = () => {
                   disabled={loading}
                   onClick={() => {
                     setActiveTab("trained");
-                    setDataSelection([]);
-                    setSelectAll(false);
                   }}
                   className={activeTab === "trained" ? activeCSS : inactiveCSS}
                 >

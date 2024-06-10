@@ -3,7 +3,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import CreditsPerUsageModal from "@/components/admin/creditsPerUsageModal";
-import { useAppContext } from "@/context/AppContext";
 
 const nameFormatter = (key: string) => {
   return key.replaceAll("_", " ");
@@ -41,16 +40,14 @@ const CreditPerUsagePage = () => {
   const getCredits = async () => {
     setLoading(true);
 
-    if (!loading) {
-      try {
-        let response: any = await axios.get("/api/users/CreditLimits");
-        if (response?.data.success) {
-          setCredits(response.data.result);
-        }
-      } catch {
-      } finally {
-        setLoading(false);
+    try {
+      const response = await axios.get("/api/users/CreditLimits");
+      if (response.data.success) {
+        setCredits(response.data.result);
       }
+    } catch {
+    } finally {
+      setLoading(false);
     }
   };
 

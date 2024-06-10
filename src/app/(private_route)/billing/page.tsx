@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 const Page = () => {
@@ -7,22 +8,19 @@ const Page = () => {
   const [totalCredits, setTotalCredits] = useState<number | null>(null);
   const [creditsData, setCreditsData] = useState<any>(null);
   const getCredits = async () => {
-    const res: any = await fetch(
-      `/api/users/getOneByEmail?email=${userData.email}`
-    );
-    const response = await res.json();
-    if (response.success) {
-      setRemainingCredits(response.result.userCredits);
-      setTotalCredits(response.result.totalCredits);
+    const response = await axios.get(`/api/users/getOneByEmail?email=${userData.email}`);
+    if (response.data.success) {
+      setRemainingCredits(response.data.userCredits);
+      setTotalCredits(response.data.totalCredits);
     }
-    const creditPackageDetails = await fetch(
+    const creditPackageDetails = await axios.get(
       `/api/users/getCreditPackageDetails?id=${userData.creditPackage}`
     );
-    const creditPackage = await creditPackageDetails.json();
-    if (creditPackage.success) {
-      setCreditsData(creditPackage.result);
+    if (creditPackageDetails.data.success) {
+      setCreditsData(creditPackageDetails.data.result);
     }
   };
+
   useEffect(() => {
     getCredits();
   }, [userData]);

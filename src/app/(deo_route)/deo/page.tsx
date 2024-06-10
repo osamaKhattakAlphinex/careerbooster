@@ -1,13 +1,11 @@
 "use client";
 
 import DataTable, { TableAction } from "@/components/admin/DataTable";
-import MessageViewer from "@/components/admin/messageViewer";
 import JobForm from "@/components/deo/JobForm";
-import { formatDate, getFormattedDate } from "@/helpers/getFormattedDateTime";
+import {  getFormattedDate } from "@/helpers/getFormattedDateTime";
 import {
   EditIcon,
   eyeIcon,
-  pencilIcon,
   trashIcon,
 } from "@/helpers/iconsProvider";
 
@@ -16,7 +14,7 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 type Job = {
   _id: string;
@@ -41,9 +39,6 @@ const Jobs = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [currentRecord, setCurrentRecord] = useState<any>(null);
   const [limitOfRecords, setLimitOfRecords] = useState<number>(10);
-  const [showTableLoader, setshowTableLoader] = useState(false);
-  const [loadingId, setLoadingId] = useState("");
-  const [pageStart, setPageStart] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
@@ -67,7 +62,6 @@ const Jobs = () => {
     }
   };
   const fetchRecords = async () => {
-    setshowTableLoader(true);
     setLoading(true);
     if (!loading) {
       axios
@@ -75,12 +69,10 @@ const Jobs = () => {
           `/api/deo?deoId=${deo._id}&limit=${limitOfRecords}&page=${currentPage}`
         )
         .then((res: any) => {
-          setLoadingId("");
           if (res.data.success) {
             setRecords(res.data.data);
 
             setTotalPages(Math.ceil(res.data.total / limitOfRecords));
-            setshowTableLoader(false);
             setLoading(false);
           } else {
             setRecords([]);
@@ -91,7 +83,6 @@ const Jobs = () => {
         })
         .finally(() => {
           setLoading(false);
-          setshowTableLoader(false);
         });
     }
   };
@@ -315,9 +306,6 @@ const Jobs = () => {
   useEffect(() => {
     setRecords([]);
     fetchRecords();
-    const startIndex = (currentPage - 1) * limitOfRecords;
-
-    setPageStart(startIndex);
     router.replace(pathname + `?r=${limitOfRecords}&p=${currentPage}`);
   }, [limitOfRecords, currentPage]);
   useEffect(() => {

@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
-import { redirect, usePathname } from "next/navigation";
+import { redirect } from "next/navigation";
 import { AppContextsProvider } from "@/context/AppContext";
 import DeoNavbar from "@/components/deo/deoNavbar";
 
