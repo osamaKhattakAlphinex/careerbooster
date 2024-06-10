@@ -50,12 +50,12 @@ const RegistrationForm = () => {
     },
 
     validationSchema: Yup.object({
-      firstName: Yup.string().required("First Name is Required"),
-      lastName: Yup.string().required("Last Name is Required"),
+      firstName: Yup.string().required("First name required"),
+      lastName: Yup.string().required("Last name required"),
       email: Yup.string()
         .email("Invalid Email Address")
-        .required("Email is Required"),
-      phone: Yup.string().required("Phone number is Required"),
+        .required("Email address required"),
+      phone: Yup.string().required("Phone number required"),
     }),
 
     onSubmit: async (values) => {

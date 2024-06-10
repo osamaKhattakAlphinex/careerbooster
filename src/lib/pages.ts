@@ -67,5 +67,9 @@ export const getPages = () => {
       name: "Services",
       route: "/services",
     },    
+    {
+      name: "Resume Scanner",
+      route: "/resume-scanner",
+    },    
   ];
 };
