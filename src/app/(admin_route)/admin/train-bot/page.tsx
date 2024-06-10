@@ -455,15 +455,6 @@ const TrainRegistrationBotAdminPage = () => {
     }
   }, [searchParams?.get("r"), searchParams?.get("p")]);
 
-  // useEffect(() => {
-  //   const startIndex = (currentPage - 1) * limitOfRecords;
-  //   setStartingPage(startIndex);
-  //   const endIndex = startIndex + limitOfRecords;
-
-  //   setRecords([]); // Clear existing records before fetching new ones
-  //   fetchRecords();
-  //   router.replace(`${pathname}?r=${limitOfRecords}&p=${currentPage}`);
-  // }, [limitOfRecords, currentPage]);
 
   return (
     <>
