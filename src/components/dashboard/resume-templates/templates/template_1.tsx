@@ -619,7 +619,7 @@ const ResumeTemplate1 = ({
                                 value={`${rec?.isContinue && "Present"}`}
                                 onSave={(value: string) => {
                                   handlers.handleSaveExperienceDetail(
-                                    { toYear: value },
+                                    { toMonth: value },
                                     i
                                   );
                                   handlers.handleSaveExperienceDetail(

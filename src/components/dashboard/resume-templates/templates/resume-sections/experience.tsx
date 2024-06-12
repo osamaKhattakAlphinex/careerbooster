@@ -172,10 +172,10 @@ const Experience = ({
                     )}
                     {rec.isContinue && (
                       <EditableField
-                        value={`${rec?.isContinue && "Present"}`}
+                        value="Present"
                         onSave={(value: string) => {
                           handlers.handleSaveExperienceDetail(
-                            { toYear: value },
+                            { toMonth: value },
                             i
                           );
                           handlers.handleSaveExperienceDetail(

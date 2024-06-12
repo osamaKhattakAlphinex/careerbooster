@@ -2,6 +2,7 @@
 import { boltIcon } from "@/helpers/iconsProvider";
 import React, { useState } from "react";
 import ResumeUploader from "./ResumeUploader";
+import ScanScore from "./ScanScore";
 
 const JobDescHandler = () => {
   const [jobDescription, setJobDescription] = useState<string>("");
@@ -103,9 +104,10 @@ const JobDescHandler = () => {
                 </li>
               ))}
             </ul>
-            <ResumeUploader potentialSkills={potentialSkills} />
+            {/* <ResumeUploader potentialSkills={potentialSkills} /> */}
           </div>
         )}
+      <ScanScore potentialSkills={potentialSkills}/>
       </section>
     </div>
   );

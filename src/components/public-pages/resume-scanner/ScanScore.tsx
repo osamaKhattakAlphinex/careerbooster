@@ -8,20 +8,22 @@ const ScanScore = ({ potentialSkills }) => {
   const [gettingScore, setGettingScore] = useState<boolean>(false);
   const [aiResumeScore, setAiResumeScore] = useState<number>(0);
   const [aiResumeProblems, setAiResumeProblems] = useState<string[]>([]);
+  const [file, setFile] = useState<any>();
+
   const getResumeScore = async () => {
-    setGettingScore(true);
+    // setGettingScore(true);
     const resume_content = localStorage.getItem("resume-scan");
+    const formData = new FormData();
+    formData.append("file", file);
     const response = await fetch("/api/resumeScan/resumeScoreFromResume", {
       method: "POST",
-      body: JSON.stringify({
-        resume_content,
-        potentialSkills,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
+      body: formData,
     });
+
+    return;
     const data = await response.json();
+
+    console.log(data);
     if (data.success) {
       let obj;
       if (typeof data.result === "object") {
@@ -50,6 +52,17 @@ const ScanScore = ({ potentialSkills }) => {
   return (
     <div className="w-full ">
       <div className=" text-center px-4 md:px-24 ">
+        <input
+          type="file"
+          onChange={(e) => {
+            e.preventDefault();
+
+            const fileInput = e.target;
+            if (fileInput && fileInput.files && fileInput.files.length > 0) {
+              setFile(fileInput.files[0]);
+            }
+          }}
+        />
         <div
           className=" flex justify-center mt-11 md:mt-11"
           onClick={getResumeScore}
@@ -86,7 +99,12 @@ const ScanScore = ({ potentialSkills }) => {
       a 15.9155 15.9155 0 0 1 0 31.831
       a 15.9155 15.9155 0 0 1 0 -31.831"
                 />
-                <text x="18" y="20.35" fill="currentColor" className="percentage">
+                <text
+                  x="18"
+                  y="20.35"
+                  fill="currentColor"
+                  className="percentage"
+                >
                   {aiResumeScore}%
                 </text>
               </svg>
