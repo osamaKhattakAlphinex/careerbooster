@@ -9,18 +9,24 @@ const openai = new OpenAI({
 });
 export async function POST(req: NextRequest) {
   try {
-    const { jobDescription } = await req.json();
+    const { potentialSkills, aiResumeKeywords } = await req.json();
     const inputPrompt = `
     
-        Here is the job description: 
-        ${jobDescription}
+        Here is the first required keywords for a specific job: 
+        ${potentialSkills}
 
-        What are the potential skills / keywords  that one should have.
+        And here is the second individual person's keywords
+        ${aiResumeKeywords}
 
-        The answer must be in a valid JSON array
-         
+        Give me a list of matching keywords from first keywords list and required keywords that are missing in second.
+
+
+        The answer must be in a valid JSON like 
+        {
+          matchingKeywords: [Array of Strings]
+          missingKeywords: [Array of Strings]
+        }
           `;
-
     const response = await openai.chat.completions.create({
       model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8Icp5xpE",
       messages: [{ role: "user", content: inputPrompt }],
@@ -29,7 +35,7 @@ export async function POST(req: NextRequest) {
       await startDB();
 
       const obj = {
-        type: "resumeScan.job.getPotentialKeywords",
+        type: "resumeScan.job.getMatchingKeywords",
         input: inputPrompt,
         output: response?.choices[0]?.message?.content?.replace(
           /(\r\n|\n|\r)/gm,
@@ -37,7 +43,7 @@ export async function POST(req: NextRequest) {
         ),
         idealOutput: "",
         status: "pending",
-        Instructions: `Get Potential Keywords from given resume`,
+        Instructions: `Get MAtching Keywords from resume and job description`,
       };
 
       await TrainBot.create({ ...obj });

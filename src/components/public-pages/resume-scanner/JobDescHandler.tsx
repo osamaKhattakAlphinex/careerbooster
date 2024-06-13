@@ -1,7 +1,6 @@
 "use client";
 import { boltIcon } from "@/helpers/iconsProvider";
 import React, { useState } from "react";
-import ResumeUploader from "./ResumeUploader";
 import ScanScore from "./ScanScore";
 
 const JobDescHandler = () => {
@@ -104,10 +103,9 @@ const JobDescHandler = () => {
                 </li>
               ))}
             </ul>
-            {/* <ResumeUploader potentialSkills={potentialSkills} /> */}
+           <ScanScore potentialSkills={potentialSkills}/>
           </div>
         )}
-      <ScanScore potentialSkills={potentialSkills}/>
       </section>
     </div>
   );
