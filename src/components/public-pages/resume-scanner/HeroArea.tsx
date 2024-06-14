@@ -1,19 +1,6 @@
-import { Fjalla_One, Roboto, Montserrat } from "next/font/google";
-import Link from "next/link";
+import { Fjalla_One, Montserrat } from "next/font/google";
 
-const fjalla_One = Fjalla_One({
-  weight: "400",
-  subsets: ["latin"],
-});
 const montserrat_r = Montserrat({
-  weight: "400",
-  subsets: ["latin"],
-});
-const montserrat_thin_r = Montserrat({
-  weight: "500",
-  subsets: ["latin"],
-});
-const montserrat_p = Montserrat({
   weight: "400",
   subsets: ["latin"],
 });

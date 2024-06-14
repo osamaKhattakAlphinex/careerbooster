@@ -2,7 +2,7 @@
 
 import React from "react";
 
-const StatusIndicator = ({ status }: { status: string }) => {
+const StatusIndicator = ({ status }: { status: string| null }) => {
   let statusColorClass = "";
 
   switch (status) {

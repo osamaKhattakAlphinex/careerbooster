@@ -1,5 +1,3 @@
-import mongoose from "mongoose";
-const { Schema } = mongoose;
 import { NextResponse } from "next/server";
 import startDB from "@/lib/db";
 import TrainBot from "@/db/schemas/TrainBot";
@@ -22,13 +20,13 @@ export const GET = async (req: any) => {
     const total = await TrainBot.count(filter); // Count based on filter conditions
     return NextResponse.json({
       success: true,
-      data: recs,
+      result: recs,
       totalRecs: total,
     });
   } catch (err) {
     return NextResponse.json({
       success: false,
-      data: [],
+      result: [],
       totalRecords: "no records found",
     });
   }

@@ -14,7 +14,6 @@ import DataTable, {
   BulkDataOperation,
   TableAction,
 } from "@/components/admin/DataTable";
-import { debug } from "console";
 import CreditsUpdationModal from "@/components/creditsUpdationModal";
 
 type User = {
@@ -45,17 +44,11 @@ const UsersPage = () => {
   const [records, setRecords] = useState([]);
   const [loadingId, setLoadingId] = useState("");
   const [limitOfUser, setLimitOfUser] = useState<number>(10);
-  const [showTableLoader, setshowTableLoader] = useState(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [pageStart, setPageStart] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
-  const [subscriptionId, setSubscriptionId] = useState("");
   const [selectAll, setSelectAll] = useState<boolean>(false);
   const [dataSelection, setDataSelection] = useState<string[]>([]);
-  const [pkg, setPkg] = useState<any>([]);
-  const [counts, setCounts] = useState<any>(null);
-  const [userStats, setUserStats] = useState<any>("total");
   const columnHelper = createColumnHelper<User>();
 
   const creditsUpdationModelRef: React.MutableRefObject<any> = useRef(null);
@@ -92,10 +85,7 @@ const UsersPage = () => {
     columnHelper.accessor("createdAt", {
       id: "createdAt",
       header: () => "Created At",
-      // cell: (info) => getFormattedDate(info.renderValue()),
-      meta: {
-        filterVariant: "range",
-      },
+      cell: (info) => getFormattedDate(info.renderValue()),
     }),
     columnHelper.accessor((row) => row, {
       id: "status",
@@ -126,56 +116,7 @@ const UsersPage = () => {
         );
       },
     }),
-    // columnHelper.accessor((row) => row, {
-    //   id: "subscription",
-    //   header: () => "Subscription",
-    //   cell: (info) => {
-    //     const { _id, userPackage, userPackageExpirationDate } = info.getValue();
-    //     return subscriptionId === _id ? (
-    //       refreshIconRotating
-    //     ) : (
-    //       <div className="flex items-center justify-center gap-2">
-    //         <select
-    //           className="rounded"
-    //           value={userPackage}
-    //           onChange={(e) => {
-    //             onSubscriptionChange(_id, e.target.value);
-    //           }}
-    //         >
-    //           {pkg.map((p: any, i: any) => {
-    //             return (
-    //               <option
-    //                 key={i}
-    //                 value={p._id}
-    //                 selected={userPackage === p._id}
-    //               >
-    //                 {p.title}
-    //               </option>
-    //             );
-    //           })}
-    //         </select>
-    //         <div className="flex items-center justify-center">
-    //           <input
-    //             type="checkbox"
-    //             checked={checkingSubscription(userPackageExpirationDate)}
-    //             onChange={(e) => {
-    //               onSubscriptionChange(_id, userPackage);
-    //               if (subscriptionId === "") {
-    //                 e.target.checked = false;
-    //               }
-    //             }}
-    //           />
-    //           <span className="text-sm font-medium text-gray-900 dark:text-gray-300">
-    //             {new Date(userPackageExpirationDate).getTime() < Date.now() ||
-    //             userPackageExpirationDate === undefined
-    //               ? "Off"
-    //               : "On"}
-    //           </span>
-    //         </div>
-    //       </div>
-    //     );
-    //   },
-    // }),
+
     columnHelper.accessor((row) => row, {
       id: "totalCredits",
 
@@ -241,7 +182,7 @@ const UsersPage = () => {
         const res = await result.json();
         if (res.success) {
           setRecords([]);
-          return getUserDeatils();
+          return getUserDetails();
         } else {
           return alert("User Not Found");
         }
@@ -258,7 +199,7 @@ const UsersPage = () => {
       .then((res: any) => {
         if (res.data.success) {
           setDataSelection([]);
-          getUserDeatils();
+          getUserDetails();
         }
       })
       .catch((err) => {
@@ -267,165 +208,48 @@ const UsersPage = () => {
       .finally(() => {});
   };
   const handleChange = async (id: string, status: boolean) => {
-    if (window.confirm("Are you sure to Change the status")) {
-      setLoadingId(id);
-      const record: any = await axios
-        .put(`/api/users/${id}`, {
-          status: status,
-        })
-        .finally(() => {
-          getUserDeatils();
-        });
-    } else {
-      // router.push("/admin/users");
-    }
-  };
-  const checkingSubscription = (expirationDate: any) => {
-    if (new Date(expirationDate).getTime() > Date.now()) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-  const onSubscriptionChange = async (id: string, pckg: string) => {
-    if (window.confirm("Are you sure to Change the subscription status")) {
-      setSubscriptionId(id);
+    const c = confirm("Are you sure to Change the status ?");
+    if (!c) return;
 
-      const record: any = await axios
-        .put(`/api/users/${id}`, {
-          userPackage: pckg,
-          userPackageUsed: {
-            resumes_generation: 0,
-            keywords_generation: 0,
-            headline_generation: 0,
-            about_generation: 0,
-            job_desc_generation: 0,
-            cover_letter_generation: 0,
-            email_generation: 0,
-            pdf_files_upload: 0,
-            review_resume: 0,
-            consulting_bids_generation: 0,
-          },
-        })
-        .finally(() => {
-          setSubscriptionId("");
-          getUserDeatils();
-        });
-    }
+    setLoadingId(id);
+    await axios.put(`/api/users/${id}`, {
+      status: status,
+    });
+
+    getUserDetails();
   };
-  const isChecked = (id: string) => {
-    if (selectAll) {
-      if (dataSelection.length === records.length) return true;
-    } else {
-      if (dataSelection.includes(id)) return true;
-      else return false;
-    }
-  };
-  const showDeleteAllButton = () => {
-    if (selectAll) {
-      return true;
-    }
-    if (dataSelection.length > 1) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-  const onSelectAll = (e: any) => {
-    setSelectAll(e.target.checked);
-    if (e.target.checked) {
-      if (records.length >= 1) {
-        let _ids: string[] = [];
-        records.map((rec: any) => _ids.push(rec._id));
-        setDataSelection(_ids);
-      }
-    } else {
-      setDataSelection([]);
-    }
-  };
-  const onSelecting = (checked: boolean, id: string) => {
-    if (selectAll)
-      if (checked) {
-        setDataSelection((prevSelection) => [...prevSelection, id]);
-      } else {
-        let newSelection = dataSelection.filter(
-          (selectedId) => selectedId !== id
-        );
-        setDataSelection(newSelection);
-        setSelectAll(false);
-      }
-    else {
-      if (checked) {
-        setDataSelection((prevSelection) => [...prevSelection, id]);
-      } else {
-        let newSelection = dataSelection.filter(
-          (selectedId) => selectedId !== id
-        );
-        setDataSelection(newSelection);
-      }
-    }
-  };
+
   const selectUsersLimit = (e: any) => {
     setCurrentPage(1);
     setLimitOfUser(e.target.value);
   };
-  const getUserDeatils = () => {
-    setshowTableLoader(true);
-
+  const getUserDetails = async () => {
     setLoading(true);
-    if (!loading) {
-      fetch(`/api/users?limit=${limitOfUser}&page=${currentPage}`)
-        .then(async (resp) => {
-          const res = await resp.json();
-          setLoadingId("");
-          if (res.success) {
-            setRecords(res.result);
-            setTotalPages(Math.ceil(res.total / limitOfUser));
-            setshowTableLoader(false);
-            setLoading(false);
-          } else {
-            setRecords([]);
-          }
-        })
-        .finally(() => {
-          setLoading(false);
-          setshowTableLoader(false);
-        });
+
+    try {
+      const response = await axios.get(
+        `/api/users?limit=${limitOfUser}&page=${currentPage}`
+      );
+      if (response.data.success) {
+        setLoadingId("");
+        setRecords(response.data.result);
+        setTotalPages(Math.ceil(response.data.total / limitOfUser));
+      }
+    } catch (error) {
+      setRecords([]);
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
-  const getUsersCount = async () => {
-    axios.get("/api/users/getCount").then((res) => {
-      if (res.data.success) {
-        setCounts(res.data);
-      }
-    });
-  };
-  const getAllPackages = () => {
-    fetch("/api/checkout/getActivePackages", {
-      method: "GET",
-    }).then(async (resp: any) => {
-      const res = await resp.json();
-      let result;
-      if (typeof res.result === "string") {
-        result = await JSON.parse(res.result);
-      } else {
-        result = res.result;
-      }
-      setPkg(result);
-    });
-  };
+
   useEffect(() => {
-    getAllPackages();
-    getUserDeatils();
-    getUsersCount();
+    getUserDetails();
   }, []);
 
   useEffect(() => {
     setRecords([]);
-    getUserDeatils();
-    const startIndex = (currentPage - 1) * limitOfUser;
-
-    setPageStart(startIndex);
+    getUserDetails();
     router.replace(pathname + `?r=${limitOfUser}&p=${currentPage}`);
   }, [limitOfUser, currentPage]);
   useEffect(() => {
@@ -443,7 +267,7 @@ const UsersPage = () => {
     <div className="flex flex-col items-start justify-start">
       <CreditsUpdationModal
         ref={creditsUpdationModelRef}
-        callback={getUserDeatils}
+        callback={getUserDetails}
       />
 
       <h2 className="text-xl uppercase dark:text-white/70 text-black/70">

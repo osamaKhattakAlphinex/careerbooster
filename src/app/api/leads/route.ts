@@ -30,13 +30,13 @@ export const GET = async (req: any) => {
 
     return NextResponse.json({
       success: true,
-      data: filteredRecs,
+      result: filteredRecs,
       totalRecords: cachedTotalRecords, // Use the cached totalRecords
     });
   } catch (err) {
     return NextResponse.json({
       success: false,
-      data: [],
+      result: [],
       totalRecords: 0,
     });
   }

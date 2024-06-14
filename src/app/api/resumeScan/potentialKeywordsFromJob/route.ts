@@ -1,18 +1,18 @@
 import TrainBot from "@/db/schemas/TrainBot";
 import startDB from "@/lib/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
-export async function POST(req: any) {
+export async function POST(req: NextRequest) {
   try {
     const { jobDescription } = await req.json();
     const inputPrompt = `
     
-        Here is the job experience: 
+        Here is the job description: 
         ${jobDescription}
 
         What are the potential skills / keywords  that one should have.
