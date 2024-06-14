@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
         And here is the second individual person's keywords
         ${aiResumeKeywords}
 
-        Give me a list of matching keywords from first keywords list and required keywords that are missing in second.
+        Give me a list of matching keywords from first keywords list (add the closely related keywords also) and required keywords that are missing in second.
 
 
         The answer must be in a valid JSON like 

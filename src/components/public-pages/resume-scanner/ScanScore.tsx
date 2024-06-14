@@ -7,21 +7,13 @@ import Link from "next/link";
 const ScanScore = ({ potentialSkills }) => {
   const [gettingScore, setGettingScore] = useState<boolean>(false);
   const [aiResumeScore, setAiResumeScore] = useState<number>(0);
+  const [aiKeywordsScore, setAiKeywordsScore] = useState<number>(0);
   const [aiResumeKeywords, setAiResumeKeywords] = useState<string[]>([]);
   const [aiResumeProblems, setAiResumeProblems] = useState<string[]>([]);
   const [fileUploading, setFileUploading] = useState<boolean>(false);
   const [uploadComplete, setUploadComplete] = useState<boolean>(false);
   const [uploadCompleteText, setUploadCompleteText] = useState<string>("");
-  const [matchingKeywords, setMatchingKeywords] = useState<string[]>([]);
   const [missingKeywords, setMissingKeywords] = useState<string[]>([]);
-
-  const calculateKeywordScore = () => {
-    const score = Math.round(
-      (matchingKeywords.length / potentialSkills.length) * 100
-    );
-    setAiResumeScore(score);
-    setGettingScore(false);
-  };
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -36,10 +28,10 @@ const ScanScore = ({ potentialSkills }) => {
           body: formData,
         });
         const data = await response.json();
-        console.log(data.result);
         if (data.success) {
           setAiResumeKeywords(data.result.keywords);
           setAiResumeProblems(data.result.problems);
+          setAiResumeScore(data.result.score);
           setUploadCompleteText("Resume Scanned Successfully");
           setFileUploading(false);
           setUploadComplete(true);
@@ -53,27 +45,32 @@ const ScanScore = ({ potentialSkills }) => {
 
   const getResumeScore = async () => {
     setGettingScore(true);
-    const response = await fetch("/api/resumeScan/matchingKeywords", {
-      method: "POST",
-      body: JSON.stringify({
-        potentialSkills,
-        aiResumeKeywords,
-      }),
-    });
-    const data = await response.json();
-    console.log(data);
-    if (data.success) {
-      let obj;
-      if (typeof data.result === "object") {
-        obj = data.result;
-      } else {
-        obj = await JSON.parse(data.result);
+    try {
+      const response = await fetch("/api/resumeScan/matchingKeywords", {
+        method: "POST",
+        body: JSON.stringify({
+          potentialSkills,
+          aiResumeKeywords,
+        }),
+      });
+      const data = await response.json();
+      
+      if (data.success) {
+        let obj;
+        if (typeof data.result === "object") {
+          obj = data.result;
+        } else {
+          obj = await JSON.parse(data.result);
+        }
+        const score = Math.round(
+          (obj.matchingKeywords.length / potentialSkills.length) * 100
+        );
+        setAiKeywordsScore(score);
+        setMissingKeywords(obj.missingKeywords);
+        setGettingScore(false);
       }
-      setMatchingKeywords(obj.matchingKeywords);
-      setMissingKeywords(obj.missingKeywords);
-      calculateKeywordScore();
-    } else {
-      console.log(data.result);
+    } catch (error) {
+      console.log(error);
       setGettingScore(false);
     }
   };
@@ -149,15 +146,15 @@ const ScanScore = ({ potentialSkills }) => {
         )}
       </div>
       <div className="flex flex-col md:flex-row gap-8 my-4">
-        {aiResumeScore !== 0 && (
+        {aiKeywordsScore !== 0 && (
           <div className="flex flex-col w-full md:w-1/2 gap-4">
             <div className="w-full">
-              <p className="font-semibold text-lg">Your Keywords Score</p>
+              <p className="font-semibold text-lg">Keywords Score</p>
               <svg viewBox="0 0 36 36" className="circular-chart">
                 <path
                   className="circle"
-                  strokeDasharray={`${aiResumeScore}, 100`}
-                  stroke={getColor(aiResumeScore)}
+                  strokeDasharray={`${aiKeywordsScore}, 100`}
+                  stroke={getColor(aiKeywordsScore)}
                   d="M18 2.0845
       a 15.9155 15.9155 0 0 1 0 31.831
       a 15.9155 15.9155 0 0 1 0 -31.831"
@@ -168,7 +165,7 @@ const ScanScore = ({ potentialSkills }) => {
                   fill="currentColor"
                   className="percentage"
                 >
-                  {aiResumeScore}%
+                  {aiKeywordsScore}%
                 </text>
               </svg>
             </div>
@@ -187,10 +184,10 @@ const ScanScore = ({ potentialSkills }) => {
             </div>
           </div>
         )}
-        {aiResumeScore !== 0 && (
+        {aiKeywordsScore !== 0 && (
           <div className="flex w-full md:w-1/2 flex-col gap-4">
             <div className="w-full">
-              <p className="font-semibold text-lg">Your Resume Score</p>
+              <p className="font-semibold text-lg">Overall Resume Score</p>
               <svg viewBox="0 0 36 36" className="circular-chart">
                 <path
                   className="circle"
