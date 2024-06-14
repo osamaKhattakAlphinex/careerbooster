@@ -465,7 +465,7 @@ const TrainRegistrationBotAdminPage = () => {
                   <option value="register.wizard.listSkills">
                     Skills List
                   </option>
-                  <option value="register.wizard.listProjects">
+                  {/* <option value="register.wizard.listProjects">
                     Projects List
                   </option>
                   <option value="register.wizard.listCertifications">
@@ -488,7 +488,7 @@ const TrainRegistrationBotAdminPage = () => {
                   </option>
                   <option value="register.wizard.listReferences">
                     References List
-                  </option>
+                  </option> */}
                 </>
               )}
               {dataType === "aiTools" && (
@@ -536,8 +536,8 @@ const TrainRegistrationBotAdminPage = () => {
                   <option value="resumeScan.job.getPotentialKeywords">
                     Job {"> "} Get Potential Skills
                   </option>
-                  <option value="resumeScan.job.getResumeScore">
-                    Resume {"> "} Get Score and Problems
+                  <option value="resumeScan.job.getMatchingKeywords">
+                    Resume {"> "} Matching Keywords
                   </option>
                   <option value="write.genearteConsultingBid">
                     Write Consulting Bid
