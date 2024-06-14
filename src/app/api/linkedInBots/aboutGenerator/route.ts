@@ -1,5 +1,5 @@
 import Prompt from "@/db/schemas/Prompt";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import { OpenAIStream, StreamingTextResponse } from "ai";
@@ -23,7 +23,7 @@ export const dynamic = "force-dynamic";
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
-export async function POST(req: any) {
+export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
 
   if (!session) {
@@ -36,7 +36,6 @@ export async function POST(req: any) {
   try {
     const dataset = "linkedin.abouts";
     const model = await getTrainedModel(dataset);
-    //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
     const reqBody = await req.json();
     const creditsUsed = reqBody?.creditsUsed;

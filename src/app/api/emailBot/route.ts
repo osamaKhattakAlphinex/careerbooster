@@ -1,7 +1,7 @@
 import User from "@/db/schemas/User";
 import startDB from "@/lib/db";
 import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { updateTrainedBotEntry } from "@/helpers/updateTrainBotEntry";
 
@@ -70,7 +70,7 @@ async function updateEmail(payload: any) {
   });
   return "ok";
 }
-export async function POST(request: any) {
+export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions);
 
   if (session) {
@@ -104,15 +104,3 @@ export async function POST(request: any) {
   }
 }
 
-// export async function GET(request: any) {
-//   try {
-//     await startDB();
-//     const emails = await user.find();
-//     return NextResponse.json({ success: true, emails }, { status: 200 });
-//   } catch (error) {
-//     return NextResponse.json(
-//       { result: "Internal Server Error", success: false },
-//       { status: 500 }
-//     );
-//   }
-// }

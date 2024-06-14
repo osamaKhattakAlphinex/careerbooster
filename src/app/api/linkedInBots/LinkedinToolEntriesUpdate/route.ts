@@ -1,16 +1,16 @@
 import LinkedinToolEntrie from "@/db/schemas/LinkedinToolEntrie";
 import startDB from "@/lib/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
-export async function POST(req: any) {
+export async function POST(req: NextRequest) {
   try {
     const { id } = await req.json();
     await startDB();
     const exist = await LinkedinToolEntrie.findOne({ _id: id });
     if (exist) {
-      const response = await LinkedinToolEntrie.updateOne(
+      await LinkedinToolEntrie.updateOne(
         { _id: id },
         { $set: { sendToCRM: true } }
       );

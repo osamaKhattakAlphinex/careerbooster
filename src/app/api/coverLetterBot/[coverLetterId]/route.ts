@@ -62,6 +62,7 @@ export async function PUT(
 }
 
 export async function DELETE(
+  req: NextRequest,
   { params }: { params: { coverLetterId: string } }
 ) {
   console.log("params",params);

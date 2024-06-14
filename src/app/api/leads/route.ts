@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import startDB from "@/lib/db";
 import LinkedinToolEntrie from "@/db/schemas/LinkedinToolEntrie";
 
 // Global variable or cache to store the totalRecords value
-let cachedTotalRecords: any = null;
+let cachedTotalRecords: number | null = null;
 
-export const GET = async (req: any) => {
+export const GET = async (req: NextRequest) => {
   const url = new URL(req.url);
   const queryParams = new URLSearchParams(url.search);
 

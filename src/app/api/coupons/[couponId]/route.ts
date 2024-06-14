@@ -41,6 +41,7 @@ export async function PUT(
 }
 
 export async function DELETE(
+  req: NextRequest,
   { params }: { params: { couponId: string } }
 ) {
   const session = await getServerSession(authOptions);

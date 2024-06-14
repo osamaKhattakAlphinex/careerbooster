@@ -2,7 +2,7 @@ import LinkedinToolEntrie from "@/db/schemas/LinkedinToolEntrie";
 import startDB from "@/lib/db";
 import { NextResponse } from "next/server";
 
-export async function GET(req: any) {
+export async function GET() {
   try {
     await startDB();
 

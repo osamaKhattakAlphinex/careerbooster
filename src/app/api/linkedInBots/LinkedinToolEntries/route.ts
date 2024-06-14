@@ -1,12 +1,12 @@
 import LinkedinToolEntrie from "@/db/schemas/LinkedinToolEntrie";
 import startDB from "@/lib/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
-export async function POST(req: any) {
+export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     if (body) {
@@ -17,23 +17,7 @@ export async function POST(req: any) {
         const openai = new OpenAI({
           apiKey: process.env.OPENAI_API_KEY,
         });
-        // load file
-        // const dir = path.join(
-        //   process.cwd() + "/public",
-        //   "/files",
-        //   `/linkedin-temp`
-        // );
-        // const loader = new PDFLoader(`${dir}/${fileName}`);
-        // const docs = await loader.load();
-
-        // let contentTxt = docs.map((doc: any) => doc.pageContent);
-        // const content = contentTxt.join(" ");
-        // CREATING LLM MODAL
-        // const model = new OpenAI({
-        //   modelName: "gpt-3.5-turbo",
-        //   temperature: 0.5,
-        // });
-
+       
         const input = `
           This is the User Data:
           ${linkedinContent}
@@ -73,7 +57,6 @@ export async function POST(req: any) {
           temperature: 0.5,
         });
 
-        console.log(response);
         try {
           await startDB();
 
@@ -100,9 +83,6 @@ export async function POST(req: any) {
             status: "pending",
             sendToCRM: false,
           });
-
-          // const resp = await chain4.call({ query: input });
-          // const respString = JSON.stringify(resp);
 
           return NextResponse.json(
             {

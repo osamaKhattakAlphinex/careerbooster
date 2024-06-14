@@ -1,5 +1,14 @@
 export type CoverLetterCard = {
-
+    jobDescription: string;
+    name: string;
+    phone: string;
+    email: string;
+    address: string;
+    date: string;
+    coverLetterText: string;
+    generatedOnDate: string;
+    generatedViaOption: string;
+    userEmail: string;
 }
 export type EmailCard = {
     id: string;

@@ -1,15 +1,13 @@
-import { TrainBotEntryType, makeTrainedBotEntry } from "@/helpers/makeTrainBotEntry";
 import { postJobDescriptions } from "../jdGeneratorSingle/linkedInJobDescription/route";
 import Prompt from "@/db/schemas/Prompt";
 import startDB from "@/lib/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: any) {
+export async function POST(req: NextRequest) {
     try {
 
         const reqBody = await req.json();
         let inputPrompt: string = ""
-        const trainBotData = reqBody?.trainBotData;
         const jobDescriptionId = reqBody?.jobDescriptionId;
         const email = reqBody?.email;
         const personName = reqBody?.personName;

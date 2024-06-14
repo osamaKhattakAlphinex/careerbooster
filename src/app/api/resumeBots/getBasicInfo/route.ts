@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import Prompt from "@/db/schemas/Prompt";
 import OpenAI from "openai";
 import { OpenAIStream, StreamingTextResponse } from "ai";
@@ -24,7 +24,7 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-export async function POST(req: any) {
+export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
 
   if (!session) {
