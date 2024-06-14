@@ -5,9 +5,10 @@ import { boltIcon, deleteIcon } from "@/helpers/iconsProvider";
 import { createColumnHelper } from "@tanstack/react-table";
 import axios from "axios";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 type Sale = {
+  _id: string;
   fullname: string;
   amount: string;
   service: string;
@@ -16,9 +17,12 @@ type Sale = {
   createdAt: string;
 };
 
-const ChangeStatus = ({ sale, refetch }: any) => {
+type Props = {
+  sale: Sale;
+  refetch: () => void;
+};
+const ChangeStatus = ({ sale, refetch }: Props) => {
   const [status, setStatus] = useState<boolean>(false);
-  
 
   useEffect(() => {
     if (sale.status === "pending") {
@@ -59,12 +63,14 @@ const ChangeStatus = ({ sale, refetch }: any) => {
     </label>
   );
 };
-const DeleteSale = ({ sale, refetch }: any) => {
+const DeleteSale = ({ sale, refetch }: Props) => {
   return (
     <button
       className="whitespace-nowrap p-2 text-xs font-medium text-center text-white bg-rose-700 rounded-lg hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 dark:bg-rose-600 dark:hover:bg-rose-700 dark:focus:ring-rose-800 no-underline"
       title="Delete"
-      onClick={(e) => {
+      onClick={() => {
+        const c = confirm('Are you sure you want to delete ?');
+        if(!c) return
         axios
           .delete(`/api/sales/${sale._id}`)
           .then((res: any) => {
@@ -75,7 +81,6 @@ const DeleteSale = ({ sale, refetch }: any) => {
           .catch((err) => {
             console.log(err);
           })
-          .finally(() => {});
       }}
     >
       {deleteIcon}
@@ -159,22 +164,18 @@ const Sales = () => {
   const fetchSales = async () => {
     setLoading(true);
 
-    if (!loading) {
-      axios
-        .get(`/api/sales?limit=${limitOfUser}&page=${currentPage}`)
-        .then((res: any) => {
-          if (res.data.success) {
-            const sales = res.data.result;
-            setRecords(sales);
-            setTotalPages(Math.ceil(res.data.total / limitOfUser));
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+    try {
+      const response = await axios.get(
+        `/api/sales?limit=${limitOfUser}&page=${currentPage}`
+      );
+      if (response.data.success) {
+        setRecords(response.data.result);
+        setTotalPages(Math.ceil(response.data.total / limitOfUser));
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
   const selectUsersLimit = (e: any) => {
@@ -189,9 +190,6 @@ const Sales = () => {
   useEffect(() => {
     setRecords([]);
     fetchSales();
-    const startIndex = (currentPage - 1) * limitOfUser;
-
-    // setPageStart(startIndex);
     router.replace(pathname + `?r=${limitOfUser}&p=${currentPage}`);
   }, [limitOfUser, currentPage]);
   useEffect(() => {

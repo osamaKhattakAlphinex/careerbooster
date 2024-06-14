@@ -6,8 +6,6 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useTourContext } from "@/context/TourContext";
 
-// new version (dashboard design)
-
 const Dashboard = () => {
   const userData = useSelector((state: any) => state.userData);
   const { tourBotRef } = useTourContext();

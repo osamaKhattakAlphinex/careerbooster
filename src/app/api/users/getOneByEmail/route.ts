@@ -6,8 +6,6 @@ export const dynamic = "force-dynamic";
 
 export async function GET(req: any) {
   try {
-    // const _body = req.json();
-
     const url = new URL(req.url);
 
     const email = url.searchParams.get("email");

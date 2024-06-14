@@ -56,17 +56,14 @@ export const POST = async (
   }
 };
 
-export const GET = async (
-  req: any,
-  { params }: { params: { recId: string } }
-) => {
+export const GET = async () => {
   try {
     await startDB();
     const fineTuneModel = await FineTuneModel.find({});
 
     return NextResponse.json({
       success: true,
-      data: fineTuneModel,
+      result: fineTuneModel,
     });
   } catch (err) {
     return NextResponse.json({

@@ -7,13 +7,15 @@ import axios from "axios";
 import ConfirmationModal from "@/components/admin/ConfirmationModal";
 import { createColumnHelper } from "@tanstack/react-table";
 import DataTable, { TableAction } from "@/components/admin/DataTable";
+import { showSuccessToast } from "@/helpers/toast";
+import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 
 type Coupon = {
   coupon_code: string;
   coupon_type: string;
   name?: string;
   amount_off?: number;
-  plan?:string;
+  plan?: string;
   currency?: string;
   duration: "once" | "repeating" | "forever";
   duration_in_months?: number;
@@ -22,10 +24,7 @@ type Coupon = {
   redeem_by?: number;
   valid?: boolean;
   times_redeemed?: number;
-  max_redemptions?: number;
-  object?: string;
-  created: number;
-  metadata: {};
+  createdAt?: Date;
   credits?: number;
 };
 
@@ -42,85 +41,63 @@ const ViewCoupons = ({}) => {
 
       header: () => "Coupon Code / Id",
       cell: (info) => info.renderValue(),
-      // footer: (info) => info.column.id,
     }),
     columnHelper.accessor("coupon_type", {
       id: "coupon_type",
 
       header: () => "Coupon Type",
       cell: (info) => info.renderValue(),
-      // footer: (info) => info.column.id,
     }),
     columnHelper.accessor("name", {
       id: "name",
 
       header: () => "name",
       cell: (info) => info.renderValue(),
-      // footer: (info) => info.column.id,
     }),
-    columnHelper.accessor("amount_off", {
-      id: "amount_off",
-
-      header: () => "Disc Amount (in $)",
-      // cell: (info: any) => info.renderValue() / 100,
-      cell: (info: any) => info.renderValue(),
-    }),
+   
     columnHelper.accessor("plan", {
       id: "plan",
 
       header: () => "Coupon For",
-      cell: (info: any) => info.renderValue() + " users",
-      // footer: (info) => info.column.id,
+      cell: (info) => info.renderValue() + " users",
     }),
-    columnHelper.accessor("percent_off", {
-      id: "percent_off",
-
-      header: () => "Disc Percentage",
-      cell: (info) => info.renderValue(),
-      // footer: (info) => info.column.id,
-    }),
-    columnHelper.accessor("duration", {
-      id: "duration",
-
-      header: () => "duration",
-      cell: (info) => info.renderValue(),
-      // footer: (info) => info.column.id,
-    }),
+   
     columnHelper.accessor("valid", {
       id: "valid",
 
       header: () => "is Valid",
       cell: (info) => (info.renderValue() ? "Yes" : "No"),
-      // footer: (info) => info.column.id,
     }),
-    columnHelper.accessor("created", {
-      id: "created",
-
+    columnHelper.accessor("createdAt", {
+      id: "createdAt",
       header: () => "Created On",
-      cell: (info: any) => toDateAndTime(info.renderValue()),
-      // footer: (info) => info.column.id,
+      cell: (info) => getFormattedDate(info.renderValue()),
     }),
 
-    columnHelper.accessor("redeem_by", {
-      id: "redeem_by",
-
-      header: () => "expires on",
-      cell: (info: any) => toDateAndTime(info.renderValue()),
-      // footer: (info) => info.column.id,
-    }),
     columnHelper.accessor("times_redeemed", {
       id: "times_redeemed",
-      header: () => "Times Redeemed ",
-
+      header: () => "Times Redeemed",
       cell: (info) => info.renderValue(),
-      // footer: (info) => info.column.id,
     }),
     columnHelper.accessor("credits", {
       id: "credits",
-
       header: () => " Free Credits",
       cell: (info) => info.renderValue(),
-      // footer: (info) => info.column.id,
+    }),
+    columnHelper.accessor("percent_off", {
+      id: "percent_off",
+      header: () => "Disc Percentage",
+      cell: (info) => info.renderValue(),
+    }),
+    columnHelper.accessor("amount_off", {
+      id: "amount_off",
+      header: () => "Disc Amount (in $)",
+      cell: (info) => info.renderValue(),
+    }),
+    columnHelper.accessor("duration", {
+      id: "duration",
+      header: () => "duration",
+      cell: (info) => info.renderValue(),
     }),
   ];
 
@@ -135,19 +112,14 @@ const ViewCoupons = ({}) => {
     },
   ];
 
-  const toDateAndTime = (timestamp: number) => {
-    const date = new Date(timestamp * 1000);
-    const formattedDate = date.toLocaleString();
-    return formattedDate;
-  };
 
   const handleDelete = async (couponCode: string) => {
     const consent = confirm("Are you sure you want to delete this coupan?");
     if (!consent) return;
     try {
-      let response: any = await axios.delete(`/api/coupons/${couponCode}`);
-      if (response?.data.success) {
-        console.log("coupan deleted");
+      const response = await axios.delete(`/api/coupons/${couponCode}`);
+      if (response.data.success) {
+        showSuccessToast("Coupon deleted successfully");
       }
     } catch (error) {
       console.log(error);
@@ -159,16 +131,15 @@ const ViewCoupons = ({}) => {
   const getCoupons = async () => {
     setLoading(true);
 
-    if (!loading) {
-      try {
-        let response: any = await axios.get("/api/coupons");
-        if (response?.data.success) {
-          setCoupons(response.data.result);
-        }
-      } catch {
-      } finally {
-        setLoading(false);
+    try {
+      const response = await axios.get("/api/coupons");
+      if (response.data.success) {
+        setCoupons(response.data.result);
       }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
   useEffect(() => {

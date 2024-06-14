@@ -2,7 +2,6 @@
 
 import DataTable, { TableAction } from "@/components/admin/DataTable";
 import MessageViewer from "@/components/admin/messageViewer";
-import { useAppContext } from "@/context/AppContext";
 import { eyeIcon, leftArrowIcon } from "@/helpers/iconsProvider";
 import { createColumnHelper } from "@tanstack/react-table";
 import axios from "axios";
@@ -17,28 +16,23 @@ type Contact = {
 };
 
 const Contacts = () => {
-  const [records, setRecords] = useState<[] | any>([]);
+  const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState<boolean>(false);
   const messageViewerRef: React.MutableRefObject<any> = useRef(null);
   const [message, setMessage] = useState<string>("");
 
   const fetchRecords = async () => {
     setLoading(true);
-
-    if (!loading) {
-      axios
-        .get("/api/contacts")
-        .then((res: any) => {
-          if (res.data.success) {
-            setRecords(res.data.emails);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+    try {
+      const response = await axios.get("/api/contacts");
+      if (response.data.success) {
+        setRecords(response.data.emails);
+      }
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 

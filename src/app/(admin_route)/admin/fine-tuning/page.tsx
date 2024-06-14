@@ -1,26 +1,21 @@
 "use client";
 import DataTable, {
   ConditionalTableAction,
-  TableAction,
 } from "@/components/admin/DataTable";
 import FineTuningSettingModel from "@/components/admin/fineTuning/fineTuningSettingModels";
 import StatusIndicator from "@/components/admin/fineTuning/statusIndicator";
-import { useAppContext } from "@/context/AppContext";
-import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 
 import {
   cancelIcon,
   deleteIcon,
-  leftArrowIcon,
   settingIcon,
   startIcon,
   statusIcon,
 } from "@/helpers/iconsProvider";
+import { showSuccessToast } from "@/helpers/toast";
 import { createColumnHelper } from "@tanstack/react-table";
 import axios from "axios";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import useSWR from "swr";
 
 type FineTuningModelsType = {
   _id: string;
@@ -32,7 +27,7 @@ type FineTuningModelsType = {
 };
 
 const FineTuningModels = () => {
-  const [records, setRecords] = useState<[] | any>([]);
+  const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   const settingModelRef: React.MutableRefObject<any> = useRef(null);
@@ -55,7 +50,7 @@ const FineTuningModels = () => {
     columnHelper.accessor("status", {
       id: "status",
       header: () => "Status",
-      cell: (info: any) => <StatusIndicator status={info.renderValue()} />,
+      cell: (info) => <StatusIndicator status={info.renderValue()} />,
     }),
     columnHelper.accessor("fineTuningJobId", {
       id: "fineTuningJobId",
@@ -116,58 +111,18 @@ const FineTuningModels = () => {
     },
   ];
 
-  const { data, error } = useSWR(
-    "/api/trainBot/tuneModel/tuningJobsStatus",
-    async function (url) {
-      const inprogressJobs: any = records.filter(
-        (rec: any) =>
-          rec.status === "in-progress" ||
-          rec.status === "validating_files" ||
-          rec.status === "queued" ||
-          rec.status === "running"
-      );
-
-      const responseData = await axios.get(url).then((res) => res.data);
-
-      return inprogressJobs.filter((inprogressJob: any) => {
-        return responseData.jobs.some((job: any) => {
-          job.id === inprogressJob.fineTuningJobId;
-          // inprogressJob.status = job.status;
-          axios
-            .get(`/api/trainBot/tuneModel/tuningJobsStatus/${job.id}`)
-            .then((res: any) => {
-              if (res.data.success) {
-              }
-            })
-            .catch((err) => {
-              console.log(err);
-            })
-            .finally(() => {
-              fetchRecords();
-              setLoading(false);
-            });
-        });
-      });
-    }
-  );
-
   const fetchRecords = async () => {
     setLoading(true);
-    if (!loading) {
-      axios
-        .get("/api/trainBot/tuneModel", {})
-        .then((res: any) => {
-          if (res.data.success) {
-            const result = res.data;
-            setRecords(result.data);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+
+    try {
+      const response = await axios.get("/api/trainBot/tuneModel");
+      if (response.data.success) {
+        setRecords(response.data.result);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -196,7 +151,7 @@ const FineTuningModels = () => {
       });
   };
 
-  const getTuningJobStatus = async (rec: any) => {
+  const getTuningJobStatus = async (rec: FineTuningModelsType) => {
     const { fineTuningJobId: jobId } = rec;
 
     axios
@@ -214,7 +169,7 @@ const FineTuningModels = () => {
       });
   };
 
-  const cancelFineTuningJob = async (rec: any) => {
+  const cancelFineTuningJob = async (rec: FineTuningModelsType) => {
     const { fineTuningJobId: jobId } = rec;
     axios
       .post(`/api/trainBot/tuneModel/tuningJobs/${jobId}`, {
@@ -233,22 +188,22 @@ const FineTuningModels = () => {
       });
   };
 
-  const deleteFileFromOpenAI = async (rec: any) => {
+  const deleteFileFromOpenAI = async (rec: FineTuningModelsType) => {
+    const c = confirm('Are you sure you want to delete ?')
+    if(!c) return
     const { fileId } = rec;
-    axios
-      .delete(`/api/trainBot/tuneModel/${fileId}`)
-      .then((res: any) => {
-        if (res.data.success) {
-          console.log(res.data.content);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
+    try {
+      const response = await axios.delete(`/api/trainBot/tuneModel/${fileId}`);
+
+      if (response.data.success) {
+        showSuccessToast("FineTuning deleted successfully");
         fetchRecords();
-        setLoading(false);
-      });
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

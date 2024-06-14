@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { showSuccessToast } from "@/helpers/toast";
 
 type Coupon = {
   coupon_type: "stripe" | "paypal" | "reward" | "services";
@@ -16,12 +17,9 @@ type Coupon = {
   redeem_by: string; // timestamp - expiration
   valid?: "true" | "false";
   plan?: "all" | "standard" | "premium";
-  // these are not specific to the coupan itself.
+  // these are not specific to the coupon itself.
   discount_type: "amount_off" | "percent_off";
   expirable: "true" | "false";
-
-  // these are specific to coupon type : reward
-
   credits?: number;
 };
 
@@ -165,9 +163,9 @@ const AddCoupon = ({ getCoupons }: Props) => {
         };
       }
       try {
-        let response: any = await axios.post("/api/coupons", payload);
-        if (response?.data.success) {
-          console.log(response.data.result);
+        const response = await axios.post("/api/coupons", payload);
+        if (response.data.success) {
+          showSuccessToast("Coupon created successfully")
         }
       } catch (err) {
         console.log(err);

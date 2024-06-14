@@ -1,6 +1,5 @@
 "use client";
 import DataTable from "@/components/admin/DataTable";
-import { useAppContext } from "@/context/AppContext";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import { createColumnHelper } from "@tanstack/react-table";
 import axios from "axios";
@@ -42,22 +41,15 @@ const TrainedModel = () => {
 
   const fetchmodels = async () => {
     setLoading(true);
-
-    if (!loading) {
-      axios
-        .get("/api/trainBot/trainedModel")
-        .then(async (res: any) => {
-          if (res.data.success) {
-            const result = await res.data;
-            setModels(result.data);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+    try {
+      const response = await axios.get("/api/trainBot/trainedModel");
+      if (response.data.success) {
+        setModels(response.data.result);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 

@@ -5,19 +5,13 @@ import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { makeid } from "@/helpers/makeid";
 import logo from "@/../public/trans-icon1.png";
-import Link from "next/link";
-import { leftArrowIcon } from "@/helpers/iconsProvider";
 import Image from "next/image";
+
 const ChatAI = () => {
   const [userData, setUserData] = useState<any>({});
   const [chat, setChat] = useState<any>([]);
   const [exampleQuestions, setExampleQuestions] = useState<boolean>(true);
-  const [submitted, setSubmitted] = useState<boolean>(false);
   const messagesContainer: any = useRef(null);
-
-  // const {stop } = useCompletion({
-  //   api: "/api/chatCompletion",
-  // });
   const handleStop = async () => {
     const obj: any = {
       chatData: chat,

@@ -42,22 +42,15 @@ const Payments = () => {
 
   const fetchPayments = async () => {
     setLoading(true);
-
-    if (!loading) {
-      axios
-        .get("/api/payment")
-        .then((res: any) => {
-          if (res.data.success) {
-            const payments = res.data.payments;
-            setPayments(payments);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+    try {
+      const response = await axios.get("/api/payment");
+      if (response.data.success) {
+        setPayments(response.data.payments);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 

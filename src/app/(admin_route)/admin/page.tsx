@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/admin/card";
-import { IconCalendarclock, antIcon } from "@/helpers/iconsProvider";
+import { IconCalendarclock } from "@/helpers/iconsProvider";
 import axios from "axios";
 
 import { useEffect, useState } from "react";
@@ -146,7 +146,6 @@ const AdminDashboard = () => {
             </CardHeader>
             <CardContent className="pt-0">
               <div className="text-3xl font-bold">
-                {/* {counts ? counts.total : 0} */}
                 {countsLinkedIn ? countsLinkedIn[countLabel] : 0}
               </div>
             </CardContent>

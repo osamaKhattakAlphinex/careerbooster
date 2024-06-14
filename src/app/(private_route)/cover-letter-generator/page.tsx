@@ -25,34 +25,25 @@ import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import EditableField from "@/components/dashboard/EditableField";
 import { useTourContext } from "@/context/TourContext";
 import TourBot from "@/components/dashboard/TourBot";
+import { RootState } from "@/store/store";
 
 export default function CoverLetterPage() {
-  const componentRef = useRef<any>(null);
-  const [aiInputUserData, setAiInputUserData] = useState<any>();
+  const componentRef = useRef<HTMLDivElement|null>(null);
+  const [aiInputUserData, setAiInputUserData] = useState({});
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session } = useSession();
   const [show, setShow] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>("profile"); // type
   const [streamedData, setStreamedData] = useState<string>("");
-  const [isCoverLetterCopied, setIsCoverLetterCopied] =
-    useState<boolean>(false);
+  const [isCoverLetterCopied, setIsCoverLetterCopied] = useState<boolean>(false);
   const [selectedFile, setSelectedFile] = useState<string>("");
-  const [setSelectedResumeId, setSetSelectedResumeId] = useState<string>("");
   const [jobDescription, setJobDescription] = useState<string>("");
-  const [isEditing, setIsEditing] = useState(false);
-  const [showPopup, setShowPopup] = useState(false);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [showPopup, setShowPopup] = useState<boolean>(false);
   const { setAvailableCredits,abortController,setAbortController, outOfCredits, setOutOfCredits } = useAppContext();
-  const [confirmationModal, setConfirmationModal] = useState(false);
-  const creditLimits = useSelector((state: any) => state.creditLimits);
+  const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
+  const creditLimits = useSelector((state: RootState) => state.creditLimits);
   const router = useRouter();
-
-  useEffect(() => {
-    return (() => {
-      abortController?.abort();
-      setAbortController(new AbortController())
-    });
-  }, []);
-  // Function to toggle editing mode on double-click
 
 
   const handleClick = () => {
@@ -64,7 +55,7 @@ export default function CoverLetterPage() {
   useEffect(() => {
     if (isEditing) {
       if (componentRef.current) {
-        const editorElement = componentRef.current.querySelector("#editor");
+        const editorElement: HTMLDivElement| null = componentRef.current.querySelector("#editor");
         if (editorElement) {
           editorElement.innerHTML = coverLetter.coverLetterText;
           editorElement.focus(); // Focus on the editable area
@@ -122,9 +113,7 @@ export default function CoverLetterPage() {
   // Redux
   const dispatch = useDispatch();
   const userData = useSelector((state: any) => state.userData);
-  const coverLetter = useSelector((state: any) => state.coverLetter);
-
-  const { resumes } = userData;
+  const coverLetter = useSelector((state: RootState) => state.coverLetter);
   const handleSingleSave = async (obj: {}) => {
     const [[key, value]] = Object.entries(obj);
     const payload = {
@@ -152,7 +141,7 @@ export default function CoverLetterPage() {
       setShow(true);
       setStreamedData("");
       const coverletterId = makeid();
-      const obj: any = {
+      const obj = {
         coverletterId: coverletterId,
         type: selectedOption,
         name: userData.firstName + " " + userData.lastName,
@@ -171,26 +160,14 @@ export default function CoverLetterPage() {
         jobDescription,
         trainBotData: {
           userEmail: userData.email,
-          // fileAddress: userData.files[0].fileName,
           fileAddress: userData.uploadedResume.fileName,
         },
+        file:"",
+        userData:{}
       };
 
       if (selectedOption === "file") {
         obj.file = selectedFile;
-      } else if (selectedOption === "aiResume") {
-        const foundResume = resumes.find(
-          (resume: any) => resume.id === setSelectedResumeId
-        );
-        obj.userData = {
-          jobTitle: foundResume.jobTitle,
-          name: foundResume.name,
-          primarySkills: foundResume.primarySkills,
-          professionalSkills: foundResume.professionalSkills,
-          secondarySkills: foundResume.secondarySkills,
-          education: foundResume.secondarySkills,
-          workExperienceArray: foundResume.workExperienceArray,
-        };
       } else {
         obj.userData = aiInputUserData;
       }
@@ -200,9 +177,8 @@ export default function CoverLetterPage() {
         body: JSON.stringify(obj),
         signal: abortController?.signal,
       })
-        .then(async (resp: any) => {
-          // const response = await resp.json();
-          if (resp.ok) {
+        .then(async (resp) => {
+          if (resp.ok && resp.body) {
             setAvailableCredits(true);
             const reader = resp.body.getReader();
             let tempText = "";
@@ -292,6 +268,10 @@ export default function CoverLetterPage() {
         skills: userData?.skills,
       });
     }
+    return (() => {
+      abortController?.abort();
+      setAbortController(new AbortController())
+    });
   }, [userData]);
 
   useEffect(() => {
@@ -304,7 +284,7 @@ export default function CoverLetterPage() {
 
   const historyProps = {
     dataSource: "coverLetters",
-    Component: (card: any) => (
+    Component: (card) => (
       <CoverLetterCardSingle
         card={card}
         componentRef={componentRef}
@@ -381,7 +361,7 @@ export default function CoverLetterPage() {
       }, 500);
     }
   }, [outOfCredits]);
-  const [uploadPdfFile, setUploadPdfFile] = useState<string>("useYourPersona");
+
   return (
     <>
       <div className="w-full sm:w-full z-1000">
@@ -420,12 +400,6 @@ export default function CoverLetterPage() {
                   }`}
                 >
                   <input
-                    // style={{
-                    //   color: "#B324D7",
-                    //   background: "#B324D7",
-                    //   border: "1px solid #B324D7",
-                    // }}
-
                     id="default-radio-1"
                     type="radio"
                     value="profile"
@@ -698,8 +672,6 @@ export default function CoverLetterPage() {
                           !aiInputUserData ||
                           selectedOption === "" ||
                           (selectedOption === "file" && selectedFile === "") ||
-                          (selectedOption === "aiResume" &&
-                            setSelectedResumeId === "") ||
                           !show ||
                           isCoverLetterCopied
                         }
@@ -710,8 +682,6 @@ export default function CoverLetterPage() {
                           !aiInputUserData ||
                           selectedOption === "" ||
                           (selectedOption === "file" && selectedFile === "") ||
-                          (selectedOption === "aiResume" &&
-                            setSelectedResumeId === "") ||
                           !show ||
                           isCoverLetterCopied
                             ? " cursor-not-allowed"

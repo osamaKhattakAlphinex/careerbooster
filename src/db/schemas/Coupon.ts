@@ -53,9 +53,6 @@ const CouponSchema = new Schema(
       type: String,
       enum: ["active", "inactive"],
     },
-    expiresAt: {
-      type: Date,
-    },
     valid: {
       type: Boolean,
       default: true,
