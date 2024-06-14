@@ -16,17 +16,18 @@ import { chevronRight } from "@/helpers/iconsProvider";
 import TourBot from "@/components/dashboard/TourBot";
 import { useTourContext } from "@/context/TourContext";
 import { useAppContext } from "@/context/AppContext";
+import { RootState } from "@/store/store";
 
 const Template = () => {
   const params = useSearchParams();
-  const { resume } = useSelector((state: any) => state);
+  const { resume } = useSelector((state: RootState) => state);
   const { data: session } = useSession();
   const [refTop, setRefTop] = useState<number | null>(null);
   const [refLeft, setRefLeft] = useState<number | null>(null);
   const [scaleHeight, setScaleHeight] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
   const templateId: number = parseInt(params.get("templateId") || "0");
-  const componentRef = useRef<any>(null);
+  const componentRef = useRef<HTMLDivElement | null>(null);
   const dispatch = useDispatch();
   const pathname = usePathname();
   const { outOfCredits } = useAppContext();
@@ -54,15 +55,20 @@ const Template = () => {
     }
   }, [outOfCredits]);
   const fetchDefaultResume = async () => {
-    const res = await fetch(
-      `/api/users/getOneByEmail?email=${session?.user?.email}`
-    );
-
-    const { result, success } = await res.json();
-
-    if (success) {
-      dispatch(setUserData(result));
-      dispatch(setResume(result.resumes[0]));
+    try {
+      
+      const res = await fetch(
+        `/api/users/getOneByEmail?email=${session?.user?.email}`
+      );
+  
+      const { result, success } = await res.json();
+  
+      if (success) {
+        dispatch(setUserData(result));
+        dispatch(setResume(result.resumes[0]));
+      }
+    } catch (error) {
+      console.log(error)
     }
   };
 

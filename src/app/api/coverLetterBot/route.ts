@@ -3,7 +3,6 @@ import startDB from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/route";
-import TrainBot from "@/db/schemas/TrainBot";
 import { updateTrainedBotEntry } from "@/helpers/updateTrainBotEntry";
 
 export async function postCoverLetter(payload: any) {
@@ -16,7 +15,6 @@ export async function postCoverLetter(payload: any) {
       user.coverLetters = [payload];
     } else {
       user.coverLetters.unshift(payload);
-      // user.coverLetters.push(payload);
     }
     await user.save();
   } catch (error) {

@@ -141,14 +141,6 @@ const ReviewResumeBot = () => {
               Get Your Resume Reviewed by AI
             </h3>
             <div className="text-sm font-bold uppercase  dark:text-gray-100 text-gray-950">
-              {/* <LimitCard
-                title="Review Availble"
-                limit={userData?.userPackageData?.limit?.review_resume}
-                used={userData?.userPackageUsed?.review_resume}
-                setPercentageCalculated={setPercentageCalculated}
-                availablePercentage={availablePercentage}
-                setAvailablePercentage={setAvailablePercentage}
-              /> */}
             </div>
           </div>
           <div className="text-sm text-[#615DFF] self-start">

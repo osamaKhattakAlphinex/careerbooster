@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-interface IUserPackage {
+export interface IUserPackage {
   _id?: string;
   title: string;
   amount: number;

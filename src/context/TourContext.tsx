@@ -7,9 +7,9 @@ interface TourRefs {
   dashboardRef: React.MutableRefObject<HTMLInputElement | null>;
   innerToolsRef: React.MutableRefObject<HTMLInputElement | null>;
   resumeElementRef: React.MutableRefObject<HTMLInputElement | null>;
-  coverLetterElementRef: React.MutableRefObject<HTMLInputElement | null>;
-  linkedinElementRef: React.MutableRefObject<HTMLInputElement | null>;
-  emailElementRef: React.MutableRefObject<HTMLInputElement | null>;
+  coverLetterElementRef: React.MutableRefObject<HTMLDivElement | null>;
+  linkedinElementRef: React.MutableRefObject<HTMLDivElement | null>;
+  emailElementRef: React.MutableRefObject<HTMLDivElement | null>;
   bidElementRef: React.MutableRefObject<HTMLInputElement | null>;
   coachElementRef: React.MutableRefObject<HTMLInputElement | null>;
   reviewElementRef: React.MutableRefObject<HTMLInputElement | null>;
@@ -17,7 +17,7 @@ interface TourRefs {
   atsElementRef: React.MutableRefObject<HTMLInputElement | null>;
   tourBotRef: React.MutableRefObject<HTMLInputElement | null>;
   historyCardRef: React.MutableRefObject<HTMLInputElement | null>;
-  emailCardsElementRef: React.MutableRefObject<HTMLInputElement | null>;
+  emailCardsElementRef: React.MutableRefObject<HTMLDivElement | null>;
   availableCreditsRef: React.MutableRefObject<HTMLInputElement | null>;
   linkedinAboutElementRef: React.MutableRefObject<HTMLInputElement | null>;
   linkedinAboutHistoryElementRef: React.MutableRefObject<HTMLInputElement | null>;
@@ -45,9 +45,9 @@ const TourContextProvider: React.FC<TourContextProviderProps> = ({
   const dashboardRef = useRef<HTMLInputElement | null>(null);
   const innerToolsRef = useRef<HTMLInputElement | null>(null);
   const resumeElementRef = useRef<HTMLInputElement | null>(null);
-  const coverLetterElementRef = useRef<HTMLInputElement | null>(null);
-  const linkedinElementRef = useRef<HTMLInputElement | null>(null);
-  const emailElementRef = useRef<HTMLInputElement | null>(null);
+  const coverLetterElementRef = useRef<HTMLDivElement | null>(null);
+  const linkedinElementRef = useRef<HTMLDivElement | null>(null);
+  const emailElementRef = useRef<HTMLDivElement | null>(null);
   const bidElementRef = useRef<HTMLInputElement | null>(null);
   const coachElementRef = useRef<HTMLInputElement | null>(null);
   const reviewElementRef = useRef<HTMLInputElement | null>(null);
@@ -55,7 +55,7 @@ const TourContextProvider: React.FC<TourContextProviderProps> = ({
   const atsElementRef = useRef<HTMLInputElement | null>(null);
   const tourBotRef = useRef<HTMLInputElement | null>(null);
   const historyCardRef = useRef<HTMLInputElement | null>(null);
-  const emailCardsElementRef = useRef<HTMLInputElement | null>(null);
+  const emailCardsElementRef = useRef<HTMLDivElement | null>(null);
   const availableCreditsRef = useRef<HTMLInputElement | null>(null);
   const linkedinAboutElementRef = useRef<HTMLInputElement | null>(null);
   const linkedinAboutHistoryElementRef = useRef<HTMLInputElement | null>(null);

@@ -16,12 +16,13 @@ import { EmailCard } from "@/components/dashboard/email-generator/EmailCard";
 import { showSuccessToast, showErrorToast } from "@/helpers/toast";
 import { useTourContext } from "@/context/TourContext";
 import TourBot from "@/components/dashboard/TourBot";
+import { RootState } from "@/store/store";
 
 const PersonalizedEmailBot = () => {
-  const componentRef = useRef<any>(null);
-  const componentFirstRef = useRef<any>(null);
-  const componentSecondRef = useRef<any>(null);
-  const [aiInputUserData, setAiInputUserData] = useState<any>();
+  const componentRef = useRef<HTMLDivElement | null>(null);
+  const componentFirstRef = useRef<HTMLDivElement | null>(null);
+  const componentSecondRef = useRef<HTMLDivElement | null>(null);
+  const [aiInputUserData, setAiInputUserData] = useState({});
   const { data: session } = useSession();
   const [show, setShow] = useState<boolean>(false);
   const [firstShow, setFirstShow] = useState<boolean>(false);
@@ -35,13 +36,12 @@ const PersonalizedEmailBot = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [isFirstEditing, setIsFirstEditing] = useState(false);
   const [isSecondEditing, setIsSecondEditing] = useState(false);
-  const [isEmailCopied, setIsEmailCopied] = useState<any>({
+  const [isEmailCopied, setIsEmailCopied] = useState({
     emailCopied: false,
     firstFollowUpCopied: false,
     secondFollowUpCopied: false,
   });
   const [selectedFile, setSelectedFile] = useState<string>("");
-  const [setSelectedResumeId, setSetSelectedResumeId] = useState<string>("");
   const [jobDescription, setJobDescription] = useState<string>("");
   const [showPopup, setShowPopup] = useState(false);
   const { setAvailableCredits,abortController, setAbortController,outOfCredits, setOutOfCredits } = useAppContext();
@@ -53,9 +53,10 @@ const PersonalizedEmailBot = () => {
 
   // Redux
   const dispatch = useDispatch();
-  const userData = useSelector((state: any) => state.userData);
-  const email = useSelector((state: any) => state.email);
-  const creditLimits = useSelector((state: any) => state.creditLimits);
+  const userData = useSelector((state: RootState) => state.userData);
+  const email = useSelector((state: RootState) => state.email);
+
+  const creditLimits = useSelector((state: RootState) => state.creditLimits);
   useEffect(() => {
     return () => {
       abortController?.abort();
@@ -193,7 +194,7 @@ const PersonalizedEmailBot = () => {
   useEffect(() => {
     if (isEditing) {
       if (componentRef.current) {
-        const editorElement = componentRef.current.querySelector("#editor");
+        const editorElement:HTMLDivElement| null = componentRef.current.querySelector("#editor");
         if (editorElement) {
           editorElement.innerHTML = email.emailText;
           editorElement.focus(); // Focus on the editable area
@@ -202,8 +203,7 @@ const PersonalizedEmailBot = () => {
     }
     if (isFirstEditing) {
       if (componentFirstRef.current) {
-        const editorElement =
-          componentFirstRef.current.querySelector("#first_editor");
+        const editorElement:HTMLDivElement| null = componentFirstRef.current.querySelector("#first_editor");
         if (editorElement) {
           editorElement.innerHTML = email.emailFirstFollowUpText;
           editorElement.focus(); // Focus on the editable area
@@ -212,8 +212,7 @@ const PersonalizedEmailBot = () => {
     }
     if (isSecondEditing) {
       if (componentSecondRef.current) {
-        const editorElement =
-          componentSecondRef.current.querySelector("#second_editor");
+        const editorElement:HTMLDivElement| null = componentSecondRef.current.querySelector("#second_editor");
         if (editorElement) {
           editorElement.innerHTML = email.emailSecondFollowUpText;
           editorElement.focus(); // Focus on the editable area
@@ -230,7 +229,7 @@ const PersonalizedEmailBot = () => {
         setEmailLoading(true);
         setShow(true);
         setStreamedData("");
-        const obj: any = {
+        const obj = {
           type: selectedOption,
           email: session?.user?.email,
           generationType: "email",
@@ -240,22 +239,11 @@ const PersonalizedEmailBot = () => {
             userEmail: userData.email,
             fileAddress: userData.defaultResumeFile,
           },
+          file: "",
+          userData:{}
         };
         if (selectedOption === "file") {
           obj.file = selectedFile;
-        } else if (selectedOption === "aiResume") {
-          const foundResume = resumes.find(
-            (resume: any) => resume.id === setSelectedResumeId
-          );
-          obj.userData = {
-            jobTitle: foundResume.jobTitle,
-            name: foundResume.name,
-            primarySkills: foundResume.primarySkills,
-            professionalSkills: foundResume.professionalSkills,
-            secondarySkills: foundResume.secondarySkills,
-            education: foundResume.secondarySkills,
-            workExperienceArray: foundResume.workExperienceArray,
-          };
         } else {
           obj.userData = aiInputUserData;
         }
@@ -265,8 +253,8 @@ const PersonalizedEmailBot = () => {
           body: JSON.stringify(obj),
           signal: abortController?.signal
         })
-          .then(async (resp: any) => {
-            if (resp.ok) {
+          .then(async (resp) => {
+            if (resp.ok && resp.body) {
               setAvailableCredits(true);
 
               const reader = resp.body.getReader();
@@ -279,7 +267,7 @@ const PersonalizedEmailBot = () => {
                   break;
                 }
                 const text = new TextDecoder().decode(value);
-                setStreamedData((prev: any) => prev + text);
+                setStreamedData((prev) => prev + text);
                 tempText += text;
               }
               setStreamedData((prev) => prev.replace("```html", ""));
@@ -288,6 +276,8 @@ const PersonalizedEmailBot = () => {
               const emailsResponse = await axios.get(
                 "/api/emailBot/getAllEmails",{signal: abortController?.signal}
               );
+
+              console.log(emailsResponse)
 
               if (emailsResponse.data.success) {
                 const updatedObject = {
@@ -298,9 +288,7 @@ const PersonalizedEmailBot = () => {
                 dispatch(setUserData({ ...userData, ...updatedObject }));
                 dispatch(
                   setEmail(
-                    emailsResponse.data.result.emails[
-                      emailsResponse.data.result.emails.length - 1
-                    ]
+                    emailsResponse.data.result.emails[0]
                   )
                 );
               }
@@ -334,7 +322,7 @@ const PersonalizedEmailBot = () => {
         setFirstFollowUpLoading(true);
         setFirstShow(true);
         setStreamedFirstFollowUpEmailText("");
-        const obj: any = {
+        const obj = {
           emailId: email.id,
           type: selectedOption,
           email: session?.user?.email,
@@ -345,6 +333,7 @@ const PersonalizedEmailBot = () => {
             userEmail: userData.email,
             fileAddress: userData.defaultResumeFile,
           },
+          userData:{}
         };
         obj.userData = aiInputUserData;
 
@@ -353,8 +342,8 @@ const PersonalizedEmailBot = () => {
           body: JSON.stringify(obj),
           signal: abortController?.signal,
         })
-          .then(async (resp: any) => {
-            if (resp.ok) {
+          .then(async (resp) => {
+            if (resp.ok && resp.body) {
               setAvailableCredits(true);
 
               const reader = resp.body.getReader();
@@ -367,7 +356,7 @@ const PersonalizedEmailBot = () => {
                   break;
                 }
                 const text = new TextDecoder().decode(value);
-                setStreamedFirstFollowUpEmailText((prev: any) => prev + text);
+                setStreamedFirstFollowUpEmailText((prev) => prev + text);
                 tempText += text;
               }
               setStreamedFirstFollowUpEmailText((prev) =>
@@ -390,9 +379,7 @@ const PersonalizedEmailBot = () => {
                 dispatch(setUserData({ ...userData, ...updatedObject }));
                 dispatch(
                   setEmail(
-                    emailsResponse.data.result.emails[
-                      emailsResponse.data.result.emails.length - 1
-                    ]
+                    emailsResponse.data.result.emails[0]
                   )
                 );
               }
@@ -428,7 +415,7 @@ const PersonalizedEmailBot = () => {
         setSecondFollowUpLoading(true);
         setSecondShow(true);
         setStreamedSecondFollowUpEmailText("");
-        const obj: any = {
+        const obj = {
           emailId: email.id,
           type: selectedOption,
           email: session?.user?.email,
@@ -440,6 +427,7 @@ const PersonalizedEmailBot = () => {
             userEmail: userData.email,
             fileAddress: userData.defaultResumeFile,
           },
+          userData:{},
         };
         obj.userData = aiInputUserData;
 
@@ -448,8 +436,8 @@ const PersonalizedEmailBot = () => {
           body: JSON.stringify(obj),
           signal: abortController?.signal,
         })
-          .then(async (resp: any) => {
-            if (resp.ok) {
+          .then(async (resp) => {
+            if (resp.ok && resp.body) {
               setAvailableCredits(true);
 
               const reader = resp.body.getReader();
@@ -462,7 +450,7 @@ const PersonalizedEmailBot = () => {
                   break;
                 }
                 const text = new TextDecoder().decode(value);
-                setStreamedSecondFollowUpEmailText((prev: any) => prev + text);
+                setStreamedSecondFollowUpEmailText((prev) => prev + text);
                 tempText += text;
               }
 
@@ -657,7 +645,11 @@ const PersonalizedEmailBot = () => {
   }, [userData]);
 
   useEffect(() => {
+    setShow(false);
+    setFirstShow(false);
+    setSecondShow(false);
     if (email.id !== "") {
+   
       setShow(true);
       if (email.emailFirstFollowUpText && email.emailFirstFollowUpText !== "") {
         setFirstShow(true);
@@ -668,10 +660,6 @@ const PersonalizedEmailBot = () => {
       ) {
         setSecondShow(true);
       }
-    } else {
-      setShow(false);
-      setFirstShow(false);
-      setSecondShow(false);
     }
   }, [email]);
 
@@ -692,7 +680,7 @@ const PersonalizedEmailBot = () => {
   ]);
   const historyProps = {
     dataSource: "emails",
-    Component: (card: any) => (
+    Component: (card) => (
       <EmailCardSingle card={card} componentRef={componentRef} source="" />
     ),
   };
@@ -701,6 +689,8 @@ const PersonalizedEmailBot = () => {
     selectedFile: selectedFile,
     selectedOption: selectedOption,
     jobDescription: jobDescription,
+    emailText: streamedData,
+    emailFirstFollowUpText: streamedFirstFollowUpEmailText,
   };
 
   return (
@@ -709,7 +699,7 @@ const PersonalizedEmailBot = () => {
         <div className="ml-0 lg:ml-[234px] px-[15px] mb-[72px]">
           <PreviouslyGeneratedList {...historyProps} />
           <div
-            ref={(ref: any) => (emailElementRef.current = ref)}
+            ref={(ref: HTMLDivElement) => (emailElementRef.current = ref)}
             className=" my-4 dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950  rounded-lg px-4 lg:px-[30px] py-[30px] flex flex-col gap-3 "
           >
             {/* header */}
@@ -841,7 +831,7 @@ const PersonalizedEmailBot = () => {
           </div>
           <div
             className="my-4   dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950  rounded-lg px-4 lg:px-[30px] py-[30px] flex flex-col gap-3 "
-            ref={(ref: any) => (emailCardsElementRef.current = ref)}
+            ref={(ref: HTMLDivElement) => (emailCardsElementRef.current = ref)}
           >
             {show ? (
               <EmailCard

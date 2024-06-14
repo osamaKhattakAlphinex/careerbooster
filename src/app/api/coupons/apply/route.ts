@@ -1,11 +1,11 @@
 import startDB from "@/lib/db";
 import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import Coupon from "@/db/schemas/Coupon";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import { updateUserCreditsByAdmin } from "@/helpers/updateUserCreditsByAdmin";
 
-export async function POST(request: any) {
+export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions);
 
   if (!session) {
@@ -16,9 +16,9 @@ export async function POST(request: any) {
   }
 
   try {
-    // await startDB();
     const { coupon } = await request.json();
-
+    
+    await startDB();
     let fetchedCoupon = await Coupon.findOne({ coupon_code: coupon });
 
     // get the coupan details from the db

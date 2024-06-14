@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { useTourContext } from "@/context/TourContext";
 import TourBot from "@/components/dashboard/TourBot";
 import { useEffect } from "react";
+import { RootState } from "@/store/store";
 
 export default function LinkedInPage() {
   const {
@@ -18,7 +19,7 @@ export default function LinkedInPage() {
     linkedinKeywordsElementRef,
     tourBotRef,
   } = useTourContext();
-  const userData = useSelector((state: any) => state.userData);
+  const userData = useSelector((state: RootState) => state.userData);
 
   const tourBotConfig = {
     name: "linkedinOptimizer",
@@ -70,7 +71,7 @@ export default function LinkedInPage() {
     }
   }, [tourBotRef]);
 
-  const creditLimits = useSelector((state: any) => state.creditLimits);
+  const creditLimits = useSelector((state: RootState) => state.creditLimits);
   return (
     <>
       <div className="w-full my-2 sm:w-full z-1000 ">
@@ -83,7 +84,7 @@ export default function LinkedInPage() {
             </div>
             <div
               className="xs:mt-2 md:mt-5"
-              ref={(ref: any) => (linkedinElementRef.current = ref)}
+              ref={(ref: HTMLDivElement) => (linkedinElementRef.current = ref)}
             >
               <HeadlineGenerator creditLimits={creditLimits} />
               <AboutGenerator creditLimits={creditLimits} />

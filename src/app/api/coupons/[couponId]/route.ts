@@ -1,12 +1,12 @@
 import startDB from "@/lib/db";
 import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import Coupon from "@/db/schemas/Coupon";
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 export async function PUT(
-  req: any,
+  req: NextRequest,
   { params }: { params: { couponId: string } }
 ) {
   const session = await getServerSession(authOptions);
@@ -41,7 +41,6 @@ export async function PUT(
 }
 
 export async function DELETE(
-  req: any,
   { params }: { params: { couponId: string } }
 ) {
   const session = await getServerSession(authOptions);

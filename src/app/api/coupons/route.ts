@@ -1,7 +1,7 @@
 import startDB from "@/lib/db";
 import { getServerSession } from "next-auth";
 
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/route";
 import Coupon from "@/db/schemas/Coupon";
 import { loadStripe } from "@stripe/stripe-js";
@@ -10,11 +10,11 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 // const stripe: any = await loadStripe(STRIPE_PK);)
 // import { stripe } from "@/lib/stripe";
 
-async function saveCouponToDb(coupon: any) {
+async function saveCouponToDb(coupon) {
   await Coupon.create({ ...coupon });
 }
 
-export async function POST(request: any) {
+export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions);
 
   if (!session) {

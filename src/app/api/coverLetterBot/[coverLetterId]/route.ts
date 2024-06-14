@@ -1,12 +1,12 @@
 import User from "@/db/schemas/User";
 import startDB from "@/lib/db";
 import { getServerSession } from "next-auth/next";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import { updateTrainedBotEntry } from "@/helpers/updateTrainBotEntry";
 
 export async function PUT(
-  req: any,
+  req: NextRequest,
   { params }: { params: { coverLetterId: string } }
 ) {
   let email: any = "";
@@ -62,7 +62,6 @@ export async function PUT(
 }
 
 export async function DELETE(
-  req: any,
   { params }: { params: { coverLetterId: string } }
 ) {
   console.log("params",params);

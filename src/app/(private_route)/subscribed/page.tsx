@@ -4,7 +4,6 @@ import { redirect } from "next/navigation";
 import Stripe from "stripe";
 
 type Props = {
-  params: any;
   searchParams: {
     [key: string]: string | string[] | undefined;
     session_id?: string;
@@ -67,7 +66,6 @@ export default async function SubscribedPage(props: Props) {
   }
    else{ 
     const sessionId = searchParams?.session_id;
-    const session: any = await getSessionDeatils(sessionId);
     const customer = await getCustomerbySession(sessionId);
     if (!customer || !customer.email) {
       redirect("/dashboard");
