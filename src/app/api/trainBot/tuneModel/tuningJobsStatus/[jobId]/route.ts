@@ -1,6 +1,6 @@
 import startDB from "@/lib/db";
-import { NextResponse } from "next/server";
-import OpenAI, { toFile } from "openai";
+import { NextRequest, NextResponse } from "next/server";
+import OpenAI from "openai";
 import FineTuneModel from "@/db/schemas/FineTuningModel";
 import TrainedModel from "@/db/schemas/TrainedModel";
 
@@ -9,7 +9,7 @@ const openai = new OpenAI({
 });
 
 export const GET = async (
-  req: any,
+  req: NextRequest,
   { params }: { params: { jobId: string } }
 ) => {
   try {
@@ -42,7 +42,7 @@ export const GET = async (
 
       await TrainedModel.findOneAndUpdate(query2, update2, options2);
     } else {
-      const newStatus = await FineTuneModel.findOneAndUpdate(
+      await FineTuneModel.findOneAndUpdate(
         {
           fineTuningJobId: jobId,
         },

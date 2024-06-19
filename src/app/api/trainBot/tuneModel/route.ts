@@ -1,12 +1,9 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import OpenAI, { toFile } from "openai";
 import startDB from "@/lib/db";
 import FineTuneModel from "@/db/schemas/FineTuningModel";
 
-export const POST = async (
-  req: any,
-  { params }: { params: { recId: string } }
-) => {
+export const POST = async (req: NextRequest) => {
   const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
   });

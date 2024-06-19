@@ -7,57 +7,57 @@ export const maxDuration = 300; // This function can run for a maximum of 5 seco
 export const dynamic = "force-dynamic";
 
 export async function GET(req: NextRequest) {
-    const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
 
-    if (!session) {
-        return NextResponse.json(
-            { result: `Not Authorised`, success: false },
-            { status: 401 }
-        );
+  if (!session) {
+    return NextResponse.json(
+      { result: `Not Authorised`, success: false },
+      { status: 401 }
+    );
+  }
+  try {
+    const url = new URL(req.url);
+
+    const id = url.searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json(
+        {
+          success: false,
+          result: "Bad Request: No email found",
+        },
+        { status: 400 }
+      );
     }
-    try {
-        const url = new URL(req.url);
 
-        const id = url.searchParams.get("id");
+    await startDB();
 
-        if (!id) {
-            return NextResponse.json(
-                {
-                    success: false,
-                    result: "Bad Request: No email found",
-                },
-                { status: 400 }
-            );
-        }
+    const creditPackage = await CreditsPackage.findById(id);
 
-        await startDB();
-
-        const creditPackage = await CreditsPackage.findById(id);
-
-        if (!creditPackage) {
-            return NextResponse.json(
-                {
-                    result: "No User Package Found",
-                    success: false,
-                },
-                { status: 404 }
-            );
-        } else {
-            return NextResponse.json(
-                {
-                    result: creditPackage,
-                    success: true,
-                },
-                { status: 200 }
-            );
-        }
-    } catch {
-        return NextResponse.json(
-            {
-                result: "Something Went Wrong",
-                success: false,
-            },
-            { status: 500 }
-        );
+    if (!creditPackage) {
+      return NextResponse.json(
+        {
+          result: "No User Package Found",
+          success: false,
+        },
+        { status: 404 }
+      );
+    } else {
+      return NextResponse.json(
+        {
+          result: creditPackage,
+          success: true,
+        },
+        { status: 200 }
+      );
     }
+  } catch {
+    return NextResponse.json(
+      {
+        result: "Something Went Wrong",
+        success: false,
+      },
+      { status: 500 }
+    );
+  }
 }

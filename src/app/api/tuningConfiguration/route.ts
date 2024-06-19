@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import startDB from "@/lib/db";
 import FineTuningSetting from "@/db/schemas/FineTuningSetting";
 
-export const GET = async (req: any) => {
+export const GET = async () => {
   try {
     await startDB();
     const settings = await FineTuningSetting.findOne({});
@@ -25,13 +25,13 @@ export const GET = async (req: any) => {
   }
 };
 
-export const POST = async (req: any) => {
+export const POST = async (req: NextRequest) => {
   try {
     const { tuningBaseModel, allowSendingDataToTuning } = await req.json();
 
     await startDB();
 
-    const settings: any = await FineTuningSetting.findOne({});
+    const settings = await FineTuningSetting.findOne({});
 
     const newSettings = await FineTuningSetting.findOneAndUpdate(
       { _id: settings._id },

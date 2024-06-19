@@ -100,9 +100,8 @@ export async function POST(req: NextRequest) {
       Do not add anything if there is no value for a field. if there is no value leave that field blank donot add any extra labels.
 
       `;
-        const response: any = await openai.chat.completions.create({
+        const response = await openai.chat.completions.create({
           model: "gpt-3.5-turbo",
-          // stream: true,
           messages: [{ role: "user", content: inputPrompt }],
         });
 
@@ -225,7 +224,7 @@ export async function POST(req: NextRequest) {
 
         }
 
-        const response: any = await openai.chat.completions.create({
+        const response = await openai.chat.completions.create({
           model: model ? model : "gpt-3.5-turbo",
           stream: true,
           messages: [{ role: "user", content: inputPrompt }],
@@ -350,9 +349,8 @@ export async function POST(req: NextRequest) {
           )} and give me 10 primary skills and the answer must be in a valid JSON array`;
         }
 
-        const response: any = await openai.chat.completions.create({
+        const response = await openai.chat.completions.create({
           model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8Icp5xpE",
-          // stream: true,
           messages: [{ role: "user", content: inputPrompt }],
         });
 

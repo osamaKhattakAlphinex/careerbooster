@@ -1,10 +1,10 @@
 import User from "@/db/schemas/User";
 import startDB from "@/lib/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
-export async function GET(req: any) {
+export async function GET(req: NextRequest) {
   try {
     const url = new URL(req.url);
 
@@ -22,7 +22,7 @@ export async function GET(req: any) {
 
     await startDB();
 
-    const user = await User.findOne({ email: email }).select("-password");
+    const user = await User.findOne({ email: email });
 
     if (!user) {
       return NextResponse.json(

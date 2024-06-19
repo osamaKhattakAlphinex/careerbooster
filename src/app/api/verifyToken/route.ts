@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 
-export async function POST(req: any) {
+export async function POST(req: NextRequest) {
   const body = await req.json();
 
   const { token } = body;

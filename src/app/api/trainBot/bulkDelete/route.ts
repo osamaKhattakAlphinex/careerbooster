@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import startDB from "@/lib/db";
 import TrainBot from "@/db/schemas/TrainBot";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
 
-export const POST = async (req: any) => {
+export const POST = async (req: NextRequest) => {
   const session = await getServerSession(authOptions);
 
   if (!session) {

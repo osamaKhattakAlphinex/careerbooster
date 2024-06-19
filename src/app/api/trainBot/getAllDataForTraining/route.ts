@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import startDB from "@/lib/db";
 import TrainBot from "@/db/schemas/TrainBot";
 
-export const POST = async (req: any) => {
+export const POST = async (req: NextRequest) => {
   const { ids } = await req.json();
 
   try {

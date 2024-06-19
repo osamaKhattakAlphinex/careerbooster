@@ -1,13 +1,12 @@
-import { NextResponse } from "next/server";
-// import { getServerSession } from "next-auth";
+import { NextRequest, NextResponse } from "next/server";
 import startDB from "@/lib/db";
-export const maxDuration = 300; // This function can run for a maximum of 5 seconds
-export const dynamic = "force-dynamic";
 
 import nodemailer from "nodemailer";
 import Contact from "@/db/schemas/Contact";
+export const maxDuration = 300; // This function can run for a maximum of 5 seconds
+export const dynamic = "force-dynamic";
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     await startDB();
 
