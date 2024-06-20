@@ -10,6 +10,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Stripe from "stripe";
 import { PayPalButton } from "react-paypal-button-v2";
+import { RootState } from "@/store/store";
 
 interface Props {
   creditPackage: CreditsPackageData;
@@ -21,21 +22,21 @@ const CreditSubscriptionCard: React.FC<Props> = ({
   customer,
   viewOnly,
 }) => {
-  const [subscribing, setSubscribing] = useState(false);
+  const [subscribing, setSubscribing] = useState<boolean>(false);
   const [amountOff, setAmountOff] = useState<number>(0);
-  const [showPaymentDialog, setShowPaymentDialog] = useState(false);
-  const [coupon, setCoupon] = useState("");
-  const [couponError, setCouponError] = useState("");
+  const [showPaymentDialog, setShowPaymentDialog] = useState<boolean>(false);
+  const [coupon, setCoupon] = useState<string>("");
+  const [couponError, setCouponError] = useState<string>("");
   const router = useRouter();
-  const paypalRef = useRef<any>(null);
+  const paypalRef = useRef<HTMLDivElement | null>(null);
   // Redux
 
   const dispatch = useDispatch();
-  const userData = useSelector((state: any) => state.userData);
+  const userData = useSelector((state: RootState) => state.userData);
 
-  const [selectedPayment, setSelectedPayment] = useState("paypal");
+  const [selectedPayment, setSelectedPayment] = useState<string>("paypal");
 
-  const handlePaymentChange = (event: any) => {
+  const handlePaymentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedPayment(event.target.value);
   };
   const [showPaypalPopup, setShowPaypalPopup] = useState(false);
@@ -66,26 +67,26 @@ const CreditSubscriptionCard: React.FC<Props> = ({
       updateUserWithFreePackage(creditPackage._id);
     } else {
       if (coupon !== "") {
-        const getCoupon = await fetch(
-          `/api/coupons/getOneCoupon?coupon=${coupon}&plan=${creditPackage.category}`
-        );
-        const data = await getCoupon.json();
-        if (data.success) {
-          const amount_off = data.result.amount_off;
-          setAmountOff(amount_off);
+        try {
+          const response = await axios.get(
+            `/api/coupons/getOneCoupon?coupon=${coupon}&plan=${creditPackage.category}`
+          );
+          if (response.data.success) {
+            const amount_off = response.data.result.amount_off;
+            setAmountOff(amount_off);
+            setShowPaypalPopup(true);
+          }
+        } catch (error) {
+          setCouponError("Error getting coupon");
           setShowPaypalPopup(true);
-        } else {
-          setCouponError(data.result);
         }
-      } else {
-        setShowPaypalPopup(true);
       }
     }
   };
 
   useEffect(() => {
     if (paypalRef.current) {
-      const getPaypalDiv = paypalRef.current.children[0];
+      const getPaypalDiv = paypalRef.current.children[0] as HTMLDivElement;
       getPaypalDiv.style.maxHeight = "500px";
       getPaypalDiv.style.overflowY = "scroll";
       getPaypalDiv.style.scrollbarWidth = "none";
@@ -181,15 +182,14 @@ const CreditSubscriptionCard: React.FC<Props> = ({
           .post("/api/users/updateUserData", {
             data: obj,
           })
-          .then(async (resp: any) => {
+          .then(async (resp) => {
             if (resp.data.success) {
               dispatch(
                 setUserData({
                   ...userData,
                   creditPackage: obj.creditPackage,
                   userCredits: obj.userCredits,
-                  // userPackageExpirationDate: obj.userPackageExpirationDate,
-                  // userPackageUsed: obj.userPackageUsed,
+                 
                 })
               );
               router.push("/dashboard");
@@ -197,20 +197,19 @@ const CreditSubscriptionCard: React.FC<Props> = ({
             // dispatch(setField({ name: "userPackageData", value: userPackage }));
             // TODO!!! Add new user subsription to db
             // TODO!! invalidate session on stripe
-          });
+          }).catch(err => {});
       }
     }
   };
 
   const getCreditPackageDetails = async (creditPackageId: string) => {
     // get user package details
-    const res2 = await fetch(
+    const response = await axios.get(
       `/api/users/getCreditPackageDetails?id=${creditPackageId}`
     );
-    const data = await res2.json();
 
-    if (data.success) {
-      const creditPackage = data.result;
+    if (response.data.success) {
+      const creditPackage = response.data.result;
       return creditPackage;
       // set user package details to redux
     }

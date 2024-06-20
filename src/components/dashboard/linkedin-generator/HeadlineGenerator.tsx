@@ -4,7 +4,7 @@ import Link from "next/link";
 import { chevronRight } from "@/helpers/iconsProvider";
 import { useTourContext } from "@/context/TourContext";
 
-const HeadlineGenerator = ({ creditLimits }: { creditLimits: any }) => {
+const HeadlineGenerator = ({ creditLimits }) => {
   const { linkedinHeadlineElementRef } = useTourContext();
 
   return (
@@ -14,7 +14,7 @@ const HeadlineGenerator = ({ creditLimits }: { creditLimits: any }) => {
         href="/linkedin-optimizer/headline"
       >
         <div
-          ref={(ref: any) => (linkedinHeadlineElementRef.current = ref)}
+          ref={(ref: HTMLDivElement) => (linkedinHeadlineElementRef.current = ref)}
           className=" dark:bg-[#222027] dark:text-gray-50 bg-[#ffffff94] text-gray-950 p-5 sm:p-8 flex flex-col md:flex-row md:align-center xs:gap-3 justify-center md:justify-between items-center rounded-xl"
         >
           <div className="hidden aspect-square rounded-full bg-gradient-to-b from-[#255CE7] to-[#7FA0E0] md:flex justify-center items-center w-14 h-14">

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import CreditSubscriptionCard from "./CreditSubscriptionCard";
 import { CreditsPackageData } from "@/db/schemas/CreditsPackage";
+import axios from "axios";
 
 interface Props {
   viewOnly?: boolean;
@@ -15,20 +16,24 @@ const CreditPackages = ({ viewOnly }: Props) => {
   const userData = useSelector((state: any) => state.userData);
   // TODO STORE PACKAGES IN REDUX AND DONOT REREQUEST THEM IF ALREADY AVAILABLE
 
-  const getAllPackages = () => {
-    fetch("/api/getActivePackages", {
-      method: "GET",
-    }).then(async (resp: any) => {
-      const res = await resp.json();
-      let result;
-      if (typeof res.result === "string") {
-        result = await JSON.parse(res.result);
+  const getAllPackages =async () => {
+   try {
+    
+     const response = await axios.get("/api/getActivePackages")
+     if(response.data.success){
+      let data
+      if (typeof response.data.result === "string") {
+        data = await JSON.parse(response.data.result);
       } else {
-        result = res.result;
+        data = response.data.result;
       }
-      setPackages(result);
-    });
+      setPackages(data);
+     }
+   } catch (error) {
+    
+   }
   };
+  
   useEffect(() => {
     getAllPackages();
   }, []);

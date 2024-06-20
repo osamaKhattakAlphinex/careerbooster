@@ -114,6 +114,10 @@ interface UserDataSlice {
 
   tours: Tours;
   resumes:[],
+  consultingBids:[],
+  coverLetters:[],
+  emails:[],
+  linkedInAbouts:[],
   trialResume?: boolean;
   redeemedCoupons:[];
   linkedin?: string;
@@ -155,6 +159,10 @@ const initialState: UserDataSlice = {
     postalCode: "",
   },
   resumes: [],
+  consultingBids:[],
+  emails:[],
+  coverLetters:[],
+  linkedInAbouts:[],
   education: [],
   experience: [],
   references: [],

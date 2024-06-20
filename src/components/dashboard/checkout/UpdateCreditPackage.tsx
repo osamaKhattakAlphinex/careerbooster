@@ -17,12 +17,12 @@ const UpdateCreditPackage = ({ customer }: any) => {
   const updatePackage = async () => {
     if (!updating) {
       setUpdating(true);
-      const res = await fetch(
+      const response = await fetch(
         `/api/users/getCreditLimits/?email=${userData.email}`
       );
-      const response = await res.json();
-      const userCurrentCredits = response.result.userCredits;
-      const userCurrentTotalCredits = response.result.totalCredits;
+      const data = await response.json();
+      const userCurrentCredits = data.result.userCredits;
+      const userCurrentTotalCredits = data.result.totalCredits;
 
       const creditPackage = await getCreditPackageDetails(customer.packageId);
 
@@ -36,14 +36,13 @@ const UpdateCreditPackage = ({ customer }: any) => {
           totalCredits:
             (userCurrentTotalCredits ? userCurrentTotalCredits : 0) +
             creditPackage.totalCredits,
-            
         };
 
         return axios
           .post("/api/users/updateUserData", {
             data: obj,
           })
-          .then(async (resp: any) => {
+          .then(async (resp) => {
             dispatch(
               setUserData({
                 ...userData,
@@ -56,7 +55,7 @@ const UpdateCreditPackage = ({ customer }: any) => {
 
             // TODO!!! Add new user subsription to db
             // TODO!! invalidate session on stripe
-          });
+          }).catch(err => {});
       }
     }
   };
@@ -70,9 +69,9 @@ const UpdateCreditPackage = ({ customer }: any) => {
           PackageId: creditPackage._id,
         },
       })
-      .then(async (resp: any) => {
+      .then(async (resp) => {
         router.push("/dashboard");
-      });
+      }).catch((err) => {});
   };
   useEffect(() => {
     if (customer && customer.email) {
@@ -83,18 +82,19 @@ const UpdateCreditPackage = ({ customer }: any) => {
 
   const getCreditPackageDetails = async (packageId: string) => {
     // get user package details
-    const res2 = await fetch(
-      `/api/users/getCreditPackageDetails?id=${packageId}`
-    );
-    const data = await res2.json();
-
-    if (data.success) {
-      const creditPackage = data.result;
-      return creditPackage;
-      // set user package details to redux
+    try {
+      const response = await axios.get(
+        `/api/users/getCreditPackageDetails?id=${packageId}`
+      );
+      if (response.data.success) {
+        const creditPackage = response.data.result;
+        return creditPackage;
+        // set user package details to redux
+      }
+    } catch (error) {
+      console.log(error);
+      return null;
     }
-
-    return null;
   };
   if (!customer) return null;
   return (

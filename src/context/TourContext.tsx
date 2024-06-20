@@ -3,30 +3,30 @@ import React, { createContext, useContext, useRef, ReactNode } from "react";
 
 // Define a type for your references
 interface TourRefs {
-  contentScrollRef: React.MutableRefObject<HTMLInputElement | null>;
-  dashboardRef: React.MutableRefObject<HTMLInputElement | null>;
-  innerToolsRef: React.MutableRefObject<HTMLInputElement | null>;
-  resumeElementRef: React.MutableRefObject<HTMLInputElement | null>;
+  contentScrollRef: React.MutableRefObject<HTMLDivElement | null>;
+  dashboardRef: React.MutableRefObject<HTMLDivElement | null>;
+  innerToolsRef: React.MutableRefObject<HTMLDivElement | null>;
+  resumeElementRef: React.MutableRefObject<HTMLDivElement | null>;
   coverLetterElementRef: React.MutableRefObject<HTMLDivElement | null>;
   linkedinElementRef: React.MutableRefObject<HTMLDivElement | null>;
   emailElementRef: React.MutableRefObject<HTMLDivElement | null>;
-  bidElementRef: React.MutableRefObject<HTMLInputElement | null>;
-  coachElementRef: React.MutableRefObject<HTMLInputElement | null>;
-  reviewElementRef: React.MutableRefObject<HTMLInputElement | null>;
-  finderElementRef: React.MutableRefObject<HTMLInputElement | null>;
-  atsElementRef: React.MutableRefObject<HTMLInputElement | null>;
-  tourBotRef: React.MutableRefObject<HTMLInputElement | null>;
-  historyCardRef: React.MutableRefObject<HTMLInputElement | null>;
+  bidElementRef: React.MutableRefObject<HTMLDivElement | null>;
+  coachElementRef: React.MutableRefObject<HTMLDivElement | null>;
+  reviewElementRef: React.MutableRefObject<HTMLDivElement | null>;
+  finderElementRef: React.MutableRefObject<HTMLDivElement | null>;
+  atsElementRef: React.MutableRefObject<HTMLDivElement | null>;
+  tourBotRef: React.MutableRefObject<HTMLDivElement | null>;
+  historyCardRef: React.MutableRefObject<HTMLDivElement | null>;
   emailCardsElementRef: React.MutableRefObject<HTMLDivElement | null>;
-  availableCreditsRef: React.MutableRefObject<HTMLInputElement | null>;
-  linkedinAboutElementRef: React.MutableRefObject<HTMLInputElement | null>;
-  linkedinAboutHistoryElementRef: React.MutableRefObject<HTMLInputElement | null>;
-  linkedinHeadlineElementRef: React.MutableRefObject<HTMLInputElement | null>;
-  linkedinHeadlineHistoryElementRef: React.MutableRefObject<HTMLInputElement | null>;
-  linkedinJDElementRef: React.MutableRefObject<HTMLInputElement | null>;
-  linkedinJDHistoryElementRef: React.MutableRefObject<HTMLInputElement | null>;
-  linkedinKeywordsElementRef: React.MutableRefObject<HTMLInputElement | null>;
-  linkedinKeywordsHistoryElementRef: React.MutableRefObject<HTMLInputElement | null>;
+  availableCreditsRef: React.MutableRefObject<HTMLDivElement | null>;
+  linkedinAboutElementRef: React.MutableRefObject<HTMLDivElement | null>;
+  linkedinAboutHistoryElementRef: React.MutableRefObject<HTMLDivElement | null>;
+  linkedinHeadlineElementRef: React.MutableRefObject<HTMLDivElement | null>;
+  linkedinHeadlineHistoryElementRef: React.MutableRefObject<HTMLDivElement | null>;
+  linkedinJDElementRef: React.MutableRefObject<HTMLDivElement | null>;
+  linkedinJDHistoryElementRef: React.MutableRefObject<HTMLDivElement | null>;
+  linkedinKeywordsElementRef: React.MutableRefObject<HTMLDivElement | null>;
+  linkedinKeywordsHistoryElementRef: React.MutableRefObject<HTMLDivElement | null>;
 }
 
 // Create a context with an initial value
@@ -41,35 +41,35 @@ const TourContextProvider: React.FC<TourContextProviderProps> = ({
   children,
 }) => {
   // Create refs for each reference
-  const contentScrollRef = useRef<HTMLInputElement | null>(null);
-  const dashboardRef = useRef<HTMLInputElement | null>(null);
-  const innerToolsRef = useRef<HTMLInputElement | null>(null);
-  const resumeElementRef = useRef<HTMLInputElement | null>(null);
+  const contentScrollRef = useRef<HTMLDivElement | null>(null);
+  const dashboardRef = useRef<HTMLDivElement | null>(null);
+  const innerToolsRef = useRef<HTMLDivElement | null>(null);
+  const resumeElementRef = useRef<HTMLDivElement | null>(null);
   const coverLetterElementRef = useRef<HTMLDivElement | null>(null);
   const linkedinElementRef = useRef<HTMLDivElement | null>(null);
   const emailElementRef = useRef<HTMLDivElement | null>(null);
-  const bidElementRef = useRef<HTMLInputElement | null>(null);
-  const coachElementRef = useRef<HTMLInputElement | null>(null);
-  const reviewElementRef = useRef<HTMLInputElement | null>(null);
-  const finderElementRef = useRef<HTMLInputElement | null>(null);
-  const atsElementRef = useRef<HTMLInputElement | null>(null);
-  const tourBotRef = useRef<HTMLInputElement | null>(null);
-  const historyCardRef = useRef<HTMLInputElement | null>(null);
+  const bidElementRef = useRef<HTMLDivElement | null>(null);
+  const coachElementRef = useRef<HTMLDivElement | null>(null);
+  const reviewElementRef = useRef<HTMLDivElement | null>(null);
+  const finderElementRef = useRef<HTMLDivElement | null>(null);
+  const atsElementRef = useRef<HTMLDivElement | null>(null);
+  const tourBotRef = useRef<HTMLDivElement | null>(null);
+  const historyCardRef = useRef<HTMLDivElement | null>(null);
   const emailCardsElementRef = useRef<HTMLDivElement | null>(null);
-  const availableCreditsRef = useRef<HTMLInputElement | null>(null);
-  const linkedinAboutElementRef = useRef<HTMLInputElement | null>(null);
-  const linkedinAboutHistoryElementRef = useRef<HTMLInputElement | null>(null);
+  const availableCreditsRef = useRef<HTMLDivElement | null>(null);
+  const linkedinAboutElementRef = useRef<HTMLDivElement | null>(null);
+  const linkedinAboutHistoryElementRef = useRef<HTMLDivElement | null>(null);
 
-  const linkedinHeadlineElementRef = useRef<HTMLInputElement | null>(null);
-  const linkedinHeadlineHistoryElementRef = useRef<HTMLInputElement | null>(
+  const linkedinHeadlineElementRef = useRef<HTMLDivElement | null>(null);
+  const linkedinHeadlineHistoryElementRef = useRef<HTMLDivElement | null>(
     null
   );
 
-  const linkedinJDElementRef = useRef<HTMLInputElement | null>(null);
-  const linkedinJDHistoryElementRef = useRef<HTMLInputElement | null>(null);
+  const linkedinJDElementRef = useRef<HTMLDivElement | null>(null);
+  const linkedinJDHistoryElementRef = useRef<HTMLDivElement | null>(null);
 
-  const linkedinKeywordsElementRef = useRef<HTMLInputElement | null>(null);
-  const linkedinKeywordsHistoryElementRef = useRef<HTMLInputElement | null>(
+  const linkedinKeywordsElementRef = useRef<HTMLDivElement | null>(null);
+  const linkedinKeywordsHistoryElementRef = useRef<HTMLDivElement | null>(
     null
   );
 

@@ -1,7 +1,6 @@
 "use client";
 import { fileUploaderIcon } from "@/helpers/iconsProvider";
 import { showErrorToast, showSuccessToast } from "@/helpers/toast";
-import FileSaver from "file-saver";
 import React from "react";
 
 export type UploaderConfig = {
@@ -44,7 +43,7 @@ const FileUploader = ({
       } else {
         setFile(file);
         setFileName(file.name);
-        showSuccessToast("File is loaded Successfully");
+        showSuccessToast("File Loaded Successfully");
       }
     }
   };

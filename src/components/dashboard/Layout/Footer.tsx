@@ -27,19 +27,10 @@ const tabOption = [
       />
     ),
   },
-  // {
-  //   href: "/",
-  //   icon: <Image src={AndroidLogo} alt="AndroidLogo" width={26} height={26} />,
-  // },
-  // {
-  //   href: "/",
-  //   icon: <Image src={AppleLogo} alt="AppleLogo" width={26} height={26} />,
-  // },
 ];
 const pagesArray = ["/subscribe"];
 const Footer = () => {
   const pathname: any = usePathname();
-  // if (pagesArray?.includes(pathname)) return <></>;
   return (
     <div
       className={`pb-7  px-3 text-center  ${

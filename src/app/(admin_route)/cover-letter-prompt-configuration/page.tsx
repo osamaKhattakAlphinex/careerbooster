@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import PromptEditor from "@/components/admin/linkedin-prompts/PromptEditor";
+import PromptEditor from "@/components/admin/prompt-editor/PromptEditor";
 import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 

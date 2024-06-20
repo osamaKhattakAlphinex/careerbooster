@@ -5,27 +5,28 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
 
-import { eyeIcon, newViewIcon, trashIcon } from "@/helpers/iconsProvider";
-import { useRouter, usePathname } from "next/navigation";
+import { newViewIcon, trashIcon } from "@/helpers/iconsProvider";
+import { useRouter } from "next/navigation";
 import { resetEmail, setEmail } from "@/store/emailSlice";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import { useState } from "react";
 import { showErrorToast, showSuccessToast } from "@/helpers/toast";
+import { RootState } from "@/store/store";
 
 type EmailType = {
   card?: any;
-  componentRef?: any;
+  componentRef?: HTMLDivElement;
   source?: string;
 };
 
 const EmailCardSingle = ({ card, componentRef, source }: EmailType) => {
   // redux
   const dispatch = useDispatch();
-  const userData = useSelector((state: any) => state.userData);
-  const [deleting, setDeleting] = useState(false);
+  const userData = useSelector((state: RootState) => state.userData);
+  const [deleting, setDeleting] = useState<boolean>(false);
 
   const router = useRouter();
-  const [confirmationModal, setConfirmationModal] = useState(false);
+  const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
   const handleOnView = async (card: any) => {
     if (source !== "") {
       router.replace("/email-assistant");
@@ -119,17 +120,6 @@ const EmailCardSingle = ({ card, componentRef, source }: EmailType) => {
               {deleting ? "Deleting..." : "Delete"}
             </span>
           </button>
-          {/* {pathname == "/dashboard"
-            ? ""
-            : card && (
-                <DownloadService
-                  componentRef={componentRef}
-                  view={handleOnView}
-                  card={card}
-                  type="email"
-                  fileName="ai-email"
-                />
-              )} */}
         </div>
       </div>
       {confirmationModal && (
