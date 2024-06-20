@@ -3,9 +3,7 @@ import React from "react";
 
 export function DateRangeFilter({ column }: { column: Column<any, unknown> }) {
   const columnFilterValue = column.getFilterValue() || ["", ""];
-
-  console.log(columnFilterValue);
-
+  
   return (
     <div>
       <div className="flex space-x-2">
