@@ -7,16 +7,17 @@ import useSaveResumeToDB from "./useSaveToDB";
 import { usePathname } from "next/navigation";
 import { showErrorToast, showSuccessToast } from "@/helpers/toast";
 import { useAppContext } from "@/context/AppContext";
+import { RootState } from "@/store/store";
 
 const useGetSummary = (
   setStreamedSummaryData: any,
 ) => {
   const dispatch = useDispatch();
-  const userData = useSelector((state: any) => state.userData);
-  const resumeData = useSelector((state: any) => state.resume);
+  const userData = useSelector((state: RootState) => state.userData);
+  const resumeData = useSelector((state: RootState) => state.resume);
   const { saveResumeToDB } = useSaveResumeToDB();
-  const creditLimits = useSelector((state: any) => state.creditLimits);
-  const [aiInputUserData, setAiInputUserData] = useState<any>();
+  const creditLimits = useSelector((state: RootState) => state.creditLimits);
+  const [aiInputUserData, setAiInputUserData] = useState({});
   const path = usePathname();
   const {abortController, setOutOfCredits} = useAppContext()
   useEffect(() => {
@@ -58,8 +59,8 @@ const useGetSummary = (
       }),
       signal: abortController?.signal
     })
-      .then(async (resp: any) => {
-        if (resp.ok) {
+      .then(async (resp) => {
+        if (resp.ok && resp.body) {
           const reader = resp.body.getReader();
           let summaryTemp = "";
           while (true) {

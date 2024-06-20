@@ -11,20 +11,21 @@ import useSaveResumeToDB from "./useSaveToDB";
 import useGetCreditLimits from "./useGetCreditLimits";
 import { showErrorToast, showSuccessToast } from "@/helpers/toast";
 import { useAppContext } from "@/context/AppContext";
+import { RootState } from "@/store/store";
 
 const useSingleJDGenerate = (
   setStreamedJDData: any,
 ) => {
   const { getUserDataIfNotExists } = useGetUserData();
   const dispatch = useDispatch();
-  const userData = useSelector((state: any) => state.userData);
-  const resumeData = useSelector((state: any) => state.resume);
-  const creditLimits = useSelector((state: any) => state.creditLimits);
+  const userData = useSelector((state: RootState) => state.userData);
+  const resumeData = useSelector((state: RootState) => state.resume);
+  const creditLimits = useSelector((state: RootState) => state.creditLimits);
   const { getCreditLimitsIfNotExists } = useGetCreditLimits();
   let oneWorkExpIndex: number;
   const { saveResumeToDB } = useSaveResumeToDB();
   const {abortController,setOutOfCredits}= useAppContext()
-  const getOneWorkExperienceNew = async (experience: any) => {
+  const getOneWorkExperienceNew = async (experience) => {
     dispatch(setWorkExperience(""));
     let temp = "";
 
@@ -101,7 +102,7 @@ const useSingleJDGenerate = (
       }
 
       if (achievementTemp.length > 0) {
-        setStreamedJDData((prev: any) => prev + `</div> <br /> `);
+        setStreamedJDData((prev: string) => prev + `</div> <br /> `);
         temp += `</div> <br /> `;
         const achivementsArray = fetchLIstOfStrings(achievementTemp);
         workExpArrObj.achievements = achivementsArray;

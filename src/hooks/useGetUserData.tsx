@@ -1,4 +1,5 @@
 "use client";
+import { RootState } from "@/store/store";
 import { setField, setIsLoading, setUserData } from "@/store/userDataSlice";
 import { useSession } from "next-auth/react";
 
@@ -6,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const useGetUserData = () => {
   const dispatch = useDispatch();
-  const userData = useSelector((state: any) => state.userData);
+  const userData = useSelector((state: RootState) => state.userData);
   const { data: session } = useSession();
 
   const getUserDataIfNotExists = async () => {
@@ -14,19 +15,12 @@ const useGetUserData = () => {
     if (!userData.isLoading && !userData.isFetched) {
       dispatch(setIsLoading(true));
       // Fetch userdata if not exists in Redux
-      const res: any = await fetch(
+      const res = await fetch(
         `/api/users/getOneByEmail?email=${session?.user?.email}`
-      ).catch((error) => {
-        console.log(error);
-      });
-      let response;
-      if (typeof res?.result === "object") {
-        response = res;
-      } else {
-        response = await res.json();
-      }
+      );
+      const data = await res.json();
 
-      dispatch(setUserData(response.result));
+      dispatch(setUserData(data.result));
       dispatch(setIsLoading(false));
       dispatch(setField({ name: "isFetched", value: true }));
     }

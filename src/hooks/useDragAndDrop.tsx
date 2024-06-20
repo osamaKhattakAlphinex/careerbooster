@@ -1,15 +1,16 @@
 "use client";
-import {  setPrimarySkills, setPublications, setWorkExperienceArray } from "@/store/resumeSlice";
+import {  setPrimarySkills, setWorkExperienceArray } from "@/store/resumeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import useSaveResumeToDB from "./useSaveToDB";
 import { setField } from "@/store/creditLimitsSlice";
+import { RootState } from "@/store/store";
 
 const useDragAndDrop = () => {
   const dispatch = useDispatch();
   const { saveResumeToDB } = useSaveResumeToDB();
-  const { resume } = useSelector((state: any) => state);
+  const { resume } = useSelector((state: RootState) => state);
 
-  const handleDropExperience = (e: any, i: number) => {
+  const handleDropExperience = (e: React.DragEvent, i: number) => {
     const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
     const updatedItems = [...resume?.workExperienceArray];
     // Swap the positions of the dragged item and the target item.
@@ -30,7 +31,7 @@ const useDragAndDrop = () => {
       });
     }
   };
-  const handleDropOthers = (e: any, i: number,section:string) => {
+  const handleDropOthers = (e: React.DragEvent, i: number,section:string) => {
     const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
     const updatedItems = [...resume[section]];
     // Swap the positions of the dragged item and the target item.
@@ -119,7 +120,7 @@ const useDragAndDrop = () => {
   };
  
 
-  const handleDropPrimary = (e: any, i: number) => {
+  const handleDropPrimary = (e: React.DragEvent, i: number) => {
     const draggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
     const updatedItems = [...resume.primarySkills];
     // Swap the positions of the dragged item and the target item.
