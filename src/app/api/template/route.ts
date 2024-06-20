@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import puppeteer from "puppeteer-core";
 import puppeteerDev from "puppeteer";
 import chromium from "@sparticuz/chromium-min";
@@ -28,7 +28,7 @@ async function getPage() {
   _page = await browser.newPage();
   return _page;
 }
-export async function POST(req: any) {
+export async function POST(req: NextRequest) {
   try {
     const { html } = await req.json();
 

@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
-const normalizeValue = (value: string) => {
+const normalizeValue = (value: string = " ") => {
   if (typeof value === "string") {
     // Remove line breaks and multiple whitespaces
     return value.replace(/\n/g, " ").replace(/\s\s+/g, " ").trim();
@@ -19,7 +19,7 @@ const EditableField = ({
   style,
   text,
 }: {
-  value: string;
+  value: string | undefined;
   overrideValue?: string;
   type?: string;
   style?: any;
@@ -28,7 +28,7 @@ const EditableField = ({
   text?: any;
 }) => {
   const [isEditing, setIsEditing] = useState(false);
-  let new_value: any = normalizeValue(value);
+  let new_value: string | undefined = normalizeValue(value);
   const [editedValue, setEditedValue] = useState<any>(new_value);
   const [inputWidth, setInputWidth] = useState<any>(null);
   const [textAreaHeight, setTextAreaHeight] = useState<any>(null);

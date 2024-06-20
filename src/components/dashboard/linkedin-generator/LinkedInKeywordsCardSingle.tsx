@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
 
-import { eyeIcon, newViewIcon, trashIcon } from "@/helpers/iconsProvider";
+import { newViewIcon, trashIcon } from "@/helpers/iconsProvider";
 import { useRouter, usePathname } from "next/navigation";
 
 import {
@@ -15,6 +15,7 @@ import {
 import { useState } from "react";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import { showErrorToast, showSuccessToast } from "@/helpers/toast";
+import { RootState } from "@/store/store";
 
 type LinkedInHeadlineType = {
   card?: any;
@@ -29,9 +30,9 @@ const LinkedInHKeywordsCardSingle = ({
 }: LinkedInHeadlineType) => {
   // redux
   const dispatch = useDispatch();
-  const userData = useSelector((state: any) => state.userData);
+  const userData = useSelector((state: RootState) => state.userData);
   const router = useRouter();
-  const [deleting, setDeleting] = useState(false);
+  const [deleting, setDeleting] = useState<boolean>(false);
 
   const pathname: any = usePathname();
   const handleOnView = async (card: any) => {
@@ -40,7 +41,7 @@ const LinkedInHKeywordsCardSingle = ({
     }
     return dispatch(setLinkedKeywords(card));
   };
-  const [confirmationModal, setConfirmationModal] = useState(false);
+  const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
   const handleOnDelete = async (card: any) => {
     setConfirmationModal(false);
     setDeleting(true);

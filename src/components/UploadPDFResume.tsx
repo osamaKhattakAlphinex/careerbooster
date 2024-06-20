@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 
 import { useSession } from "next-auth/react";
-// import { slugify } from "@/helpers/slugify";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { refreshIconRotating, uploadIcon } from "@/helpers/iconsProvider";

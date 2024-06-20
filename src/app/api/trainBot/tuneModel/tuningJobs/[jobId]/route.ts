@@ -1,6 +1,6 @@
 import startDB from "@/lib/db";
-import { NextResponse } from "next/server";
-import OpenAI, { toFile } from "openai";
+import { NextRequest, NextResponse } from "next/server";
+import OpenAI from "openai";
 import FineTuneModel from "@/db/schemas/FineTuningModel";
 
 const openai = new OpenAI({
@@ -8,7 +8,7 @@ const openai = new OpenAI({
 });
 
 export const POST = async (
-  req: any,
+  req: NextRequest,
   { params }: { params: { jobId: string } }
 ) => {
   try {
@@ -22,7 +22,7 @@ export const POST = async (
     await openai.fineTuning.jobs.cancel(jobId);
 
     // reset the status and jobId to normal
-    const fineTuneModel = await FineTuneModel.findOneAndUpdate(
+    await FineTuneModel.findOneAndUpdate(
       {
         fineTuningJobId: jobId,
       },

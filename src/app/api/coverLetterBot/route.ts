@@ -1,12 +1,12 @@
 import User from "@/db/schemas/User";
 import startDB from "@/lib/db";
 import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/route";
-import TrainBot from "@/db/schemas/TrainBot";
 import { updateTrainedBotEntry } from "@/helpers/updateTrainBotEntry";
+import { CoverLetterCard } from "../../../../types/ObjTypes/types";
 
-export async function postCoverLetter(payload: any) {
+export async function postCoverLetter(payload: CoverLetterCard) {
   try {
     await startDB();
     const user = await User.findOne({ email: payload.userEmail });
@@ -16,7 +16,6 @@ export async function postCoverLetter(payload: any) {
       user.coverLetters = [payload];
     } else {
       user.coverLetters.unshift(payload);
-      // user.coverLetters.push(payload);
     }
     await user.save();
   } catch (error) {
@@ -54,7 +53,7 @@ async function updateCoverLetter(payload: any) {
     );
   }
 }
-export async function POST(request: any) {
+export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions);
   if (session) {
     try {
@@ -81,15 +80,3 @@ export async function POST(request: any) {
   }
 }
 
-// export async function GET(request: any) {
-//   try {
-//     await startDB();
-//     const coverletters = await user.find();
-//     return NextResponse.json({ success: true, coverletters }, { status: 200 });
-//   } catch (error) {
-//     return NextResponse.json(
-//       { result: "Internal Server Error", success: false },
-//       { status: 500 }
-//     );
-//   }
-// }

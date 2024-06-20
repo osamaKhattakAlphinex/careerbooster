@@ -1,23 +1,11 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 import TrainBot from "@/db/schemas/TrainBot";
 import startDB from "@/lib/db";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
-function removeSpecialChars(str: string) {
-  // Remove new lines
-  str = str.replace(/[\r\n]+/gm, "");
-
-  // Remove Unicode characters
-  str = str.replace(/[^\x00-\x7F]/g, "");
-
-  // Remove icons
-  str = str.replace(/[^\w\s]/gi, "");
-
-  return str;
-}
-export async function POST(req: any) {
+export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     if (body) {

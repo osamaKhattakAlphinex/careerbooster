@@ -18,14 +18,15 @@ import { EditIcon, newViewIcon } from "@/helpers/iconsProvider";
 import { setLinkedInHeadline } from "@/store/linkedInHeadLineSlice";
 import TourBot from "../TourBot";
 import { useTourContext } from "@/context/TourContext";
+import { RootState } from "@/store/store";
 
 const SubHeadlineGenerator = () => {
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session } = useSession();
-  const [streamedData, setStreamedData] = useState("");
-  const [aiInputUserData, setAiInputUserData] = useState<any>(null);
-  const [showPopup, setShowPopup] = useState(false);
-  const componentRef = useRef<any>();
+  const [streamedData, setStreamedData] = useState<string>("");
+  const [aiInputUserData, setAiInputUserData] = useState({});
+  const [showPopup, setShowPopup] = useState<boolean>(false);
+  const componentRef = useRef<HTMLDivElement | null>(null);
   const { setAvailableCredits, abortController,setAbortController, outOfCredits, setOutOfCredits } = useAppContext();
   const [isEditing, setIsEditing] = useState(false);
   const [isHeadlineCopied, setIsHeadlineCopied] = useState<boolean>(false);
@@ -50,11 +51,11 @@ const SubHeadlineGenerator = () => {
   };
   // Redux
   const dispatch = useDispatch();
-  const userData = useSelector((state: any) => state.userData);
-  const linkedinHeadline = useSelector((state: any) => state.linkedinHeadline);
+  const userData = useSelector((state: RootState) => state.userData);
+  const linkedinHeadline = useSelector((state: RootState) => state.linkedinHeadline);
   const { tourBotRef, availableCreditsRef } = useTourContext();
 
-  const creditLimits = useSelector((state: any) => state.creditLimits);
+  const creditLimits = useSelector((state: RootState) => state.creditLimits);
 
   const { getUserDataIfNotExists: getUserData } = useGetUserData(); //using hook function with different name/alias
 
@@ -104,7 +105,7 @@ const SubHeadlineGenerator = () => {
     //change condition
     if (session?.user?.email && aiInputUserData) {
       setMsgLoading(true);
-      const obj: any = {
+      const obj = {
         personName: userData.firstName + " " + userData.lastName,
         email: session?.user?.email,
 
@@ -120,8 +121,8 @@ const SubHeadlineGenerator = () => {
         body: JSON.stringify(obj),
         signal: abortController?.signal,
       })
-        .then(async (resp: any) => {
-          if (resp.ok) {
+        .then(async (resp) => {
+          if (resp.ok && resp.body) {
             setAvailableCredits(true);
 
             const reader = resp.body.getReader();
@@ -234,7 +235,7 @@ const SubHeadlineGenerator = () => {
   useEffect(() => {
     if (isEditing) {
       if (componentRef.current) {
-        const editorElement = componentRef.current.querySelector("#editor");
+        const editorElement: HTMLDivElement | null = componentRef.current.querySelector("#editor");
         if (editorElement) {
           editorElement.innerHTML = linkedinHeadline.headlineText;
           editorElement.focus(); // Focus on the editable area

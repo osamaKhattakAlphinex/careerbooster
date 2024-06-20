@@ -18,8 +18,7 @@ interface Props {
 const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
   //   const router = useRouter();
   // local states
-  const [fileUploading, setFileUploading] = useState<boolean>(false);
-  const [file, setFile] = useState<any>(null); // file to upload
+  const [file, setFile] = useState<File>(); // file to upload
   const [fileName, setFileName] = useState<string>(""); // file to upload
   const [fileError, setFileError] = useState<string>("");
   const [successMsg, setSuccessMsg] = useState<string>("");
@@ -137,7 +136,6 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
     fetchFiles();
   }, []);
 
-  console.log(fileList);
 
   const uploaderConfig: UploaderConfig = {
     file: file,
@@ -201,7 +199,7 @@ const CoverLetterFileUploader = ({ selectedFile, setSelectedFile }: Props) => {
           </div>
         </div> */}
 
-        {file !== null && file.type === "application/pdf" ? (
+        {file !== null && file?.type === "application/pdf" ? (
           <FileUploadHandler
             file={file}
             text={newFileText}

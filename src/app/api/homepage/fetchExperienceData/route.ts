@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 import TrainBot from "@/db/schemas/TrainBot";
 import startDB from "@/lib/db";
@@ -19,7 +19,7 @@ function removeSpecialChars(str: string) {
 
   return str;
 }
-export async function POST(req: any) {
+export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     if (body) {
@@ -35,7 +35,6 @@ export async function POST(req: any) {
 
         const dataset = "register.wizard.listExperiences";
         const model = await getTrainedModel(dataset);
-        //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
         const input = `
               This is the User Data:
@@ -63,7 +62,6 @@ export async function POST(req: any) {
               If there is no value Leave that field blank
           `;
 
-        // const resp = await model.call(input);
         const response = await openai.chat.completions.create({
           model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8IcrLzWo",
           messages: [

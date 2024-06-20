@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 // import { getServerSession } from "next-auth";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
@@ -143,7 +143,7 @@ let emailTemplate = `<!DOCTYPE html>
 </html>
 
 `
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     if (process.env.NEXT_APP_STATE === "Production") {
       const otp = Math.floor(Math.random() * 900000) + 100000;

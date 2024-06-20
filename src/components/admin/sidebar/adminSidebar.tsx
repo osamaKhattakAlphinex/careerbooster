@@ -1,8 +1,6 @@
 "use client";
-import ThemeToggler from "@/components/Themetoggler";
 import ThemeChanger from "@/components/common/themeSwitcher";
 import {
-  IconUsersicon,
   antIcon,
   hamburgerIcon,
   crossIcon,

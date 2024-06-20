@@ -1,8 +1,8 @@
 import JobCategory from "@/db/schemas/JobCategory";
 import startDB from "@/lib/db";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
     try {
       await startDB();
       const jobCategories = await JobCategory.find();

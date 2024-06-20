@@ -7,7 +7,6 @@ import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import {
-  infoSmallIcon,
   phoneIcon,
   refreshIconRotating,
   uploadIcon,
@@ -16,9 +15,6 @@ import FileUploadHandler from "@/components/dashboard/FileUploadHandler";
 import { makeid } from "@/helpers/makeid";
 import WordFileHandler from "@/components/dashboard/WordFileHandler";
 
-// export const metadata: Metadata = {
-//   title: "CareerBooster.AI-Register",
-// };
 
 const RegistrationForm = () => {
   const router = useRouter();
@@ -26,7 +22,7 @@ const RegistrationForm = () => {
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [submittingError, setSubmittingError] = useState<string>("");
   const [fileUploading, setFileUploading] = useState<boolean>(false);
-  const [file, setFile] = useState<any>(null);
+  const [file, setFile] = useState<File>();
   const [fileName, setFileName] = useState<string>("");
   const [fileError, setFileError] = useState<string>("");
   const [text, setText] = useState<string>("");
@@ -307,7 +303,7 @@ const RegistrationForm = () => {
                       <input
                         className="hidden"
                         type="file"
-                        disabled={file}
+                        disabled={fileUploading}
                         onChange={(e) => {
                           handleFileChange(e);
                         }}
@@ -332,7 +328,7 @@ const RegistrationForm = () => {
                       </span>
                     </div>
                   )}
-                  {file !== null && file.type === "application/pdf" ? (
+                  {file !== null && file?.type === "application/pdf" ? (
                     <FileUploadHandler
                       file={file}
                       text={text}
@@ -343,8 +339,8 @@ const RegistrationForm = () => {
                     />
                   ) : (
                     file !== null &&
-                    (file.type === "application/msword" ||
-                      file.type ===
+                    (file?.type === "application/msword" ||
+                      file?.type ===
                         "application/vnd.openxmlformats-officedocument.wordprocessingml.document") && (
                       <WordFileHandler
                         file={file}

@@ -1,8 +1,6 @@
 /* eslint-disable react/display-name */
 "use client";
 
-import { updateUserCreditsByAdmin } from "@/helpers/updateUserCreditsByAdmin";
-import axios from "axios";
 import { useFormik } from "formik";
 import React, { forwardRef, useImperativeHandle, useState } from "react";
 import * as Yup from "yup";

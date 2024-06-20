@@ -10,6 +10,8 @@ import { leftArrowIcon } from "@/helpers/iconsProvider";
 import { useFormik } from "formik";
 import { Fade } from "react-awesome-reveal";
 import { setField } from "@/store/userDataSlice";
+import { RootState } from "@/store/store";
+import axios from "axios";
 
 const COUPON_MESSAGE = {
   initialized: "Please wait while we apply your coupon",
@@ -21,13 +23,13 @@ const COUPON_MESSAGE = {
 export default function SubscribePage() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const [showExpiredAlert, setShowExpiredAlert] = useState(false);
-  const [showCoupanForm, setShowCoupanForm] = useState(false);
-  const [applyingCoupon, setApplyingCoupon] = useState(false);
+  const [showExpiredAlert, setShowExpiredAlert] = useState<boolean>(false);
+  const [showCoupanForm, setShowCoupanForm] = useState<boolean>(false);
+  const [applyingCoupon, setApplyingCoupon] = useState<boolean>(false);
   const [couponState, setCoupanState] = useState<string>("initialized");
   // check if there is ?expired=1 in the URL
   const params = useSearchParams();
-  const userData = useSelector((state: any) => state.userData);
+  const userData = useSelector((state: RootState) => state.userData);
 
   const formik = useFormik({
     initialValues: {
@@ -37,7 +39,8 @@ export default function SubscribePage() {
     onSubmit: async (values) => {
       setApplyingCoupon(true);
       setShowCoupanForm(false);
-      if (userData.redeemedCoupons.includes(values.coupan)) {
+      const redeemed: string[] = userData.redeemedCoupons;
+      if (redeemed.includes(values.coupan)) {
         setCoupanState("existing");
         setTimeout(() => {
           setApplyingCoupon(false);
@@ -45,12 +48,10 @@ export default function SubscribePage() {
         return;
       }
       try {
-        let response: any = await fetch("/api/coupons/apply", {
-          method: "POST",
-          body: JSON.stringify({ coupon: values.coupan }),
+        const response = await axios.post("/api/coupons/apply", {
+          coupon: values.coupan,
         });
-        response = await response.json();
-        if (response.success) {
+        if (response.data.success) {
           setCoupanState("success");
           dispatch(
             setField({

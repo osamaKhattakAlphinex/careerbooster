@@ -1,4 +1,3 @@
-// import fs from "fs";
 import User from "@/db/schemas/User";
 import startDB from "@/lib/db";
 import { getServerSession } from "next-auth";
@@ -7,7 +6,7 @@ import { authOptions } from "../../../auth/[...nextauth]/route";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
-export async function GET(req: any) {
+export async function GET() {
   const session = await getServerSession(authOptions);
 
   if (!session) {

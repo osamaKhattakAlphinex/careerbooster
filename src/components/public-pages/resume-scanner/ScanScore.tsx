@@ -184,6 +184,7 @@ const ScanScore = ({ potentialSkills }) => {
             </div>
           </div>
         )}
+        <span className="border-r border-gray-600 my-2"></span>
         {aiKeywordsScore !== 0 && (
           <div className="flex w-full md:w-1/2 flex-col gap-4">
             <div className="w-full">

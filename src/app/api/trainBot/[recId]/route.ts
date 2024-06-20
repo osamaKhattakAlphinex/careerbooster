@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import startDB from "@/lib/db";
 import TrainBot from "@/db/schemas/TrainBot";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
 
 export const GET = async (
-  req: any,
+  req: NextRequest,
   { params }: { params: { recId: string } }
 ) => {
   try {
@@ -28,7 +28,7 @@ export const GET = async (
 };
 
 export const PUT = async (
-  req: any,
+  req: NextRequest,
   { params }: { params: { recId: string } }
 ) => {
   const session = await getServerSession(authOptions);
@@ -62,7 +62,7 @@ export const PUT = async (
   }
 };
 export const DELETE = async (
-  req: any,
+  req: NextRequest,
   { params }: { params: { recId: string } }
 ) => {
   const session = getServerSession(authOptions);

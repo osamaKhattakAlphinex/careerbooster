@@ -3,7 +3,7 @@ import TrainBot from "@/db/schemas/TrainBot";
 import User from "@/db/schemas/User";
 import startDB from "@/lib/db";
 import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function postJobDescriptions(payload: any) {
   try {
@@ -18,7 +18,6 @@ export async function postJobDescriptions(payload: any) {
       user.linkedInJobDescriptions = [payload];
     } else {
       user.linkedInJobDescriptions.unshift(payload);
-      // user.linkedInJobDescriptions.push(payload);
     }
     const response = await user.save();
     return response;
@@ -52,7 +51,7 @@ async function updateJobDescriptions(payload: any) {
     );
   }
 }
-export async function POST(request: any) {
+export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions);
 
   if (session) {

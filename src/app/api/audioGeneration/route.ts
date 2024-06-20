@@ -1,8 +1,8 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 // import path from "path";
 // import fs from "fs/promises";
-export async function POST(req: any) {
+export async function POST(req: NextRequest) {
   const body = await req.json();
   const { input } = body;
   const openai = new OpenAI({
@@ -11,7 +11,7 @@ export async function POST(req: any) {
 
   // const speechFile = path.resolve("./public/speech.mp3");
   try {
-    const mp3: any = await openai.audio.speech.create({
+    const mp3 = await openai.audio.speech.create({
       model: "tts-1",
       voice: "nova",
       input: input,

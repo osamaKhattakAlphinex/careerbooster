@@ -7,7 +7,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Fjalla_One, Montserrat } from "next/font/google";
 import { getGHLApi, getGHLApiKey } from "@/ServerActions";
-import axios from "axios";
 const fjalla_One = Fjalla_One({
   weight: "400",
   subsets: ["latin"],

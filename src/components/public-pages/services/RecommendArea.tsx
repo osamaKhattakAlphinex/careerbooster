@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Fjalla_One, Montserrat, Content } from "next/font/google";
+import { Montserrat, Content } from "next/font/google";
 import image1 from "@/../public/assets/images/services/1.webp";
 import image2 from "@/../public/assets/images/services/2.webp";
 import image3 from "@/../public/assets/images/services/3.webp";
@@ -15,10 +15,7 @@ const montserrat_500 = Montserrat({
   weight: "500",
   subsets: ["latin"],
 });
-const content_font = Content({
-  weight: "400",
-  subsets: ["khmer"],
-});
+
 const recommendUser = [
   {
     name: "Jessica Love",

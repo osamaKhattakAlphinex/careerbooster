@@ -2,12 +2,12 @@ import User from "@/db/schemas/User";
 import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
 import { updateUserTotalCredits } from "@/helpers/updateUserTotalCredits";
 import startDB from "@/lib/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
-export async function POST(req: any) {
+export async function POST(req: NextRequest) {
   try {
     const _body = await req.json();
 
@@ -22,7 +22,7 @@ export async function POST(req: any) {
           return NextResponse.json(
             { result: "Insufficient Credits", success: false },
             { status: 429 }
-          )
+          );
         }
       }
       await startDB();
@@ -35,9 +35,7 @@ export async function POST(req: any) {
         );
 
         if (updatedUser) {
-
-          await updateUserTotalCredits(email, creditsUsed)
-
+          await updateUserTotalCredits(email, creditsUsed);
 
           return NextResponse.json(
             {
@@ -85,5 +83,3 @@ export async function POST(req: any) {
     );
   }
 }
-
-  

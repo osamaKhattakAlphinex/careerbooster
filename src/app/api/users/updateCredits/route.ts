@@ -1,7 +1,7 @@
 import { updateUserCreditsByAdmin } from "@/helpers/updateUserCreditsByAdmin";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: any) {
+export async function POST(req: NextRequest) {
   const body = await req.json();
 
   const email = body.email;

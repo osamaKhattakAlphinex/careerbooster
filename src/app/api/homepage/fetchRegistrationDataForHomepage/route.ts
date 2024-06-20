@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
-export async function POST(req: any) {
+export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     if (body) {
@@ -37,7 +37,6 @@ export async function POST(req: any) {
               If there is no value Leave that field blank
           `;
 
-        // const resp = await model.call(input);
         const response = await openai.chat.completions.create({
           model: "gpt-3.5-turbo", // v2
           messages: [

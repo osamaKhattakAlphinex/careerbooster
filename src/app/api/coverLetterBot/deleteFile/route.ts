@@ -1,14 +1,12 @@
-import { NextApiHandler } from "next";
-import fs from "fs";
-import path from "path";
-import { NextResponse } from "next/server";
+
+import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import startDB from "@/lib/db";
 import User from "@/db/schemas/User";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
-export async function POST(req: any) {
+export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
 
   if (!session) {
@@ -29,7 +27,7 @@ export async function POST(req: any) {
     }
 
     const { fileName } = body;
-    const email: any = url.searchParams.get("email");
+    const email= url.searchParams.get("email");
 
     if (!fileName) {
       return NextResponse.json(
@@ -41,11 +39,6 @@ export async function POST(req: any) {
     try {
       await startDB();
 
-      // const user = await User.findOne({ email: email }, { files: 1 });
-      // const fileObject = user.files.find(
-      //   (file: any) => file.fileName === fileName
-      // );
-      // console.log("file: " + fileObject);
       const user = await User.findOne({ email: email });
 
       if (user) {

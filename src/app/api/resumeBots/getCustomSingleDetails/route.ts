@@ -1,7 +1,7 @@
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import OpenAI from "openai";
 import Prompt from "@/db/schemas/Prompt";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import startDB from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
@@ -15,7 +15,7 @@ export const dynamic = "force-dynamic";
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
-export async function POST(req: any) {
+export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
 
   if (!session) {
@@ -73,7 +73,7 @@ export async function POST(req: any) {
      
       `;
 
-    const response: any = await openai.chat.completions.create({
+    const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],

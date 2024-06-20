@@ -62,9 +62,6 @@ export default function CoverLetterPage() {
         }
       }
     }
-    // else {
-    //   dispatch(resetCoverLetter());
-    // }
   }, [isEditing]);
 
   // Function to save the edited content and exit editing mode
@@ -79,7 +76,6 @@ export default function CoverLetterPage() {
       }
     }
 
-    // setStreamedData(editedContent);
     setIsEditing(false);
     const payLoad = {
       coverLetterText: _coverLetterText, //editedContent,
@@ -112,7 +108,7 @@ export default function CoverLetterPage() {
 
   // Redux
   const dispatch = useDispatch();
-  const userData = useSelector((state: any) => state.userData);
+  const userData = useSelector((state: RootState) => state.userData);
   const coverLetter = useSelector((state: RootState) => state.coverLetter);
   const handleSingleSave = async (obj: {}) => {
     const [[key, value]] = Object.entries(obj);
@@ -148,13 +144,13 @@ export default function CoverLetterPage() {
         phone: userData.phone,
         email: userData.email,
         address:
-          userData.contact.street +
+          userData?.contact?.street +
           " " +
-          userData.contact.cityState +
+          userData?.contact?.cityState +
           " " +
-          userData.contact.country +
+          userData?.contact?.country +
           " " +
-          userData.contact.postalCode,
+          userData?.contact?.postalCode,
         date: getFormattedDate(date, "MM DD, YYYY"),
         creditsUsed: creditLimits.cover_letter_generation,
         jobDescription,
@@ -200,7 +196,6 @@ export default function CoverLetterPage() {
             );
 
             if (coverLetterResponse.data.success) {
-              // Update Redux store
               const updatedObject = {
                 ...userData,
                 coverLetters: coverLetterResponse.data.result.coverLetters,
@@ -371,7 +366,7 @@ export default function CoverLetterPage() {
           {/* <MainCoverLetterTool /> */}
           <>
             <div
-              ref={(ref: any) => (coverLetterElementRef.current = ref)}
+              ref={(ref: HTMLDivElement) => (coverLetterElementRef.current = ref)}
               className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-lg px-4 lg:px-[30px] py-6  flex flex-col gap-3 "
             >
               {/* header */}
@@ -588,13 +583,13 @@ export default function CoverLetterPage() {
                               value={
                                 coverLetter?.address
                                   ? coverLetter.address
-                                  : userData.contact.street +
+                                  : userData?.contact?.street +
                                     " " +
-                                    userData.contact.cityState +
+                                    userData?.contact?.cityState +
                                     " " +
-                                    userData.contact.country +
+                                    userData?.contact?.country +
                                     " " +
-                                    userData.contact.postalCode
+                                    userData?.contact?.postalCode
                               }
                               onSave={(value: string) => {
                                 dispatch(

@@ -1,9 +1,9 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 import startDB from "@/lib/db";
 import Prompt from "@/db/schemas/Prompt";
 
-export async function POST(req: any) {
+export async function POST(req: NextRequest) {
   const body = await req.json();
   try {
     await startDB();
@@ -48,7 +48,7 @@ export async function POST(req: any) {
   }
 }
 
-export async function GET(req: any) {
+export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const type = searchParams.get("type");
   try {

@@ -10,15 +10,14 @@ import {
   userGroup,
   clipboard,
   xMark,
-  keyIcon,
   emailBotSidebarIcon,
   coverLetterSidebarIcon,
 } from "@/helpers/iconsProvider";
 import "@/app/(private_route)/dashboard.css";
 
 import { useSelector } from "react-redux";
-import { useEffect, useRef, useState } from "react";
-import { redirect, usePathname, useRouter } from "next/navigation";
+import { useRef, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import Button from "../Button";
 import ProfileImageModal from "../ProfileImageModal";
@@ -251,17 +250,9 @@ const SideBar = () => {
                       onMouseOut={handleMouseOut}
                       onClick={() => {
                         localStorage.clear();
-                        // router.replace("/login")
                         signOut();
                       }}
-                      // style={{
-                      //   opacity: hoveredItem === index ? 1 : 0.7,
-                      //   color:
-                      //     hoveredItem === index
-                      //       ? "purple"
-                      //       : "rgb(115, 115, 115)",
-                      //   textDecoration: "none",
-                      // }}
+                     
                     >
                       <div className="w-6 h-6  pr-2 dark:text-[#959595] text-gray-950 group-hover:text-[#b324d7] dark:group-hover:text-[#b324d7] no-underline		">
                         {item.icon}

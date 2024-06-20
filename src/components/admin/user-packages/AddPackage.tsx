@@ -4,14 +4,10 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 
-type Feature = string[];
-type FeatureTooltip = string[];
-
 type Props = {
   getPackages: () => void;
 };
 
-type FeatureFieldType = { id: number; feature: string; tooltip: string };
 // Feature Field
 export const FeatureRow = ({
   id,

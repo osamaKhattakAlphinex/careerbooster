@@ -13,6 +13,7 @@ import DownloadService from "@/helpers/downloadFile";
 import { useState } from "react";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import { showSuccessToast } from "@/helpers/toast";
+import { RootState } from "@/store/store";
 
 type CoverLetterType = {
   card?: any;
@@ -28,11 +29,10 @@ const CoverLetterCardSingle = ({
   // redux
 
   const dispatch = useDispatch();
-  const userData = useSelector((state: any) => state.userData);
-  const [confirmationModal, setConfirmationModal] = useState(false);
-  const [deleting, setDeleting] = useState(false);
+  const userData = useSelector((state: RootState) => state.userData);
+  const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
+  const [deleting, setDeleting] = useState<boolean>(false);
   const router = useRouter();
-  const pathname: any = usePathname();
   const handleOnView = async (card: any) => {
     if (source !== "") {
       router.replace("/cover-letter-generator");
@@ -43,9 +43,7 @@ const CoverLetterCardSingle = ({
   const handleOnDelete = async (card: any) => {
     setConfirmationModal(false);
     setDeleting(true);
-    // const c = confirm("Are you sure you want to delete this Cover Letter?");
-
-    // if (c) {
+    
     try {
       await axios.delete(`/api/coverLetterBot/${card.id}`).then((res) => {
         if (res.data.success) {
@@ -69,7 +67,7 @@ const CoverLetterCardSingle = ({
     } finally {
       setDeleting(false);
     }
-    // }
+    
   };
 
   const handleOpenConfirmationModal = () => {
