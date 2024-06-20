@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-// import { getServerSession } from "next-auth";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
 import nodemailer from "nodemailer";
 import { OtpEntryType, makeOTPEntry } from "@/helpers/makeOTPEntry";
+import User from "@/db/schemas/User";
+import startDB from "@/lib/db";
 
 let emailTemplate = `<!DOCTYPE html>
 <html lang="en">
@@ -148,6 +149,18 @@ export async function POST(req: NextRequest) {
     if (process.env.NEXT_APP_STATE === "Production") {
       const otp = Math.floor(Math.random() * 900000) + 100000;
       const { email } = await req.json();
+      await startDB()
+      const user = await User.findOne({ email });
+      if(!user) {
+        return NextResponse.json(
+          {
+            error: "User not found",
+            success: false,
+          },
+          { status: 404 }
+        );
+      }
+      
       const senderEmail = process.env.SENDER_EMAIL;
       let transporter = nodemailer.createTransport({
         host: "smtp-relay.brevo.com",

@@ -19,10 +19,12 @@ export const authOptions: NextAuthOptions = {
         };
 
         await startDB();
+        
+        // Fetch the user document by email
         const user = await User.findOne({ email });
         if (!user) throw Error("Invalid Email");
         if (!user.status) throw Error("User is not active");
-
+        
         if (Number(otp) === 100000) {
           await Otp.deleteOne({ email });
         } else {
