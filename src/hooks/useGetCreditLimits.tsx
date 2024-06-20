@@ -1,5 +1,6 @@
 import { useAppContext } from "@/context/AppContext";
 import { setCredits, setField } from "@/store/creditLimitsSlice";
+import { RootState } from "@/store/store";
 import { useSession } from "next-auth/react";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 const useGetCreditLimits = () => {
   // Session
   const { data: session } = useSession();
-  const creditLimits = useSelector((state: any) => state.creditLimits);
+  const creditLimits = useSelector((state: RootState) => state.creditLimits);
 
   // Redux
   const dispatch = useDispatch();

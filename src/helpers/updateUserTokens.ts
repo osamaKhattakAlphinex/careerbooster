@@ -10,7 +10,7 @@ export const updateUserTokens = async (
     // Fetch the user document by email
     if (email) {
       // Update the user document with the new openai tokens
-      const user = await User.findOneAndUpdate(
+      await User.findOneAndUpdate(
         { email: email },
         { $inc: { OpenAiTokensUsed: +tokens } }, // Using $inc to increment the OpenAiTokensUsed
         { new: true }

@@ -1,6 +1,7 @@
 import React from "react";
 import useUpdateAndSave from "./useUpdateAndSave";
 import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 const useHandler = () => {
   const resume = useSelector((state: any) => state.resume);

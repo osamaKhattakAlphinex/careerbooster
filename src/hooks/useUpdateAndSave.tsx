@@ -32,7 +32,7 @@ const useUpdateAndSave = () => {
   };
 
   //   update and save the Summary
-  const updateAndSaveSummary = (value: any) => {
+  const updateAndSaveSummary = (value: string) => {
     dispatch(setSummary(value));
     saveResumeToDB({ ...resume, summary: value });
   };
