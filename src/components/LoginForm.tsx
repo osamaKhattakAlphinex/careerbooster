@@ -48,6 +48,9 @@ const LoginForm = () => {
         setSubmitting(false);
         setSuccessAlert("OTP sent to your email!");
         setOtpSend(true);
+      }).catch((err) => {
+        setSubmitting(false);
+        setSubmittingError(err.response.data.error);
       });
     } else {
       setEmailEntered(false);
