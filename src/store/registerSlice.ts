@@ -65,13 +65,13 @@ interface RegisterSlice {
     isValid: boolean;
   };
   stepFour: {
-    list?: Education[];
+    list: Education[];
     isValid: boolean;
     editId?: string;
     state: string;
   };
   stepFive: {
-    list?: WorkExperience[];
+    list: WorkExperience[];
     editId?: string;
     state: string;
     isValid: boolean;

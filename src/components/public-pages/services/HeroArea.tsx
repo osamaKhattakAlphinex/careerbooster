@@ -1,15 +1,12 @@
 "use client";
 
 import React from "react";
-import { Fjalla_One, Roboto, Montserrat } from "next/font/google";
+import { Fjalla_One } from "next/font/google";
 const fjalla_One = Fjalla_One({
   weight: "400",
   subsets: ["latin"],
 });
-const montserrat = Montserrat({
-  weight: "700",
-  subsets: ["latin"],
-});
+
 const HeroArea = () => {
   return (
     <div className="md:pt-10 lg:pt-20 xs:px-6 xs:pt-6 md:px-10  lg:px-[4rem] xl:px-36">

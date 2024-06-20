@@ -17,7 +17,7 @@ import { RootState } from "@/store/store";
 
 type CoverLetterType = {
   card?: any;
-  componentRef?: HTMLDivElement;
+  componentRef?: any;
   source?: string;
 };
 

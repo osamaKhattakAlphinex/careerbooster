@@ -4,7 +4,7 @@ import { showErrorToast, showSuccessToast } from "@/helpers/toast";
 import React from "react";
 
 export type UploaderConfig = {
-  file: any;
+  file: File | undefined;
   setFile: any;
   fileName: string;
   setFileName: any;
@@ -16,7 +16,7 @@ const FileUploader = ({
   fileName,
   setFileName,
 }: UploaderConfig) => {
-  const isValidFile = (file: any) => {
+  const isValidFile = (file: File) => {
     const ALLOWED_EXTENSIONS = /\.(pdf|doc|docx)$/i;
     if (!ALLOWED_EXTENSIONS.test(file.name)) {
       return false;
@@ -24,7 +24,7 @@ const FileUploader = ({
     return true;
   };
 
-  const isFileSizeValid = (file: any) => {
+  const isFileSizeValid = (file: File) => {
     const MAX_FILE_SIZE_BYTES = 20 * 1024 * 1024;
     if (file.size > MAX_FILE_SIZE_BYTES) {
       return false;
@@ -32,7 +32,7 @@ const FileUploader = ({
     return true;
   };
 
-  const handleFile = (file: any) => {
+  const handleFile = (file: File) => {
     if (file) {
       if (!isValidFile(file)) {
         showErrorToast("Allowed files formats are .pdf, doc or docx.");
@@ -51,21 +51,21 @@ const FileUploader = ({
   function handleFileChange(event: any) {
     event.preventDefault();
 
-    const files: any = event.target.files;
-    const fileArray: any = Array.from(files);
+    const files = event.target.files;
+    const fileArray: File[] = Array.from(files);
 
     handleFile(fileArray[0]);
   }
 
-  function handleDragOver(event: any) {
+  function handleDragOver(event) {
     event.preventDefault();
   }
 
-  function handleDrop(event: any) {
+  function handleDrop(event) {
     event.preventDefault();
 
-    const fileList: any = event.dataTransfer.files;
-    const fileArray: any = Array.from(fileList);
+    const fileList = event.dataTransfer.files;
+    const fileArray: File[] = Array.from(fileList);
 
     handleFile(fileArray[0]);
   }

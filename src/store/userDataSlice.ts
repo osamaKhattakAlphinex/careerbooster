@@ -118,6 +118,9 @@ interface UserDataSlice {
   coverLetters:[],
   emails:[],
   linkedInAbouts:[],
+  linkedInHeadlines: [],
+  linkedInJobDescriptions: [],
+  linkedInKeywords: [],
   trialResume?: boolean;
   redeemedCoupons:[];
   linkedin?: string;
@@ -163,6 +166,9 @@ const initialState: UserDataSlice = {
   emails:[],
   coverLetters:[],
   linkedInAbouts:[],
+  linkedInHeadlines:[],
+  linkedInJobDescriptions: [],
+  linkedInKeywords: [],
   education: [],
   experience: [],
   references: [],

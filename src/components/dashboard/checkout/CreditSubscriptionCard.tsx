@@ -86,7 +86,7 @@ const CreditSubscriptionCard: React.FC<Props> = ({
 
   useEffect(() => {
     if (paypalRef.current) {
-      const getPaypalDiv = paypalRef.current.children[0] as HTMLDivElement;
+      const getPaypalDiv: any = paypalRef.current.children[0];
       getPaypalDiv.style.maxHeight = "500px";
       getPaypalDiv.style.overflowY = "scroll";
       getPaypalDiv.style.scrollbarWidth = "none";

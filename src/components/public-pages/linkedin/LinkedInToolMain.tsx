@@ -16,7 +16,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { verifyInvisibleCaptcha } from "@/ServerActions";
 import WordFileHandler from "@/components/dashboard/WordFileHandler";
 
-const saveToLocalStorage = (text: any, fileName: any) => {
+const saveToLocalStorage = (text: string, fileName: string) => {
   localStorage.setItem("linkedin-content", text);
   localStorage.setItem("linkedin-fileName", fileName);
 };
@@ -25,8 +25,8 @@ const LinkedInToolMain = () => {
   const router = useRouter();
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [isVerified, setIsverified] = useState<boolean>(false);
-  const [file, setFile] = useState<any>(null); //main page
-  const [fileName, setFileName] = useState<any>(null);
+  const [file, setFile] = useState<File>(); //main page
+  const [fileName, setFileName] = useState<string>("");
   const [fileError, setFileError] = useState<string>("");
   const [fileUploading, setFileUploading] = useState<boolean>(false);
   const [uploadComplete, setUploadComplete] = useState<boolean>(false);
@@ -55,7 +55,7 @@ const LinkedInToolMain = () => {
       })
       .catch(() => setIsverified(false));
   }
-  const handleFileChange: any = async (e: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (recaptchaRef.current) {
       recaptchaRef.current.execute();
@@ -95,7 +95,6 @@ const LinkedInToolMain = () => {
   }, [isVerified]);
   return (
     <div className="w-full ">
-      {/* Hero Section */}
       <section className="hero bg-gradient-to-r from-gray-200 via-gray-200 to-gray-200 dark:from-[#01010D80] dark:via-[#000A6380] dark:to-purple-900  overflow-x-hidden lg:px-0 pt-7  lg:pt-[30px]	px-5 lg:npt-10">
         <div className="lg:px-[120px] text-center lg:pt-12 lg:pb-8 pt-15 ">
           <p className="lg:text-[20px] text-gray-800 dark:text-gray-300 text-base lg:px-0 	">
@@ -152,7 +151,7 @@ const LinkedInToolMain = () => {
             theme="dark"
           />
         </div>
-        {file !== null && file.type === "application/pdf" && fileUploading ? (
+        {file !== null && file?.type === "application/pdf" && fileUploading ? (
           <FileUploadHandler file={file} text={text} setText={setText} />
         ) : (
           file !== null &&

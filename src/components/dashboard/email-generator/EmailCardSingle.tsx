@@ -15,7 +15,7 @@ import { RootState } from "@/store/store";
 
 type EmailType = {
   card?: any;
-  componentRef?: HTMLDivElement;
+  componentRef?: any;
   source?: string;
 };
 

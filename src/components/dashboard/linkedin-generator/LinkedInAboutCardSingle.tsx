@@ -19,7 +19,7 @@ import { RootState } from "@/store/store";
 
 type LinkedInAboutType = {
   card?: any;
-  componentRef?: HTMLDivElement;
+  componentRef?: any;
   source?: string;
 };
 
