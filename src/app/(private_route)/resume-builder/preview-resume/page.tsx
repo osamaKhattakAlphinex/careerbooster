@@ -29,18 +29,19 @@ const Page = () => {
       resumeData = userData.resumes.find(
         (resume: Resume) => resume.id === resumeId
       );
-      const newWorkExperienceArray = resumeData.workExperienceArray.map(
-        (job) => {
-          return {
-            ...job,
-            toMonth: job.isContinue ? "Present" : job.toMonth,
-          };
-        }
-      );
-      resumeData = {
-        ...resumeData,
-        workExperienceArray: newWorkExperienceArray,
+    }
+    const newWorkExperienceArray = resumeData.workExperienceArray.map(
+      (job) => {
+        return {
+          ...job,
+          toMonth: job.isContinue ? "Present" : job.toMonth,
+        };
       }
+    );
+
+    resumeData = {
+      ...resumeData,
+      workExperienceArray: newWorkExperienceArray,
     }
   }, [templateId, resumeId]);
 
@@ -954,6 +955,7 @@ const Page = () => {
         ?.replaceAll(".", "")
         .replaceAll("/", "")}`
     );
+   
     generate(resumeData);
   }, [resumeData]);
 
