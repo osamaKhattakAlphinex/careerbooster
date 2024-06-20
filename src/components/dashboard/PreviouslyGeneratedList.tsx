@@ -156,7 +156,7 @@ const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
               No {sourceText} found
             </p>
             <p className="text-xs">
-              You do not have any {sourceText} yet. Your created {sourceText}{" "}
+              You do not have any {sourceText} yet. Your generated {sourceText}{" "}
               will list here.
             </p>
           </div>

@@ -11,7 +11,7 @@ const DownloadService = ({
   preview,
 }: // setOpenUpgradModal,
 any) => {
-  const docRef = useRef<any>(null);
+  const docRef = useRef<HTMLAnchorElement | null>(null);
   const { color } = useColorContext();
   let htmlToDoc: string;
   const [loading, setLoading] = useState(false);
@@ -252,7 +252,7 @@ h2:empty {
         html: htmlToDoc,
       }),
     })
-      .then(async (response: any) => {
+      .then(async (response) => {
         if (!response.ok) {
           console.log(`HTTP error! status: ${response.status}`);
         }
@@ -269,12 +269,14 @@ h2:empty {
           type: "application/pdf",
         });
         const url = URL.createObjectURL(blob);
-        docRef.current.href = url;
-        if (!preview) {
-          docRef.current.download = fileName;
+        if(docRef.current){
+          docRef.current.href = url;
+          if (!preview) {
+            docRef.current.download = fileName;
+          }
+          // docRef.current.download = fileName;
+          docRef.current.click();
         }
-        // docRef.current.download = fileName;
-        docRef.current.click();
         setLoading(false);
       })
       .catch((error) => console.log(error));

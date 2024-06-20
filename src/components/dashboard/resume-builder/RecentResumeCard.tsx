@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
 import SwiperCore from "swiper/core";
-import { infoSmallIcon } from "@/helpers/iconsProvider";
+import { emptyStateIcon, infoSmallIcon } from "@/helpers/iconsProvider";
 import { useState } from "react";
 import { useTourContext } from "@/context/TourContext";
 SwiperCore.use([Pagination]);
@@ -88,6 +88,8 @@ const RecentResumeCard = ({
             showDrop ? "translate-y-0" : "-translate-y-full"
           }`}
         >
+          {resumes.length > 0 ? (
+
           <Swiper
             slidesPerView={3}
             spaceBetween={15}
@@ -126,6 +128,18 @@ const RecentResumeCard = ({
                 </SwiperSlide>
               ))}
           </Swiper>
+          ): (
+            <div className="flex flex-col items-center justify-center w-full p-5 mt-1 space-y-2 text-gray-100/50">
+              {emptyStateIcon}
+              <p className="mt-4 text-sm font-semibold uppercase">
+                No Resumes found
+              </p>
+              <p className="text-xs">
+                You do not have any resumes yet. Your generated resumes{" "}
+                will list here.
+              </p>
+            </div>
+          ) }
         </div>
       </div>
     </>
