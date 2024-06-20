@@ -7,9 +7,10 @@ import { setField, setUserData } from "@/store/userDataSlice";
 import { setId, setResume } from "@/store/resumeSlice";
 import { useAppContext } from "@/context/AppContext";
 import { showSuccessToast } from "@/helpers/toast";
+import { RootState } from "@/store/store";
 
 const useSaveResumeToDB = () => {
-  const { resume: resumeData, userData } = useSelector((state: any) => state);
+  const { resume: resumeData, userData } = useSelector((state: RootState) => state);
   const { setAvailableCredits } = useAppContext();
   const { data: session } = useSession();
   const dispatch = useDispatch();

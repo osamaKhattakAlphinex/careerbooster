@@ -1,17 +1,17 @@
 "use client";
-import { setPrimarySkills, setWorkExperienceArray } from "@/store/resumeSlice";
-import React from "react";
+import { setPrimarySkills } from "@/store/resumeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import useSaveResumeToDB from "./useSaveToDB";
+import { RootState } from "@/store/store";
 
 const useAddPrimarySkill = () => {
   const dispatch = useDispatch();
   const { saveResumeToDB } = useSaveResumeToDB();
-  const { resume } = useSelector((state: any) => state);
+  const { resume } = useSelector((state: RootState) => state);
 
   const addPrimarySkill = (primarySkill: string) => {
     const primarySkills = resume?.primarySkills;
-    const updatedSkills = [...primarySkills];
+    let updatedSkills: string[] = [...primarySkills];
     updatedSkills.push(primarySkill);
     dispatch(setPrimarySkills({ primarySkills: updatedSkills }));
     saveResumeToDB({

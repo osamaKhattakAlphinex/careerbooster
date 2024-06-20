@@ -7,19 +7,20 @@ import useSaveResumeToDB from "./useSaveToDB";
 import useGetCreditLimits from "./useGetCreditLimits";
 import { showErrorToast, showSuccessToast } from "@/helpers/toast";
 import { useAppContext } from "@/context/AppContext";
+import { RootState } from "@/store/store";
 
 const useGetPrimarySkills = (
   setRegenerating: any,
 ) => {
   const dispatch = useDispatch();
   const {abortController, setOutOfCredits} = useAppContext();
-  const userData = useSelector((state: any) => state.userData);
-  const resumeData = useSelector((state: any) => state.resume);
+  const userData = useSelector((state: RootState) => state.userData);
+  const resumeData = useSelector((state: RootState) => state.resume);
   const { getUserDataIfNotExists } = useGetUserData();
-  const [aiInputUserData, setAiInputUserData] = useState<any>();
+  const [aiInputUserData, setAiInputUserData] = useState({});
   const { saveResumeToDB } = useSaveResumeToDB();
 
-  const creditLimits = useSelector((state: any) => state.creditLimits);
+  const creditLimits = useSelector((state: RootState) => state.creditLimits);
   const { getCreditLimitsIfNotExists } = useGetCreditLimits();
   useEffect(() => {
     if (userData && userData?.email) {
@@ -61,7 +62,7 @@ const useGetPrimarySkills = (
       }),
       signal: abortController?.signal,
     })
-      .then(async (resp: any) => {
+      .then(async (resp) => {
         const res = await resp.json();
         if (res.success) {
           if (res?.result) {

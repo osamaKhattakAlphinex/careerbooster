@@ -11,18 +11,14 @@ export const updateUserCreditsByAdmin = async (
     // Fetch the user document by email
     if (email) {
       const update: any = {
-        $inc: { userCredits: +credits, totalCredits: +credits }
+        $inc: { userCredits: +credits, totalCredits: +credits },
       };
-      
+
       if (coupon !== "") {
         update.$push = { redeemedCoupons: coupon };
       }
 
-      await User.findOneAndUpdate(
-        { email: email },
-        update,
-        { new: true }
-      );
+      await User.findOneAndUpdate({ email: email }, update, { new: true });
       console.log(`Updated totalCredits for ${email} `);
     } else {
       console.log(`User with email ${email} not found`);
