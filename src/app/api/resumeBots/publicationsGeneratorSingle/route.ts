@@ -2,7 +2,7 @@ import { OpenAIStream, StreamingTextResponse } from "ai";
 import OpenAI from "openai";
 import Prompt from "@/db/schemas/Prompt";
 import TrainBot from "@/db/schemas/TrainBot";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import startDB from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
@@ -22,7 +22,7 @@ export const dynamic = "force-dynamic";
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
-export async function POST(req: any) {
+export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
 
   if (!session) {
@@ -42,7 +42,6 @@ export async function POST(req: any) {
     const creditsUsed = reqBody?.creditsUsed;
     const dataset = "resume.writePublicationSingle";
     const model = await getTrainedModel(dataset);
-    //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
     if (userCredits) {
       if (userCredits < creditsUsed) {
@@ -77,12 +76,12 @@ export async function POST(req: any) {
      
       `;
 
-    const response: any = await openai.chat.completions.create({
+    const response = await openai.chat.completions.create({
       model: model ? model : "gpt-3.5-turbo",
       stream: true,
       messages: [{ role: "user", content: inputPrompt }],
     });
-    let workId: any;
+    let workId;
     const enc = encodingForModel("gpt-3.5-turbo"); // js-tiktoken
     let completionTokens = 0;
     const stream = OpenAIStream(response, {
@@ -91,7 +90,6 @@ export async function POST(req: any) {
         const payload = {
           id: workId,
         };
-        // postConsultingBid(payload);
         await updateUserTotalCredits(
           session?.user?.email,
           creditsUsed,

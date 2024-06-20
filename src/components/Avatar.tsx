@@ -2,7 +2,6 @@
 import axios from "axios";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
 import "@/app/(private_route)/dashboard.css";
 interface TooltipProps {
   text: string;
@@ -11,7 +10,7 @@ interface TooltipProps {
 }
 
 const Tooltip: React.FC<TooltipProps> = ({ text, children, audioPlayed }) => {
-  const [showTooltip, setShowTooltip] = useState(true);
+  const [showTooltip, setShowTooltip] = useState<boolean>(true);
 
   const toggleTooltip = () => {
     setShowTooltip(!showTooltip);
@@ -38,10 +37,9 @@ const Avatar: React.FC<AvatarProps> = ({ firstName, lastName }) => {
   const [isGif, setIsGif] = useState(false);
   const [audioPlayed, setAudioPlayed] = useState(false);
   const [response, setResponse] = useState<any>({});
-  const componentRef: any = useRef(null);
+  const componentRef = useRef<HTMLAudioElement | null>(null);
   const audioFileUrl1 = "/speech1.mp3";
   const audioFileUrl2 = "/speech2.mp3";
-  const userData = useSelector((state: any) => state.userData);
 
   const [prevUserData, setPrevUserData] = useState<{
     firstName: string;
@@ -83,24 +81,25 @@ const Avatar: React.FC<AvatarProps> = ({ firstName, lastName }) => {
       })
       .then((res) => {
         setResponse(res);
-      });
+      }).catch((error) => {});
   }, [firstName, lastName]);
   const handleClick = async () => {
     try {
-      if (isGif) {
+      if (isGif && componentRef.current) {
         setIsGif(!isGif);
         componentRef.current.pause();
         return;
       }
       if (
         firstName === prevUserData.firstName &&
-        lastName === prevUserData.lastName
+        lastName === prevUserData.lastName && 
+        componentRef.current
       ) {
         setIsGif(!isGif);
         componentRef.current.play();
         return; // If firstName and lastName haven't changed, don't make the request again
       }
-      if (response) {
+      if (response && componentRef.current) {
         setIsGif(!isGif);
         setAudioPlayed(true);
         const audioData = response.data.data;
@@ -119,7 +118,9 @@ const Avatar: React.FC<AvatarProps> = ({ firstName, lastName }) => {
             });
 
             const url = URL.createObjectURL(audioBlob);
-            componentRef.current.src = url;
+            if(componentRef.current){
+              componentRef.current.src = url;
+            }
           })
           .catch((error) => {
             console.error("Error fetching or decoding audio:", error);
@@ -141,16 +142,17 @@ const Avatar: React.FC<AvatarProps> = ({ firstName, lastName }) => {
   };
 
   useEffect(() => {
+    
     const audio = componentRef.current;
 
     const handleAudioEnded = () => {
       setIsGif(false); // Set isGif to false when the audio ends
     };
 
-    audio.addEventListener("ended", handleAudioEnded);
+    audio?.addEventListener("ended", handleAudioEnded);
 
     return () => {
-      audio.removeEventListener("ended", handleAudioEnded);
+      audio?.removeEventListener("ended", handleAudioEnded);
     };
   }, []);
 

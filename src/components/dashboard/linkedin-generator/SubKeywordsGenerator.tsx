@@ -20,15 +20,15 @@ import { useTourContext } from "@/context/TourContext";
 import TourBot from "../TourBot";
 
 const SubKeywordsGenerator = () => {
-  const componentRef = useRef<any>(null);
+  const componentRef = useRef<HTMLDivElement | null>(null);
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
-  const { data: session, status } = useSession();
-  const [streamedData, setStreamedData] = useState("");
-  const [showPopup, setShowPopup] = useState(false);
+  const { data: session } = useSession();
+  const [streamedData, setStreamedData] = useState<string>("");
+  const [showPopup, setShowPopup] = useState<boolean>(false);
 
-  const [aiInputUserData, setAiInputUserData] = useState<any>();
+  const [aiInputUserData, setAiInputUserData] = useState({});
   const { setAvailableCredits, abortController, setAbortController,outOfCredits, setOutOfCredits } = useAppContext();
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
 
   const [isKeywordsCopied, setIsKeywordsCopied] = useState<boolean>(false);
   const { getUserDataIfNotExists: getUserData } = useGetUserData(); //using hook function with different name/alias
@@ -42,7 +42,7 @@ const SubKeywordsGenerator = () => {
 
   const copyKeyword = async (text: string) => {
     try {
-      const keywordData = await htmlToPlainText(text);
+      const keywordData = htmlToPlainText(text);
       await copy(keywordData);
       setIsKeywordsCopied(true);
       // Set isHeadlineCopied to false after a delay (e.g., 2000 milliseconds or 2 seconds)
@@ -239,7 +239,7 @@ const SubKeywordsGenerator = () => {
   useEffect(() => {
     if (isEditing) {
       if (componentRef.current) {
-        const editorElement = componentRef.current.querySelector("#editor");
+        const editorElement: HTMLDivElement | null = componentRef.current.querySelector("#editor");
         if (editorElement) {
           editorElement.innerHTML = linkedinKeywords.keywordsText;
           editorElement.focus(); // Focus on the editable area

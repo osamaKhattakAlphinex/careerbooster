@@ -4,7 +4,6 @@
 import axios from "axios";
 import React, {
   forwardRef,
-  useEffect,
   useImperativeHandle,
   useState,
 } from "react";

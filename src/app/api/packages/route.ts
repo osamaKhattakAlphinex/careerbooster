@@ -1,10 +1,10 @@
 import startDB from "@/lib/db";
 import { getServerSession } from "next-auth";
 
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/route";
 import CreditsPackage from "@/db/schemas/CreditsPackage";
-export async function POST(request: any) {
+export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions);
 
   if (!session) {
@@ -32,7 +32,7 @@ export async function POST(request: any) {
   }
 }
 
-export async function GET(request: any) {
+export async function GET() {
   try {
     await startDB();
     const packages = await CreditsPackage.find();

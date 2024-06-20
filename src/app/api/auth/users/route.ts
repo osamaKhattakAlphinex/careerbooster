@@ -1,8 +1,8 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import startDB from "@/lib/db";
 import User from "@/db/schemas/User";
 
-export const POST = async (req: any) => {
+export const POST = async (req: NextRequest) => {
   const body = await req.json();
   await startDB();
 

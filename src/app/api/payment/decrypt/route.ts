@@ -1,9 +1,9 @@
 import Payment from "@/db/schemas/Payment";
 import startDB from "@/lib/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import Cryptr from "cryptr";
 
-export async function POST(req: any) {
+export async function POST(req: NextRequest) {
   try {
     await startDB();
 
@@ -17,7 +17,7 @@ export async function POST(req: any) {
 
     let payments = await Payment.find({}).sort({createdAt: -1});
 
-    payments = payments.map((pay: any) => {
+    payments = payments.map((pay) => {
       return {
         PackageId: pay.PackageId,
         userEmail: cryptr.decrypt(pay.userEmail),

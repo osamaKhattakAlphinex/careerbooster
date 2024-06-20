@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
 
-import { eyeIcon, newViewIcon, trashIcon } from "@/helpers/iconsProvider";
+import { newViewIcon, trashIcon } from "@/helpers/iconsProvider";
 import { useRouter, usePathname } from "next/navigation";
 import {
   resetConsultingBid,
   setConsultingBid,
 } from "@/store/consultingBidSlice";
-import DownloadService from "@/helpers/downloadFile";
+import { RootState } from "@/store/store";
 
 type ConsultingBidType = {
   card?: any;
@@ -26,12 +26,9 @@ const ConsultingBidCardSingle = ({
 }: ConsultingBidType) => {
   // redux
   const dispatch = useDispatch();
-  const userData = useSelector((state: any) => state.userData);
+  const userData = useSelector((state: RootState) => state.userData);
   const router = useRouter();
-  const pathname: any = usePathname();
   const handleOnView = async (card: any) => {
-    console.log(card);
-
     if (source != "") {
       router.replace("/consulting-bids-bot");
     }
@@ -99,17 +96,6 @@ const ConsultingBidCardSingle = ({
             {trashIcon}
             <span className="text-[13px] mx-2">Delete</span>
           </button>
-          {/* {pathname == "/dashboard"
-            ? ""
-            : card && (
-                <DownloadService
-                  componentRef={componentRef}
-                  view={handleOnView}
-                  card={card}
-                  type="consultingBid"
-                  fileName="ai-consulting-bid"
-                />
-              )} */}
         </div>
       </div>
     </div>

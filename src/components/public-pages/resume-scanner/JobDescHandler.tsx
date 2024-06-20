@@ -5,7 +5,7 @@ import ScanScore from "./ScanScore";
 
 const JobDescHandler = () => {
   const [jobDescription, setJobDescription] = useState<string>("");
-  const [msgLoading, setMsgLoading] = useState(false);
+  const [msgLoading, setMsgLoading] = useState<boolean>(false);
   const [potentialSkills, setPotentialSkills] = useState<string[]>([]);
 
   const getPotentialSkills = async () => {

@@ -3,7 +3,7 @@ import TrainBot from "@/db/schemas/TrainBot";
 import User from "@/db/schemas/User";
 import startDB from "@/lib/db";
 import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function postKeywords(payload: any) {
   await startDB();
@@ -44,7 +44,7 @@ async function updateKeywords(payload: any) {
   );
   return "ok";
 }
-export async function POST(request: any) {
+export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions);
 
   if (session) {

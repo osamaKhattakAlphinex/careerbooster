@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import startDB from "@/lib/db";
 import User from "@/db/schemas/User";
 import { getServerSession } from "next-auth";
@@ -6,7 +6,7 @@ import { authOptions } from "../../auth/[...nextauth]/route";
 const ObjectId = require("mongodb").ObjectId;
 
 export const PUT = async (
-  req: any,
+  req: NextRequest,
   { params }: { params: { userId: string } }
 ) => {
   const session = await getServerSession(authOptions);
@@ -69,7 +69,7 @@ export const PUT = async (
 };
 
 export const DELETE = async (
-  req: any,
+  req: NextRequest,
   { params }: { params: { userId: string } }
 ) => {
   const session = getServerSession(authOptions);

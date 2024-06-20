@@ -1,7 +1,7 @@
 import OpenAI from "openai";
 import Prompt from "@/db/schemas/Prompt";
 import startDB from "@/lib/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import { getTrainedModel } from "@/helpers/getTrainedModel";
 
@@ -13,13 +13,13 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-export async function POST(req: any) {
+export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     if (body) {
       const content = body.linkedinContent.substring(0, 8000);
       const trainBotData = body?.trainBotData;
-      let prompt;
+      let prompt:string = "";
       await startDB();
       const promptRec = await Prompt.findOne({
         type: "linkedin",
@@ -32,9 +32,6 @@ export async function POST(req: any) {
       if (content) {
         const dataset = "linkedin.headlines";
         const model = await getTrainedModel(dataset);
-        //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
-
-        // CREATING LLM MODAL
 
         const input = `
         Read Person's resume :

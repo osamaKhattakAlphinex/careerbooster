@@ -8,11 +8,11 @@ export async function GET(req: NextRequest) {
   try {
     await startDB();
     const url = new URL(req.url);
-    const deoId: any = url.searchParams.get("deoId");
-    const jobToShow: any = url.searchParams.get("jobs");
-    const findOne: any = url.searchParams.get("findOne");
-    const jobTitlequery: string | null = url.searchParams.get("query");
-    const jobLocationquery: string | null = url.searchParams.get("location");
+    const deoId = url.searchParams.get("deoId");
+    const jobToShow = url.searchParams.get("jobs");
+    const findOne = url.searchParams.get("findOne");
+    const jobTitlequery = url.searchParams.get("query");
+    const jobLocationquery = url.searchParams.get("location");
     const limit = Number(url.searchParams.get("limit"));
     const page = Number(url.searchParams.get("page"));
     const skip = (page - 1) * limit;
@@ -34,15 +34,6 @@ export async function GET(req: NextRequest) {
           };
           jobs = await Job.find(searchCondition).sort({ createdAt: -1 });
         }
-        // else {
-        //   console.log("inside else");
-        //   searchCondition.jobTitle = { $regex: jobTitlequery, $options: "i" };
-        //   searchCondition.location = {
-        //     $regex: jobLocationquery,
-        //     $options: "i",
-        //   };
-        //   jobs = await Job.find(searchCondition).sort({ createdAt: -1 });
-        // }
       } else {
         jobs = await Job.find({ featured: 1 })
           .sort({

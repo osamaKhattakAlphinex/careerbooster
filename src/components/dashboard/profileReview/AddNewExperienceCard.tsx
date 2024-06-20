@@ -4,10 +4,11 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { makeid } from "@/helpers/makeid";
 import ExperienceForm from "./ExperienceForm";
+import { RootState } from "@/store/store";
 
 const AddNewExperienceCard = () => {
   const dispatch = useDispatch();
-  const stepFive = useSelector((state: any) => state.register.stepFive);
+  const stepFive = useSelector((state: RootState) => state.register.stepFive);
   const { list } = stepFive;
 
   const formik = useFormik({

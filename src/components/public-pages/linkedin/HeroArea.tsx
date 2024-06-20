@@ -1,20 +1,10 @@
 "use client";
-//v1.1 upadted
 import linkedImage_1 from "@/../public/assets/images/linkedImage_1.png";
 import linkedImage_2 from "@/../public/assets/images/linkedImage_2.png";
-
 import Image from "next/image";
-
-import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import ReCAPTCHA from "react-google-recaptcha";
-import { verifyInvisibleCaptcha } from "@/ServerActions";
-
-const saveToLocalStorage = (text: any, fileName: any) => {
-  localStorage.setItem("linkedin-content", text);
-  localStorage.setItem("linkedin-fileName", fileName);
-};
 import { Fjalla_One, Roboto, Montserrat } from "next/font/google";
+
 const roboto = Roboto({
   weight: "300",
   subsets: ["latin"],
@@ -37,77 +27,7 @@ const montserrat_p = Montserrat({
 });
 
 const HeroArea = () => {
-  const router = useRouter();
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
-  const [isVerified, setIsverified] = useState<boolean>(false);
-  const [file, setFile] = useState<any>(null); //main page
-  const [fileName, setFileName] = useState<any>(null);
-  const [fileError, setFileError] = useState<string>("");
-  const [fileUploading, setFileUploading] = useState<boolean>(false);
-  const [uploadComplete, setUploadComplete] = useState<boolean>(false);
-  const [text, setText] = useState<string>("");
 
-  useEffect(() => {
-    if (
-      file &&
-      (file.type === "application/pdf" ||
-        file.type === "application/msword" ||
-        file.type ===
-          "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
-    ) {
-      //  file exists and is PDF
-      setFileError("");
-    } else if (file) {
-      // if file exists but not PDf
-      setFileError("only PDF or Word file is allowed");
-    }
-  }, [file]);
-  async function handleCaptchaSubmission(token: string | null) {
-    // Server function to verify captcha
-    await verifyInvisibleCaptcha(token)
-      .then(() => {
-        setIsverified(true);
-      })
-      .catch(() => setIsverified(false));
-  }
-  const handleFileChange: any = async (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    if (recaptchaRef.current) {
-      recaptchaRef.current.execute();
-
-      const fileInput = e.target;
-      if (fileInput && fileInput.files && fileInput.files.length > 0) {
-        setFile(fileInput.files[0]);
-        setFileName(fileInput.files[0].name);
-      }
-    }
-  };
-  useEffect(() => {
-    if (
-      file &&
-      (file.type === "application/pdf" ||
-        file.type === "application/msword" ||
-        file.type ===
-          "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
-    ) {
-      setFileUploading(true);
-      setUploadComplete(true);
-    }
-  }, [file, fileName]);
-
-  useEffect(() => {
-    if (uploadComplete && fileUploading && text !== "") {
-      saveToLocalStorage(text, fileName);
-      // router.push(`/linkedin/result`);
-    }
-  }, [fileUploading, uploadComplete, text]);
-  useEffect(() => {
-    if (isVerified) {
-      router.push("/linkedin/result");
-    } else {
-      console.log("Captha failed");
-    }
-  }, [isVerified]);
   return (
     <div className="w-full ">
       {/* Hero Section */}

@@ -1,19 +1,18 @@
 import User from "@/db/schemas/User";
 import startDB from "@/lib/db";
 import { getServerSession } from "next-auth/next";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../../../auth/[...nextauth]/route";
 export async function DELETE(
-  req: any,
+  req: NextRequest,
   { params }: { params: { linkedinHeadlineId: string } }
 ) {
   const session = await getServerSession(authOptions);
-  let email: any = "";
-
+ 
   if (session) {
     try {
       const linkedinHeadlineId = params.linkedinHeadlineId;
-      email = session?.user?.email;
+      const email = session?.user?.email;
       await startDB();
       const updatedUser = await User.findOneAndUpdate(
         { email: email },

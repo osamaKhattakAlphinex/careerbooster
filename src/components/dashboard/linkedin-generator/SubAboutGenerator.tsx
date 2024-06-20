@@ -19,12 +19,13 @@ import DownloadService from "@/helpers/downloadFile";
 import { EditIcon, newViewIcon } from "@/helpers/iconsProvider";
 import { useTourContext } from "@/context/TourContext";
 import TourBot from "../TourBot";
+import { RootState } from "@/store/store";
 const SubAboutGenerator = () => {
-  const componentRef = useRef<any>(null);
+  const componentRef = useRef<HTMLDivElement | null>(null);
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
-  const { data: session, status } = useSession();
-  const [streamedData, setStreamedData] = useState("");
-  const [aiInputUserData, setAiInputUserData] = useState<any>();
+  const { data: session } = useSession();
+  const [streamedData, setStreamedData] = useState<string>("");
+  const [aiInputUserData, setAiInputUserData] = useState({});
   const [option, setOption] = useState<string>("about");
   const [showPopup, setShowPopup] = useState(false);
   const { setAvailableCredits, abortController,setAbortController, outOfCredits, setOutOfCredits } = useAppContext();
@@ -51,10 +52,10 @@ const SubAboutGenerator = () => {
   };
   // Redux
   const dispatch = useDispatch();
-  const userData = useSelector((state: any) => state.userData);
-  const linkedinAbout = useSelector((state: any) => state.linkedinAbout);
+  const userData = useSelector((state: RootState) => state.userData);
+  const linkedinAbout = useSelector((state: RootState) => state.linkedinAbout);
   const { getUserDataIfNotExists: getUserData } = useGetUserData(); //using hook function with different name/alias
-  const creditLimits = useSelector((state: any) => state.creditLimits);
+  const creditLimits = useSelector((state: RootState) => state.creditLimits);
   const [isEditing, setIsEditing] = useState(false);
   const { tourBotRef, availableCreditsRef } = useTourContext();
 
@@ -235,7 +236,7 @@ const SubAboutGenerator = () => {
   useEffect(() => {
     if (isEditing) {
       if (componentRef.current) {
-        const editorElement = componentRef.current.querySelector("#editor");
+        const editorElement: HTMLDivElement | null = componentRef.current.querySelector("#editor");
         if (editorElement) {
           editorElement.innerHTML = linkedinAbout.aboutText;
           editorElement.focus(); // Focus on the editable area

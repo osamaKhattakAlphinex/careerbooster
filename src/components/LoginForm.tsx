@@ -12,14 +12,14 @@ import { showSuccessToast } from "@/helpers/toast";
 const LoginForm = () => {
   const router = useRouter();
   const [otpSend, setOtpSend] = useState<boolean>(false);
-  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [submittingError, setSubmittingError] = useState<string>("");
-  const [successAlert, setSuccessAlert] = useState("");
+  const [successAlert, setSuccessAlert] = useState<string>("");
   const otpInputsRefs = useRef<any>([]);
   const [emailEntered, setEmailEntered] = useState<boolean>(false);
 
-  const handleOtpChange = (index: any, value: any) => {
+  const handleOtpChange = (index: number, value: string) => {
     // Ensure only digits are entered
     const regex = /^[0-9]*$/;
     if (regex.test(value) && value.length <= 1) {

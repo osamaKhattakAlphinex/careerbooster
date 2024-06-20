@@ -4,10 +4,11 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { makeid } from "@/helpers/makeid";
 import EducationForm from "./EducationForm";
+import { RootState } from "@/store/store";
 
 const AddNewEducationCard = () => {
   const dispatch = useDispatch();
-  const stepFour = useSelector((state: any) => state.register.stepFour);
+  const stepFour = useSelector((state: RootState) => state.register.stepFour);
   const { list } = stepFour;
 
   const formik = useFormik({

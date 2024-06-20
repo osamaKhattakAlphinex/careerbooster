@@ -93,16 +93,16 @@ const Footer = () => {
                   </h6>
                   <ul className="flex flex-col pl-0 mb-0 list-none link-list-t ">
                     <li className=" hover:text-[#6a4dff]  dark:hover:text-[#e6f85e] text-[#11121c] dark:text-gray-300 inline-block text-[0.875rem] pl-0 no-underline">
-                      <Link href="#">
+                      <span>
                         23 The Atria 219 Bath Road Slough SL1 4BF, United
                         Kingdom
-                      </Link>
+                      </span>
                     </li>
                     <li className=" hover:text-[#6a4dff] dark:hover:text-[#e6f85e] text-[#11121c] dark:text-gray-300 inline-block text-[0.875rem]  no-underline">
-                      <Link href="#">+44 7933 951034</Link>
+                      <span >+44 7933 951034</span>
                     </li>
                     <li className=" hover:text-[#6a4dff] dark:hover:text-[#e6f85e] text-[#11121c] dark:text-gray-300 inline-block text-[0.875rem]  no-underline">
-                      <Link href="#">support@careerbooster.ai</Link>
+                      <Link href="mailto:support@careerbooster.ai">support@careerbooster.ai</Link>
                     </li>
                   </ul>
                   <ul className="flex flex-wrap items-center gap-3 mb-0 xs:justify-center sm:justify-start align-center justify-md-start">

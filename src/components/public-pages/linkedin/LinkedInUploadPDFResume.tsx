@@ -17,14 +17,13 @@ const loadFromLocalStorage = () => {
   return { linkedinContent, linkedinFileName };
 };
 
-// alskdfjals?
 const LinkedInUploadPDFResume = () => {
   // local states
   const router = useRouter();
   const [aboutMsgLoading, setAboutMsgLoading] = useState<boolean>(false); // msg loading for about section
   const [headlineMsgLoading, setHeadlineMsgLoading] = useState<boolean>(false); // msg loading for Headline  section
   const [fileError, setFileError] = useState<string>("");
-  const [streamedHeadlineData, setStreamedHeadlineData] = useState("");
+  const [streamedHeadlineData, setStreamedHeadlineData] = useState<string>("");
   const [streamedAboutData, setStreamedAboutData] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [linkedinContent, setLinkedinContent] = useState<any>("");
@@ -52,19 +51,13 @@ const LinkedInUploadPDFResume = () => {
   const [isSummaryEditing, setIsSummaryEditing] = useState(false);
 const textareaRef = useRef<any>(null);
   useEffect(() => {
-    // if (value !== editedValue) {
-    //   setEditedValue(normalizeValue(value));
-    // }
+   
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
 
       textareaRef.current.style.height =
         textareaRef.current.scrollHeight + "px";
     }
-    // if (inputRef.current) {
-    //   inputRef.current.style.width = "auto"; // Reset width to auto
-    //   inputRef.current.style.width = `${inputRef.current.scrollWidth - 30}px`; // Set width to scrollWidth
-    // }
   }, [ isSummaryEditing]);
 
   const linkedinHeadline = async (linkedinContent: string) => {
@@ -86,8 +79,8 @@ const textareaRef = useRef<any>(null);
           "Content-Type": "application/json",
         },
       })
-        .then(async (resp: any) => {
-          if (resp.ok) {
+        .then(async (resp) => {
+          if (resp.ok && resp.body) {
             const reader = resp.body.getReader();
 
             while (true) {
@@ -136,8 +129,8 @@ const textareaRef = useRef<any>(null);
           "Content-Type": "application/json",
         },
       })
-        .then(async (resp: any) => {
-          if (resp.ok) {
+        .then(async (resp) => {
+          if (resp.ok && resp.body) {
             const reader = resp.body.getReader();
             while (true) {
               const { done, value } = await reader.read();
@@ -177,7 +170,7 @@ const textareaRef = useRef<any>(null);
           "Content-Type": "application/json",
         },
       })
-        .then(async (resp: any) => {
+        .then(async (resp) => {
           const {
             userId,
             firstName,

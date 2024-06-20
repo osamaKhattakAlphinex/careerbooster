@@ -22,7 +22,7 @@ export async function DELETE(
 }
 
 export async function PUT(
-  req: any,
+  req: NextRequest,
   { params }: { params: { salesId: string } }
 ) {
   try {

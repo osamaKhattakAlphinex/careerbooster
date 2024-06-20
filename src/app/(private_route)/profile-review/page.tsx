@@ -31,6 +31,7 @@ import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
 import { showSuccessToast } from "@/helpers/toast";
 import StepCustom from "@/components/dashboard/profileReview/StepCustom";
+import { RootState } from "@/store/store";
 // export const metadata: Metadata = {
 //   title: "CareerBooster.Ai-Welcome",
 // };
@@ -40,23 +41,31 @@ const ProfileReview = () => {
   const urlStep = params?.get("step");
   // Redux
   const dispatch = useDispatch();
-  const register = useSelector((state: any) => state.register);
-  const resume = useSelector((state: any) => state.resume);
-  const userData = useSelector((state: any) => state.userData);
-  const stepOne = useSelector((state: any) => state.register.stepOne);
-  const stepTwo = useSelector((state: any) => state.register.stepTwo);
-  const stepThree = useSelector((state: any) => state.register.stepThree);
-  const stepFour = useSelector((state: any) => state.register.stepFour);
-  const stepFive = useSelector((state: any) => state.register.stepFive);
-  const stepThirteen = useSelector((state: any) => state.register.stepThirteen);
-  const stepSix = useSelector((state: any) => state.register.stepSix);
-  const stepSeven = useSelector((state: any) => state.register.stepSeven);
-  const stepEight = useSelector((state: any) => state.register.stepEight);
-  const stepNine = useSelector((state: any) => state.register.stepNine);
-  const stepTen = useSelector((state: any) => state.register.stepTen);
-  const stepEleven = useSelector((state: any) => state.register.stepEleven);
-  const stepTwelve = useSelector((state: any) => state.register.stepTwelve);
-  const stepFourteen = useSelector((state: any) => state.register.stepFourteen);
+  const register = useSelector((state: RootState) => state.register);
+  const resume = useSelector((state: RootState) => state.resume);
+  const userData = useSelector((state: RootState) => state.userData);
+  const stepOne = useSelector((state: RootState) => state.register.stepOne);
+  const stepTwo = useSelector((state: RootState) => state.register.stepTwo);
+  const stepThree = useSelector((state: RootState) => state.register.stepThree);
+  const stepFour = useSelector((state: RootState) => state.register.stepFour);
+  const stepFive = useSelector((state: RootState) => state.register.stepFive);
+  const stepThirteen = useSelector(
+    (state: RootState) => state.register.stepThirteen
+  );
+  const stepSix = useSelector((state: RootState) => state.register.stepSix);
+  const stepSeven = useSelector((state: RootState) => state.register.stepSeven);
+  const stepEight = useSelector((state: RootState) => state.register.stepEight);
+  const stepNine = useSelector((state: RootState) => state.register.stepNine);
+  const stepTen = useSelector((state: RootState) => state.register.stepTen);
+  const stepEleven = useSelector(
+    (state: RootState) => state.register.stepEleven
+  );
+  const stepTwelve = useSelector(
+    (state: RootState) => state.register.stepTwelve
+  );
+  const stepFourteen = useSelector(
+    (state: RootState) => state.register.stepFourteen
+  );
 
   const reduxStep = register.activeStep;
 
@@ -159,7 +168,6 @@ const ProfileReview = () => {
 
   // function to return true, false based for next button
   const isNextDisabled = () => {
-    console.log(register.activeStep, register.stepTwo.isValid);
     if (register.activeStep === 1 && register.stepOne.isValid === false) {
       return true;
     } else if (
@@ -223,10 +231,10 @@ const ProfileReview = () => {
         dispatch(
           setStepThree({
             ...stepThree,
-            country: userData.contact.country,
-            street: userData.contact.street,
-            cityState: userData.contact.cityState,
-            postalCode: userData.contact.postalCode,
+            country: userData?.contact?.country,
+            street: userData?.contact?.street,
+            cityState: userData?.contact?.cityState,
+            postalCode: userData?.contact?.postalCode,
           })
         );
         dispatch(setStepFive({ ...stepFive, list: userData.experience }));
@@ -258,116 +266,114 @@ const ProfileReview = () => {
       if (userData.references) {
         dispatch(setStepTwelve({ ...stepTwelve, list: userData.references }));
       }
-      if (userData.ptojects) {
+      if (userData.projects) {
         dispatch(setStepFourteen({ ...stepFourteen, list: userData.projects }));
       }
     }
   }, [userData]);
   return (
-    <>
-      <div className="ml-0 lg:ml-[284px] lg:mb-[72px]">
-        {/* </script> */}
-        {/* <Link
+    <div className="ml-0 lg:ml-[284px] lg:mb-[72px]">
+      {/* </script> */}
+      {/* <Link
           href="/dashboard"
           className="ml-2 my-4 no-underline text-[#B324D7] flex flex-row gap-2 items-center hover:text-[#E6F85E] hover:opacity-80 transition-all"
         >
           {leftArrowIcon}
           Back
         </Link> */}
-        <main className="w-full">
-          <section className="pb-15 ">
-            <div className="xs:px-3 md:container ">
-              <div className="w-full mt-4">
-                <div className="">
-                  <div className="gap-8">
-                    <div
-                      className={`md:my-6 flex ${
-                        register.activeStep > 1
-                          ? "xs:justify-between"
-                          : "xs:justify-end "
-                      } items-center`}
-                    ></div>
+      <main className="w-full">
+        <section className="pb-15 ">
+          <div className="xs:px-3 md:container ">
+            <div className="w-full mt-4">
+              <div className="">
+                <div className="gap-8">
+                  <div
+                    className={`md:my-6 flex ${
+                      register.activeStep > 1
+                        ? "xs:justify-between"
+                        : "xs:justify-end "
+                    } items-center`}
+                  ></div>
 
-                    {register.activeStep === 1 && (
-                      <>
-                        <StepOne />
-                        <StepTwo />
-                        <StepThree />
-                      </>
-                    )}
-                    {/* {register.activeStep === 2 && <StepTwo />}
+                  {register.activeStep === 1 && (
+                    <>
+                      <StepOne />
+                      <StepTwo />
+                      <StepThree />
+                    </>
+                  )}
+                  {/* {register.activeStep === 2 && <StepTwo />}
                     {register.activeStep === 3 && <StepThree />} */}
 
-                    {register.activeStep === 2 && <StepFour />}
-                    {register.activeStep === 3 && <StepFive />}
-                    {register.activeStep === 4 && <StepCustom />}
+                  {register.activeStep === 2 && <StepFour />}
+                  {register.activeStep === 3 && <StepFive />}
+                  {register.activeStep === 4 && <StepCustom />}
 
-                    {/* {register.activeStep === 4 && <StepSix />} */}
+                  {/* {register.activeStep === 4 && <StepSix />} */}
 
-                    {register.activeStep === 5 && <ProfilePreview />}
-                    {/* {register.activeStep === 4 && <ProfilePreview />} */}
-                    {/* {register.activeStep === 6 && <StepEight />} */}
+                  {register.activeStep === 5 && <ProfilePreview />}
+                  {/* {register.activeStep === 4 && <ProfilePreview />} */}
+                  {/* {register.activeStep === 6 && <StepEight />} */}
 
-                    <div
-                      className={`my-6 flex ${
-                        register.activeStep > 1
-                          ? "xs:justify-between"
-                          : "xs:justify-end "
-                      } items-center`}
-                    >
-                      {register.activeStep > 1 && (
-                        <button
-                          type="submit"
-                          className={`  ${
-                            register.isSubmitting
-                              ? "dark:text-gray-400"
-                              : "dark:text-gray-100"
-                          } flex items-center gap-2 xs:scale-75 md:scale-100 text-base text-gray-950 `}
-                          onClick={(e) => {
-                            dispatch(setActiveStep(register.activeStep - 1));
-                          }}
-                          disabled={register.isSubmitting}
-                        >
-                          <span className="xs:scale-75 md:scale-100">
-                            {leftArrowIcon}
-                          </span>{" "}
-                          Back
-                        </button>
-                      )}
+                  <div
+                    className={`my-6 flex ${
+                      register.activeStep > 1
+                        ? "xs:justify-between"
+                        : "xs:justify-end "
+                    } items-center`}
+                  >
+                    {register.activeStep > 1 && (
+                      <button
+                        type="submit"
+                        className={`  ${
+                          register.isSubmitting
+                            ? "dark:text-gray-400"
+                            : "dark:text-gray-100"
+                        } flex items-center gap-2 xs:scale-75 md:scale-100 text-base text-gray-950 `}
+                        onClick={(e) => {
+                          dispatch(setActiveStep(register.activeStep - 1));
+                        }}
+                        disabled={register.isSubmitting}
+                      >
+                        <span className="xs:scale-75 md:scale-100">
+                          {leftArrowIcon}
+                        </span>{" "}
+                        Back
+                      </button>
+                    )}
 
-                      {register.activeStep < 5 && (
-                        <button
-                          type="submit"
-                          // disabled={isNextDisabled()}
-                          className="py-3 md:mb-3 px-6 font-medium xs:scale-75 md:scale-100 text-base rounded-lg  text-gray-900 !bg-[#e6f85e] float-right"
-                          onClick={(e) => {
-                            dispatch(setActiveStep(register.activeStep + 1));
-                            singleHandleSaveDetails();
-                          }}
-                        >
-                          Save & Next
-                        </button>
-                      )}
+                    {register.activeStep < 5 && (
+                      <button
+                        type="submit"
+                        // disabled={isNextDisabled()}
+                        className="py-3 md:mb-3 px-6 font-medium xs:scale-75 md:scale-100 text-base rounded-lg  text-gray-900 !bg-[#e6f85e] float-right"
+                        onClick={(e) => {
+                          dispatch(setActiveStep(register.activeStep + 1));
+                          singleHandleSaveDetails();
+                        }}
+                      >
+                        Save & Next
+                      </button>
+                    )}
 
-                      {register.activeStep === 5 && (
-                        <button
-                          type="submit"
-                          className="py-3 mb-3 px-6 font-medium xs:scale-75 md:scale-100 text-base rounded-lg  text-gray-900 !bg-[#e6f85e] float-right"
-                          onClick={handleSaveDetails}
-                        >
-                          {register.isSubmitting ? refreshIconRotating : "Save"}
-                        </button>
-                      )}
-                    </div>
-                    <div className="mb-0 "></div>
+                    {register.activeStep === 5 && (
+                      <button
+                        type="submit"
+                        className="py-3 mb-3 px-6 font-medium xs:scale-75 md:scale-100 text-base rounded-lg  text-gray-900 !bg-[#e6f85e] float-right"
+                        onClick={handleSaveDetails}
+                      >
+                        {register.isSubmitting ? refreshIconRotating : "Save"}
+                      </button>
+                    )}
                   </div>
+                  <div className="mb-0 "></div>
                 </div>
               </div>
             </div>
-          </section>
-        </main>
-      </div>
-    </>
+          </div>
+        </section>
+      </main>
+    </div>
   );
 };
 

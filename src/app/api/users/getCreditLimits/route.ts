@@ -1,13 +1,11 @@
 import User from "@/db/schemas/User";
 import startDB from "@/lib/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
 
-export async function GET(req: any) {
+export async function GET(req: NextRequest) {
   try {
-    // const _body = req.json();
-
     const url = new URL(req.url);
 
     const email = url.searchParams.get("email");

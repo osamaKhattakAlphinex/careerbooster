@@ -1,6 +1,6 @@
 import startDB from "@/lib/db";
-import { NextResponse } from "next/server";
-import OpenAI, { toFile } from "openai";
+import { NextRequest, NextResponse } from "next/server";
+import OpenAI from "openai";
 import FineTuneModel from "@/db/schemas/FineTuningModel";
 import TrainedModel from "@/db/schemas/TrainedModel";
 import FineTuningSetting from "@/db/schemas/FineTuningSetting";
@@ -10,7 +10,7 @@ const openai = new OpenAI({
 });
 
 export const GET = async (
-  req: any,
+  req: NextRequest,
   { params }: { params: { fileId: string } }
 ) => {
   try {
@@ -28,7 +28,7 @@ export const GET = async (
 };
 
 export const DELETE = async (
-  req: any,
+  req: NextRequest,
   { params }: { params: { fileId: string } }
 ) => {
   try {
@@ -49,7 +49,7 @@ export const DELETE = async (
 };
 
 export const POST = async (
-  req: any,
+  req: NextRequest,
   { params }: { params: { fileId: string } }
 ) => {
   try {

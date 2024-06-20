@@ -1,8 +1,8 @@
 import Sales from "@/db/schemas/Sales";
 import startDB from "@/lib/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: any) {
+export async function GET(req: NextRequest) {
   try {
     const url = new URL(req.url);
 
@@ -29,7 +29,7 @@ export async function GET(req: any) {
   }
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     await startDB();
 

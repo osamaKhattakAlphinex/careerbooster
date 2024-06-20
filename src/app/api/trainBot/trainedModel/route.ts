@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import startDB from "@/lib/db";
 import TrainedModel from "@/db/schemas/TrainedModel";
 
-export const GET = async (req: any) => {
+export const GET = async () => {
   try {
     await startDB();
     const trainedModels = await TrainedModel.find({});

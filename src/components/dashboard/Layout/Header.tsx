@@ -11,7 +11,7 @@ interface HeaderProps {
 }
 const pagesArray = ["/subscribe"];
 const Header: React.FC<HeaderProps> = ({ children }) => {
-  const pathname: any = usePathname();
+  const pathname = usePathname();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const userData = useSelector((state: any) => state.userData);

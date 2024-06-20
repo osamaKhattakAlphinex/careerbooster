@@ -113,7 +113,14 @@ interface UserDataSlice {
   };
 
   tours: Tours;
-
+  resumes:[],
+  consultingBids:[],
+  coverLetters:[],
+  emails:[],
+  linkedInAbouts:[],
+  linkedInHeadlines: [],
+  linkedInJobDescriptions: [],
+  linkedInKeywords: [],
   trialResume?: boolean;
   redeemedCoupons:[];
   linkedin?: string;
@@ -128,7 +135,7 @@ interface UserDataSlice {
   experience?: WorkExperience[];
   projects?: Project[];
   files?: string[];
-  uploadedResume: { fileName: string; fileContent: string } | {};
+  uploadedResume: { fileName: string; fileContent: string } ;
   chatThreads?: { assistant_id: string; threads: string[] } | {};
   skills?: string[];
   defaultResumeFile: string;
@@ -154,6 +161,14 @@ const initialState: UserDataSlice = {
     cityState: "",
     postalCode: "",
   },
+  resumes: [],
+  consultingBids:[],
+  emails:[],
+  coverLetters:[],
+  linkedInAbouts:[],
+  linkedInHeadlines:[],
+  linkedInJobDescriptions: [],
+  linkedInKeywords: [],
   education: [],
   experience: [],
   references: [],
@@ -165,7 +180,7 @@ const initialState: UserDataSlice = {
   publications: [],
   projects: [],
   files: [],
-  uploadedResume: {},
+  uploadedResume: {fileName:"", fileContent: ""},
   chatThreads: {},
   userCredits: 0,
   skills: [],

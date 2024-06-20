@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import startDB from "@/lib/db";
 import User from "@/db/schemas/User";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
 
-export async function POST(req: any) {
+export async function POST(req: NextRequest) {
   const { converted } = await req.json();
   //   const imageBlob = data.get("imageBuffer");
   //   const contentType = data.get("contentType");
@@ -15,7 +15,7 @@ export async function POST(req: any) {
   if (session) {
     try {
       await startDB();
-      const user = await User.findOneAndUpdate(
+      await User.findOneAndUpdate(
         { email: session.user?.email },
         {
           $set: {

@@ -72,15 +72,13 @@ const ResumeBuilder = () => {
 
 
   const { getUserDataIfNotExists } = useGetUserData();
-  const componentRef = useRef<any>(null);
+  const componentRef = useRef<HTMLDivElement>(null);
   const { data: session } = useSession();
   const { abortController,setAbortController, outOfCredits } = useAppContext();
   // Local States
   const [finished, setFinished] = useState<boolean>(false);
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const [streamedJDData, setStreamedJDData] = useState<any>("");
-  const [streamedPublicationData, setStreamedPublicationData] =
-    useState<any>("");
   const [aiInputUserData, setAiInputUserData] = useState<any>();
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [resumeGenerated, setResumeGenerated] = useState<boolean>(false);
@@ -333,89 +331,6 @@ const ResumeBuilder = () => {
       dispatch(setState({ name: "resumeLoading", value: false }));
       setResumeGenerated(true);
       dispatch(setWorkExperience(temp));
-    }
-    // });
-  };
-
-  const getPublications = async () => {
-    // return makeAPICallWithRetry(async () => {
-    await getCreditLimitsIfNotExists();
-    await getUserDataIfNotExists();
-
-    if (userData.isFetched) {
-      // remove ids from experiences
-      const publications = userData.publications.map((item: Publication) => {
-        const { id, ...rest } = item;
-        return rest;
-      });
-      setStreamedPublicationData("");
-      let temp = "";
-      const publicationArr: any = [];
-      for (const [index, publication] of publications.entries()) {
-        let publicationArrObj: any = {};
-        let html = "";
-        html += `<h2 style="font-size: 1.3rem; font-weight: bold; line-height: 2rem; ">${publication?.title}</h2>`;
-        publicationArrObj.title = publication?.title;
-
-        html += `<h2 style="font-size: 1.1rem; line-height: 1.5rem">
-        
-        ${formatDate(publication?.date)}
-                  </h2>`;
-        html += `<div>`;
-        publicationArrObj.date = formatDate(publication?.date);
-
-        temp += html;
-        let achievementTemp = "";
-        setStreamedPublicationData((prev: any) => prev + html);
-
-        const res: any = await fetch(
-          "/api/resumeBots/publicationsGeneratorSingle",
-          {
-            method: "POST",
-            body: JSON.stringify({
-              publication: publication,
-
-              creditsUsed: creditLimits.resume_individualPublication,
-              trainBotData: {
-                userEmail: userData.email,
-                // fileAddress: userData.files[0].fileName,
-                fileAddress: userData.uploadedResume.fileName,
-              },
-              personName: userData.firstName + " " + userData.lastName,
-              jobTitle: resumeData.state.jobPosition,
-            }),
-          }
-        );
-
-        if (res.ok) {
-          const reader = res.body.getReader();
-          while (true) {
-            const { done, value } = await reader.read();
-
-            if (done) {
-              break;
-            }
-
-            const text = new TextDecoder().decode(value);
-            setStreamedPublicationData((prev: any) => prev + text);
-            temp += text;
-            achievementTemp += text;
-          }
-
-          setStreamedJDData((prev: any) => prev + `</div> <br /> `);
-          temp += `</div> <br /> `;
-          const achivementsArray = fetchLIstOfStrings(achievementTemp);
-          publicationArrObj.description = achivementsArray;
-          publicationArr.push(publicationArrObj);
-        } else {
-          setShowConfettiRunning(false);
-          setStreamedPublicationData("You ran out of credits!");
-        }
-      }
-      setFinished(true);
-      dispatch(setPublications({ publications: publicationArr }));
-      setResumeGenerated(true);
-      dispatch(setState({ name: "resumeLoading", value: false }));
     }
     // });
   };

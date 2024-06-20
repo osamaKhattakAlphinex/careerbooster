@@ -5,27 +5,29 @@ import "../../templateStyles.css";
 import DownloadService from "@/helpers/downloadFile";
 import { useSearchParams } from "next/navigation";
 import { getTemplates } from "@/components/dashboard/resume-templates/static-templates";
-import { formatDate, getFormattedDate } from "@/helpers/getFormattedDateTime";
+import { formatDate } from "@/helpers/getFormattedDateTime";
 import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 import { useReactToPrint } from "react-to-print";
+import { RootState } from "@/store/store";
+import { Resume } from "@/store/resumeSlice";
 const Page = () => {
   const params = useSearchParams();
   const [scale, setScale] = useState<number>(1);
-  const [cvMaxHeight, setCvMaxHeight] = useState<any>(null);
+  const [cvMaxHeight, setCvMaxHeight] = useState<number|null>(null);
   const [fileName, setFileName] = useState<string>("");
   const templateId: number = parseInt(params.get("templateId") || "0");
   const resumeId: string = params.get("resumeId") || "";
-  let resumeData = useSelector((state: any) => state.resume);
-  const userData = useSelector((state: any) => state.userData);
-  const cvRef = useRef<any>(null);
-  let template: any;
+  let resumeData
+  const userData = useSelector((state: RootState) => state.userData);
+  const cvRef = useRef<HTMLDivElement | null>(null);
+  let template;
   template = getTemplates(templateId);
 
   useEffect(() => {
     if (resumeData.id === "") {
       resumeData = userData.resumes.find(
-        (resume: any) => resume.id === resumeId
+        (resume: Resume) => resume.id === resumeId
       );
       const newWorkExperienceArray = resumeData.workExperienceArray.map(
         (job) => {
@@ -574,7 +576,7 @@ const Page = () => {
     div.classList.add("page");
     div.id = "page-" + pages.length;
     pages.push(div);
-    cvRef.current.append(div);
+    cvRef?.current?.append(div);
     return div;
   };
 

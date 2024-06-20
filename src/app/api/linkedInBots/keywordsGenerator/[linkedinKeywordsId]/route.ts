@@ -1,10 +1,10 @@
 import User from "@/db/schemas/User";
 import startDB from "@/lib/db";
 import { getServerSession } from "next-auth/next";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../../../auth/[...nextauth]/route";
 export async function DELETE(
-  req: any,
+  req: NextRequest,
   { params }: { params: { linkedinKeywordsId: string } }
 ) {
 

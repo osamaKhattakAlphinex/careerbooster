@@ -1,10 +1,8 @@
 import startDB from "@/lib/db";
-import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
-import { authOptions } from "../auth/[...nextauth]/route";
 import Contact from "@/db/schemas/Contact";
 
-export async function GET(request: any) {
+export async function GET() {
   try {
     await startDB();
     const emails = await Contact.find();

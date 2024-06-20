@@ -5,6 +5,8 @@ type EmailButtonProps = {
   selectedFile?: string;
   handleGenerate: any;
   generateButtonText: string;
+  emailText: string;
+  emailFirstFollowUpText: string;
 };
 
 const GenerateEmailsButton = ({
@@ -14,6 +16,8 @@ const GenerateEmailsButton = ({
   selectedOption,
   handleGenerate,
   generateButtonText,
+  emailText,
+  emailFirstFollowUpText
 }: EmailButtonProps) => {
   return (
     <button
@@ -22,7 +26,9 @@ const GenerateEmailsButton = ({
         msgLoading ||
         selectedOption === "" ||
         (selectedOption === "file" && selectedFile === "") ||
-        (generateButtonText === "Generate Email" && jobDescription === "")
+        (generateButtonText === "Generate Email" && jobDescription === "") ||
+        (generateButtonText === "Generate First Follow Up Email" && emailText === "") ||
+        (generateButtonText === "Generate Second Follow Up Email" && emailFirstFollowUpText === "")
       }
       onClick={handleGenerate}
       className={`absolute z-10 top-[45%] left-1/2 py-3 px-4 md:px-7  -translate-x-1/2  dark:border-none  dark:border-0 border-[1.5px] border-gray-950/80 bg-transparent flex flex-row justify-center items-center gap-1 md:gap-2 rounded-full dark:bg-gradient-to-r  hover:from-purple-800 hover:to-pink-600 from-[#b324d7] to-[#615dff] ${
@@ -87,6 +93,8 @@ type EmailPlaceHolderCardProps = {
   selectedOption: string;
   jobDescription: string;
   msgLoading: boolean;
+  emailText: string;
+  emailFirstFollowUpText: string;
 };
 
 export const EmailPlaceHolderCard = (props: EmailPlaceHolderCardProps) => {

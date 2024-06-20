@@ -1,23 +1,29 @@
 "use client";
+import { IUserPackage } from "@/components/admin/user-packages/ReadPackage";
+import { RootState } from "@/store/store";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 const Page = () => {
-  const userData = useSelector((state: any) => state.userData);
+  const userData = useSelector((state: RootState) => state.userData);
   const [remainingCredits, setRemainingCredits] = useState<number | null>(null);
   const [totalCredits, setTotalCredits] = useState<number | null>(null);
-  const [creditsData, setCreditsData] = useState<any>(null);
+  const [creditsData, setCreditsData] = useState<IUserPackage | null>(null);
   const getCredits = async () => {
     const response = await axios.get(`/api/users/getOneByEmail?email=${userData.email}`);
     if (response.data.success) {
-      setRemainingCredits(response.data.userCredits);
-      setTotalCredits(response.data.totalCredits);
+      setRemainingCredits(response.data.result.userCredits);
+      setTotalCredits(response.data.result.totalCredits);
     }
-    const creditPackageDetails = await axios.get(
-      `/api/users/getCreditPackageDetails?id=${userData.creditPackage}`
-    );
-    if (creditPackageDetails.data.success) {
-      setCreditsData(creditPackageDetails.data.result);
+    try {
+      const creditPackageDetails = await axios.get(
+        `/api/users/getCreditPackageDetails?id=${userData.creditPackage}`
+      );
+      if (creditPackageDetails.data.success) {
+        setCreditsData(creditPackageDetails.data.result);
+      }
+    } catch (error) {
+      console.log(error)
     }
   };
 
@@ -59,7 +65,7 @@ const Page = () => {
                   Package Category
                 </h3>
                 <span className="text-xs font-semibold text-gray-600 capitalize dark:text-gray-400 md:text-sm">
-                  {creditsData?.category}
+                  {creditsData?.category || "Basic"}
                 </span>
               </div>
               <div className="flex flex-row items-center justify-between w-full py-1">
@@ -67,7 +73,7 @@ const Page = () => {
                   Status
                 </h3>
                 <span className="text-xs font-semibold text-gray-600 capitalize dark:text-gray-400 md:text-sm">
-                  {creditsData?.status}
+                  {creditsData?.status || "Active"}
                 </span>
               </div>
               <div className="flex flex-row items-center justify-between w-full py-1 ">

@@ -22,13 +22,14 @@ import { setLinkedInJobDescription } from "@/store/linkedInJobDescriptionSlice";
 import DownloadService from "@/helpers/downloadFile";
 import { useTourContext } from "@/context/TourContext";
 import TourBot from "../TourBot";
+import { RootState } from "@/store/store";
 
 const SubJDGenerator = () => {
-  const componentRef = useRef<any>(null);
-  const creditLimits = useSelector((state: any) => state.creditLimits);
+  const componentRef = useRef<HTMLDivElement | null>(null);
+  const creditLimits = useSelector((state: RootState) => state.creditLimits);
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session } = useSession();
-  const [streamedData, setStreamedData] = useState("");
+  const [streamedData, setStreamedData] = useState<string>("");
   const [showPopup, setShowPopup] = useState(false);
   const { setAvailableCredits, abortController, setAbortController, outOfCredits, setOutOfCredits } = useAppContext();
   const [existingJDId, setExistingJDId] = useState("");
@@ -128,7 +129,7 @@ const SubJDGenerator = () => {
   useEffect(() => {
     if (isEditing.isEdit) {
       if (componentRef.current) {
-        const editorElement = componentRef.current.querySelector("#editor");
+        const editorElement: HTMLDivElement | null = componentRef.current.querySelector("#editor");
         if (editorElement) {
           editorElement.innerHTML =
             linkedinJD.jobDescriptionText[isEditing.editIndex];
@@ -155,8 +156,8 @@ const SubJDGenerator = () => {
   };
   // Redux
   const dispatch = useDispatch();
-  let userData = useSelector((state: any) => state.userData);
-  const linkedinJD = useSelector((state: any) => state.linkedinJobDesc);
+  let userData = useSelector((state: RootState) => state.userData);
+  const linkedinJD = useSelector((state: RootState) => state.linkedinJobDesc);
   const { getUserDataIfNotExists: getUserData } = useGetUserData(); //using hook function with different name/alias
 
   useEffect(() => {
@@ -165,90 +166,93 @@ const SubJDGenerator = () => {
   }, [linkedinJD.jobDescriptionText]);
 
   const workExperienceGenerator = async (experienceIndex: any) => {
-    let experience = userData.experience[experienceIndex];
-    let tempText = [...generatedWorkExperience];
-    let singleGenerated = "";
-    tempText[experienceIndex] = singleGenerated;
-    setGeneratedWorkExperience(tempText);
-    let html = "";
-    html += `<h2 class="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">${experience?.jobTitle}</h2>`;
-    html += `<h3 class="text-base font-semibold">${experience?.company} | ${experience?.cityState} ${experience?.country}</h3>`;
-    html += `<p class="text-sm font-semibold">${experience?.fromMonth} ${
-      experience?.fromYear
-    } to ${
-      experience?.isContinue
-        ? "Present"
-        : experience?.toMonth + " " + experience?.toYear
-    }</p>`;
-    html += `<br/><div>`;
+    if(userData.experience){
 
-    singleGenerated += html;
-    setMsgLoading(true);
-    const jobDescriptionId = makeid();
-    const obj: any = {
-      jobDescriptionId: jobDescriptionId,
-      personName: userData.firstName + " " + userData.lastName,
-      creditsUsed: creditLimits.linkedin_individualWorkExperience,
-      email: session?.user?.email,
-      trainBotData: {
-        userEmail: userData.email,
-        fileAddress: userData.uploadedResume.fileName,
-      },
-      experience: experience,
-    };
-    const res: any = await fetch("/api/linkedInBots/jdGeneratorSingle", {
-      method: "POST",
-      body: JSON.stringify(obj),
-      signal: abortController?.signal
-    });
-
-    if (res.ok) {
+      let experience = userData.experience[experienceIndex];
+      let tempText = [...generatedWorkExperience];
+      let singleGenerated = "";
       tempText[experienceIndex] = singleGenerated;
       setGeneratedWorkExperience(tempText);
-      setAvailableCredits(true);
-
-      const reader = res.body.getReader();
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) {
-          break;
-        }
-        const text = new TextDecoder().decode(value);
-
-        singleGenerated += text;
-      }
-
-      singleGenerated += `</div><br/>`;
-      singleGenerated = singleGenerated.replace("```html", "");
-      singleGenerated = singleGenerated.replace("```", "");
-      setGeneratedWorkExperience((prevExperience) => {
-        // Predefined index to insert the new item
-        const newArray = [...prevExperience];
-        newArray.splice(experienceIndex, 1, singleGenerated);
-        return newArray;
-      });
-      tempText[experienceIndex] = singleGenerated;
-
-      setMsgLoading(false);
-      const jdObj = {
-        jobDescriptionId: existingJDId,
-        email: userData?.email,
+      let html = "";
+      html += `<h2 class="text-base font-bold leading-8 hover:shadow-md hover:cursor-text hover:bg-gray-100">${experience?.jobTitle}</h2>`;
+      html += `<h3 class="text-base font-semibold">${experience?.company} | ${experience?.cityState} ${experience?.country}</h3>`;
+      html += `<p class="text-sm font-semibold">${experience?.fromMonth} ${
+        experience?.fromYear
+      } to ${
+        experience?.isContinue
+          ? "Present"
+          : experience?.toMonth + " " + experience?.toYear
+      }</p>`;
+      html += `<br/><div>`;
+  
+      singleGenerated += html;
+      setMsgLoading(true);
+      const jobDescriptionId = makeid();
+      const obj = {
+        jobDescriptionId: jobDescriptionId,
+        personName: userData.firstName + " " + userData.lastName,
+        creditsUsed: creditLimits.linkedin_individualWorkExperience,
+        email: session?.user?.email,
+        trainBotData: {
+          userEmail: userData.email,
+          fileAddress: userData.uploadedResume.fileName,
+        },
+        experience: experience,
       };
-
-      await saveToDB(jdObj, tempText);
+      const res = await fetch("/api/linkedInBots/jdGeneratorSingle", {
+        method: "POST",
+        body: JSON.stringify(obj),
+        signal: abortController?.signal
+      });
+  
+      if (res.ok && res.body) {
+        tempText[experienceIndex] = singleGenerated;
+        setGeneratedWorkExperience(tempText);
+        setAvailableCredits(true);
+  
+        const reader = res.body.getReader();
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) {
+            break;
+          }
+          const text = new TextDecoder().decode(value);
+  
+          singleGenerated += text;
+        }
+  
+        singleGenerated += `</div><br/>`;
+        singleGenerated = singleGenerated.replace("```html", "");
+        singleGenerated = singleGenerated.replace("```", "");
+        setGeneratedWorkExperience((prevExperience) => {
+          // Predefined index to insert the new item
+          const newArray = [...prevExperience];
+          newArray.splice(experienceIndex, 1, singleGenerated);
+          return newArray;
+        });
+        tempText[experienceIndex] = singleGenerated;
+  
+        setMsgLoading(false);
+        const jdObj = {
+          jobDescriptionId: existingJDId,
+          email: userData?.email,
+        };
+  
+        await saveToDB(jdObj, tempText);
+      }
+      const JDResponse = await axios.get(
+        "/api/linkedInBots/jdGeneratorSingle/getAllJD",{signal: abortController?.signal}
+      );
+      const updatedObject = {
+        ...userData,
+        linkedInJobDescriptions: JDResponse.data.result.linkedInJobDescriptions,
+      };
+      dispatch(setUserData({ ...userData, ...updatedObject }));
+      dispatch(
+        setLinkedInJobDescription({ ...linkedinJD, jobDescriptionText: tempText })
+      );
+      showSuccessToast("Job Description Generated Successfully");
     }
-    const JDResponse = await axios.get(
-      "/api/linkedInBots/jdGeneratorSingle/getAllJD",{signal: abortController?.signal}
-    );
-    const updatedObject = {
-      ...userData,
-      linkedInJobDescriptions: JDResponse.data.result.linkedInJobDescriptions,
-    };
-    dispatch(setUserData({ ...userData, ...updatedObject }));
-    dispatch(
-      setLinkedInJobDescription({ ...linkedinJD, jobDescriptionText: tempText })
-    );
-    showSuccessToast("Job Description Generated Successfully");
   };
 
   const handleGenerate = async () => {
@@ -256,9 +260,9 @@ const SubJDGenerator = () => {
 
     await getUserDataIfNotExists();
     //change condition
-    if (session?.user?.email && userData.isFetched) {
+    if (session?.user?.email && userData.isFetched && userData.experience) {
       // remove ids from experiences
-      const experiences = userData.experience.map((item: WorkExperience) => {
+      const experiences: any = userData.experience.map((item: WorkExperience) => {
         const { id, ...rest } = item;
         return rest;
       });
@@ -283,7 +287,7 @@ const SubJDGenerator = () => {
         singleGenerated += html;
         setMsgLoading(true);
         const jobDescriptionId = makeid();
-        const obj: any = {
+        const obj = {
           jobDescriptionId: jobDescriptionId,
 
           personName: userData.firstName + " " + userData.lastName,
@@ -296,13 +300,13 @@ const SubJDGenerator = () => {
           },
           experience: experience,
         };
-        const res: any = await fetch("/api/linkedInBots/jdGeneratorSingle", {
+        const res = await fetch("/api/linkedInBots/jdGeneratorSingle", {
           method: "POST",
           body: JSON.stringify(obj),
           signal: abortController?.signal
         });
 
-        if (res.ok) {
+        if (res.ok && res.body) {
           setAvailableCredits(true);
 
           const reader = res.body.getReader();
@@ -365,12 +369,12 @@ const SubJDGenerator = () => {
             method: "POST",
             body: JSON.stringify(jdObj),
             signal: abortController?.signal
-          }).then(async (response: any) => {
+          }).then(async (response) => {
             const res = await response.json();
             if (res.success) {
               await saveToDB(jdObj, tempText);
             }
-          });
+          }).catch(error => {});
         }
       }
 

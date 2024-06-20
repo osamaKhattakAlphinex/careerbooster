@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const MainLoaderLayer = () => {
-  const [showLoader, setShowLoader] = useState(true);
+  const [showLoader, setShowLoader] = useState<boolean>(true);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
