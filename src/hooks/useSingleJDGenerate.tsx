@@ -54,7 +54,7 @@ const useSingleJDGenerate = (
       workExpArrObj.toYear = experience?.toYear;
 
       let achievementTemp = "";
-      const res: any = await fetch("/api/resumeBots/jdGeneratorSingle", {
+      const res = await fetch("/api/resumeBots/jdGeneratorSingle", {
         method: "POST",
         body: JSON.stringify({
           detailedResume: detailedResume,
@@ -70,7 +70,7 @@ const useSingleJDGenerate = (
         }),
         signal: abortController?.signal,
       })
-      if (res?.ok) {
+      if (res.ok && res.body) {
         const reader = res.body.getReader();
         setStreamedJDData(" ");
 
@@ -83,7 +83,7 @@ const useSingleJDGenerate = (
           const text = new TextDecoder().decode(value);
           // const text = response.result;
 
-          setStreamedJDData((prev: any) => prev + text);
+          setStreamedJDData((prev: string) => prev + text);
           // temp += text;
           achievementTemp += text;
         }

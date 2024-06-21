@@ -10,15 +10,16 @@ import { useDispatch, useSelector } from "react-redux";
 import useSaveResumeToDB from "./useSaveToDB";
 import { setField, setTours } from "@/store/userDataSlice";
 import axios from "axios";
+import { RootState } from "@/store/store";
 
 const useUpdateAndSave = () => {
-  const { resume, userData } = useSelector((state: any) => state);
+  const { resume, userData } = useSelector((state: RootState) => state);
 
   const dispatch = useDispatch();
   const { saveResumeToDB } = useSaveResumeToDB();
 
   //   update and save the Skills
-  const updateAndSaveSkill = (updatedSkills: any) => {
+  const updateAndSaveSkill = (updatedSkills: string[]) => {
     dispatch(
       setPrimarySkills({
         ...resume,
