@@ -59,19 +59,12 @@ const TourContextProvider: React.FC<TourContextProviderProps> = ({
   const availableCreditsRef = useRef<HTMLDivElement | null>(null);
   const linkedinAboutElementRef = useRef<HTMLDivElement | null>(null);
   const linkedinAboutHistoryElementRef = useRef<HTMLDivElement | null>(null);
-
   const linkedinHeadlineElementRef = useRef<HTMLDivElement | null>(null);
-  const linkedinHeadlineHistoryElementRef = useRef<HTMLDivElement | null>(
-    null
-  );
-
+  const linkedinHeadlineHistoryElementRef = useRef<HTMLDivElement | null>(null);
   const linkedinJDElementRef = useRef<HTMLDivElement | null>(null);
   const linkedinJDHistoryElementRef = useRef<HTMLDivElement | null>(null);
-
   const linkedinKeywordsElementRef = useRef<HTMLDivElement | null>(null);
-  const linkedinKeywordsHistoryElementRef = useRef<HTMLDivElement | null>(
-    null
-  );
+  const linkedinKeywordsHistoryElementRef = useRef<HTMLDivElement | null>(null);
 
   // Define the context value
   const contextValue: TourRefs = {
@@ -93,16 +86,12 @@ const TourContextProvider: React.FC<TourContextProviderProps> = ({
     availableCreditsRef,
     linkedinAboutElementRef,
     linkedinAboutHistoryElementRef,
-
     linkedinHeadlineElementRef,
     linkedinHeadlineHistoryElementRef,
-
     linkedinJDElementRef,
     linkedinJDHistoryElementRef,
-
     linkedinKeywordsElementRef,
     linkedinKeywordsHistoryElementRef,
-
     // Add more references as needed
   };
 
