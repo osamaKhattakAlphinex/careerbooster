@@ -350,7 +350,7 @@ export async function POST(req: NextRequest) {
         }
 
         const response = await openai.chat.completions.create({
-          model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8Icp5xpE",
+          model: model? model : "ft:gpt-3.5-turbo-1106:careerbooster-ai::8Icp5xpE",
           messages: [{ role: "user", content: inputPrompt }],
         });
 

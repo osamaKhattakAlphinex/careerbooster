@@ -71,7 +71,7 @@ const useGetSummary = (
             }
 
             const text = new TextDecoder().decode(value);
-            setStreamedSummaryData((prev: any) => prev + text);
+            setStreamedSummaryData((prev: string) => prev + text);
             summaryTemp += text;
           }
 
