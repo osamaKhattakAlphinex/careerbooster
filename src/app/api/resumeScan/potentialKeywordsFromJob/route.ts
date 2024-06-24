@@ -1,4 +1,6 @@
+import Prompt from "@/db/schemas/Prompt";
 import TrainBot from "@/db/schemas/TrainBot";
+import { getTrainedModel } from "@/helpers/getTrainedModel";
 import startDB from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
@@ -10,19 +12,23 @@ const openai = new OpenAI({
 export async function POST(req: NextRequest) {
   try {
     const { jobDescription } = await req.json();
-    const inputPrompt = `
-    
-        Here is the job description: 
-        ${jobDescription}
+    await startDB();
 
-        What are the potential skills / keywords  that one should have.
-
-        The answer must be in a valid JSON array
-         
-          `;
+    const dataset = "resumeScan.getPotentialKeywords";
+    const model = await getTrainedModel(dataset);
+    const promptRec = await Prompt.findOne({
+      type: "resumeScan",
+      name: "potentailKeywords",
+      active: true,
+    });
+    let inputPrompt = promptRec.value;
+    inputPrompt = inputPrompt.replaceAll(
+      "{{jobDescription}}",
+      jobDescription
+    );
 
     const response = await openai.chat.completions.create({
-      model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8Icp5xpE",
+      model: model? model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8Icp5xpE",
       messages: [{ role: "user", content: inputPrompt }],
     });
     try {

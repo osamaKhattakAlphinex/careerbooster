@@ -1,4 +1,6 @@
+import Prompt from "@/db/schemas/Prompt";
 import TrainBot from "@/db/schemas/TrainBot";
+import { getTrainedModel } from "@/helpers/getTrainedModel";
 import startDB from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
@@ -10,32 +12,35 @@ const openai = new OpenAI({
 export async function POST(req: NextRequest) {
   try {
     const { potentialSkills, aiResumeKeywords } = await req.json();
-    const inputPrompt = `
+    await startDB();
+
+    const dataset = "resumeScan.matchingKeywords";
+    const model = await getTrainedModel(dataset);
     
-        Here is the first required keywords for a specific job: 
-        ${potentialSkills}
+    const promptRec = await Prompt.findOne({
+      type: "resumeScan",
+      name: "matchingKeywords",
+      active: true,
+    });
+    let inputPrompt = promptRec.value;
+    inputPrompt = inputPrompt.replaceAll(
+      "{{requiredKeywords}}",
+      potentialSkills
+    );
+    inputPrompt = inputPrompt.replaceAll(
+      "{{resumeKeywords}}",
+      aiResumeKeywords
+    );
 
-        And here is the second individual person's keywords
-        ${aiResumeKeywords}
-
-        Give me a list of matching keywords from first keywords list (add the closely related keywords also) and required keywords that are missing in second.
-
-
-        The answer must be in a valid JSON like 
-        {
-          matchingKeywords: [Array of Strings]
-          missingKeywords: [Array of Strings]
-        }
-          `;
     const response = await openai.chat.completions.create({
-      model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8Icp5xpE",
+      model: model? model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8Icp5xpE",
       messages: [{ role: "user", content: inputPrompt }],
     });
     try {
       await startDB();
 
       const obj = {
-        type: "resumeScan.job.getMatchingKeywords",
+        type: "resumeScan.getMatchingKeywords",
         input: inputPrompt,
         output: response?.choices[0]?.message?.content?.replace(
           /(\r\n|\n|\r)/gm,
