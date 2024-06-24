@@ -12,11 +12,10 @@ const openai = new OpenAI({
 export async function POST(req: NextRequest) {
   try {
     const { potentialSkills, aiResumeKeywords } = await req.json();
-    await startDB();
-
+    
     const dataset = "resumeScan.matchingKeywords";
     const model = await getTrainedModel(dataset);
-    
+    await startDB();
     const promptRec = await Prompt.findOne({
       type: "resumeScan",
       name: "matchingKeywords",
@@ -33,7 +32,7 @@ export async function POST(req: NextRequest) {
     );
 
     const response = await openai.chat.completions.create({
-      model: model? model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8Icp5xpE",
+      model: model ? model : "ft:gpt-3.5-turbo-1106:careerbooster-ai::8Icp5xpE",
       messages: [{ role: "user", content: inputPrompt }],
     });
     try {
@@ -48,7 +47,7 @@ export async function POST(req: NextRequest) {
         ),
         idealOutput: "",
         status: "pending",
-        Instructions: `Get MAtching Keywords from resume and job description`,
+        Instructions: `Get Matching Keywords from resume and job description`,
       };
 
       await TrainBot.create({ ...obj });
