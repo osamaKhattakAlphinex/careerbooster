@@ -25,9 +25,13 @@ export async function POST(req: NextRequest) {
     inputPrompt = inputPrompt.replaceAll("{{jobDescription}}", jobDescription);
 
     const response = await openai.chat.completions.create({
-      model: model ? model : "ft:gpt-3.5-turbo-1106:careerbooster-ai::8Icp5xpE",
+      model: model ? model : "gpt-4-1106-preview",
+      response_format: { type: "json_object" },
       messages: [{ role: "user", content: inputPrompt }],
     });
+    console.log(
+      response.choices[0].message.content?.replace(/(\r\n|\n|\r)/gm, "")
+    );
     try {
       await startDB();
 

@@ -18,13 +18,13 @@ const JobDescHandler = () => {
     });
     const data = await response.json();
     if (data.success) {
-      let skills: [];
+      let results;
       if (typeof data.result === "object") {
-        skills = data.result;
+        results = data.result;
       } else {
-        skills = await JSON.parse(data.result);
+        results = await JSON.parse(data.result);
       }
-      setPotentialSkills(skills);
+      setPotentialSkills(results.skills);
       setMsgLoading(false);
     } else {
       console.log(data.result);
