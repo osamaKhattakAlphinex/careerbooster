@@ -292,6 +292,14 @@ const Menu = () => {
               </li>
               <li className="px-5 py-2">
                 <Link
+                  href="/resume-scan-prompt-configuration"
+                  className="text-white no-underline hover:no-underline hover:text-white/80"
+                >
+                  Resume Scan
+                </Link>
+              </li>
+              <li className="px-5 py-2">
+                <Link
                   href="/cover-letter-prompt-configuration"
                   className="text-white no-underline hover:no-underline hover:text-white/80"
                 >

@@ -534,10 +534,10 @@ const TrainRegistrationBotAdminPage = () => {
                     LinkedIn {"> "} Generate Job Description
                   </option>
                   <option value="resumeScan.job.getPotentialKeywords">
-                    Job {"> "} Get Potential Skills
+                    Resume Scan {"> "} Job {"> "} Get Potential Keywords
                   </option>
-                  <option value="resumeScan.job.getMatchingKeywords">
-                    Resume {"> "} Matching Keywords
+                  <option value="resumeScan.getMatchingKeywords">
+                    Resume Scan {"> "} Matching Keywords
                   </option>
                   <option value="write.genearteConsultingBid">
                     Write Consulting Bid
