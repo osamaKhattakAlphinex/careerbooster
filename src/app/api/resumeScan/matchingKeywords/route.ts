@@ -12,11 +12,10 @@ const openai = new OpenAI({
 export async function POST(req: NextRequest) {
   try {
     const { potentialSkills, aiResumeKeywords } = await req.json();
-    await startDB();
-
+    
     const dataset = "resumeScan.matchingKeywords";
     const model = await getTrainedModel(dataset);
-
+    await startDB();
     const promptRec = await Prompt.findOne({
       type: "resumeScan",
       name: "matchingKeywords",
