@@ -12,23 +12,20 @@ const openai = new OpenAI({
 export async function POST(req: NextRequest) {
   try {
     const { jobDescription } = await req.json();
-    await startDB();
 
     const dataset = "resumeScan.getPotentialKeywords";
     const model = await getTrainedModel(dataset);
+    await startDB();
     const promptRec = await Prompt.findOne({
       type: "resumeScan",
-      name: "potentailKeywords",
+      name: "potentialKeywords",
       active: true,
     });
     let inputPrompt = promptRec.value;
-    inputPrompt = inputPrompt.replaceAll(
-      "{{jobDescription}}",
-      jobDescription
-    );
+    inputPrompt = inputPrompt.replaceAll("{{jobDescription}}", jobDescription);
 
     const response = await openai.chat.completions.create({
-      model: model? model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8Icp5xpE",
+      model: model ? model : "ft:gpt-3.5-turbo-1106:careerbooster-ai::8Icp5xpE",
       messages: [{ role: "user", content: inputPrompt }],
     });
     try {
