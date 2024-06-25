@@ -44,7 +44,13 @@ const PersonalizedEmailBot = () => {
   const [selectedFile, setSelectedFile] = useState<string>("");
   const [jobDescription, setJobDescription] = useState<string>("");
   const [showPopup, setShowPopup] = useState(false);
-  const { setAvailableCredits,abortController, setAbortController,outOfCredits, setOutOfCredits } = useAppContext();
+  const {
+    setAvailableCredits,
+    abortController,
+    setAbortController,
+    outOfCredits,
+    setOutOfCredits,
+  } = useAppContext();
   const [emailLoading, setEmailLoading] = useState<boolean>(false);
   const [firstFollowUpLoading, setFirstFollowUpLoading] =
     useState<boolean>(false);
@@ -194,7 +200,8 @@ const PersonalizedEmailBot = () => {
   useEffect(() => {
     if (isEditing) {
       if (componentRef.current) {
-        const editorElement:HTMLDivElement| null = componentRef.current.querySelector("#editor");
+        const editorElement: HTMLDivElement | null =
+          componentRef.current.querySelector("#editor");
         if (editorElement) {
           editorElement.innerHTML = email.emailText;
           editorElement.focus(); // Focus on the editable area
@@ -203,7 +210,8 @@ const PersonalizedEmailBot = () => {
     }
     if (isFirstEditing) {
       if (componentFirstRef.current) {
-        const editorElement:HTMLDivElement| null = componentFirstRef.current.querySelector("#first_editor");
+        const editorElement: HTMLDivElement | null =
+          componentFirstRef.current.querySelector("#first_editor");
         if (editorElement) {
           editorElement.innerHTML = email.emailFirstFollowUpText;
           editorElement.focus(); // Focus on the editable area
@@ -212,7 +220,8 @@ const PersonalizedEmailBot = () => {
     }
     if (isSecondEditing) {
       if (componentSecondRef.current) {
-        const editorElement:HTMLDivElement| null = componentSecondRef.current.querySelector("#second_editor");
+        const editorElement: HTMLDivElement | null =
+          componentSecondRef.current.querySelector("#second_editor");
         if (editorElement) {
           editorElement.innerHTML = email.emailSecondFollowUpText;
           editorElement.focus(); // Focus on the editable area
@@ -240,18 +249,18 @@ const PersonalizedEmailBot = () => {
             fileAddress: userData.defaultResumeFile,
           },
           file: "",
-          userData:{}
+          userData: {},
         };
         if (selectedOption === "file") {
           obj.file = selectedFile;
         } else {
           obj.userData = aiInputUserData;
         }
- 
+
         fetch("/api/emailBot/emailGenerator", {
           method: "POST",
           body: JSON.stringify(obj),
-          signal: abortController?.signal
+          signal: abortController?.signal,
         })
           .then(async (resp) => {
             if (resp.ok && resp.body) {
@@ -274,10 +283,11 @@ const PersonalizedEmailBot = () => {
               setStreamedData((prev) => prev.replace("```", ""));
 
               const emailsResponse = await axios.get(
-                "/api/emailBot/getAllEmails",{signal: abortController?.signal}
+                "/api/emailBot/getAllEmails",
+                { signal: abortController?.signal }
               );
 
-              console.log(emailsResponse)
+              console.log(emailsResponse);
 
               if (emailsResponse.data.success) {
                 const updatedObject = {
@@ -286,11 +296,7 @@ const PersonalizedEmailBot = () => {
                 };
 
                 dispatch(setUserData({ ...userData, ...updatedObject }));
-                dispatch(
-                  setEmail(
-                    emailsResponse.data.result.emails[0]
-                  )
-                );
+                dispatch(setEmail(emailsResponse.data.result.emails[0]));
               }
             } else {
               const res = await resp.json();
@@ -333,7 +339,7 @@ const PersonalizedEmailBot = () => {
             userEmail: userData.email,
             fileAddress: userData.defaultResumeFile,
           },
-          userData:{}
+          userData: {},
         };
         obj.userData = aiInputUserData;
 
@@ -367,7 +373,8 @@ const PersonalizedEmailBot = () => {
               );
 
               const emailsResponse = await axios.get(
-                "/api/emailBot/getAllEmails",{signal: abortController?.signal}
+                "/api/emailBot/getAllEmails",
+                { signal: abortController?.signal }
               );
 
               if (emailsResponse.data.success) {
@@ -377,11 +384,7 @@ const PersonalizedEmailBot = () => {
                 };
 
                 dispatch(setUserData({ ...userData, ...updatedObject }));
-                dispatch(
-                  setEmail(
-                    emailsResponse.data.result.emails[0]
-                  )
-                );
+                dispatch(setEmail(emailsResponse.data.result.emails[0]));
               }
             } else {
               const res = await resp.json();
@@ -427,7 +430,7 @@ const PersonalizedEmailBot = () => {
             userEmail: userData.email,
             fileAddress: userData.defaultResumeFile,
           },
-          userData:{},
+          userData: {},
         };
         obj.userData = aiInputUserData;
 
@@ -462,7 +465,8 @@ const PersonalizedEmailBot = () => {
               );
 
               const emailsResponse = await axios.get(
-                "/api/emailBot/getAllEmails",{signal: abortController?.signal}
+                "/api/emailBot/getAllEmails",
+                { signal: abortController?.signal }
               );
 
               if (emailsResponse.data.success) {
@@ -532,7 +536,10 @@ const PersonalizedEmailBot = () => {
       const updatedEmails = await axios.put(
         `/api/emailBot/${email.id}`,
         payLoad,
-        { headers: { "Content-Type": "application/json" },signal: abortController?.signal }
+        {
+          headers: { "Content-Type": "application/json" },
+          signal: abortController?.signal,
+        }
       );
 
       const updatedObject = {
@@ -567,7 +574,10 @@ const PersonalizedEmailBot = () => {
       const updatedEmails = await axios.put(
         `/api/emailBot/${email.id}`,
         payLoad,
-        { headers: { "Content-Type": "application/json" },signal: abortController?.signal }
+        {
+          headers: { "Content-Type": "application/json" },
+          signal: abortController?.signal,
+        }
       );
 
       const updatedObject = {
@@ -602,7 +612,10 @@ const PersonalizedEmailBot = () => {
       const updatedEmails = await axios.put(
         `/api/emailBot/${email.id}`,
         payLoad,
-        { headers: { "Content-Type": "application/json" },signal: abortController?.signal }
+        {
+          headers: { "Content-Type": "application/json" },
+          signal: abortController?.signal,
+        }
       );
 
       const updatedObject = {
@@ -649,7 +662,6 @@ const PersonalizedEmailBot = () => {
     setFirstShow(false);
     setSecondShow(false);
     if (email.id !== "") {
-   
       setShow(true);
       if (email.emailFirstFollowUpText && email.emailFirstFollowUpText !== "") {
         setFirstShow(true);
@@ -792,6 +804,7 @@ const PersonalizedEmailBot = () => {
                   </div>
                 </label>
                 <textarea
+                  value={jobDescription}
                   id="job-title"
                   name="jobTitle"
                   rows={6}
@@ -799,6 +812,17 @@ const PersonalizedEmailBot = () => {
                   placeholder="Copy the job description for the position you are applying and paste it here to generate post application follow up emails to the hiring managers."
                   className="w-full px-3 lg:px-8 rounded-lg text-xs md:text-sm text-[#959595] bg-transparent border-[#312E37] border-[1px] pt-3"
                 />
+                <a
+                  // disabled={jobDescription == ""}
+                  className=" hover:underline ml-auto cursor-pointer mt-4"
+                  onClick={() => {
+                    setJobDescription("");
+                  }}
+                >
+                  <span className="text-xs capitalize dark:text-gray-300  text-gray-950 md:text-sm">
+                    clear input
+                  </span>
+                </a>
               </div>
               {show && (
                 <button
@@ -917,9 +941,7 @@ const PersonalizedEmailBot = () => {
           </div>
         </div>
       </div>
-      <TourBot
-        config={outOfCredits ? tourBotConfig2 : tourBotConfig}
-      />
+      <TourBot config={outOfCredits ? tourBotConfig2 : tourBotConfig} />
     </>
   );
 };

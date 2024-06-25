@@ -28,23 +28,29 @@ import TourBot from "@/components/dashboard/TourBot";
 import { RootState } from "@/store/store";
 
 export default function CoverLetterPage() {
-  const componentRef = useRef<HTMLDivElement|null>(null);
+  const componentRef = useRef<HTMLDivElement | null>(null);
   const [aiInputUserData, setAiInputUserData] = useState({});
   const [msgLoading, setMsgLoading] = useState<boolean>(false); // msg loading
   const { data: session } = useSession();
   const [show, setShow] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>("profile"); // type
   const [streamedData, setStreamedData] = useState<string>("");
-  const [isCoverLetterCopied, setIsCoverLetterCopied] = useState<boolean>(false);
+  const [isCoverLetterCopied, setIsCoverLetterCopied] =
+    useState<boolean>(false);
   const [selectedFile, setSelectedFile] = useState<string>("");
   const [jobDescription, setJobDescription] = useState<string>("");
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [showPopup, setShowPopup] = useState<boolean>(false);
-  const { setAvailableCredits,abortController,setAbortController, outOfCredits, setOutOfCredits } = useAppContext();
+  const {
+    setAvailableCredits,
+    abortController,
+    setAbortController,
+    outOfCredits,
+    setOutOfCredits,
+  } = useAppContext();
   const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
   const creditLimits = useSelector((state: RootState) => state.creditLimits);
   const router = useRouter();
-
 
   const handleClick = () => {
     setIsEditing((prevState) => !prevState);
@@ -55,7 +61,8 @@ export default function CoverLetterPage() {
   useEffect(() => {
     if (isEditing) {
       if (componentRef.current) {
-        const editorElement: HTMLDivElement| null = componentRef.current.querySelector("#editor");
+        const editorElement: HTMLDivElement | null =
+          componentRef.current.querySelector("#editor");
         if (editorElement) {
           editorElement.innerHTML = coverLetter.coverLetterText;
           editorElement.focus(); // Focus on the editable area
@@ -94,7 +101,10 @@ export default function CoverLetterPage() {
     const updatedCoverLetters = await axios.put(
       `/api/coverLetterBot/${coverLetter.id}`,
       payLoad,
-      { headers: { "Content-Type": "application/json" }, signal:abortController?.signal }
+      {
+        headers: { "Content-Type": "application/json" },
+        signal: abortController?.signal,
+      }
     );
 
     const updatedObject = {
@@ -119,7 +129,10 @@ export default function CoverLetterPage() {
     const updatedCoverLetters = await axios.put(
       `/api/coverLetterBot/${coverLetter.id}`,
       payload,
-      { headers: { "Content-Type": "application/json" }, signal:abortController?.signal }
+      {
+        headers: { "Content-Type": "application/json" },
+        signal: abortController?.signal,
+      }
     );
 
     const updatedObject = {
@@ -158,8 +171,8 @@ export default function CoverLetterPage() {
           userEmail: userData.email,
           fileAddress: userData.uploadedResume.fileName,
         },
-        file:"",
-        userData:{}
+        file: "",
+        userData: {},
       };
 
       if (selectedOption === "file") {
@@ -192,7 +205,8 @@ export default function CoverLetterPage() {
             setStreamedData((prev) => prev.replace("```html", ""));
             setStreamedData((prev) => prev.replace("```", ""));
             const coverLetterResponse = await axios.get(
-              "/api/coverLetterBot/getAllCoverLetters",{signal: abortController?.signal}
+              "/api/coverLetterBot/getAllCoverLetters",
+              { signal: abortController?.signal }
             );
 
             if (coverLetterResponse.data.success) {
@@ -263,10 +277,10 @@ export default function CoverLetterPage() {
         skills: userData?.skills,
       });
     }
-    return (() => {
+    return () => {
       abortController?.abort();
-      setAbortController(new AbortController())
-    });
+      setAbortController(new AbortController());
+    };
   }, [userData]);
 
   useEffect(() => {
@@ -366,7 +380,9 @@ export default function CoverLetterPage() {
           {/* <MainCoverLetterTool /> */}
           <>
             <div
-              ref={(ref: HTMLDivElement) => (coverLetterElementRef.current = ref)}
+              ref={(ref: HTMLDivElement) =>
+                (coverLetterElementRef.current = ref)
+              }
               className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-lg px-4 lg:px-[30px] py-6  flex flex-col gap-3 "
             >
               {/* header */}
@@ -460,59 +476,71 @@ export default function CoverLetterPage() {
                     id="job-title"
                     name="jobTitle"
                     rows={6}
+                    value={jobDescription}
                     onChange={(e) => setJobDescription(e.target.value)}
                     placeholder="Copy the job description for the position you are applying and paste it here to generate a tailor cover letter."
                     className="w-full px-3 lg:px-8 rounded-lg text-xs md:text-sm text-[#959595] bg-transparent border-[#312E37] border-[1px] pt-3"
                   />
                 </div>
-
-                <button
-                  type="button"
-                  disabled={
-                    selectedOption === "" ||
-                    (selectedOption === "file" && selectedFile === "") ||
-                    jobDescription === ""
-                  }
-                  onClick={handleGenerate}
-                  className={`w-max flex flex-row transition-all duration-300  group justify-center sm:justify-start lg:px-6 px-4 py-2 rounded-full dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1.5px] border-gray-950 bg-transparent ${
-                    (selectedOption === "" ||
+                <div className="flex justify-end w-full items-center">
+                  <button
+                    type="button"
+                    disabled={
+                      selectedOption === "" ||
                       (selectedOption === "file" && selectedFile === "") ||
-                      jobDescription === "") &&
-                    "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
-                  }`}
-                >
-                  {msgLoading ? (
-                    <div className="flex flex-row items-center justify-center gap-2">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        className={`w-3 h-3 md:w-4 md:h-4 dark:text-gray-100 text-gray-950 ${
-                          msgLoading ? "animate-spin" : ""
-                        }`}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                        />
-                      </svg>
-                      <span className="text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950 md:text-sm">
-                        Please wait...
-                      </span>
-                    </div>
-                  ) : (
-                    <div className="flex flex-row items-center justify-center gap-2">
-                      {boltIcon}
+                      jobDescription === ""
+                    }
+                    onClick={handleGenerate}
+                    className={`w-max flex flex-row transition-all duration-300  group justify-center sm:justify-start lg:px-6 px-4 py-2 rounded-full dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1.5px] border-gray-950 bg-transparent ${
+                      (selectedOption === "" ||
+                        (selectedOption === "file" && selectedFile === "") ||
+                        jobDescription === "") &&
+                      "opacity-50 cursor-not-allowed" // Apply these styles when the button is disabled
+                    }`}
+                  >
+                    {msgLoading ? (
+                      <div className="flex flex-row items-center justify-center gap-2">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          className={`w-3 h-3 md:w-4 md:h-4 dark:text-gray-100 text-gray-950 ${
+                            msgLoading ? "animate-spin" : ""
+                          }`}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                          />
+                        </svg>
+                        <span className="text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950 md:text-sm">
+                          Please wait...
+                        </span>
+                      </div>
+                    ) : (
+                      <div className="flex flex-row items-center justify-center gap-2">
+                        {boltIcon}
 
-                      <span className="text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950 md:text-sm">
-                        Generate Cover Letter
-                      </span>
-                    </div>
-                  )}
-                </button>
+                        <span className="text-xs capitalize dark:text-gray-300 group-hover:dark:text-gray-200 group-hover:font-semibold text-gray-950 md:text-sm">
+                          Generate Cover Letter
+                        </span>
+                      </div>
+                    )}
+                  </button>
+                  <a
+                    onClick={() => {
+                      setJobDescription("");
+                    }}
+                    className="cursor-pointer hover:underline ml-auto"
+                  >
+                    <span className="text-xs capitalize dark:text-gray-300  text-gray-950 md:text-sm">
+                      Clear Input
+                    </span>
+                  </a>
+                </div>
               </div>
 
               {show && (
@@ -799,9 +827,7 @@ export default function CoverLetterPage() {
           onConfirm={() => onConfirm()}
         />
       )}
-      <TourBot
-        config={outOfCredits ? tourBotConfig2 : tourBotConfig}
-      />
+      <TourBot config={outOfCredits ? tourBotConfig2 : tourBotConfig} />
     </>
   );
 }

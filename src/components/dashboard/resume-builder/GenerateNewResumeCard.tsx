@@ -269,6 +269,16 @@ const GenerateResume = ({ handleGenerate }: Props) => {
                 rows={10}
                 className="w-full py-2 px-4 rounded-md text-xs md:text-sm text-[#959595] bg-transparent border-[#312E37] border-[1px]"
               />
+              <a
+                className="ml-auto hover:underline cursor-pointer"
+                onClick={() => {
+                  dispatch(setState({ name: "jobDescription", value: "" }));
+                }}
+              >
+                <span className="text-xs capitalize dark:text-gray-300  text-gray-950 md:text-sm">
+                  Clear Input
+                </span>
+              </a>
             </>
           ) : (
             ""
