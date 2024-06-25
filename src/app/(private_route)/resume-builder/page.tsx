@@ -48,7 +48,6 @@ import CreditInfoModal from "@/components/dashboard/resume-builder/CreditsInfoMo
 import TemplateSlider from "@/components/dashboard/resume-templates/templateSlider";
 import TourBot from "@/components/dashboard/TourBot";
 import { useTourContext } from "@/context/TourContext";
-import { formatDate } from "@/helpers/getFormattedDateTime";
 import { useAppContext } from "@/context/AppContext";
 
 const ResumeBuilder = () => {
