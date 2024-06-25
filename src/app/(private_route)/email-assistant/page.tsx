@@ -812,9 +812,9 @@ const PersonalizedEmailBot = () => {
                   placeholder="Copy the job description for the position you are applying and paste it here to generate post application follow up emails to the hiring managers."
                   className="w-full px-3 lg:px-8 rounded-lg text-xs md:text-sm text-[#959595] bg-transparent border-[#312E37] border-[1px] pt-3"
                 />
-                <button
-                  disabled={jobDescription == ""}
-                  className=" mt-4 w-max flex flex-row transition-all duration-300  group justify-center sm:justify-start lg:px-6 px-4 py-2 rounded-full dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1.5px] border-gray-950 bg-transparent disabled:opacity-50 disabled:cursor-not-allowed ml-auto"
+                <a
+                  // disabled={jobDescription == ""}
+                  className=" hover:underline ml-auto cursor-pointer mt-4"
                   onClick={() => {
                     setJobDescription("");
                   }}
@@ -822,7 +822,7 @@ const PersonalizedEmailBot = () => {
                   <span className="text-xs capitalize dark:text-gray-300  text-gray-950 md:text-sm">
                     clear input
                   </span>
-                </button>
+                </a>
               </div>
               {show && (
                 <button
