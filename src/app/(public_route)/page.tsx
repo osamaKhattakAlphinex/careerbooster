@@ -3,7 +3,6 @@ import CTASection from "@/components/public-pages/Homepage/CTASection";
 import FeaturesSecond from "@/components/public-pages/Homepage/FeaturesSecond";
 import FeaturesSection from "@/components/public-pages/Homepage/FeaturesSection";
 import HeroArea from "@/components/public-pages/Homepage/HeroArea";
-import PricingSection from "@/components/public-pages/Homepage/PricingSection";
 import Reviews from "@/components/public-pages/Homepage/Reviews";
 import RewardsSection from "@/components/public-pages/Homepage/RewardsSection";
 import UseCases from "@/components/public-pages/Homepage/UseCases";
@@ -63,9 +62,6 @@ export default function Home() {
 
         {/* <!-- Reviews --> */}
         <Reviews />
-
-        {/* <!-- Pricing --> */}
-        {/* <PricingSection /> */}
 
         {/* <!-- FAQ --> */}
         <FAQList />
