@@ -69,6 +69,18 @@ const ReviewPromptsConfiguration = () => {
               updating={updating}
             />
           </div>
+          <div className="flex gap-4 mt-4">
+            <PromptEditor
+              name="resumeAnalysis"
+              title="Resume Analysis Prompt"
+              type="resumeScan"
+              prompts={prompts}
+              promptsLoading={promptsLoading}
+              handleSave={handleSave}
+              updating={updating}
+            />
+           
+          </div>
         </>
       )}
     </div>
