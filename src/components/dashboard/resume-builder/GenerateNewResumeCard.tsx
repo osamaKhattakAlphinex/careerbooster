@@ -269,6 +269,16 @@ const GenerateResume = ({ handleGenerate }: Props) => {
                 rows={10}
                 className="w-full py-2 px-4 rounded-md text-xs md:text-sm text-[#959595] bg-transparent border-[#312E37] border-[1px]"
               />
+              <button
+                className="mt-2 w-max flex flex-row transition-all duration-300  group justify-center sm:justify-start lg:px-6 px-4 py-2 rounded-full dark:bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1.5px] border-gray-950 bg-transparent disabled:opacity-50 disabled:cursor-not-allowed ml-auto"
+                onClick={() => {
+                  dispatch(setState({ name: "jobDescription", value: "" }));
+                }}
+              >
+                <span className="text-xs capitalize dark:text-gray-300  text-gray-950 md:text-sm">
+                  Clear Input
+                </span>
+              </button>
             </>
           ) : (
             ""
