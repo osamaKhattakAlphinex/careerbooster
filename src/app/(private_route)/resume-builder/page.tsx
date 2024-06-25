@@ -139,6 +139,7 @@ const ResumeBuilder = () => {
       await getSummary();
       await getPrimarySkills();
       await getWorkExperienceNew();
+      
       //  runConfetti();
     } else {
       setShowPopup(true);
@@ -474,12 +475,12 @@ const ResumeBuilder = () => {
         <div className="fixed top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-black/90">
           <div className="flex flex-col items-center gap-4 py-4 bg-gray-800 rounded-lg">
             <div className="flex items-center justify-between w-full px-4">
-              <h1 className="font-semibold xs:text-xl md:text-2xl ">
+              <h1 className="font-semibold xs:text-xl md:text-2xl">
                 Select a Design for your Resume
               </h1>
               <h1
                 className="font-semibold cursor-pointer xs:text-xl md:text-2xl"
-                onClick={() => setShowTemplatePopup(false)}
+                onClick={() => setShowTemplatePopup(false) }
               >
                 {crossIcon}
               </h1>
@@ -632,18 +633,50 @@ const ResumeBuilder = () => {
             (resumeData?.name ||
               resumeData?.contact?.email ||
               resumeData?.summary) && (
+                <>
+               
               <div
                 className={`my-10 ${
                   resumeData.state.resumeLoading ? "animate-pulse" : ""
                 }`}
               >
-                {/* <Link href="#" className="text-black">Preview</Link> */}
+                 <div className="  whitespace-nowrap w-full ml-auto xs:mt-4 xs:flex xs:justify-center md:inline-block gap-3 xs:pb-0 md:pb-4 md:sticky top-4 right-0 z-[35]">
+                  <Link
+                    className="no-underline w-fit"
+                    href={`/resume-builder/preview-resume?templateId=5&resumeId=${resumeData.id}`}
+                  >
+                    <div
+                      className={`flex flex-row gap-2 items-center xs:flex-1 w-fit ml-auto lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full  bg-[#e4e9f7]  dark:bg-[#18181b] text-gray-900  dark:text-gray-300 border-[1px] border-[#f0f0f0] `}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-4 h-4"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                        />
+                      </svg>
+                      Download / Print Preview
+                    </div>
+                  </Link>
+                </div>
                 <div
                   className={`bg-white ${
                     resumeData.state.resumeLoading ? "animate-pulse" : ""
                   }`}
                   ref={componentRef}
-                >
+                > 
                   <ResumeTemplate1
                     streamedSummaryData={streamedSummaryData}
                     streamedJDData={streamedJDData}
@@ -652,6 +685,7 @@ const ResumeBuilder = () => {
                   />
                 </div>
               </div>
+                </>
             )}
           {showPopup && (
             <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
