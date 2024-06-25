@@ -70,11 +70,10 @@ const ResumeBuilder = () => {
   const { resumeElementRef, tourBotRef, historyCardRef, availableCreditsRef } =
     useTourContext();
 
-
   const { getUserDataIfNotExists } = useGetUserData();
   const componentRef = useRef<HTMLDivElement>(null);
   const { data: session } = useSession();
-  const { abortController,setAbortController, outOfCredits } = useAppContext();
+  const { abortController, setAbortController, outOfCredits } = useAppContext();
   // Local States
   const [finished, setFinished] = useState<boolean>(false);
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
@@ -91,10 +90,10 @@ const ResumeBuilder = () => {
   const { getCreditLimitsIfNotExists } = useGetCreditLimits();
 
   useEffect(() => {
-    return (() => {
+    return () => {
       abortController?.abort();
-      setAbortController(new AbortController())
-    });
+      setAbortController(new AbortController());
+    };
   }, []);
   const { getSummary } = useGetSummary(setStreamedSummaryData);
 
@@ -388,7 +387,7 @@ const ResumeBuilder = () => {
       resumeData?.name &&
       !outOfCredits
     ) {
-      runConfetti()
+      runConfetti();
       saveResumeToDB();
     }
   }, [resumeData?.state?.resumeLoading]);
@@ -661,9 +660,7 @@ const ResumeBuilder = () => {
           )}
         </div>
       </div>
-      <TourBot
-        config={outOfCredits ? tourBotConfig2 : tourBotConfig}
-      />
+      <TourBot config={outOfCredits ? tourBotConfig2 : tourBotConfig} />
     </>
   );
 };
