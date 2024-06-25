@@ -24,7 +24,7 @@ const SingleRecentResumeCard = ({
   const { email, resumes } = userData;
   const [confirmationModal, setConfirmationModal] = useState(false);
   const [deleting, setDeleting] = useState(false);
-  
+
   const router = useRouter();
   const dispatch = useDispatch();
   const handleOnView = async () => {
@@ -41,6 +41,9 @@ const SingleRecentResumeCard = ({
     setDeleting(true);
     setConfirmationModal(false);
     const updatedResumes = resumes.filter((r: Resume) => r.id !== resume.id);
+    if (updatedResumes.length === 0) {
+      setFinished(false);
+    }
     updateUser(updatedResumes);
     dispatch(emptyResume());
   };

@@ -1,18 +1,16 @@
 import User from "@/db/schemas/User";
 import startDB from "@/lib/db";
 import { getServerSession } from "next-auth/next";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import { updateTrainedBotEntry } from "@/helpers/updateTrainBotEntry";
 
 export async function PUT(
-  req: any,
+  req: NextRequest,
   { params }: { params: { consultingBidId: string } }
 ) {
-  let email: any = "";
   const session = await getServerSession(authOptions);
-
-  email = session?.user?.email;
+  const email = session?.user?.email;
 
   const requestBody = await req.json();
   const consultingBidId = params.consultingBidId;
