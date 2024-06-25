@@ -104,8 +104,8 @@ const JobDescHandler = () => {
                 </li>
               ))}
             </ul>
-            {/* <ResumeUploader potentialSkills={potentialSkills}/>  */}
-            <ScanScore potentialSkills={potentialSkills}/>
+            <ResumeUploader potentialSkills={potentialSkills}/> 
+            {/* <ScanScore potentialSkills={potentialSkills}/> */}
           </div>
         )}
       </section>

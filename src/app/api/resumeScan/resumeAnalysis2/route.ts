@@ -11,30 +11,30 @@ const openai = new OpenAI({
 });
 export async function POST(req: NextRequest) {
   try {
-    const { jobDescription } = await req.json();
-
-    const dataset = "resumeScan.getPotentialKeywords";
+    const { resume_content } = await req.json();
+    const dataset = "resumeScan.resumeAnalysis";
     const model = await getTrainedModel(dataset);
     await startDB();
     const promptRec = await Prompt.findOne({
       type: "resumeScan",
-      name: "potentialKeywords",
+      name: "resumeAnalysis",
       active: true,
     });
     let inputPrompt = promptRec.value;
-    inputPrompt = inputPrompt.replaceAll("{{jobDescription}}", jobDescription);
+    inputPrompt = inputPrompt.replaceAll("{{resumeData}}", resume_content);
 
     const response = await openai.chat.completions.create({
+      //   model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8Icp5xpE",
       model: model ? model : "gpt-4-1106-preview",
       response_format: { type: "json_object" },
       messages: [{ role: "user", content: inputPrompt }],
     });
-    
+
     try {
       await startDB();
 
       const obj = {
-        type: "resumeScan.job.getPotentialKeywords",
+        type: "resumeScan.resumeAnalysis",
         input: inputPrompt,
         output: response?.choices[0]?.message?.content?.replace(
           /(\r\n|\n|\r)/gm,
@@ -42,12 +42,11 @@ export async function POST(req: NextRequest) {
         ),
         idealOutput: "",
         status: "pending",
-        Instructions: `Get Potential Keywords from given resume`,
+        Instructions: "Get Resume Score, Keywords and Potential Problems in Resume",
       };
 
       await TrainBot.create({ ...obj });
     } catch (error) {}
-
     return NextResponse.json(
       {
         result: response?.choices[0]?.message?.content?.replace(

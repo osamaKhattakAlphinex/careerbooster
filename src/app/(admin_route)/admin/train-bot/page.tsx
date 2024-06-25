@@ -536,6 +536,9 @@ const TrainRegistrationBotAdminPage = () => {
                   <option value="resumeScan.job.getPotentialKeywords">
                     Resume Scan {"> "} Job {"> "} Get Potential Keywords
                   </option>
+                  <option value="resumeScan.resumeAnalysis">
+                    Resume Scan {"> "} Resume Analysis
+                  </option>
                   <option value="resumeScan.getMatchingKeywords">
                     Resume Scan {"> "} Matching Keywords
                   </option>
