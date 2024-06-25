@@ -1,11 +1,11 @@
-import { eyeIcon, trashIcon } from "@/helpers/iconsProvider";
+import { trashIcon } from "@/helpers/iconsProvider";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import { Resume, emptyResume, setResume } from "@/store/resumeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setUserData } from "@/store/userDataSlice";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import { showSuccessToast } from "@/helpers/toast";
 const SingleRecentResumeCard = ({
