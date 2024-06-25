@@ -67,7 +67,7 @@ export async function POST(req: NextRequest) {
         ),
         idealOutput: "",
         status: "pending",
-        Instructions: `Get Resume Score, Keywords and Potential Problems in Resume`,
+        Instructions: "Get Resume Score, Keywords and Potential Problems in Resume",
       };
 
       await TrainBot.create({ ...obj });
