@@ -55,23 +55,23 @@ export async function POST(req: NextRequest) {
       messages: [{ role: "user", content: inputPrompt }],
     });
 
-    // try {
-    //   await startDB();
+    try {
+      await startDB();
 
-    //   const obj = {
-    //     type: "resumeScan.resumeAnalysis",
-    //     input: inputPrompt,
-    //     output: response?.choices[0]?.message?.content?.replace(
-    //       /(\r\n|\n|\r)/gm,
-    //       ""
-    //     ),
-    //     idealOutput: "",
-    //     status: "pending",
-    //     Instructions: `Get Resume Score and Potential Problems in Resume against a specific job description`,
-    //   };
+      const obj = {
+        type: "resumeScan.resumeAnalysis",
+        input: inputPrompt,
+        output: response?.choices[0]?.message?.content?.replace(
+          /(\r\n|\n|\r)/gm,
+          ""
+        ),
+        idealOutput: "",
+        status: "pending",
+        Instructions: `Get Resume Score, Keywords and Potential Problems in Resume`,
+      };
 
-    //   await TrainBot.create({ ...obj });
-    // } catch (error) {}
+      await TrainBot.create({ ...obj });
+    } catch (error) {}
     return NextResponse.json(
       {
         result: response?.choices[0]?.message?.content?.replace(
