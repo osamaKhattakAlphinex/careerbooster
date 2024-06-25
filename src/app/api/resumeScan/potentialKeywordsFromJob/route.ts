@@ -29,9 +29,7 @@ export async function POST(req: NextRequest) {
       response_format: { type: "json_object" },
       messages: [{ role: "user", content: inputPrompt }],
     });
-    console.log(
-      response.choices[0].message.content?.replace(/(\r\n|\n|\r)/gm, "")
-    );
+    
     try {
       await startDB();
 
