@@ -1,4 +1,3 @@
-// import fs from "fs";
 import User from "@/db/schemas/User";
 import startDB from "@/lib/db";
 import { getServerSession } from "next-auth";

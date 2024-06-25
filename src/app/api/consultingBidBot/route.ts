@@ -1,7 +1,7 @@
 import User from "@/db/schemas/User";
 import startDB from "@/lib/db";
 import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { updateTrainedBotEntry } from "@/helpers/updateTrainBotEntry";
 
@@ -38,7 +38,7 @@ async function updateConsultingBid(payload: any) {
   });
   return "ok";
 }
-export async function POST(request: any) {
+export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions);
 
   if (session) {
