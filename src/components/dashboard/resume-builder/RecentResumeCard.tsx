@@ -89,57 +89,56 @@ const RecentResumeCard = ({
           }`}
         >
           {resumes.length > 0 ? (
-
-          <Swiper
-            slidesPerView={3}
-            spaceBetween={15}
-            navigation={true}
-            modules={[Navigation]}
-            breakpoints={{
-              0: {
-                slidesPerView: 1,
-              },
-              640: {
-                slidesPerView: 1,
-              },
-              768: {
-                slidesPerView: 3,
-              },
-              1080: {
-                slidesPerView: 3,
-              },
-              1280: {
-                slidesPerView: 3,
-              },
-            }}
-            className="mySwiper"
-          >
-            {resumes &&
-              resumes.map((resume: any) => (
-                <SwiperSlide key={resume.id}>
-                  <SingleRecentResumeCard
-                    key={resume.id}
-                    resume={resume}
-                    source={source}
-                    componentRef={componentRef}
-                    setFinished={setFinished}
-                    templateId={templateId}
-                  />
-                </SwiperSlide>
-              ))}
-          </Swiper>
-          ): (
+            <Swiper
+              slidesPerView={3}
+              spaceBetween={15}
+              navigation={true}
+              modules={[Navigation]}
+              breakpoints={{
+                0: {
+                  slidesPerView: 1,
+                },
+                640: {
+                  slidesPerView: 1,
+                },
+                768: {
+                  slidesPerView: 3,
+                },
+                1080: {
+                  slidesPerView: 3,
+                },
+                1280: {
+                  slidesPerView: 3,
+                },
+              }}
+              className="mySwiper"
+            >
+              {resumes &&
+                resumes.map((resume: any) => (
+                  <SwiperSlide key={resume.id}>
+                    <SingleRecentResumeCard
+                      key={resume.id}
+                      resume={resume}
+                      source={source}
+                      componentRef={componentRef}
+                      setFinished={setFinished}
+                      templateId={templateId}
+                    />
+                  </SwiperSlide>
+                ))}
+            </Swiper>
+          ) : (
             <div className="flex flex-col items-center justify-center w-full p-5 mt-1 space-y-2 text-gray-100/50">
               {emptyStateIcon}
               <p className="mt-4 text-sm font-semibold uppercase">
                 No Resumes found
               </p>
               <p className="text-xs">
-                You do not have any resumes yet. Your generated resumes{" "}
-                will list here.
+                You do not have any resumes yet. Your generated resumes will
+                list here.
               </p>
             </div>
-          ) }
+          )}
         </div>
       </div>
     </>
