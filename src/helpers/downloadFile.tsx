@@ -9,7 +9,7 @@ const DownloadService = ({
   type,
   fileName,
   preview,
-}: // setOpenUpgradModal,
+}:
 any) => {
   const docRef = useRef<HTMLAnchorElement | null>(null);
   const { color } = useColorContext();
