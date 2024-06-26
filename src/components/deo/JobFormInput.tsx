@@ -4,13 +4,14 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { crossIcon, crossIcon1, crossIconSmall } from "@/helpers/iconsProvider";
 import axios from "axios";
-import dynamic from "next/dynamic";
-import CustomEditor from "../CustomEditor";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
   const [jobCategories, setJobCategories] = useState<any>([]);
   const [updateJob, setUpdateJob] = useState<boolean>(false);
   const [rewritingJob, setRewritingJob] = useState(false);
+  const [value, setValue] = useState("");
 
   useEffect(() => {
     fetch("/api/deo/jobCategories", {
@@ -164,8 +165,10 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
         <div className="w-full flex flex-col ">
           <label
             htmlFor="job"
-            className={`py-2 text-sm text-gray-100 ${
-              formik.errors.job ? "text-red-500" : ""
+            className={`py-2 text-sm  ${
+              formik.touched.job && formik.errors.job
+                ? "text-red-500"
+                : "text-gray-100"
             }`}
           >
             Job Title
@@ -175,7 +178,7 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
             id="job"
             // placeholder="Enter job title"
             className={`w-full px-2 py-3 text-sm text-gray-100 bg-gray-500 rounded-sm outline-none placeholder:text-gray-200 ${
-              formik.errors.job
+              formik.touched.job && formik.errors.job
                 ? "border-red-500 border-2"
                 : "border-transparent border-none"
             }`}
@@ -188,8 +191,10 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
         <div className="w-full">
           <label
             htmlFor="employer"
-            className={`py-2 text-sm text-gray-100 ${
-              formik.errors.employer ? "text-red-500" : ""
+            className={`py-2 text-sm  ${
+              formik.touched.employer && formik.errors.employer
+                ? "text-red-500"
+                : "text-gray-100"
             }`}
           >
             Employer
@@ -199,7 +204,7 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
             id="employer"
             // placeholder="Enter employer name"
             className={`w-full px-2 py-3 text-sm text-gray-100 bg-gray-500 rounded-sm outline-none placeholder:text-gray-200 ${
-              formik.errors.job
+              formik.touched.employer && formik.errors.employer
                 ? "border-red-500 border-2"
                 : "border-transparent border-none"
             }`}
@@ -213,7 +218,9 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
           <label
             htmlFor="location"
             className={`py-2 text-sm  ${
-              formik.errors.location ? "text-red-500" : "text-gray-100"
+              formik.touched.location && formik.errors.location
+                ? "text-red-500"
+                : "text-gray-100"
             }`}
           >
             Location
@@ -223,7 +230,7 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
             id="location"
             // placeholder="Enter job location"
             className={`w-full px-2 py-3 text-sm text-gray-100 bg-gray-500 rounded-sm outline-none placeholder:text-gray-200 ${
-              formik.errors.location
+              formik.touched.location && formik.errors.location
                 ? "border-red-500 border-2"
                 : "border-transparent border-none"
             }`}
@@ -237,7 +244,9 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
           <label
             htmlFor="category"
             className={`py-2 text-sm ${
-              formik.errors.category ? "text-red-500" : "text-gray-100"
+              formik.touched.category && formik.errors.category
+                ? "text-red-500"
+                : "text-gray-100"
             }`}
           >
             Job Category
@@ -245,7 +254,7 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
           <select
             id="category"
             className={`w-full px-2 py-3 text-sm text-gray-100 bg-gray-500 rounded-sm outline-none placeholder:text-gray-200 ${
-              formik.errors.category
+              formik.touched.category && formik.errors.category
                 ? "border-red-500 border-2"
                 : "border-transparent border-none"
             }`}
@@ -275,7 +284,9 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
           <label
             htmlFor="joblink"
             className={`py-2 text-sm ${
-              formik.errors.joblink ? "text-red-500" : "text-gray-100"
+              formik.touched.joblink && formik.errors.joblink
+                ? "text-red-500"
+                : "text-gray-100"
             }`}
           >
             Job Link
@@ -285,7 +296,7 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
             id="joblink"
             // placeholder="Enter job link"
             className={`w-full px-2 py-3 text-sm text-gray-100 bg-gray-500 rounded-sm outline-none placeholder:text-gray-200 ${
-              formik.errors.joblink
+              formik.touched.joblink && formik.errors.joblink
                 ? "border-red-500 border-2"
                 : "border-transparent border-none"
             }`}
@@ -301,7 +312,9 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
               <label
                 htmlFor="skills"
                 className={`py-2 text-sm ${
-                  formik.errors.skills ? "text-red-500" : "text-gray-100"
+                  formik.touched.skills && formik.errors.skills
+                    ? "text-red-500"
+                    : "text-gray-100"
                 }`}
               >
                 Skills
@@ -312,7 +325,7 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
                 // placeholder="Enter required skills"
                 name="skills"
                 className={`w-full px-2 py-3 text-sm text-gray-100 bg-gray-500 rounded-sm outline-none placeholder:text-gray-200 ${
-                  formik.errors.skills
+                  formik.touched.skills && formik.errors.skills
                     ? "border-red-500 border-2"
                     : "border-transparent border-none"
                 }`}
@@ -371,7 +384,7 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
             </div>
           ))}
         </div>
-        <div className="w-full col-span-2 space-y-1">
+        <div className="w-full  space-y-1">
           <label htmlFor="description" className="py-2 text-sm text-gray-100">
             Job Description
           </label>
@@ -382,12 +395,20 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
             className={`w-full px-2 py-3 text-sm text-gray-100 bg-gray-500 rounded-sm outline-none placeholder:text-gray-200 `}
             {...formik.getFieldProps("description")}
           /> */}
-          <CustomEditor initialData="<h1>Hello from CKEditor in Next.js!</h1>" />
+          <div className="text-gray-100 mb-10 ">
+            <ReactQuill
+              theme="snow"
+              value={formik.values.description}
+              onChange={(value) => formik.setFieldValue("description", value)}
+              style={{ height: "400px" }}
+            />
+          </div>
+
           {formik.touched.description && formik.errors.description && (
             <div className="text-red-500">{formik.errors.description}</div>
           )}
         </div>
-        <div className="flex col-span-2 gap-2">
+        <div className="flex my-14 gap-2">
           <button
             type="submit"
             disabled={formik.isSubmitting}
