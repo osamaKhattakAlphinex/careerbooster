@@ -1,10 +1,9 @@
 "use client";
-//v1.3
 import { ThemeProvider } from "next-themes";
 import Script from "next/script";
 import React from "react";
 
-const NextThemeProvider = ({ children }: any) => {
+const NextThemeProvider = ({ children }:{children: React.ReactNode}) => {
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body suppressHydrationWarning={true}>

@@ -14,7 +14,7 @@ any) => {
   const docRef = useRef<HTMLAnchorElement | null>(null);
   const { color } = useColorContext();
   let htmlToDoc: string;
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const templateCall = async () => {
     setLoading(true);
