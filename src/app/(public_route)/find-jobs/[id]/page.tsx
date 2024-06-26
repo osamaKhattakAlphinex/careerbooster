@@ -2,10 +2,9 @@
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { SingleJob } from "../../../../../types/ObjTypes/types";
 
 export default function ViewJobPage({ params }: { params: { id: string } }) {
-  const [singleJob, setSingleJob] = useState<SingleJob>();
+  const [singleJob, setSingleJob] = useState<any>();
   useEffect(() => {
     if (params.id) {
       fetch(`/api/deo/?findOne=${params.id}`, {
@@ -14,7 +13,7 @@ export default function ViewJobPage({ params }: { params: { id: string } }) {
         const res = await response.json();
         if (res.success) {
           setSingleJob(res.data);
-                }
+        }
       });
     }
   }, [params]);
@@ -77,7 +76,12 @@ export default function ViewJobPage({ params }: { params: { id: string } }) {
             )}
           </div>
         </div>
-        <div className="content text-gray-100">{singleJob?.jobDescription}</div>
+        <div
+          className="content text-gray-100"
+          dangerouslySetInnerHTML={{
+            __html: singleJob?.jobDescription,
+          }}
+        ></div>
         <div className="my-8 ">
           {singleJob?.link && (
             <Link

@@ -54,5 +54,4 @@ export type SingleJob = {
     status: string;
     featured: number;
     updatedAt: Date;
-
 }
