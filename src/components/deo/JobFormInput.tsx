@@ -4,6 +4,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { crossIcon, crossIcon1, crossIconSmall } from "@/helpers/iconsProvider";
 import axios from "axios";
+import dynamic from "next/dynamic";
+import CustomEditor from "../CustomEditor";
 
 const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
   const [jobCategories, setJobCategories] = useState<any>([]);
@@ -158,62 +160,95 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
           {crossIconSmall}
         </div>
       </div>
-      <form
-        className="grid grid-cols-2 gap-2 mt-2"
-        onSubmit={formik.handleSubmit}
-      >
-        <div className="w-full">
-          <label htmlFor="job" className="py-2 text-sm text-gray-100">
+      <form className="flex flex-col gap-2 mt-2" onSubmit={formik.handleSubmit}>
+        <div className="w-full flex flex-col ">
+          <label
+            htmlFor="job"
+            className={`py-2 text-sm text-gray-100 ${
+              formik.errors.job ? "text-red-500" : ""
+            }`}
+          >
             Job Title
           </label>
           <input
             type="text"
             id="job"
-            placeholder="Enter job title"
-            className="w-full px-2 py-1 text-sm text-gray-100 bg-gray-500 rounded-sm outline-none placeholder:text-gray-200"
+            // placeholder="Enter job title"
+            className={`w-full px-2 py-3 text-sm text-gray-100 bg-gray-500 rounded-sm outline-none placeholder:text-gray-200 ${
+              formik.errors.job
+                ? "border-red-500 border-2"
+                : "border-transparent border-none"
+            }`}
             {...formik.getFieldProps("job")}
           />
           {formik.touched.job && formik.errors.job && (
-            <div className="text-red-500">{formik.errors.job}</div>
+            <div className="text-red-500 text-sm">{formik.errors.job}</div>
           )}
         </div>
         <div className="w-full">
-          <label htmlFor="employer" className="py-2 text-sm text-gray-100">
+          <label
+            htmlFor="employer"
+            className={`py-2 text-sm text-gray-100 ${
+              formik.errors.employer ? "text-red-500" : ""
+            }`}
+          >
             Employer
           </label>
           <input
             type="text"
             id="employer"
-            placeholder="Enter employer name"
-            className="w-full px-2 py-1 text-sm text-gray-100 bg-gray-500 rounded-sm outline-none placeholder:text-gray-200"
+            // placeholder="Enter employer name"
+            className={`w-full px-2 py-3 text-sm text-gray-100 bg-gray-500 rounded-sm outline-none placeholder:text-gray-200 ${
+              formik.errors.job
+                ? "border-red-500 border-2"
+                : "border-transparent border-none"
+            }`}
             {...formik.getFieldProps("employer")}
           />
           {formik.touched.employer && formik.errors.employer && (
-            <div className="text-red-500">{formik.errors.employer}</div>
+            <div className="text-red-500 text-sm">{formik.errors.employer}</div>
           )}
         </div>
         <div className="w-full">
-          <label htmlFor="location" className="py-2 text-sm text-gray-100">
+          <label
+            htmlFor="location"
+            className={`py-2 text-sm  ${
+              formik.errors.location ? "text-red-500" : "text-gray-100"
+            }`}
+          >
             Location
           </label>
           <input
             type="text"
             id="location"
-            placeholder="Enter job location"
-            className="w-full px-2 py-1 text-sm text-gray-100 bg-gray-500 rounded-sm outline-none placeholder:text-gray-200"
+            // placeholder="Enter job location"
+            className={`w-full px-2 py-3 text-sm text-gray-100 bg-gray-500 rounded-sm outline-none placeholder:text-gray-200 ${
+              formik.errors.location
+                ? "border-red-500 border-2"
+                : "border-transparent border-none"
+            }`}
             {...formik.getFieldProps("location")}
           />
-          {formik.touched.location && formik.errors.location && (
+          {formik.errors.location && formik.errors.location && (
             <div className="text-red-500">{formik.errors.location}</div>
           )}
         </div>
         <div className="w-full">
-          <label htmlFor="category" className="py-2 text-sm text-gray-100">
+          <label
+            htmlFor="category"
+            className={`py-2 text-sm ${
+              formik.errors.category ? "text-red-500" : "text-gray-100"
+            }`}
+          >
             Job Category
           </label>
           <select
             id="category"
-            className="w-full px-2 py-1 text-sm text-gray-100 bg-gray-500 rounded-sm outline-none placeholder:text-gray-200"
+            className={`w-full px-2 py-3 text-sm text-gray-100 bg-gray-500 rounded-sm outline-none placeholder:text-gray-200 ${
+              formik.errors.category
+                ? "border-red-500 border-2"
+                : "border-transparent border-none"
+            }`}
             {...formik.getFieldProps("category")}
           >
             {/* <option value="" disabled>
@@ -237,14 +272,23 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
         </div>
 
         <div className="w-full">
-          <label htmlFor="joblink" className="py-2 text-sm text-gray-100">
+          <label
+            htmlFor="joblink"
+            className={`py-2 text-sm ${
+              formik.errors.joblink ? "text-red-500" : "text-gray-100"
+            }`}
+          >
             Job Link
           </label>
           <input
             type="text"
             id="joblink"
-            placeholder="Enter job link"
-            className="w-full px-2 py-1 text-sm text-gray-100 bg-gray-500 rounded-sm outline-none placeholder:text-gray-200"
+            // placeholder="Enter job link"
+            className={`w-full px-2 py-3 text-sm text-gray-100 bg-gray-500 rounded-sm outline-none placeholder:text-gray-200 ${
+              formik.errors.joblink
+                ? "border-red-500 border-2"
+                : "border-transparent border-none"
+            }`}
             {...formik.getFieldProps("joblink")}
           />
           {formik.touched.joblink && formik.errors.joblink && (
@@ -254,15 +298,24 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
         <div className="flex flex-col">
           <div className="flex flex-row items-end justify-between gap-2">
             <div className="flex-1 w-full">
-              <label htmlFor="skills" className="py-2 text-sm text-gray-100">
+              <label
+                htmlFor="skills"
+                className={`py-2 text-sm ${
+                  formik.errors.skills ? "text-red-500" : "text-gray-100"
+                }`}
+              >
                 Skills
               </label>
               <input
                 type="text"
                 id="skills"
-                placeholder="Enter required skills"
+                // placeholder="Enter required skills"
                 name="skills"
-                className="w-full px-2 py-1 text-sm text-gray-100 bg-gray-500 rounded-sm outline-none placeholder:text-gray-200"
+                className={`w-full px-2 py-3 text-sm text-gray-100 bg-gray-500 rounded-sm outline-none placeholder:text-gray-200 ${
+                  formik.errors.skills
+                    ? "border-red-500 border-2"
+                    : "border-transparent border-none"
+                }`}
                 onChange={(e) => setNewSkill(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
@@ -292,7 +345,7 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
                     );
                   }
                 }}
-                className="h-full px-3 py-1 text-sm text-gray-100 bg-green-600 rounded-sm"
+                className="h-full px-3 py-3 text-sm text-gray-100 bg-green-600 rounded-sm"
               >
                 Add Skill
               </button>
@@ -322,13 +375,14 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
           <label htmlFor="description" className="py-2 text-sm text-gray-100">
             Job Description
           </label>
-          <textarea
+          {/* <textarea
             id="description"
-            placeholder="Enter job description"
+            // placeholder="Enter job description"
             rows={4}
-            className="w-full px-2 py-1 text-sm text-gray-100 bg-gray-500 rounded-sm outline-none placeholder:text-gray-200"
+            className={`w-full px-2 py-3 text-sm text-gray-100 bg-gray-500 rounded-sm outline-none placeholder:text-gray-200 `}
             {...formik.getFieldProps("description")}
-          />
+          /> */}
+          <CustomEditor initialData="<h1>Hello from CKEditor in Next.js!</h1>" />
           {formik.touched.description && formik.errors.description && (
             <div className="text-red-500">{formik.errors.description}</div>
           )}
