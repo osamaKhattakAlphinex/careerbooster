@@ -262,7 +262,6 @@ h2:empty {
         }
 
         const res = await response.json();
-        console.log(res)
         const arrayBufferView = new Uint8Array(res.result.data);
 
         const blob = new Blob([arrayBufferView], {

@@ -24,6 +24,7 @@
     "axios": "^1.4.0",
     "bcrypt": "^5.1.1",
     "ckeditor5": "^42.0.0",
+    "ckeditor5-custom-build": "^0.0.6",
     "ckeditor5-premium-features": "^42.0.0",
     "clipboard-copy": "^4.0.1",
     "clsx": "^2.0.0",
