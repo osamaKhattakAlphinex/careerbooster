@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-react": "^7.0.0",
     "@ducanh2912/next-pwa": "^10.2.7",
     "@reduxjs/toolkit": "^1.9.5",
     "@sparticuz/chromium-min": "^123.0.1",
@@ -22,6 +23,8 @@
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
     "bcrypt": "^5.1.1",
+    "ckeditor5": "^42.0.0",
+    "ckeditor5-premium-features": "^42.0.0",
     "clipboard-copy": "^4.0.1",
     "clsx": "^2.0.0",
     "cryptr": "^6.3.0",
