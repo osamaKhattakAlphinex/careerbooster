@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { RootState } from "@/store/store";
 
 const ProfileCompletionAlert = () => {
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
@@ -14,7 +15,7 @@ const ProfileCompletionAlert = () => {
       setShowSuccessAlert(true);
     }
   }, [params]);
-  const userData = useSelector((state: any) => state.userData);
+  const userData = useSelector((state: RootState) => state.userData);
   if (userData?.wizardReviewed && showSuccessAlert) {
     return (
       <div className="flex lg:flex-row flex-col justify-center mb-7 items-center bg-[#312E37] bg-opacity-[35%] w-full lg:h-[80px]  rounded-xl px-2 lg:py-[8px] py-[12px] pcursor-pointer">

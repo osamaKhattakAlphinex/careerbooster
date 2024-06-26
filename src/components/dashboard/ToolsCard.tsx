@@ -3,8 +3,7 @@ import { useTourContext } from "@/context/TourContext";
 import { chevronRight } from "@/helpers/iconsProvider";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import DeleteConfirmationModal from "../common/ConfirmationModal";
+import React, { useState } from "react";
 
 const ToolsCard = ({
   title,
@@ -13,7 +12,6 @@ const ToolsCard = ({
   icon,
   bgColor1,
   bgColor2,
-  isActive,
   action,
 }: {
   title: string;
@@ -22,7 +20,6 @@ const ToolsCard = ({
   icon: any;
   bgColor1: string;
   bgColor2: string;
-  isActive: boolean;
   action: string;
 }) => {
   const {

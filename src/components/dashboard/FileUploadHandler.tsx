@@ -4,7 +4,7 @@ import React from "react";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-const saveToLocalStorage = (text: any) => {
+const saveToLocalStorage = (text: string) => {
   localStorage.setItem("pdfText", text);
 };
 

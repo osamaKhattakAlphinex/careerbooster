@@ -2,7 +2,7 @@
 import { refreshBigIconRotating } from "@/helpers/iconsProvider";
 import { useDispatch, useSelector } from "react-redux";
 import DidYouKnowCard from "./DidYouKnowCard";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { makeid } from "@/helpers/makeid";
@@ -30,34 +30,20 @@ import { usePathname } from "next/navigation";
 import VirtualBot from "./VirtualBot";
 import { getPackageID } from "@/ServerActions";
 import { setUserData } from "@/store/userDataSlice";
+import { RootState } from "@/store/store";
 
 interface Props {
   children: React.ReactNode;
-}
-
-// to Remove special characters from string
-function removeSpecialChars(str: string) {
-  // Remove new lines
-  str = str.replace(/[\r\n]+/gm, "");
-
-  // Remove Unicode characters
-  str = str.replace(/[^\x00-\x7F]/g, "");
-
-  // Remove icons
-  str = str.replace(/[^\w\s]/gi, "");
-
-  return str;
 }
 
 const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   const pathname = usePathname();
   // Redux
   const router = useRouter();
-  const userData = useSelector((state: any) => state.userData);
-  const [subscribing, setSubscribing] = useState(false);
+  const userData = useSelector((state: RootState) => state.userData);
   const dispatch = useDispatch();
-  const register = useSelector((state: any) => state.register);
-  const resume = useSelector((state: any) => state.resume);
+  const register = useSelector((state: RootState) => state.register);
+  const resume = useSelector((state: RootState) => state.resume);
   const [showStuckError, setShowStuckError] = useState(false);
 
   // useeffect to show stuck error to true after 2 minutes
@@ -1140,9 +1126,8 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   }, [userData.email]);
 
   const updateUserWithFreePackage = async () => {
-    console.log("Updating user with free package...");
     const creditPackageId: string | undefined = await getPackageID();
-    if (!subscribing && creditPackageId) {
+    if (creditPackageId) {
       const creditPackage = await getCreditPackageDetails(creditPackageId);
 
       if (creditPackage) {
