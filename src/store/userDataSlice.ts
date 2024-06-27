@@ -98,9 +98,8 @@ interface UserDataSlice {
   isFetched: boolean;
   isLoading: boolean;
   error: string;
-  // userId?: string;
-  firstName?: string;
-  lastName?: string;
+  firstName: string;
+  lastName: string;
   phone?: string;
   email?: string;
   role?: string;

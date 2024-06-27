@@ -8,10 +8,11 @@ import { refreshIconRotating, uploadIcon } from "@/helpers/iconsProvider";
 import FileUploadHandler from "./dashboard/FileUploadHandler";
 import WordFileHandler from "./dashboard/WordFileHandler";
 import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 const UploadPDFResume = () => {
   const router = useRouter();
-  const userData = useSelector((state: any) => state.userData);
+  const userData = useSelector((state: RootState) => state.userData);
 
   // local states
   const [fileUploading, setFileUploading] = useState<boolean>(false);

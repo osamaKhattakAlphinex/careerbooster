@@ -6,11 +6,12 @@ import { useEffect } from "react";
 
 import "@/app/(private_route)/dashboard.css";
 import { setCredits, setField } from "@/store/creditLimitsSlice";
+import { RootState } from "@/store/store";
 
 const CreditLimitsProvider = () => {
     // Session
     const { data: session } = useSession();
-    const creditLimits = useSelector((state: any) => state.creditLimits);
+    const creditLimits = useSelector((state: RootState) => state.creditLimits);
     // Redux    
     const dispatch = useDispatch();
     // when user is authenticated get userdata if not exists

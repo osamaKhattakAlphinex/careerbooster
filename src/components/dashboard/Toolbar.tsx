@@ -28,7 +28,7 @@ const Toolbar = ({
   copyToClipBoard,
   children,
 }: ToolbarType) => {
-  const [confirmationModal, setConfirmationModal] = useState(false);
+  const [confirmationModal, setConfirmationModal] = useState<boolean>(false);
   return (
     <>
       <div className="relative group">

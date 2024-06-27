@@ -13,6 +13,7 @@ const WordFileHandler = ({
   text,
   setText,
 }: any) => {
+
   const str2xml = (str: any) => {
     if (str.charCodeAt(0) === 65279) {
       // BOM sequence
@@ -133,6 +134,7 @@ const WordFileHandler = ({
       }
     }
   }, [text]);
+  
   return <></>;
 };
 

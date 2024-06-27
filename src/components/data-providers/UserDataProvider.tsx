@@ -7,6 +7,7 @@ import { setField as setFieldRegister } from "@/store/registerSlice";
 import { useEffect } from "react";
 
 import "@/app/(private_route)/dashboard.css";
+import { RootState } from "@/store/store";
 
 const UserDataProvider = () => {
   // Session
@@ -14,7 +15,7 @@ const UserDataProvider = () => {
 
   // Redux
   const dispatch = useDispatch();
-  const userData = useSelector((state: any) => state.userData);
+  const userData = useSelector((state: RootState) => state.userData);
   // when user is authenticated get userdata if not exists
   const getUserDataIfNotExists = async () => {
     if (!userData.isLoading && !userData.isFetched) {
@@ -46,19 +47,6 @@ const UserDataProvider = () => {
         dispatch(
           setField({ name: "wizardCompleted", value: user.wizardCompleted })
         );
-
-        // if (user?.userPackage) {
-        //   // get user package details
-        //   const res2 = await fetch(
-        //     `/api/users/getCreditPackageDetails?id=${user?.creditPackage}`
-        //   );
-        //   const data = await res2.json();
-        //   if (data.success) {
-        //     const userPackage = data.result;
-        //     // set user package details to redux
-        //     dispatch(setField({ name: "userPackageData", value: userPackage }));
-        //   }
-        // }
       } catch (err) {
         console.log(err);
       }

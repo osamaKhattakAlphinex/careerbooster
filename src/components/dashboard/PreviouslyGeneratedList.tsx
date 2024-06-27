@@ -57,7 +57,7 @@ const PreviouslyGeneratedList = ({ dataSource, Component }: Props) => {
 
   return (
     <div
-      ref={(ref: any) => (historyCardRef.current = ref)}
+      ref={(ref: HTMLDivElement) => (historyCardRef.current = ref)}
       className="dark:bg-[#17151b] dark:text-white  bg-[#00000015] text-gray-950  rounded-lg  mb-7 px-4 lg:px-[24px] pt-[20px] pb-[20px] z-0"
     >
       <div className="flex items-center justify-between gap-3">

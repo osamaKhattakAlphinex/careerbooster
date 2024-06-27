@@ -1,4 +1,3 @@
-"use client";
 import ToolsCard from "@/components/dashboard/ToolsCard";
 import chatbot from "@/../public/icon/chatbot.png";
 import book from "@/../public/icon/book.png";
@@ -7,7 +6,6 @@ import email from "@/../public/icon/email.png";
 import review from "@/../public/icon/review.png";
 import bigs from "@/../public/icon/bigs.png";
 import letter from "@/../public/icon/letter.png";
-import { useState } from "react";
 import bagsIcon from "@/../public/icon/bagsIcon.svg";
 import scanIcon from "@/../public/icon/scanIcon.svg";
 
@@ -105,10 +103,8 @@ const cardDetail = [
     action: "coming soon",
   },
 ];
-// { name: "Career Coach", value: "careerCoach" },
 
 const ResumeMaker = () => {
-  const [activeTab, setActiveTab] = useState("Career Coach");
   return (
     <div className="md:pt-2 xs:pt-0 lg:mt-2">
       <div className="grid grid-cols-1 gap-2 md:grid-cols-3 sm:grid-cols-2">
@@ -116,7 +112,6 @@ const ResumeMaker = () => {
           <ToolsCard
             key={index}
             {...item}
-            isActive={activeTab === item.title}
           />
         ))}
       </div>
