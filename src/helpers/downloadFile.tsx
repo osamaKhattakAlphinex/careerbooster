@@ -282,7 +282,6 @@ h2:empty {
   };
 
   return (
-    <>
       <div className="hidden xs:block md:block group">
         <a className="hidden" href="#" ref={docRef} target="_blank"></a>
 
@@ -341,7 +340,6 @@ h2:empty {
           </div>
         </button>
       </div>
-    </>
   );
 };
 
