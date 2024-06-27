@@ -9,12 +9,12 @@ const DownloadService = ({
   type,
   fileName,
   preview,
-}: // setOpenUpgradModal,
+}:
 any) => {
   const docRef = useRef<HTMLAnchorElement | null>(null);
   const { color } = useColorContext();
   let htmlToDoc: string;
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const templateCall = async () => {
     setLoading(true);
@@ -262,7 +262,6 @@ h2:empty {
         }
 
         const res = await response.json();
-        console.log(res)
         const arrayBufferView = new Uint8Array(res.result.data);
 
         const blob = new Blob([arrayBufferView], {
@@ -283,7 +282,6 @@ h2:empty {
   };
 
   return (
-    <>
       <div className="hidden xs:block md:block group">
         <a className="hidden" href="#" ref={docRef} target="_blank"></a>
 
@@ -342,7 +340,6 @@ h2:empty {
           </div>
         </button>
       </div>
-    </>
   );
 };
 

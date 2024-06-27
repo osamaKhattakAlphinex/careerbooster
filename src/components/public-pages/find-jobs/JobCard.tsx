@@ -13,7 +13,6 @@ export default function JobCard({
   query: string;
   locationQuery: any;
 }) {
-  console.log(locationQuery);
   const [loading, setLoading] = useState(false);
   const [limitOfRecords, setLimitOfRecords] = useState(10);
   const [currentPage, setCurrentPage] = useState<number>(1);

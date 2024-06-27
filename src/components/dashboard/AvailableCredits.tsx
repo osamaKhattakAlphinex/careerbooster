@@ -1,9 +1,10 @@
 import { useAppContext } from "@/context/AppContext";
+import { RootState } from "@/store/store";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const AvailableCredits = () => {
-  const userData = useSelector((state: any) => state.userData);
+  const userData = useSelector((state: RootState) => state.userData);
   const [userCurrentCredits, setUserCurrentCredits] = useState<number>(0);
   const [userCurrentTotalCredits, setUserCurrentTotalCredits] =
     useState<number>(0);

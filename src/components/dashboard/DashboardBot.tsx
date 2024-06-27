@@ -5,7 +5,7 @@ import "@/app/(private_route)/dashboard.css";
 import { useTourContext } from "@/context/TourContext";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 import { useSelector } from "react-redux";
-import { crossIcon, crossIconSmall } from "@/helpers/iconsProvider";
+import { crossIconSmall } from "@/helpers/iconsProvider";
 interface TooltipProps {
   text: string;
   children: React.ReactNode;
