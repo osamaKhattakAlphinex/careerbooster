@@ -1,7 +1,7 @@
 "use client";
 import { crossIcon } from "@/helpers/iconsProvider";
 import { RootState } from "@/store/store";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const CustomSection = ({ setSectionsPopup,setNewSectionEntry }) => {
@@ -40,9 +40,15 @@ const CustomSection = ({ setSectionsPopup,setNewSectionEntry }) => {
       setSectionsPopup(false);
     }
   };
+  useEffect(()=>{
+    const element = document.querySelector(".customSection");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  },[])
 
   return (
-    <div className="fixed right-[30%] top-1/3 z-50 boverflow-auto bg-white  w-2/5 rounded-md shadow-xl">
+    <div className="customSection overflow-auto bg-white  w-3/4 self-center rounded-md shadow-xl">
       <div className="p-4 flex flex-col rounded-lg">
         <div className="flex items-center justify-between w-full px-4">
           <h3 className="font-semibold xs:text-lg md:text-xl">

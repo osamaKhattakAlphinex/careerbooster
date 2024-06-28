@@ -8,7 +8,7 @@ const AddSection = ({setNewSectionEntry}) => {
 
   return (
     <>
-      <div className="flex flex-row items-center justify-center">
+      <div className="flex flex-row items-center justify-center w-full">
         <span className=" h-[1px] !block bg-gray-300 flex-1"></span>
         <button
           title="Add Section"
