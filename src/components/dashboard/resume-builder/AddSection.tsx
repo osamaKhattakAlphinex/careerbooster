@@ -9,7 +9,7 @@ const AddSection = ({setNewSectionEntry}) => {
   return (
     <>
       <div className="flex flex-row items-center justify-center">
-        <span className=" h-[1px] bg-gray-300 flex-1"></span>
+        <span className=" h-[1px] !block bg-gray-300 flex-1"></span>
         <button
           title="Add Section"
           type="button"
@@ -25,7 +25,7 @@ const AddSection = ({setNewSectionEntry}) => {
             <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
           </svg>
         </button>
-        <span className=" h-[1px] bg-gray-300 flex-1"></span>
+        <span className=" h-[1px] !block bg-gray-300 flex-1"></span>
       </div>
       {sectionsPopup && <CustomSection setSectionsPopup={setSectionsPopup} setNewSectionEntry={setNewSectionEntry}/> }
     </>
