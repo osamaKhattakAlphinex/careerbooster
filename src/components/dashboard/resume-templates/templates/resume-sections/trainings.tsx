@@ -33,7 +33,7 @@ const Training = ({ heading, trainings, styles, customStyle }: Props) => {
   return (
     <>
       <span
-        className={`${styles?.span1} ${
+        className={`trainings ${styles?.span1} ${
           customStyle?.borderTopBottom ? "!block" : "hidden"
         }
          

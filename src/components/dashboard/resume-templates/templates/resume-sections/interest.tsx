@@ -36,7 +36,7 @@ const Interest = ({
   return (
     <>
       <span
-        className={`${styles?.span1} ${
+        className={`interests ${styles?.span1} ${
           customStyle?.borderTopBottom ? "!block" : "hidden"
         }`}
       ></span>

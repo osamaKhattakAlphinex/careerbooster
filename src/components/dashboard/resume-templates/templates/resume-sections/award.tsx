@@ -30,7 +30,7 @@ const Award = ({ heading, awards, styles, customStyle }: Props) => {
   return (
     <>
       <span
-        className={`${styles?.span1} ${
+        className={`awards ${styles?.span1} ${
           customStyle?.borderTopBottom ? "!block" : "hidden"
         }`}
       ></span>

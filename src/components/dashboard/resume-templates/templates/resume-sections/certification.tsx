@@ -36,7 +36,7 @@ const Certification = ({
   return (
     <>
       <span
-        className={`${styles?.span1} ${
+        className={`certifications ${styles?.span1} ${
           customStyle?.borderTopBottom ? "!block" : "hidden"
         }`}
       ></span>
