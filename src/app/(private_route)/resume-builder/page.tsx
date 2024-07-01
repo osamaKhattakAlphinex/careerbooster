@@ -644,7 +644,7 @@ const ResumeBuilder = () => {
                     href={`/resume-builder/preview-resume?templateId=5&resumeId=${resumeData.id}`}
                   >
                     <div
-                      className={`flex flex-row gap-2 items-center xs:flex-1 w-fit ml-auto lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full  bg-[#e4e9f7]  dark:bg-[#18181b] text-gray-900  dark:text-gray-300 border-[1px] border-[#f0f0f0] `}
+                      className={`flex flex-row gap-2 items-center xs:flex-1 w-fit ml-auto lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full  bg-[#e4e9f7]  dark:bg-[#18181b] text-gray-900  dark:text-gray-300 border-[1px] border-gray-950/80 dark:border-[#f0f0f0] `}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

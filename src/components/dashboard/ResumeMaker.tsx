@@ -64,7 +64,7 @@ const cardDetail = [
   {
     title: "Career Coach",
     description:
-      "Empower your career with AI-driven insights by our career coach for strategic moves.",
+      "Empower your career with AI-driven insights by our career coach.",
     link: "#",
     // link: "/career-coach",
     icon: chatbot,
