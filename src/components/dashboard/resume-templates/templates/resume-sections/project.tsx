@@ -34,12 +34,12 @@ const Project = ({ heading, projects, styles, customStyle }: Props) => {
   return (
     <>
       <span
-        className={`projects ${styles?.span1} ${
+        className={` ${styles?.span1} ${
           customStyle?.borderTopBottom ? "!block" : "hidden"
         }`}
       ></span>
       <h3
-        className={`${styles?.project_h3}  ${
+        className={`projects ${styles?.project_h3}  ${
           customStyle?.centeredHeading ? "justify-center" : ""
         } ${styles.bgColor} `}
       >

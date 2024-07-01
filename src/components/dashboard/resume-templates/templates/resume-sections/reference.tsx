@@ -22,12 +22,12 @@ const Reference = ({ heading, references, styles, customStyle }: Props) => {
   return (
     <>
       <span
-        className={`references ${styles?.span1} ${
+        className={` ${styles?.span1} ${
           customStyle?.borderTopBottom ? "!block" : "hidden"
         }`}
       ></span>
       <h3
-        className={`${styles?.reference_h3} ${
+        className={`references ${styles?.reference_h3} ${
           customStyle?.centeredHeading ? "justify-center" : ""
         }
           ${styles?.bgColor}

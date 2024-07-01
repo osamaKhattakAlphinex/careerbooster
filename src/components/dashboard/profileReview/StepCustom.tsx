@@ -1225,7 +1225,7 @@ export const LangaugesForm = ({
         <div className="flex flex-row-reverse items-center justify-end gap-2 ">
           <input
             type="submit"
-            className="cursor-pointer form-btn"
+            className="cursor-pointer form-btn whitespace-normal"
             value={isEditing ? "Update Language" : "Add Language"}
           />
           <input

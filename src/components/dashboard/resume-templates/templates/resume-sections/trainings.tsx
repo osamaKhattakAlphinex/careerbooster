@@ -22,10 +22,6 @@ const Training = ({ heading, trainings, styles, customStyle }: Props) => {
   const [newTraining, setNewTraining] = useState("");
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const [newBulletSection, setNewBulletSection] = useState<string | null>(null);
-  const [streamedJDData, setStreamedJDData] = useState<any>("");
-  const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
-    number | null
-  >(null);
   const { updateSaveHook } = useUpdateAndSave();
 
   const { handleDropOthersAchievement, handleDropOthers } = useDragAndDrop();
@@ -33,7 +29,7 @@ const Training = ({ heading, trainings, styles, customStyle }: Props) => {
   return (
     <>
       <span
-        className={`trainings ${styles?.span1} ${
+        className={` ${styles?.span1} ${
           customStyle?.borderTopBottom ? "!block" : "hidden"
         }
          
@@ -41,7 +37,7 @@ const Training = ({ heading, trainings, styles, customStyle }: Props) => {
       ></span>
 
       <h3
-        className={`${styles?.training_h3} ${
+        className={`trainings ${styles?.training_h3} ${
           customStyle?.centeredHeading ? "justify-center" : ""
         }
           ${styles?.bgColor}

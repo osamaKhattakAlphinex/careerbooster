@@ -29,11 +29,11 @@ const Language = ({
   return (
     <>
       <span
-        className={`languages ${styles?.span1} ${
+        className={` ${styles?.span1} ${
           customStyle?.borderTopBottom ? "!block" : "hidden"
         }`}
       ></span>
-      <div className={`${rounded_style ? rounded_style : ""}`}>
+      <div className={`languages ${rounded_style ? rounded_style : ""}`}>
         <h3
           className={`${styles?.language_h3} ${
             customStyle?.centeredHeading ? "justify-center" : ""

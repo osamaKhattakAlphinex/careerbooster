@@ -36,11 +36,11 @@ const Interest = ({
   return (
     <>
       <span
-        className={`interests ${styles?.span1} ${
+        className={` ${styles?.span1} ${
           customStyle?.borderTopBottom ? "!block" : "hidden"
         }`}
       ></span>
-      <div className={`${rounded_style ? rounded_style : ""}`}>
+      <div className={`interests ${rounded_style ? rounded_style : ""}`}>
         <h3
           className={`${styles?.interest_h3} ${
             customStyle?.centeredHeading ? "justify-center" : ""
