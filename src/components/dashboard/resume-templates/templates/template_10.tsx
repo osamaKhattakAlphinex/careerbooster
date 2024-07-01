@@ -28,6 +28,7 @@ import Award from "./resume-sections/award";
 import Project from "./resume-sections/project";
 import Reference from "./resume-sections/reference";
 import Education from "./resume-sections/education";
+import AddSection from "../../resume-builder/AddSection";
 
 const ResumeTemplate10 = () => {
   const { updateSaveHook } = useUpdateAndSave();
@@ -38,6 +39,27 @@ const ResumeTemplate10 = () => {
     setIsSidebar(true);
     return () => setIsSidebar(false);
   }, []);
+  const [newSectionEntry, setNewSectionEntry] = useState({
+    awards: false,
+    certifications: false,
+    trainings: false,
+    interests: false,
+    publications: false,
+    languages: false,
+    projects: false,
+    references: false,
+  });
+  useEffect(() => {
+    const keys = Object.keys(newSectionEntry);
+    const trueKey = keys.find((key) => newSectionEntry[key]);
+
+    if (trueKey) {
+      const element = document.querySelector(`.${trueKey}`);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+  }, [newSectionEntry]);
 
   return (
     <div className="relative first-page">
@@ -87,7 +109,8 @@ const ResumeTemplate10 = () => {
             rounded_style="rounded-3xl border-2 border-[#043382] xs:py-2 py-[6px] my-3  flex justify-center"
           />
           {/* Interests & Hobbies */}
-          {resume?.interests && resume?.interests.length > 0 && (
+          {((resume?.interests && resume?.interests.length > 0) ||
+            newSectionEntry.interests) && (
             <Interest
               heading={resume.headings.interests}
               interests={resume.interests}
@@ -96,7 +119,8 @@ const ResumeTemplate10 = () => {
             />
           )}
           {/* Languages */}
-          {resume?.languages && resume?.languages.length > 0 && (
+          {((resume?.languages && resume?.languages.length > 0) ||
+            newSectionEntry.languages) && (
             <Language
               heading={resume.headings.languages}
               languages={resume.languages}
@@ -130,7 +154,8 @@ const ResumeTemplate10 = () => {
           {/* <CustomResumeSection /> */}
           {/* Publications */}
           <div className="w-full">
-            {resume?.publications && resume?.publications.length > 0 && (
+            {((resume?.publications && resume?.publications.length > 0) ||
+              newSectionEntry.publications) && (
               <Publication
                 customStyle={customStyle_10}
                 heading={resume.headings.publications}
@@ -142,7 +167,8 @@ const ResumeTemplate10 = () => {
 
           {/* Certificates */}
           <div className="w-full">
-            {resume?.certifications && resume?.certifications.length > 0 && (
+            {((resume?.certifications && resume?.certifications.length > 0) ||
+              newSectionEntry.certifications) && (
               <Certification
                 customStyle={customStyle_10}
                 heading={resume.headings.certifications}
@@ -155,7 +181,8 @@ const ResumeTemplate10 = () => {
 
           {/* Awards */}
           <div className="w-full">
-            {resume?.awards && resume?.awards.length > 0 && (
+            {((resume?.awards && resume?.awards.length > 0) ||
+              newSectionEntry.awards) && (
               <Award
                 customStyle={customStyle_10}
                 heading={resume.headings.awards}
@@ -167,7 +194,8 @@ const ResumeTemplate10 = () => {
 
           {/* Trainings */}
           <div className="w-full">
-            {resume?.trainings && resume?.trainings.length > 0 && (
+            {((resume?.trainings && resume?.trainings.length > 0) ||
+              newSectionEntry.trainings) && (
               <Training
                 customStyle={customStyle_10}
                 heading={resume.headings.trainings}
@@ -179,7 +207,8 @@ const ResumeTemplate10 = () => {
 
           {/* Projects */}
           <div className="w-full">
-            {resume?.projects && resume?.projects.length > 0 && (
+            {((resume?.projects && resume?.projects.length > 0) ||
+              newSectionEntry.projects) && (
               <Project
                 heading={resume.headings.projects}
                 projects={resume.projects}
@@ -191,7 +220,8 @@ const ResumeTemplate10 = () => {
 
           {/* References */}
           <div className="w-full">
-            {resume?.references && resume?.references.length > 0 && (
+            {((resume?.references && resume?.references.length > 0) ||
+              newSectionEntry.references) && (
               <Reference
                 customStyle={customStyle_10}
                 heading={resume.headings.references}
@@ -212,6 +242,7 @@ const ResumeTemplate10 = () => {
               />
             )}
           </div>
+          <AddSection setNewSectionEntry={setNewSectionEntry} />
         </div>
       </div>
     </div>
