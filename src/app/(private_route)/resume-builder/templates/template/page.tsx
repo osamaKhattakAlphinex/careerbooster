@@ -129,7 +129,7 @@ const Template = () => {
               className="overflow-hidden xs:mt-3 md:mt-0 text-white no-underline rounded-lg"
             >
               <div
-                className={`text-xs font-bold bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] dark:border-gray-950 bg-transparent flex items-center gap-2 text-center p-2`}
+                className={`text-xs font-bold bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] dark:border-gray-950 bg-transparent flex items-center gap-2 text-center p-2`}
               >
                 View All Templates<i className="">{chevronRight}</i>
               </div>
@@ -179,7 +179,7 @@ const Template = () => {
                         key={`template-${index}`}
                         className={`${
                           index === activeTemplate
-                            ? " border-2 rounded-md p-2 border-indigo-600"
+                            ? " border-2 border-gray-950/80 dark:border-gray-100 rounded-md p-2 "
                             : " "
                         }box-border relative flex items-center overflow-hidden rounded-lg group`}
                       >
@@ -275,7 +275,7 @@ const Template = () => {
                   <Link
                     href="/resume-builder"
                     // className="w-2 overflow-hidden text-white no-underline rounded-lg"
-                    className={` dark:bg-gradient-to-r no-underline w-fit hover:from-purple-800 hover:to-pink-600 from-[#b324d7]  to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2 py-2 px-[26px]  rounded-full`}
+                    className={`text-[#fff] bg-gradient-to-r no-underline w-fit hover:from-purple-800 hover:to-pink-600 from-[#b324d7]  to-[#615dff] flex flex-row justify-center items-center gap-2 py-2 px-[26px]  rounded-full`}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -283,7 +283,7 @@ const Template = () => {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="w-4 h-4 dark:text-gray-100 text-gray-950"
+                      className="w-4 h-4 text-gray-100 "
                     >
                       <path
                         strokeLinecap="round"
@@ -300,7 +300,7 @@ const Template = () => {
                     href={`/resume-builder/preview-resume?templateId=${templateId}&resumeId=${resume.id}`}
                   >
                     <div
-                      className={`flex flex-row gap-2 items-center xs:flex-1 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full  bg-[#e4e9f7]  dark:bg-[#18181b] text-gray-900  dark:text-gray-300 border-[1px] border-[#f0f0f0] `}
+                      className={`flex flex-row gap-2 items-center xs:flex-1 lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full  bg-[#e4e9f7]  dark:bg-[#18181b] text-gray-900  dark:text-gray-300 border-[1px] border-gray-950/80 dark:border-[#f0f0f0] `}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -354,7 +354,7 @@ const Template = () => {
                     className="overflow-hidden text-white no-underline rounded-lg"
                   >
                     <div
-                      className={` font-bold bg-gradient-to-r from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] dark:border-gray-950 bg-transparent flex items-center gap-2 text-center py-1 px-2`}
+                      className={` font-bold bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 from-[#b324d7] to-[#615dff] dark:border-none dark:border-0 border-[1px] dark:border-gray-950 bg-transparent flex items-center gap-2 text-center py-1 px-2`}
                     >
                       View All Templates<i className="">{chevronRight}</i>
                     </div>

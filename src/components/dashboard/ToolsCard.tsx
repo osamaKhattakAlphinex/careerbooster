@@ -34,7 +34,7 @@ const ToolsCard = ({
     atsElementRef,
   } = useTourContext();
   const [confirmationModal, setConfirmationModal] = useState(false);
-  const getRef = (title: any, ref: any) => {
+  const getRef = (title: string, ref: HTMLDivElement) => {
     switch (title) {
       case "Resume Builder":
         resumeElementRef.current = ref;
@@ -72,7 +72,7 @@ const ToolsCard = ({
   };
   return (
     <div
-      ref={(ref) => getRef(title, ref)}
+      ref={(ref: HTMLDivElement) => getRef(title, ref)}
       className="dark:bg-transparent dark:border-none dark:rounded-none rounded-md bg-[#ffffff94] border-[#b6b8b6]"
     >
       {action === "coming soon" ? (

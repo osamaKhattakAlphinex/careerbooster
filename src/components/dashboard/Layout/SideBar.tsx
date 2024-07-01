@@ -193,7 +193,7 @@ const SideBar = () => {
               </h1>
               <Link
                 href="/profile-review"
-                className="text-[14px] no-underline text-[#B324D7] p-.5 sideBar_p_text"
+                className="text-[14px] no-underline text-[#B324D7] hover:text-[#D66EE6]  p-.5 sideBar_p_text"
               >
                 Edit Profile
               </Link>
