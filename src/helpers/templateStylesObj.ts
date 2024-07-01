@@ -850,7 +850,7 @@ export const template_15_styles = {
   experienceHeading_temp_2: "experienceHeading_temp_2",
   summary_heading: "summary_heading",
   summary_text: "summary_text",
-  publication_h3: "publication_h3",
+  publication_h3: "publication_h3 ",
   achievement_div: "achievement_div",
   achievement_h2: "achievement_h2",
   achievement_h1: "achievement_h1",
@@ -993,7 +993,7 @@ export const template_16_styles = {
   experienceHeading_temp_2: "experienceHeading_temp_2",
   summary_heading: "summary_heading",
   summary_text: "summary_text",
-  publication_h3: "publication_h3",
+  publication_h3: "publication_h3 ",
   achievement_div: "achievement_div",
   achievement_h2: "achievement_h2",
   achievement_h1: "achievement_h1",
@@ -1101,7 +1101,6 @@ export const customStyle_2 = {
   borderTopBottom: false,
   borderBottom: false,
   centeredHeading: false,
-
 };
 export const customStyle_8 = { borderTopBottom: true, centeredHeading: true };
 export const customStyle_6 = { borderTopBottom: true, centeredHeading: false };

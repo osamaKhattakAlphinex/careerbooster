@@ -691,6 +691,9 @@ export const InterestsForm = ({
   const stepTen = useSelector((state: any) => state.register.stepTen);
   const { list, state } = stepTen;
   const { isSidebar } = useAppContext();
+  const { template15 } = useAppContext();
+
+  console.log(isSidebar);
   useEffect(() => {
     if (rec) {
       formik.setValues(rec);
@@ -752,7 +755,7 @@ export const InterestsForm = ({
           <label
             htmlFor="description"
             className={`block mb-2 text-sm font-bold  ${
-              pathname == "/profile-review" || isSidebar
+              pathname == "/profile-review" || (isSidebar && !template15)
                 ? "text-gray-200"
                 : "text-gray-950"
             }`}
@@ -767,16 +770,28 @@ export const InterestsForm = ({
             value={formik.values.description}
           ></textarea>
         </div>
-        <div className="flex flex-row-reverse items-center justify-end gap-2">
+        <div
+          className={`items-center justify-end  ${
+            isSidebar ? "flex flex-col gap-4" : "flex flex-row-reverse gap-2"
+          }`}
+        >
           <input
             type="submit"
-            className="cursor-pointer form-btn whitespace-normal"
+            className={`cursor-pointer  whitespace-normal ${
+              isSidebar
+                ? "px-2 py-2 text-blue-500 border border-blue-500 rounded-lg"
+                : "form-btn"
+            }`}
             value={isEditing ? "Update Interest" : "Add Interest"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="cursor-pointer form-btn"
+            className={`cursor-pointer ${
+              isSidebar
+                ? "px-4 py-2 text-blue-500 border border-blue-500 rounded-lg"
+                : "form-btn"
+            }`}
             value="Cancel"
           />
         </div>
@@ -1127,6 +1142,7 @@ export const LangaugesForm = ({
 }: any) => {
   const dispatch = useDispatch();
   const { isSidebar } = useAppContext();
+  const { template15 } = useAppContext();
   const stepEleven = useSelector((state: any) => state.register.stepEleven);
   const { list, state } = stepEleven;
 
@@ -1180,7 +1196,7 @@ export const LangaugesForm = ({
           <label
             htmlFor="language"
             className={`block mb-2 text-sm font-bold  ${
-              pathname == "/profile-review" || isSidebar
+              pathname == "/profile-review" || (isSidebar && !template15)
                 ? "text-gray-200"
                 : "text-gray-950"
             }`}
@@ -1200,7 +1216,7 @@ export const LangaugesForm = ({
           <label
             htmlFor="proficiency"
             className={`block mb-2 text-sm font-bold  ${
-              pathname == "/profile-review" || isSidebar
+              pathname == "/profile-review" || (isSidebar && !template15)
                 ? "text-gray-200"
                 : "text-gray-950"
             }`}
@@ -1212,7 +1228,7 @@ export const LangaugesForm = ({
             value={formik.values.proficiency}
             onChange={formik.handleChange}
             className={`form-control ${
-              pathname == "/profile-review" || isSidebar
+              pathname == "/profile-review" || (isSidebar && !template15)
                 ? "text-gray-200"
                 : "text-gray-950"
             }`}
@@ -1222,16 +1238,28 @@ export const LangaugesForm = ({
             <option value="Advanced">Advanced</option>
           </select>
         </div>
-        <div className="flex flex-row-reverse items-center justify-end gap-2 ">
+        <div
+          className={`items-center justify-end ${
+            isSidebar ? "flex flex-col gap-4" : "flex flex-row-reverse gap-2"
+          }`}
+        >
           <input
             type="submit"
-            className="cursor-pointer form-btn whitespace-normal"
+            className={`cursor-pointer  ${
+              isSidebar
+                ? "px-2 py-2 border border-blue-500 text-blue-500 rounded-lg"
+                : "form-btn"
+            }`}
             value={isEditing ? "Update Language" : "Add Language"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="cursor-pointer form-btn"
+            className={`cursor-pointer ${
+              isSidebar
+                ? "px-2 py-2 border border-blue-500 text-blue-500 rounded-lg"
+                : "form-btn"
+            }`}
             value="Cancel"
           />
         </div>

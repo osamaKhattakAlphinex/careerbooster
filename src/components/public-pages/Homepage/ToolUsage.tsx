@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React, { ReactNode } from "react";
 import { Fade, Slide } from "react-awesome-reveal";
 interface ToolUsageProps {
@@ -37,7 +38,7 @@ const ToolUsage: React.FC<ToolUsageProps> = ({
       </Slide>
       <Fade duration={3000}>
         <div className="flex-shrink-0 my-5">
-          <a
+          <Link
             href={link}
             className="inline-flex no-underline justify-center group items-center relative  text-[#6a4dff] dark:text-[#e6f85e] gap-3 dark:after:bg-[#e6f85e] after:bg-[#0000ff9c] hover:text-[#6a4dff] after:content[''] after:absolute after:-bottom-[2px] after:left-0 after:w-0 after:h-[1px] after:ease-in-out after:duration-300  hover:after:w-[100%]"
           >
@@ -58,7 +59,7 @@ const ToolUsage: React.FC<ToolUsageProps> = ({
                 strokeLinejoin="round"
               />
             </svg>
-          </a>
+          </Link>
         </div>
       </Fade>
     </div>
