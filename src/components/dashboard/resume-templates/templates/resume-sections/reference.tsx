@@ -15,7 +15,7 @@ type Props = {
 };
 
 const Reference = ({ heading, references, styles, customStyle }: Props) => {
-  const { handleDropOthersAchievement, handleDropOthers } = useDragAndDrop();
+  const { handleDropOthers } = useDragAndDrop();
   const { handlers } = useHandler();
   const { updateSaveHook } = useUpdateAndSave();
 

@@ -22,7 +22,7 @@ const Language = ({
   customStyle,
   rounded_style,
 }: Props) => {
-  const { handleDropOthersAchievement, handleDropOthers } = useDragAndDrop();
+  const { handleDropOthers } = useDragAndDrop();
   const { handlers } = useHandler();
   const { updateSaveHook } = useUpdateAndSave();
 

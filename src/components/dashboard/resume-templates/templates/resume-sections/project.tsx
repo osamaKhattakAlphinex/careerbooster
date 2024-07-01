@@ -23,10 +23,6 @@ const Project = ({ heading, projects, styles, customStyle }: Props) => {
   const [newReward, setNewReward] = useState("");
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const [newBulletSection, setNewBulletSection] = useState<string | null>(null);
-  const [streamedJDData, setStreamedJDData] = useState<any>("");
-  const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
-    number | null
-  >(null);
 
   const { handleDropOthersAchievement, handleDropOthers } = useDragAndDrop();
   const { updateSaveHook } = useUpdateAndSave();
