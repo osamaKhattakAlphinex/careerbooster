@@ -23,10 +23,6 @@ const Project = ({ heading, projects, styles, customStyle }: Props) => {
   const [newReward, setNewReward] = useState("");
   const [insideIndex, setInsideIndex] = useState<number>(0);
   const [newBulletSection, setNewBulletSection] = useState<string | null>(null);
-  const [streamedJDData, setStreamedJDData] = useState<any>("");
-  const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
-    number | null
-  >(null);
 
   const { handleDropOthersAchievement, handleDropOthers } = useDragAndDrop();
   const { updateSaveHook } = useUpdateAndSave();
@@ -34,12 +30,12 @@ const Project = ({ heading, projects, styles, customStyle }: Props) => {
   return (
     <>
       <span
-        className={`${styles?.span1} ${
+        className={` ${styles?.span1} ${
           customStyle?.borderTopBottom ? "!block" : "hidden"
         }`}
       ></span>
       <h3
-        className={`${styles?.project_h3}  ${
+        className={`projects ${styles?.project_h3}  ${
           customStyle?.centeredHeading ? "justify-center" : ""
         } ${styles.bgColor} `}
       >
