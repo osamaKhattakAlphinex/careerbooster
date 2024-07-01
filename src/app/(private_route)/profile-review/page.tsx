@@ -32,9 +32,7 @@ import { setUserData } from "@/store/userDataSlice";
 import { showSuccessToast } from "@/helpers/toast";
 import StepCustom from "@/components/dashboard/profileReview/StepCustom";
 import { RootState } from "@/store/store";
-// export const metadata: Metadata = {
-//   title: "CareerBooster.Ai-Welcome",
-// };
+
 const ProfileReview = () => {
   const router = useRouter();
   const params = useSearchParams();
