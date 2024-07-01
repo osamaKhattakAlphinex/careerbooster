@@ -1,5 +1,5 @@
 "use client";
-import { memo, useEffect, useState } from "react";
+import { memo, use, useEffect, useState } from "react";
 import React from "react";
 import { TwitterPicker, ColorResult } from "react-color";
 import { useSelector } from "react-redux";
@@ -26,10 +26,7 @@ import ColorPicker from "../colorPicker";
 import DeleteConfirmationModal from "@/components/common/ConfirmationModal";
 import { formatDate } from "@/helpers/getFormattedDateTime";
 import Project from "./resume-sections/project";
-import {
-  customStyle_6,
-  template_6_styles,
-} from "@/helpers/templateStylesObj";
+import { customStyle_6, template_6_styles } from "@/helpers/templateStylesObj";
 import Summary from "./resume-sections/summary";
 import Experience from "./resume-sections/experience";
 import Publication from "./resume-sections/publication";
@@ -40,13 +37,14 @@ import Interest from "./resume-sections/interest";
 import Reference from "./resume-sections/reference";
 import Language from "./resume-sections/language";
 import Education from "./resume-sections/education";
+import AddSection from "../../resume-builder/AddSection";
 
 const ResumeTemplate1 = ({
   streamedSummaryData,
   setStreamedSummaryData,
   streamedJDData,
   setStreamedJDData,
-  }: {
+}: {
   streamedSummaryData: string;
   streamedJDData: string;
   setStreamedJDData: any;
@@ -65,9 +63,7 @@ const ResumeTemplate1 = ({
   const [confirmationModal, setConfirmationModal] = useState(false);
 
   const [regenerating, setRegenerating] = useState(false);
-  const { getPrimarySkills } = useGetPrimarySkills(
-    setRegenerating,
-  );
+  const { getPrimarySkills } = useGetPrimarySkills(setRegenerating);
   const [regeneratedRecordIndex, setRegeneratedRecordIndex] = useState<
     number | null
   >(null);
@@ -75,10 +71,7 @@ const ResumeTemplate1 = ({
   // const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const { getSummary } = useGetSummary(setStreamedSummaryData);
   // const [streamedJDData, setStreamedJDData] = useState<any>("");
-  const { getOneWorkExperienceNew } = useSingleJDGenerate(
-    setStreamedJDData
-
-  );
+  const { getOneWorkExperienceNew } = useSingleJDGenerate(setStreamedJDData);
 
   const {
     handleDropPrimary,
@@ -92,6 +85,17 @@ const ResumeTemplate1 = ({
   const { addPrimarySkill } = useAddPrimarySkill();
   const { updateSaveHook } = useUpdateAndSave();
   const { handlers } = useHandler();
+
+  const [newSectionEntry, setNewSectionEntry] = useState({
+    awards: false,
+    certifications: false,
+    trainings: false,
+    interests: false,
+    publications: false,
+    languages: false,
+    projects: false,
+    references: false,
+  });
 
   useEffect(() => {
     if (streamedJDData === "") {
@@ -118,6 +122,18 @@ const ResumeTemplate1 = ({
       setPrimarySkill("");
     }
   };
+
+  useEffect(() => {
+    const keys = Object.keys(newSectionEntry);
+    const trueKey = keys.find(key => newSectionEntry[key]);
+
+    if (trueKey) {
+      const element = document.querySelector(`.${trueKey}`);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block:"center" });
+      }
+    }
+  }, [newSectionEntry]);
 
   // const saveColor = (color: ColorResult) => {
   // Access the selected color value from the 'color' parameter
@@ -293,7 +309,7 @@ const ResumeTemplate1 = ({
             </li>
           </ul>
 
-          <div className="flex flex-col flex-wrap w-full ">
+          <div className="flex flex-col flex-wrap w-full">
             {/* EXECUTIVE SUMMARY */}
             <span className="!block border-stylee w-full h-0 border-[1px] !border-gray-500 md:mt-3"></span>
             <h3 className="flex items-center gap-2 font-semibold uppercase border-2 border-transparent md:my-1 xs:text-xs md:text-base hover:border-dashed hover:border-gray-500">
@@ -830,7 +846,7 @@ const ResumeTemplate1 = ({
             )}
 
             {/* Publications */}
-            {resume?.publications && resume?.publications.length > 0 && (
+            {((resume?.publications && resume?.publications.length > 0) || newSectionEntry.publications) && (
               <Publication
                 heading={resume.headings.publications}
                 publications={resume.publications}
@@ -839,7 +855,7 @@ const ResumeTemplate1 = ({
               />
             )}
             {/* Certification */}
-            {resume?.certifications && resume?.certifications.length > 0 && (
+            {((resume?.certifications && resume?.certifications.length > 0) || newSectionEntry.certifications) && (
               <Certification
                 customStyle={customStyle_6}
                 heading={resume.headings.certifications}
@@ -848,7 +864,7 @@ const ResumeTemplate1 = ({
               />
             )}
             {/* Trainings */}
-            {resume?.trainings && resume?.trainings.length > 0 && (
+            {((resume?.trainings && resume?.trainings.length > 0) || newSectionEntry.trainings) && (
               <Training
                 heading={resume.headings.trainings}
                 trainings={resume.trainings}
@@ -858,7 +874,7 @@ const ResumeTemplate1 = ({
             )}
 
             {/* Awards */}
-            {resume?.awards && resume?.awards.length > 0 && (
+            {((resume?.awards && resume?.awards.length > 0)|| newSectionEntry.awards) && (
               <Award
                 heading={resume.headings.awards}
                 awards={resume.awards}
@@ -868,7 +884,7 @@ const ResumeTemplate1 = ({
             )}
             {/* Projects */}
             <div className="w-full">
-              {resume?.projects && resume?.projects.length > 0 && (
+              {((resume?.projects && resume?.projects.length > 0) || newSectionEntry.projects) && (
                 <Project
                   heading={resume.headings.projects}
                   projects={resume.projects}
@@ -878,7 +894,7 @@ const ResumeTemplate1 = ({
               )}
             </div>
             {/* Interests & Hobbies */}
-            {resume?.interests && resume?.interests.length > 0 && (
+            {((resume?.interests && resume?.interests.length > 0) || newSectionEntry.interests) && (
               <Interest
                 heading={resume.headings.interests}
                 interests={resume.interests}
@@ -888,7 +904,7 @@ const ResumeTemplate1 = ({
             )}
 
             {/* References */}
-            {resume?.references && resume?.references.length > 0 && (
+            {((resume?.references && resume?.references.length > 0)|| newSectionEntry.references) && (
               <Reference
                 heading={resume.headings.references}
                 references={resume.references}
@@ -898,7 +914,7 @@ const ResumeTemplate1 = ({
             )}
 
             {/* Languages */}
-            {resume?.languages && resume?.languages.length > 0 && (
+            {((resume?.languages && resume?.languages.length > 0) || newSectionEntry.languages) && (
               <Language
                 heading={resume.headings.languages}
                 languages={resume.languages}
@@ -918,6 +934,7 @@ const ResumeTemplate1 = ({
                 />
               )}
             </div>
+            <AddSection setNewSectionEntry={setNewSectionEntry} />
           </div>
         </div>
       </div>

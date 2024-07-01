@@ -30,12 +30,12 @@ const Publication = ({ heading, publications, styles, customStyle }: Props) => {
   return (
     <>
       <span
-        className={`${styles?.span1} ${
+        className={` ${styles?.span1} ${
           customStyle?.borderTopBottom ? "!block" : "hidden"
         }`}
       ></span>
       <h3
-        className={`${styles?.publication_h3}  ${
+        className={`publications ${styles?.publication_h3}  ${
           customStyle?.centeredHeading ? "justify-center" : ""
         } ${styles?.bgColor} `}
       >

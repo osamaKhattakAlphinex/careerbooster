@@ -50,6 +50,7 @@ const useUpdateAndSave = () => {
       workExperienceArray: updatedExp,
     });
   };
+  
   const updateAndSaveOthers = (updatedExp: any,section:string) => {
     dispatch(
       setResumeField({

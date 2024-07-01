@@ -30,12 +30,12 @@ const Award = ({ heading, awards, styles, customStyle }: Props) => {
   return (
     <>
       <span
-        className={`${styles?.span1} ${
+        className={` ${styles?.span1} ${
           customStyle?.borderTopBottom ? "!block" : "hidden"
         }`}
       ></span>
       <h3
-        className={`${styles?.award_h3} ${
+        className={`awards ${styles?.award_h3} ${
           customStyle?.centeredHeading ? "justify-center" : ""
         }
           ${customStyle?.bgColor}

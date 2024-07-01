@@ -36,12 +36,12 @@ const Certification = ({
   return (
     <>
       <span
-        className={`${styles?.span1} ${
+        className={` ${styles?.span1} ${
           customStyle?.borderTopBottom ? "!block" : "hidden"
         }`}
       ></span>
       <h3
-        className={`${styles?.certification_h3} ${
+        className={`certifications ${styles?.certification_h3} ${
           customStyle?.centeredHeading ? "justify-center" : ""
         }
           ${customStyle?.bgColor}
@@ -166,7 +166,7 @@ const Certification = ({
                 </span>
               </h2>
               <div className="px-4 py-1">
-                {rec?.description &&  (
+                {rec?.description && (
                   <ul className={styles?.certification_ul}>
                     {rec?.description.map((achievement: any, ind: number) =>
                       achievement === "" ? (
