@@ -55,6 +55,7 @@ const ResumeTemplate4 = () => {
     setIsSidebar(true);
     return () => setIsSidebar(false);
   }, []);
+
   useEffect(() => {
     const keys = Object.keys(newSectionEntry);
     const trueKey = keys.find((key) => newSectionEntry[key]);
