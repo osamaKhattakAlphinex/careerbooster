@@ -691,6 +691,7 @@ export const InterestsForm = ({
   const stepTen = useSelector((state: any) => state.register.stepTen);
   const { list, state } = stepTen;
   const { isSidebar } = useAppContext();
+  console.log(isSidebar);
   useEffect(() => {
     if (rec) {
       formik.setValues(rec);
@@ -767,16 +768,28 @@ export const InterestsForm = ({
             value={formik.values.description}
           ></textarea>
         </div>
-        <div className="flex flex-row-reverse items-center justify-end gap-2">
+        <div
+          className={`items-center justify-end  ${
+            isSidebar ? "flex flex-col gap-4" : "flex flex-row-reverse gap-2"
+          }`}
+        >
           <input
             type="submit"
-            className="cursor-pointer form-btn whitespace-normal"
+            className={`cursor-pointer  whitespace-normal ${
+              isSidebar
+                ? "px-2 py-2 text-blue-500 border border-blue-500 rounded-lg"
+                : "form-btn"
+            }`}
             value={isEditing ? "Update Interest" : "Add Interest"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="cursor-pointer form-btn"
+            className={`cursor-pointer ${
+              isSidebar
+                ? "px-4 py-2 text-blue-500 border border-blue-500 rounded-lg"
+                : "form-btn"
+            }`}
             value="Cancel"
           />
         </div>
@@ -1222,16 +1235,28 @@ export const LangaugesForm = ({
             <option value="Advanced">Advanced</option>
           </select>
         </div>
-        <div className="flex flex-row-reverse items-center justify-end gap-2 ">
+        <div
+          className={`items-center justify-end ${
+            isSidebar ? "flex flex-col gap-4" : "flex flex-row-reverse gap-2"
+          }`}
+        >
           <input
             type="submit"
-            className="cursor-pointer form-btn whitespace-normal"
+            className={`cursor-pointer  ${
+              isSidebar
+                ? "px-2 py-2 border border-blue-500 text-blue-500 rounded-lg"
+                : "form-btn"
+            }`}
             value={isEditing ? "Update Language" : "Add Language"}
           />
           <input
             type="button"
             onClick={formCloseHandler}
-            className="cursor-pointer form-btn"
+            className={`cursor-pointer ${
+              isSidebar
+                ? "px-2 py-2 border border-blue-500 text-blue-500 rounded-lg"
+                : "form-btn"
+            }`}
             value="Cancel"
           />
         </div>
