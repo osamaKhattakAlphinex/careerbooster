@@ -49,6 +49,7 @@ import Header from "./resume-sections/header";
 import Contact from "./resume-sections/contact";
 import Skill from "./resume-sections/skills";
 import AddSection from "../../resume-builder/AddSection";
+import { useAppContext } from "@/context/AppContext";
 
 const ResumeTemplate15 = () => {
   const dispatch = useDispatch();
@@ -137,6 +138,12 @@ const ResumeTemplate15 = () => {
   //   setColor_second(color.hex);
 
   // };
+  const { setIsSidebar } = useAppContext();
+  useEffect(() => {
+    setIsSidebar(true);
+    return () => setIsSidebar(false);
+  }, []);
+
   return (
     <div className="relative w-full text-gray-900 first-page">
       <div className="flex">
