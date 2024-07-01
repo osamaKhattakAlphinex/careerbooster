@@ -54,12 +54,12 @@ const ResumeTemplate2 = () => {
 
   useEffect(() => {
     const keys = Object.keys(newSectionEntry);
-    const trueKey = keys.find(key => newSectionEntry[key]);
+    const trueKey = keys.find((key) => newSectionEntry[key]);
 
     if (trueKey) {
       const element = document.querySelector(`.${trueKey}`);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block:"center" });
+        element.scrollIntoView({ behavior: "smooth", block: "center" });
       }
     }
   }, [newSectionEntry]);
@@ -109,7 +109,8 @@ const ResumeTemplate2 = () => {
         </div>
 
         {/* Publications */}
-        {((resume?.publications && resume?.publications.length > 0) || newSectionEntry.publications) && (
+        {((resume?.publications && resume?.publications.length > 0) ||
+          newSectionEntry.publications) && (
           <div className="w-full">
             <Publication
               heading={resume.headings.publications}
@@ -120,7 +121,8 @@ const ResumeTemplate2 = () => {
         )}
 
         {/* Certificates */}
-        {((resume?.certifications && resume?.certifications.length > 0) || newSectionEntry.certifications) && (
+        {((resume?.certifications && resume?.certifications.length > 0) ||
+          newSectionEntry.certifications) && (
           <div className="w-full">
             <Certification
               heading={resume.headings.certifications}
@@ -131,7 +133,8 @@ const ResumeTemplate2 = () => {
         )}
 
         {/* Trainings */}
-        {((resume?.trainings && resume?.trainings.length > 0) || newSectionEntry.trainings) && (
+        {((resume?.trainings && resume?.trainings.length > 0) ||
+          newSectionEntry.trainings) && (
           <div className="w-full">
             <Training
               heading={resume.headings.trainings}
@@ -141,7 +144,8 @@ const ResumeTemplate2 = () => {
           </div>
         )}
         {/* Projects */}
-        {((resume?.projects && resume?.projects.length > 0) || newSectionEntry.projects) && (
+        {((resume?.projects && resume?.projects.length > 0) ||
+          newSectionEntry.projects) && (
           <div className="w-full">
             <Project
               heading={resume.headings.projects}
@@ -153,7 +157,8 @@ const ResumeTemplate2 = () => {
         )}
 
         {/* Awards */}
-        {((resume?.awards && resume?.awards.length > 0)|| newSectionEntry.awards) && (
+        {((resume?.awards && resume?.awards.length > 0) ||
+          newSectionEntry.awards) && (
           <div className="w-full">
             <Award
               heading={resume.headings.awards}
@@ -164,7 +169,8 @@ const ResumeTemplate2 = () => {
         )}
 
         {/* Interests & Hobbies */}
-        {((resume?.interests && resume?.interests.length > 0) || newSectionEntry.interests) && (
+        {((resume?.interests && resume?.interests.length > 0) ||
+          newSectionEntry.interests) && (
           <div className="w-full">
             <Interest
               heading={resume.headings.interests}
@@ -175,7 +181,8 @@ const ResumeTemplate2 = () => {
           </div>
         )}
         {/* Languages */}
-        {((resume?.languages && resume?.languages.length > 0) || newSectionEntry.languages) && (
+        {((resume?.languages && resume?.languages.length > 0) ||
+          newSectionEntry.languages) && (
           <div className="w-full">
             <Language
               heading={resume.headings.languages}
@@ -186,7 +193,8 @@ const ResumeTemplate2 = () => {
         )}
 
         {/* References */}
-        {((resume?.references && resume?.references.length > 0)|| newSectionEntry.references) && (
+        {((resume?.references && resume?.references.length > 0) ||
+          newSectionEntry.references) && (
           <div className="w-full">
             <Reference
               heading={resume.headings.references}
@@ -210,7 +218,7 @@ const ResumeTemplate2 = () => {
             />
           )}
         </div>
-      <AddSection setNewSectionEntry={setNewSectionEntry} />
+        <AddSection setNewSectionEntry={setNewSectionEntry} />
       </div>
     </>
   );
