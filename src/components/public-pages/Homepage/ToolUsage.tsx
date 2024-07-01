@@ -41,11 +41,11 @@ const ToolUsage: React.FC<ToolUsageProps> = ({
             href={link}
             className="inline-flex no-underline justify-center group items-center relative  text-[#6a4dff] dark:text-[#e6f85e] gap-3 dark:after:bg-[#e6f85e] after:bg-[#0000ff9c] hover:text-[#6a4dff] after:content[''] after:absolute after:-bottom-[2px] after:left-0 after:w-0 after:h-[1px] after:ease-in-out after:duration-300  hover:after:w-[100%]"
           >
-            <span className="group-hover:text-[#6a4dff] md:text-[16px] xs:text-sm">
+            <span className=" md:text-[16px] xs:text-sm">
               {linkText}
             </span>
             <svg
-              className="w-[1rem] h-[1rem] group-hover:text-[#6a4dff]"
+              className="w-[1rem] h-[1rem] "
               viewBox="0 0 16 16"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"

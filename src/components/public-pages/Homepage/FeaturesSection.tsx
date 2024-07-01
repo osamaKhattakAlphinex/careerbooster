@@ -167,7 +167,7 @@ const FeaturesSection = () => {
             </h5>
             <Link
               href="/register"
-              className="dark:bg-[#e6f85e] dark:text-gray-950  text-[16px] font-[500] px-[1.5rem] py-[.85rem] bg-[#6a4dff] text-gray-100 rounded-md "
+              className="dark:bg-[#e6f85e] dark:hover:bg-[#c2da55] dark:text-gray-950  text-[16px] font-[500] px-[1.5rem] py-[.85rem] bg-[#6a4dff] hover:bg-[#5840cc] text-gray-100 rounded-md "
             >
               Let{"'"}s get started!
             </Link>
