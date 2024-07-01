@@ -64,6 +64,7 @@ const ResumeTemplate16 = () => {
     setIsSidebar(true);
     return () => setIsSidebar(false);
   }, []);
+
   const { updateSaveHook } = useUpdateAndSave();
 
   return (

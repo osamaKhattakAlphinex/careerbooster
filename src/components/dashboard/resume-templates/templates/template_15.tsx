@@ -139,9 +139,15 @@ const ResumeTemplate15 = () => {
 
   // };
   const { setIsSidebar } = useAppContext();
+  const { setTemplate15 } = useAppContext();
+
   useEffect(() => {
     setIsSidebar(true);
     return () => setIsSidebar(false);
+  }, []);
+  useEffect(() => {
+    setTemplate15(true);
+    return () => setTemplate15(false);
   }, []);
 
   return (

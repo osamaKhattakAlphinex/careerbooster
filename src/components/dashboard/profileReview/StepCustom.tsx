@@ -691,6 +691,8 @@ export const InterestsForm = ({
   const stepTen = useSelector((state: any) => state.register.stepTen);
   const { list, state } = stepTen;
   const { isSidebar } = useAppContext();
+  const { template15 } = useAppContext();
+
   console.log(isSidebar);
   useEffect(() => {
     if (rec) {
@@ -753,7 +755,7 @@ export const InterestsForm = ({
           <label
             htmlFor="description"
             className={`block mb-2 text-sm font-bold  ${
-              pathname == "/profile-review" || isSidebar
+              pathname == "/profile-review" || (isSidebar && !template15)
                 ? "text-gray-200"
                 : "text-gray-950"
             }`}
@@ -1140,6 +1142,7 @@ export const LangaugesForm = ({
 }: any) => {
   const dispatch = useDispatch();
   const { isSidebar } = useAppContext();
+  const { template15 } = useAppContext();
   const stepEleven = useSelector((state: any) => state.register.stepEleven);
   const { list, state } = stepEleven;
 
@@ -1193,7 +1196,7 @@ export const LangaugesForm = ({
           <label
             htmlFor="language"
             className={`block mb-2 text-sm font-bold  ${
-              pathname == "/profile-review" || isSidebar
+              pathname == "/profile-review" || (isSidebar && !template15)
                 ? "text-gray-200"
                 : "text-gray-950"
             }`}
@@ -1213,7 +1216,7 @@ export const LangaugesForm = ({
           <label
             htmlFor="proficiency"
             className={`block mb-2 text-sm font-bold  ${
-              pathname == "/profile-review" || isSidebar
+              pathname == "/profile-review" || (isSidebar && !template15)
                 ? "text-gray-200"
                 : "text-gray-950"
             }`}
@@ -1225,7 +1228,7 @@ export const LangaugesForm = ({
             value={formik.values.proficiency}
             onChange={formik.handleChange}
             className={`form-control ${
-              pathname == "/profile-review" || isSidebar
+              pathname == "/profile-review" || (isSidebar && !template15)
                 ? "text-gray-200"
                 : "text-gray-950"
             }`}
