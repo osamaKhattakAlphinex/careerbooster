@@ -115,7 +115,7 @@ const LinkedInToolMain = () => {
           </h5>
 
           <div className="linkedinPdfButton flex justify-center mt-11 md:mt-11">
-            <label className=" py-[12px] lg:py-[20px]  lg:px-[40px]  px-[28px] cursor-pointer  rounded-xl bg-gradient-to-r to-violet-500 from-fuchsia-500">
+            <label className=" py-[12px] lg:py-[20px]  lg:px-[40px]  px-[28px] cursor-pointer  rounded-xl bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 to-violet-500 from-fuchsia-500">
               <input
                 type="file"
                 className="hidden "
