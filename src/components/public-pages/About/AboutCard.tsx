@@ -25,7 +25,7 @@ const AboutCard = () => {
               </p>
               <Link
                 href="/register"
-                className=" items-center gap-2 bg-gradient-to-r from-purple-700 to-pink-500 text-white p-4 rounded-lg w-auto px-[2rem] py-[1rem] text-[1.125rem] font-medium mt-4"
+                className=" items-center gap-2 bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 from-purple-700 to-pink-500 text-white p-4 rounded-lg w-auto px-[2rem] py-[1rem] text-[1.125rem] font-medium mt-4"
               >
                 Upload Resume - It{"'"}s Free
               </Link>
