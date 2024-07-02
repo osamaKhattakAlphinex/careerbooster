@@ -49,6 +49,7 @@ import TemplateSlider from "@/components/dashboard/resume-templates/templateSlid
 import TourBot from "@/components/dashboard/TourBot";
 import { useTourContext } from "@/context/TourContext";
 import { useAppContext } from "@/context/AppContext";
+import { RootState } from "@/store/store";
 
 const ResumeBuilder = () => {
   const [confettingRunning, setConfettiRunning] = useState(false);
@@ -75,17 +76,17 @@ const ResumeBuilder = () => {
   const { abortController, setAbortController, outOfCredits } = useAppContext();
   // Local States
   const [finished, setFinished] = useState<boolean>(false);
-  const [streamedSummaryData, setStreamedSummaryData] = useState("");
-  const [streamedJDData, setStreamedJDData] = useState<any>("");
-  const [aiInputUserData, setAiInputUserData] = useState<any>();
+  const [streamedSummaryData, setStreamedSummaryData] = useState<string>("");
+  const [streamedJDData, setStreamedJDData] = useState<string>("");
+  const [aiInputUserData, setAiInputUserData] = useState({});
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [resumeGenerated, setResumeGenerated] = useState<boolean>(false);
   const { saveResumeToDB } = useSaveResumeToDB();
   // Redux
   const dispatch = useDispatch();
-  const resumeData = useSelector((state: any) => state.resume);
-  const userData = useSelector((state: any) => state.userData);
-  const creditLimits = useSelector((state: any) => state.creditLimits);
+  const resumeData = useSelector((state: RootState) => state.resume);
+  const userData = useSelector((state: RootState) => state.userData);
+  const creditLimits = useSelector((state: RootState) => state.creditLimits);
   const { getCreditLimitsIfNotExists } = useGetCreditLimits();
 
   useEffect(() => {
@@ -133,11 +134,15 @@ const ResumeBuilder = () => {
       dispatch(setLanguages({ languages: userData.languages }));
 
       dispatch(setId(""));
-      await getBasicInfo();
-      await getSummary();
-      await getPrimarySkills();
-      await getWorkExperienceNew();
-      
+      const basicInfoResponse = await getBasicInfo();
+      if (basicInfoResponse.success) {
+        await getSummary();
+        await getPrimarySkills();
+        await getWorkExperienceNew();
+      } else {
+        dispatch(setState({ name: "resumeLoading", value: false }));
+      }
+
       //  runConfetti();
     } else {
       setShowPopup(true);
@@ -172,80 +177,72 @@ const ResumeBuilder = () => {
   // };
 
   const getBasicInfo = async () => {
-    // return makeAPICallWithRetry(async () => {
-    return fetch("/api/resumeBots/getBasicInfo", {
-      method: "POST",
-      body: JSON.stringify({
-        type: "basicDetails",
-        inputType: "userData",
-        personName: userData.firstName + " " + userData.lastName,
-        creditsUsed: creditLimits.resume_basicInfo,
-        userData: aiInputUserData,
-
-        resumeType: resumeData.state.resumeType,
-        jobPosition: resumeData.state.jobPosition,
-        jobDescription: resumeData.state.jobDescription,
-
-        trainBotData: {
-          userEmail: userData.email,
-          fileAddress: userData.uploadedResume.fileName,
-        },
-      }),
-      signal: abortController?.signal,
-    })
-      .then(async (resp: any) => {
-        const res = await resp.json();
-
-        if (res.success && res?.result) {
-          let myJSON;
-          if (typeof res.result === "object") {
-            myJSON = res.result;
-          } else {
-            myJSON = await JSON.parse(res.result);
-          }
-
-          const basicObj = {
-            ...myJSON,
-            name: userData?.firstName + " " + userData?.lastName,
-            contact: {
-              ...myJSON?.contact,
-              email: userData?.email,
-              phone: userData?.phone,
-              address:
-                userData?.contact?.street +
-                " " +
-                userData?.contact?.cityState +
-                " " +
-                userData?.contact?.country +
-                " " +
-                userData?.contact?.postalCode,
-            },
-            education: userData?.education,
-          };
-          dispatch(setBasicInfo(basicObj));
-        } else {
-          setShowConfettiRunning(false);
-
-          showErrorToast("Something Went Wrong");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
+    try {
+      const response = await fetch("/api/resumeBots/getBasicInfo", {
+        method: "POST",
+        body: JSON.stringify({
+          type: "basicDetails",
+          inputType: "userData",
+          personName: userData.firstName + " " + userData.lastName,
+          creditsUsed: creditLimits.resume_basicInfo,
+          userData: aiInputUserData,
+          resumeType: resumeData.state.resumeType,
+          jobPosition: resumeData.state.jobPosition,
+          jobDescription: resumeData.state.jobDescription,
+          trainBotData: {
+            userEmail: userData.email,
+            fileAddress: userData.uploadedResume.fileName,
+          },
+        }),
+        signal: abortController?.signal,
       });
-    // });
+
+      const res = await response.json();
+
+      if (res.success && res.result) {
+        let myJSON =
+          typeof res.result === "object" ? res.result : JSON.parse(res.result);
+        const basicObj = {
+          ...myJSON,
+          name: userData?.firstName + " " + userData?.lastName,
+          contact: {
+            ...myJSON?.contact,
+            email: userData?.email,
+            phone: userData?.phone,
+            address: `${userData?.contact?.street} ${userData?.contact?.cityState} ${userData?.contact?.country} ${userData?.contact?.postalCode}`,
+          },
+          education: userData?.education,
+        };
+        dispatch(setBasicInfo(basicObj));
+        return { success: true }; // return success response
+      } else {
+        setShowConfettiRunning(false);
+        showErrorToast("Something Went Wrong");
+        return { success: false }; // return error response
+      }
+    } catch (err) {
+      console.log(err);
+      setShowConfettiRunning(false);
+      showErrorToast("Something Went Wrong");
+      return { success: false }; // return error response
+    }
   };
+
+  // Call the function and log the response
 
   const getWorkExperienceNew = async () => {
     // return makeAPICallWithRetry(async () => {
     await getCreditLimitsIfNotExists();
     await getUserDataIfNotExists();
 
-    if (userData.isFetched) {
+    if (userData.isFetched && userData.experience) {
       // remove ids from experiences
-      const experiences = userData.experience.map((item: WorkExperience) => {
-        const { id, ...rest } = item;
-        return rest;
-      });
+      const experiences: any = userData.experience.map(
+        (item: WorkExperience) => {
+          const { id, ...rest } = item;
+          return rest;
+        }
+      );
       setStreamedJDData("");
       dispatch(setWorkExperience(""));
       let temp = "";
@@ -478,7 +475,7 @@ const ResumeBuilder = () => {
               </h1>
               <h1
                 className="font-semibold cursor-pointer xs:text-xl md:text-2xl"
-                onClick={() => setShowTemplatePopup(false) }
+                onClick={() => setShowTemplatePopup(false)}
               >
                 {crossIcon}
               </h1>
@@ -631,59 +628,58 @@ const ResumeBuilder = () => {
             (resumeData?.name ||
               resumeData?.contact?.email ||
               resumeData?.summary) && (
-                <>
-               
-              <div
-                className={`my-10 ${
-                  resumeData.state.resumeLoading ? "animate-pulse" : ""
-                }`}
-              >
-                 <div className="  whitespace-nowrap w-full ml-auto xs:mt-4 xs:flex xs:justify-center md:inline-block gap-3 xs:pb-0 md:pb-4 md:sticky top-4 right-0 z-[35]">
-                  <Link
-                    className="no-underline w-fit"
-                    href={`/resume-builder/preview-resume?templateId=5&resumeId=${resumeData.id}`}
-                  >
-                    <div
-                      className={`flex flex-row gap-2 items-center xs:flex-1 w-fit ml-auto lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full  bg-[#e4e9f7]  dark:bg-[#18181b] text-gray-900  dark:text-gray-300 border-[1px] border-gray-950/80 dark:border-[#f0f0f0] `}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-4 h-4"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
-                        />
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                        />
-                      </svg>
-                      Download / Print Preview
-                    </div>
-                  </Link>
-                </div>
+              <>
                 <div
-                  className={`bg-white ${
+                  className={`my-10 ${
                     resumeData.state.resumeLoading ? "animate-pulse" : ""
                   }`}
-                  ref={componentRef}
-                > 
-                  <ResumeTemplate1
-                    streamedSummaryData={streamedSummaryData}
-                    streamedJDData={streamedJDData}
-                    setStreamedJDData={setStreamedJDData}
-                    setStreamedSummaryData={setStreamedSummaryData}
-                  />
+                >
+                  <div className="  whitespace-nowrap w-full ml-auto xs:mt-4 xs:flex xs:justify-center md:inline-block gap-3 xs:pb-0 md:pb-4 md:sticky top-4 right-0 z-[35]">
+                    <Link
+                      className="no-underline w-fit"
+                      href={`/resume-builder/preview-resume?templateId=5&resumeId=${resumeData.id}`}
+                    >
+                      <div
+                        className={`flex flex-row gap-2 items-center xs:flex-1 w-fit ml-auto lg:text-sm text-xs lg:px-6 px-3 py-2 rounded-full  bg-[#e4e9f7]  dark:bg-[#18181b] text-gray-900  dark:text-gray-300 border-[1px] border-gray-950/80 dark:border-[#f0f0f0] `}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-4 h-4"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+                          />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                          />
+                        </svg>
+                        Download / Print Preview
+                      </div>
+                    </Link>
+                  </div>
+                  <div
+                    className={`bg-white ${
+                      resumeData.state.resumeLoading ? "animate-pulse" : ""
+                    }`}
+                    ref={componentRef}
+                  >
+                    <ResumeTemplate1
+                      streamedSummaryData={streamedSummaryData}
+                      streamedJDData={streamedJDData}
+                      setStreamedJDData={setStreamedJDData}
+                      setStreamedSummaryData={setStreamedSummaryData}
+                    />
+                  </div>
                 </div>
-              </div>
-                </>
+              </>
             )}
           {showPopup && (
             <div className="bg-[#18181B] text-red-600 p-2 px-8 rounded-xl absolute top-4 left-1/2 transform -translate-x-1/2">
