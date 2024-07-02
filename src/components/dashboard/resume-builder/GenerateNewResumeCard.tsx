@@ -9,6 +9,7 @@ import { setState } from "@/store/resumeSlice";
 import Link from "next/link";
 import { infoSmallIcon } from "@/helpers/iconsProvider";
 import { useTourContext } from "@/context/TourContext";
+import { RootState } from "@/store/store";
 
 interface Props {
   // getConsent: () => void;
@@ -36,8 +37,7 @@ const GenerateResume = ({ handleGenerate }: Props) => {
   >("resume-basic");
   const { data: session } = useSession();
   const dispatch = useDispatch();
-  const state = useSelector((state: any) => state.resume.state);
-  const userData = useSelector((state: any) => state.userData);
+  const state = useSelector((state: RootState) => state.resume.state);
   const memoizedState = useMemo(() => state, [state]);
   const { resumeElementRef } = useTourContext();
 
@@ -47,7 +47,7 @@ const GenerateResume = ({ handleGenerate }: Props) => {
 
   return (
     <div
-      ref={(ref: any) => (resumeElementRef.current = ref)}
+      ref={(ref: HTMLDivElement) => (resumeElementRef.current = ref)}
       className=" dark:bg-[#17151b] dark:text-white bg-[#00000015] text-gray-950 rounded-lg py-6 px-4 md:px-[30px] flex flex-col gap-4 "
     >
       {/* header */}
@@ -55,16 +55,7 @@ const GenerateResume = ({ handleGenerate }: Props) => {
         <h3 className=" text-[16px] md:text-sm uppercase dark:text-gray-100 text-gray-950 font-bold">
           generate new resume
         </h3>
-        <div className="font-bold uppercase dark:text-gray-100 text-gray-950">
-          {/* <LimitCard
-            title="AvailableCredits : "
-            limit={userData?.userPackageData?.limit?.resumes_generation}
-            used={userData?.userPackageUsed?.resumes_generation}
-            setPercentageCalculated={setPercentageCalculated}
-            availablePercentage={availablePercentage}
-            setAvailablePercentage={setAvailablePercentage}
-          /> */}
-        </div>
+       
       </div>
 
       {/* instruction */}
