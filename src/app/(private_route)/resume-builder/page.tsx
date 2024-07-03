@@ -3,7 +3,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import ResumeTemplate1 from "@/components/dashboard/resume-templates/templates/template_1";
 import { useDispatch, useSelector } from "react-redux";
-import { Publication, WorkExperience } from "@/store/userDataSlice";
+import { WorkExperience } from "@/store/userDataSlice";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import {
@@ -30,7 +30,6 @@ import {
   chevronRight,
   crossIcon,
   infoSmallIcon,
-  leftArrowIcon,
 } from "@/helpers/iconsProvider";
 import Confetti from "react-dom-confetti";
 import RecentResumeCard from "@/components/dashboard/resume-builder/RecentResumeCard";
