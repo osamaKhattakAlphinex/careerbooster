@@ -11,17 +11,15 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
   const [jobCategories, setJobCategories] = useState<any>([]);
   const [updateJob, setUpdateJob] = useState<boolean>(false);
   const [rewritingJob, setRewritingJob] = useState(false);
-  const [value, setValue] = useState("");
 
+  const getJObCategories = async () => {
+    const res = await axios.get("/api/deo/jobCategories");
+    if (res.data.success) {
+      setJobCategories(res.data.data);
+    }
+  };
   useEffect(() => {
-    fetch("/api/deo/jobCategories", {
-      method: "GET",
-    }).then(async (response) => {
-      const res = await response.json();
-      if (res.success) {
-        setJobCategories(res.data);
-      }
-    });
+    getJObCategories();
     if (singleRec) {
       formik.setFieldValue("category", singleRec.category);
       formik.setFieldValue("joblink", singleRec.link);
