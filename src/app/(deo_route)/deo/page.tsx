@@ -2,12 +2,8 @@
 
 import DataTable, { TableAction } from "@/components/admin/DataTable";
 import JobForm from "@/components/deo/JobForm";
-import {  getFormattedDate } from "@/helpers/getFormattedDateTime";
-import {
-  EditIcon,
-  eyeIcon,
-  trashIcon,
-} from "@/helpers/iconsProvider";
+import { getFormattedDate } from "@/helpers/getFormattedDateTime";
+import { EditIcon, eyeIcon, trashIcon } from "@/helpers/iconsProvider";
 import { RootState } from "@/store/store";
 
 import { createColumnHelper } from "@tanstack/react-table";
@@ -36,7 +32,7 @@ type Job = {
 };
 
 const Jobs = () => {
-  const userData = useSelector((state: RootState)=>state.userData)
+  const userData = useSelector((state: RootState) => state.userData);
   const [records, setRecords] = useState<[] | any>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
@@ -49,11 +45,11 @@ const Jobs = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
- useEffect(() =>{
-  if(userData.isFetched){
-    setDeo(userData)
-  }
- },[userData])
+  useEffect(() => {
+    if (userData.isFetched) {
+      setDeo(userData);
+    }
+  }, [userData]);
   const fetchRecords = async () => {
     setLoading(true);
     if (!loading) {
@@ -61,7 +57,7 @@ const Jobs = () => {
         .get(
           `/api/deo?deoId=${deo._id}&limit=${limitOfRecords}&page=${currentPage}`
         )
-        .then((res: any) => {
+        .then((res) => {
           if (res.data.success) {
             setRecords(res.data.data);
 
@@ -287,14 +283,17 @@ const Jobs = () => {
     setLimitOfRecords(e.target.value);
   };
 
- 
   useEffect(() => {
-    fetchRecords();
+    if (deo._id) {
+      fetchRecords();
+    }
   }, [deo, open]);
 
   useEffect(() => {
     setRecords([]);
-    fetchRecords();
+    if (deo._id) {
+      fetchRecords();
+    }
     router.replace(pathname + `?r=${limitOfRecords}&p=${currentPage}`);
   }, [limitOfRecords, currentPage]);
   useEffect(() => {
