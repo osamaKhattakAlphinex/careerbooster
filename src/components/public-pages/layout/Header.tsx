@@ -252,7 +252,7 @@ const Header = () => {
                              ? "text-[#6A4DFF] font-bold dark:text-[#e6f85e]  "
                              : " dark:text-gray-100 text-gray-900 font-semibold "
                          }
-                  capitalize font-semibold text-smno-underline hover:text-[0#000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c] px-3`}
+                  capitalize font-semibold text-sm no-underline hover:text-[0#000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c] px-3`}
                   href="/login"
                 >
                   Login
@@ -379,7 +379,7 @@ const Header = () => {
                              ? "text-[#6A4DFF] font-bold  dark:text-[#e6f85e]  "
                              : " dark:text-gray-100 text-gray-900 font-semibold "
                          }
-                   text-xl capitalize no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]  `}
+                   text-sm capitalize no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]  `}
                   href="/"
                 >
                   Home
@@ -391,7 +391,7 @@ const Header = () => {
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <Link
-                    className=" dark:text-gray-100 text-xl capitalize text-gray-900 no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]"
+                    className=" dark:text-gray-100 text-sm capitalize text-gray-900 no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]"
                     href={role === "admin" ? "/admin" : "/dashboard"}
                   >
                     Dashboard
@@ -540,7 +540,7 @@ const Header = () => {
                 >
                   <button
                     type="button"
-                    className="block w-full px-4 py-2 text-xl text-left capitalize dark:text-gray-100 text-gray-950"
+                    className="block w-full px-4 py-2 text-sm text-left capitalize dark:text-gray-100 text-gray-950"
                     role="menuitem"
                     id="menu-item-3"
                     onClick={() => signOut()}
@@ -560,7 +560,7 @@ const Header = () => {
                              ? "text-[#6A4DFF] font-bold   dark:text-[#e6f85e]  "
                              : " dark:text-gray-100 text-gray-900 font-semibold "
                          }
-                    capitalize no-underline text-xl hover:text-[0#000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c] px-3`}
+                    capitalize no-underline text-sm hover:text-[0#000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c] px-3`}
                     href="/login"
                   >
                     login
@@ -575,7 +575,7 @@ const Header = () => {
                   <Link
                     href="/register"
                     // className="no-underline  capitalize font-[500] text-[.75rem] py-[.6rem] rounded-md text-[#6a4dff] dark:text-[#e6f85e] border-[1px] border-[#6a4dff] hover:border-[#6a4dff] hover:bg-[#6a4dff] hover:border-none hover:text-gray-100 dark:bg-[#11121c] dark:border-[#e6f85e]  dark:hover:bg-[#e6f85e] dark:hover:border-none dark:hover:text-[#11121c]"
-                    className="dark:text-gray-100 text-gray-900 capitalize no-underline text-xl hover:text-[0#000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c] px-3"
+                    className="dark:text-gray-100 text-gray-900 capitalize no-underline text-sm hover:text-[0#000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c] px-3"
                   >
                     Get started
                   </Link>

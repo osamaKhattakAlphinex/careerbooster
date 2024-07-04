@@ -14,7 +14,7 @@ const montserrat_r = Montserrat({
 const FindJobs4Me = () => {
     const faqs = [
         {
-          question: `What Is CareerBooster{"'"}s Find Job4Me?`,
+          question: "What Is CareerBooster's Find Job4Me?",
           answer:
             "Our Find Job4Me service was created to offer busy professionals a solution to job searching on their own. We assign a dedicated Virtual Job Search assistant who will be responsible for managing the time-consuming art of job searching.\n\nOur professional Virtual Job Search Assistants will be responsible for searching for jobs on your behalf, applying to the jobs you approve, and networking with key decision-makers to land you interviews.",
         },
@@ -34,7 +34,7 @@ const FindJobs4Me = () => {
             "No. CareerBooster does not guarantee a job as a result of using our service. We provide significant results in order for you to find your dream job.",
         },
         {
-          question: `What{"'"}s Your Money-Back Guarantee?`,
+          question: "What's Your Money-Back Guarantee?",
           answer:
             "We will deliver the services we promise, or we will refund your money.",
         },

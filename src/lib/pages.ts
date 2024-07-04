@@ -76,6 +76,14 @@ export const getPages = () => {
       route: "/executive-recruitment",
     },  
     {
+      name: "AI-Powered Job Board",
+      route: "/job-board",
+    },  
+    {
+      name: "Find Jobs4Me",
+      route: "/find-jobs4me",
+    },  
+    {
       name: "Resume Scanner",
       route: "/resume-scanner",
     },    
