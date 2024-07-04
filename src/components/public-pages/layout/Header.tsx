@@ -129,14 +129,14 @@ const Header = () => {
                     active === ""
                       ? "text-[#6A4DFF] font-bold dark:text-[#e6f85e] "
                       : " dark:text-gray-100 text-gray-900 font-semibold "
-                  }  capitalize  text-sm  no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]`}
+                  }  capitalize  text-sm  no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]`}
                   href="/"
                 >
                   Home
                 </Link>
               </li>
               <li className="px-3 mt-0 ">
-                <Link
+                {/* <Link
                   className={` ${
                     active === "about"
                       ? "text-[#6A4DFF] font-bold dark:text-[#e6f85e] "
@@ -145,6 +145,16 @@ const Header = () => {
                   href="/about"
                 >
                   About
+                </Link> */}
+                <Link
+                  className={` ${
+                    active === "executive-recruitment"
+                      ? "text-[#6A4DFF] font-bold dark:text-[#e6f85e] "
+                      : " dark:text-gray-100 text-gray-900 font-semibold "
+                  }  capitalize  text-sm  no-underline whitespace-nowrap hover:text-[#0000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]`}
+                  href="/executive-recruitment"
+                >
+                  Executive Recruitment
                 </Link>
               </li>
               <li className="px-3 mt-0 ">
@@ -175,7 +185,7 @@ const Header = () => {
                   Find Jobs
                 </Link>
               </li> */}
-              <li className="px-3 mt-0 ">
+              {/* <li className="px-3 mt-0 ">
                 <Link
                   className={`
                          ${
@@ -202,7 +212,7 @@ const Header = () => {
                 >
                   Contact
                 </Link>
-              </li>
+              </li> */}
               {!isAuth && (
                 <Link
                   className={`
@@ -211,7 +221,7 @@ const Header = () => {
                              ? "text-[#6A4DFF] font-bold dark:text-[#e6f85e]  "
                              : " dark:text-gray-100 text-gray-900 font-semibold "
                          }
-                  capitalize font-semibold text-smno-underline hover:text-[0#000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c] px-3`}
+                  capitalize font-semibold text-smno-underline hover:text-[0#000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c] px-3`}
                   href="/login"
                 >
                   Login
@@ -362,7 +372,7 @@ const Header = () => {
                 className="px-3 mt-0"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <Link
+                {/* <Link
                   className={`
                          ${
                            active === "about"
@@ -373,6 +383,18 @@ const Header = () => {
                   href="/about"
                 >
                   About
+                </Link> */}
+                <Link
+                  className={`
+                         ${
+                           active === "executive-recruitment"
+                             ? "text-[#6A4DFF] font-bold   dark:text-[#e6f85e]  "
+                             : " dark:text-gray-100 text-gray-900 font-semibold "
+                         }
+                   text-xl  capitalize no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	`}
+                  href="/executive-recruitment"
+                >
+                  Executive Recruitment
                 </Link>
               </li>
               <li
@@ -409,7 +431,7 @@ const Header = () => {
                   Find Jobs
                 </Link>
               </li> */}
-              <li
+              {/* <li
                 className="px-3 mt-0 "
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -444,7 +466,7 @@ const Header = () => {
                 >
                   Contact
                 </Link>
-              </li>
+              </li> */}
 
               {isAuth ? (
                 <li

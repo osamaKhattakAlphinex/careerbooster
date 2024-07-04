@@ -68,6 +68,14 @@ export const getPages = () => {
       route: "/services",
     },    
     {
+      name: "Career Booster AI Suite",
+      route: "/career-booster-ai-suite",
+    },
+    {
+      name: "Executive Recruitment",
+      route: "/executive-recruitment",
+    },  
+    {
       name: "Resume Scanner",
       route: "/resume-scanner",
     },    
