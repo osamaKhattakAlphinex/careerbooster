@@ -19,11 +19,6 @@ export default function ViewJobPage({ params }: { params: { id: string } }) {
   }, [params]);
   return (
     <>
-      <div className="flex  items-center justify-center py-40 ">
-        <h1 className="text-gray-100 font-extrabold text-4xl">
-          FIND YOUR NEXT CAREER GIG
-        </h1>
-      </div>
       <div className="flex flex-col gap-4 mx-10 rounded-md shadow-md text-gray-100 bg-black mt-[-100px] mb-10 p-10">
         <h2 className="text-gray-100 font-extrabold text-2xl">
           {singleJob?.jobTitle}

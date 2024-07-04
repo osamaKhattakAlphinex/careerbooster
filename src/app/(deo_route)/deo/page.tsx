@@ -8,6 +8,7 @@ import {
   eyeIcon,
   trashIcon,
 } from "@/helpers/iconsProvider";
+import { RootState } from "@/store/store";
 
 import { createColumnHelper } from "@tanstack/react-table";
 import axios from "axios";
@@ -15,6 +16,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 type Job = {
   _id: string;
@@ -34,6 +36,7 @@ type Job = {
 };
 
 const Jobs = () => {
+  const userData = useSelector((state: RootState)=>state.userData)
   const [records, setRecords] = useState<[] | any>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
@@ -41,26 +44,16 @@ const Jobs = () => {
   const [limitOfRecords, setLimitOfRecords] = useState<number>(10);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
-
   const [deo, setDeo] = useState<any>({});
-  const { data: session } = useSession();
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const getUserDataIfNotExists = async () => {
-    try {
-      // Fetch userdata if not exists in Redux
-      const res = await fetch(
-        `/api/users/getOneByEmail?email=${session?.user?.email}`
-      );
-      const response = await res.json();
-      const user = response.result;
-      setDeo(user);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+ useEffect(() =>{
+  if(userData.isFetched){
+    setDeo(userData)
+  }
+ },[userData])
   const fetchRecords = async () => {
     setLoading(true);
     if (!loading) {
@@ -294,11 +287,7 @@ const Jobs = () => {
     setLimitOfRecords(e.target.value);
   };
 
-  useEffect(() => {
-    if (session?.user?.email) {
-      getUserDataIfNotExists();
-    }
-  }, [session]);
+ 
   useEffect(() => {
     fetchRecords();
   }, [deo, open]);
