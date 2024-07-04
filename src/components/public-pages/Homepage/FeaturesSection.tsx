@@ -99,7 +99,7 @@ const FeaturesSection = () => {
     },
   ];
   return (
-    <section className="pb-15 px-2 dark:bg-gray-950 bg-gray-100">
+    <section className="features pb-15 px-2 dark:bg-gray-950 bg-gray-100">
       <Fade duration={2000}>
         <div className="mx-auto w-full sm:container xs:max-w-full xs:px-2  ">
           <div className="flex flex-col justify-center text-center mb-18">

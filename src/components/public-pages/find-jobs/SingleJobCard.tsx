@@ -26,7 +26,7 @@ export default function SinglejobCard({
           <h2 className="dark:text-gray-100 text-gray-950 text-xl font-bold xs:mb-3">
             {jobTitle}
           </h2>
-          <div className="flex gap-4 items-center">
+          {/* <div className="flex gap-4 items-center">
             <div className="remote flex items-center dark:bg-gray-100 bg-gray-950 px-2 py-1 rounded-md dark:text-gray-950 text-gray-100 text-sm font-bold">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +47,7 @@ export default function SinglejobCard({
             <div className="full_time dark:bg-gray-100 bg-gray-950 dark:text-gray-950 text-gray-100 px-2 py-1 rounded-md text-sm font-bold">
               Full Time
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="md:flex md:flex-row xs:flex-col dark:text-gray-100 text-gray-950 md:gap-3 xs:gap-4 items-center">
           <span className="country flex flex-row md:items-center xs:items-start dark:text-gray-100 text-gray-950 font-medium text-base xs:gap-2">
@@ -106,8 +106,8 @@ export default function SinglejobCard({
         </div>
         <div className="buttons flex items-center gap-2 md:ml-auto xs:mx-auto md:mx-0 xs:justify-center md:justify-end ">
           <Link
-            href={`/find-jobs/${jobId}`}
-            className="flex items-center gap-2 w-fit rounded-md dark:bg-gray-100 dark:text-gray-950 bg-gray-950 text-gray-100 font-semibold px-3 md:text-base xs:text-sm py-1 dark:hover:bg-transparent dark:hover:text-gray-100  "
+            href={`/test-job-board/${jobId}`}
+            className="flex border-2 items-center gap-2 w-fit rounded-md dark:bg-gray-100 dark:text-gray-950 bg-gray-950 text-gray-100 font-semibold px-3 md:text-base xs:text-sm py-1 dark:hover:bg-transparent dark:hover:text-gray-100  "
           >
             {eyeIcon}
             View Job
@@ -115,7 +115,7 @@ export default function SinglejobCard({
           <Link
             href={applyJobLink}
             target="_blank"
-            className="flex items-center gap-2 w-fit rounded-md dark:bg-gray-100 dark:text-gray-950 bg-gray-950 text-gray-100 font-semibold px-3 md:text-base xs:text-sm py-1 dark:hover:bg-transparent dark:hover:text-gray-100 "
+            className="flex border-2 items-center gap-2 w-fit rounded-md dark:bg-gray-100 dark:text-gray-950 bg-gray-950 text-gray-100 font-semibold px-3 md:text-base xs:text-sm py-1 dark:hover:bg-transparent dark:hover:text-gray-100 "
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

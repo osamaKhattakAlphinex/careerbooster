@@ -19,7 +19,7 @@ export default function ViewJobPage({ params }: { params: { id: string } }) {
   }, [params]);
   return (
     <>
-      <div className="flex flex-col gap-4 mx-10 rounded-md shadow-md text-gray-100 bg-black mt-[-100px] mb-10 p-10">
+      <div className="flex flex-col gap-4 mx-10 rounded-md shadow-md text-gray-100 bg-black mt-40 mb-10 p-10">
         <h2 className="text-gray-100 font-extrabold text-2xl">
           {singleJob?.jobTitle}
         </h2>
@@ -64,7 +64,7 @@ export default function ViewJobPage({ params }: { params: { id: string } }) {
               <Link
                 target="_blank"
                 href={singleJob?.link}
-                className=" text-base rounded-md px-4 py-2 !text-gray-950 hover:!text-gray-100 bg-white hover:bg-transparent"
+                className=" text-base rounded-md px-4 py-2 border-2 !text-gray-950 hover:!text-gray-100 bg-white hover:bg-transparent"
               >
                 Apply now
               </Link>

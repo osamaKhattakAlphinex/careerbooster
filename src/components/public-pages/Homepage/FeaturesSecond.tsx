@@ -61,8 +61,8 @@ const FeaturesSecond = () => {
       //   </svg>
       // ),
       className: " md:flex-row-reverse",
-      imageSrc1: "assets/images/illustrations/feature-illustration-1-dark.svg",
-      imageSrc2: "assets/images/illustrations/feature-illustration-1-blue.svg",
+      imageSrc1: "	/assets/images/illustrations/feature-illustration-3-dark.svg",
+      imageSrc2: "	/assets/images/illustrations/feature-illustration-3-blue.svg",
     },
     {
       id: 3,
@@ -158,7 +158,7 @@ const FeaturesSecond = () => {
   ];
 
   return (
-    <section className="pb-10 bg-gray-100 dark:bg-gray-950">
+    <section className="featuresSecond pb-10 bg-gray-100 dark:bg-gray-950">
       <div className="w-full mx-auto sm:container xs:max-w-full xs:px-2 ">
         {SecondFeatureSingleData.map((item, i) => {
           return (

@@ -51,28 +51,22 @@ const Jobs = () => {
     }
   }, [userData]);
   const fetchRecords = async () => {
-    setLoading(true);
-    if (!loading) {
-      axios
-        .get(
-          `/api/deo?deoId=${deo._id}&limit=${limitOfRecords}&page=${currentPage}`
-        )
-        .then((res) => {
-          if (res.data.success) {
-            setRecords(res.data.data);
+    try {
+      setLoading(true);
+      const res = await axios.get(
+        `/api/deo?deoId=${deo._id}&limit=${limitOfRecords}&page=${currentPage}`
+      );
+      if (res.data.success) {
+        setRecords(res.data.data);
 
-            setTotalPages(Math.ceil(res.data.total / limitOfRecords));
-            setLoading(false);
-          } else {
-            setRecords([]);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+        setTotalPages(Math.ceil(res.data.total / limitOfRecords));
+        setLoading(false);
+      } else {
+        setRecords([]);
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
     }
   };
 
@@ -263,7 +257,7 @@ const Jobs = () => {
       name: "Preview",
       type: "handler",
       element: (rec: any) => {
-        router.push(`/find-jobs/${rec._id}`);
+        router.push(`/test-job-board/${rec._id}`);
       },
       styles:
         "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 no-underline",

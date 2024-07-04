@@ -3,6 +3,7 @@ import UploadPDFResume from "@/components/UploadPDFResume";
 import { Fade, Zoom } from "react-awesome-reveal";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const HeroArea = () => {
   const [currentStringIndex, setCurrentStringIndex] = useState(0);
@@ -12,9 +13,9 @@ const HeroArea = () => {
     "Get More Interviews.",
     "Access Confidential Opportunities with the Right Keywords.",
     "Get the Attention You Deserve from Recruiters.",
+    "Expect a Document That Stands Out from the Competition.",
     "Get Past the ATS and Increase Your Visibility.",
     "A Top-Notch Resume Will Boost Your Confidence.",
-    "Expect a Document That Stands Out from the Competition.",
   ];
 
   useEffect(() => {
@@ -47,6 +48,19 @@ const HeroArea = () => {
 
     return () => clearTimeout(typingTimeout);
   }, [currentString, currentStringIndex, strings]);
+
+  const moveToFeatures = () => {
+    const featuresSection = document.querySelector(".features");
+    if (featuresSection) {
+      featuresSection.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
+  const moveToFeaturesSecond = () => {
+    const featuresSection = document.querySelector(".featuresSecond");
+    if (featuresSection) {
+      featuresSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <section
       className={`dark:bg-[url('/assets/images/bg/bg-4.png')] bg-[url('/assets/images/bg/1.jpg')] md:pt-40 xs:pt-[120px] xs:pb-[50px] pb-10  md:pb-18 bg-auto bg-no-repeat bg-center overflow-hidden `}
@@ -62,19 +76,33 @@ const HeroArea = () => {
                   </p>
                   <h1 className="text-gray-950 dark:text-gray-100 mb-8 md:text-4xl text-[24px] font-semibold">
                     Get Everything You Need to Land a High-Paying Job, Faster
-                    <br />
-                    {/* <span className=" flex justify-center items-center font-bold md:text-3xl min-h-[56px]   text-2xl text-transparent bg-clip-text bg-gradient-to-r from-[#b324d7] to-[#fe577f] dark:bg-gradient-to-r dark:from-[#58ebff] dark:to-[#e6f85e] typed-animation ">
+                    <br/>
+                    <button
+                      onClick={moveToFeatures}
+                      className="inline-flex text-lg no-underline justify-center items-center relative text-[#6a4dff] dark:text-[#e6f85e] gap-3 dark:after:bg-[#e6f85e] after:bg-[#0000ff9c] after:content[''] after:absolute after:-bottom-[2px] after:left-0 after:w-0 after:h-[1px] after:ease-in-out after:duration-300 hover:text-[#6a4dff] hover:after:w-[100%]"
+                    >
+                      <span>Learn More</span>
+                      <svg
+                        className="w-4 h-4 "
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667"
+                          stroke="currentColor"
+                          strokeWidth="1.21"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </button>
+                    <span className=" flex justify-center items-center font-bold md:text-3xl min-h-[56px]   text-2xl text-transparent bg-clip-text bg-gradient-to-r from-[#b324d7] to-[#fe577f] dark:bg-gradient-to-r dark:from-[#58ebff] dark:to-[#e6f85e] typed-animation ">
                       <p>{currentString}</p>
-                    </span> */}
+                    </span>
                   </h1>
-                  {/* <UploadPDFResume /> */}
-                  <div className="flex justify-center items-center cursor-pointer gap-2 bg-gradient-to-r from-purple-700 to-pink-500 text-white px-2 py-2 rounded-lg lg:w-[17%] sm:w-[50%] md:w-[17%] xs:w-full mx-auto hover:from-purple-800 hover:to-pink-600 transition-all duration-300 ease-in-out">
-                    <div>
-                      <p className="m-0 whitespace-nowrap cursor-pointer text-lg [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)] capitalize text-center">
-                        Learn More
-                      </p>
-                    </div>
-                  </div>
+
+                  <UploadPDFResume />
                 </div>
                 <div className="relative z-1 animate-in duration-300 my-10">
                   <p className=" text-[#0000ff9c] dark:text-[#e6f85e] xs:text-base md:text-xl ">
@@ -82,7 +110,27 @@ const HeroArea = () => {
                   </p>
                   <h1 className="text-gray-950 dark:text-gray-100 mb-8 md:text-4xl text-[24px] font-semibold">
                     Find Exceptional Leaders to Drive Your Business Forward
-                    <br />
+                    <br/>
+                    <button
+                      onClick={moveToFeaturesSecond}
+                      className="inline-flex text-lg no-underline justify-center items-center relative text-[#6a4dff] dark:text-[#e6f85e] gap-3 dark:after:bg-[#e6f85e] after:bg-[#0000ff9c] after:content[''] after:absolute after:-bottom-[2px] after:left-0 after:w-0 after:h-[1px] after:ease-in-out after:duration-300 hover:text-[#6a4dff] hover:after:w-[100%]"
+                    >
+                      <span>Learn More</span>
+                      <svg
+                        className="w-4 h-4 "
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M4 12.6667L12.6667 4M12.6667 4V12.32M12.6667 4H4.34667"
+                          stroke="currentColor"
+                          strokeWidth="1.21"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </button>
                   </h1>
                 </div>
                 <div>
