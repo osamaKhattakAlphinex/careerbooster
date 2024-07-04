@@ -40,7 +40,7 @@ const LinkedInUploadPDFResume = () => {
     phone: "",
     location: "",
   });
-  // Define state variables to track API call statuses
+  // Define states to track API call statuses
   const [headlineComplete, setHeadlineComplete] = useState<boolean>(false);
   const [aboutComplete, setAboutComplete] = useState<boolean>(false);
   const [aboutData, setAboutData] = useState<string>("aboutDefault");

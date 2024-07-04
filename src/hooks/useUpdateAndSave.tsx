@@ -65,7 +65,7 @@ const useUpdateAndSave = () => {
 
 
   //   update and save the Basic Info
-  const updateAndSaveBasicInfo = (obj: any) => {
+  const updateAndSaveBasicInfo = (obj: Record<string,string>) => {
     const [[key, value]] = Object.entries(obj);
 
     dispatch(
@@ -94,11 +94,11 @@ const useUpdateAndSave = () => {
     });
   };
 
-  const updateAndSaveJobTitle = (value: any) => {
+  const updateAndSaveJobTitle = (value: string) => {
     dispatch(setField({ name: "jobTitle", value: value }));
     saveResumeToDB({ ...resume, jobTitle: value });
   };
-  const updateAndSaveHeadings = (obj: any) => {
+  const updateAndSaveHeadings = (obj: Record<string,string>) => {
     const [[key, value]] = Object.entries(obj);
 
     dispatch(
@@ -113,7 +113,7 @@ const useUpdateAndSave = () => {
     });
   };
 
-  const updateAndSaveTourStatus = (tour: any) => {
+  const updateAndSaveTourStatus = (tour: Record<string,boolean>) => {
     dispatch(setTours({ tour }));
     try {
         axios.post("/api/users/updateUserData", {
@@ -127,8 +127,8 @@ const useUpdateAndSave = () => {
     }
   };
 
-  const updateAndSaveName = (value: any) => {
-    dispatch(setField({ name: "name", value: value }));
+  const updateAndSaveName = (value: string) => {
+    dispatch(setResumeField({ name: "name", value: value }));
     saveResumeToDB({ ...resume, name: value });
   };
 

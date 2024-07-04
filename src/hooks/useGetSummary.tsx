@@ -96,8 +96,9 @@ const useGetSummary = (
         }
       })
       .catch((err) => {
-        setStreamedSummaryData(resumeData?.summary);
-        dispatch(setSummary(resumeData?.summary));
+        console.log(err)
+        // setStreamedSummaryData(resumeData?.summary);
+        // dispatch(setSummary(resumeData?.summary));
       });
   };
 
