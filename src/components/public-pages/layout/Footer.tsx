@@ -49,13 +49,13 @@ const Footer = () => {
                       <Link href="/blog">Blog</Link>
                     </li> */}
                     <li>
-                      <Link href="/login" className="font-semibold">
-                        Sign in
+                      <Link href="/use-cases" className="font-semibold">
+                        Use Cases
                       </Link>
                     </li>
                     <li>
-                      <Link href="/register" className="font-semibold">
-                        Register
+                      <Link href="/pricing" className="font-semibold">
+                        Pricing
                       </Link>
                     </li>
                     <li>
