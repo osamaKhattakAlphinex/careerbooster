@@ -2,17 +2,59 @@
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { crossIcon, crossIcon1, crossIconSmall } from "@/helpers/iconsProvider";
+import { crossIcon1, crossIconSmall } from "@/helpers/iconsProvider";
+import Autosuggest from "react-autosuggest";
 import axios from "axios";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
+import { skills } from "../data-providers/SkillData";
 
 const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
   const [jobCategories, setJobCategories] = useState<any>([]);
   const [updateJob, setUpdateJob] = useState<boolean>(false);
   const [rewritingJob, setRewritingJob] = useState(false);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const getSuggestions = (value) => {
+    const inputValue = value.trim().toLowerCase();
+    const inputLength = inputValue.length;
+    return inputLength === 0
+      ? []
+      : skills.filter(
+          (skill) => skill.toLowerCase().slice(0, inputLength) === inputValue
+        );
+  };
 
+  const getSuggestionValue = (suggestion) => suggestion;
+
+  const renderSuggestion = (suggestion, { isHighlighted }) => (
+    <div
+      className={`p-2 text-gray-950 ${
+        isHighlighted ? "bg-gray-300" : "bg-white"
+      } hover:bg-gray-300 cursor-pointer`}
+      onClick={() => handleSuggestionClick(suggestion)}
+    >
+      {suggestion}
+    </div>
+  );
+
+  const handleSuggestionClick = (suggestion) => {
+    setNewSkill("");
+    addSkills(suggestion);
+    setSuggestions([]);
+  };
+
+  const onChange = (event, { newValue }) => {
+    setNewSkill(newValue);
+  };
+
+  const onSuggestionsFetchRequested = ({ value }) => {
+    setSuggestions(getSuggestions(value));
+  };
+
+  const onSuggestionsClearRequested = () => {
+    setSuggestions([]);
+  };
   const getJObCategories = async () => {
     const res = await axios.get("/api/deo/jobCategories");
     if (res.data.success) {
@@ -322,7 +364,7 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
               >
                 Skills
               </label>
-              <input
+              {/* <input
                 type="text"
                 id="skills"
                 // placeholder="Enter required skills"
@@ -345,6 +387,37 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
                       "At least one skill is required"
                     );
                   }
+                }}
+              /> */}
+              <Autosuggest
+                suggestions={suggestions}
+                onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+                onSuggestionsClearRequested={onSuggestionsClearRequested}
+                getSuggestionValue={getSuggestionValue}
+                renderSuggestion={renderSuggestion}
+                inputProps={{
+                  id: "skills",
+                  name: "skills",
+                  className: `w-full px-2 py-3 text-sm text-gray-100 bg-gray-500 rounded-sm outline-none placeholder:text-gray-200 ${
+                    formik.touched.skills && formik.errors.skills
+                      ? "border-red-500 border-2"
+                      : "border-transparent border-none"
+                  }`,
+                  value: newSkill,
+                  onChange: onChange,
+                  // onKeyDown: (e) => {
+                  //   if (e.key === "Enter") {
+                  //     e.preventDefault();
+                  //     if (newSkill.trim() !== "") {
+                  //       addSkills(newSkill);
+                  //     }
+                  //   } else {
+                  //     formik.setFieldError(
+                  //       "skills",
+                  //       "At least one skill is required"
+                  //     );
+                  //   }
+                  // },
                 }}
               />
             </div>

@@ -17,7 +17,6 @@ export async function POST(request: NextRequest) {
               Rewrite and proofread it, also try to keep it in format so that it can look professional.
   
               Also give me top 10 skills that are related to this job
-  
               The output must be in json format. (following is an example)
           {
             jobDescription: "VALUE_HERE",
