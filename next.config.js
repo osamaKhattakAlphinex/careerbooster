@@ -1,3 +1,5 @@
+const { redirect } = require("next/dist/server/api-utils");
+
 /** @type {import('next').NextConfig} */
 const withPWA = require("@ducanh2912/next-pwa").default({
   dest: "public",
@@ -12,9 +14,22 @@ const withPWA = require("@ducanh2912/next-pwa").default({
 });
 
 const nextConfig = {
-
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/career-booster-ai-suite",
+        permanent: true,
+      },
+    ];
+  },
   experimental: {
-    serverComponentsExternalPackages: ["puppeteer-core", "@sparticuz/chromium", "@sparticuz/chromium-min", "puppeteer"],
+    serverComponentsExternalPackages: [
+      "puppeteer-core",
+      "@sparticuz/chromium",
+      "@sparticuz/chromium-min",
+      "puppeteer",
+    ],
     serverActions: true,
   },
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
