@@ -211,7 +211,7 @@ const Header = () => {
                              ? "text-[#6A4DFF] font-bold dark:text-[#e6f85e]  "
                              : " dark:text-gray-100 text-gray-900 font-semibold "
                          }
-                  capitalize font-semibold text-smno-underline hover:text-[0#000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c] px-3`}
+                  capitalize font-semibold text-smno-underline hover:text-[0#000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c] px-3`}
                   href="/login"
                 >
                   Login

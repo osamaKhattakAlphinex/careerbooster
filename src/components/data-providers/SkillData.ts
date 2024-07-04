@@ -1,0 +1,26 @@
+const skills = [
+    "Python", "JavaScript", "Java", "C++", "C#", "Ruby", "PHP", "Swift", "Kotlin",
+    "HTML", "CSS", "React", "Angular", "Vue.js", "Node.js", "Django", "Flask",
+    "SQL", "R", "MATLAB", "TensorFlow", "PyTorch", "Machine Learning", "Data Visualization", "Data Mining", "Big Data",
+    "Docker", "Kubernetes", "Jenkins", "CI/CD", "AWS", "Azure", "Google Cloud Platform",
+    "Ethical Hacking", "Network Security", "Cryptography", "Information Security", "Penetration Testing",
+    "Patient Care", "Clinical Research", "Nursing", "Emergency Medicine", "Surgery", "Medical Coding",
+    "Healthcare Management", "Medical Billing", "Electronic Health Records (EHR)", "Health Informatics",
+    "Financial Reporting", "Tax Preparation", "Auditing", "Bookkeeping",
+    "Portfolio Management", "Risk Management", "Financial Analysis", "Asset Management",
+    "Retail Banking", "Corporate Banking", "Credit Analysis", "Loan Processing",
+    "SEO", "SEM", "Content Marketing", "Social Media Marketing", "Email Marketing",
+    "Consumer Behavior", "Data Analysis", "Market Trends", "Competitive Analysis",
+    "Copywriting", "Graphic Design", "Campaign Management", "Media Buying",
+    "Curriculum Development", "Classroom Management", "Educational Technology", "Lesson Planning",
+    "Corporate Training", "Instructional Design", "E-Learning Development", "Coaching",
+    "Civil Engineering", "Structural Engineering", "Mechanical Engineering", "Electrical Engineering",
+    "Carpentry", "Plumbing", "Electrical Work", "Masonry",
+    "Public Speaking", "Writing", "Active Listening", "Presentation Skills",
+    "Team Management", "Conflict Resolution", "Decision Making", "Strategic Planning",
+    "Analytical Thinking", "Critical Thinking", "Creativity", "Innovation",
+    "Prioritization", "Multitasking", "Goal Setting", "Scheduling",
+    "Agile Methodologies", "Scrum", "Kanban", "Project Planning",
+    "Client Relations", "Customer Support", "CRM Software", "Complaint Resolution"
+  ];
+  
