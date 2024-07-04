@@ -58,16 +58,16 @@ export default function Home() {
         <FeaturesSecond />
 
         {/* <!-- Use cases --> */}
-        <UseCases />
+        {/* <UseCases /> */}
 
         {/* <!-- Reviews --> */}
-        <Reviews />
+        {/* <Reviews /> */}
 
         {/* <!-- FAQ --> */}
         <FAQList />
 
         {/* <!-- CTA --> */}
-        <CTASection />
+        {/* <CTASection /> */}
       </main>
     </>
   );

@@ -24,33 +24,31 @@ const FeaturesSection = () => {
           </g>
         </svg>
       ),
-      heading: "Get Past the ATS and Increase Your Visibility",
+      heading: "CareerBoost AI Suite",
       content:
-        "The ATS is no human—it's a robot designed to shortlist resumes based on specific criteria. This means your resume must speak the language of machines to secure that initial interview invitation. The question arises: Who can craft a better robotfriendly resume than a robot itself? We've decoded the algorithms that the ATS employs to shortlist candidates. Your resume is crafted with a deep understanding of what it takes to pass this robotic gatekeeper",
+        "Optimize your resume, LinkedIn profile, and cover letters with our cutting-edge AI tools.Ensure your application materials stand out and pass through Applicant Tracking Systems (ATS) with ease.",
     },
     {
       id: 2,
       svg: (
         <svg
-          className="w-full h-full"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
-          viewBox="0 0 40 40"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-full h-full"
         >
-          <g
-            stroke="currentColor"
+          <path
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeWidth="2"
-          >
-            <path d="M3.333 20 20 32.37 36.666 20" />
-            <path d="M11.667 15 20 21.667 28.334 15m-10.001-5L20 11.333 21.666 10 20 8.666 18.333 10Z" />
-          </g>
+            d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z"
+          />
         </svg>
       ),
-      heading: "Get the Attention You Deserve from the Recruiters.",
+      heading: "Find Me a Job",
       content:
-        "Our system has been meticulously trained through extensive research and consultations with numerous executive resume writers. We've fine-tuned our system to create resumes that captivate the attention of recruiters and hiring managers.",
+        "Navigating the job market can be overwhelming. Our Virtual Job Search Assistant is here to streamline your search process. This personalized service identifies and recommends jobs tailored to your skills, experience, and career aspirations, saving you time and effort.",
     },
     {
       id: 3,
@@ -71,9 +69,9 @@ const FeaturesSection = () => {
           </g>
         </svg>
       ),
-      heading: "Land your Dream Job 10x Faster",
+      heading: "AI-Powered Job Board ",
       content:
-        "Your applications will be more strategic, more effective, and more likely to lead to your dream job. Gone are the days of sending out generic resumes and hoping for the best. With our Resume AI, you can craft personalized resumes for every job opportunity you pursue. Our AI analyzes each job posting and highlights the keywords and skills that matter most to recruiters. It then helps you incorporate these essential elements seamlessly into your resume, making it a perfect match for the position you're targeting. When a recruiter sees a resume that aligns perfectly with their job opening, it significantly increases your chances of getting noticed and landing an interview.",
+        "Discover exclusive job opportunities on our curated job board. Leveraging advanced AI technology, we match you with the right opportunities, ensuring that senior-level professionals have access to high-impact roles across various industries.",
     },
     {
       id: 4,
@@ -95,9 +93,9 @@ const FeaturesSection = () => {
           </g>
         </svg>
       ),
-      heading: "Endorsed by a Former Google Recruiter",
+      heading: "Career Advancement Suite",
       content:
-        "Still skeptical? Take it from the experts. Nolan Church, a former Google recruiter, has emphasized that resumes often suffer from an overload of words and paragraphs, resulting in a 'zero chance' of progressing. He recommends using AI tools to refine your resume. In an interview with Business Insider, he praised the effectiveness of AI-driven resume optimization, confirming that it's the smart choice for modern job seekers. So, when you trust AI for your executive resume, you're not just appeasing the robots; you're ensuring your resume shines in the eyes of discerning human recruiters too. It's the winning combination for your career success.",
+        "Our Executive Career Advancement Suite offers senior-level job seekers comprehensive support to excel in their careers. It includes Interview Coaching for confident interview performance, Networking Opportunities to connect with industry leaders, and Personal Branding to stand out in the job market.",
     },
   ];
   return (
@@ -105,23 +103,20 @@ const FeaturesSection = () => {
       <Fade duration={2000}>
         <div className="mx-auto w-full sm:container xs:max-w-full xs:px-2  ">
           <div className="flex flex-col justify-center text-center mb-18">
-            <p className="mb-5 dark:text-gray-100  xs:text-base md:text-xl text-gray-950  ">
+            {/* <p className="mb-5 dark:text-gray-100  xs:text-base md:text-xl text-gray-950  ">
               Uncover the Secret to Superior Resumes
-            </p>
-            <h1 className="mb-5  dark:text-gray-100 text-gray-950 font-semibold md:text-3xl text-[20px]">
-              Why Trust AI for Your Executive Resume?
-              <br className="d-none d-lg-block" />
+            </p> */}
+            <h1 className="mb-2  dark:text-gray-100 text-gray-950 font-semibold md:text-3xl text-[20px]">
+              Your One-Stop Shop for Senior-Level Jobs
+              {/* <br className="d-none d-lg-block" /> */}
             </h1>
-            <h4 className="mb-0 dark:text-gray-100 text-gray-950  md:text-[20px] text-[17px]">
+            {/* <h4 className="mb-0 dark:text-gray-100 text-gray-950  md:text-[20px] text-[17px]">
               The Game-Changing Advantages You Never Knew About
-            </h4>
-            <p className="py-10 md:w-[75%] xs:w-full mx-auto dark:text-gray-100 text-gray-950 pb-10">
-              In today{"'"}s competitive job market, landing your dream role isn
-              {"'"}t just about qualifications and experience; It{"'"}s about
-              making sure your resume stands out. But here{"'"}s the catch:
-              before your resume even reaches the human recruiter{"'"}s desk, it
-              has to pass through a critical gatekeeper—the Applicant Tracking
-              System (ATS).
+            </h4> */}
+            <p className="py-4 md:w-[75%] text-base xs:w-full mx-auto dark:text-gray-100 text-gray-950 pb-10">
+              Whether you{"'"}re aiming for senior management, director, VP, or
+              C-level positions like CMO, CFO, CTO, and CIO, we have the tools
+              and expertise to help you succeed.
             </p>
           </div>
 
@@ -143,7 +138,7 @@ const FeaturesSection = () => {
                           {item.svg}
                         </div>
                         <div className="content">
-                          <h4 className="mb-4 font-semibold xs:flex xs:justify-center xs:gap-2  text-xl dark:text-gray-100 text-gray-950 ">
+                          <h4 className="mb-4 font-semibold xs:flex xs:justify-center md:justify-normal xs:gap-2  text-xl dark:text-gray-100 text-gray-950 ">
                             <div className="icon  xs:hidden  md:flex mb-2 lg:hidden w-14 h-14 md:flex-shrink-0  align-center justify-center rounded-lg border-[1px] dark:bg-[#1E1F27] text-[#0000ff9c] bg-[#E5E3F7] dark:text-[#e6f85e] dark:border-white border-[#c7bef9] dark:border-opacity-10 border-opacity-25">
                               {item.svg}
                             </div>
@@ -161,7 +156,7 @@ const FeaturesSection = () => {
             })}
           </div>
 
-          <div className="text-center ">
+          {/* <div className="text-center ">
             <h5 className="lg:my-10 md:my-10 xs:mb-10 xs:mt-0 dark:text-gray-100 text-gray-950 font-[600] text-[1.25rem]">
               Ready to craft a resume that impresses both bots and humans?
             </h5>
@@ -171,7 +166,7 @@ const FeaturesSection = () => {
             >
               Let{"'"}s get started!
             </Link>
-          </div>
+          </div> */}
         </div>
       </Fade>
     </section>

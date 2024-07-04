@@ -58,28 +58,35 @@ const HeroArea = () => {
               <div className="text-center">
                 <div className="relative z-1 animate-in duration-300">
                   <p className=" text-[#0000ff9c] dark:text-[#e6f85e] xs:text-base md:text-xl ">
-                    Unlock Your Career Potential
+                    Looking for a Senior-Level Job?
                   </p>
                   <h1 className="text-gray-950 dark:text-gray-100 mb-8 md:text-4xl text-[24px] font-semibold">
-                    Your Free AI Resume Writer & LinkedIn Optimization Tool to
-                    Turbocharge Your Career!
+                    Get Everything You Need to Land a High-Paying Job, Faster
                     <br />
-                    {/* <span
-                    className="font-bold md:text-[40px] mt-8 text-[24px] text-transparent bg-clip-text bg-gradient-to-r from-[#b324d7] to-[#fe577f] dark:bg-gradient-to-r dark:from-[#58ebff] dark:to-[#e6f85e] typed-animation text-wrap"
-                    data-strings='["Find Your Dream Job Faster.", "Get More Interviews.", 
-                        "Access Confidential Opportunities with the Right Keywords.", "Get the Attention You Deserve from Recruiters.",
-                        "Get Past the ATS and Increase Your Visibility.",
-                        "A Top-Notch Resume Will Boost Your Confidence.",
-                        "Expect a Document That Stands Out from the Competition"]'
-                  ></span> */}
-                    <span className=" flex justify-center items-center font-bold md:text-3xl min-h-[56px]   text-2xl text-transparent bg-clip-text bg-gradient-to-r from-[#b324d7] to-[#fe577f] dark:bg-gradient-to-r dark:from-[#58ebff] dark:to-[#e6f85e] typed-animation ">
+                    {/* <span className=" flex justify-center items-center font-bold md:text-3xl min-h-[56px]   text-2xl text-transparent bg-clip-text bg-gradient-to-r from-[#b324d7] to-[#fe577f] dark:bg-gradient-to-r dark:from-[#58ebff] dark:to-[#e6f85e] typed-animation ">
                       <p>{currentString}</p>
-                    </span>
+                    </span> */}
                   </h1>
-                  <UploadPDFResume />
+                  {/* <UploadPDFResume /> */}
+                  <div className="flex justify-center items-center cursor-pointer gap-2 bg-gradient-to-r from-purple-700 to-pink-500 text-white px-2 py-2 rounded-lg lg:w-[17%] sm:w-[50%] md:w-[17%] xs:w-full mx-auto hover:from-purple-800 hover:to-pink-600 transition-all duration-300 ease-in-out">
+                    <div>
+                      <p className="m-0 whitespace-nowrap cursor-pointer text-lg [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)] capitalize text-center">
+                        Learn More
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="relative z-1 animate-in duration-300 my-10">
+                  <p className=" text-[#0000ff9c] dark:text-[#e6f85e] xs:text-base md:text-xl ">
+                    Seeking Top Executive Talent?
+                  </p>
+                  <h1 className="text-gray-950 dark:text-gray-100 mb-8 md:text-4xl text-[24px] font-semibold">
+                    Find Exceptional Leaders to Drive Your Business Forward
+                    <br />
+                  </h1>
                 </div>
                 <div>
-                  <div className="relative flex justify-center">
+                  {/* <div className="relative flex justify-center">
                     <Image
                       width={811}
                       height={341}
@@ -107,9 +114,9 @@ const HeroArea = () => {
                         />
                       </div>
                     </Zoom>
-                  </div>
+                  </div> */}
                 </div>
-                <ul className="flex flex-wrap gap-4 md:gap-8 lg:gap-10 items-center justify-center mt-8 mb-0 dark:text-gray-100 text-gray-950">
+                {/* <ul className="flex flex-wrap gap-4 md:gap-8 lg:gap-10 items-center justify-center mt-8 mb-0 dark:text-gray-100 text-gray-950">
                   <li>Write Resumes 100x Faster</li>
                   <li>Write Keyword-Optimized LinkedIn Profile</li>
                 </ul>
@@ -144,7 +151,7 @@ const HeroArea = () => {
                     src="/assets/images/review-logos/capterra_reviews_2.svg"
                     alt=""
                   />
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
