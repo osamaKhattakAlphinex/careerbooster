@@ -104,7 +104,7 @@ const HeroArea = () => {
 
                   <UploadPDFResume />
                 </div>
-                <div className="relative z-1 animate-in duration-300 my-10">
+                {/* <div className="relative z-1 animate-in duration-300 my-10">
                   <p className=" text-[#0000ff9c] dark:text-[#e6f85e] xs:text-base md:text-xl ">
                     Seeking Top Executive Talent?
                   </p>
@@ -132,7 +132,7 @@ const HeroArea = () => {
                       </svg>
                     </button>
                   </h1>
-                </div>
+                </div> */}
                 <div>
                   {/* <div className="relative flex justify-center">
                     <Image
