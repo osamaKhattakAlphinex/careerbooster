@@ -6,6 +6,7 @@ import { crossIcon, crossIcon1, crossIconSmall } from "@/helpers/iconsProvider";
 import axios from "axios";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 
 const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
   const [jobCategories, setJobCategories] = useState<any>([]);
@@ -31,30 +32,34 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
       setUpdateJob(true);
     }
   }, []);
-  const rewriteJob = () => {
-    setRewritingJob(true);
-    fetch("/api/deo/rewriteJob", {
-      method: "POST",
-      body: JSON.stringify({ content: formik.values.description }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then(async (resp: any) => {
-        const res = await resp.json();
-        if (res.success && res?.result) {
-          let myJSON;
-          if (typeof res.result === "object") {
-            myJSON = res.result;
-          } else {
-            myJSON = await JSON.parse(res.result);
-          }
-          formik.setFieldValue("description", myJSON.jobDescription);
-          formik.setFieldValue("skills", myJSON.skills);
+  const rewriteJob = async () => {
+    try {
+      setRewritingJob(true);
+      const resp = await fetch("/api/deo/rewriteJob", {
+        method: "POST",
+        body: JSON.stringify({
+          content: htmlToPlainText(formik.values.description),
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const res = await resp.json();
+      if (res.success) {
+        let myJSON;
+        if (typeof res.result === "object") {
+          myJSON = res.result;
+        } else {
+          myJSON = await JSON.parse(res.result);
         }
-      })
-      .catch((error) => setRewritingJob(false))
-      .finally(() => setRewritingJob(false));
+        formik.setFieldValue("description", myJSON.jobDescription);
+        formik.setFieldValue("skills", myJSON.skills);
+      }
+    } catch (error) {
+      setRewritingJob(false);
+    } finally {
+      setUpdateJob(false);
+    }
   };
   const [newSkill, setNewSkill] = useState("");
   const formik = useFormik({

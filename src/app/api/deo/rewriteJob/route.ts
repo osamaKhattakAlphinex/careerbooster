@@ -18,16 +18,17 @@ export async function POST(request: NextRequest) {
   
               Also give me top 10 skills that are related to this job
   
-              The output must be in this format. (following is an example)
+              The output must be in json format. (following is an example)
           {
-            "jobDescription": "VALUE_HERE",
-            "skills": []
+            jobDescription: "VALUE_HERE",
+            skills: []
           }
           jobDescription must be in proper html format.
           `;
 
       const response: any = await openai.chat.completions.create({
         model: "ft:gpt-3.5-turbo-1106:careerbooster::9SLbRnyu",
+        // response_format: {"type": "json_object"},
         messages: [{ role: "user", content: input }],
       });
       try {
