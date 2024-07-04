@@ -31,12 +31,10 @@ export const metadata: Metadata = {
 };
 function page() {
   return (
-    <>
-      <main className="bg-[#fff] dark:bg-[#171825]">
-        <PageHeader title="Executive Recruitment Service" />
-        <ExecutiveRecruitment />
-      </main>
-    </>
+    <main className="bg-[#fff] dark:bg-[#171825]">
+      <PageHeader title="Executive Recruitment Service" />
+      <ExecutiveRecruitment />
+    </main>
   );
 }
 

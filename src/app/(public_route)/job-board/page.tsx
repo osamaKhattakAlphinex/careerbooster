@@ -1,10 +1,9 @@
 import React from "react";
 import PageHeader from "@/components/PageHeader";
 import { Metadata } from "next";
-import FindJobs4Me from "@/components/public-pages/Homepage/FindJobs4Me";
 export const metadata: Metadata = {
-  title: "Find Jobs4Me - CareerBooster.ai",
-  description: "Find Jobs4Me Service Page",
+  title: "Job Board - CareerBooster.ai",
+  description: "Job Board Service Page",
   keywords: [
     "CareerBooster.AI",
     "AI-powered tools",
@@ -31,12 +30,15 @@ export const metadata: Metadata = {
 };
 function page() {
   return (
-    
-      <main className="bg-[#fff] dark:bg-[#171825]">
-        <PageHeader title="Find Jobs4Me" />
-        <FindJobs4Me />
-      </main>
-    
+    <main className="bg-[#fff] dark:bg-[#171825]">
+      <PageHeader title="AI-Powered Job Board"/>
+      <div className="flex justify-center mt-10 pb-10">
+        <h1 className="text-2xl font-semibold self-center ">
+
+        Coming Soon! Currently in Development
+        </h1>
+        </div>
+    </main>
   );
 }
 

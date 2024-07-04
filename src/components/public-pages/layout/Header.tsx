@@ -151,13 +151,44 @@ const Header = () => {
                     active === "executive-recruitment"
                       ? "text-[#6A4DFF] font-bold dark:text-[#e6f85e] "
                       : " dark:text-gray-100 text-gray-900 font-semibold "
-                  }  capitalize  text-sm  no-underline whitespace-nowrap hover:text-[#0000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]`}
+                  }  capitalize  text-sm  no-underline whitespace-nowrap hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]`}
                   href="/executive-recruitment"
                 >
                   Executive Recruitment
                 </Link>
               </li>
               <li className="px-3 mt-0 ">
+                <Link
+                  className={`
+                         ${
+                           active === "find-jobs4me"
+                             ? "text-[#6A4DFF] font-bold   dark:text-[#e6f85e]  "
+                             : " dark:text-gray-100 text-gray-900 font-semibold "
+                         }
+                  capitalize font-semibold text-sm whitespace-nowrap no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	`}
+                  href="/find-jobs4me"
+                >
+                  Find Jobs4Me
+                </Link>
+              </li>
+              <li
+                className="px-3 mt-0 "
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Link
+                  className={`
+                         ${
+                           active === "job-board"
+                             ? "text-[#6A4DFF] font-bold   dark:text-[#e6f85e]  "
+                             : " dark:text-gray-100 text-gray-900 font-semibold "
+                         }
+                   text-sm capitalize no-underline whitespace-nowrap hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	`}
+                  href="/job-board"
+                >
+                  AI-Powered Job Board
+                </Link>
+              </li>
+              {/* <li className="px-3 mt-0 ">
                 <Link
                   className={`
                          ${
@@ -170,7 +201,7 @@ const Header = () => {
                 >
                   Use cases
                 </Link>
-              </li>
+              </li> */}
               {/* <li className="px-3 mt-0 ">
                 <Link
                   className={`
@@ -233,7 +264,7 @@ const Header = () => {
                 <div className="relative inline-block text-left lg:block xs:hidden">
                   <button
                     type="button"
-                    className="grid place-content-center w-full justify-center gap-x-1.5 rounded-md px-1   font-semibold   text-xs"
+                    className="grid place-content-center w-full justify-center gap-x-1.5 rounded-md px-1  font-semibold   text-xs"
                     id="menu-button"
                     // onMouseOver={() => setDropdownOpen(true)}
                     // onMouseLeave={() => setDropdownOpen(false)}
@@ -391,13 +422,47 @@ const Header = () => {
                              ? "text-[#6A4DFF] font-bold   dark:text-[#e6f85e]  "
                              : " dark:text-gray-100 text-gray-900 font-semibold "
                          }
-                   text-xl  capitalize no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	`}
+                   text-sm  capitalize no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	`}
                   href="/executive-recruitment"
                 >
                   Executive Recruitment
                 </Link>
               </li>
               <li
+                className="px-3 mt-0 "
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Link
+                  className={`
+                         ${
+                           active === "find-jobs4me"
+                             ? "text-[#6A4DFF] font-bold   dark:text-[#e6f85e]  "
+                             : " dark:text-gray-100 text-gray-900 font-semibold "
+                         }
+                  text-sm  capitalize no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	`}
+                  href="/find-jobs4me"
+                >
+                  Find Jobs4Me
+                </Link>
+              </li>
+              <li
+                className="px-3 mt-0 "
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Link
+                  className={`
+                         ${
+                           active === "job-board"
+                             ? "text-[#6A4DFF] font-bold   dark:text-[#e6f85e]  "
+                             : " dark:text-gray-100 text-gray-900 font-semibold "
+                         }
+                   text-sm capitalize no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	`}
+                  href="/job-board"
+                >
+                  AI-Powered Job Board
+                </Link>
+              </li>
+              {/* <li
                 className="px-3 mt-0 "
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -413,7 +478,7 @@ const Header = () => {
                 >
                   Use cases
                 </Link>
-              </li>
+              </li> */}
               {/* <li
                 className="px-3 mt-0 "
                 onClick={() => setMobileMenuOpen(false)}
@@ -495,7 +560,7 @@ const Header = () => {
                              ? "text-[#6A4DFF] font-bold   dark:text-[#e6f85e]  "
                              : " dark:text-gray-100 text-gray-900 font-semibold "
                          }
-                    capitalize no-underline text-xl hover:text-[0#000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c] px-3`}
+                    capitalize no-underline text-xl hover:text-[0#000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c] px-3`}
                     href="/login"
                   >
                     login
