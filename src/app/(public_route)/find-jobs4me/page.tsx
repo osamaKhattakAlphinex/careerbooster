@@ -1,10 +1,10 @@
 import React from "react";
 import PageHeader from "@/components/PageHeader";
-import ExecutiveRecruitment from "@/components/public-pages/Homepage/ExecutiveRecruitment";
 import { Metadata } from "next";
+import FindJobs4Me from "@/components/public-pages/Homepage/FindJobs4Me";
 export const metadata: Metadata = {
-  title: "Executive Recruitment - CareerBooster.ai",
-  description: "Executive Recruitment Service Page",
+  title: "Find Jobs4Me - CareerBooster.ai",
+  description: "Find Jobs4Me Service Page",
   keywords: [
     "CareerBooster.AI",
     "AI-powered tools",
@@ -31,10 +31,12 @@ export const metadata: Metadata = {
 };
 function page() {
   return (
-    <main className="bg-[#fff] dark:bg-[#171825]">
-      <PageHeader title="Executive Recruitment Service" />
-      <ExecutiveRecruitment />
-    </main>
+    
+      <main className="bg-[#fff] dark:bg-[#171825]">
+        <PageHeader title="Find Jobs4Me" />
+        <FindJobs4Me />
+      </main>
+    
   );
 }
 
