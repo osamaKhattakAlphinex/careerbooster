@@ -49,13 +49,13 @@ const Footer = () => {
                       <Link href="/blog">Blog</Link>
                     </li> */}
                     <li>
-                      <Link href="/login" className="font-semibold">
-                        Sign in
+                      <Link href="/use-cases" className="font-semibold">
+                        Use Cases
                       </Link>
                     </li>
                     <li>
-                      <Link href="/register" className="font-semibold">
-                        Register
+                      <Link href="/pricing" className="font-semibold">
+                        Pricing
                       </Link>
                     </li>
                     <li>
@@ -67,24 +67,24 @@ const Footer = () => {
                 </div>
                 <div className="flex flex-col lg:px-5 xs:justify-center sm:justify-start xs:w-full sm:w-fit ">
                   <h6 className="my-2 font-semibold text-gray-950 dark:text-gray-100">
-                    Use Cases
+                    AI Powered Tools
                   </h6>
                   <ul className="pl-0 mb-0 list-none link-list-t">
                     <li>
-                      <Link href="/use-cases">Generate Resumes</Link>
+                      <Link href="/resume-builder">Generate Resumes</Link>
                     </li>
                     <li>
-                      <Link href="/use-cases">Generate Cover Letters</Link>
+                      <Link href="/cover-letter-generator">Generate Cover Letters</Link>
                     </li>
                     <li>
-                      <Link href="/use-cases">Generate Follow up Emails</Link>
+                      <Link href="/email-assistant">Generate Follow up Emails</Link>
                     </li>
                     <li>
-                      <Link href="/use-cases">LinkedIn Optimization</Link>
+                      <Link href="/linkedin-optimizer">LinkedIn Optimization</Link>
                     </li>
-                    <li>
+                    {/* <li>
                       <Link href="/use-cases">Generate Consulting Bids</Link>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
                 <div className="flex flex-col lg:px-5 xs:justify-center sm:justify-start xs:w-full sm:w-fit">

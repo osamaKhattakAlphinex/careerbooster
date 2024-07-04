@@ -2,12 +2,9 @@
 
 import DataTable, { TableAction } from "@/components/admin/DataTable";
 import JobForm from "@/components/deo/JobForm";
-import {  getFormattedDate } from "@/helpers/getFormattedDateTime";
-import {
-  EditIcon,
-  eyeIcon,
-  trashIcon,
-} from "@/helpers/iconsProvider";
+import { getFormattedDate } from "@/helpers/getFormattedDateTime";
+import { EditIcon, eyeIcon, trashIcon } from "@/helpers/iconsProvider";
+import { RootState } from "@/store/store";
 
 import { createColumnHelper } from "@tanstack/react-table";
 import axios from "axios";
@@ -15,6 +12,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 type Job = {
   _id: string;
@@ -34,6 +32,7 @@ type Job = {
 };
 
 const Jobs = () => {
+  const userData = useSelector((state: RootState) => state.userData);
   const [records, setRecords] = useState<[] | any>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
@@ -41,49 +40,33 @@ const Jobs = () => {
   const [limitOfRecords, setLimitOfRecords] = useState<number>(10);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
-
   const [deo, setDeo] = useState<any>({});
-  const { data: session } = useSession();
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const getUserDataIfNotExists = async () => {
-    try {
-      // Fetch userdata if not exists in Redux
-      const res = await fetch(
-        `/api/users/getOneByEmail?email=${session?.user?.email}`
-      );
-      const response = await res.json();
-      const user = response.result;
-      setDeo(user);
-    } catch (err) {
-      console.log(err);
+  useEffect(() => {
+    if (userData.isFetched) {
+      setDeo(userData);
     }
-  };
+  }, [userData]);
   const fetchRecords = async () => {
-    setLoading(true);
-    if (!loading) {
-      axios
-        .get(
-          `/api/deo?deoId=${deo._id}&limit=${limitOfRecords}&page=${currentPage}`
-        )
-        .then((res: any) => {
-          if (res.data.success) {
-            setRecords(res.data.data);
+    try {
+      setLoading(true);
+      const res = await axios.get(
+        `/api/deo?deoId=${deo._id}&limit=${limitOfRecords}&page=${currentPage}`
+      );
+      if (res.data.success) {
+        setRecords(res.data.data);
 
-            setTotalPages(Math.ceil(res.data.total / limitOfRecords));
-            setLoading(false);
-          } else {
-            setRecords([]);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+        setTotalPages(Math.ceil(res.data.total / limitOfRecords));
+        setLoading(false);
+      } else {
+        setRecords([]);
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
     }
   };
 
@@ -274,7 +257,7 @@ const Jobs = () => {
       name: "Preview",
       type: "handler",
       element: (rec: any) => {
-        router.push(`/find-jobs/${rec._id}`);
+        router.push(`/test-job-board/${rec._id}`);
       },
       styles:
         "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 no-underline",
@@ -295,17 +278,16 @@ const Jobs = () => {
   };
 
   useEffect(() => {
-    if (session?.user?.email) {
-      getUserDataIfNotExists();
+    if (deo._id) {
+      fetchRecords();
     }
-  }, [session]);
-  useEffect(() => {
-    fetchRecords();
   }, [deo, open]);
 
   useEffect(() => {
     setRecords([]);
-    fetchRecords();
+    if (deo._id) {
+      fetchRecords();
+    }
     router.replace(pathname + `?r=${limitOfRecords}&p=${currentPage}`);
   }, [limitOfRecords, currentPage]);
   useEffect(() => {

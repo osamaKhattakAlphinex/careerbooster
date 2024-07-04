@@ -95,6 +95,7 @@ export interface Project {
 }
 
 interface UserDataSlice {
+  _id:string;
   isFetched: boolean;
   isLoading: boolean;
   error: string;
@@ -145,6 +146,7 @@ interface UserDataSlice {
 }
 
 const initialState: UserDataSlice = {
+  _id:"",
   isFetched: false,
   isLoading: false,
   error: "",
