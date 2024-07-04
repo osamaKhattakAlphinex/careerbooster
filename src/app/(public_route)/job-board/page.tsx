@@ -31,13 +31,12 @@ export const metadata: Metadata = {
 function page() {
   return (
     <main className="bg-[#fff] dark:bg-[#171825]">
-      <PageHeader title="AI-Powered Job Board"/>
+      <PageHeader title="AI-Powered Job Board" />
       <div className="flex justify-center mt-10 pb-10">
         <h1 className="text-2xl font-semibold self-center ">
-
-        Coming Soon! Currently in Development
+          Coming Soon! Currently in Development
         </h1>
-        </div>
+      </div>
     </main>
   );
 }
