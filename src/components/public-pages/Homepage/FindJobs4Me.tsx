@@ -14,7 +14,7 @@ const montserrat_r = Montserrat({
 const FindJobs4Me = () => {
     const faqs = [
         {
-          question: "What Is CareerBooster's Find Job4Me?",
+          question: `What Is CareerBooster{"'"}s Find Job4Me?`,
           answer:
             "Our Find Job4Me service was created to offer busy professionals a solution to job searching on their own. We assign a dedicated Virtual Job Search assistant who will be responsible for managing the time-consuming art of job searching.\n\nOur professional Virtual Job Search Assistants will be responsible for searching for jobs on your behalf, applying to the jobs you approve, and networking with key decision-makers to land you interviews.",
         },
@@ -34,7 +34,7 @@ const FindJobs4Me = () => {
             "No. CareerBooster does not guarantee a job as a result of using our service. We provide significant results in order for you to find your dream job.",
         },
         {
-          question: "What's Your Money-Back Guarantee?",
+          question: `What{"'"}s Your Money-Back Guarantee?`,
           answer:
             "We will deliver the services we promise, or we will refund your money.",
         },
@@ -146,7 +146,7 @@ const FindJobs4Me = () => {
               >
                 Your LinkedIn profile, résumé, and cover letter are your
                 sales team. And they are going to help your ideal employer
-                find you. Before we begin the job search, we'll redesign
+                find you. Before we begin the job search, we{"'"}ll redesign
                 your résumé using an Executive Level Resume format and
                 keyword optimize your LinkedIn to attract your ideal
                 prospects.
@@ -190,15 +190,15 @@ const FindJobs4Me = () => {
                 <p
                   className={`text-gray-400 ${montserrat_r.className} text-[20px]`}
                 >
-                  We'll reach out to 500+ decision makers on your behalf in
+                  We{"'"}ll reach out to 500+ decision makers on your behalf in
                   your industry and desired location to find positions that
-                  aren't listed on job boards.
+                  aren{"'"}t listed on job boards.
                 </p>
                 <br />
                 <p
                   className={`text-gray-400 ${montserrat_r.className} text-[20px]`}
                 >
-                  When you're looking for a job, it's easy to become focused
+                  When you{"'"}re looking for a job, it{"'"}s easy to become focused
                   on job boards and search engines and forget about other
                   ways to find open positions. This kind of tunnel vision
                   can mean missing out on the hidden job market—unadvertised
@@ -229,7 +229,7 @@ const FindJobs4Me = () => {
               >
                 If you want to find a job fast, you need to apply for a
                 large number of jobs. But how can you send out a high volume
-                of applications quickly and easily? That's where we come in.
+                of applications quickly and easily? That{"'"}s where we come in.
               </p>
               <br />
               <p
@@ -272,7 +272,7 @@ const FindJobs4Me = () => {
                 Your dedicated Virtual Assistant will add at least 500 new
                 connections to your network on LinkedIn with decision makers
                 in your industry, send networking messages to leverage your
-                job search using the world's primary search engine and
+                job search using the world{"'"}s primary search engine and
                 social network.
               </p>
             </div>
@@ -335,7 +335,7 @@ const FindJobs4Me = () => {
           <p
             className={`text-lg !font-semibold ${montserrat_r.className} text-[20px]`}
           >
-            "People often say “looking for a job is a full time job”, and
+            {'"'}People often say “looking for a job is a full time job”, and
             that shouldn{"’"}t be the case. It doesn{"’"}t have to be this
             painful of a process.
           </p>
@@ -349,7 +349,7 @@ const FindJobs4Me = () => {
             doing what matters most to land a job. You also have a higher
             likelihood of generating several offers, that way you{"’"}re not
             only finding A job, but the RIGHT job. I think it{"’"}s worth
-            the investment."
+            the investment.{'"'}
           </p>
           <p
             className={`mt-4 text-blue-600 !font-semibold ${montserrat_r.className} text-[20px]`}
@@ -489,7 +489,7 @@ const FindJobs4Me = () => {
           Opportunity!
         </h1>
         <p className={`text-[23px] ${montserrat_r.className} pt-6 mb-10`}>
-          Let's see if we're a fit. Get started by scheduling a
+          Let{"'"}s see if we{"'"}re a fit. Get started by scheduling a
           complimentary consultation.
         </p>
         <Link
