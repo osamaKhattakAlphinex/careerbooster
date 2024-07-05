@@ -136,6 +136,18 @@ const Header = () => {
                 </Link>
               </li>
               <li className="px-3 mt-0 ">
+                <Link
+                  className={` ${
+                    active === "career-boost-ai-suite"
+                      ? "text-[#6A4DFF] font-bold dark:text-[#e6f85e] "
+                      : " dark:text-gray-100 text-gray-900 font-semibold "
+                  }  capitalize  text-sm  no-underline whitespace-nowrap hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]`}
+                  href="/career-boost-ai-suite"
+                >
+                  CareerBoost AI Suite
+                </Link>
+              </li>
+              <li className="px-3 mt-0 ">
                 {/* <Link
                   className={` ${
                     active === "about"
@@ -157,18 +169,19 @@ const Header = () => {
                   Executive Recruitment
                 </Link>
               </li>
+            
               <li className="px-3 mt-0 ">
                 <Link
                   className={`
                          ${
-                           active === "find-jobs4me"
+                           active === "find-job4me"
                              ? "text-[#6A4DFF] font-bold   dark:text-[#e6f85e]  "
                              : " dark:text-gray-100 text-gray-900 font-semibold "
                          }
                   capitalize font-semibold text-sm whitespace-nowrap no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	`}
-                  href="/find-jobs4me"
+                  href="/find-job4me"
                 >
-                  Find Jobs4Me
+                  Find Job4Me
                 </Link>
               </li>
               <li
@@ -398,7 +411,23 @@ const Header = () => {
                   </Link>
                 </li>
               )}
-
+              <li
+                className="px-3 mt-0"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Link
+                  className={`
+                         ${
+                           active === "career-boost-ai-suite"
+                             ? "text-[#6A4DFF] font-bold   dark:text-[#e6f85e]  "
+                             : " dark:text-gray-100 text-gray-900 font-semibold "
+                         }
+                   text-lg  capitalize no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	`}
+                  href="/career-boost-ai-suite"
+                >
+                  CareerBoost AI Suite
+                </Link>
+              </li>
               <li
                 className="px-3 mt-0"
                 onClick={() => setMobileMenuOpen(false)}
@@ -428,6 +457,7 @@ const Header = () => {
                   Executive Recruitment
                 </Link>
               </li>
+
               <li
                 className="px-3 mt-0 "
                 onClick={() => setMobileMenuOpen(false)}
@@ -435,14 +465,14 @@ const Header = () => {
                 <Link
                   className={`
                          ${
-                           active === "find-jobs4me"
+                           active === "find-job4me"
                              ? "text-[#6A4DFF] font-bold   dark:text-[#e6f85e]  "
                              : " dark:text-gray-100 text-gray-900 font-semibold "
                          }
                   text-lg  capitalize no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	`}
-                  href="/find-jobs4me"
+                  href="/find-job4me"
                 >
-                  Find Jobs4Me
+                  Find Job4Me
                 </Link>
               </li>
               <li

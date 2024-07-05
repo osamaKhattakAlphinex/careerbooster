@@ -7,7 +7,7 @@ import {
   uploadIcon,
 } from "@/helpers/iconsProvider";
 import Image from "next/image";
-import FAQList from "../Homepage/Faqs";
+import FAQList from "../career-boost-ai-suite/Faqs";
 import Reviews from "../Homepage/Reviews";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";

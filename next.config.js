@@ -14,15 +14,6 @@ const withPWA = require("@ducanh2912/next-pwa").default({
 });
 
 const nextConfig = {
-  async redirects() {
-    return [
-      {
-        source: "/",
-        destination: "/career-booster-ai-suite",
-        permanent: true,
-      },
-    ];
-  },
   experimental: {
     serverComponentsExternalPackages: [
       "puppeteer-core",

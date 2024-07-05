@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
 import CTASection from "@/components/public-pages/Homepage/CTASection";
+import FAQList from "@/components/public-pages/Homepage/Faqs";
 import FeaturesSecond from "@/components/public-pages/Homepage/FeaturesSecond";
 import FeaturesSection from "@/components/public-pages/Homepage/FeaturesSection";
 import HeroArea from "@/components/public-pages/Homepage/HeroArea";
 import Reviews from "@/components/public-pages/Homepage/Reviews";
 import RewardsSection from "@/components/public-pages/Homepage/RewardsSection";
 import UseCases from "@/components/public-pages/Homepage/UseCases";
-import FAQList from "@/components/public-pages/Homepage/Faqs";
+import type { Metadata } from "next";
+
 
 export const metadata: Metadata = {
   title: "AI Suite - CareerBooster.ai",
@@ -58,16 +59,16 @@ export default function Home() {
         <FeaturesSecond />
 
         {/* <!-- Use cases --> */}
-        {/* <UseCases /> */}
+        <UseCases />
 
         {/* <!-- Reviews --> */}
-        {/* <Reviews /> */}
+        <Reviews />
 
         {/* <!-- FAQ --> */}
         <FAQList />
 
         {/* <!-- CTA --> */}
-        {/* <CTASection /> */}
+        <CTASection />
       </main>
     </>
   );
