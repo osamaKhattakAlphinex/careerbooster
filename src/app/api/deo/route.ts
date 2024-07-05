@@ -111,7 +111,7 @@ export async function POST(request: NextRequest) {
     await startDB();
     let { payload } = await request.json();
     const job = new Job({ ...payload });
-    const response = await job.save();
+    await job.save();
 
     return NextResponse.json({ success: true, response: job }, { status: 200 });
   } catch (error) {
