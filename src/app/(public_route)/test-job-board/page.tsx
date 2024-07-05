@@ -1,31 +1,40 @@
+"use client";
 import JobCard from "@/components/public-pages/find-jobs/JobCard";
 import JobSearchForm from "@/components/public-pages/find-jobs/JobSearchForm";
 import ResumeUploader from "@/components/public-pages/test-job-board/ResumeUploader";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Jobs - CareerBooster.ai",
-  description: "Jobs - CareerBooster.ai | Developed by NausalTech",
-};
+import SuggestionCard from "@/components/public-pages/test-job-board/SuggestionCard";
+import { useState } from "react";
 
 export default function JobBoard({
   searchParams,
 }: {
   searchParams?: {
     query?: string;
-    location?: any;
+    location?: string;
     page?: string;
   };
 }) {
   const query = searchParams?.query || "";
   const locationQuery = searchParams?.location || "";
+  const [aiResumeKeywords, setAiResumeKeywords] = useState<string[]>([]);
+  const [aiResumeSuggestions, setAiResumeSuggestions] = useState<string[]>([]);
 
   return (
     <>
       <main className="flex-grow-1 pb-20 pt-[120px]">
         <JobSearchForm />
-        {/* <ResumeUploader /> */}
-        <JobCard query={query} locationQuery={locationQuery} />
+        <ResumeUploader
+          setAiResumeKeywords={setAiResumeKeywords}
+          setAiResumeSuggestions={setAiResumeSuggestions}
+        />
+        <JobCard
+          query={query}
+          locationQuery={locationQuery}
+          aiResumeKeywords={aiResumeKeywords}
+        />
+        {aiResumeSuggestions.length > 0 && (
+          <SuggestionCard aiResumeSuggestions={aiResumeSuggestions} />
+        )}
       </main>
     </>
   );
