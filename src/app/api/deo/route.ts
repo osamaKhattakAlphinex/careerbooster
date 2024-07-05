@@ -12,6 +12,8 @@ export async function GET(req: NextRequest) {
     const jobToShow = url.searchParams.get("jobs");
     const findOne = url.searchParams.get("findOne");
     const jobTitlequery = url.searchParams.get("query");
+    const skills = url.searchParams.get("skills");
+    console.log(skills,typeof skills)
     const jobLocationquery = url.searchParams.get("location");
     const limit = Number(url.searchParams.get("limit"));
     const page = Number(url.searchParams.get("page"));
@@ -43,7 +45,11 @@ export async function GET(req: NextRequest) {
           .skip(skip);
       }
       total = await Job.count();
-    } else {
+    } else if (skills){
+
+      total = await Job.count();
+
+    }else {
       jobs = await Job.find({ addedByUserId: deoId })
         .sort({
           createdAt: -1,
