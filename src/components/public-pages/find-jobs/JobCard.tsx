@@ -1,7 +1,6 @@
 "use client";
-import { eyeIcon, refreshBigIconRotating } from "@/helpers/iconsProvider";
+import { refreshBigIconRotating } from "@/helpers/iconsProvider";
 import axios from "axios";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import SinglejobCard from "./SingleJobCard";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -9,7 +8,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 export default function JobCard({
   query,
   locationQuery,
-  aiResumeKeywords,
+  aiResumeKeywords = [],
 }: {
   query: string;
   locationQuery: any;
@@ -33,9 +32,9 @@ export default function JobCard({
     if (!loading) {
       axios
         .get(
-          `/api/deo?jobs=featured&query=${query}&location=${locationQuery}&limit=${limitOfRecords}&page=${currentPage}`
+          `/api/deo?jobs=featured&query=${query}&location=${locationQuery}&skills=${aiResumeKeywords}&limit=${limitOfRecords}&page=${currentPage}`
         )
-        .then((res: any) => {
+        .then((res) => {
           setLoadingId("");
           if (res.data.success) {
             setRecords(res.data.data);
@@ -58,10 +57,11 @@ export default function JobCard({
   useEffect(() => {
     fetchRecords(query, locationQuery);
   }, []);
-
+  
   useEffect(() => {
     if(aiResumeKeywords?.length) {
       console.log(aiResumeKeywords)
+      // fetchRecords(query, locationQuery);
     }
   }, [aiResumeKeywords]);
 
