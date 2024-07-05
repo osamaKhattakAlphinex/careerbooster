@@ -1,23 +1,22 @@
-import {
-  makeTrainedBotEntry,
-} from "@/helpers/makeTrainBotEntry";
+import Prompt from "@/db/schemas/Prompt";
+import TrainBot from "@/db/schemas/TrainBot";
+import { getTrainedModel } from "@/helpers/getTrainedModel";
+import startDB from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
-
-export async function POST(request: NextRequest) {
+export const maxDuration = 300; // This function can run for a maximum of 5 seconds
+export const dynamic = "force-dynamic";
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+export async function POST(req: NextRequest) {
   try {
-    const body = await request.json();
-    const content = body.content.substring(0, 12000);
-    if (content) {
-      const openai = new OpenAI({
-        apiKey: process.env.OPENAI_API_KEY || "",
-      });
-      const input = `This is the job description: ${content}
-              
-              Rewrite and proofread it, also try to keep it in format so that it can look professional.
-  
-              Also give me top 20 skills that are related to this job from this list of skills.
-              [
+    const { resume_content } = await req.json();
+    let inputPrompt = `This the resume data
+        ${resume_content}
+
+        I want to get top 20 Skills out of this also include skills which are from this list
+         [
               // Software Development
               "JavaScript", "Python", "Java", "C++", "C#", "PHP", "Ruby", "Swift", "Kotlin", "HTML", "CSS", 
               "React", "Next.js", "Nest.js", "Angular", "Vue.js", "Node.js", "Django", "Flask", "Spring", "ASP.NET", "MySQL", 
@@ -84,45 +83,38 @@ export async function POST(request: NextRequest) {
               "Training", "Coaching", "Research", "Technical Writing", "Public Speaking", "Data Entry", 
               "Multitasking", "Event Planning", "Project Coordination", "Process Improvement"
             ]
+
+              Also give some suggestions to improve resume data/content
               The output must be in json format. (following is an example)
-          {
-            jobDescription: "VALUE_HERE",
-            skills: []
-          }
-          jobDescription must be in proper html format.
-          `;
+            {
+                skills: [Array of strings],
+                suggestions: [Array of strings]
+            }
 
-      const response: any = await openai.chat.completions.create({
-        // model: "ft:gpt-3.5-turbo-1106:careerbooster::9SLbRnyu",
-        model:"gpt-4-1106-preview",
-        response_format: {"type": "json_object"},
-        messages: [{ role: "user", content: input }],
-      });
-      try {
-        const obj: any = {
-          type: "deo.rewriteJob",
-          input: input,
-          output: response?.choices[0]?.message?.content?.replace(
-            /(\r\n|\n|\r)/gm,
-            ""
-          ),
-          idealOutput: "",
-          status: "pending",
-          userEmail: "DEO",
-          Instructions: `Write about for consultant using his/her resume`,
-        };
-        await makeTrainedBotEntry(obj);
-      } catch (error) {}
 
-      return NextResponse.json(
-        { success: true, result: response.choices[0].message.content },
-        { status: 200 }
-      );
-    }
+    `
+    const response = await openai.chat.completions.create({
+      //   model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8Icp5xpE",
+      model: "gpt-4-1106-preview",
+      response_format: { type: "json_object" },
+      messages: [{ role: "user", content: inputPrompt }],
+    });
+
+  
+    return NextResponse.json(
+      {
+        result: response?.choices[0]?.message?.content?.replace(
+          /(\r\n|\n|\r)/gm,
+          ""
+        ),
+        success: true,
+      },
+      { status: 200 }
+    );
   } catch (error) {
     return NextResponse.json(
-      { result: "Internal Server Error", success: false },
-      { status: 500 }
+      { result: "Something went wrong", success: false },
+      { status: 404 }
     );
   }
 }

@@ -18,7 +18,7 @@ export default function SinglejobCard({
   applyJobLink,
   jobId,
 }: Props) {
-  // const [seeMore, se]
+
   return (
     <div className="card md:flex md:flex-row xs:flex-col  dark:border dark:border-gray-100 dark:bg-black bg-gray-100  md:mx-14 md:px-8 py-10 rounded-md mt-4 shadow-lg xs:mx-4 xs:px-2">
       <div className="flex flex-col gap-6">
@@ -107,7 +107,7 @@ export default function SinglejobCard({
         <div className="buttons flex items-center gap-2 md:ml-auto xs:mx-auto md:mx-0 xs:justify-center md:justify-end ">
           <Link
             href={`/test-job-board/${jobId}`}
-            className="flex border-2 items-center gap-2 w-fit rounded-md dark:bg-gray-100 dark:text-gray-950 bg-gray-950 text-gray-100 font-semibold px-3 md:text-base xs:text-sm py-1 dark:hover:bg-transparent dark:hover:text-gray-100  "
+            className="flex border-2 items-center gap-2 w-fit rounded-md dark:bg-gray-100 dark:text-gray-950 bg-gray-950 text-gray-100 font-semibold px-3 md:text-base xs:text-sm py-1 hover:bg-gray-100 hover:text-gray-950 dark:hover:bg-transparent dark:hover:text-gray-100  "
           >
             {eyeIcon}
             View Job
@@ -115,7 +115,7 @@ export default function SinglejobCard({
           <Link
             href={applyJobLink}
             target="_blank"
-            className="flex border-2 items-center gap-2 w-fit rounded-md dark:bg-gray-100 dark:text-gray-950 bg-gray-950 text-gray-100 font-semibold px-3 md:text-base xs:text-sm py-1 dark:hover:bg-transparent dark:hover:text-gray-100 "
+            className="flex border-2 items-center gap-2 w-fit rounded-md dark:bg-gray-100 dark:text-gray-950 bg-gray-950 text-gray-100 font-semibold px-3 md:text-base xs:text-sm py-1 hover:bg-gray-100 hover:text-gray-950 dark:hover:bg-transparent dark:hover:text-gray-100 "
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

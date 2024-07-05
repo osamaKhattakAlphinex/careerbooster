@@ -9,9 +9,11 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 export default function JobCard({
   query,
   locationQuery,
+  aiResumeKeywords,
 }: {
   query: string;
   locationQuery: any;
+  aiResumeKeywords?: string[] | [];
 }) {
   const [loading, setLoading] = useState(false);
   const [limitOfRecords, setLimitOfRecords] = useState(10);
@@ -56,6 +58,8 @@ export default function JobCard({
   useEffect(() => {
     fetchRecords(query, locationQuery);
   }, []);
+
+  useEffect(() => {}, [aiResumeKeywords]);
 
   useEffect(() => {
     setRecords([]);
