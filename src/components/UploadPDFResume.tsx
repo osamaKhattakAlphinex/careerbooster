@@ -98,11 +98,11 @@ const UploadPDFResume = () => {
               <div>
                 <p className="m-0 whitespace-nowrap cursor-pointer text-sm [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)] capitalize text-center">
                   {/* Upload Your Existing Resume */}
-                  Upload Your Resume to Get Started
+                  Upload Resume to Get Started
                 </p>
-                {/* <p className="text-[10px] text-gray-300 m-0 capitalize text-center">
-                  To eliminate manual data entry
-                </p> */}
+                <p className="text-[10px] text-gray-300 m-0 capitalize text-center">
+                  Eliminate manual data entry
+                </p>
               </div>
             </div>
           )}

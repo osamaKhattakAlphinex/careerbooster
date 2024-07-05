@@ -3,8 +3,8 @@ import PageHeader from "@/components/PageHeader";
 import { Metadata } from "next";
 import FindJobs4Me from "@/components/public-pages/Homepage/FindJobs4Me";
 export const metadata: Metadata = {
-  title: "Find Jobs4Me - CareerBooster.ai",
-  description: "Find Jobs4Me Service Page",
+  title: "Find Job4Me - CareerBooster.ai",
+  description: "Find Job4Me Service Page",
   keywords: [
     "CareerBooster.AI",
     "AI-powered tools",

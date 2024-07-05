@@ -1,5 +1,5 @@
 import CTASection from "@/components/public-pages/Homepage/CTASection";
-import FAQList from "@/components/public-pages/Homepage/Faqs";
+import FAQList from "@/components/public-pages/career-boost-ai-suite/Faqs";
 import UseCases from "@/components/public-pages/Homepage/UseCases";
 import PageHeader from "@/components/PageHeader";
 import { Metadata } from "next";
