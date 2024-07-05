@@ -94,7 +94,7 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
         } else {
           myJSON = await JSON.parse(res.result);
         }
-        formik.setFieldValue("description", myJSON.jobDescription);
+        // formik.setFieldValue("description", myJSON.jobDescription);
         formik.setFieldValue("skills", myJSON.skills);
       }
     } catch (error) {

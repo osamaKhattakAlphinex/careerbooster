@@ -1,18 +1,17 @@
-"use client"
+"use client";
 import FileUploadHandler from "@/components/dashboard/FileUploadHandler";
 import WordFileHandler from "@/components/dashboard/WordFileHandler";
 import { refreshIconRotating, uploadIcon } from "@/helpers/iconsProvider";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import "@/styles/ScoreRing.css";
 
-const ResumeUploader = () => {
+const ResumeUploader = ({ setAiResumeKeywords, setAiResumeSuggestions }) => {
   const [file, setFile] = useState<any>(null);
   const [fileError, setFileError] = useState<string>("");
   const [fileUploading, setFileUploading] = useState<boolean>(false);
   const [uploadComplete, setUploadComplete] = useState<boolean>(false);
   const [uploadCompleteText, setUploadCompleteText] = useState<string>("");
   const [text, setText] = useState<string>("");
-  const [aiResumeKeywords, setAiResumeKeywords] = useState<string[]>([]);
 
   useEffect(() => {
     if (
@@ -42,7 +41,7 @@ const ResumeUploader = () => {
 
   const analyzeResume = async () => {
     try {
-      const response = await fetch("/api/resumeScan/resumeAnalysis2", {
+      const response = await fetch("/api/job-board/gettingSkills", {
         method: "POST",
         body: JSON.stringify({
           resume_content: text,
@@ -61,18 +60,15 @@ const ResumeUploader = () => {
         } else {
           obj = await JSON.parse(data.result);
         }
-
-        setAiResumeKeywords(obj.keywords);
+        console.log(obj);
+        setAiResumeKeywords(obj.skills);
+        setAiResumeSuggestions(obj.suggestions);
         setUploadCompleteText("Resume Scanned Successfully");
         setFileUploading(false);
         setUploadComplete(true);
       }
     } catch (error) {}
-   
   };
-
-
- 
 
   useEffect(() => {
     if (fileUploading && text !== "") {
@@ -84,7 +80,7 @@ const ResumeUploader = () => {
   return (
     <>
       <div className="linkedinPdfButton flex justify-center mt-11 md:mt-11">
-        <label className=" py-2 lg:py-2.5 mb-4  lg:px-[40px]  px-[28px] cursor-pointer  rounded-xl bg-gradient-to-r to-violet-500 from-fuchsia-500">
+        <label className=" py-2 lg:py-2.5 mb-4  lg:px-[40px]  px-[28px] cursor-pointer  rounded-xl bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 from-purple-700 to-pink-500">
           <input
             type="file"
             className="hidden"
@@ -98,7 +94,7 @@ const ResumeUploader = () => {
             <div className="flex flex-row items-center justify-center gap-2">
               <p className="text-gray-100">{refreshIconRotating}</p>
 
-              <span className="text-[14px] lg:text-[20px] capitalize text-gray-100 ">
+              <span className="text-[14px] lg:text-[16px] capitalize text-gray-100 ">
                 Uploading Resume...
               </span>
             </div>
@@ -106,10 +102,10 @@ const ResumeUploader = () => {
             <div className="flex gap-2 ">
               <div className="text-gray-100">{uploadIcon}</div>
               <div className="text-center ">
-                <p className="text-gray-100 m-0 font-semibold whitespace-nowrap lg:text-[20px] cursor-pointer text-[14px] lg:leading-6 leading-4[text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
+                <p className="text-gray-100 m-0 font-semibold whitespace-nowrap lg:text-[16px] cursor-pointer text-[14px] lg:leading-6 leading-4[text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
                   Upload Resume to get Related Jobs
                 </p>
-                <p className=" text-gray-100 lg:text-[14px] text-[10px] lg:leading-4 leading-[14px] pt-2">
+                <p className=" text-gray-100 lg:text-[14px] text-[10px] lg:leading-3 leading-[14px] pt-2">
                   No credits required
                 </p>
               </div>
@@ -143,8 +139,6 @@ const ResumeUploader = () => {
           <p className="m-0">{uploadCompleteText}</p>
         </div>
       )}
-      
-      
     </>
   );
 };
