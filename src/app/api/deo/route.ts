@@ -12,6 +12,8 @@ export async function GET(req: NextRequest) {
     const jobToShow = url.searchParams.get("jobs");
     const findOne = url.searchParams.get("findOne");
     const jobTitlequery = url.searchParams.get("query");
+    const skills = url.searchParams.get("skills");
+    console.log(skills, typeof skills);
     const jobLocationquery = url.searchParams.get("location");
     const limit = Number(url.searchParams.get("limit"));
     const page = Number(url.searchParams.get("page"));
@@ -42,15 +44,47 @@ export async function GET(req: NextRequest) {
           .limit(limit)
           .skip(skip);
       }
-      total = await Job.count();
-    } else {
+      total = await Job.count({ featured: 1 });
+    } 
+    // else if (skills) {
+    //   const halfSkillsCount = Math.ceil(skills.length / 2);
+    //   jobs = await Job.aggregate([
+    //     {
+    //       $match: {
+    //         featured: 1,
+    //       },
+    //     },
+    //     {
+    //       $project: {
+    //         skills: 1,
+    //         matchedSkills: {
+    //           $size: {
+    //             $filter: {
+    //               input: "$skills",
+    //               as: "jobSkill",
+    //               cond: { $in: ["$$jobSkill", skills] },
+    //             },
+    //           },
+    //         },
+    //       },
+    //     },
+    //     {
+    //       $match: {
+    //         matchedSkills: { $gte: halfSkillsCount },
+    //       },
+    //     },
+    //   ]);
+    //   console.log(jobs);
+    //   total = await Job.count();
+    // } 
+    else {
       jobs = await Job.find({ addedByUserId: deoId })
         .sort({
           createdAt: -1,
         })
         .limit(limit)
         .skip(skip);
-      total = await Job.count();
+      total = await Job.count({ addedByUserId: deoId });
     }
     return NextResponse.json(
       { success: true, data: jobs, total: total },
@@ -77,7 +111,7 @@ export async function POST(request: NextRequest) {
     await startDB();
     let { payload } = await request.json();
     const job = new Job({ ...payload });
-    const response = await job.save();
+    await job.save();
 
     return NextResponse.json({ success: true, response: job }, { status: 200 });
   } catch (error) {

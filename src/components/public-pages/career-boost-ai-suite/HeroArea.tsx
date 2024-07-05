@@ -111,8 +111,8 @@ const HeroArea = () => {
                       </span>{" "}
                       Get Everything You Need to Land a High-Paying Job, Faster
                     </h1>
-                    <Link
-                      href="#"
+                    <button
+                      onClick={moveToFeatures}
                       className=" mt-10 inline-flex no-underline justify-center group items-center relative  text-[#6a4dff] dark:text-[#e6f85e] gap-3 dark:after:bg-[#e6f85e] after:bg-[#0000ff9c] hover:text-[#6a4dff] after:content[''] after:absolute after:-bottom-[2px] after:left-0 after:w-0 after:h-[1px] after:ease-in-out after:duration-300  hover:after:w-[100%]"
                     >
                       <span className=" md:text-[16px] xs:text-sm">
@@ -132,7 +132,7 @@ const HeroArea = () => {
                           strokeLinejoin="round"
                         />
                       </svg>
-                    </Link>
+                    </button>
                   </div>
                   <div className="md:w-[35%] xs:hidden md:block">
                     <Image
@@ -159,8 +159,8 @@ const HeroArea = () => {
                       </span>{" "}
                       Find Exceptional Leaders to Drive Your Business Forward
                     </h1>
-                    <Link
-                      href="#"
+                    <button
+                      onClick={moveToFeaturesSecond}
                       className=" mt-10 inline-flex no-underline justify-center group items-center relative  text-[#6a4dff] dark:text-[#e6f85e] gap-3 dark:after:bg-[#e6f85e] after:bg-[#0000ff9c] hover:text-[#6a4dff] after:content[''] after:absolute after:-bottom-[2px] after:left-0 after:w-0 after:h-[1px] after:ease-in-out after:duration-300  hover:after:w-[100%]"
                     >
                       <span className=" md:text-[16px] xs:text-sm">
@@ -180,7 +180,7 @@ const HeroArea = () => {
                           strokeLinejoin="round"
                         />
                       </svg>
-                    </Link>
+                    </button>
                   </div>
                   <div className="md:w-[35%] xs:hidden md:block">
                     <Image
