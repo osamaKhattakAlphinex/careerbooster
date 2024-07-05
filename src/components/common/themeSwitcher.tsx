@@ -4,17 +4,17 @@ import { useEffect } from "react";
 
 const ThemeChanger = () => {
   const { theme, setTheme } = useTheme();
-
-  useEffect(() => {}, [theme]);
+ 
 
   return (
     <div>
       {theme === "dark" ? (
         <button
-          onClick={(e) =>{
+          title="Change Theme"
+          onClick={(e) => {
             e.preventDefault();
-            setTheme("light")
-          } }
+            setTheme("light");
+          }}
           className="grid place-content-center dark:text-white text-gray-950"
         >
           <svg
@@ -34,12 +34,11 @@ const ThemeChanger = () => {
         </button>
       ) : (
         <button
-          onClick={(e) =>
-            {
-              e.preventDefault();
-              setTheme("dark")
-            }
-            }
+          title="Change Theme"
+          onClick={(e) => {
+            e.preventDefault();
+            setTheme("dark");
+          }}
           className="grid place-content-center dark:text-white text-gray-950"
         >
           <svg
