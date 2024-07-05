@@ -168,7 +168,7 @@ const FindJobs4Me = () => {
               </div>
             </div>
             <div className="flex md:flex-row xs:flex-col xs:text-center md:text-left">
-              <div className="flex md:flex-col xs:flex-row xs:text-center md:text-left xs:mx-auto md:mx-0">
+              <div className="flex md:flex-col xs:flex-row xs:text-center md:text-left xs:mx-auto ">
                 <div
                   className={`flex-none md:w-12 md:h-12 xs:w-8 xs:h-8 bg-orange-600 rounded-full flex items-center justify-center  font-bold mr-8 ${montserrat_r.className} md:text-[36px] xs:text-[26px] md:mb-6 xs:mb-2`}
                 >
