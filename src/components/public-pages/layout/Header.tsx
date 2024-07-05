@@ -10,6 +10,7 @@ import "@/app/(private_route)/dashboard.css";
 import ThemeChanger from "@/components/common/themeSwitcher";
 import { Fade, Slide } from "react-awesome-reveal";
 import { usePathname } from "next/navigation";
+import { RootState } from "@/store/store";
 
 const Header = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -32,7 +33,7 @@ const Header = () => {
     }
   }, [pathname]);
 
-  const userData = useSelector((state: any) => state.userData);
+  const userData = useSelector((state: RootState) => state.userData);
 
   return (
     <nav
