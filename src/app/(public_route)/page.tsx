@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
-import CTASection from "@/components/public-pages/Homepage/CTASection";
-import FeaturesSecond from "@/components/public-pages/Homepage/FeaturesSecond";
-import FeaturesSection from "@/components/public-pages/Homepage/FeaturesSection";
-import HeroArea from "@/components/public-pages/Homepage/HeroArea";
-import Reviews from "@/components/public-pages/Homepage/Reviews";
-import RewardsSection from "@/components/public-pages/Homepage/RewardsSection";
-import UseCases from "@/components/public-pages/Homepage/UseCases";
-import FAQList from "@/components/public-pages/Homepage/Faqs";
+import FeaturesSecond from "@/components/public-pages/career-boost-ai-suite/FeaturesSecond";
+import FeaturesSection from "@/components/public-pages/career-boost-ai-suite/FeaturesSection";
+import RewardsSection from "@/components/public-pages/career-boost-ai-suite/RewardsSection";
+import FAQList from "@/components/public-pages/career-boost-ai-suite/Faqs";
+import HeroArea from "@/components/public-pages/career-boost-ai-suite/HeroArea";
 
 export const metadata: Metadata = {
-  title: "CareerBooster.ai",
+  title: "Home - CareerBooster.ai",
   description:
     "Your Free AI Resume Writer & LinkedIn Optimization Tool to Turbocharge Your Career!",
   keywords: [

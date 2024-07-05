@@ -59,7 +59,11 @@ export default function JobCard({
     fetchRecords(query, locationQuery);
   }, []);
 
-  useEffect(() => {}, [aiResumeKeywords]);
+  useEffect(() => {
+    if(aiResumeKeywords?.length) {
+      console.log(aiResumeKeywords)
+    }
+  }, [aiResumeKeywords]);
 
   useEffect(() => {
     setRecords([]);

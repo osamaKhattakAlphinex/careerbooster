@@ -2,7 +2,7 @@ import AboutCard from "@/components/public-pages/About/AboutCard";
 import BrandsCard from "@/components/public-pages/About/BrandsCard";
 import TeamCard from "@/components/public-pages/About/TeamCard";
 import CTASection from "@/components/public-pages/Homepage/CTASection";
-import FeaturesSection from "@/components/public-pages/Homepage/FeaturesSection";
+import FeaturesSection from "@/components/public-pages/career-boost-ai-suite/FeaturesSection";
 import Reviews from "@/components/public-pages/Homepage/Reviews";
 import PageHeader from "@/components/PageHeader";
 import { Metadata } from "next";
