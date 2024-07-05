@@ -45,7 +45,7 @@ const FindJobs4Me = () => {
     },
   ];
   return (
-    <section className="md:pt-20 xs:pt-[0px] xs:pb-[50px] pb-10  md:pb-18  dark:bg-gray-950 bg-gray-100 dark:text-white text-black  justify-center items-center min-h-screen flex flex-col">
+    <section className="md:pt-20 xs:pt-[0px] xs:pb-[50px] pb-10  md:pb-18  dark:bg-gray-950 bg-gray-100 dark:text-white text-gray-950  justify-center items-center min-h-screen flex flex-col">
       <div className="text-center p-6 lg:w-2/3 xs:w-full flex flex-col gap-2 pb-20">
         <h1
           className={`md:text-[54px] xs:text-[30px] !font-extrabold mb-4 ${montserrat_r.className}`}
@@ -53,7 +53,7 @@ const FindJobs4Me = () => {
           Give Us 30-60 Days & We{"'"}ll Find You a Dream Job!
         </h1>
         <p
-          className={`mb-6 ${montserrat_r.className} md:text-[22px] xs:text-[16px] text-gray-200`}
+          className={`mb-6 ${montserrat_r.className} md:text-[22px] xs:text-[16px] dark:text-gray-200 text-gray-900`}
         >
           Our team of dedicated Virtual Job Search Assistants can make your life
           easier by managing your entire job search. Save time and do what you
@@ -109,7 +109,7 @@ const FindJobs4Me = () => {
           </p>
         </div>
       </div>
-      <div className=" text-white py-10 md:px-6 xs:px-2">
+      <div className=" dark:text-gray-100 text-gray-950 py-10 md:px-6 xs:px-2">
         <div className="md:px-10 mx-auto">
           <h2
             className={`md:text-[50px] xs:text-[34px] !font-extrabold text-center mb-2 ${montserrat_r.className}`}
@@ -117,7 +117,7 @@ const FindJobs4Me = () => {
             How do we do it?
           </h2>
           <p
-            className={`text-center mb-10 md:text-[24px] xs:text-[18px] text-gray-400 ${montserrat_r.className} !font-extrabold`}
+            className={`text-center mb-10 md:text-[24px] xs:text-[18px] dark:text-gray-400 text-gray-700 ${montserrat_r.className} !font-extrabold`}
           >
             Fast, inexpensive, effective!
           </p>
@@ -140,7 +140,7 @@ const FindJobs4Me = () => {
                   Campaign
                 </h3>
                 <p
-                  className={`text-gray-400 ${montserrat_r.className} md:text-[20px] xs:text-[15px]`}
+                  className={`dark:text-gray-400 text-gray-700 ${montserrat_r.className} md:text-[20px] xs:text-[15px]`}
                 >
                   Your LinkedIn profile, résumé, and cover letter are your sales
                   team. And they are going to help your ideal employer find you.
@@ -150,7 +150,7 @@ const FindJobs4Me = () => {
                 </p>
                 <br />
                 <p
-                  className={`text-gray-400 ${montserrat_r.className} md:text-[20px] xs:text-[15px]`}
+                  className={`dark:text-gray-400 text-gray-700 ${montserrat_r.className} md:text-[20px] xs:text-[15px]`}
                 >
                   The modern-day job search is not like it used to be. Long gone
                   are the days of applying for jobs online and getting calls for
@@ -160,7 +160,7 @@ const FindJobs4Me = () => {
                 </p>{" "}
                 <br />
                 <p
-                  className={`text-gray-400 ${montserrat_r.className} md:text-[20px] xs:text-[15px]`}
+                  className={`dark:text-gray-400 text-gray-700 ${montserrat_r.className} md:text-[20px] xs:text-[15px]`}
                 >
                   So you really need to run your job search like a marketing
                   campaign.
@@ -168,7 +168,7 @@ const FindJobs4Me = () => {
               </div>
             </div>
             <div className="flex md:flex-row xs:flex-col xs:text-center md:text-left">
-              <div className="flex md:flex-row xs:flex-col xs:text-center md:text-left">
+              <div className="flex md:flex-col xs:flex-row xs:text-center md:text-left xs:mx-auto md:mx-0">
                 <div
                   className={`flex-none md:w-12 md:h-12 xs:w-8 xs:h-8 bg-orange-600 rounded-full flex items-center justify-center  font-bold mr-8 ${montserrat_r.className} md:text-[36px] xs:text-[26px] md:mb-6 xs:mb-2`}
                 >
@@ -185,7 +185,7 @@ const FindJobs4Me = () => {
                 </h3>
                 <div className="border-orange-600 border-2 p-4">
                   <p
-                    className={`text-gray-400 ${montserrat_r.className} md:text-[20px] xs:text-[15px]`}
+                    className={`dark:text-gray-400 text-gray-700 ${montserrat_r.className} md:text-[20px] xs:text-[15px]`}
                   >
                     We{"'"}ll reach out to 500+ decision makers on your behalf
                     in your industry and desired location to find positions that
@@ -193,7 +193,7 @@ const FindJobs4Me = () => {
                   </p>
                   <br />
                   <p
-                    className={`text-gray-400 ${montserrat_r.className} md:text-[20px] xs:text-[15px]`}
+                    className={`dark:text-gray-400 text-gray-700 ${montserrat_r.className} md:text-[20px] xs:text-[15px]`}
                   >
                     When you{"'"}re looking for a job, it{"'"}s easy to become
                     focused on job boards and search engines and forget about
@@ -222,7 +222,7 @@ const FindJobs4Me = () => {
                   Find Jobs & Submit Applications
                 </h3>
                 <p
-                  className={`text-gray-400 ${montserrat_r.className} md:text-[20px] xs:text-[15px]`}
+                  className={`dark:text-gray-400 text-gray-700 ${montserrat_r.className} md:text-[20px] xs:text-[15px]`}
                 >
                   If you want to find a job fast, you need to apply for a large
                   number of jobs. But how can you send out a high volume of
@@ -230,7 +230,7 @@ const FindJobs4Me = () => {
                 </p>
                 <br />
                 <p
-                  className={`text-gray-400 ${montserrat_r.className} md:text-[20px] xs:text-[15px]`}
+                  className={`dark:text-gray-400 text-gray-700 ${montserrat_r.className} md:text-[20px] xs:text-[15px]`}
                 >
                   We will find and apply to all new job openings in your area
                   daily for 60 days, so you do not miss any opportunities. We
@@ -256,7 +256,7 @@ const FindJobs4Me = () => {
                   Expand Your Network
                 </h3>
                 <p
-                  className={`text-gray-400 ${montserrat_r.className} md:text-[20px] xs:text-[15px]`}
+                  className={`dark:text-gray-400 text-gray-700 ${montserrat_r.className} md:text-[20px] xs:text-[15px]`}
                 >
                   You always hear that 80% of job opportunities are not posted –
                   this is what is called the hidden job market. The key to
@@ -264,7 +264,7 @@ const FindJobs4Me = () => {
                 </p>
                 <br />
                 <p
-                  className={`text-gray-400 ${montserrat_r.className} md:text-[20px] xs:text-[15px]`}
+                  className={`dark:text-gray-400 text-gray-700 ${montserrat_r.className} md:text-[20px] xs:text-[15px]`}
                 >
                   Your dedicated Virtual Assistant will add at least 500 new
                   connections to your network on LinkedIn with decision makers
@@ -291,7 +291,7 @@ const FindJobs4Me = () => {
                   Monitoring LinkedIn & Track Jobs
                 </h3>
                 <p
-                  className={`text-gray-400 ${montserrat_r.className} md:text-[20px] xs:text-[15px]`}
+                  className={`dark:text-gray-400 text-gray-700 ${montserrat_r.className} md:text-[20px] xs:text-[15px]`}
                 >
                   A big part of the LinkedIn approach is to make sure that you
                   monitor who has added you back, and then send them messages
@@ -301,7 +301,7 @@ const FindJobs4Me = () => {
                 </p>
                 <br />
                 <p
-                  className={`text-gray-400 ${montserrat_r.className} md:text-[20px] xs:text-[15px]`}
+                  className={`dark:text-gray-400 text-gray-700 ${montserrat_r.className} md:text-[20px] xs:text-[15px]`}
                 >
                   The typical job search involves applying to as many jobs as
                   you can. The real challenge becomes keeping track of all the
@@ -318,7 +318,7 @@ const FindJobs4Me = () => {
           </div>
         </div>
       </div>
-      <div className="bg-[#E4ECF2] mt-20 rounded-l-3xl rounded-b-3xl md:p-6 xs:p-2 shadow-md  flex   md:w-[80%] xs:w-[95%] mx-auto text-gray-400">
+      <div className="bg-[#E4ECF2] mt-20 rounded-l-3xl rounded-b-3xl md:p-6 xs:p-2 shadow-md  flex   md:w-[80%] xs:w-[95%] mx-auto dark:text-gray-400 text-gray-700">
         <div className="flex md:flex-row xs:flex-col items-center ">
           <div className="md:w-1/3 xs:w-full flex justify-center items-center">
             <img
@@ -360,7 +360,7 @@ const FindJobs4Me = () => {
           </div>
         </div>
       </div>
-      <div className="bg-gray-950 w-full mt-20">
+      <div className="dark:bg-gray-950 bg-gray-100 w-full mt-20">
         <div className="content text-center md:w-2/3 xs:w-full xs:px-1 md:px-0 mx-auto">
           <h1
             className={`text-[40px] ${montserrat_r.className} !font-bold text-[#188bf6]`}
@@ -500,7 +500,7 @@ const FindJobs4Me = () => {
           </div>
         </div>
       </div>
-      <div className="bg-gray-950 w-full mt-20">
+      <div className="dark:bg-gray-950 bg-gray-100 w-full mt-20">
         <div className="content text-center md:w-2/3 xs:w-full xs:px-2 md:px-0 mx-auto">
           <h1
             className={`md:text-[40px] xs:text-[28px] ${montserrat_r.className} !font-bold `}
