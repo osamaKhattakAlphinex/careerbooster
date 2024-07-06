@@ -60,7 +60,6 @@ export default function JobCard({
   
   useEffect(() => {
     if(aiResumeKeywords?.length) {
-      console.log(aiResumeKeywords)
       fetchRecords(query, locationQuery);
     }
   }, [aiResumeKeywords]);

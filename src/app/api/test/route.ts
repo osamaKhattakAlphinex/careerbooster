@@ -65,8 +65,8 @@ export async function GET() {
           matchedSkillsCount: 0, // Optionally remove the matchedSkillsCount field from the final output
         },
       },
-    ]);
-    let count = await Job.count([
+    ]).limit(4).skip(1);
+    const jobCount = await Job.aggregate([
       {
         $match: {
           featured: 1,
@@ -101,8 +101,7 @@ export async function GET() {
         },
       },
     ])
-
-    console.log(count, jobs.length);
+    console.log(jobCount.length, jobs.length);
     return NextResponse.json(jobs);
   } catch (error) {
     console.error("Error fetching jobs:", error);
