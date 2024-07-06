@@ -33,7 +33,7 @@ function page() {
   return (
     
       <main className="bg-[#fff] dark:bg-[#171825]">
-        <PageHeader title="Find Jobs4Me" />
+        <PageHeader title="Find Job4Me" />
         <FindJobs4Me />
       </main>
     
