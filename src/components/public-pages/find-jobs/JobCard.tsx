@@ -32,7 +32,7 @@ export default function JobCard({
     if (!loading) {
       axios
         .get(
-          `/api/deo?jobs=featured&query=${query}&location=${locationQuery}&skills=${aiResumeKeywords}&limit=${limitOfRecords}&page=${currentPage}`
+          `/api/deo?jobs=featured&query=${query}&location=${locationQuery}&skills=${aiResumeKeywords.join(',')}&limit=${limitOfRecords}&page=${currentPage}`
         )
         .then((res) => {
           setLoadingId("");
