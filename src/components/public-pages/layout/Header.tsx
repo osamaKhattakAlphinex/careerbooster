@@ -310,7 +310,7 @@ const Header = () => {
                       <div className="px-1 py-1 rounded-lg" role="none">
                         <Link
                           href="#"
-                          className="block px-2 py-2 text-lg text-gray-400 no-underline rounded-sm cursor-default dark:text-gray-400"
+                          className="block px-2 py-2 text-sm text-gray-400 no-underline rounded-sm cursor-default dark:text-gray-400"
                           role="menuitem"
                           id="menu-item-0"
                         >
@@ -324,7 +324,7 @@ const Header = () => {
                                 : "/deo"
                               : "/dashboard"
                           }
-                          className="block px-2 py-2 text-lg no-underline rounded-sm dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
+                          className="block px-2 py-2 text-sm no-underline rounded-sm dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
                           role="menuitem"
                           id="menu-item-0"
                         >
@@ -332,7 +332,7 @@ const Header = () => {
                         </Link>
                         <Link
                           href="/profile-review"
-                          className="block px-2 py-2 text-lg no-underline rounded-sm dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
+                          className="block px-2 py-2 text-sm no-underline rounded-sm dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
                           role="menuitem"
                           id="menu-item-1"
                         >
@@ -340,7 +340,7 @@ const Header = () => {
                         </Link>
                         <button
                           type="button"
-                          className="block w-full px-2 py-2 text-lg text-left rounded-sm dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
+                          className="block w-full px-2 py-2 text-sm text-left rounded-sm dark:text-gray-100 text-gray-950 dark:hover:bg-gray-600 hover:bg-blue-100"
                           role="menuitem"
                           id="menu-item-3"
                           onClick={() => signOut()}

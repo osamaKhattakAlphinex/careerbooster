@@ -12,8 +12,8 @@ export async function GET(req: NextRequest) {
     const jobToShow = url.searchParams.get("jobs");
     const findOne = url.searchParams.get("findOne");
     const jobTitlequery = url.searchParams.get("query");
-    const skills = url.searchParams.get("skills");
-    console.log(skills, typeof skills);
+    const skillsParam = url.searchParams.get("skills");
+    const skills = skillsParam ? skillsParam.split(",") : [];
     const jobLocationquery = url.searchParams.get("location");
     const limit = Number(url.searchParams.get("limit"));
     const page = Number(url.searchParams.get("page"));
@@ -36,6 +36,83 @@ export async function GET(req: NextRequest) {
           };
           jobs = await Job.find(searchCondition).sort({ createdAt: -1 });
         }
+        total = await Job.count({ searchCondition });
+      } else if (skills.length > 0) {
+        const halfSkillsCount = Math.ceil(skills.length / 3);
+        jobs = await Job.aggregate([
+          {
+            $match: {
+              featured: 1,
+            },
+          },
+          {
+            $addFields: {
+              matchedSkillsCount: {
+                $size: {
+                  $filter: {
+                    input: "$skills",
+                    as: "jobSkill",
+                    cond: {
+                      $in: [
+                        { $toLower: "$$jobSkill" },
+                        skills.map((skill) => skill.toLowerCase()),
+                      ],
+                    },
+                  },
+                },
+              },
+            },
+          },
+          {
+            $match: {
+              matchedSkillsCount: { $gte: halfSkillsCount },
+            },
+          },
+          {
+            $project: {
+              matchedSkillsCount: 0, // Optionally remove the matchedSkillsCount field from the final output
+            },
+          },
+        ])
+          .limit(limit)
+          .skip(skip);
+
+        const jobCount = await Job.aggregate([
+          {
+            $match: {
+              featured: 1,
+            },
+          },
+          {
+            $addFields: {
+              matchedSkillsCount: {
+                $size: {
+                  $filter: {
+                    input: "$skills",
+                    as: "jobSkill",
+                    cond: {
+                      $in: [
+                        { $toLower: "$$jobSkill" },
+                        skills.map((skill) => skill.toLowerCase()),
+                      ],
+                    },
+                  },
+                },
+              },
+            },
+          },
+          {
+            $match: {
+              matchedSkillsCount: { $gte: halfSkillsCount },
+            },
+          },
+          {
+            $project: {
+              matchedSkillsCount: 0, // Optionally remove the matchedSkillsCount field from the final output
+            },
+          },
+        ]);
+        total = jobCount.length;
       } else {
         jobs = await Job.find({ featured: 1 })
           .sort({
@@ -43,41 +120,9 @@ export async function GET(req: NextRequest) {
           })
           .limit(limit)
           .skip(skip);
+        total = await Job.count({ featured: 1 });
       }
-      total = await Job.count({ featured: 1 });
-    } 
-    // else if (skills) {
-    //   const halfSkillsCount = Math.ceil(skills.length / 2);
-    //   jobs = await Job.aggregate([
-    //     {
-    //       $match: {
-    //         featured: 1,
-    //       },
-    //     },
-    //     {
-    //       $project: {
-    //         skills: 1,
-    //         matchedSkills: {
-    //           $size: {
-    //             $filter: {
-    //               input: "$skills",
-    //               as: "jobSkill",
-    //               cond: { $in: ["$$jobSkill", skills] },
-    //             },
-    //           },
-    //         },
-    //       },
-    //     },
-    //     {
-    //       $match: {
-    //         matchedSkills: { $gte: halfSkillsCount },
-    //       },
-    //     },
-    //   ]);
-    //   console.log(jobs);
-    //   total = await Job.count();
-    // } 
-    else {
+    } else {
       jobs = await Job.find({ addedByUserId: deoId })
         .sort({
           createdAt: -1,

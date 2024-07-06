@@ -54,16 +54,10 @@ const ResumeUploader = ({ setAiResumeKeywords, setAiResumeSuggestions }) => {
       const data = await response.json();
 
       if (data.success) {
-        let obj;
-        if (typeof data.result === "object") {
-          obj = data.result;
-        } else {
-          obj = await JSON.parse(data.result);
-        }
-        console.log(obj);
+        const obj = typeof data.result === "object" ? data.result : JSON.parse(data.result);
         setAiResumeKeywords(obj.skills);
         setAiResumeSuggestions(obj.suggestions);
-        setUploadCompleteText("Resume Scanned Successfully");
+        setUploadCompleteText("Related Jobs Found Successfully");
         setFileUploading(false);
         setUploadComplete(true);
       }
