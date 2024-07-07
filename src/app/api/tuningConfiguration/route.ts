@@ -1,5 +1,3 @@
-import mongoose from "mongoose";
-const { Schema } = mongoose;
 import { NextRequest, NextResponse } from "next/server";
 import startDB from "@/lib/db";
 import FineTuningSetting from "@/db/schemas/FineTuningSetting";

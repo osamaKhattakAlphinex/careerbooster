@@ -16,7 +16,6 @@ import { RootState } from "@/store/store";
 
 import { createColumnHelper } from "@tanstack/react-table";
 import axios from "axios";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
