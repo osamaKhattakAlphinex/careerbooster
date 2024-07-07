@@ -116,7 +116,7 @@ const showBulkDataOperations = (
             className={`flex flex-row justify-start items-center gap-2 ${op.styles}`}
             onClick={() => op.element(selectedIds)}
           >
-            {op.icon} {op.name}
+            {op.icon} {op.name} 
           </button>
         );
       }
@@ -198,7 +198,8 @@ const DataTable = <C, D>({
   };
 
   useEffect(() => {
-    setRowSelectionIds(getSelectedRowsId());
+    const rowIds = getSelectedRowsId()
+    setRowSelectionIds(rowIds);
   }, [rowSelection]);
 
   return (
