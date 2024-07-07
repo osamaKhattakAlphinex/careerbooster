@@ -12,8 +12,7 @@ const DeoNavbar = () => {
       </div>
 
       <div className="flex flex-row items-center justify-between gap-3">
-        <div className="grid w-6 h-6 bg-green-700 rounded-md shadow-md sm:w-8 sm:h-8 place-content-center">
-          {/* <ThemeToggler /> */}
+        <div className="grid w-6 h-6 rounded-md shadow-md sm:w-8 sm:h-8 place-content-center">
           <ThemeChanger />
         </div>
         <div className="grid w-6 h-6 rounded-md shadow-md sm:w-8 sm:h-8 bg-rose-700 place-content-center">
