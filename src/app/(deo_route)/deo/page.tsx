@@ -1,9 +1,17 @@
 "use client";
 
-import DataTable, { TableAction } from "@/components/admin/DataTable";
+import DataTable, {
+  BulkDataOperation,
+  TableAction,
+} from "@/components/admin/DataTable";
 import JobForm from "@/components/deo/JobForm";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
-import { EditIcon, eyeIcon, trashIcon } from "@/helpers/iconsProvider";
+import {
+  EditIcon,
+  deleteIcon,
+  eyeIcon,
+  trashIcon,
+} from "@/helpers/iconsProvider";
 import { RootState } from "@/store/store";
 
 import { createColumnHelper } from "@tanstack/react-table";
@@ -301,6 +309,37 @@ const Jobs = () => {
     }
   }, [searchParams?.get("r"), searchParams?.get("p")]);
 
+  const bulkDataOperations: BulkDataOperation = {
+    operations: [
+      {
+        name: "Delete All",
+        type: "handler",
+        element: (ids: string[]| []) => handleDeleteAll(ids),
+        styles:
+          "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-rose-700 rounded-lg hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 dark:bg-rose-600 dark:hover:bg-rose-700 dark:focus:ring-rose-800 no-underline",
+        icon: deleteIcon,
+      },
+    ],
+  };
+
+  const handleDeleteAll = async (ids: string[] | [] = []) => {
+    console.log(ids);
+    // setLoading(true);
+
+    // axios
+    //   .post("/api/users/bulkDelete", { dataSelection: ids })
+    //   .then((res: any) => {
+    //     if (res.data.success) {
+    //       setDataSelection([]);
+    //       getUserDetails();
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   })
+    //   .finally(() => {});
+  };
+
   return (
     <>
       <div className="flex flex-col items-start justify-start">
@@ -361,6 +400,8 @@ const Jobs = () => {
               source="deo"
               actions={actions}
               loading={loading}
+              enableRowSelection={true}
+              bulkDataOperations={bulkDataOperations}
             />
           ) : (
             "No records found"
