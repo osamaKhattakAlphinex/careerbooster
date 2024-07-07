@@ -32,7 +32,9 @@ export default function JobCard({
     if (!loading) {
       axios
         .get(
-          `/api/deo?jobs=featured&query=${query}&location=${locationQuery}&skills=${aiResumeKeywords.join(',')}&limit=${limitOfRecords}&page=${currentPage}`
+          `/api/deo?jobs=featured&query=${query}&location=${locationQuery}&skills=${aiResumeKeywords.join(
+            ","
+          )}&limit=${limitOfRecords}&page=${currentPage}`
         )
         .then((res) => {
           setLoadingId("");
@@ -57,9 +59,9 @@ export default function JobCard({
   useEffect(() => {
     fetchRecords(query, locationQuery);
   }, []);
-  
+
   useEffect(() => {
-    if(aiResumeKeywords?.length) {
+    if (aiResumeKeywords?.length) {
       fetchRecords(query, locationQuery);
     }
   }, [aiResumeKeywords]);
@@ -103,14 +105,12 @@ export default function JobCard({
               onChange={handleChange}
               value={limitOfRecords}
             >
-              <>
-                <option value={10}>10</option>
-                <option value={20}>20</option>
-                <option value={30}>30</option>
-                <option value={40}>40</option>
-                <option value={100}>100</option>
-                <option value={500}>500</option>
-              </>
+              <option value={10}>10</option>
+              <option value={20}>20</option>
+              <option value={30}>30</option>
+              <option value={40}>40</option>
+              <option value={100}>100</option>
+              <option value={500}>500</option>
             </select>
           </div>
           <div className="md:flex xs:hidden md:justify-end mt-4 ">
