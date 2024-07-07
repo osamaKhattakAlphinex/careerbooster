@@ -1,7 +1,6 @@
 import Job from "@/db/schemas/Job";
 import startDB from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
-
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
 export async function GET(req: NextRequest) {

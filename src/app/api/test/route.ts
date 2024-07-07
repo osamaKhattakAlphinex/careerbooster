@@ -101,7 +101,8 @@ export async function GET() {
         },
       },
     ])
-    console.log(jobCount.length, jobs.length);
+    const count = await Job.count({ featured: 1 })
+    console.log(jobCount.length, jobs.length, count);
     return NextResponse.json(jobs);
   } catch (error) {
     console.error("Error fetching jobs:", error);
