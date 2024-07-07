@@ -1,8 +1,9 @@
+
 import { NextRequest, NextResponse } from "next/server";
 import startDB from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
-import User from "@/db/schemas/User";
+import Job from "@/db/schemas/Job";
 
 export const POST = async (req: NextRequest) => {
   const session = await getServerSession(authOptions);
@@ -32,7 +33,7 @@ export const POST = async (req: NextRequest) => {
       });
     }
 
-    await User.deleteMany({ _id: { $in: idsToDelete } });
+    await Job.deleteMany({ _id: { $in: idsToDelete } });
 
     return NextResponse.json(
       {

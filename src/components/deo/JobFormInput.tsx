@@ -305,9 +305,6 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
             }`}
             {...formik.getFieldProps("category")}
           >
-            {/* <option value="" disabled>
-              Select a category
-            </option> */}
             {jobCategories.map((category: any) => {
               return (
                 <option
