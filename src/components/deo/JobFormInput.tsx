@@ -64,6 +64,7 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
   useEffect(() => {
     getJObCategories();
     if (singleRec) {
+      console.log(singleRec)
       formik.setFieldValue("category", singleRec.category);
       formik.setFieldValue("joblink", singleRec.link);
       formik.setFieldValue("skills", singleRec.skills);
@@ -96,11 +97,10 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
         }
         // formik.setFieldValue("description", myJSON.jobDescription);
         formik.setFieldValue("skills", myJSON.skills);
+        setRewritingJob(false);
       }
     } catch (error) {
       setRewritingJob(false);
-    } finally {
-      setUpdateJob(false);
     }
   };
   const [newSkill, setNewSkill] = useState("");
@@ -281,7 +281,7 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
             }`}
             {...formik.getFieldProps("location")}
           />
-          {formik.errors.location && formik.errors.location && (
+          {formik.touched.location && formik.errors.location && (
             <div className="text-red-500">{formik.errors.location}</div>
           )}
         </div>
@@ -484,7 +484,7 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
             <div className="text-red-500">{formik.errors.description}</div>
           )}
         </div>
-        <div className="flex my-14 gap-2">
+        <div className="flex mt-14 mb-2 gap-2">
           <button
             type="submit"
             disabled={formik.isSubmitting}
@@ -492,14 +492,15 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
           >
             {updateJob ? "Update Job" : "Save Job"}
           </button>
-          <button
-            onClick={rewriteJob}
-            className="!bg-blue-500 w-fit rounded-sm py-1 px-2  cursor-pointer text-gray-100 text-sm"
-          >
-            {rewritingJob ? " Please wait..." : "Rewrite Job with AI"}
-          </button>
         </div>
       </form>
+      <button
+        disabled={formik.values.description === ""}
+        onClick={rewriteJob}
+        className="!bg-blue-500 w-fit rounded-sm py-1 px-2 mb-14 cursor-pointer text-gray-100 text-sm"
+      >
+        {rewritingJob ? " Please wait..." : "Rewrite Job with AI"}
+      </button>
     </div>
   );
 };
