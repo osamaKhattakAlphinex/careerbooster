@@ -323,21 +323,19 @@ const Jobs = () => {
   };
 
   const handleDeleteAll = async (ids: string[] | [] = []) => {
-    console.log(ids);
-    // setLoading(true);
+    setLoading(true);
 
-    // axios
-    //   .post("/api/users/bulkDelete", { dataSelection: ids })
-    //   .then((res: any) => {
-    //     if (res.data.success) {
-    //       setDataSelection([]);
-    //       getUserDetails();
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   })
-    //   .finally(() => {});
+    axios
+      .post("/api/deo/bulkDelete", { dataSelection: ids })
+      .then((res: any) => {
+        if (res.data.success) {
+          fetchRecords();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {setLoading(false)});
   };
 
   return (
