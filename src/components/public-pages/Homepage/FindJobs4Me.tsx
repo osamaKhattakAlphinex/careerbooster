@@ -62,7 +62,7 @@ const FindJobs4Me = () => {
         <Link
           target="_blank"
           href="https://calendly.com/callofcareer/15min"
-          className={`${montserrat_r.className} md:text-[20px] xs:text-[14px] bg-[#BD10E0] text-white  md:py-4 md:px-8 xs:py-3 xs:px-4 rounded-full hover:bg-purple-700 transition duration-300 !font-bold mt-4 w-fit mx-auto `}
+          className={`${montserrat_r.className} md:text-[20px] xs:text-[14px] bg-[#BD10E0] text-gray-100  md:py-4 md:px-8 xs:py-3 xs:px-4 rounded-full hover:bg-purple-700 transition duration-300 !font-bold mt-4 w-fit mx-auto `}
         >
           Schedule a Free Consultation →
         </Link>
@@ -517,9 +517,9 @@ const FindJobs4Me = () => {
           <Link
             target="_blank"
             href="https://calendly.com/callofcareer/15min"
-            className={`${montserrat_r.className} !font-bold md:text-[24px] xs:text-[15px] bg-[#BD10E0] p-4  rounded-lg hover:bg-purple-700 transition duration-300`}
+            className={`${montserrat_r.className} !font-bold md:text-[24px] text-gray-100 xs:text-[15px] bg-[#BD10E0] p-4  rounded-lg hover:bg-purple-700 transition duration-300`}
           >
-            Schedule A free Consultation
+            Schedule a Free Consultation
           </Link>
         </div>
       </div>
