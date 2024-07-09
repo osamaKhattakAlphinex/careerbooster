@@ -39,7 +39,7 @@ const Header = () => {
     <nav
       className={`translate-y-[0%] xs:h-[68.88px] lg:h-[90.06px] opacity-[1] fixed top-0 left-0 w-full right-0 z-50 dark:bg-gray-950 bg-gray-100  on-over shadow-lg  dark:text-gray-100 text-gray-900`}
     >
-      <div className="flex items-center justify-between mx-auto pt-1 lg:pt-4 dark:shadow-sm  sm:container xs:max-w-full xs:px-2">
+      <div className="flex items-center justify-between mx-auto pt-1 lg:pt-4 dark:shadow-sm  sm:container xs:max-w-full md:w-full lg:!px-2 xs:px-4">
         {/* <!-- Logo --> */}
 
         <Link
@@ -170,7 +170,7 @@ const Header = () => {
                   Executive Recruitment
                 </Link>
               </li>
-            
+
               <li className="px-3 mt-0 ">
                 <Link
                   className={`
