@@ -529,7 +529,7 @@ const FindJobs4Me = () => {
         >
           Frequently Asked Questions
         </h1>
-        {faqs.map((faq: any) => {
+        {faqs.map((faq: { question: string; answer: string }) => {
           return (
             <>
               <div className="flex flex-col  xs:text-center md:text-left">
