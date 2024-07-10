@@ -14,34 +14,51 @@ const heading_n = Fjalla_One({
 const FindJobs4Me = () => {
   const faqs = [
     {
-      question: "What Is CareerBooster's Find Job4Me?",
+      question: "What Is CareerBooster's Career JumpStart Service?",
       answer:
-        "Our Find Job4Me service was created to offer busy professionals a solution to job searching on their own. We assign a dedicated Virtual Job Search assistant who will be responsible for managing the time-consuming art of job searching.\n\nOur professional Virtual Job Search Assistants will be responsible for searching for jobs on your behalf, applying to the jobs you approve, and networking with key decision-makers to land you interviews.",
+        "The service was created to offer busy professionals a solution to job searching on their own. We assign a dedicated Virtual Job Search assistant who will be responsible for managing the time-consuming art of job searching. Our professional Virtual Job Search Assistants will be responsible for searching for jobs on your behalf, applying to the jobs you approve, and networking with key decision-makers to land you interviews.",
+    },
+    {
+      question: " How does the virtual assistant work?",
+      answer:
+        "We will assign a dedicated virtual assistant (VA) to work closely with you throughout your job search. The VA will manage your LinkedIn profile, adding relevant connections with decision-makers and headhunters in your desired industry, which can lead to uncovering unannounced and confidential opportunities. The VA will also conduct daily searches on LinkedIn and various job boards to identify relevant job openings. When they find a job that matches your requirements, they will share it with you. Upon your approval, the VA will apply on your behalf and submit the application. This process saves you time and ensures consistent efforts in your job search, leading to potential opportunities within 30-60 days.",
+    },
+    {
+      question: "How do I communicate with my virtual assistant?",
+      answer:
+        "You can communicate with your virtual assistant via email, phone calls, or scheduled virtual meetings. We ensure that communication is clear and efficient to keep your job search on track.",
+    },
+    {
+      question: "How much does the Career JumpStart service cost?",
+      answer:
+        "The service costs $4,500, with $3,000 as the placement fee and $1,500 invested in career tools and Virtual Assistant. The placement fee is only charged after you secure your desired job and receive your first paycheck.",
+    },
+    {
+      question:
+        "How is the $1,500 investment in career tools and resources utilized?",
+      answer:
+        "The $1,500 investment covers essential tools and resources such as executive resume writing, LinkedIn profile optimization, and a dedicated virtual assistant to manage your job applications and networking efforts.",
+    },
+    {
+      question: " What if I already have a resume and LinkedIn profile?",
+      answer:
+        " Even if you have an existing resume and LinkedIn profile, we will enhance and optimize them to better align with current industry standards and highlight your strengths more effectively. We do this to increase your chances of success by boosting your ranking in recruiters' systems and the LinkedIn algorithm with keyword optimization techniques.  ",
     },
     {
       question: "Can I Hire A Recruiter To Find Me A Job?",
       answer:
-        "A recruiter’s main job is to help hiring companies fill open positions, not find jobs for individuals.\n\nRecruiters do not receive compensation from job seekers. They receive compensation from hiring companies.\n\nTherefore, you cannot hire a recruiter to find you a job.",
+        " A recruiter’s main job is to help hiring companies fill open positions, not find jobs for individuals. Recruiters do not receive compensation from job seekers. They receive compensation from hiring companies. Therefore, you cannot hire a recruiter to find you a job.",
     },
     {
-      question: "How Much Does The Managed Job Search Service Cost?",
+      question: "What industries does CareerBooster specialize in?",
       answer:
-        "Our Managed Job Search service costs $2,000 per month. We also need executive-level resume design, Linkedin optimization and a personal website to find your dream job faster, which are included in the $2,000.",
+        "Our expertise includes, but is not limited to, technology, finance, healthcare, manufacturing, real estate, legal, marketing, education, non-profit, energy, retail, consumer goods, telecommunications, hospitality, automotive, pharmaceuticals, biotechnology, insurance, transportation and logistics, construction, entertainment and media, food and beverage, government, and public administration. We connect you with executive headhunters and decision makers across these sectors to find the best opportunities that align with your specific skill set and experience.",
     },
     {
-      question: "Do You Guarantee A Job?",
+      question:
+        "  Do you offer any guarantees with the Career JumpStart service?",
       answer:
-        "No. CareerBooster does not guarantee a job as a result of using our service. We provide significant results in order for you to find your dream job.",
-    },
-    {
-      question: "What's Your Money-Back Guarantee?",
-      answer:
-        "We will deliver the services we promise, or we will refund your money.",
-    },
-    {
-      question: "What Types Of Professionals Do You Work With?",
-      answer:
-        "The higher-up you climb the corporate ladder the more challenging it can be to find a suitable position. While we are more than equipped to help mid-career professionals, the majority of our clients are Directors, VPs, or C-Level candidates with salaries ranging from $150,000 - $500,000.",
+        " While we cannot guarantee a job offer, our success-based fee structure ensures that you only pay our placement fee after securing your desired job. This reflects our commitment to providing effective and results-driven services.",
     },
   ];
   return (
@@ -61,14 +78,54 @@ const FindJobs4Me = () => {
         </p>
         <Link
           target="_blank"
-          href="https://calendly.com/callofcareer/15min"
+          href="https://api.leadconnectorhq.com/widget/booking/YWUhGhQTqpIH6XVQZBPu"
           className={`${montserrat_r.className} md:text-[20px] xs:text-[14px] bg-[#BD10E0] text-gray-100  md:py-4 md:px-8 xs:py-3 xs:px-4 rounded-full hover:bg-purple-700 transition duration-300 !font-bold mt-4 w-fit mx-auto `}
         >
           Schedule a Free Consultation →
         </Link>
       </div>
-      <div className="bg-[#E5EFF7] text-gray-900 py-10 md:px-6 w-full">
+
+      <div
+        className={`bg-[#E5EFF7] text-gray-900 py-10 md:px-6 w-full ${montserrat_r.className}`}
+      >
         <div className="mx-auto text-center md:px-10 xs:px-2">
+          <h1 className={` md:text-[36px] xs:text-[26px]`}>Introducing:</h1>
+          <h1
+            className={`text-[#4F31F0] font-extrabold md:text-[46px] xs:text-[32px]`}
+          >
+            Career JumpStart Service{" "}
+          </h1>
+          <h4 className="md:text-[24px] xs:text-[18px] text-gray-600 italic">
+            For Director, VP, SVP and C-Level Job Seekers
+          </h4>
+          <div className="w-[70%] h-[70%] mx-auto my-8">
+            <div className="pt-[100%] relative ">
+              <iframe
+                src="https://player.vimeo.com/video/981888560?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+                className="absolute top-0 left-0 w-full h-full"
+                title="CareerBooster's Career JumpStart"
+              ></iframe>
+            </div>
+          </div>
+          <h1 className="text-gray-950 md:text-[46px] xs:text-[32px] font-extrabold">
+            Want to JumpStart Your Career?
+          </h1>
+          <p className="text-gray-600 md:text-[24px] xs:text-[18px] md:w-2/3 xs:w-full py-2 mx-auto">
+            Elevate your career and secure a high-paying position, schedule a
+            call with us today. Let{"’"}s explore how we can work together to
+            land your next executive role.
+          </p>
+          <div className="mt-6 md:mb-20 xs:mb-8">
+            <Link
+              target="_blank"
+              href="https://api.leadconnectorhq.com/widget/booking/YWUhGhQTqpIH6XVQZBPu"
+              className={`${montserrat_r.className} md:text-[20px] xs:text-[14px] bg-[#BD10E0] text-gray-100  md:py-4 md:px-8 xs:py-3 xs:px-4 rounded-full hover:bg-purple-700 transition duration-300 !font-bold mt-4 w-fit mx-auto `}
+            >
+              Schedule Your Call Now
+            </Link>
+          </div>
+
           <h2
             className={`md:text-[40px] xs:text-[26px]  mb-4 !font-extrabold ${montserrat_r.className}`}
           >
@@ -102,10 +159,10 @@ const FindJobs4Me = () => {
           <p
             className={`text-[#595757]mb-6 md:text-[25px] xs:text-[16px] ${montserrat_r.className}`}
           >
-            We will assign you a dedicated virtual assistant for one to two
-            months to help you with your job search using the latest tools and
-            techniques that put you in front of the decision makers and give you
-            access to confidential and unannounced opportunities.
+            We will assign you a dedicated virtual assistant for 1-2 months to
+            help you with your job search using the latest tools and techniques
+            that put you in front of the decision makers and give you access to
+            confidential and unannounced opportunities.
           </p>
         </div>
       </div>
@@ -372,20 +429,21 @@ const FindJobs4Me = () => {
             className={`md:text-[20px] xs:px-[16px] ${montserrat_r.className} pt-6`}
           >
             Finding a senior level job can be much easier than you think. Many
-            people simply don’t know the correct steps to take which makes them
-            take far longer than they need to. We’ll do all the hard work and
-            smart work for you, and you’ll find your next job in no time.
+            people simply do{"’"}t know the correct steps to take which makes
+            them take far longer than they need to. We{"’"}ll do all the hard
+            work and smart work for you, and you{"’"}ll find your next job in no
+            time.
           </p>
         </div>
       </div>
       <div className="flex md:flex-row xs:flex-col justify-center md:p-4 w-full gap-4 md:px-14 xs:px-2 mt-20">
         {/* Without Find Job4Me */}
-        <div className="bg-gray-100 text-gray-950  shadow-md md:mx-2 xs:mx-0 md:w-1/2 xs:w-full">
+        <div className="bg-gray-100  text-gray-950  shadow-md md:mx-2 xs:mx-0 md:w-1/2 xs:w-full">
           <div
             className={`bg-red-700 p-4  text-center font-bold ${montserrat_r.className} md:text-[23px] 
-            xs:text-[18px] !font-extrabold`}
+            xs:text-[18px] !font-extrabold `}
           >
-            Without Find Job4Me
+            The Hard Work Way
           </div>
           <div className="bg-white text-black ">
             <p
@@ -442,7 +500,7 @@ const FindJobs4Me = () => {
           <div
             className={`bg-green-700 p-4  text-center font-bold ${montserrat_r.className} text-[23px] !font-extrabold`}
           >
-            With Find Job4Me
+            The Easy Way
           </div>
           <div className="bg-white text-black ">
             <p
@@ -491,15 +549,10 @@ const FindJobs4Me = () => {
               Higher likelihood of generating several offers, that way you’re
               not only finding A job, but the RIGHT job.
             </p>
-            <p
-              className={`text-gray-950 ${montserrat_r.className} md:text-[23px] 
-            xs:text-[18px] p-4 text-center bg-[#E4ECF2]`}
-            >
-              Cost: $2000
-            </p>
           </div>
         </div>
       </div>
+
       <div className="dark:bg-gray-950 bg-gray-100 w-full mt-20">
         <div className="content text-center md:w-2/3 xs:w-full xs:px-2 md:px-0 mx-auto">
           <h1
