@@ -10,16 +10,9 @@ const RewardsSection = () => {
           <div className="mx-auto w-full sm:container xs:max-w-full xs:px-2 ">
             <div className="reward-content text-center">
               <h1 className=" md:text-3xl text-[24px]  dark:text-gray-100 text-gray-950 font-[600]">
-                Get Ready for a $10k Reward - Prove Us Wrong!
-              </h1>
-              <h4 className="py-3  px-2 dark:text-gray-100 text-gray-950 font-normal md:text-xl xs:text-[1rem]">
-                We{"'"}re so confident in our AI tool that we dare you to find a
-                better one. If you do, We{"'"}ll hand you $10,000. Challenge
-                accepted?
-              </h4>
-              <h4 className="lg:py-3 md:py-3 xs:py-1  px-2 dark:text-gray-100 text-gray-950 font-normal md:text-xl xs:text-[1rem]">
                 Why CareerBooster is better than GPT and Other Tools?
-              </h4>
+              </h1>
+
               <h4 className=" px-2 dark:text-gray-100 text-gray-950 font-normal md:text-xl xs:text-[1rem]">
                 At CareerBooster, we understand the value of AI, including GPT,
                 in crafting exceptional resumes. However, here{"'"}s why our AI

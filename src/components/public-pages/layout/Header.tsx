@@ -37,242 +37,47 @@ const Header = () => {
 
   return (
     <nav
-      className={`translate-y-[0%] xs:h-[68.88px] lg:h-[90.06px] opacity-[1] fixed top-0 left-0 w-full right-0 z-50 dark:bg-gray-950 bg-gray-100  on-over shadow-lg  dark:text-gray-100 text-gray-900`}
+      className={`translate-y-[0%]  opacity-[1] fixed top-0 left-0 w-full right-0 z-50 dark:bg-gray-950 bg-gray-100  on-over shadow-lg  dark:text-gray-100 text-gray-900`}
     >
-      <div className="flex items-center justify-between mx-auto pt-1 lg:pt-4 dark:shadow-sm  sm:container xs:max-w-full xs:px-2">
-        {/* <!-- Logo --> */}
-
-        <Link
-          className="m-0 xs:flex xs:justify-between xs:w-full xs:ease-in-out xs:duration-300 xs:transition-all "
-          href="/"
-        >
-          <div className="flex items-center justify-center ">
-            <Image
-              width={200}
-              height={200}
-              src="/dark_logo.png"
-              alt="icon"
-              className="sm:m-0  dark:block hidden"
-            />
-            <Image
-              width={200}
-              height={200}
-              src="/white_logo.png"
-              alt="icon"
-              className="sm:m-0  dark:hidden block"
-            />
-          </div>
-        </Link>
-        <div className="flex items-center gap-4 lg:hidden xs:flex-row xs:justify-between">
-          <span className="lg:hidden">
-            <ThemeChanger />
-          </span>
-          {!mobileMenuOpen ? (
-            <button
-              className={`lg:hidden block xs:ease-in-out xs:duration-300 xs:transition-all`}
-              type="button"
-              onClick={(e) => {
-                e.preventDefault();
-                setMobileMenuOpen(!mobileMenuOpen);
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
-                />
-              </svg>
-            </button>
-          ) : (
-            <button
-              className="xs:ease-in-out xs:duration-300 xs:transition-all"
-              onClick={(e) => {
-                e.preventDefault();
-                setMobileMenuOpen(!mobileMenuOpen);
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18 18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          )}
-        </div>
-
-        {/* <!-- Navbar content --> */}
-        {/* For desktop */}
-        <div className="hidden ml-auto lg:block">
-          <div className="flex flex-row items-center gap-4 p-2">
-            <ul
-              className={`flex lg:gap-2 xl:gap-5  dark:text-[#fff] text-gray-900 py-2`}
-            >
-              <li className="px-3 mt-0 ">
-                <Link
-                  className={` ${
-                    active === ""
-                      ? "text-[#6A4DFF] font-bold dark:text-[#e6f85e] "
-                      : " dark:text-gray-100 text-gray-900 font-semibold "
-                  }  capitalize  text-sm  no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]`}
-                  href="/"
-                >
-                  Home
-                </Link>
-              </li>
-              <li className="px-3 mt-0 ">
-                <Link
-                  className={` ${
-                    active === "career-boost-ai-suite"
-                      ? "text-[#6A4DFF] font-bold dark:text-[#e6f85e] "
-                      : " dark:text-gray-100 text-gray-900 font-semibold "
-                  }  capitalize  text-sm  no-underline whitespace-nowrap hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]`}
-                  href="/career-boost-ai-suite"
-                >
-                  CareerBoost AI Suite
-                </Link>
-              </li>
-              <li className="px-3 mt-0 ">
-                {/* <Link
-                  className={` ${
-                    active === "about"
-                      ? "text-[#6A4DFF] font-bold dark:text-[#e6f85e] "
-                      : " dark:text-gray-100 text-gray-900 font-semibold "
-                  }  capitalize  text-sm  no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]`}
-                  href="/about"
-                >
-                  About
-                </Link> */}
-                <Link
-                  className={` ${
-                    active === "executive-recruitment"
-                      ? "text-[#6A4DFF] font-bold dark:text-[#e6f85e] "
-                      : " dark:text-gray-100 text-gray-900 font-semibold "
-                  }  capitalize  text-sm  no-underline whitespace-nowrap hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]`}
-                  href="/executive-recruitment"
-                >
-                  Executive Recruitment
-                </Link>
-              </li>
-            
-              <li className="px-3 mt-0 ">
-                <Link
-                  className={`
-                         ${
-                           active === "find-job4me"
-                             ? "text-[#6A4DFF] font-bold   dark:text-[#e6f85e]  "
-                             : " dark:text-gray-100 text-gray-900 font-semibold "
-                         }
-                  capitalize font-semibold text-sm whitespace-nowrap no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	`}
-                  href="/find-job4me"
-                >
-                  Find Job4Me
-                </Link>
-              </li>
-              <li
-                className="px-3 mt-0 "
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <Link
-                  className={`
-                         ${
-                           active === "job-board"
-                             ? "text-[#6A4DFF] font-bold   dark:text-[#e6f85e]  "
-                             : " dark:text-gray-100 text-gray-900 font-semibold "
-                         }
-                   text-sm capitalize no-underline whitespace-nowrap hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	`}
-                  href="/job-board"
-                >
-                  AI-Powered Job Board
-                </Link>
-              </li>
-              {/* <li className="px-3 mt-0 ">
-                <Link
-                  className={`
-                         ${
-                           active === "use-cases"
-                             ? "text-[#6A4DFF] font-bold   dark:text-[#e6f85e]  "
-                             : " dark:text-gray-100 text-gray-900 font-semibold "
-                         }
-                  capitalize font-semibold text-sm whitespace-nowrap no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	`}
-                  href="/use-cases"
-                >
-                  Use cases
-                </Link>
-              </li> */}
-              {/* <li className="px-3 mt-0 ">
-                <Link
-                  className={`
-                         ${
-                           active === "find-jobs"
-                             ? "text-[#6A4DFF] font-bold   dark:text-[#e6f85e]  "
-                             : " dark:text-gray-100 text-gray-900 font-semibold "
-                         }
-                  capitalize font-semibold text-sm whitespace-nowrap no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	`}
-                  href="/find-jobs"
-                >
-                  Find Jobs
-                </Link>
-              </li> */}
-              {/* <li className="px-3 mt-0 ">
-                <Link
-                  className={`
-                         ${
-                           active === "pricing"
-                             ? "text-[#6A4DFF] font-bold  dark:text-[#e6f85e]  "
-                             : " dark:text-gray-100 text-gray-900 font-semibold "
-                         }
-                  capitalize font-semibold text-sm no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	`}
-                  href="/pricing"
-                >
-                  Pricing
-                </Link>
-              </li>
-              <li className="px-3 mt-0 ">
-                <Link
-                  className={` 
-                         ${
-                           active === "contact"
-                             ? "text-[#6A4DFF] font-bold dark:text-[#e6f85e]  "
-                             : " dark:text-gray-100 text-gray-900 font-semibold "
-                         }
-                  capitalize font-semibold text-sm no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	`}
-                  href="/contact"
-                >
-                  Contact
-                </Link>
-              </li> */}
-              {!isAuth && (
-                <Link
-                  className={`
+      <div className="flex xs:flex-row lg:flex-col  justify-between mx-auto pt-1 lg:py-4 dark:shadow-sm  sm:container xs:max-w-full md:w-full ">
+        <div className="flex justify-between items-center">
+          {/* <!-- Logo --> */}
+          <Link
+            className="m-0 xs:flex xs:justify-between xs:w-full xs:ease-in-out xs:duration-300 xs:transition-all "
+            href="/"
+          >
+            <div className="flex items-center justify-center ">
+              <Image
+                width={200}
+                height={200}
+                src="/dark_logo.png"
+                alt="icon"
+                className="sm:m-0  dark:block hidden"
+              />
+              <Image
+                width={200}
+                height={200}
+                src="/white_logo.png"
+                alt="icon"
+                className="sm:m-0  dark:hidden block"
+              />
+            </div>
+          </Link>
+          <div className="xs:hidden lg:flex">
+            {!isAuth && (
+              <Link
+                className={`
                          ${
                            active === "login"
                              ? "text-[#6A4DFF] font-bold dark:text-[#e6f85e]  "
                              : " dark:text-gray-100 text-gray-900 font-semibold "
                          }
                   capitalize font-semibold text-sm no-underline hover:text-[0#000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c] px-3`}
-                  href="/login"
-                >
-                  Login
-                </Link>
-              )}
-            </ul>
+                href="/login"
+              >
+                Login
+              </Link>
+            )}
             <div className="visible">
               {isAuth ? (
                 <div className="relative inline-block text-left lg:block xs:hidden">
@@ -360,12 +165,212 @@ const Header = () => {
                 </Link>
               )}
             </div>
-            <div>
-              {/* <!-- Navbar toggler button --> */}
-              <span className="hidden ml-2 lg:block xl:block">
-                <ThemeChanger />
-              </span>
-            </div>
+          </div>
+
+          <div>
+            {/* <!-- Navbar toggler button --> */}
+            <span className="hidden ml-2 lg:block xl:block">
+              <ThemeChanger />
+            </span>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-4 lg:hidden xs:flex-row xs:justify-between">
+          <span className="lg:hidden">
+            <ThemeChanger />
+          </span>
+          {!mobileMenuOpen ? (
+            <button
+              className={`lg:hidden block xs:ease-in-out xs:duration-300 xs:transition-all`}
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                setMobileMenuOpen(!mobileMenuOpen);
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
+                />
+              </svg>
+            </button>
+          ) : (
+            <button
+              className="xs:ease-in-out xs:duration-300 xs:transition-all"
+              onClick={(e) => {
+                e.preventDefault();
+                setMobileMenuOpen(!mobileMenuOpen);
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18 18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          )}
+        </div>
+
+        {/* <!-- Navbar content --> */}
+        {/* For desktop */}
+        <div className="hidden mx-auto lg:block">
+          <div className="flex flex-row items-center gap-4 p-2">
+            <ul
+              className={`flex lg:gap-2 xl:gap-5  dark:text-[#fff] text-gray-900 py-2`}
+            >
+              <li className="px-3 mt-0 ">
+                <Link
+                  className={` ${
+                    active === ""
+                      ? "text-[#6A4DFF] font-bold dark:text-[#e6f85e] "
+                      : " dark:text-gray-100 text-gray-900 font-semibold "
+                  }  capitalize  text-sm  no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]`}
+                  href="/"
+                >
+                  Home
+                </Link>
+              </li>
+              <li className="px-3 mt-0 ">
+                <Link
+                  className={` ${
+                    active === "career-boost-ai-suite"
+                      ? "text-[#6A4DFF] font-bold dark:text-[#e6f85e] "
+                      : " dark:text-gray-100 text-gray-900 font-semibold "
+                  }  capitalize  text-sm  no-underline whitespace-nowrap hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]`}
+                  href="/career-boost-ai-suite"
+                >
+                  CareerBoost AI Suite
+                </Link>
+              </li>
+              <li className="px-3 mt-0 ">
+                {/* <Link
+                  className={` ${
+                    active === "about"
+                      ? "text-[#6A4DFF] font-bold dark:text-[#e6f85e] "
+                      : " dark:text-gray-100 text-gray-900 font-semibold "
+                  }  capitalize  text-sm  no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]`}
+                  href="/about"
+                >
+                  About
+                </Link> */}
+                <Link
+                  className={` ${
+                    active === "executive-recruitment"
+                      ? "text-[#6A4DFF] font-bold dark:text-[#e6f85e] "
+                      : " dark:text-gray-100 text-gray-900 font-semibold "
+                  }  capitalize  text-sm  no-underline whitespace-nowrap hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]`}
+                  href="/executive-recruitment"
+                >
+                  Executive Recruitment
+                </Link>
+              </li>
+
+              <li className="px-3 mt-0 ">
+                <Link
+                  className={`
+                         ${
+                           active === "find-job4me"
+                             ? "text-[#6A4DFF] font-bold   dark:text-[#e6f85e]  "
+                             : " dark:text-gray-100 text-gray-900 font-semibold "
+                         }
+                  capitalize font-semibold text-sm whitespace-nowrap no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	`}
+                  href="/find-job4me"
+                >
+                  Find Job4Me
+                </Link>
+              </li>
+              <li
+                className="px-3 mt-0 "
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Link
+                  className={`
+                         ${
+                           active === "job-board"
+                             ? "text-[#6A4DFF] font-bold   dark:text-[#e6f85e]  "
+                             : " dark:text-gray-100 text-gray-900 font-semibold "
+                         }
+                   text-sm capitalize no-underline whitespace-nowrap hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	`}
+                  href="/job-board"
+                >
+                  AI-Powered Job Board
+                </Link>
+              </li>
+              {/* <li className="px-3 mt-0 ">
+                <Link
+                  className={`
+                         ${
+                           active === "use-cases"
+                             ? "text-[#6A4DFF] font-bold   dark:text-[#e6f85e]  "
+                             : " dark:text-gray-100 text-gray-900 font-semibold "
+                         }
+                  capitalize font-semibold text-sm whitespace-nowrap no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	`}
+                  href="/use-cases"
+                >
+                  Use cases
+                </Link>
+              </li> */}
+              {/* <li className="px-3 mt-0 ">
+                <Link
+                  className={`
+                         ${
+                           active === "find-jobs"
+                             ? "text-[#6A4DFF] font-bold   dark:text-[#e6f85e]  "
+                             : " dark:text-gray-100 text-gray-900 font-semibold "
+                         }
+                  capitalize font-semibold text-sm whitespace-nowrap no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	`}
+                  href="/find-jobs"
+                >
+                  Find Jobs
+                </Link>
+              </li> */}
+              {/* <li className="px-3 mt-0 ">
+                <Link
+                  className={`
+                         ${
+                           active === "pricing"
+                             ? "text-[#6A4DFF] font-bold  dark:text-[#e6f85e]  "
+                             : " dark:text-gray-100 text-gray-900 font-semibold "
+                         }
+                  capitalize font-semibold text-sm no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	`}
+                  href="/pricing"
+                >
+                  Pricing
+                </Link>
+              </li>
+              <li className="px-3 mt-0 ">
+                <Link
+                  className={` 
+                         ${
+                           active === "contact"
+                             ? "text-[#6A4DFF] font-bold dark:text-[#e6f85e]  "
+                             : " dark:text-gray-100 text-gray-900 font-semibold "
+                         }
+                  capitalize font-semibold text-sm no-underline hover:text-[#0000ff9c] dark:hover:text-[#e6f85e] dark:focus:text-[#e6f85e] focus:text-[#0000ff9c]	`}
+                  href="/contact"
+                >
+                  Contact
+                </Link>
+              </li> */}
+            </ul>
           </div>
         </div>
       </div>

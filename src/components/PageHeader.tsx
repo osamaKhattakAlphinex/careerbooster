@@ -6,7 +6,7 @@ interface Props {
 }
 const PageHeader: React.FC<Props> = ({ title, secondTitle }) => {
   return (
-    <div className="py-8 mt-[54.88px] mb-4 lg:mt-[90.06px] bg-[url('/assets/images/shapes/stripe-light.svg')] bg-no-repeat dark:bg-[url('/assets/images/shapes/stripe-dark.svg')] flex  justify-center items-center  bg-cover bg-start">
+    <div className="py-8 mt-[64.88px] mb-4 lg:mt-[140.06px] bg-[url('/assets/images/shapes/stripe-light.svg')] bg-no-repeat dark:bg-[url('/assets/images/shapes/stripe-dark.svg')] flex  justify-center items-center  bg-cover bg-start">
       <div className="flex flex-col gap-3 ">
         <h1 className="font-semibold text-[#000] dark:text-[#fff]  text-center leading-5 text-xl">
           {title}

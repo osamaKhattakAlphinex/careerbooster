@@ -72,7 +72,7 @@ const HeroArea = () => {
           slidesPerView={1}
           spaceBetween={10}
           rewind={true}
-          speed={1200}
+          speed={2500}
           autoplay={{ delay: 2500, disableOnInteraction: false }}
           modules={[Autoplay]}
           className="xs:!px-4 mb-16"
