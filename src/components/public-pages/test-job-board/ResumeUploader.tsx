@@ -135,7 +135,6 @@ const ResumeUploader = ({ setAiResumeKeywords, setAiResumeSuggestions }) => {
         </div>
       )}
       {fileUploading && <JobBoardBot/>}
-      {/* <JobBoardBot/> */}
     </>
   );
 };
