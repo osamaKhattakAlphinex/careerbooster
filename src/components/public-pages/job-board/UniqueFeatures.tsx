@@ -56,9 +56,9 @@ function UniqueFeatures() {
         Unique Features of Our AI-Powered Job Board
       </h1>
       <div className="flex md:flex-row xs:flex-col w-full gap-4 md::px-20 xs:px-2 flex-wrap">
-        {cardContent.map((card: any) => {
+        {cardContent.map((card: any, index:number) => {
           return (
-            <div className="md:w-[23%] xs:w-full flex flex-col gap-2 dark:shadow-2xl shadow-md p-6 text-center ">
+            <div key={index} className="md:w-[23%] xs:w-full flex flex-col gap-2 dark:shadow-2xl shadow-md p-6 text-center ">
               <span className="rounded-[100px]  w-6 mx-auto  dark:bg-gray-700 bg-gray-300 ">
                 {card.cardNo}
               </span>
