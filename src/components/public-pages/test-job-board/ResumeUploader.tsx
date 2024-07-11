@@ -4,6 +4,7 @@ import WordFileHandler from "@/components/dashboard/WordFileHandler";
 import { refreshIconRotating, uploadIcon } from "@/helpers/iconsProvider";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import "@/styles/ScoreRing.css";
+import JobBoardBot from "./JobBoardBot";
 
 const ResumeUploader = ({ setAiResumeKeywords, setAiResumeSuggestions }) => {
   const [file, setFile] = useState<any>(null);
@@ -133,6 +134,7 @@ const ResumeUploader = ({ setAiResumeKeywords, setAiResumeSuggestions }) => {
           <p className="m-0">{uploadCompleteText}</p>
         </div>
       )}
+      {fileUploading && <JobBoardBot/>}
     </>
   );
 };
