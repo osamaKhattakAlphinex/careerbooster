@@ -15,7 +15,7 @@ export default function JobBoard({
   };
 }) {
   const query = searchParams?.query || "";
-  const [singleCategory, setSingleCategory] = useState("");
+  const [singleCategory, setSingleCategory] = useState("Choose a Category");
   const locationQuery = searchParams?.location || "";
   const [aiResumeKeywords, setAiResumeKeywords] = useState<string[]>([]);
   const [aiResumeSuggestions, setAiResumeSuggestions] = useState<string[]>([]);
