@@ -6,10 +6,12 @@ import SinglejobCard from "./SingleJobCard";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function JobCard({
+  singleCategory,
   query,
   locationQuery,
   aiResumeKeywords = [],
 }: {
+  singleCategory: string;
   query: string;
   locationQuery: any;
   aiResumeKeywords?: string[] | [];
@@ -26,7 +28,12 @@ export default function JobCard({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const fetchRecords = async (query?: string, locationQuery?: any) => {
+
+  const fetchRecords = async (
+    query?: string,
+    locationQuery?: any,
+    singleCategory?: string
+  ) => {
     setLoading(true);
     setshowTableLoader(true);
     if (!loading) {
@@ -34,7 +41,7 @@ export default function JobCard({
         .get(
           `/api/deo?jobs=featured&query=${query}&location=${locationQuery}&skills=${aiResumeKeywords.join(
             ","
-          )}&limit=${limitOfRecords}&page=${currentPage}`
+          )}&limit=${limitOfRecords}&page=${currentPage}&jobCategory=${singleCategory}`
         )
         .then((res) => {
           setLoadingId("");
@@ -57,7 +64,7 @@ export default function JobCard({
     }
   };
   useEffect(() => {
-    fetchRecords(query, locationQuery);
+    fetchRecords(query, locationQuery, singleCategory);
   }, []);
 
   useEffect(() => {
@@ -68,12 +75,12 @@ export default function JobCard({
 
   useEffect(() => {
     setRecords([]);
-    fetchRecords(query, locationQuery);
+    fetchRecords(query, locationQuery, singleCategory);
     const startIndex = (currentPage - 1) * limitOfRecords;
 
     setPageStart(startIndex);
     router.replace(pathname + `?r=${limitOfRecords}&p=${currentPage}`);
-  }, [limitOfRecords, currentPage, query, locationQuery]);
+  }, [limitOfRecords, currentPage, query, locationQuery, singleCategory]);
   useEffect(() => {
     const existingNumberOfRecords = searchParams?.get("r");
     const existingPage = searchParams?.get("p");
@@ -89,10 +96,9 @@ export default function JobCard({
     setLimitOfRecords(e.target.value);
     setCurrentPage(1);
   };
-
   return (
     <>
-      {records.length > 0 && (
+      {records.length > 0 ? (
         <div className="md:flex md:flex-row xs:flex-col items-center justify-between   md:mx-14 xs:mx-4">
           <div className="md:flex md:flex-row xs:flex-col items-center gap-2">
             <label htmlFor="userPerPage" className="text-sm font-medium">
@@ -168,6 +174,14 @@ export default function JobCard({
             </nav>
           </div>
         </div>
+      ) : (
+        <p
+          className={`text-[20px] text-center pt-10 ${
+            loading ? "hidden" : "block"
+          } `}
+        >
+          Sorry! Nothing Found
+        </p>
       )}
       {loading && (
         <div className="text-gary-100 text-lg flex justify-center items-center">
@@ -179,6 +193,7 @@ export default function JobCard({
         ? records.map((items: any) => {
             return (
               <SinglejobCard
+                category={items.category}
                 jobTitle={items.jobTitle}
                 location={items.location}
                 employer={items.employer}
