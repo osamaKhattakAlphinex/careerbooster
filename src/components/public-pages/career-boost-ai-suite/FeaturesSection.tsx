@@ -46,7 +46,7 @@ const FeaturesSection = () => {
           />
         </svg>
       ),
-      heading: "Find Me a Job",
+      heading: "Find Job4Me",
       content:
         "Navigating the job market can be overwhelming. Our Virtual Job Search Assistant is here to streamline your search process. This personalized service identifies and recommends jobs tailored to your skills, experience, and career aspirations, saving you time and effort.",
     },
