@@ -13,7 +13,7 @@ const HeroArea = () => {
     "Access Confidential Opportunities with the Right Keywords.",
     "Get the Attention You Deserve from Recruiters.",
     "Get Past the ATS and Increase Your Visibility.",
-    "A Top-Notch Resume Will Boost Your Confidence.",
+    "A Top-Notch Resume Will Bo ost Your Confidence.",
     "Expect a Document That Stands Out from the Competition.",
   ];
 

@@ -10,7 +10,6 @@ const DeoNavbar = () => {
       <div>
         <Link href="/"> CareerBooster.AI</Link>
       </div>
-
       <div className="flex flex-row items-center justify-between gap-3">
         <div className="grid w-6 h-6 rounded-md shadow-md sm:w-8 sm:h-8 place-content-center">
           <ThemeChanger />

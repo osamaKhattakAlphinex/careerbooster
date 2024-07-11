@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import SVGProvider from "../../../helpers/SVGProvider";
 import { Fade, Slide } from "react-awesome-reveal";
 
 const FeaturesSection = () => {
