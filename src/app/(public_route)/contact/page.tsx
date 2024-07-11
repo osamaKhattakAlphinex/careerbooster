@@ -1,6 +1,4 @@
-import AddressCard from "@/components/public-pages/Contact/AddressCard";
 import ContactForm from "@/components/public-pages/Contact/ContactForm";
-import MapCard from "@/components/public-pages/Contact/MapCard";
 import PageHeader from "@/components/PageHeader";
 import { Metadata } from "next";
 
@@ -43,8 +41,6 @@ export default function ContactPage() {
           <div className="container mx-auto">
             <ContactForm />
             <br />
-            {/* <AddressCard /> */}
-            {/* <MapCard /> */}
           </div>
         </section>
       </main>
