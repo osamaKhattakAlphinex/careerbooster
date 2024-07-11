@@ -58,7 +58,7 @@ const ResumeUploader = ({ setAiResumeKeywords, setAiResumeSuggestions }) => {
         const obj = typeof data.result === "object" ? data.result : JSON.parse(data.result);
         setAiResumeKeywords(obj.skills);
         setAiResumeSuggestions(obj.suggestions);
-        setUploadCompleteText("Related Jobs Found Successfully");
+        setUploadCompleteText("Search Completed Successfully");
         setFileUploading(false);
         setUploadComplete(true);
       }

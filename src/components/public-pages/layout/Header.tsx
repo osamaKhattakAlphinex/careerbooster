@@ -57,11 +57,11 @@ const Header = () => {
   return (
     <nav
       id="header"
-      className={`translate-y-[0%]  opacity-[1] fixed top-0 left-0 w-full right-0 z-50 dark:bg-gray-950 bg-gray-100  on-over shadow-lg  dark:text-gray-100 text-gray-900  transition-top duration-300 ${
+      className={`translate-y-[0%] opacity-[1] fixed top-0 left-0 w-full right-0 z-50 dark:bg-gray-950 bg-gray-100  on-over shadow-md shadow-[#e6f85e]/20  dark:text-gray-100 text-gray-900  transition-top duration-300 ${
         isScrollingUp ? "top-0" : "top-0"
       }`}
     >
-      <div className="flex xs:flex-row lg:flex-col  justify-between mx-auto pt-1 lg:py-4 dark:shadow-sm  sm:container xs:max-w-full md:w-full ">
+      <div className="flex xs:flex-row lg:flex-col  justify-between mx-auto pt-1 lg:py-4 sm:container xs:max-w-full md:w-full ">
         <div className="flex justify-between items-center" id="part1">
           {/* <!-- Logo --> */}
           <Link
@@ -255,8 +255,8 @@ const Header = () => {
         {/* For desktop */}
         <div className={`hidden mx-auto lg:block`} id="part-2">
           <div
-            className={` items-center gap-4 p-2flex space-x-4 ${
-              isScrollingUp ? "flex flex-row " : "hidden"
+            className={`transition-all duration-300 items-center gap-4 p-2 flex space-x-4 ${
+              isScrollingUp ? "opacity-100 h-auto" : "opacity-0 h-0 overflow-hidden"
             }`}
           >
             <ul
