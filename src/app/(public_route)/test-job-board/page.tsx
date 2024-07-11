@@ -20,22 +20,20 @@ export default function JobBoard({
   const [aiResumeSuggestions, setAiResumeSuggestions] = useState<string[]>([]);
 
   return (
-    <>
-      <main className="flex-grow-1 pb-20 pt-[120px]">
-        <JobSearchForm />
-        <ResumeUploader
-          setAiResumeKeywords={setAiResumeKeywords}
-          setAiResumeSuggestions={setAiResumeSuggestions}
-        />
-        <JobCard
-          query={query}
-          locationQuery={locationQuery}
-          aiResumeKeywords={aiResumeKeywords}
-        />
-        {aiResumeSuggestions.length > 0 && (
-          <SuggestionCard aiResumeSuggestions={aiResumeSuggestions} />
-        )}
-      </main>
-    </>
+    <main className="flex-grow-1 pb-20 pt-[160px]">
+      <JobSearchForm />
+      <ResumeUploader
+        setAiResumeKeywords={setAiResumeKeywords}
+        setAiResumeSuggestions={setAiResumeSuggestions}
+      />
+      <JobCard
+        query={query}
+        locationQuery={locationQuery}
+        aiResumeKeywords={aiResumeKeywords}
+      />
+      {aiResumeSuggestions.length > 0 && (
+        <SuggestionCard aiResumeSuggestions={aiResumeSuggestions} />
+      )}
+    </main>
   );
 }
