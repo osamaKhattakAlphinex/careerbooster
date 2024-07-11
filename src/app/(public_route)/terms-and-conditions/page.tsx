@@ -8,7 +8,7 @@ export default function TermsAndConditionPage() {
   return (
     <>
       <div className="container">
-        <div className="terms-and-conditions my-20 ">
+        <div className="terms-and-conditions my-40 ">
           <h1 className="py-5 text-[18px] font-bold uppercase">
             Terms and Condtions
           </h1>

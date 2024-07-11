@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 export default function PrivacyPloicyPage() { 
   return (
     <>
-      <main className="flex-grow-1 my-20 py-10">
+      <main className="flex-grow-1 my-28 py-10">
         <div className="container">
           <div className="privacy-policy py-5">
             <h2 className="text-[18px] font-bold">Privacy Policy</h2>

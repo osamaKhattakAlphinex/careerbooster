@@ -189,7 +189,14 @@ export default function JobCard({
               />
             );
           })
-        : ""}
+        : !loading && (
+            <div className="text-gray-500 my-10 py-5 text-lg text-center mx-40">
+              We{"'"}re sorry, but we currently don{"'"}t have any job openings that
+              match your skill set. We value your time and strive to provide
+              only the most relevant job postings. Please check back again soon,
+              or try adjusting your search criteria.
+            </div>
+          )}
       {records.length > 0 && (
         <div className="flex justify-end mt-4 md:mx-14 xs:mx-4">
           <nav aria-label="Page navigation example">
