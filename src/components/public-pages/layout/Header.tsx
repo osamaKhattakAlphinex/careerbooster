@@ -19,9 +19,28 @@ const Header = () => {
   const isAuth = status === "authenticated";
   const [active, setActive] = useState<string>("");
   const role = data?.user?.role;
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [isScrollingUp, setIsScrollingUp] = useState(true);
 
   const pathname = usePathname();
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY) {
+        // Scrolling down
+        setIsScrollingUp(false);
+      } else {
+        // Scrolling up
+        setIsScrollingUp(true);
+      }
+      setLastScrollY(window.scrollY);
+    };
 
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [lastScrollY]);
   useEffect(() => {
     if (pathname === "/") {
       setActive("");
@@ -37,10 +56,13 @@ const Header = () => {
 
   return (
     <nav
-      className={`translate-y-[0%]  opacity-[1] fixed top-0 left-0 w-full right-0 z-50 dark:bg-gray-950 bg-gray-100  on-over shadow-lg  dark:text-gray-100 text-gray-900`}
+      id="header"
+      className={`translate-y-[0%]  opacity-[1] fixed top-0 left-0 w-full right-0 z-50 dark:bg-gray-950 bg-gray-100  on-over shadow-lg  dark:text-gray-100 text-gray-900  transition-top duration-300 ${
+        isScrollingUp ? "top-0" : "top-0"
+      }`}
     >
       <div className="flex xs:flex-row lg:flex-col  justify-between mx-auto pt-1 lg:py-4 dark:shadow-sm  sm:container xs:max-w-full md:w-full ">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center" id="part1">
           {/* <!-- Logo --> */}
           <Link
             className="m-0 xs:flex xs:justify-between xs:w-full xs:ease-in-out xs:duration-300 xs:transition-all "
@@ -231,8 +253,12 @@ const Header = () => {
 
         {/* <!-- Navbar content --> */}
         {/* For desktop */}
-        <div className="hidden mx-auto lg:block">
-          <div className="flex flex-row items-center gap-4 p-2">
+        <div className={`hidden mx-auto lg:block`} id="part-2">
+          <div
+            className={` items-center gap-4 p-2flex space-x-4 ${
+              isScrollingUp ? "flex flex-row " : "hidden"
+            }`}
+          >
             <ul
               className={`flex lg:gap-2 xl:gap-5  dark:text-[#fff] text-gray-900 py-2`}
             >
