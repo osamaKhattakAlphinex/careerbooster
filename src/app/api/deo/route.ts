@@ -23,6 +23,7 @@ export async function GET(req: NextRequest) {
     let jobs;
     let total;
     let searchCondition: any = {};
+
     if (jobCategory === "Choose a Category") {
       jobs = await Job.find({ featured: 1 });
     } else if (jobCategory !== "Choose a Category") {
