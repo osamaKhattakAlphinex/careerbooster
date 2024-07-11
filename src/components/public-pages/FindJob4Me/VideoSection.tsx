@@ -20,7 +20,7 @@ function VideoSection() {
         <h4 className="md:text-[24px] xs:text-[18px] text-gray-600 italic">
           For Director, VP, SVP and C-Level Job Seekers
         </h4>
-        <div className="w-[38%] h-[20%] mx-auto my-8">
+        <div className="md:w-[38%] xs:w-full h-[20%] mx-auto my-8">
           <div className="pt-[100%] relative ">
             <iframe
               src="https://player.vimeo.com/video/981888560?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
