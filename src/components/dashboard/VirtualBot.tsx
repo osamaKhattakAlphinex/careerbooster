@@ -36,13 +36,11 @@ interface VirtualBotProps {
 
 const VirtualBot: React.FC<VirtualBotProps> = ({ firstName, lastName }) => {
   const [isGif, setIsGif] = useState(false);
-  // const [audioPlayed, setAudioPlayed] = useState(false);
   const [audioPrepared, setAudioPrepared] = useState(false);
   const [response, setResponse] = useState<any>({});
   const componentRef: any = useRef(null);
   const audioFileUrl1 = "/speech1.mp3";
   const audioFileUrl2 = "/speech_scan_resume.mp3";
-  // const userData = useSelector((state: any) => state.userData);
 
   const [prevUserData, setPrevUserData] = useState<{
     firstName: string;
