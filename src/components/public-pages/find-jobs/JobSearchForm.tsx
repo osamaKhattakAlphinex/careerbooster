@@ -9,8 +9,6 @@ export default function JobSearchForm({
   setSingleCategory,
 }: any) {
   const [categories, setCategories] = useState<any>([]);
-
-  const [records, setRecords] = useState<any>([]);
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -146,15 +144,14 @@ export default function JobSearchForm({
                 id=""
                 className="w-full border-none bg-gray-950"
               >
-                <option selected>Choose a Category</option>
+                <option selected disabled>
+                  Choose a Category
+                </option>
                 {categories.map((category: any) => {
-                  // console.log(category);
                   return (
-                    <>
-                      <option key={category._id} value={category.name}>
-                        {category?.name}
-                      </option>
-                    </>
+                    <option key={category._id} value={category.name}>
+                      {category?.name}
+                    </option>
                   );
                 })}
               </select>
