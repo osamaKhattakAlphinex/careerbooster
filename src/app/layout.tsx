@@ -35,7 +35,7 @@ export default function RootLayout({
           <CreditLimitsProvider />
           {children}
           <ToastContainer />
-          {/* <MicrosoftClarity /> */}
+          <MicrosoftClarity />
         </ReduxProvider>
       </AuthProvider>
     </NextThemeProvider>
