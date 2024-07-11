@@ -18,16 +18,11 @@ export async function GET(req: NextRequest) {
     const page = Number(url.searchParams.get("page"));
     const skip = (page - 1) * limit;
     const jobCategory = url.searchParams.get("jobCategory");
-    console.log(jobCategory);
 
     let jobs;
     let total;
     let searchCondition: any = {};
-    if (jobCategory === "Choose a Category") {
-      jobs = await Job.find({ featured: 1 });
-    } else if (jobCategory !== "Choose a Category") {
-      jobs = await Job.find({ category: jobCategory });
-    } else if (findOne) {
+    if (findOne) {
       jobs = await Job.findOne({ _id: findOne });
     } else if (jobToShow === "featured") {
       if (jobTitlequery !== "" || jobLocationquery !== "") {
