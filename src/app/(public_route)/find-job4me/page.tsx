@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 function page() {
   return (
     
-      <main className="bg-[#fff] dark:bg-[#171825]">
+      <main className="pt-5 bg-[#fff] dark:bg-[#171825]">
         <PageHeader title="Find Job4Me" />
         <FindJobs4Me />
       </main>

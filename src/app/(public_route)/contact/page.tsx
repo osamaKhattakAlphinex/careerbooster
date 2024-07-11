@@ -1,6 +1,4 @@
-import AddressCard from "@/components/public-pages/Contact/AddressCard";
 import ContactForm from "@/components/public-pages/Contact/ContactForm";
-import MapCard from "@/components/public-pages/Contact/MapCard";
 import PageHeader from "@/components/PageHeader";
 import { Metadata } from "next";
 
@@ -35,7 +33,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <main className="flex-grow-1 bg-[#fff] dark:bg-[#171825]">
+      <main className="pt-5 flex-grow-1 bg-[#fff] dark:bg-[#171825]">
         {/* <!-- Page header --> */}
         <PageHeader title="Contact With Us" secondTitle="Contact" />
 
@@ -43,8 +41,6 @@ export default function ContactPage() {
           <div className="container mx-auto">
             <ContactForm />
             <br />
-            {/* <AddressCard /> */}
-            {/* <MapCard /> */}
           </div>
         </section>
       </main>

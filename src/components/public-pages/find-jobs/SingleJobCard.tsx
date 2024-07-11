@@ -8,8 +8,10 @@ type Props = {
   viewjoblink?: any;
   applyJobLink: any;
   jobId: string;
+  category: string;
 };
 export default function SinglejobCard({
+  category,
   jobTitle,
   location,
   employer,
@@ -18,11 +20,11 @@ export default function SinglejobCard({
   applyJobLink,
   jobId,
 }: Props) {
-
   return (
     <div className="card md:flex md:flex-row xs:flex-col  dark:border dark:border-gray-100 dark:bg-black bg-gray-100  md:mx-14 md:px-8 py-10 rounded-md mt-4 shadow-lg xs:mx-4 xs:px-2">
       <div className="flex flex-col gap-6">
         <div className="md:flex md:flex-row xs:flex-col gap-6 items-center">
+          {/* {category} */}
           <h2 className="dark:text-gray-100 text-gray-950 text-xl font-bold xs:mb-3">
             {jobTitle}
           </h2>

@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <main className="flex-grow-1 pb-20 dark:bg-gray-950 bg-gray-100">
+      <main className="pt-5 flex-grow-1 pb-20 dark:bg-gray-950 bg-gray-100">
         {/* <!-- Page header --> */}
         <PageHeader title="About CareerBooster.AI" secondTitle="About us" />
 

@@ -17,13 +17,14 @@ export async function GET(req: NextRequest) {
     const limit = Number(url.searchParams.get("limit"));
     const page = Number(url.searchParams.get("page"));
     const skip = (page - 1) * limit;
-
+    const jobCategory = url.searchParams.get("jobCategory");
     let jobs;
     let total;
     let searchCondition: any = {};
     if (findOne) {
       jobs = await Job.findOne({ _id: findOne });
     } else if (jobToShow === "featured") {
+      searchCondition.featured = 1;
       if (jobTitlequery !== "" || jobLocationquery !== "") {
         if (jobTitlequery !== "" && jobLocationquery == "") {
           searchCondition.jobTitle = { $regex: jobTitlequery, $options: "i" };
@@ -112,6 +113,10 @@ export async function GET(req: NextRequest) {
           },
         ]);
         total = jobCount.length;
+      } else if (jobCategory !== "Choose a Category"){
+        searchCondition.category = jobCategory;
+        jobs = await Job.find(searchCondition).sort({createdAt: -1});
+        total = await Job.count({ category: jobCategory });
       } else {
         jobs = await Job.find({ featured: 1 })
           .sort({
