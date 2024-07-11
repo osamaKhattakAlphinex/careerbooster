@@ -15,19 +15,24 @@ export default function JobBoard({
   };
 }) {
   const query = searchParams?.query || "";
+  const [singleCategory, setSingleCategory] = useState("");
   const locationQuery = searchParams?.location || "";
   const [aiResumeKeywords, setAiResumeKeywords] = useState<string[]>([]);
   const [aiResumeSuggestions, setAiResumeSuggestions] = useState<string[]>([]);
-
+  console.log(singleCategory);
   return (
     <>
       <main className="flex-grow-1 pb-20 pt-[160px]">
-        <JobSearchForm />
+        <JobSearchForm
+          singleCategory={singleCategory}
+          setSingleCategory={setSingleCategory}
+        />
         <ResumeUploader
           setAiResumeKeywords={setAiResumeKeywords}
           setAiResumeSuggestions={setAiResumeSuggestions}
         />
         <JobCard
+          singleCategory={singleCategory}
           query={query}
           locationQuery={locationQuery}
           aiResumeKeywords={aiResumeKeywords}

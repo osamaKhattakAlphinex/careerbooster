@@ -1,8 +1,16 @@
 "use client";
+import axios from "axios";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
-export default function JobSearchForm() {
+export default function JobSearchForm({
+  singleCategory,
+  setSingleCategory,
+}: any) {
+  const [categories, setCategories] = useState<any>([]);
+
+  const [records, setRecords] = useState<any>([]);
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -30,6 +38,28 @@ export default function JobSearchForm() {
     }
     replace(`${pathname}?${params.toString()}`);
   }, 500);
+  useEffect(() => {
+    axios
+      .get("/api/deo/jobCategories")
+      .then((resp) => {
+        setCategories(resp.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  // useEffect(() => {
+  //   axios
+  //     .get(`/api/deo?jobCategory=${singleCategory}`)
+  //     .then((res) => {
+  //       setRecords(res.data.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, [singleCategory]);
+
   return (
     <>
       <section id="JobSearchForm" className="mb-10 xs:px-4">
@@ -47,7 +77,7 @@ export default function JobSearchForm() {
               e.preventDefault();
             }}
           >
-            <div className="group flex flex-row justify-start items-center gap-3 p-3 border-[1px] border-gray-600 rounded-lg md:w-1/2 xs:w-full dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff] xs:mb-4">
+            <div className="group flex flex-row justify-start items-center gap-3 p-3 border-[1px] border-gray-600 rounded-lg md:w-1/3 xs:w-full dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff] xs:mb-4">
               <span className="text-gray-800 dark:text-gray-100">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -74,7 +104,7 @@ export default function JobSearchForm() {
                 placeholder="Job title or search keyword"
               />
             </div>
-            <div className="group flex flex-row justify-start items-center gap-3 p-3 border-[1px] border-gray-600 rounded-lg md:w-1/2 xs:w-full dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff] xs:mb-4">
+            <div className="group flex flex-row justify-start items-center gap-3 p-3 border-[1px] border-gray-600 rounded-lg md:w-1/3 xs:w-full dark:focus-within:border-[#e6f85e] focus-within:border-[rgb(106,77,255)] xs:mb-4">
               <span className="text-gray-800 dark:text-gray-100">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -105,6 +135,29 @@ export default function JobSearchForm() {
                 onChange={(e) => handleLocationSearch(e.target.value)}
                 defaultValue={searchParams.get("location")?.toString()}
               />
+            </div>
+            <div className="group flex flex-row justify-start items-center gap-3 p-3 border-[1px] border-gray-600 rounded-lg md:w-1/3 xs:w-full dark:focus-within:border-[#e6f85e] focus-within:border-[#6a4dff] xs:mb-4">
+              <select
+                onChange={(e) => {
+                  const selectedCategory = e.target.value;
+                  setSingleCategory(selectedCategory);
+                }}
+                value={singleCategory}
+                id=""
+                className="w-full border-none bg-gray-950"
+              >
+                <option selected>Choose a Category</option>
+                {categories.map((category: any) => {
+                  // console.log(category);
+                  return (
+                    <>
+                      <option key={category._id} value={category.name}>
+                        {category?.name}
+                      </option>
+                    </>
+                  );
+                })}
+              </select>
             </div>
           </form>
         </div>
