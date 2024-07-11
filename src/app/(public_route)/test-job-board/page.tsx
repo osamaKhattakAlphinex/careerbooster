@@ -21,7 +21,7 @@ export default function JobBoard({
 
   return (
     <>
-      <main className="flex-grow-1 pb-20 pt-[120px]">
+      <main className="flex-grow-1 pb-20 pt-[160px]">
         <JobSearchForm />
         <ResumeUploader
           setAiResumeKeywords={setAiResumeKeywords}
