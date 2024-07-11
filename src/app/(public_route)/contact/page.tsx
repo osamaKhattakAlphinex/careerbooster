@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <main className="flex-grow-1 bg-[#fff] dark:bg-[#171825]">
+      <main className="pt-5 flex-grow-1 bg-[#fff] dark:bg-[#171825]">
         {/* <!-- Page header --> */}
         <PageHeader title="Contact With Us" secondTitle="Contact" />
 

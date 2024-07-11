@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 
 function page() {
   return (
-    <main className="bg-[#fff] dark:bg-[#171825]">
+    <main className="pt-5 bg-[#fff] dark:bg-[#171825]">
       <PageHeader title="AI-Powered Job Board" />
       <div className="flex flex-col gap-8 justify-center xs:px-2 md:px-0 mt-10 pb-10">
         <ComingSoon />
