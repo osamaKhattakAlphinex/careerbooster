@@ -129,7 +129,6 @@ export default function JobSearchForm({
                   setSingleCategory(selectedCategory);
                 }}
                 value={singleCategory}
-                id=""
                 className="w-full border-none bg-gray-100 dark:bg-gray-950 "
               >
                 <option selected disabled>

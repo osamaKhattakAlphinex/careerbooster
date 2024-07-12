@@ -21,16 +21,7 @@ export async function GET(req: NextRequest) {
     let jobs;
     let total;
     let searchCondition: any = {};
-<<<<<<< HEAD
-
-    if (jobCategory === "Choose a Category") {
-      jobs = await Job.find({ featured: 1 });
-    } else if (jobCategory !== "Choose a Category") {
-      jobs = await Job.find({ category: jobCategory });
-    } else if (findOne) {
-=======
     if (findOne) {
->>>>>>> 43bffda851681f3d7bdb7941e567413bfa62c96f
       jobs = await Job.findOne({ _id: findOne });
     } else if (jobToShow === "featured") {
       searchCondition.featured = 1;
