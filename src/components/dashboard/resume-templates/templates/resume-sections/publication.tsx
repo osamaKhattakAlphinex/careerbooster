@@ -37,7 +37,7 @@ const Publication = ({ heading, publications, styles, customStyle }: Props) => {
       <h3
         className={`publications ${styles?.publication_h3}  ${
           customStyle?.centeredHeading ? "justify-center" : ""
-        } ${styles?.bgColor} `}
+        }  ${styles?.bgColor} `}
       >
         {!customStyle?.hideIcons && (
           <svg
