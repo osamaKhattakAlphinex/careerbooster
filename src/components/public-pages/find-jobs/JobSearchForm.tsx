@@ -47,17 +47,6 @@ export default function JobSearchForm({
       });
   }, []);
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`/api/deo?jobCategory=${singleCategory}`)
-  //     .then((res) => {
-  //       setRecords(res.data.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, [singleCategory]);
-
   return (
     <>
       <section id="JobSearchForm" className="mb-10 xs:px-4">
@@ -65,8 +54,7 @@ export default function JobSearchForm({
           Find Your Next Job
         </h1>
         <div
-          className="form rounded-md dark:bg-black bg-gray-100 shadow-md md:mx-20 "
-          // style={{ width: "max-content" }}
+          className="form rounded-md dark:bg-black bg-gray-100 shadow-md md:mx-20"
         >
           <form
             action=""
@@ -141,8 +129,7 @@ export default function JobSearchForm({
                   setSingleCategory(selectedCategory);
                 }}
                 value={singleCategory}
-                id=""
-                className="w-full border-none bg-gray-950"
+                className="w-full border-none bg-gray-100 dark:bg-gray-950 "
               >
                 <option selected disabled>
                   Choose a Category
