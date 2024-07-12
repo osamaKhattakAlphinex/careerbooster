@@ -57,7 +57,7 @@ const Header = () => {
   return (
     <nav
       id="header"
-      className={`translate-y-[0%] opacity-[1] fixed top-0 left-0 w-full right-0 z-50 dark:bg-gray-950 bg-gray-100  on-over shadow-md shadow-[#e6f85e]/20  dark:text-gray-100 text-gray-900  transition-top duration-300 ${
+      className={`translate-y-[0%] opacity-[1] fixed top-0 left-0 w-full right-0 z-50 dark:bg-gray-950 bg-gray-100  on-over shadow-md shadow-[#6a4dff]/30 dark:shadow-[#e6f85e]/30  dark:text-gray-100 text-gray-900  transition-top duration-300 ${
         isScrollingUp ? "top-0" : "top-0"
       }`}
     >
