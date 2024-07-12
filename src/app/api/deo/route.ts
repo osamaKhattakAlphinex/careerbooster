@@ -28,13 +28,19 @@ export async function GET(req: NextRequest) {
       if (jobTitlequery !== "" || jobLocationquery !== "") {
         if (jobTitlequery !== "" && jobLocationquery == "") {
           searchCondition.jobTitle = { $regex: jobTitlequery, $options: "i" };
-          jobs = await Job.find(searchCondition).sort({ createdAt: -1 });
+          jobs = await Job.find(searchCondition)
+            .sort({ createdAt: -1 })
+            .limit(limit)
+            .skip(skip);
         } else if (jobTitlequery == "" && jobLocationquery !== "") {
           searchCondition.location = {
             $regex: jobLocationquery,
             $options: "i",
           };
-          jobs = await Job.find(searchCondition).sort({ createdAt: -1 });
+          jobs = await Job.find(searchCondition)
+            .sort({ createdAt: -1 })
+            .limit(limit)
+            .skip(skip);
         }
         total = await Job.count({ searchCondition });
       } else if (skills.length > 0) {
@@ -113,9 +119,12 @@ export async function GET(req: NextRequest) {
           },
         ]);
         total = jobCount.length;
-      } else if (jobCategory !== "Choose a Category"){
+      } else if (jobCategory !== "Choose a Category") {
         searchCondition.category = jobCategory;
-        jobs = await Job.find(searchCondition).sort({createdAt: -1});
+        jobs = await Job.find(searchCondition)
+          .sort({ createdAt: -1 })
+          .limit(limit)
+          .skip(skip);
         total = await Job.count({ category: jobCategory });
       } else {
         jobs = await Job.find({ featured: 1 })
