@@ -18,7 +18,7 @@ const Summary = ({ summary, heading, customStyle, styles }: Props) => {
   const { updateSaveHook } = useUpdateAndSave();
   const [streamedSummaryData, setStreamedSummaryData] = useState("");
   const { getSummary } = useGetSummary(setStreamedSummaryData);
- 
+
   return (
     <>
       <span
@@ -31,7 +31,7 @@ const Summary = ({ summary, heading, customStyle, styles }: Props) => {
           customStyle?.centeredHeading ? "!justify-center" : ""
         } ${styles?.bgColor}`}
       >
-        {resumeSummaryIcon}
+        {!customStyle?.hideIcons && resumeSummaryIcon}
         <EditableField
           value={heading ? heading : "Execuitve summary"}
           style={{ width: "fit-content " }}
@@ -75,7 +75,6 @@ const Summary = ({ summary, heading, customStyle, styles }: Props) => {
           />
         </div>
       </Toolbar>
-      
     </>
   );
 };
