@@ -16,7 +16,6 @@ type Props = {
   styles: any;
   customStyle?: any;
   rounded_style?: any;
-
 };
 const Skill = ({
   heading,
@@ -55,7 +54,7 @@ const Skill = ({
           ></span>
           <div className={` ${rounded_style ? rounded_style : ""} `}>
             <h2 className={` ${styles?.skill_heading} `}>
-              {resumeSkillsIcon}
+              {!customStyle?.hideIcons && resumeSkillsIcon}
               <EditableField
                 value={heading ? heading : "Skills"}
                 style={{ width: "fit-content" }}

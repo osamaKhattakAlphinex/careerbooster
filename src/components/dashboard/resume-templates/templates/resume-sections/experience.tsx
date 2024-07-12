@@ -62,7 +62,7 @@ const Experience = ({
           customStyle?.centeredHeading ? "justify-center" : ""
         }  ${styles?.bgColor} `}
       >
-        {resumeWorkExpIcon}
+        {!customStyle?.hideIcons && resumeWorkExpIcon}
 
         <EditableField
           value={heading ? heading : "work experience"}
@@ -118,11 +118,13 @@ const Experience = ({
                       }}
                     />
                   </h2>
+
                   <h2 className={styles?.achievement_h2}>
                     {/* {rec?.fromMonth + " " + rec?.fromYear} -{" "}
                 {rec?.isContinue
                   ? "Present"
-                  : `${rec?.toMonth} ${rec?.toYear}`}{" "}
+                  : `${rec?.toMonth} 
+                ${rec?.toYear}`}{" "}
                 |{" "} */}
                     {rec.fromMonth && (
                       <EditableField
