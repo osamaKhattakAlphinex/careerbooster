@@ -22,6 +22,7 @@ import Contact from "./resume-sections/contact";
 import Header from "./resume-sections/header";
 import Skill from "./resume-sections/skills";
 import AddSection from "../../resume-builder/AddSection";
+import Experience_Resume_20 from "./resume-sections/experience_resume_20";
 // import CustomResumeSection from "../../resume-builder/CustomResumeSection";
 const ResumeTemplate8 = () => {
   const [newSectionEntry, setNewSectionEntry] = useState({
@@ -82,7 +83,7 @@ const ResumeTemplate8 = () => {
             customStyle={customStyle_20}
           />
           {/* Work Experience */}
-          <Experience
+          <Experience_Resume_20
             heading={resume.headings.workExperienceArray}
             workExperienceArray={resume.workExperienceArray}
             workExperience={resume.workExperience}
