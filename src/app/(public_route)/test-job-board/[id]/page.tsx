@@ -19,12 +19,12 @@ export default function ViewJobPage({ params }: { params: { id: string } }) {
   }, [params]);
   return (
     <>
-      <div className="flex flex-col gap-4 mx-10 rounded-md shadow-lg dark:border dark:border-gray-100 dark:bg-black bg-gray-100 mt-40 mb-10 p-10">
-        <h2 className="text-gray-950 dark:text-gray-100 font-extrabold text-2xl">
+      <div className="flex flex-col gap-4 md:mx-10 xs:mx-2 rounded-md shadow-lg dark:border dark:border-gray-100 dark:bg-black bg-gray-100 md:mt-40 xs:mt-20 mb-10 md:p-10 xs:p-4">
+        <h2 className="text-gray-950 dark:text-gray-100 font-extrabold text-2xl md:text-left xs:text-center">
           {singleJob?.jobTitle}
         </h2>
-        <div className="flex  w-full border-b-[1px] border-white pb-4">
-          <div className=" w-3/4 justify-between flex items-center gap-10 text-base ">
+        <div className="md:flex-row xs:flex-col flex md:text-left xs:text-center  w-full border-b-[1px] border-white pb-4">
+          <div className=" md:w-3/4 xs:w-full md:justify-between flex md:flex-row xs:flex-col md:items-center md:gap-10 xs:gap-2 text-base ">
             <div className="">
               Employer :{" "}
               <span className="font-medium"> {singleJob?.employer}</span>{" "}
@@ -36,7 +36,7 @@ export default function ViewJobPage({ params }: { params: { id: string } }) {
                 {getFormattedDate(singleJob?.updatedAt)}
               </span>
             </div>
-            <div className="flex items-center gap-2 ">
+            <div className="flex items-center gap-2 md:mx-0 xs:mx-auto ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -59,7 +59,7 @@ export default function ViewJobPage({ params }: { params: { id: string } }) {
               : <span className="font-medium">{singleJob?.location}</span>
             </div>
           </div>
-          <div className="w-1/4 flex justify-end ml-auto ">
+          <div className="md:w-1/4 xs:w-fit flex justify-end md:ml-auto xs:mt-4 md:mt-0 md:mx-0 xs:mx-auto">
             {singleJob?.link && (
               <Link
                 target="_blank"
@@ -72,12 +72,12 @@ export default function ViewJobPage({ params }: { params: { id: string } }) {
           </div>
         </div>
         <div
-          className="content  text-gray-950 dark:text-gray-100"
+          className="md:text-left xs:text-center  text-gray-950 dark:text-gray-100"
           dangerouslySetInnerHTML={{
             __html: singleJob?.jobDescription,
           }}
         ></div>
-        <div className="my-8 ">
+        <div className="my-8 xs:mx-auto md:mx-0">
           {singleJob?.link && (
             <Link
               target="_blank"
