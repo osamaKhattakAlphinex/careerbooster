@@ -11,7 +11,7 @@ const cvHeadings: any = [
       section: "summary",
       headingKey: "summary",
       styles:
-        "font-semibold border-b-2 border-gray-950/80 mt-2 flex flex-row justify-center items-center uppercase text-base text-gray-950/80 py-0.5",
+        "font-semibold border-b-2 bg-gray-200 border-gray-950/80 mt-2 flex flex-row justify-center items-center uppercase text-base text-gray-950/80 py-0.5",
       attributes: [{ "icon-color": "black" }],
     },
     {
@@ -20,14 +20,14 @@ const cvHeadings: any = [
       headingKey: "workExperienceArray",
       attributes: [{ "icon-color": "black" }],
       styles:
-        "font-semibold uppercase border-b-2 border-gray-950/80 mt-2 text-base flex flex-row justify-center items-center text-gray-950/80 py-0.5",
+        "font-semibold uppercase border-b-2 bg-gray-200 border-gray-950/80 mt-2 text-base flex flex-row justify-center items-center text-gray-950/80 py-0.5",
     },
     {
       text: "skills",
       section: "primarySkills",
       headingKey: "primarySkills",
       styles:
-        "font-semibold uppercase border-b-2 border-gray-950/80 mt-2 text-base flex flex-row items-center justify-center py-0.5 w-full text-gray-950/80 before:block",
+        "font-semibold uppercase border-b-2 bg-gray-200 border-gray-950/80 mt-2 text-base flex flex-row items-center justify-center py-0.5 w-full text-gray-950/80 before:block",
       attributes: [{ "icon-color": "black" }],
     },
     {
@@ -36,14 +36,14 @@ const cvHeadings: any = [
       headingKey: "education",
       attributes: [{ "icon-color": "black" }],
       styles:
-        "font-semibold border-b-2 border-gray-950/80 mt-2 w-full uppercase text-base flex flex-row justify-center items-center text-gray-950/80 py-0.5",
+        "font-semibold border-b-2 bg-gray-200 border-gray-950/80 mt-2 w-full uppercase text-base flex flex-row justify-center items-center text-gray-950/80 py-0.5",
     },
     {
       text: "certificates",
       section: "certifications",
       headingKey: "certifications",
       styles:
-        "font-semibold uppercase border-b-2 border-gray-950/80 mt-2 text-base flex flex-row justify-center items-center py-0.5 w-full text-gray-950/80 before:block",
+        "font-semibold uppercase border-b-2 bg-gray-200 border-gray-950/80 mt-2 text-base flex flex-row justify-center items-center py-0.5 w-full text-gray-950/80 before:block",
       attributes: [{ "icon-color": "black" }],
     },
     {
@@ -51,7 +51,7 @@ const cvHeadings: any = [
       section: "awards",
       headingKey: "awards",
       styles:
-        "font-semibold uppercase border-b-2 border-gray-950/80 mt-2 text-base flex flex-row justify-center items-center py-0.5 w-full text-gray-950/80 before:block",
+        "font-semibold uppercase border-b-2 bg-gray-200 border-gray-950/80 mt-2 text-base flex flex-row justify-center items-center py-0.5 w-full text-gray-950/80 before:block",
       attributes: [{ "icon-color": "black" }],
     },
     {
@@ -59,7 +59,7 @@ const cvHeadings: any = [
       section: "publications",
       headingKey: "publications",
       styles:
-        "font-semibold uppercase border-b-2 border-gray-950/80 mt-2 text-base flex flex-row justify-center items-center py-0.5 w-full text-gray-950/80 before:block",
+        "font-semibold uppercase border-b-2 bg-gray-200 border-gray-950/80 mt-2 text-base flex flex-row justify-center items-center py-0.5 w-full text-gray-950/80 before:block",
       attributes: [{ "icon-color": "black" }],
     },
     {
@@ -75,7 +75,7 @@ const cvHeadings: any = [
       section: "references",
       headingKey: "references",
       styles:
-        "font-semibold uppercase border-b-2 border-gray-950/80 mt-2 text-base flex flex-row justify-center items-center py-0.5 w-full text-gray-950/80 before:block",
+        "font-semibold uppercase border-b-2 bg-gray-200 border-gray-950/80 mt-2 text-base flex flex-row justify-center items-center py-0.5 w-full text-gray-950/80 before:block",
       attributes: [{ "icon-color": "black" }],
     },
     {
@@ -83,7 +83,7 @@ const cvHeadings: any = [
       section: "interests",
       headingKey: "interests",
       styles:
-        "font-semibold uppercase border-b-2 border-gray-950/80 mt-2 text-base flex flex-row justify-center items-center py-0.5 w-full text-gray-950/80 before:block",
+        "font-semibold uppercase border-b-2 bg-gray-200 border-gray-950/80 mt-2 text-base flex flex-row justify-center items-center py-0.5 w-full text-gray-950/80 before:block",
       attributes: [{ "icon-color": "black" }],
     },
     {
@@ -91,7 +91,7 @@ const cvHeadings: any = [
       section: "trainings",
       headingKey: "trainings",
       styles:
-        "font-semibold uppercase border-b-2 border-gray-950/80 mt-2 text-base flex flex-row justify-center items-center py-0.5 w-full text-gray-950/80 before:block",
+        "font-semibold uppercase border-b-2 bg-gray-200 border-gray-950/80 mt-2 text-base flex flex-row justify-center items-center py-0.5 w-full text-gray-950/80 before:block",
       attributes: [{ "icon-color": "black" }],
     },
     {
@@ -99,7 +99,7 @@ const cvHeadings: any = [
       section: "projects",
       headingKey: "projects",
       styles:
-        "font-semibold uppercase border-b-2 border-gray-950/80 mt-2 text-base flex flex-row justify-center items-center py-0.5 w-full text-gray-950/80 before:block",
+        "font-semibold uppercase border-b-2 bg-gray-200 border-gray-950/80 mt-2 text-base flex flex-row justify-center items-center py-0.5 w-full text-gray-950/80 before:block",
       attributes: [{ "icon-color": "black" }],
     },
   ];
@@ -125,7 +125,7 @@ const cvHeadings: any = [
       },
       contact: {
         styles:
-          "flex flex-row flex-wrap text-base w-[98%] justify-between px-6 items-center m-2 py-1 gap-4",
+          "flex flex-row flex-wrap text-base w-[98%] justify-between px-6 items-center m-2 py-1 pb-2 gap-4",
         elements: [
           {
             id: "phone",
@@ -353,7 +353,7 @@ const cvHeadings: any = [
       elements: [
         {
           tag: "div",
-          styles: "bg-gray-200 flex flex-col w-[30%] p-4 rounded-md",
+          styles: "flex flex-col w-[30%] p-4 rounded-md",
           container: [
             {
               id: "educationLevel",
