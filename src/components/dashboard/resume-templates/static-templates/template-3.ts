@@ -1,4 +1,3 @@
-import { Tangerine } from "next/font/google";
 
 const cvHeadings: any = [
   {

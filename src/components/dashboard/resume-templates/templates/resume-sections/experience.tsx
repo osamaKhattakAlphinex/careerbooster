@@ -10,7 +10,7 @@ import useSingleJDGenerate from "@/hooks/useSingleJDGenerate";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 
 type Props = {
-  heading: any;
+  heading: string;
   workExperienceArray: any;
   workExperience: any;
   styles: any;
@@ -160,7 +160,7 @@ const Experience = ({
                         }}
                       />
                     )}
-                    {rec.toMonth && <span>&nbsp;</span>}
+                    {/* {rec.toMonth && <span>&nbsp;</span>} */}
                     {rec.toYear && !rec.isContinue && (
                       <EditableField
                         value={`${rec?.toYear}`}
