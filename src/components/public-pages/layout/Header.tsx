@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import "@/app/(private_route)/dashboard.css";
 import ThemeChanger from "@/components/common/themeSwitcher";
-import { Fade, Slide } from "react-awesome-reveal";
+import { Slide } from "react-awesome-reveal";
 import { usePathname } from "next/navigation";
 import { RootState } from "@/store/store";
 
