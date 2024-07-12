@@ -16,7 +16,7 @@ type Props = {
 };
 const Education = ({ heading, educations, styles, customStyle }: Props) => {
   const [confirmationModal, setConfirmationModal] = useState(false);
-  const [deleteIndex,setDeleteIndex] =  useState(-1)
+  const [deleteIndex, setDeleteIndex] = useState(-1);
   const { handlers } = useHandler();
   const { updateSaveHook } = useUpdateAndSave();
 
@@ -32,7 +32,7 @@ const Education = ({ heading, educations, styles, customStyle }: Props) => {
           customStyle?.centeredHeading ? "justify-center" : ""
         } ${styles?.bgColor}`}
       >
-        {resumeEductionIcon}
+        {!customStyle?.hideIcons && resumeEductionIcon}
 
         <EditableField
           value={heading ? heading : "education"}
@@ -75,8 +75,8 @@ const Education = ({ heading, educations, styles, customStyle }: Props) => {
               </li>
               <div
                 onClick={() => {
-                  setConfirmationModal(true)
-                  setDeleteIndex(i)
+                  setConfirmationModal(true);
+                  setDeleteIndex(i);
                 }}
                 className={`${styles?.education_delete}`}
               >
