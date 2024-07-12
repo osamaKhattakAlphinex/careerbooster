@@ -23,20 +23,20 @@ export default function ViewJobPage({ params }: { params: { id: string } }) {
         <h2 className="text-gray-950 dark:text-gray-100 font-extrabold text-2xl">
           {singleJob?.jobTitle}
         </h2>
-        <div className="flex w-full border-b-[1px] border-white pb-4">
-          <div className=" w-3/4 flex items-center gap-10 text-base ">
-            <div className="w-[60%]">
+        <div className="flex  w-full border-b-[1px] border-white pb-4">
+          <div className=" w-3/4 justify-between flex items-center gap-10 text-base ">
+            <div className="">
               Employer :{" "}
               <span className="font-medium"> {singleJob?.employer}</span>{" "}
             </div>
-            <div className="w-[30%]">
+            <div className="">
               Date Posted :{" "}
               <span className="font-medium">
                 {" "}
                 {getFormattedDate(singleJob?.updatedAt)}
               </span>
             </div>
-            <div className="flex items-center gap-2 w-[25%]">
+            <div className="flex items-center gap-2 ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
