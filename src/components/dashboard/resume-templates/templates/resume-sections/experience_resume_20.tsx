@@ -35,8 +35,7 @@ const Experience_Resume_20 = ({
   const [insideIndex, setInsideIndex] = useState<number>(0);
 
   const { handlers } = useHandler();
-  const { handleDropPrimary, handleDropAchievement, handleDropExperience } =
-    useDragAndDrop();
+  const { handleDropAchievement, handleDropExperience } = useDragAndDrop();
 
   const { getOneWorkExperienceNew } = useSingleJDGenerate(setStreamedJDData);
 
