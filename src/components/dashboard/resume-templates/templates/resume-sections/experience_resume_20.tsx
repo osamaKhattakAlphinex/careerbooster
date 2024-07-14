@@ -107,7 +107,7 @@ const Experience_Resume_20 = ({
                   draggable
                 >
                   <div className="flex w-full justify-between items-center">
-                    <div className="w-[80%]">
+                    <div>
                       <h2 className={`${styles?.achievement_h1} !mt-0`}>
                         <EditableField
                           value={rec?.title}
@@ -133,7 +133,7 @@ const Experience_Resume_20 = ({
                       </span>
                     </div>
 
-                    <h2 className="w-[20%] text-right flex flex-col text-base">
+                    <h2 className="text-right flex flex-col text-base">
                       <div className="flex gap-1 text-xs font-semibold leading-relaxed hover:cursor-default">
                         <span className="hover:shadow-md hover:bg-gray-100">
                           <EditableField
