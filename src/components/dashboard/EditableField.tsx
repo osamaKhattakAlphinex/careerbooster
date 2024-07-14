@@ -103,7 +103,7 @@ const EditableField = ({
             </a> */}
             <span
               ref={spanRef}
-              className={`w-fit xs:block md:block hover:cursor-text `}
+              className={`w-fit xs:block md:block hover:cursor-text hover:shadow-md hover:bg-gray-100`}
               title="Click to Edit"
               style={{ textAlign: text }}
             >
