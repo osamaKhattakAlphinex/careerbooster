@@ -1099,7 +1099,7 @@ export const template_20_styles = {
   conatact_heading:
     "flex flex-row items-center gap-2 mb-2 -mr-6 text-base font-semibold uppercase border-2 border-transparent md:-mr-6 md:mt-4 hover:border-dashed hover:border-gray-500 hover:w-full",
   contact_ul:
-    "flex justify-between w-full gap-3 pl-0 mt-8 mb-4 text-xs break-all mb-6",
+    "flex xs:flex-col md:flex-row justify-between w-full gap-3 pl-0 mt-8 mb-4 text-xs break-all mb-6",
   contact_li:
     "flex flex-row items-start justify-start gap-1 hover:shadow-md hover:bg-gray-100",
   skill_heading:

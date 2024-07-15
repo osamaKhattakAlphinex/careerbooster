@@ -60,12 +60,13 @@ export const ALL_TEMPLATES: Template[] = [
   {
     id: 4,
     title: "",
-    active: false,
+    active: true,
     tags: ["classic-executive"],
     category: "premium",
-    preview: "/assets/images/templates/resume-5.png",
-    template: (props) => <ResumeTemplate5 {...props} />,
+    preview: "/assets/images/templates/resume-20.png",
+    template: (props) => <ResumeTemplate20 {...props} />,
   },
+  
   {
     id: 5,
     active: true,
@@ -195,10 +196,10 @@ export const ALL_TEMPLATES: Template[] = [
   {
     id: 19,
     title: "",
-    active: true,
+    active: false,
     tags: ["classic-executive"],
     category: "premium",
-    preview: "/assets/images/templates/resume-20.png",
-    template: (props) => <ResumeTemplate20 {...props} />,
+    preview: "/assets/images/templates/resume-5.png",
+    template: (props) => <ResumeTemplate5 {...props} />,
   },
 ];
