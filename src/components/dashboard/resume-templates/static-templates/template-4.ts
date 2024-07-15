@@ -67,7 +67,7 @@ const cvHeadings: any = [
     section: "languages",
     headingKey: "languages",
     styles:
-      "font-semibold uppercase border-b-2 border-gray-950/80 mt-2 text-base flex flex-row justify-center items-center py-0.5 w-full text-gray-950/80 before:block",
+      "font-semibold uppercase border-b-2 bg-gray-200 border-gray-950/80 mt-2 text-base flex flex-row justify-center items-center py-0.5 w-full text-gray-950/80 before:block",
     attributes: [{ "icon-color": "black" }],
   },
   {
