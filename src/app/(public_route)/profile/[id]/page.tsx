@@ -11,7 +11,7 @@ const Page = ({ params }: { params: { id: string } }) => {
   const [active, setActive] = useState("eduaction-card");
 
   const userDetails = useSelector((state: RootState) => state.userData);
-  console.log(userDetails);
+
   const [userData, setUserData] = useState(userDetails);
   useEffect(() => {
     if (params.id && !userDetails._id && userDetails._id !== params.id) {
@@ -25,6 +25,7 @@ const Page = ({ params }: { params: { id: string } }) => {
       });
     }
   }, [params]);
+  console.log(userData);
   return (
     <div className=" flex flex-col mt-52 px-20">
       {/* {hero-section} */}
@@ -33,7 +34,7 @@ const Page = ({ params }: { params: { id: string } }) => {
           <h2 className="text-[28px]">
             HEY, I AM{" "}
             <span className="text-[#E0E360]">
-              {userDetails.firstName + " " + userDetails.lastName}
+              {userData.firstName + " " + userData.lastName}
             </span>
           </h2>
           <h1 className="text-[36px] font-bold text-[#BE4A86]">
@@ -41,24 +42,24 @@ const Page = ({ params }: { params: { id: string } }) => {
           </h1>
           {/* <ul className="flex flex-col gap-3 ">
             <li>
-              {userDetails.contact?.country +
+              {userData.contact?.country +
                 " , " +
-                userDetails.contact?.cityState}
+                userData.contact?.cityState}
             </li>
-            <li>{userDetails.email}</li>
+            <li>{userData.email}</li>
             <li>
-              <Link className="underline" href={`${userDetails.linkedin}`}>
-                {userDetails.linkedin}
+              <Link className="underline" href={`${userData.linkedin}`}>
+                {userData.linkedin}
               </Link>
             </li>
-            <li>{userDetails.phone}</li>
+            <li>{userData.phone}</li>
           </ul> */}
         </div>
         <div className="w-1/2  ">
-          {userDetails.profileImage ? (
+          {userData.profileImage ? (
             <Image
               className="rounded-[200px] mx-auto"
-              src={`${userDetails?.profileImage}`}
+              src={`${userData?.profileImage}`}
               width={300}
               height={300}
               alt="profile-image"
@@ -78,8 +79,8 @@ const Page = ({ params }: { params: { id: string } }) => {
       <div className="flex w-full flex-col py-16">
         <h1 className="text-[36px] font-bold text-center mb-6">Skills</h1>
         <div className="flex flex-row items-center flex-wrap gap-3 w-[75%] mx-auto text-center justify-center">
-          {userDetails.skills
-            ? userDetails.skills.map((skill: any) => {
+          {userData.skills
+            ? userData.skills.map((skill: any) => {
                 return (
                   <>
                     <span className=" rounded-xl text-[18px]  w-fit py-3 px-5 bg-gray-400 text-gray-900">
@@ -134,7 +135,7 @@ const Page = ({ params }: { params: { id: string } }) => {
             id="education-card "
             className="mt-8 rounded-md shadow-2xl p-10 w-1/2 bg-gray-900"
           >
-            {userDetails.experience?.map((experience) => {
+            {userData.experience?.map((experience) => {
               return (
                 <>
                   <li className="mb-6 flex gap-4 ">
@@ -198,7 +199,7 @@ const Page = ({ params }: { params: { id: string } }) => {
             id="education-card "
             className="mt-8 rounded-md shadow-2xl p-10 w-1/2 bg-gray-900"
           >
-            {userDetails.education?.map((education) => {
+            {userData.education?.map((education) => {
               return (
                 <>
                   <li className="mb-4 flex gap-4 ">
