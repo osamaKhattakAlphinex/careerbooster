@@ -97,11 +97,7 @@ const Experience_Resume_20 = ({
                 // }}
               >
                 <div
-<<<<<<< HEAD
-                  className={`${styles.achievement_div} flex flex-col`}
-=======
                   className={styles?.achievement_div}
->>>>>>> 9c11283e682ecf0f822fda17ee47f7adf29766de
                   onDragStart={(e) =>
                     e.dataTransfer.setData("text/plain", i.toString())
                   }
