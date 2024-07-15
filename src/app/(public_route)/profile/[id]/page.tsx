@@ -1,11 +1,9 @@
 "use client";
-import Button from "@/components/Button";
 import { RootState } from "@/store/store";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-// import Button from "./Button";
 
 const Page = ({ params }: { params: { id: string } }) => {
   const [active, setActive] = useState("education-card");
@@ -35,13 +33,13 @@ const Page = ({ params }: { params: { id: string } }) => {
               {userData?.firstName + " " + userData?.lastName}
             </span>
           </h2>
-          <Image
+          {/* <Image
             className="rounded-[200px] mx-auto xs:block md:hidden"
             src={`${userData?.profileImage}`}
             width={200}
             height={200}
             alt="profile-image"
-          />
+          /> */}
           <h1 className="md:text-[36px] xs:text-[30px] font-bold text-[#BE4A86]">
             {userData?.experience?.[0]?.jobTitle}
           </h1>
@@ -108,7 +106,7 @@ const Page = ({ params }: { params: { id: string } }) => {
               onClick={() => {
                 setActive("education-card");
               }}
-              className={`inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 ${
+              className={`inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 ${
                 active === "education-card"
                   ? "text-blue-600 border-b-2 border-blue-600"
                   : ""
@@ -165,10 +163,10 @@ const Page = ({ params }: { params: { id: string } }) => {
                         <span> {experience.fromYear}</span> -
                         <span
                           className={`${
-                            experience.isContinue ? "inline" : "hidden"
+                            experience.isContinue ? "" : "hidden"
                           }`}
                         >
-                          Present
+                          &nbsp;Present
                         </span>
                         <span> {experience.toMonth}</span>
                         <span> {experience.toYear}</span>
@@ -234,10 +232,20 @@ const Page = ({ params }: { params: { id: string } }) => {
                           " In " +
                           education.fieldOfStudy}
                       </h2>
-
-                      <h3 className="text-[20px]">
-                        {education.fromYear + "-" + education.toYear}
+                      <h3 className="text-[18px] font-medium">
+                        <span>{education.fromMonth}</span>
+                        <span> {education.fromYear}</span> -
+                        <span
+                          className={`${
+                            education.isContinue ? "" : "hidden"
+                          }`}
+                        >
+                          &nbsp;Present
+                        </span>
+                        <span> {education.toMonth}</span>
+                        <span> {education.toYear}</span>
                       </h3>
+                      
                       <p></p>
                     </div>
                   </li>
