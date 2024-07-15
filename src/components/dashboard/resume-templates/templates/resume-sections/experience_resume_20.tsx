@@ -98,7 +98,7 @@ const Experience_Resume_20 = ({
                 // }}
               >
                 <div
-                  className={`flex flex-col`}
+                  className={`${styles.achievement_div} flex flex-col`}
                   onDragStart={(e) =>
                     e.dataTransfer.setData("text/plain", i.toString())
                   }
@@ -159,7 +159,9 @@ const Experience_Resume_20 = ({
                           />
                         </span>
                       </div>
-                      <div className="flex  gap-1 text-xs font-semibold leading-relaxed hover:cursor-default">
+                      <div
+                        className={`flex  gap-1 text-xs font-semibold leading-relaxed hover:cursor-default ${styles?.achievement_h2}`}
+                      >
                         {rec.fromMonth && (
                           <EditableField
                             value={`${rec?.fromMonth}`}
