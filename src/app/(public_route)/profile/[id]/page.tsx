@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 
-const page = ({ params }: { params: { id: string } }) => {
+const Page = ({ params }: { params: { id: string } }) => {
     const [userData, setUserData] = useState({});
   useEffect(() => {
     if (params.id) {
@@ -20,4 +20,4 @@ const page = ({ params }: { params: { id: string } }) => {
   )
 }
 
-export default page
+export default Page
