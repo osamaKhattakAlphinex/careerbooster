@@ -15,7 +15,6 @@ import FileUploadHandler from "@/components/dashboard/FileUploadHandler";
 import { makeid } from "@/helpers/makeid";
 import WordFileHandler from "@/components/dashboard/WordFileHandler";
 
-
 const RegistrationForm = () => {
   const router = useRouter();
   const params = useSearchParams();
@@ -31,7 +30,8 @@ const RegistrationForm = () => {
   const isAuth = status === "authenticated";
 
   const content = params?.get("content");
-
+  const getProfile = params?.get("profile");
+  
   // Redux
 
   const formik = useFormik({
@@ -101,7 +101,11 @@ const RegistrationForm = () => {
               setSubmitting(false);
               return setSubmittingError(res.error);
             }
-            router.replace("/dashboard");
+            if(getProfile === "true"){
+              router.replace("/dashboard?goToProfile=true");
+            } else {
+              router.replace("/dashboard");
+            }
           })
           .catch(function (error) {
             if (error.response.data.error) {
@@ -167,7 +171,7 @@ const RegistrationForm = () => {
           "Content-Type": "application/json",
         },
       })
-        .then(async (resp: any) => {
+        .then(async (resp) => {
           const res = await resp.json();
           if (res.success) {
             let userData;
@@ -298,7 +302,7 @@ const RegistrationForm = () => {
             <div className={`mb-5`}>
               {!params?.get("file") && (
                 <>
-                  {!isAuth && data === null && !content ? (
+                  {!isAuth && data === null && content !== "true" ? (
                     <label className="flex justify-center md:my-6 ">
                       <input
                         className="hidden"
@@ -662,6 +666,8 @@ const RegistrationForm = () => {
                   <span className="flex items-center justify-center">
                     {refreshIconRotating}
                   </span>
+                ) : getProfile === "true" ? (
+                  "Make My Profile"
                 ) : (
                   "Create an account"
                 )}

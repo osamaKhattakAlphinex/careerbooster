@@ -35,7 +35,7 @@ export default function JobBoard({
         locationQuery={locationQuery}
         aiResumeKeywords={aiResumeKeywords}
       />
-      {aiResumeSuggestions.length > 0 && (
+      {(aiResumeSuggestions && aiResumeSuggestions.length > 0) && (
         <SuggestionCard aiResumeSuggestions={aiResumeSuggestions} />
       )}
     </main>
