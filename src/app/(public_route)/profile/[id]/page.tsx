@@ -155,16 +155,14 @@ const Page = ({ params }: { params: { id: string } }) => {
                         {experience.jobTitle}
                       </h1>
                       <h2 className="text-[18px] font-medium ">
-                        {experience.company + " In " + experience.cityState}
+                        {experience.company + ", " + experience.cityState}
                       </h2>
 
                       <h3 className="text-[18px] font-medium">
                         <span>{experience.fromMonth}</span>
                         <span> {experience.fromYear}</span> -
                         <span
-                          className={`${
-                            experience.isContinue ? "" : "hidden"
-                          }`}
+                          className={`${experience.isContinue ? "" : "hidden"}`}
                         >
                           &nbsp;Present
                         </span>
@@ -223,30 +221,26 @@ const Page = ({ params }: { params: { id: string } }) => {
                     </div>
                     <div className="flex flex-col gap-2">
                       <h1 className="text-[28px] font-medium">
-                        {education.schoolName +
-                          " , " +
-                          education.schoolLocation}{" "}
-                      </h1>
-                      <h2 className="text-[24px] font-medium">
                         {education.educationLevel +
                           " In " +
                           education.fieldOfStudy}
+                      </h1>
+                      <h2 className="text-[18px] font-medium">
+                        {education.schoolName +
+                          ", " +
+                          education.schoolLocation}{" "}
                       </h2>
                       <h3 className="text-[18px] font-medium">
                         <span>{education.fromMonth}</span>
                         <span> {education.fromYear}</span> -
                         <span
-                          className={`${
-                            education.isContinue ? "" : "hidden"
-                          }`}
+                          className={`${education.isContinue ? "" : "hidden"}`}
                         >
                           &nbsp;Present
                         </span>
                         <span> {education.toMonth}</span>
                         <span> {education.toYear}</span>
                       </h3>
-                      
-                      <p></p>
                     </div>
                   </li>
                 </>
