@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 // import Button from "./Button";
 
 const Page = ({ params }: { params: { id: string } }) => {
-  const [active, setActive] = useState("eduaction-card");
+  const [active, setActive] = useState("education-card");
   const userDetails = useSelector((state: RootState) => state.userData);
   const [userData, setUserData] = useState(userDetails);
 
@@ -25,17 +25,24 @@ const Page = ({ params }: { params: { id: string } }) => {
     }
   }, [params]);
   return (
-    <div className=" flex flex-col mt-52 px-20">
+    <div className=" flex flex-col xs:mt-[90px] lg:mt-52 md:mt-28 md:px-20 xs:px-4 xs:text-center md:text-left">
       {/* {hero-section} */}
-      <div className="flex w-full justify-between items-center ">
-        <div className="flex flex-col gap-3 w-1/2">
-          <h2 className="text-[28px]">
+      <div className="flex md:flex-row xs:flex-col w-full justify-between items-center ">
+        <div className="flex flex-col gap-3 xs:w-full md:w-1/2">
+          <h2 className="md:text-[28px] xs:text-[24px]">
             HEY, I AM{" "}
             <span className="text-[#E0E360]">
               {userData?.firstName + " " + userData?.lastName}
             </span>
           </h2>
-          <h1 className="text-[36px] font-bold text-[#BE4A86]">
+          <Image
+            className="rounded-[200px] mx-auto xs:block md:hidden"
+            src={`${userData?.profileImage}`}
+            width={200}
+            height={200}
+            alt="profile-image"
+          />
+          <h1 className="md:text-[36px] xs:text-[30px] font-bold text-[#BE4A86]">
             {userData?.experience?.[0]?.jobTitle}
           </h1>
           {/* <ul className="flex flex-col gap-3 ">
@@ -53,7 +60,7 @@ const Page = ({ params }: { params: { id: string } }) => {
             <li>{userData.phone}</li>
           </ul> */}
         </div>
-        <div className="w-1/2  ">
+        <div className="w-1/2 xs:hidden md:block ">
           {userData.profileImage ? (
             <Image
               className="rounded-[200px] mx-auto"
@@ -74,14 +81,16 @@ const Page = ({ params }: { params: { id: string } }) => {
         </div>
       </div>
       {/* skills-section */}
-      <div className="flex w-full flex-col py-16">
-        <h1 className="text-[36px] font-bold text-center mb-6">Skills</h1>
-        <div className="flex flex-row items-center flex-wrap gap-3 w-[75%] mx-auto text-center justify-center">
+      <div className="flex w-full flex-col md:py-16 xs:py-6">
+        <h1 className="md:text-[36px] xs:text-[30px] font-bold text-center mb-6">
+          Skills
+        </h1>
+        <div className="flex flex-row items-center flex-wrap gap-3 md:w-[75%] xs:w-full mx-auto text-center justify-center">
           {userData?.skills
             ? userData?.skills.map((skill: string) => {
                 return (
                   <>
-                    <span className=" rounded-xl text-[18px] capitalize w-fit py-3 px-5 bg-gray-400 text-gray-900">
+                    <span className=" rounded-xl xs:text-[16px] md:text-[18px] capitalize w-fit md:py-3 md:px-5 xs:p-2 bg-gray-400 text-gray-900">
                       {skill}
                     </span>
                   </>
@@ -92,9 +101,9 @@ const Page = ({ params }: { params: { id: string } }) => {
       </div>
       {/* Education and Experience tabs */}
 
-      <div className="text-[26px] font-medium text-center text-gray-500 border border-gray-200 dark:text-gray-400 dark:border-gray-700 w-[80%] mx-auto my-10 rounded-lg">
+      <div className="md:text-[26px] xs:text-[22px] font-medium text-center text-gray-500 border border-gray-200 dark:text-gray-400 dark:border-gray-700 md:w-[80%] mx-auto my-10 rounded-lg xs:w-full">
         <ul className="flex  w-full justify-between  -mb-px">
-          <li className="me-2 w-1/2 ml-auto">
+          <li className="me-2 md:w-1/2  md:ml-auto">
             <button
               onClick={() => {
                 setActive("education-card");
@@ -108,7 +117,7 @@ const Page = ({ params }: { params: { id: string } }) => {
               Experience
             </button>
           </li>
-          <li className="me-2 w-1/2">
+          <li className="me-2 md:w-1/2 ">
             <button
               onClick={() => {
                 setActive("experience-card");
@@ -131,13 +140,13 @@ const Page = ({ params }: { params: { id: string } }) => {
         <div className={` w-full flex`}>
           <ul
             id="education-card "
-            className="mt-8 rounded-md shadow-2xl p-10 w-1/2 bg-gray-900"
+            className="mt-8 rounded-md shadow-2xl p-10 lg:w-1/2 xs:w-full bg-gray-900"
           >
             {userData?.experience?.map((experience) => {
               return (
                 <>
                   <li className="mb-6 flex gap-4 ">
-                    <div className="relative flex flex-col items-center mt-[10px]">
+                    <div className="relative md:flex md:flex-col items-center mt-[10px] xs:hidden">
                       <div className="absolute w-[2px] bg-[#E0E360] h-[115%]"></div>
                       <div className="flex items-center justify-center w-4 h-4 bg-[#E0E360] rounded-full">
                         <span className="text-white"></span>
@@ -153,7 +162,14 @@ const Page = ({ params }: { params: { id: string } }) => {
 
                       <h3 className="text-[18px] font-medium">
                         <span>{experience.fromMonth}</span>
-                        <span> {experience.fromYear}</span> -<span></span>
+                        <span> {experience.fromYear}</span> -
+                        <span
+                          className={`${
+                            experience.isContinue ? "inline" : "hidden"
+                          }`}
+                        >
+                          Present
+                        </span>
                         <span> {experience.toMonth}</span>
                         <span> {experience.toYear}</span>
                       </h3>
@@ -165,7 +181,7 @@ const Page = ({ params }: { params: { id: string } }) => {
             })}
           </ul>
           <div
-            className="w-1/2 m-auto
+            className="w-1/2 m-auto xs:hidden lg:block
       "
           >
             <Image
@@ -182,7 +198,7 @@ const Page = ({ params }: { params: { id: string } }) => {
       {active === "experience-card" && (
         <div className={` w-full flex`}>
           <div
-            className="w-1/2 m-auto
+            className="w-1/2 m-auto xs:hidden lg:block
       "
           >
             <Image
@@ -195,13 +211,13 @@ const Page = ({ params }: { params: { id: string } }) => {
           </div>
           <ul
             id="education-card "
-            className="mt-8 rounded-md shadow-2xl p-10 w-1/2 bg-gray-900"
+            className="mt-8 rounded-md shadow-2xl p-10 xs:w-full lg:w-1/2 bg-gray-900"
           >
             {userData?.education?.map((education) => {
               return (
                 <>
                   <li className="mb-4 flex gap-4 ">
-                    <div className="relative flex flex-col items-center mt-[10px]">
+                    <div className="relative md:flex md:flex-col items-center mt-[10px] xs:hidden">
                       <div className="absolute w-[2px] bg-[#E0E360] h-[115%]"></div>
                       <div className="flex items-center justify-center w-4 h-4 bg-[#E0E360] rounded-full">
                         <span className="text-white"></span>
