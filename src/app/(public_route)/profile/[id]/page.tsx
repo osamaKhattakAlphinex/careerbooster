@@ -1,8 +1,8 @@
-"use client"
-import React, { useEffect, useState } from 'react'
+"use client";
+import React, { useEffect, useState } from "react";
 
 const Page = ({ params }: { params: { id: string } }) => {
-    const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState({});
   useEffect(() => {
     if (params.id) {
       fetch(`/api/users/${params.id}`, {
@@ -15,9 +15,7 @@ const Page = ({ params }: { params: { id: string } }) => {
       });
     }
   }, [params]);
-  return (
-    <div>page</div>
-  )
-}
+  return <div>page</div>;
+};
 
-export default Page
+export default Page;
