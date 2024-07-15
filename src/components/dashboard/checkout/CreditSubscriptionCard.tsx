@@ -78,8 +78,10 @@ const CreditSubscriptionCard: React.FC<Props> = ({
           }
         } catch (error) {
           setCouponError("Error getting coupon");
-          setShowPaypalPopup(true);
+          setShowPaypalPopup(false);
         }
+      } else {
+        setShowPaypalPopup(true);
       }
     }
   };
@@ -259,8 +261,8 @@ const CreditSubscriptionCard: React.FC<Props> = ({
               )}
               {/* invalid coupon error */}
 
-              <a
-                href="#"
+              <button
+                // href="#"
                 onClick={(e) => {
                   e.preventDefault(); // Prevent default anchor behavior
                   handleClick(); // Call handleAnchorClick function
@@ -272,7 +274,7 @@ const CreditSubscriptionCard: React.FC<Props> = ({
                   : creditPackage.amount === 0
                   ? "Select Plan"
                   : "Select Plan"}
-              </a>
+              </button>
             </>
           )}
 

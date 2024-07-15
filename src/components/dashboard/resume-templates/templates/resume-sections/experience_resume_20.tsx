@@ -35,8 +35,7 @@ const Experience_Resume_20 = ({
   const [insideIndex, setInsideIndex] = useState<number>(0);
 
   const { handlers } = useHandler();
-  const { handleDropPrimary, handleDropAchievement, handleDropExperience } =
-    useDragAndDrop();
+  const { handleDropAchievement, handleDropExperience } = useDragAndDrop();
 
   const { getOneWorkExperienceNew } = useSingleJDGenerate(setStreamedJDData);
 
@@ -98,7 +97,11 @@ const Experience_Resume_20 = ({
                 // }}
               >
                 <div
+<<<<<<< HEAD
                   className={`${styles.achievement_div} flex flex-col`}
+=======
+                  className={styles?.achievement_div}
+>>>>>>> 9c11283e682ecf0f822fda17ee47f7adf29766de
                   onDragStart={(e) =>
                     e.dataTransfer.setData("text/plain", i.toString())
                   }
@@ -107,8 +110,8 @@ const Experience_Resume_20 = ({
                   draggable
                 >
                   <div className="flex w-full justify-between items-center">
-                    <div className="w-[80%]">
-                      <h2 className={`${styles?.achievement_h1} `}>
+                    <div>
+                      <h2 className={`${styles?.achievement_h1} !mt-0`}>
                         <EditableField
                           value={rec?.title}
                           style={{ width: "100%" }}
@@ -133,8 +136,8 @@ const Experience_Resume_20 = ({
                       </span>
                     </div>
 
-                    <h2 className="w-[20%] text-right flex flex-col text-base">
-                      <div className="flex  gap-1 text-xs font-semibold leading-relaxed hover:cursor-default">
+                    <h2 className="text-right flex flex-col text-base">
+                      <div className="flex gap-1 text-xs font-semibold leading-relaxed hover:cursor-default">
                         <span className="hover:shadow-md hover:bg-gray-100">
                           <EditableField
                             value={rec?.cityState}
