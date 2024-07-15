@@ -5,6 +5,34 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
 const ObjectId = require("mongodb").ObjectId;
 
+export const GET = async (
+  req: NextRequest,
+  { params }: { params: { userId: string } }
+) => {
+  try {
+    await startDB();
+    const user = await User.findById(params.userId);
+    if (!user) {
+      return NextResponse.json({
+        success: false,
+        message: "User not found",
+      },{
+        status: 404,
+      });
+    }
+    return NextResponse.json({
+      success: true,
+      user,
+    });
+  } catch (error) {
+    return NextResponse.json({
+      success: false,
+    },{
+      status: 500,
+    });
+  }
+}
+
 export const PUT = async (
   req: NextRequest,
   { params }: { params: { userId: string } }
