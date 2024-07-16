@@ -39,7 +39,7 @@ const Page = ({ params }: { params: { id: string } }) => {
   }, [params]);
 
   const downloadPdf = async () => {
-    const fileName = "test.pdf";
+    const fileName = `${userData.firstName}.pdf`;
     const blob = await pdf(<ProfileResume userData={userData} />).toBlob();
     saveAs(blob, fileName);
   };
@@ -75,7 +75,7 @@ const Page = ({ params }: { params: { id: string } }) => {
                 className="rounded-full w-fit px-4 py-2 text-[18px] mt-2 bg-blue-500 text-gray-100"
                 onClick={downloadPdf}
               >
-                Download My Profile
+                Download Profile
               </button>
 
               {/* <ul className="flex flex-col gap-3 ">
