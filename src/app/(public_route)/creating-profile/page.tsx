@@ -2,7 +2,6 @@
 import PageHeader from "@/components/PageHeader";
 // import { RootState } from "@/store/store";
 // import Link from "next/link";
-// import React from "react";
 // import { useSelector } from "react-redux";
 
 const Page = () => {
