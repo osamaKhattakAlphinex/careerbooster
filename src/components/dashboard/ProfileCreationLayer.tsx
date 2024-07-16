@@ -1162,7 +1162,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
                 router.push("/dashboard");
               }
             }
-            // dispatch(setField({ name: "userPackageData", value: userPackage }));
             // TODO!!! Add new user subsription to db
             // TODO!! invalidate session on stripe
           });
