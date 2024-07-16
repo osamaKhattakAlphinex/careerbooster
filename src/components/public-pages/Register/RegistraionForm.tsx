@@ -102,7 +102,7 @@ const RegistrationForm = () => {
               return setSubmittingError(res.error);
             }
             if(getProfile === "true"){
-              router.replace("/profile?goToProfile=true");
+              router.replace("/creating-profile?goToProfile=true");
             } else {
               router.replace("/dashboard");
             }
