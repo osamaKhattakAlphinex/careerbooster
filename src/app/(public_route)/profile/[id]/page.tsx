@@ -10,9 +10,15 @@ const Page = ({ params }: { params: { id: string } }) => {
   const userDetails = useSelector((state: RootState) => state.userData);
   const [userData, setUserData] = useState(userDetails);
   const [userFetched, setUserFetched] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    if (userDetails._id) {
+      setUserData(userDetails);
+      setUserFetched(true);
+    }
     if (params.id && !userDetails._id && userDetails._id !== params.id) {
+      setLoading(true);
       fetch(`/api/users/${params.id}`, {
         method: "GET",
       })
@@ -23,7 +29,10 @@ const Page = ({ params }: { params: { id: string } }) => {
             setUserData(res.user);
           }
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.log(error))
+        .finally(() => {
+          setLoading(false);
+        });
     }
   }, [params]);
   return (
@@ -262,9 +271,15 @@ const Page = ({ params }: { params: { id: string } }) => {
         </>
       ) : (
         <div className="flex justify-center gap-8 xs:px-2 md:px-0 mt-16 pb-16">
-          <span className=" text-[#6a4dff] dark:text-[#e6f85e]">
-            User doesn't exist
-          </span>
+          {loading ? (
+            <span className="animate-blink text-[#6a4dff] dark:text-[#e6f85e]">
+              Loading ...
+            </span>
+          ) : (
+            <span className=" text-[#6a4dff] dark:text-[#e6f85e]">
+              User doesn{"'"}t exist
+            </span>
+          )}
         </div>
       )}
     </div>
