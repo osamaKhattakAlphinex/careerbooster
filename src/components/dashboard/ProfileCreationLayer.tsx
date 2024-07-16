@@ -1152,8 +1152,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
                   ...userData,
                   creditPackage: obj.creditPackage,
                   userCredits: obj.userCredits,
-                  // userPackageExpirationDate: obj.userPackageExpirationDate,
-                  // userPackageUsed: obj.userPackageUsed,
                 })
               );
               if(goToProfile === "true") {
