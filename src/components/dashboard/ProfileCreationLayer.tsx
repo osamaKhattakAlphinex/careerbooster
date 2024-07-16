@@ -31,7 +31,6 @@ import VirtualBot from "./VirtualBot";
 import { getPackageID } from "@/ServerActions";
 import { setUserData } from "@/store/userDataSlice";
 import { RootState } from "@/store/store";
-import { useAppContext } from "@/context/AppContext";
 
 interface Props {
   children: React.ReactNode;
@@ -592,7 +591,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
                     position: item?.position,
                     company: item?.company,
                     contactInformation: item?.contactInformation,
-                  
                   };
                 });
 
@@ -658,7 +656,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
                     id: makeid(),
                     title: item?.title,
                     description: item?.description,
-                                     
                   };
                 });
 
@@ -1154,9 +1151,9 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
                   userCredits: obj.userCredits,
                 })
               );
-              if(goToProfile === "true") {
-                router.push(`/profile/${userData._id}`)
-              }else{
+              if (goToProfile === "true") {
+                router.replace(`/profile/${userData._id}`);
+              } else {
                 router.push("/dashboard");
               }
             }
