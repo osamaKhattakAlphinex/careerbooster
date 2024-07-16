@@ -158,7 +158,9 @@ const Experience_Resume_20 = ({
                           />
                         </span>
                       </div>
-                      <div className="flex  gap-1 text-xs font-semibold leading-relaxed hover:cursor-default">
+                      <div
+                        className={`flex  gap-1 text-xs font-semibold leading-relaxed hover:cursor-default ${styles?.achievement_h2}`}
+                      >
                         {rec.fromMonth && (
                           <EditableField
                             value={`${rec?.fromMonth}`}
