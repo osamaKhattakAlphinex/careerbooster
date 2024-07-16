@@ -43,7 +43,7 @@ const AppContextsProvider: React.FC<AppContextsProvider> = ({ children }) => {
     abortController,
     setAbortController,
     outOfCredits,
-    setOutOfCredits,
+    setOutOfCredits
   };
 
   return (
@@ -54,7 +54,7 @@ const AppContextsProvider: React.FC<AppContextsProvider> = ({ children }) => {
 };
 
 // Create a custom hook to access the context values
-const useAppContext: any = () => {
+const useAppContext = () => {
   const context = useContext(AppContext);
   if (!context) {
     throw new Error("useAppContext must be used within a TourContextProvider");

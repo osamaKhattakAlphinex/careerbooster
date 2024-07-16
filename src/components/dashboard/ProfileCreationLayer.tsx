@@ -25,12 +25,13 @@ import {
   setStepTwo,
 } from "@/store/registerSlice";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { usePathname } from "next/navigation";
 import VirtualBot from "./VirtualBot";
 import { getPackageID } from "@/ServerActions";
 import { setUserData } from "@/store/userDataSlice";
 import { RootState } from "@/store/store";
+import { useAppContext } from "@/context/AppContext";
 
 interface Props {
   children: React.ReactNode;
@@ -40,12 +41,13 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   const pathname = usePathname();
   // Redux
   const router = useRouter();
+  const params = useSearchParams();
   const userData = useSelector((state: RootState) => state.userData);
   const dispatch = useDispatch();
   const register = useSelector((state: RootState) => state.register);
   const resume = useSelector((state: RootState) => state.resume);
   const [showStuckError, setShowStuckError] = useState(false);
-
+  const goToProfile = params?.get("goToProfile");
   // useeffect to show stuck error to true after 2 minutes
   useEffect(() => {
     const t = setTimeout(() => {
@@ -1143,21 +1145,21 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
           .post("/api/users/updateUserData", {
             data: obj,
           })
-          .then(async (resp: any) => {
+          .then(async (resp) => {
             if (resp.data.success) {
               dispatch(
                 setUserData({
                   ...userData,
                   creditPackage: obj.creditPackage,
                   userCredits: obj.userCredits,
-                  // userPackageExpirationDate: obj.userPackageExpirationDate,
-                  // userPackageUsed: obj.userPackageUsed,
                 })
               );
-
-              router.push("/dashboard");
+              if(goToProfile === "true") {
+                router.push(`/profile/${userData._id}`)
+              }else{
+                router.push("/dashboard");
+              }
             }
-            // dispatch(setField({ name: "userPackageData", value: userPackage }));
             // TODO!!! Add new user subsription to db
             // TODO!! invalidate session on stripe
           });
