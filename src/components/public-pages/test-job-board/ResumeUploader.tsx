@@ -11,18 +11,18 @@ import { RootState } from "@/store/store";
 
 const ResumeUploader = ({ setAiResumeKeywords, setAiResumeSuggestions }) => {
   const [file, setFile] = useState<any>(null);
-  const userData = useSelector((state: RootState) => state.userData)
+  const userData = useSelector((state: RootState) => state.userData);
   const [fileError, setFileError] = useState<string>("");
   const [fileUploading, setFileUploading] = useState<boolean>(false);
   const [uploadComplete, setUploadComplete] = useState<boolean>(false);
   const [registerationData, setRegisterationData] = useState<boolean>(false);
   const [uploadCompleteText, setUploadCompleteText] = useState<string>("");
-  const [text, setText] = useState<string>("MUHAMMAD USAMA BUTT  +923415233592   ⋄   Rawalpindi, Pakistan buttusamarwp@gmail.com   ⋄   GitHub   ⋄   Portfolio   ⋄   LinkedIn  SUMMARY  I am a skilled and motivated individual with extensive experience in developing web applications using the MERN stack, with a strong focus on React and NextJs. I have a track record of delivering high-quality solutions that meet user needs and expectations. I am experienced in working in agile development environments and collaborating with cross-functional teams to ensure timely project delivery.  SKILLS Technical Skills   JavaScript, React, NextJS, Redux, TypeScript, Node.js, MongoDB, Express.js, HTML5, CSS, Tailwind CSS, Material UI, Git, OpenAI  Tools   JIRA, Asana, Trello, GitHub, VS Code  EXPERIENCE Sr. Software Engineer (MERN)   November 2023 - Present CareerBooster.AI, Islamabad - Link to Site  •   Proficiently used Next.js framework for both frontend and backend development, showcasing expertise in creating dynamic and immersive user interfaces.  •   Skilled in integrating backend systems with OpenAI’s APIs, including deploying voice models and leveraging assistant functionalities, enhancing user experiences.  •   Specialized in building rich frontend experiences and seamlessly integrating AI capabilities into projects.  Full Stack Developer   July 2023 - October 2023 Horizon Tech Services Pvt. Ltd., Islamabad  •   Utilized React and Vue.js, popular JavaScript frameworks, to create dynamic and interactive user interfaces for web applications.  •   Leveraged data visualization tools to analyze and present complex data sets on frontend web applications, providing valuable insights and aiding in data-driven decision-making processes.  Web Developer   February 2022 - March 2023 Techlancers.Inc, Rawalpindi  •   Developed and maintained custom websites and web applications for clients using modern web technologies, with a strong emphasis on React and NextJS.  •   Maintained clear and consistent communication with clients throughout the project lifecycle, used Git for version control, and worked in agile development environments using tools like JIRA, Asana, and Trello to manage projects and tasks.  •   Delivered high-quality, tested, and well-documented code that IS easy to maintain and scale, using best practices.  Frontend Developer   March 2021 - January 2022 OneSolTech , Rawalpindi  •   Designed and implemented responsive user interfaces that provide an optimal user experience on a variety of devices and screen sizes.  •   Collaborated with clients to define project requirements and goals, providing guidance and expertise to help ensure the success of their projects. INTERNSHIPS Full Stack Developer Intern   July 2022 - September 2022 Sayabi Devs, Remote  •   Collaborated with a team of developers to build a full-stack website on the MERN stack for a course provider platform, ensuring seamless functionality and user experience.  •   Worked on various assigned tasks from the employer, such as implementing user authentication and creating dynamic content pages.  PROJECTS Whimcarnator - An AI-based Sketch to Real Image Generator   October 2022 - May 2023  •   Whimcarnator allows users to draw or upload a sketch on the provided canvas, which then generates different variations of that sketch into respective photorealistic images.  •   The web application is built using NextJS/ReactJS, while the machine learning backend uses GAN/Stable Dif- fusion based on the research paper titled ”Pretraining is All You Need”.  EDUCATION BE in Software Engineering , NUST, Islamabad   2019 - 2023 CGPA: 3.59/4.00  HOBBIES  Cricket, Music, Travelling, Fitness");
+  const [text, setText] = useState<string>("");
   const router = useRouter();
   const fetchRegistrationDataFromResume = async () => {
-    setRegisterationData(true);  
-    if(userData._id){
-      router.push(`/profile/${userData._id}`)
+    setRegisterationData(true);
+    if (userData._id) {
+      router.push(`/profile/${userData._id}`);
       return;
     }
     if (text) {
@@ -172,8 +172,6 @@ const ResumeUploader = ({ setAiResumeKeywords, setAiResumeSuggestions }) => {
           >
             <p className="m-0">{uploadCompleteText}</p>
           </div>
-        </>
-      )}
           <div className="my-2 flex justify-center">
             <button
               className=" py-2 lg:py-2.5 mb-4 flex gap-2 items-center lg:px-[40px]  px-[28px] cursor-pointer  rounded-xl bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 from-purple-700 to-pink-500"
@@ -193,6 +191,8 @@ const ResumeUploader = ({ setAiResumeKeywords, setAiResumeSuggestions }) => {
               )}
             </button>
           </div>
+        </>
+      )}
       {fileUploading && <JobBoardBot />}
     </>
   );
