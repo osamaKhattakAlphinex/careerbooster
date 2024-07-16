@@ -1,5 +1,7 @@
 "use client";
+import ProfileResume from "@/components/public-pages/ProfileResume";
 import { RootState } from "@/store/store";
+import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -37,6 +39,13 @@ const Page = ({ params }: { params: { id: string } }) => {
   }, [params]);
   return (
     <div className=" flex flex-col xs:mt-[90px] lg:mt-52 md:mt-28 md:px-20 xs:px-4 xs:text-center md:text-left">
+      <PDFViewer width="100%" height="600">
+        <ProfileResume />
+      </PDFViewer>
+      <PDFDownloadLink document={<ProfileResume />} fileName="my-document.pdf">
+        {({ loading }) => (loading ? "Loading document..." : "Download now!")}
+      </PDFDownloadLink>
+
       {/* {hero-section} */}
       {userFetched ? (
         <>
@@ -114,7 +123,7 @@ const Page = ({ params }: { params: { id: string } }) => {
           </div>
           {/* Education and Experience tabs */}
 
-          <div className="md:text-[26px] xs:text-[22px] font-medium text-center text-gray-500 border border-gray-200 dark:text-gray-400 dark:border-gray-700 md:w-[80%] mx-auto my-10 rounded-lg xs:w-full">
+          <div className="md:text-[26px] xs:text-[22px] font-medium text-center text-gray-500 border border-gray-200 dark:text-gray-400 dark:border-gray-700 md:w-[80%] mx-auto md:my-10 xs:mb-10 rounded-lg xs:w-full">
             <ul className="flex  w-full justify-between  -mb-px">
               <li className="me-2 md:w-1/2  md:ml-auto">
                 <button
@@ -153,7 +162,7 @@ const Page = ({ params }: { params: { id: string } }) => {
             <div className={` w-full flex`}>
               <ul
                 id="education-card "
-                className="mt-8 rounded-md shadow-2xl p-10 lg:w-1/2 xs:w-full bg-gray-900"
+                className="md:mt-8 rounded-md shadow-2xl md:p-10 xs:p-4 lg:w-1/2 xs:w-full bg-gray-900"
               >
                 {userData?.experience?.map((experience) => {
                   return (
@@ -166,14 +175,14 @@ const Page = ({ params }: { params: { id: string } }) => {
                           </div>
                         </div>
                         <div className="flex flex-col gap-2">
-                          <h1 className="text-[28px] font-medium">
+                          <h1 className="md:text-[28px] xs:text-[22px] font-medium">
                             {experience.jobTitle}
                           </h1>
-                          <h2 className="text-[18px] font-medium ">
+                          <h2 className="md:text-[18px] xs:text-[15px]  font-medium ">
                             {experience.company + ", " + experience.cityState}
                           </h2>
 
-                          <h3 className="text-[18px] font-medium">
+                          <h3 className="md:text-[18px] xs:text-[15px] font-medium">
                             <span>{experience.fromMonth}</span>
                             <span> {experience.fromYear}</span> -
                             <span
@@ -186,7 +195,9 @@ const Page = ({ params }: { params: { id: string } }) => {
                             <span> {experience.toMonth}</span>
                             <span> {experience.toYear}</span>
                           </h3>
-                          <p>{experience.description}</p>
+                          <p className="md:text-[16px] xs:text-[14px]">
+                            {experience.description}
+                          </p>
                         </div>
                       </li>
                     </>
@@ -224,7 +235,7 @@ const Page = ({ params }: { params: { id: string } }) => {
               </div>
               <ul
                 id="education-card "
-                className="mt-8 rounded-md shadow-2xl p-10 xs:w-full lg:w-1/2 bg-gray-900"
+                className="md:mt-8 rounded-md shadow-2xl md:p-10 xs:p-4 xs:w-full lg:w-1/2 bg-gray-900"
               >
                 {userData?.education?.map((education) => {
                   return (
@@ -237,17 +248,17 @@ const Page = ({ params }: { params: { id: string } }) => {
                           </div>
                         </div>
                         <div className="flex flex-col gap-2">
-                          <h1 className="text-[28px] font-medium">
+                          <h1 className="md:text-[28px] xs:text-[22px] font-medium">
                             {education.educationLevel +
                               " In " +
                               education.fieldOfStudy}
                           </h1>
-                          <h2 className="text-[18px] font-medium">
+                          <h2 className="md:text-[18px] xs:text-[15px] font-medium">
                             {education.schoolName +
                               ", " +
                               education.schoolLocation}{" "}
                           </h2>
-                          <h3 className="text-[18px] font-medium">
+                          <h3 className="md:text-[18px] xs:text-[15px] font-medium">
                             <span>{education.fromMonth}</span>
                             <span> {education.fromYear}</span> -
                             <span
