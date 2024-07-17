@@ -62,7 +62,7 @@ const Page = ({ params }: { params: { id: string } }) => {
             <div className="flex flex-col gap-3 xs:w-full md:w-1/2">
               <h2 className="md:text-[28px] xs:text-[24px]">
                 HEY, I AM{" "}
-                <span className="text-[#E0E360]">
+                <span className="text-[#6a4dff] dark:text-[#e6f85e]">
                   {userData?.firstName + " " + userData?.lastName}
                 </span>
               </h2>

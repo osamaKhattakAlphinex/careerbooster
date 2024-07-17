@@ -112,7 +112,7 @@ const Footer = () => {
                         target="_blank"
                       >
                         <svg
-                          className="text-[#000] dark:text-gray-300 w-4 h-4 "
+                          className="text-[#000] dark:text-gray-300 w-4 h-4 hover:text-[#6a4dff] dark:hover:text-[#e6f85e]"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 18 18"
@@ -141,7 +141,7 @@ const Footer = () => {
                       >
                         <svg
                           className=" 
-                          text-[#000] dark:text-gray-300 w-3.5 h-3.5 border border-black dark:border-gray-100  p-0.5 rounded "
+                          text-[#000] dark:text-gray-300 w-3.5 h-3.5 border border-black dark:border-gray-100  p-0.5 rounded hover:text-[#6a4dff] dark:hover:text-[#e6f85e] "
                           aria-hidden="true"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="currentColor"
@@ -162,7 +162,7 @@ const Footer = () => {
                         target="_blank"
                       >
                         <svg
-                          className="text-[#000] dark:text-gray-300 w-4 h-4"
+                          className="text-[#000] dark:text-gray-300 w-4 h-4 hover:text-[#6a4dff] dark:hover:text-[#e6f85e]"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 18 18"
