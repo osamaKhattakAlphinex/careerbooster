@@ -24,25 +24,7 @@ import ProfileImageModal from "../ProfileImageModal";
 import AvailableCredits from "../AvailableCredits";
 import { useTourContext } from "@/context/TourContext";
 
-const items = [
-  { icon: homeIcon, text: "My Dashboard", url: "/dashboard" },
-  { icon: clipboard, text: "My Resumes", url: "/resume-builder" },
-  {
-    icon: coverLetterSidebarIcon,
-    text: "Cover Letters",
-    url: "/cover-letter-generator",
-  },
-  { icon: userGroup, text: "LinkedIn Optimizer", url: "/linkedin-optimizer" },
-  {
-    icon: emailBotSidebarIcon,
-    text: "Email Assistant",
-    url: "/email-assistant",
-  },
-  { icon: dollarIcon, text: "Billing Details", url: "/billing" },
-  // { icon: bid, text: "Consulting Bot", url: "/consulting-bids-bot" },
-  { icon: userCircle, text: "Profile Settings ", url: "/profile-review" },
-  { icon: powerIcon, text: "Sign Out", url: "/dashboard" },
-];
+
 const pagesArray = ["/subscribe", "/subscribed"];
 const SideBar = () => {
   const pathname: any = usePathname();
@@ -53,7 +35,25 @@ const SideBar = () => {
   const imageRef = useRef<any>();
   const [image, setImage] = useState<any>(null);
   const { availableCreditsRef } = useTourContext();
-
+  const items = [
+    { icon: homeIcon, text: "My Dashboard", url: "/dashboard" },
+    { icon: clipboard, text: "My Resumes", url: "/resume-builder" },
+    {
+      icon: coverLetterSidebarIcon,
+      text: "Cover Letters",
+      url: "/cover-letter-generator",
+    },
+    { icon: userGroup, text: "LinkedIn Optimizer", url: "/linkedin-optimizer" },
+    {
+      icon: emailBotSidebarIcon,
+      text: "Email Assistant",
+      url: "/email-assistant",
+    },
+    { icon: dollarIcon, text: "Billing Details", url: "/billing" },
+    // { icon: bid, text: "Consulting Bot", url: "/consulting-bids-bot" },
+    { icon: userCircle, text: "Profile", url: `/profile/${userData._id}` },
+    { icon: powerIcon, text: "Sign Out", url: "/dashboard" },
+  ];
   const imageCroperRef = useRef<any>();
 
   if (pagesArray?.includes(pathname)) return <></>;

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ducanh2912/next-pwa": "^10.2.7",
+    "@react-pdf/renderer": "^3.4.4",
     "@reduxjs/toolkit": "^1.9.5",
     "@sparticuz/chromium-min": "^123.0.1",
     "@stripe/stripe-js": "^2.1.6",
@@ -27,6 +28,7 @@
     "cryptr": "^6.3.0",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.12",
+    "file-saver": "^2.0.5",
     "formik": "^2.4.6",
     "js-tiktoken": "^1.0.10",
     "jsonwebtoken": "^9.0.2",

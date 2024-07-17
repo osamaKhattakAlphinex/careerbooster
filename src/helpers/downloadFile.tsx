@@ -1,5 +1,5 @@
 "use client";
-import { useColorContext } from "@/context/ResumeColorContext";
+// import { useColorContext } from "@/context/ResumeColorContext";
 import { useRef, useState } from "react";
 
 const DownloadService = ({
@@ -12,7 +12,7 @@ const DownloadService = ({
 }:
 any) => {
   const docRef = useRef<HTMLAnchorElement | null>(null);
-  const { color } = useColorContext();
+  // const { color } = useColorContext();
   let htmlToDoc: string;
   const [loading, setLoading] = useState<boolean>(false);
 
