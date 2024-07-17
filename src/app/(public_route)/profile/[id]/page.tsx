@@ -1,20 +1,28 @@
 "use client";
 import ProfileResume from "@/components/public-pages/ProfileResume";
 import { RootState } from "@/store/store";
-import { pdf, PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
+import { pdf } from "@react-pdf/renderer";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { saveAs } from "file-saver";
+import { linkedInIconFilled } from "@/helpers/iconsProvider";
 const Page = ({ params }: { params: { id: string } }) => {
   const [active, setActive] = useState("education-card");
+  const profileRef = useRef<HTMLDivElement | null>(null);
   const userDetails = useSelector((state: RootState) => state.userData);
   const [userData, setUserData] = useState(userDetails);
   const [userFetched, setUserFetched] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    if (userDetails._id) {
+      setUserData(userDetails);
+      setUserFetched(true);
+    }
     if (params.id && !userDetails._id && userDetails._id !== params.id) {
+      setLoading(true);
       fetch(`/api/users/${params.id}`, {
         method: "GET",
       })
@@ -25,21 +33,27 @@ const Page = ({ params }: { params: { id: string } }) => {
             setUserData(res.user);
           }
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.log(error))
+        .finally(() => {
+          setLoading(false);
+        });
     }
   }, [params]);
 
   const downloadPdf = async () => {
-    const fileName = "test.pdf";
+    const fileName = `${userData.firstName}.pdf`;
     const blob = await pdf(<ProfileResume userData={userData} />).toBlob();
     saveAs(blob, fileName);
   };
 
   return (
     <div className=" flex flex-col xs:mt-[90px] lg:mt-52 md:mt-28 md:px-20 xs:px-4 xs:text-center md:text-left">
-      {/* <PDFViewer width="100%" height="600">
-        <ProfileResume userData={userData} />
-      </PDFViewer> */}
+      {/* <div
+        ref={profileRef}
+        className="xs:hidden bg-white flex flex-col items-center justify-center p-8"
+      >
+        <ProfileResume />
+      </div> */}
 
       {/* {hero-section} */}
       {userFetched ? (
@@ -48,41 +62,34 @@ const Page = ({ params }: { params: { id: string } }) => {
             <div className="flex flex-col gap-3 xs:w-full md:w-1/2">
               <h2 className="md:text-[28px] xs:text-[24px]">
                 HEY, I AM{" "}
+<<<<<<< HEAD
                 <span className="dark:text-[#E0E360] text-blue-400">
+=======
+                <span className="text-[#6a4dff] dark:text-[#e6f85e]">
+>>>>>>> c8530979f3c61bc922bc992527d9ffc39168c14c
                   {userData?.firstName + " " + userData?.lastName}
                 </span>
               </h2>
-              {/* <Image
-            className="rounded-[200px] mx-auto xs:block md:hidden"
-            src={`${userData?.profileImage}`}
-            width={200}
-            height={200}
-            alt="profile-image"
-          /> */}
+             
               <h1 className="md:text-[36px] xs:text-[30px] font-bold text-[#BE4A86]">
                 {userData?.experience?.[0]?.jobTitle}
               </h1>
+
+              <ul className="flex items-center gap-3 ">
+                <li>{userData.email}</li>
+                <li>
+                  <Link className="underline" href={`${userData.linkedin}`}>
+                    {linkedInIconFilled}
+                  </Link>
+                </li>
+                {/* <li>{userData.phone}</li> */}
+              </ul>
               <button
                 className="rounded-full w-fit px-4 py-2 text-[18px] dark:hover:bg-transparent dark:hover:border dark:hover:border-[#E0E360] dark:hover:text-gray-100 hover:bg-transparent hover:border hover:border-blue-400 hover:text-gray-900 mt-2 dark:text-gray-900  dark:bg-[#E0E360] bg-blue-500 text-gray-100"
                 onClick={downloadPdf}
               >
-                Download My Profile
+                Download Profile
               </button>
-
-              {/* <ul className="flex flex-col gap-3 ">
-            <li>
-              {userData.contact?.country +
-                " , " +
-                userData.contact?.cityState}
-            </li>
-            <li>{userData.email}</li>
-            <li>
-              <Link className="underline" href={`${userData.linkedin}`}>
-                {userData.linkedin}
-              </Link>
-            </li>
-            <li>{userData.phone}</li>
-          </ul> */}
             </div>
             <div className="w-1/2 xs:hidden md:block ">
               {userData.profileImage ? (
@@ -284,9 +291,15 @@ const Page = ({ params }: { params: { id: string } }) => {
         </>
       ) : (
         <div className="flex justify-center gap-8 xs:px-2 md:px-0 mt-16 pb-16">
-          <span className=" text-[#6a4dff] dark:text-[#e6f85e]">
-            User doesn't exist
-          </span>
+          {loading ? (
+            <span className="animate-blink text-[#6a4dff] dark:text-[#e6f85e]">
+              Loading ...
+            </span>
+          ) : (
+            <span className=" text-[#6a4dff] dark:text-[#e6f85e]">
+              User doesn{"'"}t exist
+            </span>
+          )}
         </div>
       )}
     </div>

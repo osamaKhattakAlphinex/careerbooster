@@ -11,7 +11,6 @@ import ReactPDF, {
 // Create styles
 const styles = StyleSheet.create({
   page: {
-    // fontFamily: ,
     fontSize: 12,
     padding: 20,
     backgroundColor: "#f4f4f4",
@@ -75,7 +74,10 @@ const styles = StyleSheet.create({
 });
 
 function ProfileResume({ userData }) {
+<<<<<<< HEAD
   //   console.log(userData);
+=======
+>>>>>>> c8530979f3c61bc922bc992527d9ffc39168c14c
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -87,13 +89,12 @@ function ProfileResume({ userData }) {
 
           <Text style={styles.ul}>
             <Text style={styles.li}>
-              contact: <Text>{userData.phone}</Text> |
+              <Text>{userData.phone}</Text> |&nbsp;
             </Text>
             <Text style={styles.li}>
-              Email: <Text> {userData.email}</Text> |
+              <Text> {userData.email}</Text> |&nbsp;
             </Text>
             <Text style={styles.li}>
-              Address:{" "}
               <Text>
                 {userData.contact.cityState +
                   " " +
@@ -103,33 +104,19 @@ function ProfileResume({ userData }) {
                   " " +
                   userData.contact.country}
               </Text>{" "}
-              |
+              |&nbsp;
             </Text>
             <Text style={styles.li}>
-              LinkedIn: <Text>{userData.linkedin}</Text>{" "}
+              <Text>{userData.linkedin}</Text>{" "}
             </Text>
           </Text>
         </View>
-        {/* <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Executive Summary</Text>
-          <Text>
-            Energetic and dedicated React/Next.js Developer with expertise in
-            creating robust web interfaces and maintaining reusable code at
-            CareerBooster.ae. Skilled in front-end development, HTML, CSS, and
-            Bootstrap, while also proficient in SEO, with a deep understanding
-            of optimization strategies and techniques. Worked closely with
-            developers, designers, and clients to ensure high-quality technical
-            results that align with client goals and user experience. Interests
-            lie in web development and the highly scalable application of my
-            technical expertise and versatile skill set towards achieving
-            outstanding results in web development and design.
-          </Text>
-        </View> */}
+
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Skills</Text>
           <View style={styles.skillSection}>
-            {userData.skills.map((skill) => {
-              return <Text>• {skill}</Text>;
+            {userData.skills.map((skill, index) => {
+              return <Text key={index}>• {skill}</Text>;
             })}
           </View>
         </View>
@@ -177,7 +164,6 @@ function ProfileResume({ userData }) {
                     <Text> {education.toMonth}</Text>
                     <Text> {education.toYear}</Text>
                   </Text>
-                  {/* <Text style={styles.expDesc}>{education.description}</Text> */}
                 </>
               );
             })}
