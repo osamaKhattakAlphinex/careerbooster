@@ -5,7 +5,7 @@ import "../../templateStyles.css";
 import DownloadService from "@/helpers/downloadFile";
 import { useSearchParams } from "next/navigation";
 import { getTemplates } from "@/components/dashboard/resume-templates/static-templates";
-import { formatDate } from "@/helpers/getFormattedDateTime";
+import { formatDate, getFormattedDate } from "@/helpers/getFormattedDateTime";
 import Link from "next/link";
 import { leftArrowIcon } from "@/helpers/iconsProvider";
 import { useReactToPrint } from "react-to-print";

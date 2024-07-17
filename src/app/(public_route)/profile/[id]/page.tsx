@@ -10,7 +10,7 @@ import { saveAs } from "file-saver";
 import { linkedInIconFilled } from "@/helpers/iconsProvider";
 const Page = ({ params }: { params: { id: string } }) => {
   const [active, setActive] = useState("education-card");
-  // const profileRef = useRef<HTMLDivElement | null>(null);
+  const profileRef = useRef<HTMLDivElement | null>(null);
   const userDetails = useSelector((state: RootState) => state.userData);
   const [userData, setUserData] = useState(userDetails);
   const [userFetched, setUserFetched] = useState<boolean>(false);
