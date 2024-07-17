@@ -74,6 +74,10 @@ const styles = StyleSheet.create({
 });
 
 function ProfileResume({ userData }) {
+<<<<<<< HEAD
+  //   console.log(userData);
+=======
+>>>>>>> c8530979f3c61bc922bc992527d9ffc39168c14c
   return (
     <Document>
       <Page size="A4" style={styles.page}>
