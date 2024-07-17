@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
 });
 
 function ProfileResume({ userData }) {
-  console.log(userData);
+  //   console.log(userData);
   return (
     <Document>
       <Page size="A4" style={styles.page}>

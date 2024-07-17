@@ -48,7 +48,7 @@ const Page = ({ params }: { params: { id: string } }) => {
             <div className="flex flex-col gap-3 xs:w-full md:w-1/2">
               <h2 className="md:text-[28px] xs:text-[24px]">
                 HEY, I AM{" "}
-                <span className="text-[#E0E360]">
+                <span className="dark:text-[#E0E360] text-blue-400">
                   {userData?.firstName + " " + userData?.lastName}
                 </span>
               </h2>
@@ -63,7 +63,7 @@ const Page = ({ params }: { params: { id: string } }) => {
                 {userData?.experience?.[0]?.jobTitle}
               </h1>
               <button
-                className="rounded-full w-fit px-4 py-2 text-[18px] mt-2 bg-blue-500 text-gray-100"
+                className="rounded-full w-fit px-4 py-2 text-[18px] dark:hover:bg-transparent dark:hover:border dark:hover:border-[#E0E360] dark:hover:text-gray-100 hover:bg-transparent hover:border hover:border-blue-400 hover:text-gray-900 mt-2 dark:text-gray-900  dark:bg-[#E0E360] bg-blue-500 text-gray-100"
                 onClick={downloadPdf}
               >
                 Download My Profile
@@ -114,7 +114,7 @@ const Page = ({ params }: { params: { id: string } }) => {
                 ? userData?.skills.map((skill: string) => {
                     return (
                       <>
-                        <span className=" rounded-xl xs:text-[16px] md:text-[18px] capitalize w-fit md:py-3 md:px-5 xs:p-2 bg-gray-400 text-gray-900">
+                        <span className=" rounded-xl xs:text-[16px] md:text-[18px] capitalize w-fit md:py-3 md:px-5 xs:p-2 dark:bg-gray-400 bg-gray-200 text-gray-900">
                           {skill}
                         </span>
                       </>
@@ -164,15 +164,15 @@ const Page = ({ params }: { params: { id: string } }) => {
             <div className={` w-full flex`}>
               <ul
                 id="education-card "
-                className="md:mt-8 rounded-md shadow-2xl md:p-10 xs:p-4 lg:w-1/2 xs:w-full bg-gray-900"
+                className="md:mt-8 rounded-md shadow-2xl md:p-10 xs:p-4 lg:w-1/2 xs:w-full dark:bg-gray-900 bg-gray-200"
               >
                 {userData?.experience?.map((experience) => {
                   return (
                     <>
                       <li className="mb-6 flex gap-4 ">
                         <div className="relative md:flex md:flex-col items-center mt-[10px] xs:hidden">
-                          <div className="absolute w-[2px] bg-[#E0E360] h-[115%]"></div>
-                          <div className="flex items-center justify-center w-4 h-4 bg-[#E0E360] rounded-full">
+                          <div className="absolute w-[2px] dark:bg-[#E0E360] bg-blue-400 h-[115%]"></div>
+                          <div className="flex items-center justify-center w-4 h-4 dark:bg-[#E0E360] bg-blue-400 rounded-full">
                             <span className="text-white"></span>
                           </div>
                         </div>
@@ -237,15 +237,15 @@ const Page = ({ params }: { params: { id: string } }) => {
               </div>
               <ul
                 id="education-card "
-                className="md:mt-8 rounded-md shadow-2xl md:p-10 xs:p-4 xs:w-full lg:w-1/2 bg-gray-900"
+                className="md:mt-8 rounded-md shadow-2xl md:p-10 xs:p-4 xs:w-full lg:w-1/2 dark:bg-gray-900 bg-gray-200"
               >
                 {userData?.education?.map((education) => {
                   return (
                     <>
                       <li className="mb-4 flex gap-4 ">
                         <div className="relative md:flex md:flex-col items-center mt-[10px] xs:hidden">
-                          <div className="absolute w-[2px] bg-[#E0E360] h-[115%]"></div>
-                          <div className="flex items-center justify-center w-4 h-4 bg-[#E0E360] rounded-full">
+                          <div className="absolute w-[2px] dark:bg-[#E0E360] bg-blue-400 h-[115%]"></div>
+                          <div className="flex items-center justify-center w-4 h-4 dark:bg-[#E0E360] bg-blue-400 rounded-full">
                             <span className="text-white"></span>
                           </div>
                         </div>
