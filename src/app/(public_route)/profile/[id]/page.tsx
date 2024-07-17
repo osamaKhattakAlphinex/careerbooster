@@ -1,14 +1,16 @@
 "use client";
 import ProfileResume from "@/components/public-pages/ProfileResume";
 import { RootState } from "@/store/store";
-import { pdf, PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
+import { pdf } from "@react-pdf/renderer";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { saveAs } from "file-saver";
+import { linkedInIconFilled } from "@/helpers/iconsProvider";
 const Page = ({ params }: { params: { id: string } }) => {
   const [active, setActive] = useState("education-card");
+  const profileRef = useRef<HTMLDivElement | null>(null);
   const userDetails = useSelector((state: RootState) => state.userData);
   const [userData, setUserData] = useState(userDetails);
   const [userFetched, setUserFetched] = useState<boolean>(false);
@@ -46,9 +48,12 @@ const Page = ({ params }: { params: { id: string } }) => {
 
   return (
     <div className=" flex flex-col xs:mt-[90px] lg:mt-52 md:mt-28 md:px-20 xs:px-4 xs:text-center md:text-left">
-      {/* <PDFViewer width="100%" height="600">
-        <ProfileResume userData={userData} />
-      </PDFViewer> */}
+      {/* <div
+        ref={profileRef}
+        className="xs:hidden bg-white flex flex-col items-center justify-center p-8"
+      >
+        <ProfileResume />
+      </div> */}
 
       {/* {hero-section} */}
       {userFetched ? (
@@ -61,37 +66,26 @@ const Page = ({ params }: { params: { id: string } }) => {
                   {userData?.firstName + " " + userData?.lastName}
                 </span>
               </h2>
-              {/* <Image
-            className="rounded-[200px] mx-auto xs:block md:hidden"
-            src={`${userData?.profileImage}`}
-            width={200}
-            height={200}
-            alt="profile-image"
-          /> */}
+             
               <h1 className="md:text-[36px] xs:text-[30px] font-bold text-[#BE4A86]">
                 {userData?.experience?.[0]?.jobTitle}
               </h1>
+
+              <ul className="flex items-center gap-3 ">
+                <li>{userData.email}</li>
+                <li>
+                  <Link className="underline" href={`${userData.linkedin}`}>
+                    {linkedInIconFilled}
+                  </Link>
+                </li>
+                {/* <li>{userData.phone}</li> */}
+              </ul>
               <button
                 className="rounded-full w-fit px-4 py-2 text-[18px] mt-2 bg-blue-500 text-gray-100"
                 onClick={downloadPdf}
               >
                 Download Profile
               </button>
-
-              {/* <ul className="flex flex-col gap-3 ">
-            <li>
-              {userData.contact?.country +
-                " , " +
-                userData.contact?.cityState}
-            </li>
-            <li>{userData.email}</li>
-            <li>
-              <Link className="underline" href={`${userData.linkedin}`}>
-                {userData.linkedin}
-              </Link>
-            </li>
-            <li>{userData.phone}</li>
-          </ul> */}
             </div>
             <div className="w-1/2 xs:hidden md:block ">
               {userData.profileImage ? (
