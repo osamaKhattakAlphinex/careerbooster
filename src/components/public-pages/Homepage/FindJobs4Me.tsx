@@ -1,6 +1,5 @@
 import React from "react";
 import { Fjalla_One, Montserrat } from "next/font/google";
-import Link from "next/link";
 import HeroArea from "../FindJob4Me/HeroArea";
 import VideoSection from "../FindJob4Me/VideoSection";
 import HowWeDoIt from "../FindJob4Me/HowWeDoIt";

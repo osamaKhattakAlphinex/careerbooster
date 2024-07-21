@@ -52,7 +52,7 @@ function UniqueFeatures() {
   return (
     <div>
       {" "}
-      <h1 className="md:text-[36px] xs:text-[26px] font-semibold md:self-center xs:text-center xs:mt-4 md:mt-10">
+      <h1 className="md:text-[36px] xs:text-[26px] font-semibold md:self-center xs:text-center xs:mt-4 md:mt-10 text-[#6a4dff] dark:text-[#e6f85e]">
         Unique Features of Our AI-Powered Job Board
       </h1>
       <div className="flex md:flex-row xs:flex-col w-full gap-4 md::px-20 xs:px-2 flex-wrap">

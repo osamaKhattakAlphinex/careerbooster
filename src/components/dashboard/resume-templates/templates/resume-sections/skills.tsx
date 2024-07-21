@@ -11,8 +11,8 @@ import Loader from "@/components/common/Loader";
 import useUpdateAndSave from "@/hooks/useUpdateAndSave";
 
 type Props = {
-  heading: any;
-  skills: any;
+  heading: string;
+  skills: string[];
   styles: any;
   customStyle?: any;
   rounded_style?: any;
