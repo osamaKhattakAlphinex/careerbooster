@@ -17,7 +17,7 @@ export default function JobCard({
   aiResumeKeywords?: string[] | [];
 }) {
   const [loading, setLoading] = useState(false);
-  const [limitOfRecords, setLimitOfRecords] = useState(10);
+  const [limitOfRecords, setLimitOfRecords] = useState(20);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [records, setRecords] = useState<[] | any>([]);
   const [showTableLoader, setshowTableLoader] = useState(false);
@@ -111,12 +111,11 @@ export default function JobCard({
               onChange={handleChange}
               value={limitOfRecords}
             >
-              <option value={10}>10</option>
               <option value={20}>20</option>
-              <option value={30}>30</option>
-              <option value={40}>40</option>
-              <option value={100}>100</option>
-              <option value={500}>500</option>
+              <option value={30}>40</option>
+              <option value={40}>60</option>
+              <option value={100}>80</option>
+              <option value={500}>100</option>
             </select>
           </div>
           <div className="md:flex xs:hidden md:justify-end mt-4 ">
@@ -206,10 +205,10 @@ export default function JobCard({
           })
         : !loading && (
             <div className="text-gray-500 my-10 py-5 text-lg text-center mx-40">
-              We{"'"}re sorry, but we currently don{"'"}t have any job openings that
-              match your skill set. We value your time and strive to provide
-              only the most relevant job postings. Please check back again soon,
-              or try adjusting your search criteria.
+              We{"'"}re sorry, but we currently don{"'"}t have any job openings
+              that match your skill set. We value your time and strive to
+              provide only the most relevant job postings. Please check back
+              again soon, or try adjusting your search criteria.
             </div>
           )}
       {records.length > 0 && (

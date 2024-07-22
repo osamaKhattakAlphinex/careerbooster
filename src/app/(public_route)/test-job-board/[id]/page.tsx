@@ -1,10 +1,14 @@
 "use client";
 import { getFormattedDate } from "@/helpers/getFormattedDateTime";
+import { RootState } from "@/store/store";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function ViewJobPage({ params }: { params: { id: string } }) {
   const [singleJob, setSingleJob] = useState<any>();
+  const userData = useSelector((state: RootState) => state.userData);
+
   useEffect(() => {
     if (params.id) {
       fetch(`/api/deo/?findOne=${params.id}`, {
@@ -85,6 +89,15 @@ export default function ViewJobPage({ params }: { params: { id: string } }) {
               className=" text-base rounded-md px-4 py-2 border-2 dark:border-gray-100 !text-gray-950 dark:hover:!text-gray-100 bg-white hover:bg-transparent"
             >
               Apply now
+            </Link>
+          )}
+          {singleJob?.link && userData._id && (
+            <Link
+              target="_blank"
+              href={`/resume-builder?jobId=${params.id}`}
+              className=" text-base rounded-md px-4 py-2 border-2 dark:border-gray-100 !text-gray-950 dark:hover:!text-gray-100 bg-white hover:bg-transparent ml-4"
+            >
+              Create My Resume For This Job
             </Link>
           )}
         </div>

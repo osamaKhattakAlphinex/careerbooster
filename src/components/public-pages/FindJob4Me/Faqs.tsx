@@ -61,22 +61,23 @@ function Faqs() {
       >
         Frequently Asked Questions
       </h1>
-      {faqs.map((faq: { question: string; answer: string }) => {
+      {faqs.map((faq: { question: string; answer: string }, index) => {
         return (
-          <>
-            <div className="flex flex-col  xs:text-center md:text-left">
-              <h1
-                className={`${montserrat_r.className} !font-bold md:text-[34px] xs:text-[24px] mb-8`}
-              >
-                Q: {faq.question}
-              </h1>
-              <p
-                className={`${montserrat_r.className} !font-bold md:text-[23px] xs:text-[16px] mb-12`}
-              >
-                A: {faq.answer}
-              </p>
-            </div>
-          </>
+          <div
+            key={index}
+            className="flex flex-col xs:text-center md:text-left"
+          >
+            <h1
+              className={`${montserrat_r.className} !font-bold md:text-[34px] xs:text-[24px] mb-8`}
+            >
+              Q: {faq.question}
+            </h1>
+            <p
+              className={`${montserrat_r.className} !font-bold md:text-[23px] xs:text-[16px] mb-12`}
+            >
+              A: {faq.answer}
+            </p>
+          </div>
         );
       })}
     </div>

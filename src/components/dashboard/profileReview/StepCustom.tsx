@@ -149,7 +149,7 @@ const RecordCard = ({ rec, recName, deleteHandler }: any) => {
 
         {rec.description && (
           <span
-            className="text-xs lowercase text-white/40"
+            className="cursor-pointer text-xs lowercase text-white/40"
             onClick={() => setSeeMore(!seeMore)}
           >
             {seeMore ? "see less <<" : "see more >>"}
