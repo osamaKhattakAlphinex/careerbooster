@@ -10,12 +10,16 @@ import Link from "next/link";
 import { infoSmallIcon } from "@/helpers/iconsProvider";
 import { useTourContext } from "@/context/TourContext";
 import { RootState } from "@/store/store";
+import axios from "axios";
+import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 
 interface Props {
   // getConsent: () => void;
   handleGenerate: () => Promise<void>;
+  jobId?: any;
 }
-const GenerateResume = ({ handleGenerate }: Props) => {
+const GenerateResume = ({ handleGenerate, jobId }: Props) => {
+  const [singleJob, setSingleJob] = useState<any>();
   const radiosResumeType: { labelText: string; value: string }[] = [
     {
       labelText: "Generate Basic Resume",
@@ -34,7 +38,22 @@ const GenerateResume = ({ handleGenerate }: Props) => {
   const [showInstruction, setShowInstruction] = useState<boolean>(false);
   const [resumeType, setResumeType] = useState<
     "resume-basic" | "resume-job-title" | "resume-job-description"
-  >("resume-basic");
+  >(jobId ? "resume-job-description" : "resume-basic");
+  useEffect(() => {
+    if (jobId) {
+      setResumeType("resume-job-description");
+      axios
+        .get(`/api/deo/?findOne=${jobId}`)
+        .then((resp) => {
+          setSingleJob(resp.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [jobId]);
+
+  
   const { data: session } = useSession();
   const dispatch = useDispatch();
   const state = useSelector((state: RootState) => state.resume.state);
@@ -42,9 +61,10 @@ const GenerateResume = ({ handleGenerate }: Props) => {
   const { resumeElementRef } = useTourContext();
 
   useEffect(() => {
-    setResumeType(memoizedState.resumeType);
-  }, [memoizedState]);
-
+    if (!jobId) {
+      setResumeType(memoizedState.resumeType);
+    }
+  }, [memoizedState, jobId]);
   return (
     <div
       ref={(ref: HTMLDivElement) => (resumeElementRef.current = ref)}
@@ -55,7 +75,6 @@ const GenerateResume = ({ handleGenerate }: Props) => {
         <h3 className=" text-[16px] md:text-sm uppercase dark:text-gray-100 text-gray-950 font-bold">
           generate new resume
         </h3>
-       
       </div>
 
       {/* instruction */}
@@ -250,7 +269,11 @@ const GenerateResume = ({ handleGenerate }: Props) => {
               <textarea
                 name="targetedJobPosition"
                 id="targetedJobPosition"
-                value={memoizedState?.jobDescription}
+                value={
+                  jobId
+                    ? htmlToPlainText(singleJob?.jobDescription)
+                    : memoizedState?.jobDescription
+                }
                 onChange={(e) =>
                   dispatch(
                     setState({ name: "jobDescription", value: e.target.value })

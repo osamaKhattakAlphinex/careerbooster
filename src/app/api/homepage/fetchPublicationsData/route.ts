@@ -52,14 +52,16 @@ export async function POST(req: NextRequest) {
           `;
 
         const response = await openai.chat.completions.create({
-          model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8Icp5xpE", // v2
+          model: "gpt-4o-mini",
+          response_format: { type: "json_object" },
+          // model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8Icp5xpE", // v2
           messages: [
             {
               role: "user",
               content: input,
             },
           ],
-          temperature: 1,
+          // temperature: 1,
         });
         try {
           // make a trainBot entry

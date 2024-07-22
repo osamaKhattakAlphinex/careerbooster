@@ -49,12 +49,15 @@ import TourBot from "@/components/dashboard/TourBot";
 import { useTourContext } from "@/context/TourContext";
 import { useAppContext } from "@/context/AppContext";
 import { RootState } from "@/store/store";
+import { useSearchParams } from "next/navigation";
 
 const ResumeBuilder = () => {
   const [confettingRunning, setConfettiRunning] = useState(false);
   const [showConfettiRunning, setShowConfettiRunning] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
   const [showTemplatePopup, setShowTemplatePopup] = useState(false);
+  const searchParams = useSearchParams();
+  const jobId = searchParams.get("jobId");
   const confettiConfig = {
     angle: 90,
     spread: 360,
@@ -508,7 +511,7 @@ const ResumeBuilder = () => {
             </div>
           )}
           <div>
-            <GenerateResume handleGenerate={handleGenerate} />
+            <GenerateResume jobId={jobId} handleGenerate={handleGenerate} />
           </div>
           <div className="fixed bottom-0 flex items-center justify-center">
             <Confetti active={confettingRunning} config={confettiConfig} />

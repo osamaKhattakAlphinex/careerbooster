@@ -32,6 +32,10 @@ export function DateRangeFilter({ column }: { column: Column<any, unknown> }) {
   );
 }
 
+export function formatStringWithCommas(numberString) {
+  return numberString.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
 // A typical debounced input react component
 function DebouncedInput({
   value: initialValue,

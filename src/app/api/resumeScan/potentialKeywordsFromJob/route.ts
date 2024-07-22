@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
       response_format: { type: "json_object" },
       messages: [{ role: "user", content: inputPrompt }],
     });
-    
+
     try {
       await startDB();
 

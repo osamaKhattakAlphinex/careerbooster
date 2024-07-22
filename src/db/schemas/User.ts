@@ -39,6 +39,18 @@ const UserSchema = new Schema(
       type: Boolean,
       required: true,
     },
+    expectedSalary: {
+      type: String,
+      default:""
+    },
+    desiredJobTitle: {
+      type: String,
+      default: "",
+    },
+    locationPreference: {
+      type: String,
+      default: "",
+    },
     education: [],
     experience: [],
     skills: [],
