@@ -5,7 +5,7 @@ function JobSeekers() {
   return (
     <div className="flex w-full md:px-20 xs:px-2 md:mt-10">
       <div className="flex flex-col md:w-1/2 xs:w-full  gap-2 xs:text-center md:text-left">
-        <h1 className="md:text-[26px] xs:text-[20px] font-medium">
+        <h1 className="md:text-[26px] xs:text-[20px] font-medium text-[#6a4dff] dark:text-[#e6f85e]">
           For Job Seekers
         </h1>
         <h3 className="md:text-[36px] xs:text-[24px] font-semibold">

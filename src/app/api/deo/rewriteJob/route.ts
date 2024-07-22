@@ -93,7 +93,7 @@ export async function POST(request: NextRequest) {
 
       const response: any = await openai.chat.completions.create({
         // model: "ft:gpt-3.5-turbo-1106:careerbooster::9SLbRnyu",
-        model: "gpt-4-1106-preview",
+        model: "gpt-4o-mini",
         response_format: { type: "json_object" },
         messages: [{ role: "user", content: input }],
       });
