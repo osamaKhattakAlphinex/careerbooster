@@ -11,6 +11,7 @@ import { infoSmallIcon } from "@/helpers/iconsProvider";
 import { useTourContext } from "@/context/TourContext";
 import { RootState } from "@/store/store";
 import axios from "axios";
+import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 
 interface Props {
   // getConsent: () => void;
@@ -52,11 +53,7 @@ const GenerateResume = ({ handleGenerate, jobId }: Props) => {
     }
   }, [jobId]);
 
-  const stripHtmlTags = (html) => {
-    const div = document.createElement("div");
-    div.innerHTML = html;
-    return div.textContent || div.innerText || "";
-  };
+  
   const { data: session } = useSession();
   const dispatch = useDispatch();
   const state = useSelector((state: RootState) => state.resume.state);
@@ -274,7 +271,7 @@ const GenerateResume = ({ handleGenerate, jobId }: Props) => {
                 id="targetedJobPosition"
                 value={
                   jobId
-                    ? stripHtmlTags(singleJob?.jobDescription)
+                    ? htmlToPlainText(singleJob?.jobDescription)
                     : memoizedState?.jobDescription
                 }
                 onChange={(e) =>

@@ -58,7 +58,6 @@ const ResumeBuilder = () => {
   const [showTemplatePopup, setShowTemplatePopup] = useState(false);
   const searchParams = useSearchParams();
   const jobId = searchParams.get("jobId");
-  console.log(jobId);
   const confettiConfig = {
     angle: 90,
     spread: 360,
