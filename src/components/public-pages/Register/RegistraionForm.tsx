@@ -51,9 +51,18 @@ const RegistrationForm = () => {
     validationSchema: Yup.object({
       firstName: Yup.string().required("First name required"),
       lastName: Yup.string().required("Last name required"),
-      expectedSalary: Yup.string().required("Expected salary is required"),
-      desiredJobTitle: Yup.string().required("Desired job title is required"),
-      preferedLocation: Yup.string().required("Preferd location is required"),
+      expectedSalary:
+        getProfile === "true"
+          ? Yup.string().required("Expected salary is required")
+          : Yup.string().notRequired(),
+      desiredJobTitle:
+        getProfile === "true"
+          ? Yup.string().required("Desired job title is required")
+          : Yup.string().notRequired(),
+      preferedLocation:
+        getProfile === "true"
+          ? Yup.string().required("Preferred location is required")
+          : Yup.string().notRequired(),
 
       email: Yup.string()
         .email("Invalid Email Address")
@@ -74,9 +83,9 @@ const RegistrationForm = () => {
           lastName: values.lastName,
           email: values.email,
           registeredPhone: values.phone,
-          jobTitle: values.desiredJobTitle,
-          salary: values.expectedSalary,
-          location: values.preferedLocation,
+          desiredJobTitle: values.desiredJobTitle,
+          expectedSalary: values.expectedSalary,
+          locationPreference: values.preferedLocation,
           // password: values.password,
 
           uploadedResume: {
@@ -552,7 +561,7 @@ const RegistrationForm = () => {
                       type="text"
                       name="expectedSalary"
                       className="block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-4 pl-[3rem] text-base w-full border-[1px] border-[#bdbfd4] bg-transparent bg-clip"
-                      placeholder="Expected Salary"
+                      placeholder="Expected Salary Per Annum (in $)"
                       onBlur={formik.handleBlur}
                       onChange={formik.handleChange}
                       value={formik.values.expectedSalary}
@@ -631,7 +640,7 @@ const RegistrationForm = () => {
                       type="text"
                       name="preferedLocation"
                       className="block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-4 pl-[3rem] text-base w-full border-[1px] border-[#bdbfd4] bg-transparent bg-clip"
-                      placeholder="Prefferd Location"
+                      placeholder="Preffered Location"
                       onBlur={formik.handleBlur}
                       onChange={formik.handleChange}
                       value={formik.values.preferedLocation}

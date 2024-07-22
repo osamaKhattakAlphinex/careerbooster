@@ -51,7 +51,7 @@ const Page = ({ params }: { params: { id: string } }) => {
     return (
       <div className=" flex flex-col xs:mt-[90px] lg:mt-52 md:mt-28 md:px-20 xs:px-4 xs:text-center mb-10">
         <span className=" text-[#6a4dff] dark:text-[#e6f85e] text-[20px] ">
-          You Do Not Have Access To This Page
+          You Don{"'"}t Have Access To This Page
         </span>
         <div className="flex gap-4 mx-auto text-center mt-4 items-center">
           <Link
@@ -193,7 +193,7 @@ const Page = ({ params }: { params: { id: string } }) => {
             <div className={` w-full flex`}>
               <ul
                 id="education-card "
-                className="md:mt-8 rounded-md shadow-2xl md:p-10 xs:p-4 lg:full xs:w-full dark:bg-gray-900 bg-gray-200"
+                className="md:my-8 rounded-md shadow-2xl md:p-10 xs:p-4 lg:full xs:w-full dark:bg-gray-900 bg-gray-200"
               >
                 {userData?.experience?.map((experience) => {
                   return (
@@ -242,7 +242,7 @@ const Page = ({ params }: { params: { id: string } }) => {
             <div className={` w-full flex`}>
               <ul
                 id="education-card "
-                className="md:mt-8 rounded-md shadow-2xl md:p-10 xs:p-4 xs:w-full lg:w-full dark:bg-gray-900 bg-gray-200"
+                className="md:my-8 rounded-md shadow-2xl md:p-10 xs:p-4 xs:w-full lg:w-full dark:bg-gray-900 bg-gray-200"
               >
                 {userData?.education?.map((education) => {
                   return (
