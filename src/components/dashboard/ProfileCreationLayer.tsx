@@ -61,14 +61,14 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       fetchEducationDataFromResume();
       fetchExperienceDataFromResume();
       fetchSkillsDataFromResume();
-      // fetchCertificatesDataFromResume();
-      // fetchAwardsDataFromResume();
-      // fetchInterestsDataFromResume();
-      // fetchLanguagesDataFromResume();
-      // fetchTrainingsDataFromResume();
-      // fetchPublicationsDataFromResume();
-      // fetchReferencesDataFromResume();
-      // fetchProjectsDataFromResume();
+      fetchCertificatesDataFromResume();
+      fetchAwardsDataFromResume();
+      fetchInterestsDataFromResume();
+      fetchLanguagesDataFromResume();
+      fetchTrainingsDataFromResume();
+      fetchPublicationsDataFromResume();
+      fetchReferencesDataFromResume();
+      fetchProjectsDataFromResume();
     }
   };
 
@@ -457,8 +457,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
                 const formattedArr = data?.interests.map((item: any) => {
                   return {
                     id: makeid(),
-                    name: item?.name,
-                    description: item?.description,
+                    description: item,
                   };
                 });
 

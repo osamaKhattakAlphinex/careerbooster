@@ -101,6 +101,9 @@ interface UserDataSlice {
   error: string;
   firstName: string;
   lastName: string;
+  expectedSalary: string;
+  desiredJobTitle:string;
+  locationPreference: string;
   phone?: string;
   email?: string;
   role?: string;
@@ -152,6 +155,9 @@ const initialState: UserDataSlice = {
   error: "",
   firstName: "",
   lastName: "",
+  expectedSalary: "",
+  desiredJobTitle: "",
+  locationPreference: "",
   phone: "",
   email: "",
   linkedin: "",

@@ -21,13 +21,12 @@ export async function POST(req: NextRequest) {
 
         const dataset = "register.wizard.listLanguages";
         const model = await getTrainedModel(dataset);
-        //console.log(`Trained Model(${model}) for Dataset(${dataset})`);
 
         const input = `
               This is the User Data:
               ${content}
     
-              Now please give me a List of All Languages found from the above user data provided.
+              Now please give me a List of All Languages(do not add coding languages) found from the above user data provided.
     
               The answer MUST be a valid JSON and formatting should be like this 
               replace the VALUE_HERE with the actual values
@@ -51,14 +50,16 @@ export async function POST(req: NextRequest) {
           `;
 
         const response = await openai.chat.completions.create({
-          model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8Icp5xpE", // v2
+          model: "gpt-4o-mini",
+          response_format: { type: "json_object" },
+          // model: "ft:gpt-3.5-turbo-1106:careerbooster-ai::8Icp5xpE", // v2
           messages: [
             {
               role: "user",
               content: input,
             },
           ],
-          temperature: 1,
+          // temperature: 1,
         });
         try {
           // make a trainBot entry
