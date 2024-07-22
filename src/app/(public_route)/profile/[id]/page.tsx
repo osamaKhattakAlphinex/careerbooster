@@ -8,6 +8,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { saveAs } from "file-saver";
 import { linkedInIconFilled } from "@/helpers/iconsProvider";
+import { formatStringWithCommas } from "@/helpers/DateRangeFilter";
 const Page = ({ params }: { params: { id: string } }) => {
   const [active, setActive] = useState("education-card");
   const profileRef = useRef<HTMLDivElement | null>(null);
@@ -39,8 +40,7 @@ const Page = ({ params }: { params: { id: string } }) => {
         });
     }
   }, [userDetails]);
-  // console.log("userdeatil", userDetails._id);
-  // console.log("params", params.id);
+ 
 
   const downloadPdf = async () => {
     const fileName = `${userData.firstName}.pdf`;
@@ -56,7 +56,7 @@ const Page = ({ params }: { params: { id: string } }) => {
       </div>
     );
   }
-  console.log(userDetails);
+
   return (
     <div className=" flex flex-col xs:mt-[90px] lg:mt-52 md:mt-28 md:px-20 xs:px-4 xs:text-center md:text-left">
       {/* <div
@@ -82,7 +82,7 @@ const Page = ({ params }: { params: { id: string } }) => {
                 {userData?.experience?.[0]?.jobTitle}
               </h1>
 
-              <ul className="flex items-center gap-3 xs:text-center md:text-left xs:mx-auto ">
+              <ul className="flex items-center gap-3 xs:text-center md:text-left xs:mx-auto md:mx-0 ">
                 <li>{userData.email}</li>
                 <li>
                   <Link
@@ -97,7 +97,7 @@ const Page = ({ params }: { params: { id: string } }) => {
                 {/* <li>{userData.phone}</li> */}
               </ul>
               <button
-                className="rounded-full w-fit px-4 py-2 text-[18px] dark:hover:bg-transparent dark:hover:border dark:hover:border-[#E0E360] dark:hover:text-gray-100 hover:bg-transparent hover:border hover:border-blue-400 hover:text-gray-900 mt-2 dark:text-gray-900  dark:bg-[#E0E360] bg-blue-500 text-gray-100 mx-auto"
+                className="rounded-full w-fit px-4 py-2 text-[18px] dark:hover:bg-transparent dark:hover:border dark:hover:border-[#E0E360] dark:hover:text-gray-100 hover:bg-transparent hover:border hover:border-blue-400 hover:text-gray-900 mt-2 dark:text-gray-900  dark:bg-[#E0E360] bg-blue-500 text-gray-100 xs:mx-auto md:mx-0"
                 onClick={downloadPdf}
               >
                 Download Profile
@@ -131,7 +131,7 @@ const Page = ({ params }: { params: { id: string } }) => {
                     Expected Salary
                   </h1>
                   <h1 className="text-gray-100 lg:text-[20px] md:text-[16px]">
-                    {userData.expectedSalary}
+                    {formatStringWithCommas(userData.expectedSalary)} $
                   </h1>
                 </div>
                 <div className="jobTitle flex md:flex-col xs:flex-row gap-4 md:w-1/3 xs:w-full items-center">
