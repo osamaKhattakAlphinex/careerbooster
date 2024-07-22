@@ -21,7 +21,7 @@ const Page = ({ params }: { params: { id: string } }) => {
       setUserData(userDetails);
       setUserFetched(true);
     }
-    if (params.id && !userDetails._id && userDetails._id !== params.id) {
+    if (userDetails._id) {
       setLoading(true);
       fetch(`/api/users/${params.id}`, {
         method: "GET",
@@ -38,13 +38,39 @@ const Page = ({ params }: { params: { id: string } }) => {
           setLoading(false);
         });
     }
-  }, [params]);
+  }, [userDetails]);
+  // console.log("userdeatil", userDetails._id);
+  // console.log("params", params.id);
 
   const downloadPdf = async () => {
     const fileName = `${userData.firstName}.pdf`;
     const blob = await pdf(<ProfileResume userData={userData} />).toBlob();
     saveAs(blob, fileName);
   };
+  if (!userDetails._id) {
+    return (
+      <div className=" flex flex-col xs:mt-[90px] lg:mt-52 md:mt-28 md:px-20 xs:px-4 xs:text-center mb-10">
+        <span className=" text-[#6a4dff] dark:text-[#e6f85e] text-[20px] ">
+          You Do Not Have Access To This Page
+        </span>
+        <div className="flex gap-4 mx-auto text-center mt-4 items-center">
+          <Link
+            href="/register"
+            className="rounded-full w-fit px-4 py-2 text-[18px] dark:hover:bg-transparent dark:hover:border dark:hover:border-[#E0E360] dark:hover:text-gray-100 hover:bg-transparent hover:border hover:border-blue-400 hover:text-gray-900 mt-2 dark:text-gray-900  dark:bg-[#E0E360] bg-blue-500 text-gray-100"
+          >
+            Create Your Account
+          </Link>
+          <span>OR</span>
+          <Link
+            href="/login"
+            className="rounded-full w-fit px-4 py-2 text-[18px] dark:hover:bg-transparent dark:hover:border dark:hover:border-[#E0E360] dark:hover:text-gray-100 hover:bg-transparent hover:border hover:border-blue-400 hover:text-gray-900 mt-2 dark:text-gray-900  dark:bg-[#E0E360] bg-blue-500 text-gray-100"
+          >
+            Login
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className=" flex flex-col xs:mt-[90px] lg:mt-52 md:mt-28 md:px-20 xs:px-4 xs:text-center md:text-left">
@@ -66,7 +92,7 @@ const Page = ({ params }: { params: { id: string } }) => {
                   {userData?.firstName + " " + userData?.lastName}
                 </span>
               </h2>
-             
+
               <h1 className="md:text-[36px] xs:text-[30px] font-bold text-[#BE4A86]">
                 {userData?.experience?.[0]?.jobTitle}
               </h1>
@@ -167,7 +193,7 @@ const Page = ({ params }: { params: { id: string } }) => {
             <div className={` w-full flex`}>
               <ul
                 id="education-card "
-                className="md:mt-8 rounded-md shadow-2xl md:p-10 xs:p-4 lg:w-1/2 xs:w-full dark:bg-gray-900 bg-gray-200"
+                className="md:mt-8 rounded-md shadow-2xl md:p-10 xs:p-4 lg:full xs:w-full dark:bg-gray-900 bg-gray-200"
               >
                 {userData?.experience?.map((experience) => {
                   return (
@@ -209,38 +235,14 @@ const Page = ({ params }: { params: { id: string } }) => {
                   );
                 })}
               </ul>
-              <div
-                className="w-1/2 m-auto xs:hidden lg:block
-      "
-              >
-                <Image
-                  className=" ml-auto align-middle"
-                  src="/assets/images/exp-1.png"
-                  alt="education"
-                  width={600}
-                  height={600}
-                />
-              </div>
             </div>
           )}
           {/* Experience Cards */}
           {active === "experience-card" && (
             <div className={` w-full flex`}>
-              <div
-                className="w-1/2 m-auto xs:hidden lg:block
-      "
-              >
-                <Image
-                  className=" align-middle"
-                  src="/assets/images/Education.png"
-                  alt="education"
-                  width={400}
-                  height={600}
-                />
-              </div>
               <ul
                 id="education-card "
-                className="md:mt-8 rounded-md shadow-2xl md:p-10 xs:p-4 xs:w-full lg:w-1/2 dark:bg-gray-900 bg-gray-200"
+                className="md:mt-8 rounded-md shadow-2xl md:p-10 xs:p-4 xs:w-full lg:w-full dark:bg-gray-900 bg-gray-200"
               >
                 {userData?.education?.map((education) => {
                   return (
