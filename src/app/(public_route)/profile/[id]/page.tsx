@@ -56,7 +56,7 @@ const Page = ({ params }: { params: { id: string } }) => {
       </div>
     );
   }
-
+  console.log(userDetails);
   return (
     <div className=" flex flex-col xs:mt-[90px] lg:mt-52 md:mt-28 md:px-20 xs:px-4 xs:text-center md:text-left">
       {/* <div
@@ -82,17 +82,22 @@ const Page = ({ params }: { params: { id: string } }) => {
                 {userData?.experience?.[0]?.jobTitle}
               </h1>
 
-              <ul className="flex items-center gap-3 ">
+              <ul className="flex items-center gap-3 xs:text-center md:text-left xs:mx-auto ">
                 <li>{userData.email}</li>
                 <li>
-                  <Link className="underline" href={`${userData.linkedin}`}>
+                  <Link
+                    className={`underline${
+                      userDetails.linkedin ? "block" : "hidden"
+                    }`}
+                    href={`${userData.linkedin}`}
+                  >
                     {linkedInIconFilled}
                   </Link>
                 </li>
                 {/* <li>{userData.phone}</li> */}
               </ul>
               <button
-                className="rounded-full w-fit px-4 py-2 text-[18px] dark:hover:bg-transparent dark:hover:border dark:hover:border-[#E0E360] dark:hover:text-gray-100 hover:bg-transparent hover:border hover:border-blue-400 hover:text-gray-900 mt-2 dark:text-gray-900  dark:bg-[#E0E360] bg-blue-500 text-gray-100"
+                className="rounded-full w-fit px-4 py-2 text-[18px] dark:hover:bg-transparent dark:hover:border dark:hover:border-[#E0E360] dark:hover:text-gray-100 hover:bg-transparent hover:border hover:border-blue-400 hover:text-gray-900 mt-2 dark:text-gray-900  dark:bg-[#E0E360] bg-blue-500 text-gray-100 mx-auto"
                 onClick={downloadPdf}
               >
                 Download Profile
@@ -118,6 +123,36 @@ const Page = ({ params }: { params: { id: string } }) => {
               )}
             </div>
           </div>
+          {userDetails.desiredJobTitle && (
+            <>
+              <div className="py-8 px-4 text-center md:flex-row xs:flex-col  lg:w-[90%] xs:w-full xs:mt-6 md:mt-16 mx-auto flex gap-10 rounded-md bg-gray-900">
+                <div className="salary flex md:flex-col xs:flex-row gap-4 md:w-1/3 xs:w-full items-center">
+                  <h1 className="text-gray-100 lg:text-[26px] xs:text-[20px] font-semibold">
+                    Expected Salary
+                  </h1>
+                  <h1 className="text-gray-100 lg:text-[20px] md:text-[16px]">
+                    {userData.expectedSalary}
+                  </h1>
+                </div>
+                <div className="jobTitle flex md:flex-col xs:flex-row gap-4 md:w-1/3 xs:w-full items-center">
+                  <h1 className="text-gray-100 lg:text-[26px] xs:text-[20px] font-semibold">
+                    Desired Job Title
+                  </h1>
+                  <h1 className="text-gray-100 lg:text-[20px] md:text-[16px]">
+                    {userData.desiredJobTitle}
+                  </h1>
+                </div>
+                <div className="Location flex md:flex-col xs:flex-row gap-4 md:w-1/3 xs:w-full items-center">
+                  <h1 className="text-gray-100 lg:text-[26px] xs:text-[20px] font-semibold">
+                    Preferred Location
+                  </h1>
+                  <h1 className="text-gray-100 lg:text-[20px] md:text-[16px]">
+                    {userData.locationPreference}
+                  </h1>
+                </div>
+              </div>
+            </>
+          )}
           {/* skills-section */}
           <div className="flex w-full flex-col md:py-16 xs:py-6">
             <h1 className="md:text-[36px] xs:text-[30px] font-bold text-center mb-6">
