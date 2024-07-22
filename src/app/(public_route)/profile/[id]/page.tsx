@@ -21,7 +21,7 @@ const Page = ({ params }: { params: { id: string } }) => {
       setUserData(userDetails);
       setUserFetched(true);
     }
-    if (userDetails._id) {
+    if (userDetails._id && params.id === userDetails._id) {
       setLoading(true);
       fetch(`/api/users/${params.id}`, {
         method: "GET",
@@ -47,27 +47,12 @@ const Page = ({ params }: { params: { id: string } }) => {
     const blob = await pdf(<ProfileResume userData={userData} />).toBlob();
     saveAs(blob, fileName);
   };
-  if (!userDetails._id) {
+  if (!userDetails._id || params.id !== userDetails._id) {
     return (
       <div className=" flex flex-col xs:mt-[90px] lg:mt-52 md:mt-28 md:px-20 xs:px-4 xs:text-center mb-10">
         <span className=" text-[#6a4dff] dark:text-[#e6f85e] text-[20px] ">
           You Don{"'"}t Have Access To This Page
         </span>
-        <div className="flex gap-4 mx-auto text-center mt-4 items-center">
-          <Link
-            href="/register"
-            className="rounded-full w-fit px-4 py-2 text-[18px] dark:hover:bg-transparent dark:hover:border dark:hover:border-[#E0E360] dark:hover:text-gray-100 hover:bg-transparent hover:border hover:border-blue-400 hover:text-gray-900 mt-2 dark:text-gray-900  dark:bg-[#E0E360] bg-blue-500 text-gray-100"
-          >
-            Create Your Account
-          </Link>
-          <span>OR</span>
-          <Link
-            href="/login"
-            className="rounded-full w-fit px-4 py-2 text-[18px] dark:hover:bg-transparent dark:hover:border dark:hover:border-[#E0E360] dark:hover:text-gray-100 hover:bg-transparent hover:border hover:border-blue-400 hover:text-gray-900 mt-2 dark:text-gray-900  dark:bg-[#E0E360] bg-blue-500 text-gray-100"
-          >
-            Login
-          </Link>
-        </div>
       </div>
     );
   }
