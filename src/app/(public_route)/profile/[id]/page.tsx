@@ -40,7 +40,6 @@ const Page = ({ params }: { params: { id: string } }) => {
         });
     }
   }, [userDetails]);
- 
 
   const downloadPdf = async () => {
     const fileName = `${userData.firstName}.pdf`;
@@ -128,10 +127,12 @@ const Page = ({ params }: { params: { id: string } }) => {
               <div className="py-8 px-4 text-center md:flex-row xs:flex-col  lg:w-[90%] xs:w-full xs:mt-6 md:mt-16 mx-auto flex gap-10 rounded-md bg-gray-900">
                 <div className="salary flex md:flex-col xs:flex-row gap-4 md:w-1/3 xs:w-full items-center">
                   <h1 className="text-gray-100 lg:text-[26px] xs:text-[20px] font-semibold">
-                    Expected Salary
+                    Expected Salary (in $)
                   </h1>
                   <h1 className="text-gray-100 lg:text-[20px] md:text-[16px]">
-                    {formatStringWithCommas(userData.expectedSalary)} $
+                    {userData.expectedSalary
+                      ? formatStringWithCommas(userData.expectedSalary)
+                      : "Not Specified"}
                   </h1>
                 </div>
                 <div className="jobTitle flex md:flex-col xs:flex-row gap-4 md:w-1/3 xs:w-full items-center">
@@ -139,7 +140,9 @@ const Page = ({ params }: { params: { id: string } }) => {
                     Desired Job Title
                   </h1>
                   <h1 className="text-gray-100 lg:text-[20px] md:text-[16px]">
-                    {userData.desiredJobTitle}
+                    {userData.desiredJobTitle
+                      ? userData.desiredJobTitle
+                      : "Not Specified"}
                   </h1>
                 </div>
                 <div className="Location flex md:flex-col xs:flex-row gap-4 md:w-1/3 xs:w-full items-center">
@@ -147,7 +150,9 @@ const Page = ({ params }: { params: { id: string } }) => {
                     Preferred Location
                   </h1>
                   <h1 className="text-gray-100 lg:text-[20px] md:text-[16px]">
-                    {userData.locationPreference}
+                    {userData.locationPreference
+                      ? userData.locationPreference
+                      : "Not Specified"}
                   </h1>
                 </div>
               </div>

@@ -108,7 +108,7 @@ export default function SinglejobCard({
         </div>
         <div className="buttons flex items-center gap-2 md:ml-auto xs:mx-auto md:mx-0 xs:justify-center md:justify-end ">
           <Link
-            href={`/test-job-board/${jobId}`}
+            href={`/ai-job-board/${jobId}`}
             className="flex border-2 items-center gap-2 w-fit rounded-md dark:bg-gray-100 dark:text-gray-950 bg-gray-950 text-gray-100 font-semibold px-3 md:text-base xs:text-sm py-1 hover:bg-gray-100 hover:text-gray-950 dark:hover:bg-transparent dark:hover:text-gray-100  "
           >
             {eyeIcon}
