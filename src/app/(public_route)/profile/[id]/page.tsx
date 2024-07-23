@@ -5,6 +5,7 @@ import { pdf } from "@react-pdf/renderer";
 import Image from "next/image";
 import Link from "next/link";
 import * as Yup from "yup";
+import { useDispatch } from "react-redux";
 
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
@@ -23,6 +24,8 @@ const Page = ({ params }: { params: { id: string } }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [isEmployer, setIsEmployer] = useState("");
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+
   const formik = useFormik({
     initialValues: {
       desiredJobTitle: "",
@@ -32,16 +35,20 @@ const Page = ({ params }: { params: { id: string } }) => {
     onSubmit: async (values) => {
       axios
         .post("/api/users/updateUserData", {
-          data:{
+          data: {
             ...userData,
             desiredJobTitle: values.desiredJobTitle,
             expectedSalary: values.expectedSalary,
             locationPreference: values.prefferedLocation,
-          }
+          },
         })
-        .then((resp) => {
-          console.log(resp);
+        .then((resp: any) => {
+          // console.log(resp);
           console.log("user Updated Successfully");
+
+          formik.resetForm();
+
+          setOpen(false);
         })
         .catch((err) => {
           console.log(err);
@@ -94,8 +101,6 @@ const Page = ({ params }: { params: { id: string } }) => {
       </div>
     );
   }
-
-
 
   return (
     <div className=" flex flex-col xs:mt-[90px] lg:mt-52 md:mt-28 md:px-20 xs:px-4 xs:text-center md:text-left">
@@ -165,32 +170,32 @@ const Page = ({ params }: { params: { id: string } }) => {
           </div>
           {userDetails.desiredJobTitle ? (
             <>
-              <div className="py-8 px-4 text-center md:flex-row xs:flex-col  lg:w-[90%] xs:w-full xs:mt-6 md:mt-16 mx-auto flex gap-10 rounded-md bg-gray-900">
+              <div className="py-8 px-4 text-center md:flex-row xs:flex-col  lg:w-[90%] xs:w-full xs:mt-6 md:mt-16 mx-auto flex gap-10 rounded-md dark:bg-gray-900 bg-gray-100">
                 <div className="salary flex md:flex-col xs:flex-row gap-4 md:w-1/3 xs:w-full items-center">
-                  <h1 className="text-gray-100 lg:text-[26px] xs:text-[20px] font-semibold">
+                  <h1 className="dark:text-gray-100 text-gray-950 lg:text-[26px] xs:text-[20px] font-semibold">
                     Expected Salary (in $)
                   </h1>
-                  <h1 className="text-gray-100 lg:text-[20px] md:text-[16px]">
+                  <h1 className="dark:text-gray-100 text-gray-950 lg:text-[20px] md:text-[16px]">
                     {userData.expectedSalary
                       ? formatStringWithCommas(userData.expectedSalary)
                       : "Not Specified"}
                   </h1>
                 </div>
                 <div className="jobTitle flex md:flex-col xs:flex-row gap-4 md:w-1/3 xs:w-full items-center">
-                  <h1 className="text-gray-100 lg:text-[26px] xs:text-[20px] font-semibold">
+                  <h1 className="dark:text-gray-100 text-gray-950 lg:text-[26px] xs:text-[20px] font-semibold">
                     Desired Job Title
                   </h1>
-                  <h1 className="text-gray-100 lg:text-[20px] md:text-[16px]">
+                  <h1 className="dark:text-gray-100 text-gray-950 lg:text-[20px] md:text-[16px]">
                     {userData.desiredJobTitle
                       ? userData.desiredJobTitle
                       : "Not Specified"}
                   </h1>
                 </div>
                 <div className="Location flex md:flex-col xs:flex-row gap-4 md:w-1/3 xs:w-full items-center">
-                  <h1 className="text-gray-100 lg:text-[26px] xs:text-[20px] font-semibold">
+                  <h1 className="dark:text-gray-100 text-gray-950 lg:text-[26px] xs:text-[20px] font-semibold">
                     Preferred Location
                   </h1>
-                  <h1 className="text-gray-100 lg:text-[20px] md:text-[16px]">
+                  <h1 className="dark:text-gray-100 text-gray-950 lg:text-[20px] md:text-[16px]">
                     {userData.locationPreference
                       ? userData.locationPreference
                       : "Not Specified"}
@@ -204,10 +209,10 @@ const Page = ({ params }: { params: { id: string } }) => {
                 isEmployer === "No" ? "hidden" : "flex"
               }`}
             >
-              <h1 className="text-center font-semibold text-[30px] ">
-                Are You A Job Seeker ?
-              </h1>
               <div className="flex items-center gap-4 mx-auto mt-6">
+                <h1 className="text-center font-semibold text-[30px] ">
+                  Are You A Job Seeker ?
+                </h1>
                 <button
                   onClick={() => {
                     setIsEmployer("Yes");
@@ -300,7 +305,7 @@ const Page = ({ params }: { params: { id: string } }) => {
                             </div>
                             {formik.touched.expectedSalary &&
                               formik.errors.expectedSalary && (
-                                <p className="pt-3 text-red-600">
+                                <p className=" text-red-600 mx-auto w-fit">
                                   {formik.touched.expectedSalary &&
                                     formik.errors.expectedSalary}
                                 </p>
@@ -337,7 +342,7 @@ const Page = ({ params }: { params: { id: string } }) => {
                             </div>
                             {formik.touched.desiredJobTitle &&
                               formik.errors.desiredJobTitle && (
-                                <p className="pt-3 text-red-600">
+                                <p className=" text-red-600 mx-auto w-fit">
                                   {formik.touched.desiredJobTitle &&
                                     formik.errors.desiredJobTitle}
                                 </p>
@@ -379,7 +384,7 @@ const Page = ({ params }: { params: { id: string } }) => {
                             </div>
                             {formik.touched.prefferedLocation &&
                               formik.errors.prefferedLocation && (
-                                <p className="pt-3 text-red-600">
+                                <p className=" text-red-600 mx-auto w-fit">
                                   {formik.touched.prefferedLocation &&
                                     formik.errors.prefferedLocation}
                                 </p>
