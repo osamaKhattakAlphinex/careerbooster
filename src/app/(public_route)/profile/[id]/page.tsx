@@ -4,11 +4,16 @@ import { RootState } from "@/store/store";
 import { pdf } from "@react-pdf/renderer";
 import Image from "next/image";
 import Link from "next/link";
+import * as Yup from "yup";
+
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { saveAs } from "file-saver";
 import { linkedInIconFilled } from "@/helpers/iconsProvider";
 import { formatStringWithCommas } from "@/helpers/DateRangeFilter";
+import { showSuccessToast } from "@/helpers/toast";
+import { useFormik } from "formik";
+import axios from "axios";
 const Page = ({ params }: { params: { id: string } }) => {
   const [active, setActive] = useState("education-card");
   const profileRef = useRef<HTMLDivElement | null>(null);
@@ -16,7 +21,8 @@ const Page = ({ params }: { params: { id: string } }) => {
   const [userData, setUserData] = useState(userDetails);
   const [userFetched, setUserFetched] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-
+  const [isEmployer, setIsEmployer] = useState("");
+  const [open, setOpen] = useState(false);
   useEffect(() => {
     if (userDetails._id) {
       setUserData(userDetails);
@@ -55,6 +61,37 @@ const Page = ({ params }: { params: { id: string } }) => {
       </div>
     );
   }
+
+  const formik = useFormik({
+    initialValues: {
+      desiredJobTitle: "",
+      expectedSalary: "",
+      prefferedLocation: "",
+    },
+    onSubmit: async (values) => {
+      axios
+        .post("/api/users/updateUserData", {
+          ...userData,
+          desiredJobTitle: values.desiredJobTitle,
+          expectedSalary: values.expectedSalary,
+          locationPreference: values.prefferedLocation,
+        })
+        .then((resp) => {
+          console.log(resp);
+          console.log("user Updated Successfully");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    validationSchema: Yup.object({
+      desiredJobTitle: Yup.string().required("Job Title is required"),
+      expectedSalary: Yup.string().required("Expected Salary is required"),
+      prefferedLocation: Yup.string().required(
+        "Location Prefrence is required"
+      ),
+    }),
+  });
 
   return (
     <div className=" flex flex-col xs:mt-[90px] lg:mt-52 md:mt-28 md:px-20 xs:px-4 xs:text-center md:text-left">
@@ -122,7 +159,7 @@ const Page = ({ params }: { params: { id: string } }) => {
               )}
             </div>
           </div>
-          {userDetails.desiredJobTitle && (
+          {userDetails.desiredJobTitle ? (
             <>
               <div className="py-8 px-4 text-center md:flex-row xs:flex-col  lg:w-[90%] xs:w-full xs:mt-6 md:mt-16 mx-auto flex gap-10 rounded-md bg-gray-900">
                 <div className="salary flex md:flex-col xs:flex-row gap-4 md:w-1/3 xs:w-full items-center">
@@ -157,6 +194,205 @@ const Page = ({ params }: { params: { id: string } }) => {
                 </div>
               </div>
             </>
+          ) : (
+            <div
+              className={` flex-col text-center mt-12 ${
+                isEmployer === "No" ? "hidden" : "flex"
+              }`}
+            >
+              <h1 className="text-center font-semibold text-[30px] ">
+                Are You A Job Seeker ?
+              </h1>
+              <div className="flex items-center gap-4 mx-auto mt-6">
+                <button
+                  onClick={() => {
+                    setIsEmployer("Yes");
+                    setOpen(true);
+                  }}
+                  className="w-fit px-4 py-1 rounded-lg bg-blue-600 text-gray-100 text-[16px]"
+                >
+                  Yes
+                </button>
+                <button
+                  onClick={() => {
+                    setIsEmployer("No");
+                  }}
+                  className="w-fit px-4 py-1 rounded-lg bg-blue-600 text-gray-100 text-[16px]"
+                >
+                  No
+                </button>
+                {isEmployer === "Yes" ? (
+                  <div
+                    id="authentication-modal"
+                    aria-hidden="true"
+                    className={`${
+                      open ? "flex" : "hidden"
+                    } overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center bg-white  bg-opacity-5 backdrop-blur-sm  w-full md:inset-0 h-[calc(100%-1rem)] max-h-full`}
+                  >
+                    <div className="relative p-4 w-full  max-h-full">
+                      {/* <!-- Modal content --> */}
+                      <div className="relative bg-white rounded-lg shadow pb-20 dark:bg-gray-700 max-w-3xl mx-auto">
+                        {/* <!-- Modal header --> */}
+                        <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 ">
+                          <h3 className="text-xl font-semibold text-gray-900 dark:text-white ">
+                            Update Your Profile
+                          </h3>
+                          <button
+                            type="button"
+                            className="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            data-modal-hide="authentication-modal"
+                            onClick={() => {
+                              setOpen(false);
+                            }}
+                          >
+                            <svg
+                              className="w-3 h-3"
+                              aria-hidden="true"
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 14 14"
+                            >
+                              <path
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                              />
+                            </svg>
+                            <span className="sr-only">Close modal</span>
+                          </button>
+                        </div>
+                        {/* <!-- Modal body --> */}
+                        <form onSubmit={formik.handleSubmit}>
+                          <div className="my-2 text-start mt-10">
+                            <div className="relative flex flex-wrap items-stretch w-[70%] mb-6 mx-auto ">
+                              <span className="absolute flex items-center justify-center w-12 h-12 transform -translate-y-1/2 z-1000 top-1/2">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  strokeWidth={1.5}
+                                  stroke="currentColor"
+                                  className="w-4 h-4"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                                  />
+                                </svg>
+                              </span>
+
+                              <input
+                                type="text"
+                                name="expectedSalary"
+                                className="block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-4 pl-[3rem] text-base w-full border-[1px] border-[#bdbfd4] bg-transparent bg-clip"
+                                placeholder="Expected Salary Per Annum (in $)"
+                                onBlur={formik.handleBlur}
+                                onChange={formik.handleChange}
+                                value={formik.values.expectedSalary}
+                              />
+                            </div>
+                            {formik.touched.expectedSalary &&
+                              formik.errors.expectedSalary && (
+                                <p className="pt-3 text-red-600">
+                                  {formik.touched.expectedSalary &&
+                                    formik.errors.expectedSalary}
+                                </p>
+                              )}
+                          </div>
+                          <div className="my-2 text-start">
+                            <div className="relative flex flex-wrap items-stretch w-[70%] mb-6 mx-auto ">
+                              <span className="absolute flex items-center justify-center w-12 h-12 transform -translate-y-1/2 z-1000 top-1/2">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  strokeWidth={1.5}
+                                  stroke="currentColor"
+                                  className="w-4 h-4"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z"
+                                  />
+                                </svg>
+                              </span>
+
+                              <input
+                                type="text"
+                                name="desiredJobTitle"
+                                className="block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-4 pl-[3rem] text-base w-full border-[1px] border-[#bdbfd4] bg-transparent bg-clip"
+                                placeholder="Desired Job Title"
+                                onBlur={formik.handleBlur}
+                                onChange={formik.handleChange}
+                                value={formik.values.desiredJobTitle}
+                              />
+                            </div>
+                            {formik.touched.desiredJobTitle &&
+                              formik.errors.desiredJobTitle && (
+                                <p className="pt-3 text-red-600">
+                                  {formik.touched.desiredJobTitle &&
+                                    formik.errors.desiredJobTitle}
+                                </p>
+                              )}
+                          </div>
+                          <div className="my-2 text-start">
+                            <div className="relative flex flex-wrap items-stretch w-[70%] mb-6 mx-auto ">
+                              <span className="absolute flex items-center justify-center w-12 h-12 transform -translate-y-1/2 z-1000 top-1/2">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  strokeWidth={1.5}
+                                  stroke="currentColor"
+                                  className="w-4 h-4"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                                  />
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+                                  />
+                                </svg>
+                              </span>
+
+                              <input
+                                type="text"
+                                name="prefferedLocation"
+                                className="block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-4 pl-[3rem] text-base w-full border-[1px] border-[#bdbfd4] bg-transparent bg-clip"
+                                placeholder="Preffered Location"
+                                onBlur={formik.handleBlur}
+                                onChange={formik.handleChange}
+                                value={formik.values.prefferedLocation}
+                              />
+                            </div>
+                            {formik.touched.prefferedLocation &&
+                              formik.errors.prefferedLocation && (
+                                <p className="pt-3 text-red-600">
+                                  {formik.touched.prefferedLocation &&
+                                    formik.errors.prefferedLocation}
+                                </p>
+                              )}
+                          </div>
+                          <button className="bg-blue-600 rounded-md px-4 py-2 text-gray-100 text-[20px] w-fit mx-auto">
+                            Update Profile
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
+            </div>
           )}
           {/* skills-section */}
           <div className="flex w-full flex-col md:py-16 xs:py-6">
