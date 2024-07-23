@@ -23,6 +23,39 @@ const Page = ({ params }: { params: { id: string } }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [isEmployer, setIsEmployer] = useState("");
   const [open, setOpen] = useState(false);
+  const formik = useFormik({
+    initialValues: {
+      desiredJobTitle: "",
+      expectedSalary: "",
+      prefferedLocation: "",
+    },
+    onSubmit: async (values) => {
+      axios
+        .post("/api/users/updateUserData", {
+          data:{
+            ...userData,
+            desiredJobTitle: values.desiredJobTitle,
+            expectedSalary: values.expectedSalary,
+            locationPreference: values.prefferedLocation,
+          }
+        })
+        .then((resp) => {
+          console.log(resp);
+          console.log("user Updated Successfully");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    validationSchema: Yup.object({
+      desiredJobTitle: Yup.string().required("Job Title is required"),
+      expectedSalary: Yup.string().required("Expected Salary is required"),
+      prefferedLocation: Yup.string().required(
+        "Location Prefrence is required"
+      ),
+    }),
+  });
+
   useEffect(() => {
     if (userDetails._id) {
       setUserData(userDetails);
@@ -62,36 +95,7 @@ const Page = ({ params }: { params: { id: string } }) => {
     );
   }
 
-  const formik = useFormik({
-    initialValues: {
-      desiredJobTitle: "",
-      expectedSalary: "",
-      prefferedLocation: "",
-    },
-    onSubmit: async (values) => {
-      axios
-        .post("/api/users/updateUserData", {
-          ...userData,
-          desiredJobTitle: values.desiredJobTitle,
-          expectedSalary: values.expectedSalary,
-          locationPreference: values.prefferedLocation,
-        })
-        .then((resp) => {
-          console.log(resp);
-          console.log("user Updated Successfully");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    validationSchema: Yup.object({
-      desiredJobTitle: Yup.string().required("Job Title is required"),
-      expectedSalary: Yup.string().required("Expected Salary is required"),
-      prefferedLocation: Yup.string().required(
-        "Location Prefrence is required"
-      ),
-    }),
-  });
+
 
   return (
     <div className=" flex flex-col xs:mt-[90px] lg:mt-52 md:mt-28 md:px-20 xs:px-4 xs:text-center md:text-left">
