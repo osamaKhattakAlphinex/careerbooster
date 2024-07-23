@@ -15,6 +15,7 @@ import { formatStringWithCommas } from "@/helpers/DateRangeFilter";
 import { showSuccessToast } from "@/helpers/toast";
 import { useFormik } from "formik";
 import axios from "axios";
+import { setField } from "@/store/userDataSlice";
 const Page = ({ params }: { params: { id: string } }) => {
   const [active, setActive] = useState("education-card");
   const profileRef = useRef<HTMLDivElement | null>(null);
@@ -42,10 +43,21 @@ const Page = ({ params }: { params: { id: string } }) => {
             locationPreference: values.prefferedLocation,
           },
         })
-        .then((resp: any) => {
-          // console.log(resp);
-          console.log("user Updated Successfully");
-
+        .then((resp) => {
+            console.log("user Updated Successfully");
+            dispatch(
+              setField({ name: "expectedSalary", value: values.expectedSalary })
+            );
+            dispatch(
+              setField({ name: "desiredJobTitle", value: values.desiredJobTitle })
+            );
+            dispatch(
+              setField({
+                name: "locationPreference",
+                value: values.prefferedLocation,
+              })
+            );
+          
           formik.resetForm();
 
           setOpen(false);
@@ -58,7 +70,7 @@ const Page = ({ params }: { params: { id: string } }) => {
       desiredJobTitle: Yup.string().required("Job Title is required"),
       expectedSalary: Yup.string().required("Expected Salary is required"),
       prefferedLocation: Yup.string().required(
-        "Location Prefrence is required"
+        "Preferred Location is required"
       ),
     }),
   });
@@ -376,7 +388,7 @@ const Page = ({ params }: { params: { id: string } }) => {
                                 type="text"
                                 name="prefferedLocation"
                                 className="block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-4 pl-[3rem] text-base w-full border-[1px] border-[#bdbfd4] bg-transparent bg-clip"
-                                placeholder="Preffered Location"
+                                placeholder="Preferred Location"
                                 onBlur={formik.handleBlur}
                                 onChange={formik.handleChange}
                                 value={formik.values.prefferedLocation}
