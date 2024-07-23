@@ -24,7 +24,7 @@ export default function JobBoard({
   const [aiResumeKeywords, setAiResumeKeywords] = useState<string[]>([]);
   const [aiResumeSuggestions, setAiResumeSuggestions] = useState<string[]>([]);
   return (
-    <main className="flex-grow-1 pb-20 bg-[#fff] dark:bg-[#171825]">
+    <main className="pt-5 flex-grow-1 pb-20 bg-[#fff] dark:bg-[#171825]">
       <PageHeader title="AI-Powered Job Board" beta={true}/>
       <JobSearchForm
         singleCategory={singleCategory}

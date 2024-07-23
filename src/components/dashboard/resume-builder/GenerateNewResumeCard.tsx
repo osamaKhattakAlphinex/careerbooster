@@ -19,7 +19,6 @@ interface Props {
   jobId?: any;
 }
 const GenerateResume = ({ handleGenerate, jobId }: Props) => {
-  const [singleJob, setSingleJob] = useState<any>();
   const radiosResumeType: { labelText: string; value: string }[] = [
     {
       labelText: "Generate Basic Resume",
@@ -45,7 +44,14 @@ const GenerateResume = ({ handleGenerate, jobId }: Props) => {
       axios
         .get(`/api/deo/?findOne=${jobId}`)
         .then((resp) => {
-          setSingleJob(resp.data.data);
+          console.log(resp.data.data.jobDescription);
+          dispatch(
+            setState({
+              name: "jobDescription",
+              value: htmlToPlainText(resp.data.data.jobDescription),
+            })
+          );
+          // setSingleJob(resp.data.data);
         })
         .catch((err) => {
           console.log(err);
@@ -53,7 +59,6 @@ const GenerateResume = ({ handleGenerate, jobId }: Props) => {
     }
   }, [jobId]);
 
-  
   const { data: session } = useSession();
   const dispatch = useDispatch();
   const state = useSelector((state: RootState) => state.resume.state);
@@ -269,11 +274,7 @@ const GenerateResume = ({ handleGenerate, jobId }: Props) => {
               <textarea
                 name="targetedJobPosition"
                 id="targetedJobPosition"
-                value={
-                  jobId
-                    ? htmlToPlainText(singleJob?.jobDescription)
-                    : memoizedState?.jobDescription
-                }
+                value={memoizedState?.jobDescription}
                 onChange={(e) =>
                   dispatch(
                     setState({ name: "jobDescription", value: e.target.value })
@@ -366,14 +367,16 @@ const GenerateResume = ({ handleGenerate, jobId }: Props) => {
         </label> */}
         <button
           disabled={
-            //memoizedState.jobPosition === "" ||
+            (resumeType === "resume-job-title" && memoizedState.jobPosition === "") || 
+            (resumeType === "resume-job-description" && memoizedState.jobDescription === "") ||
             memoizedState.resumeLoading || !session?.user?.email
           }
           onClick={() => handleGenerate()}
           className={` dark:bg-gradient-to-r hover:from-purple-800 hover:to-pink-600 from-[#b324d7]  to-[#615dff] dark:border-none dark:border-0 border-[1px] border-gray-950 bg-transparent flex flex-row justify-center items-center gap-2  px-4 py-2  rounded-full ${
-            // memoizedState.jobPosition === "" ||
+            (resumeType === "resume-job-title" && memoizedState.jobPosition === "") ||
+            (resumeType === "resume-job-description" && memoizedState.jobDescription === "") ||
             memoizedState.resumeLoading || !session?.user?.email
-              ? "opacity-50 cursor-not-allowed"
+              ? "opacity-50"
               : ""
           }`}
         >
@@ -415,7 +418,7 @@ const GenerateResume = ({ handleGenerate, jobId }: Props) => {
                   />
                 </svg>
 
-                <span className="ml-1 mb-0.5 text-xs font-semibold cursor-pointer md:text-sm dark:text-gray-100 text-gray-950">
+                <span className="ml-1 mb-0.5 text-xs font-semibold md:text-sm dark:text-gray-100 text-gray-950">
                   Generate Resume
                 </span>
               </div>
