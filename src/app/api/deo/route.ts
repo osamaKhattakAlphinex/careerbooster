@@ -168,6 +168,16 @@ export async function POST(request: NextRequest) {
   try {
     await startDB();
     let { payload } = await request.json();
+
+    const existingJob = await Job.findOne({ link: payload.link });
+
+    if (existingJob) {
+      return NextResponse.json(
+        { result: "Job with same link already exists!", success: false },
+        { status: 403 }
+      );
+    }
+
     const job = new Job({ ...payload });
     await job.save();
 

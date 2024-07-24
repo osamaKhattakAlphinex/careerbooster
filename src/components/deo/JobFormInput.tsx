@@ -15,6 +15,7 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
   const [updateJob, setUpdateJob] = useState<boolean>(false);
   const [rewritingJob, setRewritingJob] = useState(false);
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [error,setError] = useState<string>("")
   const getSuggestions = (value) => {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
@@ -135,48 +136,57 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
     }),
     onSubmit: async (values) => {
       // Handle form submission here
-      if (updateJob) {
-        const formData = {
-          ...singleRec,
-          jobTitle: values.job,
-          location: values.location,
-          employer: values.employer,
-          category: values.category,
-          jobDescription: values.description,
-          link: values.joblink,
-          skills: values.skills,
-        };
-        const upadteJob = await axios.put(`/api/deo?jobId=${singleRec._id}`, {
-          ...formData,
-        });
-        if (upadteJob.data.success) {
-          formik.resetForm();
-          setOpen(false);
+      try {
+        if (updateJob) {
+          const formData = {
+            ...singleRec,
+            jobTitle: values.job,
+            location: values.location,
+            employer: values.employer,
+            category: values.category,
+            jobDescription: values.description,
+            link: values.joblink,
+            skills: values.skills,
+          };
+          const upadteJob = await axios.put(`/api/deo?jobId=${singleRec._id}`, {
+            ...formData,
+          });
+          if (upadteJob.data.success) {
+            formik.resetForm();
+            setOpen(false);
+          } else {
+            console.log("Something went wrong");
+          }
         } else {
-          console.log("Something went wrong");
+          const formData = {
+            jobTitle: values.job,
+            location: values.location,
+            employer: values.employer,
+            category: values.category,
+            jobDescription: values.description,
+            addedByUserId: deoId,
+            link: values.joblink,
+            skills: values.skills,
+            status: "active",
+          };
+          const addJob = await axios.post("/api/deo", {
+            payload: formData,
+          });
+          debugger
+          console.log(addJob)
+          if (addJob.data.success) {
+            formik.resetForm();
+            setOpen(false);
+          } else {
+            
+            console.log("Something went wrong");
+          }
         }
-      } else {
-        const formData = {
-          jobTitle: values.job,
-          location: values.location,
-          employer: values.employer,
-          category: values.category,
-          jobDescription: values.description,
-          addedByUserId: deoId,
-          link: values.joblink,
-          skills: values.skills,
-          status: "active",
-        };
-        const addJob = await axios.post("/api/deo", {
-          payload: formData,
-        });
-        if (addJob.data.success) {
-          formik.resetForm();
-          setOpen(false);
-        } else {
-          console.log("Something went wrong");
-        }
+      }  catch (error:any) {
+        console.error("Error during API call:", error.response.data.result);
+        setError( error.response.data.result)
       }
+      
     },
   });
   const addSkills = (value: any) => {
@@ -491,6 +501,8 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
           </button>
         </div>
       </form>
+      {error!=="" && <div className="text-red-500 my-2">Error: {error}</div>}
+
       <button
         disabled={formik.values.description === ""}
         onClick={rewriteJob}

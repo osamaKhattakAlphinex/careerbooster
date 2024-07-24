@@ -640,7 +640,7 @@ const RegistrationForm = () => {
                       type="text"
                       name="preferedLocation"
                       className="block outline-none focus:border-blue-400 dark:bg-transparent rounded-lg pr-[1.5rem] py-4 pl-[3rem] text-base w-full border-[1px] border-[#bdbfd4] bg-transparent bg-clip"
-                      placeholder="Preffered Location"
+                      placeholder="Preferred Location"
                       onBlur={formik.handleBlur}
                       onChange={formik.handleChange}
                       value={formik.values.preferedLocation}

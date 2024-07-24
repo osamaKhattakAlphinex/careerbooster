@@ -18,6 +18,7 @@ const EditableField = ({
   onSave,
   style,
   text,
+  profile=false,
 }: {
   value: string | undefined;
   overrideValue?: string;
@@ -26,6 +27,7 @@ const EditableField = ({
   className?: any;
   onSave: (value: string) => void;
   text?: any;
+  profile?: boolean; // indicates whether the field is for profile details
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   let new_value: string | undefined = normalizeValue(value);
@@ -58,7 +60,12 @@ const EditableField = ({
       setTextAreaHeight(spanRef.current?.scrollHeight + 1);
     }
   }, [spanRef.current?.scrollWidth]);
-
+  useEffect(() => {
+    if (isEditing && textareaRef.current) {
+      const len = editedValue.length;
+      textareaRef.current.setSelectionRange(len, len);
+    }
+  }, [isEditing]);
   return (
     <>
       <span
@@ -72,7 +79,7 @@ const EditableField = ({
               <textarea
                 ref={textareaRef}
                 value={editedValue}
-                className={`bg-transparent w-full hover:cursor-text ${className} resize-none overflow-y-hidden`}
+                className={`bg-transparent w-full hover:cursor-text ${profile?"p-2":""} ${className} resize-none overflow-y-hidden`}
                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                   setEditedValue(e.target.value)
                 }
@@ -103,7 +110,7 @@ const EditableField = ({
             </a> */}
             <span
               ref={spanRef}
-              className={`w-fit xs:block md:block hover:cursor-text hover:shadow-md hover:bg-gray-100`}
+              className={`w-fit xs:block md:block hover:cursor-text hover:shadow-md ${profile? "p-2 hover:bg-transparent dark:border-[#2e2f45] rounded-lg hover:border-dashed border-2 hover:border-2":"hover:bg-gray-100"}`}
               title="Click to Edit"
               style={{ textAlign: text }}
             >

@@ -208,7 +208,7 @@ export default function JobCard({
               We{"'"}re sorry, but we currently don{"'"}t have any job openings
               that match your skill set. We value your time and strive to
               provide only the most relevant job postings. Please check back
-              again soon, or try adjusting your search criteria.
+              again soon, or try adjusting your search criteria using manual search.
             </div>
           )}
       {records.length > 0 && (
