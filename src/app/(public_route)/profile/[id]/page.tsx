@@ -204,16 +204,16 @@ const Page = ({ params }: { params: { id: string } }) => {
               <div className="flex items-center gap-3 mt-4">
                 {" "}
                 <button
-                  className="rounded-full w-fit px-4 py-2 text-[18px] dark:hover:bg-transparent dark:hover:border dark:hover:border-[#E0E360] dark:hover:text-gray-100 hover:bg-transparent hover:border hover:border-blue-400 hover:text-gray-900 dark:text-gray-900  dark:bg-[#E0E360] bg-blue-500 text-gray-100 xs:mx-auto md:mx-0"
+                  className="rounded-full w-fit px-4 py-2 md:text-[18px] xs:text[15px]  dark:hover:bg-transparent dark:hover:border dark:hover:border-[#E0E360] dark:hover:text-gray-100 hover:bg-transparent hover:border hover:border-blue-400 hover:text-gray-900 dark:text-gray-900  dark:bg-[#E0E360] bg-blue-500 text-gray-100 xs:mx-auto md:mx-0"
                   onClick={downloadPdf}
                 >
                   Download Profile
                 </button>
-                <h2 className="text-[18px]">OR</h2>
+                <h2 className="md:text-[18px] xs:text[15px] ">OR</h2>
                 <Link
                   target="_blank"
                   href="/profile-review"
-                  className="rounded-full w-fit px-4 py-2 text-[18px] dark:hover:bg-transparent dark:hover:border dark:hover:border-[#E0E360] dark:hover:text-gray-100 hover:bg-transparent hover:border hover:border-blue-400 hover:text-gray-900 dark:text-gray-900  dark:bg-[#E0E360] bg-blue-500 text-gray-100 xs:mx-auto md:mx-0"
+                  className="rounded-full w-fit px-4 py-2 md:text-[18px] xs:text[15px] dark:hover:bg-transparent dark:hover:border dark:hover:border-[#E0E360] dark:hover:text-gray-100 hover:bg-transparent hover:border hover:border-blue-400 hover:text-gray-900 dark:text-gray-900  dark:bg-[#E0E360] bg-blue-500 text-gray-100 xs:mx-auto md:mx-0"
                 >
                   Edit Profile
                 </Link>
@@ -243,7 +243,7 @@ const Page = ({ params }: { params: { id: string } }) => {
           {userDetails.desiredJobTitle ? (
             <div className="flex flex-col lg:w-[90%] xs:w-full xs:mt-6 md:mt-16 mx-auto  gap-2 rounded-md dark:bg-gray-900 bg-gray-100">
               <div
-                className="w-[40px] ml-auto pt-4 pr-4 "
+                className="md:w-[40px] xs:w-[20px] ml-auto pt-4 md:pr-4 xs:mr-4 md:mr-0"
                 onClick={() => {
                   setIsUpdateFormOpen(true);
                 }}
@@ -264,11 +264,14 @@ const Page = ({ params }: { params: { id: string } }) => {
                 </svg>
               </div>
 
-              <div className="py-8 px-4 text-center md:flex-row xs:flex-col  flex ">
+              <div className="md:py-8 xs:py-4 px-4 text-center md:flex-row xs:flex-col  flex ">
                 <div className="salary flex md:flex-col xs:flex-row gap-4 md:w-1/3 xs:w-full items-center">
                   <h1 className="dark:text-gray-100 text-gray-950 lg:text-[26px] xs:text-[20px] font-semibold">
                     Expected Salary (in $)
                   </h1>
+                  <span className="xs:block md:hidden text-[18px] font-bold">
+                    -
+                  </span>
                   <h1 className="dark:text-gray-100 text-gray-950 lg:text-[20px] md:text-[16px]">
                     {userData.expectedSalary
                       ? formatStringWithCommas(userData.expectedSalary)
@@ -279,6 +282,9 @@ const Page = ({ params }: { params: { id: string } }) => {
                   <h1 className="dark:text-gray-100 text-gray-950 lg:text-[26px] xs:text-[20px] font-semibold">
                     Desired Job Title
                   </h1>
+                  <span className="xs:block md:hidden text-[18px] font-bold">
+                    -
+                  </span>
                   <h1 className="dark:text-gray-100 text-gray-950 lg:text-[20px] md:text-[16px]">
                     {userData.desiredJobTitle
                       ? userData.desiredJobTitle
@@ -289,6 +295,9 @@ const Page = ({ params }: { params: { id: string } }) => {
                   <h1 className="dark:text-gray-100 text-gray-950 lg:text-[26px] xs:text-[20px] font-semibold">
                     Preferred Location
                   </h1>
+                  <span className="xs:block md:hidden text-[18px] font-bold">
+                    -
+                  </span>
                   <h1 className="dark:text-gray-100 text-gray-950 lg:text-[20px] md:text-[16px]">
                     {userData.locationPreference
                       ? userData.locationPreference
@@ -488,7 +497,7 @@ const Page = ({ params }: { params: { id: string } }) => {
                           </p>
                         )}
                     </div>
-                    <button className="bg-blue-600 rounded-md px-4 py-2 justify-center flex text-gray-100 text-[20px] w-fit mx-auto">
+                    <button className="bg-blue-600 rounded-md px-4 py-2 justify-center flex text-gray-100 md:text-[20px] xs:text-[16px] w-fit mx-auto">
                       Update Profile
                     </button>
                   </form>
@@ -498,11 +507,13 @@ const Page = ({ params }: { params: { id: string } }) => {
           )}
           {userData.summary ? (
             <div className="flex flex-col lg:w-[90%] xs:w-full xs:mt-6 md:mt-20 mx-auto  gap-2 rounded-md dark:bg-gray-900 bg-gray-100 p-8">
-              <h1 className="font-bold text-[30px] text-center uppercase">
+              <h1 className="font-bold md:text-[30px] xs:text-[20px] text-center uppercase">
                 Summmary
               </h1>
-              <span className="text-center w-[60px] h-2 border-b-[4px] mx-auto border-green-400 mb-4"></span>
-              <p className="text-[20px]">{userData.summary}</p>
+              <span className="text-center md:w-[60px] xs:w-[30px] h-2 border-b-[4px] mx-auto border-green-400 mb-4"></span>
+              <p className="md:text-[20px] xs:text-[16px]">
+                {userData.summary}
+              </p>
             </div>
           ) : (
             <button
