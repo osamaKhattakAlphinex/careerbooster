@@ -78,9 +78,7 @@ const Page = ({ params }: { params: { id: string } }) => {
   });
 
   useEffect(() => {
-    console.log("in useEffect");
     if (isUpdateFormOpen) {
-      console.log("inside");
       formik.setFieldValue("desiredJobTitle", userData.desiredJobTitle);
       formik.setFieldValue("expectedSalary", userData.expectedSalary);
       formik.setFieldValue("prefferedLocation", userData.locationPreference);
