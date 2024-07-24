@@ -312,27 +312,30 @@ const Page = ({ params }: { params: { id: string } }) => {
                 isEmployer === "No" ? "hidden" : "flex"
               }`}
             >
-              <div className="flex items-center gap-4 mx-auto mt-6">
+              <div className="md:flex-row flex xs:flex-col items-center gap-4 mx-auto mt-6">
                 <h1 className="text-center font-semibold text-[30px] ">
                   Are You A Job Seeker ?
                 </h1>
-                <button
-                  onClick={() => {
-                    setIsEmployer("Yes");
-                    setOpen(true);
-                  }}
-                  className="w-fit px-4 py-1 rounded-lg bg-blue-600 text-gray-100 text-[16px]"
-                >
-                  Yes
-                </button>
-                <button
-                  onClick={() => {
-                    setIsEmployer("No");
-                  }}
-                  className="w-fit px-4 py-1 rounded-lg bg-blue-600 text-gray-100 text-[16px]"
-                >
-                  No
-                </button>
+                <div className="flex gap-4">
+                  {" "}
+                  <button
+                    onClick={() => {
+                      setIsEmployer("Yes");
+                      setOpen(true);
+                    }}
+                    className="w-fit px-4 py-1 rounded-lg bg-blue-600 text-gray-100 text-[16px]"
+                  >
+                    Yes
+                  </button>
+                  <button
+                    onClick={() => {
+                      setIsEmployer("No");
+                    }}
+                    className="w-fit px-4 py-1 rounded-lg bg-blue-600 text-gray-100 text-[16px]"
+                  >
+                    No
+                  </button>
+                </div>
               </div>
             </div>
           )}
