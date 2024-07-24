@@ -7,18 +7,16 @@ import Link from "next/link";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { saveAs } from "file-saver";
 import { linkedInIconFilled } from "@/helpers/iconsProvider";
 import { formatStringWithCommas } from "@/helpers/DateRangeFilter";
-import { showSuccessToast } from "@/helpers/toast";
 import { useFormik } from "formik";
 import axios from "axios";
 import { setField } from "@/store/userDataSlice";
 const Page = ({ params }: { params: { id: string } }) => {
   const [active, setActive] = useState("education-card");
-  const profileRef = useRef<HTMLDivElement | null>(null);
   const userDetails = useSelector((state: RootState) => state.userData);
   const [userData, setUserData] = useState(userDetails);
   const [userFetched, setUserFetched] = useState<boolean>(false);
@@ -164,13 +162,7 @@ const Page = ({ params }: { params: { id: string } }) => {
 
   return (
     <div className=" flex flex-col xs:mt-[90px] lg:mt-52 md:mt-28 md:px-20 xs:px-4 xs:text-center md:text-left">
-      {/* <div
-        ref={profileRef}
-        className="xs:hidden bg-white flex flex-col items-center justify-center p-8"
-      >
-        <ProfileResume />
-      </div> */}
-
+      
       {/* {hero-section} */}
       {userFetched ? (
         <>
