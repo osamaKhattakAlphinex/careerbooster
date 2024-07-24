@@ -44,20 +44,20 @@ const Page = ({ params }: { params: { id: string } }) => {
           },
         })
         .then((resp) => {
-            console.log("user Updated Successfully");
-            dispatch(
-              setField({ name: "expectedSalary", value: values.expectedSalary })
-            );
-            dispatch(
-              setField({ name: "desiredJobTitle", value: values.desiredJobTitle })
-            );
-            dispatch(
-              setField({
-                name: "locationPreference",
-                value: values.prefferedLocation,
-              })
-            );
-          
+          console.log("user Updated Successfully");
+          dispatch(
+            setField({ name: "expectedSalary", value: values.expectedSalary })
+          );
+          dispatch(
+            setField({ name: "desiredJobTitle", value: values.desiredJobTitle })
+          );
+          dispatch(
+            setField({
+              name: "locationPreference",
+              value: values.prefferedLocation,
+            })
+          );
+
           formik.resetForm();
 
           setOpen(false);
@@ -74,6 +74,42 @@ const Page = ({ params }: { params: { id: string } }) => {
       ),
     }),
   });
+
+  const generateSummaryForProfile = () => {
+    const formData = {
+      content: userData.uploadedResume.fileContent,
+      trainBotData: {
+        userEmail: userData.email,
+        fileAddress: userData.defaultResumeFile,
+      },
+    };
+
+    fetch("/api/homepage/writeSummary", {
+      method: "POST",
+      body: JSON.stringify(formData),
+    })
+      .then(async (resp) => {
+        const res = await resp.json();
+        if (res.success) {
+          if (res.result) {
+            dispatch(setField({ name: "summary", value: res.result }));
+            setUserData((prev) => {
+              return {
+                ...prev,
+                summary: res.result,
+              };
+            });
+            await axios.post("/api/users/updateUserData", {
+              data: {
+                ...userData,
+                summary: res.result,
+              },
+            });
+          }
+        }
+      })
+      .catch((error) => {});
+  };
 
   useEffect(() => {
     if (userDetails._id) {
@@ -122,6 +158,14 @@ const Page = ({ params }: { params: { id: string } }) => {
       >
         <ProfileResume />
       </div> */}
+
+      {userData.summary ? (
+        userData.summary
+      ) : (
+        <button onClick={() => generateSummaryForProfile()}>
+          Executive Summary
+        </button>
+      )}
 
       {/* {hero-section} */}
       {userFetched ? (
