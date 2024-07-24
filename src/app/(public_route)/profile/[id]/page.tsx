@@ -146,44 +146,35 @@ const Page = ({ params }: { params: { id: string } }) => {
         });
     }
   }, [userDetails]);
-  // console.log(userData);
 
   const downloadPdf = async () => {
     const fileName = `${userData.firstName}.pdf`;
     const blob = await pdf(<ProfileResume userData={userData} />).toBlob();
     saveAs(blob, fileName);
   };
-  // if (loading) {
-  //   <div className=" flex flex-col xs:mt-[90px] lg:mt-52 md:mt-28 md:px-20 xs:px-4 xs:text-center mb-10">
-  //     <span className=" text-[#6a4dff] dark:text-[#e6f85e] text-[20px] ">
-  //       {refreshIconRotating}
-  //     </span>
-  //   </div>;
-  // }
-  if (!userDetails._id && params.id !== userDetails._id) {
-    if (userDetails.isLoading) {
-      return (
-        <div className=" flex flex-col xs:mt-[90px] lg:mt-52 md:mt-28 md:px-20 xs:px-4 xs:text-center mb-10">
-          <span className=" text-[#6a4dff] dark:text-[#e6f85e] text-[20px] mx-auto">
-            {refreshIconRotating}
-          </span>
-        </div>
-      );
-    } else {
-      return (
-        <div className=" flex flex-col xs:mt-[90px] lg:mt-52 md:mt-28 md:px-20 xs:px-4 xs:text-center mb-10">
-          <span className=" text-[#6a4dff] dark:text-[#e6f85e] text-[20px] ">
-            You Don{"'"}t Have Access To This Page
-          </span>
-        </div>
-      );
-    }
+ 
+  if (!userDetails._id || params.id !== userDetails._id) {
+     if (userDetails.isLoading) {
+    return (
+      <div className=" flex flex-col xs:mt-[90px] lg:mt-52 md:mt-28 md:px-20 xs:px-4 xs:text-center mb-10">
+        <span className=" text-[#6a4dff] dark:text-[#e6f85e] text-[20px] mx-auto">
+          {refreshIconRotating}
+        </span>
+      </div>
+    );
+  }else {
+    return (
+      <div className=" flex flex-col xs:mt-[90px] lg:mt-52 md:mt-28 md:px-20 xs:px-4 xs:text-center mb-10">
+        <span className=" text-[#6a4dff] dark:text-[#e6f85e] text-[20px] ">
+          You Don{"'"}t Have Access To This Page
+        </span>
+      </div>
+    );
   }
-  console.log(userDetails);
+  }
 
   return (
     <div className=" flex flex-col xs:mt-[90px] lg:mt-52 md:mt-28 md:px-20 xs:px-4 xs:text-center md:text-left">
-      
       {/* {hero-section} */}
       {userFetched ? (
         <>
