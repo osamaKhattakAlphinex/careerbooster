@@ -173,14 +173,6 @@ const Page = ({ params }: { params: { id: string } }) => {
         <ProfileResume />
       </div> */}
 
-      {userData.summary ? (
-        userData.summary
-      ) : (
-        <button onClick={() => generateSummaryForProfile()}>
-          Generate Profile Summary
-        </button>
-      )}
-
       {/* {hero-section} */}
       {userFetched ? (
         <>
@@ -211,12 +203,23 @@ const Page = ({ params }: { params: { id: string } }) => {
                 </li>
                 {/* <li>{userData.phone}</li> */}
               </ul>
-              <button
-                className="rounded-full w-fit px-4 py-2 text-[18px] dark:hover:bg-transparent dark:hover:border dark:hover:border-[#E0E360] dark:hover:text-gray-100 hover:bg-transparent hover:border hover:border-blue-400 hover:text-gray-900 mt-2 dark:text-gray-900  dark:bg-[#E0E360] bg-blue-500 text-gray-100 xs:mx-auto md:mx-0"
-                onClick={downloadPdf}
-              >
-                Download Profile
-              </button>
+              <div className="flex items-center gap-3 mt-4">
+                {" "}
+                <button
+                  className="rounded-full w-fit px-4 py-2 text-[18px] dark:hover:bg-transparent dark:hover:border dark:hover:border-[#E0E360] dark:hover:text-gray-100 hover:bg-transparent hover:border hover:border-blue-400 hover:text-gray-900 mt-2 dark:text-gray-900  dark:bg-[#E0E360] bg-blue-500 text-gray-100 xs:mx-auto md:mx-0"
+                  onClick={downloadPdf}
+                >
+                  Download Profile
+                </button>
+                <h2 className="text-[18px]">OR</h2>
+                <Link
+                  target="_blank"
+                  href="/profile-review"
+                  className="rounded-full w-fit px-4 py-2 text-[18px] dark:hover:bg-transparent dark:hover:border dark:hover:border-[#E0E360] dark:hover:text-gray-100 hover:bg-transparent hover:border hover:border-blue-400 hover:text-gray-900 mt-2 dark:text-gray-900  dark:bg-[#E0E360] bg-blue-500 text-gray-100 xs:mx-auto md:mx-0"
+                >
+                  Edit Profile
+                </Link>
+              </div>
             </div>
             <div className="w-1/2 xs:hidden md:block ">
               {userData.profileImage ? (
@@ -238,8 +241,9 @@ const Page = ({ params }: { params: { id: string } }) => {
               )}
             </div>
           </div>
+
           {userDetails.desiredJobTitle ? (
-            <div className="flex flex-col lg:w-[90%] xs:w-full xs:mt-6 md:mt-16 mx-auto  gap-10 rounded-md dark:bg-gray-900 bg-gray-100">
+            <div className="flex flex-col lg:w-[90%] xs:w-full xs:mt-6 md:mt-16 mx-auto  gap-2 rounded-md dark:bg-gray-900 bg-gray-100">
               <div
                 className="w-[40px] ml-auto pt-4 pr-4 "
                 onClick={() => {
@@ -486,7 +490,7 @@ const Page = ({ params }: { params: { id: string } }) => {
                           </p>
                         )}
                     </div>
-                    <button className="bg-blue-600 rounded-md px-4 py-2 text-gray-100 text-[20px] w-fit mx-auto">
+                    <button className="bg-blue-600 rounded-md px-4 py-2 justify-center flex text-gray-100 text-[20px] w-fit mx-auto">
                       Update Profile
                     </button>
                   </form>
@@ -494,7 +498,22 @@ const Page = ({ params }: { params: { id: string } }) => {
               </div>
             </div>
           )}
-
+          {userData.summary ? (
+            <div className="flex flex-col lg:w-[90%] xs:w-full xs:mt-6 md:mt-20 mx-auto  gap-2 rounded-md dark:bg-gray-900 bg-gray-100 p-8">
+              <h1 className="font-bold text-[30px] text-center uppercase">
+                Summmary
+              </h1>
+              <span className="text-center w-[60px] h-2 border-b-[4px] mx-auto border-green-400 mb-4"></span>
+              <p className="text-[20px]">{userData.summary}</p>
+            </div>
+          ) : (
+            <button
+              className="rounded-full bg-blue-600 mt-10 mx-auto text-gray-100 px-4 py-2 w-fit"
+              onClick={() => generateSummaryForProfile()}
+            >
+              Generate Profile Summary
+            </button>
+          )}
           {/* skills-section */}
           <div className="flex w-full flex-col md:py-16 xs:py-6">
             <h1 className="md:text-[36px] xs:text-[30px] font-bold text-center mb-6">

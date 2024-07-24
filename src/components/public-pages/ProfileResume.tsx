@@ -107,6 +107,10 @@ function ProfileResume({ userData }) {
             </Text>
           </Text>
         </View>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Summary</Text>
+          <Text style={styles.expDesc}>{userData.summary}</Text>
+        </View>
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Skills</Text>
