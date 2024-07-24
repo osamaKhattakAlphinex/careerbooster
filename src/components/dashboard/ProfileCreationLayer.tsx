@@ -29,20 +29,21 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { usePathname } from "next/navigation";
 import VirtualBot from "./VirtualBot";
 import { getPackageID } from "@/ServerActions";
-import { setUserData } from "@/store/userDataSlice";
+import { setField, setUserData } from "@/store/userDataSlice";
 import { RootState } from "@/store/store";
 
 interface Props {
   children: React.ReactNode;
 }
 
+
 const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   const pathname = usePathname();
   // Redux
   const router = useRouter();
   const params = useSearchParams();
-  const userData = useSelector((state: RootState) => state.userData);
   const dispatch = useDispatch();
+  const userData = useSelector((state: RootState) => state.userData);
   const register = useSelector((state: RootState) => state.register);
   const resume = useSelector((state: RootState) => state.resume);
   const [showStuckError, setShowStuckError] = useState(false);
@@ -58,6 +59,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   const createProfileFromResume = () => {
     if (register.scrappedContent && !userData.wizardCompleted) {
       fetchBasicDataFromResume();
+      writeBasicSummaryFromResume();
       fetchEducationDataFromResume();
       fetchExperienceDataFromResume();
       fetchSkillsDataFromResume();
@@ -83,7 +85,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
 
       const formData = {
         type: "basicInfo",
-        // file: userData.defaultResumeFile,
+
         content: register.scrappedContent,
         trainBotData: {
           userEmail: userData.email,
@@ -152,7 +154,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   const fetchEducationDataFromResume = (refetch = false) => {
     if (
       (refetch || register.scrapped.education === false) &&
-      // userData.defaultResumeFile &&
       register.scrappedContent !== "" &&
       register.scrapping.education === false
     ) {
@@ -160,7 +161,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       dispatch(setScrapping({ education: true }));
 
       const formData = {
-        // file: userData.defaultResumeFile,
         content: register.scrappedContent,
         trainBotData: {
           userEmail: userData.email,
@@ -285,10 +285,33 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
     }
   };
 
+  const writeBasicSummaryFromResume = async ( ) => {
+    const formData = {
+      content: register.scrappedContent,
+      trainBotData: {
+        userEmail: userData.email,
+        fileAddress: userData.defaultResumeFile,
+      },
+    };
+  
+    fetch("/api/homepage/writeSummary", {
+      method: "POST",
+      body: JSON.stringify(formData),
+    })
+      .then(async (resp) => {
+        const res = await resp.json();
+        if (res.success) {
+          if (res.result) {
+            dispatch(setField({ name: "summary", value: res.result }));
+          }
+        }
+      })
+      .catch((error) => {});
+  };
+
   const fetchCertificatesDataFromResume = (refetch = false) => {
     if (
       (refetch || register.scrapped.certifications === false) &&
-      // userData.defaultResumeFile &&
       register.scrappedContent !== "" &&
       register.scrapping.certifications === false
     ) {
@@ -296,7 +319,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       dispatch(setScrapping({ certifications: true }));
 
       const formData = {
-        // file: userData.defaultResumeFile,
         content: register.scrappedContent,
         trainBotData: {
           userEmail: userData.email,
@@ -356,7 +378,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   const fetchAwardsDataFromResume = (refetch = false) => {
     if (
       (refetch || register.scrapped.awards === false) &&
-      // userData.defaultResumeFile &&
       register.scrappedContent !== "" &&
       register.scrapping.awards === false
     ) {
@@ -364,7 +385,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       dispatch(setScrapping({ awards: true }));
 
       const formData = {
-        // file: userData.defaultResumeFile,
         content: register.scrappedContent,
         trainBotData: {
           userEmail: userData.email,
@@ -423,7 +443,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   const fetchInterestsDataFromResume = (refetch = false) => {
     if (
       (refetch || register.scrapped.interests === false) &&
-      // userData.defaultResumeFile &&
       register.scrappedContent !== "" &&
       register.scrapping.interests === false
     ) {
@@ -431,7 +450,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       dispatch(setScrapping({ languages: true }));
 
       const formData = {
-        // file: userData.defaultResumeFile,
         content: register.scrappedContent,
         trainBotData: {
           userEmail: userData.email,
@@ -487,7 +505,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   const fetchLanguagesDataFromResume = (refetch = false) => {
     if (
       (refetch || register.scrapped.languages === false) &&
-      // userData.defaultResumeFile &&
       register.scrappedContent !== "" &&
       register.scrapping.languages === false
     ) {
@@ -495,7 +512,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       dispatch(setScrapping({ languages: true }));
 
       const formData = {
-        // file: userData.defaultResumeFile,
         content: register.scrappedContent,
         trainBotData: {
           userEmail: userData.email,
@@ -552,7 +568,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   const fetchReferencesDataFromResume = (refetch = false) => {
     if (
       (refetch || register.scrapped.references === false) &&
-      // userData.defaultResumeFile &&
       register.scrappedContent !== "" &&
       register.scrapping.references === false
     ) {
@@ -560,7 +575,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       dispatch(setScrapping({ references: true }));
 
       const formData = {
-        // file: userData.defaultResumeFile,
         content: register.scrappedContent,
         trainBotData: {
           userEmail: userData.email,
@@ -619,7 +633,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   const fetchProjectsDataFromResume = (refetch = false) => {
     if (
       (refetch || register.scrapped.projects === false) &&
-      // userData.defaultResumeFile &&
       register.scrappedContent !== "" &&
       register.scrapping.projects === false
     ) {
@@ -627,7 +640,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       dispatch(setScrapping({ projects: true }));
 
       const formData = {
-        // file: userData.defaultResumeFile,
         content: register.scrappedContent,
         trainBotData: {
           userEmail: userData.email,
@@ -684,7 +696,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   const fetchPublicationsDataFromResume = (refetch = false) => {
     if (
       (refetch || register.scrapped.publications === false) &&
-      // userData.defaultResumeFile &&
       register.scrappedContent !== "" &&
       register.scrapping.publications === false
     ) {
@@ -692,7 +703,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       dispatch(setScrapping({ publications: true }));
 
       const formData = {
-        // file: userData.defaultResumeFile,
         content: register.scrappedContent,
         trainBotData: {
           userEmail: userData.email,
@@ -752,7 +762,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   const fetchExperienceDataFromResume = (refetch = false) => {
     if (
       (refetch || register.scrapped.workExperience === false) &&
-      // userData.defaultResumeFile &&
       register.scrapping.workExperience === false &&
       register.scrappedContent !== ""
     ) {
@@ -760,7 +769,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       dispatch(setScrapping({ workExperience: true }));
 
       const formData = {
-        // file: userData.defaultResumeFile,
         content: register.scrappedContent,
         trainBotData: {
           userEmail: userData.email,
@@ -937,13 +945,11 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   const fetchSkillsDataFromResume = () => {
     if (
       register.scrapped.skills === false &&
-      // userData.defaultResumeFile &&
       register.scrapping.skills === false &&
       register.scrappedContent !== ""
     ) {
       dispatch(setScrapping({ skills: true }));
       const formData = {
-        // file: userData.defaultResumeFile,
         content: register.scrappedContent,
         trainBotData: {
           userEmail: userData.email,
@@ -987,7 +993,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
   const fetchTrainingsDataFromResume = (refetch = false) => {
     if (
       (refetch || register.scrapped.trainings === false) &&
-      // userData.defaultResumeFile &&
       register.scrappedContent !== "" &&
       register.scrapping.trainings === false
     ) {
@@ -995,7 +1000,6 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
       dispatch(setScrapping({ trainings: true }));
 
       const formData = {
-        // file: userData.defaultResumeFile,
         content: register.scrappedContent,
         trainBotData: {
           userEmail: userData.email,
@@ -1056,6 +1060,7 @@ const ProfileCreationLayer: React.FC<Props> = ({ children }) => {
     const obj = {
       firstName: register.stepOne.firstName,
       lastName: register.stepOne.lastName,
+      summary: userData.summary,
       email: userData.email,
       linkedin: register.stepTwo.linkedin,
       file: resume.uploadedFileName,

@@ -29,7 +29,6 @@ export async function POST(req: NextRequest) {
 
     const reqBody = await req.json();
     const data = reqBody?.data;
-
     if (!data || !data.email) {
       return NextResponse.json(
         {

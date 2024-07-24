@@ -126,6 +126,19 @@ const useUpdateAndSave = () => {
       console.log(error);
     }
   };
+  const updateAndSaveProfileSummary = (summary: string) => {
+    dispatch(setField({name: "summary", value: summary}))
+    try {
+        axios.post("/api/users/updateUserData", {
+        data: {
+          email: userData.email,
+          summary: summary, 
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const updateAndSaveName = (value: string) => {
     dispatch(setResumeField({ name: "name", value: value }));
@@ -144,6 +157,7 @@ const useUpdateAndSave = () => {
       updateAndSaveEducation,
       updateAndSaveHeadings,
       updateAndSaveTourStatus,
+      updateAndSaveProfileSummary,
     },
   };
 };

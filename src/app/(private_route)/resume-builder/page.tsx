@@ -518,10 +518,6 @@ const ResumeBuilder = () => {
           </div>
           {finished && (
             <div className="space-y-3 text-white">
-              {/* <p>
-                We have generated free text basic resume for you for further
-                design templates click here
-              </p> */}
               <div className="flex items-center justify-between gap-3 xs:flex-col md:flex-row">
                 <div className="flex items-center gaap-3">
                   <h2 className="flex items-center my-3 text-base font-bold dark:text-gray-100 text-gray-950">

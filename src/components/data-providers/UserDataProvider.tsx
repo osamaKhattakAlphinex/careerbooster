@@ -40,10 +40,10 @@ const UserDataProvider = () => {
             value: user?.uploadedResume?.fileContent,
           })
         );
-        // dispatch(
-        //   setField({ name: "defaultResumeFile", value: user?.files[0] })
-        // );
-        // }
+        dispatch(
+          setField({ name: "defaultResumeFile", value: user?.uploadedResume?.fileName })
+        );
+        
         dispatch(
           setField({ name: "wizardCompleted", value: user.wizardCompleted })
         );

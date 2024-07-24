@@ -108,6 +108,7 @@ interface UserDataSlice {
   email?: string;
   role?: string;
   userCredits?: number;
+  summary?: string;
   contact?: {
     country?: string;
     street?: string;
@@ -162,6 +163,7 @@ const initialState: UserDataSlice = {
   email: "",
   linkedin: "",
   role: "",
+  summary:"",
   contact: {
     country: "",
     street: "",

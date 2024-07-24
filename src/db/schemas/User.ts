@@ -19,7 +19,10 @@ const UserSchema = new Schema(
     registeredPhone: {
       type: String,
     },
-
+    summary: {
+      type: String,
+      default: "",
+    },
     linkedin: {
       type: String,
       unique: true,

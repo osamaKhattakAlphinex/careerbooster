@@ -14,7 +14,6 @@ export default function JobSearchForm({
   const { replace } = useRouter();
   // Inside the Search Component...
   const handleSearch = useDebouncedCallback((term) => {
-    console.log(`Searching... ${term}`);
 
     const params = new URLSearchParams(searchParams.toString());
     if (term) {
@@ -50,12 +49,8 @@ export default function JobSearchForm({
   return (
     <>
       <section id="JobSearchForm" className="mb-10 xs:px-4">
-        <h1 className="dark:text-gray-100 text-gray-950 font-extrabold text-[24px] text-center mb-4">
-          Find Your Next Job
-        </h1>
-        <div
-          className="form rounded-md dark:bg-black bg-gray-100 shadow-md md:mx-20"
-        >
+       
+        <div className="form rounded-md dark:bg-black bg-gray-100 shadow-md md:mx-20">
           <form
             action=""
             className="md:flex xs:flex-col xs:gap-4 md:flex-row gap-6 md:px-10 py-6 mx-auto w-full"
