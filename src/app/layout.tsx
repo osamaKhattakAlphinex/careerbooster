@@ -10,7 +10,7 @@ import CreditLimitsProvider from "@/components/data-providers/CreditLimitsProvid
 import "./index.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { GoogleAnalytics } from '@next/third-parties/google'
+import { GoogleTagManager } from "@next/third-parties/google";
 import MicrosoftClarity from "@/metrics/MicrosoftClarity";
 
 export const metadata: Metadata = {
@@ -27,7 +27,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body suppressHydrationWarning={true}>
-      <GoogleAnalytics gaId="G-NDN7TY5F2W" />
+        {/* <GoogleAnalytics gaId="G-NDN7TY5F2W" /> */}
+        <GoogleTagManager gtmId="GTM-MN4QXD96" />
         <NextThemeProvider>
           <Head>
             <meta
@@ -42,7 +43,7 @@ export default function RootLayout({
               <CreditLimitsProvider />
               {children}
               <ToastContainer />
-              {/* <MicrosoftClarity /> */}
+              <MicrosoftClarity />
             </ReduxProvider>
           </AuthProvider>
         </NextThemeProvider>
