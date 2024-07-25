@@ -88,6 +88,7 @@ const Page = ({ params }: { params: { id: string } }) => {
     }
   }, [isUpdateFormOpen]);
   const generateSummaryForProfile = () => {
+    setLoading(true);
     const formData = {
       content: userData.uploadedResume.fileContent,
       trainBotData: {
@@ -105,12 +106,6 @@ const Page = ({ params }: { params: { id: string } }) => {
         if (res.success) {
           if (res.result) {
             dispatch(setField({ name: "summary", value: res.result }));
-            setUserData((prev) => {
-              return {
-                ...prev,
-                summary: res.result,
-              };
-            });
             await axios.post("/api/users/updateUserData", {
               data: {
                 ...userData,
@@ -120,16 +115,17 @@ const Page = ({ params }: { params: { id: string } }) => {
           }
         }
       })
-      .catch((error) => {});
+      .catch((error) => {})
+      .finally(() => setLoading(false));
   };
 
   useEffect(() => {
     if (userDetails._id) {
       setUserData(userDetails);
       setUserFetched(true);
+      return;
     }
-    if (userDetails._id && params.id === userDetails._id) {
-      setLoading(true);
+    if (!userDetails._id && params.id) {
       fetch(`/api/users/${params.id}`, {
         method: "GET",
       })
@@ -140,10 +136,7 @@ const Page = ({ params }: { params: { id: string } }) => {
             setUserData(res.user);
           }
         })
-        .catch((error) => console.log(error))
-        .finally(() => {
-          setLoading(false);
-        });
+        .catch((error) => console.log(error));
     }
   }, [userDetails]);
 
@@ -152,31 +145,31 @@ const Page = ({ params }: { params: { id: string } }) => {
     const blob = await pdf(<ProfileResume userData={userData} />).toBlob();
     saveAs(blob, fileName);
   };
- 
+
   if (!userDetails._id || params.id !== userDetails._id) {
-     if (userDetails.isLoading) {
-    return (
-      <div className=" flex flex-col xs:mt-[90px] lg:mt-52 md:mt-28 md:px-20 xs:px-4 xs:text-center mb-10">
-        <span className=" text-[#6a4dff] dark:text-[#e6f85e] text-[20px] mx-auto">
-          {refreshIconRotating}
-        </span>
-      </div>
-    );
-  }else {
-    return (
-      <div className=" flex flex-col xs:mt-[90px] lg:mt-52 md:mt-28 md:px-20 xs:px-4 xs:text-center mb-10">
-        <span className=" text-[#6a4dff] dark:text-[#e6f85e] text-[20px] ">
-          You Don{"'"}t Have Access To This Page
-        </span>
-      </div>
-    );
-  }
+    if (userDetails.isLoading) {
+      return (
+        <div className=" flex flex-col xs:mt-[90px] lg:mt-52 md:mt-28 md:px-20 xs:px-4 xs:text-center mb-10">
+          <span className=" text-[#6a4dff] dark:text-[#e6f85e] text-[20px] mx-auto">
+            {refreshIconRotating}
+          </span>
+        </div>
+      );
+    } else {
+      return (
+        <div className=" flex flex-col xs:mt-[90px] lg:mt-52 md:mt-28 md:px-20 xs:px-4 xs:text-center mb-10">
+          <span className=" text-[#6a4dff] dark:text-[#e6f85e] text-[20px] ">
+            You Don{"'"}t Have Access To This Page
+          </span>
+        </div>
+      );
+    }
   }
 
   return (
     <div className=" flex flex-col xs:mt-[90px] lg:mt-52 md:mt-28 md:px-20 xs:px-4 xs:text-center md:text-left">
       {/* {hero-section} */}
-      {userFetched ? (
+      {userFetched && (
         <>
           <div className="flex md:flex-row xs:flex-col w-full justify-between items-center ">
             <div className="flex flex-col gap-3 xs:w-full md:w-1/2">
@@ -327,7 +320,7 @@ const Page = ({ params }: { params: { id: string } }) => {
                       setIsEmployer("Yes");
                       setOpen(true);
                     }}
-                    className="w-fit px-4 py-1 rounded-lg bg-blue-600 text-gray-100 text-[16px]"
+                    className="w-fit px-4 py-1 rounded-lg bg-blue-600 hover:bg-blue-800 text-gray-100 text-[16px]"
                   >
                     Yes
                   </button>
@@ -335,7 +328,7 @@ const Page = ({ params }: { params: { id: string } }) => {
                     onClick={() => {
                       setIsEmployer("No");
                     }}
-                    className="w-fit px-4 py-1 rounded-lg bg-blue-600 text-gray-100 text-[16px]"
+                    className="w-fit px-4 py-1 rounded-lg bg-blue-600 hover:bg-blue-800 text-gray-100 text-[16px]"
                   >
                     No
                   </button>
@@ -504,7 +497,7 @@ const Page = ({ params }: { params: { id: string } }) => {
                           </p>
                         )}
                     </div>
-                    <button className="bg-blue-600 rounded-md px-4 py-2 justify-center flex text-gray-100 md:text-[20px] xs:text-[16px] w-fit mx-auto">
+                    <button className="bg-blue-600 hover:bg-blue-800 rounded-md px-4 py-2 justify-center flex text-gray-100 md:text-[20px] xs:text-[16px] w-fit mx-auto">
                       Update Profile
                     </button>
                   </form>
@@ -524,10 +517,10 @@ const Page = ({ params }: { params: { id: string } }) => {
             </div>
           ) : (
             <button
-              className="rounded-full bg-blue-600 mt-10 mx-auto text-gray-100 px-4 py-2 w-fit"
+              className="rounded-full bg-blue-600 hover:bg-blue-800 mt-10 mx-auto text-gray-100 px-4 py-2 w-fit"
               onClick={() => generateSummaryForProfile()}
             >
-              Generate Profile Summary
+              {loading ? refreshIconRotating : "Generate Profile Summary"}
             </button>
           )}
           {/* skills-section */}
@@ -535,7 +528,7 @@ const Page = ({ params }: { params: { id: string } }) => {
             <h1 className="md:text-[36px] xs:text-[30px] font-bold text-center mb-6">
               Skills
             </h1>
-            <div className="flex flex-row items-center flex-wrap gap-3 md:w-[75%] xs:w-full mx-auto text-center justify-center">
+            <div className="flex flex-row items-center flex-wrap gap-3 w-full mx-auto text-center justify-center">
               {userData?.skills
                 ? userData?.skills.map((skill: string, index: number) => {
                     return (
@@ -685,18 +678,6 @@ const Page = ({ params }: { params: { id: string } }) => {
             </div>
           )}
         </>
-      ) : (
-        <div className="flex justify-center gap-8 xs:px-2 md:px-0 mt-16 pb-16">
-          {loading ? (
-            <span className="animate-blink text-[#6a4dff] dark:text-[#e6f85e]">
-              Loading ...
-            </span>
-          ) : (
-            <span className=" text-[#6a4dff] dark:text-[#e6f85e]">
-              User doesn{"'"}t exist
-            </span>
-          )}
-        </div>
       )}
     </div>
   );
