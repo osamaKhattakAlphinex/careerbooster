@@ -11,7 +11,6 @@ import "./index.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GoogleTagManager } from "@next/third-parties/google";
-import MicrosoftClarity from "@/metrics/MicrosoftClarity";
 
 export const metadata: Metadata = {
   title: "Dashboard - CareerBooster.ai",
@@ -27,7 +26,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body suppressHydrationWarning={true}>
-        {/* <GoogleAnalytics gaId="G-NDN7TY5F2W" /> */}
         <GoogleTagManager gtmId="GTM-MN4QXD96" />
         <NextThemeProvider>
           <Head>
@@ -43,7 +41,6 @@ export default function RootLayout({
               <CreditLimitsProvider />
               {children}
               <ToastContainer />
-              <MicrosoftClarity />
             </ReduxProvider>
           </AuthProvider>
         </NextThemeProvider>
