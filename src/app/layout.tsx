@@ -10,6 +10,7 @@ import CreditLimitsProvider from "@/components/data-providers/CreditLimitsProvid
 import "./index.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { GoogleAnalytics } from '@next/third-parties/google'
 import MicrosoftClarity from "@/metrics/MicrosoftClarity";
 
 export const metadata: Metadata = {
@@ -24,20 +25,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <NextThemeProvider>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <AuthProvider>
-        <ReduxProvider>
-          <UserDataProvider />
-          <MainLoaderLayer />
-          <CreditLimitsProvider />
-          {children}
-          <ToastContainer />
-          {/* <MicrosoftClarity /> */}
-        </ReduxProvider>
-      </AuthProvider>
-    </NextThemeProvider>
+    <html lang="en" suppressHydrationWarning={true}>
+      <body suppressHydrationWarning={true}>
+      <GoogleAnalytics gaId="GTM-MN4QXD96" />
+        <NextThemeProvider>
+          <Head>
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1"
+            />
+          </Head>
+          <AuthProvider>
+            <ReduxProvider>
+              <UserDataProvider />
+              <MainLoaderLayer />
+              <CreditLimitsProvider />
+              {children}
+              <ToastContainer />
+              {/* <MicrosoftClarity /> */}
+            </ReduxProvider>
+          </AuthProvider>
+        </NextThemeProvider>
+      </body>
+    </html>
   );
 }
