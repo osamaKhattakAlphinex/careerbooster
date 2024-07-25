@@ -10,7 +10,7 @@ import CreditLimitsProvider from "@/components/data-providers/CreditLimitsProvid
 import "./index.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import MicrosoftClarity from "@/metrics/MicrosoftClarity";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
   title: "Dashboard - CareerBooster.ai",
@@ -24,20 +24,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <NextThemeProvider>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <AuthProvider>
-        <ReduxProvider>
-          <UserDataProvider />
-          <MainLoaderLayer />
-          <CreditLimitsProvider />
-          {children}
-          <ToastContainer />
-          <MicrosoftClarity />
-        </ReduxProvider>
-      </AuthProvider>
-    </NextThemeProvider>
+    <html lang="en" suppressHydrationWarning={true}>
+      <body suppressHydrationWarning={true}>
+        <GoogleTagManager gtmId="GTM-MN4QXD96" />
+        <NextThemeProvider>
+          <Head>
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1"
+            />
+          </Head>
+          <AuthProvider>
+            <ReduxProvider>
+              <UserDataProvider />
+              <MainLoaderLayer />
+              <CreditLimitsProvider />
+              {children}
+              <ToastContainer />
+            </ReduxProvider>
+          </AuthProvider>
+        </NextThemeProvider>
+      </body>
+    </html>
   );
 }
