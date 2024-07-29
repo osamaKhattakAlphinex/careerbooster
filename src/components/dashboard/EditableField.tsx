@@ -11,7 +11,6 @@ const normalizeValue = (value: string = " ") => {
   }
 };
 const EditableField = ({
-  overrideValue,
   value,
   type,
   className,
@@ -21,7 +20,6 @@ const EditableField = ({
   profile=false,
 }: {
   value: string | undefined;
-  overrideValue?: string;
   type?: string;
   style?: any;
   className?: any;

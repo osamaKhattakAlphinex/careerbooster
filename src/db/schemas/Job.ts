@@ -27,6 +27,9 @@ const JobSchema = new Schema(
       type: mongoose.SchemaTypes.ObjectId,
       required: true,
     },
+    applicationProfiles:{
+      type:String,
+    },
     link: String,
     skills: [],
     rejectMsg: String,
