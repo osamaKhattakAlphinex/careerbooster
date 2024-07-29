@@ -10,12 +10,12 @@ import "react-quill/dist/quill.snow.css";
 import { htmlToPlainText } from "@/helpers/HtmlToPlainText";
 import { skills } from "../data-providers/SkillData";
 
-const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
+const JobFormInput = ({ deoId, role, setOpen, singleRec }: any) => {
   const [jobCategories, setJobCategories] = useState<any>([]);
   const [updateJob, setUpdateJob] = useState<boolean>(false);
   const [rewritingJob, setRewritingJob] = useState(false);
   const [suggestions, setSuggestions] = useState<string[]>([]);
-  const [error,setError] = useState<string>("")
+  const [error, setError] = useState<string>("");
   const getSuggestions = (value) => {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
@@ -56,16 +56,16 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
   const onSuggestionsClearRequested = () => {
     setSuggestions([]);
   };
-  const getJObCategories = async () => {
+  const getJobCategories = async () => {
     const res = await axios.get("/api/deo/jobCategories");
     if (res.data.success) {
       setJobCategories(res.data.data);
     }
   };
   useEffect(() => {
-    getJObCategories();
+    getJobCategories();
     if (singleRec) {
-      console.log(singleRec)
+      console.log(singleRec);
       formik.setFieldValue("category", singleRec.category);
       formik.setFieldValue("joblink", singleRec.link);
       formik.setFieldValue("skills", singleRec.skills);
@@ -120,9 +120,12 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
       employer: Yup.string().required("Employer is required"),
       location: Yup.string().required("Location is required"),
       category: Yup.string().required("Job Category is required"),
-      joblink: Yup.string()
-        .url("Invalid URL format")
-        .required("Job Link is required"),
+      joblink:
+        role === "employer"
+          ? Yup.string().url("Invalid URL format")
+          : Yup.string()
+              .url("Invalid URL format")
+              .required("Job Link is required"),
       skills: Yup.array()
         .of(Yup.string())
         .test(
@@ -172,21 +175,19 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
           const addJob = await axios.post("/api/deo", {
             payload: formData,
           });
-          debugger
-          console.log(addJob)
+          debugger;
+          console.log(addJob);
           if (addJob.data.success) {
             formik.resetForm();
             setOpen(false);
           } else {
-            
             console.log("Something went wrong");
           }
         }
-      }  catch (error:any) {
+      } catch (error: any) {
         console.error("Error during API call:", error.response.data.result);
-        setError( error.response.data.result)
+        setError(error.response.data.result);
       }
-      
     },
   });
   const addSkills = (value: any) => {
@@ -501,7 +502,7 @@ const JobFormInput = ({ deoId, setOpen, singleRec }: any) => {
           </button>
         </div>
       </form>
-      {error!=="" && <div className="text-red-500 my-2">Error: {error}</div>}
+      {error !== "" && <div className="text-red-500 my-2">Error: {error}</div>}
 
       <button
         disabled={formik.values.description === ""}

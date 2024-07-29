@@ -1,9 +1,8 @@
-import React from 'react'
+import EmployerJobBoard from "@/components/employer/JobBoard";
+import React from "react";
 
 const JobBoard = () => {
-  return (
-    <div>JobBoard</div>
-  )
-}
+  return <EmployerJobBoard />;
+};
 
-export default JobBoard
+export default JobBoard;
