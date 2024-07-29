@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body suppressHydrationWarning={true}>
-        {/* <GoogleTagManager gtmId="GTM-MN4QXD96" /> */}
+        <GoogleTagManager gtmId="GTM-MN4QXD96" />
         <NextThemeProvider>
           <Head>
             <meta
