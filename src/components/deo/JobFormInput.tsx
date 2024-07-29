@@ -168,6 +168,7 @@ const JobFormInput = ({ deoId, role, setOpen, singleRec }: any) => {
             category: values.category,
             jobDescription: values.description,
             addedByUserId: deoId,
+            addedBy: role === "employer" ? "employer" : "deo",
             link: values.joblink,
             skills: values.skills,
             status: "active",
@@ -175,8 +176,6 @@ const JobFormInput = ({ deoId, role, setOpen, singleRec }: any) => {
           const addJob = await axios.post("/api/deo", {
             payload: formData,
           });
-          debugger;
-          console.log(addJob);
           if (addJob.data.success) {
             formik.resetForm();
             setOpen(false);
@@ -342,7 +341,7 @@ const JobFormInput = ({ deoId, role, setOpen, singleRec }: any) => {
                 : "text-gray-100"
             }`}
           >
-            Job Link
+            {role === "employer" ? "Job Link (Optional)" : "Job Link "}
           </label>
           <input
             type="text"

@@ -120,7 +120,7 @@ const Interest = ({
           </h2> */}
 
               <div className="px-4 py-1">
-                {rec?.description && (
+                {rec?.description && Array.isArray(rec?.description) ? (
                   <ul className={` ${styles?.interest_ul}`}>
                     {rec?.description.map((achievement: any, ind: number) =>
                       achievement === "" ? (
@@ -199,6 +199,18 @@ const Interest = ({
                         </li>
                       )
                     )}
+                  </ul>
+                ) : (
+                  <ul className={` text-xs`}>
+                    <li className={`list-disc capitalize`}>
+                      <EditableField
+                        type="textarea"
+                        value={rec.description}
+                        onSave={(value: string) => {
+                          handlers.handleUpdateInterests(value, i,"interests");
+                        }}
+                      />
+                    </li>
                   </ul>
                 )}
 

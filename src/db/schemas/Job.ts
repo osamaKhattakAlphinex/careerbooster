@@ -31,9 +31,7 @@ const JobSchema = new Schema(
       type: String,
       default: "deo",
     },
-    applicationProfiles:{
-      type:String,
-    },
+    applicationProfiles:[],
     link: String,
     skills: [],
     rejectMsg: String,
