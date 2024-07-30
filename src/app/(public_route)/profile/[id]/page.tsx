@@ -6,8 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
-
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { saveAs } from "file-saver";
 import {
@@ -87,6 +86,7 @@ const Page = ({ params }: { params: { id: string } }) => {
       setOpen(true);
     }
   }, [isUpdateFormOpen]);
+
   const generateSummaryForProfile = () => {
     setLoading(true);
     const formData = {
@@ -145,7 +145,7 @@ const Page = ({ params }: { params: { id: string } }) => {
     const blob = await pdf(<ProfileResume userData={userData} />).toBlob();
     saveAs(blob, fileName);
   };
-
+  
   if (!userDetails._id || params.id !== userDetails._id) {
     if (userDetails.isLoading) {
       return (

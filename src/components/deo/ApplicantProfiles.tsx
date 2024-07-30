@@ -1,11 +1,22 @@
+import { crossIconSmall } from "@/helpers/iconsProvider";
 import Link from "next/link";
 import React from "react";
 
-const ApplicantProfiles = ({ profiles }) => {
+const ApplicantProfiles = ({ profiles, setShowProfiles }) => {
   return (
     <div className="absolute inset-0 z-30 w-full h-full bg-black/90 overflow-y-scroll">
       <div className="mx-auto text-center w-full h-full pt-12">
-        <h1 className="text-xl font-bold">Applicant Profiles</h1>
+        <div className="flex justify-between px-10">
+          <h1 className="py-2 text-lg font-semibold text-gray-100 dark:text-gray-100">
+            Applicant Profiles
+          </h1>
+          <div
+            className="mt-5 cursor-pointer text-gray-100 dark:text-gray-100"
+            onClick={() => setShowProfiles(false)}
+          >
+            {crossIconSmall}
+          </div>
+        </div>
         <br />
         <div className="flex flex-wrap justify-center">
           {profiles.length ? (

@@ -409,7 +409,7 @@ const JobPortal = () => {
             </div>
           </div>
         </div>
-        {showProfiles && <ApplicantProfiles profiles={applicantProfiles} />}
+        {showProfiles && <ApplicantProfiles profiles={applicantProfiles} setShowProfiles={setShowProfiles} />}
         {open ? (
           <JobForm
             setOpen={setOpen}
