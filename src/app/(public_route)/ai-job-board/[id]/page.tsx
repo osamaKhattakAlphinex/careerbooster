@@ -29,7 +29,12 @@ export default function ViewJobPage({ params }: { params: { id: string } }) {
   }, [params]);
 
   const jobProfileToDb = (jobId) => {
-    if (singleJob?.applicationProfiles.includes(`/profile/${userData._id}`)) {
+    if (
+      userData._id &&
+      singleJob?.applicationProfiles.some(
+        (profile) => profile.profileLink === `/profile/${userData._id}`
+      )
+    ) {
       showInfoToast("Already Applied to this Job");
       return;
     }
@@ -38,7 +43,11 @@ export default function ViewJobPage({ params }: { params: { id: string } }) {
         .put(`/api/deo?jobId=${jobId}`, {
           applicationProfiles: [
             ...singleJob?.applicationProfiles,
-            `/profile/${userData._id}`,
+            {
+              name: `${userData.firstName} ${userData.lastName}`,
+              profileLink: `/profile/${userData._id}`,
+              appliedDate: getFormattedDate(new Date()),
+            },
           ],
           noOfProposals: singleJob.noOfProposals + 1,
         })
@@ -47,8 +56,12 @@ export default function ViewJobPage({ params }: { params: { id: string } }) {
             return {
               ...prev,
               applicationProfiles: [
-                ...prev.applicationProfiles,
-                `/profile/${userData._id}`,
+                ...singleJob?.applicationProfiles,
+                {
+                  name: `${userData.firstName} ${userData.lastName}`,
+                  profileLink: `/profile/${userData._id}`,
+                  appliedDate: getFormattedDate(new Date()),
+                },
               ],
               noOfProposals: prev.noOfProposals + 1,
             };

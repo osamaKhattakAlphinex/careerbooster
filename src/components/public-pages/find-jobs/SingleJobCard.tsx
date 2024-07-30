@@ -1,3 +1,4 @@
+import { getFormattedDate } from "@/helpers/getFormattedDateTime";
 import { eyeIcon, sparkleIcon } from "@/helpers/iconsProvider";
 import {
   showErrorToast,
@@ -17,7 +18,7 @@ type Props = {
   jobId: string;
   addedBy: string;
   noOfProposals: number;
-  applicationProfiles: string[];
+  applicationProfiles: any;
 };
 export default function SinglejobCard({
   jobTitle,
@@ -32,7 +33,12 @@ export default function SinglejobCard({
 }: Props) {
   const userData = useSelector((state: RootState) => state.userData);
   const jobProfileToDb = () => {
-    if (applicationProfiles.includes(`/profile/${userData._id}`)) {
+    if (
+      userData._id &&
+      applicationProfiles.some(
+        (profile) => profile.profileLink === `/profile/${userData._id}`
+      )
+    ) {
       showInfoToast("Already Applied to this Job");
       return;
     }
@@ -41,14 +47,22 @@ export default function SinglejobCard({
         .put(`/api/deo?jobId=${jobId}`, {
           applicationProfiles: [
             ...applicationProfiles,
-            `/profile/${userData._id}`,
+            {
+              name: `${userData.firstName} ${userData.lastName}`,
+              profileLink: `/profile/${userData._id}`,
+              appliedDate: getFormattedDate(new Date()),
+            },
           ],
           noOfProposals: noOfProposals + 1,
         })
         .then((response) => {
           (applicationProfiles = [
             ...applicationProfiles,
-            `/profile/${userData._id}`,
+            {
+              name: `${userData.firstName} ${userData.lastName}`,
+              profileLink: `/profile/${userData._id}`,
+              appliedDate: getFormattedDate(new Date()),
+            },
           ]),
             (noOfProposals = noOfProposals + 1);
           showSuccessToast("Applied Successfully");
