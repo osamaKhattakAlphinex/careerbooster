@@ -20,7 +20,7 @@ import { setField } from "@/store/userDataSlice";
 const Page = ({ params }: { params: { id: string } }) => {
   const [active, setActive] = useState("education-card");
   const userDetails = useSelector((state: RootState) => state.userData);
-  const [userData, setUserData] = useState(userDetails);
+  const [userData, setUserData] = useState<any>({});
   const [userFetched, setUserFetched] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [isEmployer, setIsEmployer] = useState("");
@@ -120,12 +120,12 @@ const Page = ({ params }: { params: { id: string } }) => {
   };
 
   useEffect(() => {
-    if (userDetails._id) {
+    if (userDetails._id && userDetails.role !== "employer") {
       setUserData(userDetails);
       setUserFetched(true);
       return;
     }
-    if (!userDetails._id && params.id) {
+    if ((!userDetails._id && params.id) || userDetails.role !== "employer") {
       fetch(`/api/users/${params.id}`, {
         method: "GET",
       })
@@ -145,8 +145,11 @@ const Page = ({ params }: { params: { id: string } }) => {
     const blob = await pdf(<ProfileResume userData={userData} />).toBlob();
     saveAs(blob, fileName);
   };
-  
-  if (!userDetails._id || params.id !== userDetails._id) {
+
+  if (
+    (!userDetails._id || params.id !== userDetails._id) &&
+    userDetails.role !== "employer"
+  ) {
     if (userDetails.isLoading) {
       return (
         <div className=" flex flex-col xs:mt-[90px] lg:mt-52 md:mt-28 md:px-20 xs:px-4 xs:text-center mb-10">
@@ -206,14 +209,18 @@ const Page = ({ params }: { params: { id: string } }) => {
                 >
                   Download Profile
                 </button>
-                <h2 className="md:text-[18px] xs:text[15px] ">OR</h2>
-                <Link
-                  target="_blank"
-                  href="/profile-review"
-                  className="rounded-full w-fit px-4 py-2 md:text-[18px] xs:text[15px] dark:hover:bg-transparent dark:hover:border dark:hover:border-[#E0E360] dark:hover:text-gray-100 hover:bg-transparent hover:border hover:border-blue-400 hover:text-gray-900 dark:text-gray-900  dark:bg-[#E0E360] bg-blue-500 text-gray-100 xs:mx-auto md:mx-0"
-                >
-                  Edit Profile
-                </Link>
+                {userDetails.role !== "employer" && (
+                  <>
+                    <h2 className="md:text-[18px] xs:text[15px] ">OR</h2>
+                    <Link
+                      target="_blank"
+                      href="/profile-review"
+                      className="rounded-full w-fit px-4 py-2 md:text-[18px] xs:text[15px] dark:hover:bg-transparent dark:hover:border dark:hover:border-[#E0E360] dark:hover:text-gray-100 hover:bg-transparent hover:border hover:border-blue-400 hover:text-gray-900 dark:text-gray-900  dark:bg-[#E0E360] bg-blue-500 text-gray-100 xs:mx-auto md:mx-0"
+                    >
+                      Edit Profile
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
             <div className="w-1/2 xs:hidden md:block ">
@@ -237,29 +244,31 @@ const Page = ({ params }: { params: { id: string } }) => {
             </div>
           </div>
 
-          {userDetails.desiredJobTitle ? (
+          {userData.desiredJobTitle ? (
             <div className="flex flex-col lg:w-[90%] xs:w-full xs:mt-6 md:mt-16 mx-auto  gap-2 rounded-md dark:bg-gray-900 bg-gray-100">
-              <div
-                className="md:w-[40px] xs:w-[20px] ml-auto pt-4 md:pr-4 xs:mr-4 md:mr-0"
-                onClick={() => {
-                  setIsUpdateFormOpen(true);
-                }}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="size-6 cursor-pointer"
+              {userDetails.role !== "employer" && (
+                <div
+                  className="md:w-[40px] xs:w-[20px] ml-auto pt-4 md:pr-4 xs:mr-4 md:mr-0"
+                  onClick={() => {
+                    setIsUpdateFormOpen(true);
+                  }}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"
-                  />
-                </svg>
-              </div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-6 cursor-pointer"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"
+                    />
+                  </svg>
+                </div>
+              )}
 
               <div className="md:py-8 xs:py-4 px-4 text-center md:flex-row xs:flex-col  flex ">
                 <div className="salary flex md:flex-col xs:flex-row gap-4 md:w-1/3 xs:w-full items-center">
@@ -304,37 +313,39 @@ const Page = ({ params }: { params: { id: string } }) => {
               </div>
             </div>
           ) : (
-            <div
-              className={` flex-col text-center mt-12 ${
-                isEmployer === "No" ? "hidden" : "flex"
-              }`}
-            >
-              <div className="md:flex-row flex xs:flex-col items-center gap-4 mx-auto mt-6">
-                <h1 className="text-center font-semibold text-[30px] ">
-                  Are You A Job Seeker ?
-                </h1>
-                <div className="flex gap-4">
-                  {" "}
-                  <button
-                    onClick={() => {
-                      setIsEmployer("Yes");
-                      setOpen(true);
-                    }}
-                    className="w-fit px-4 py-1 rounded-lg bg-blue-600 hover:bg-blue-800 text-gray-100 text-[16px]"
-                  >
-                    Yes
-                  </button>
-                  <button
-                    onClick={() => {
-                      setIsEmployer("No");
-                    }}
-                    className="w-fit px-4 py-1 rounded-lg bg-blue-600 hover:bg-blue-800 text-gray-100 text-[16px]"
-                  >
-                    No
-                  </button>
+            userDetails.role !== "employer" && (
+              <div
+                className={` flex-col text-center mt-12 ${
+                  isEmployer === "No" ? "hidden" : "flex"
+                }`}
+              >
+                <div className="md:flex-row flex xs:flex-col items-center gap-4 mx-auto mt-6">
+                  <h1 className="text-center font-semibold text-[30px] ">
+                    Are You A Job Seeker ?
+                  </h1>
+                  <div className="flex gap-4">
+                    {" "}
+                    <button
+                      onClick={() => {
+                        setIsEmployer("Yes");
+                        setOpen(true);
+                      }}
+                      className="w-fit px-4 py-1 rounded-lg bg-blue-600 hover:bg-blue-800 text-gray-100 text-[16px]"
+                    >
+                      Yes
+                    </button>
+                    <button
+                      onClick={() => {
+                        setIsEmployer("No");
+                      }}
+                      className="w-fit px-4 py-1 rounded-lg bg-blue-600 hover:bg-blue-800 text-gray-100 text-[16px]"
+                    >
+                      No
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            )
           )}
           {isEmployer === "Yes" && (
             <div

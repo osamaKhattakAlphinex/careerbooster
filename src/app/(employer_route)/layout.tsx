@@ -4,10 +4,29 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { AppContextsProvider } from "@/context/AppContext";
 import EmployerSidebar from "@/components/employer/Sidebar";
+import { Metadata } from "next";
 
 interface Props {
   children: ReactNode;
 }
+export const metadata: Metadata = {
+  title: "Employer Portal - CareerBooster.ai",
+  description: "Employer Portal",
+  keywords: [
+    "AI Job Finder",
+    "Employer Portal",
+    "Career Booster",
+    "Job Search",
+    "AI Resume Builder",
+    "Finding Jobs",
+    "Find Candidates",
+  ],
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+  },
+};
 
 export default async function EmployerLayout({ children }: Props) {
   const session = await getServerSession(authOptions);

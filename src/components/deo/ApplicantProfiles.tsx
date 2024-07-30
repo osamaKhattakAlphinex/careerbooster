@@ -30,7 +30,7 @@ const ApplicantProfiles = ({ profiles, setShowProfiles }) => {
                     <strong>{profile.name}</strong>
                   </h2>
                   <p className="text-xs text-gray-500">
-                    Applied Date: <strong>{profile.appliedDate}</strong>
+                    Applied on: <strong>{profile.appliedDate}</strong>
                   </p>
                   <Link
                     href={profile.profileLink}
