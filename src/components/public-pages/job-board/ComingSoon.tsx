@@ -22,11 +22,11 @@ function ComingSoon() {
           </p>
         </Link>
         <Link
-          href="#"
+          href="/employer-signup"
           className="mt-2 cursor-pointer gap-2 bg-gradient-to-r from-purple-700 to-pink-500 text-white px-4 py-2 rounded-lg w-fit hover:from-purple-800 hover:to-pink-600 transition-all duration-300 ease-in-out"
         >
           <p className="text-gray-100 m-0 font-semibold whitespace-nowrap lg:text-[16px] cursor-pointer text-[14px] lg:leading-6 leading-4[text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
-            I am an Employer (Coming Soon)
+            I am an Employer
           </p>
           <p className=" text-gray-100 text-center lg:text-[14px] text-[10px] lg:leading-3 leading-[14px] pt-2">
             Searching for Talent
