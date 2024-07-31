@@ -9,6 +9,10 @@ export const getPages = () => {
       route: "/register",
     },
     {
+      name: "Employer Signup",
+      route: "/employer-signup",
+    },
+    {
       name: "Dashboard",
       route: "/dashboard",
     },
@@ -76,8 +80,12 @@ export const getPages = () => {
       route: "/executive-recruitment",
     },  
     {
-      name: "AI-Powered Job Board",
+      name: "Job Board",
       route: "/job-board",
+    },  
+    {
+      name: "AI-Powered Job Board",
+      route: "/ai-job-board",
     },  
     {
       name: "Find Jobs4Me",
