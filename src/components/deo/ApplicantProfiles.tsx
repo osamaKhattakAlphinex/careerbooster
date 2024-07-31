@@ -25,7 +25,7 @@ const ApplicantProfiles = ({ profiles, setShowProfiles }) => {
                 key={index}
                 className="flex flex-col justify-center items-center w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4"
               >
-                <div className="w-full h-20 bg-gray-100 p-4 rounded-md shadow-md flex flex-col justify-center items-start">
+                <div className=" w-full bg-gray-100 p-3 rounded-md shadow-md flex flex-col justify-center items-start">
                   <h2 className=" text-gray-950">
                     <strong>{profile.name}</strong>
                   </h2>
@@ -35,7 +35,7 @@ const ApplicantProfiles = ({ profiles, setShowProfiles }) => {
                   <Link
                     href={profile.profileLink}
                     target="_blank"
-                    className="text-xs bg-blue-600 rounded-sm hover:bg-blue-800 px-2 py-1 mt-2 text-gray-100"
+                    className="text-xs bg-blue-600 rounded hover:bg-blue-800 px-2 py-1.5 mt-2 text-gray-100"
                   >
                     View Profile
                   </Link>
