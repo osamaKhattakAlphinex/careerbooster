@@ -19,7 +19,7 @@ export type TableAction = {
   props?: any;
   element: React.JSX.Element | any;
   styles: string;
-  icon: any;
+  icon?: any;
 };
 
 export type BulkDataOperation = {

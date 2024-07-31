@@ -189,17 +189,19 @@ export default function JobCard({
       )}
 
       {records.length > 0
-        ? records.map((items: any) => {
+        ? records.map((item: any) => {
             return (
               <SinglejobCard
-                category={items.category}
-                jobTitle={items.jobTitle}
-                location={items.location}
-                employer={items.employer}
-                jobDescription={items.jobDescription}
-                applyJobLink={items.link}
-                jobId={items._id}
-                key={items._id}
+                jobTitle={item.jobTitle}
+                location={item.location}
+                employer={item.employer}
+                jobDescription={item.jobDescription}
+                addedBy={item.addedBy}
+                applyJobLink={item.link}
+                jobId={item._id}
+                noOfProposals={item.noOfProposals}
+                applicationProfiles={item.applicationProfiles}
+                key={item._id}
               />
             );
           })

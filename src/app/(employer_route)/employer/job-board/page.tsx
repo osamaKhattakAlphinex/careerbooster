@@ -1,8 +1,8 @@
-import EmployerJobBoard from "@/components/employer/JobBoard";
+import JobPortal from "@/components/deo/JobPortal";
 import React from "react";
 
 const JobBoard = () => {
-  return <EmployerJobBoard />;
+  return <JobPortal />;
 };
 
 export default JobBoard;

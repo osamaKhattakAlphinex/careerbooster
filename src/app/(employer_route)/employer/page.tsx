@@ -33,9 +33,7 @@ const Page = () => {
   }, [userData]);
   return (
     <div className="flex flex-col justify-start items-start gap-4">
-      <h1 className="text-lg  dark:text-white/70 text-black/70">
-        Jobs Details
-      </h1>
+      <h1 className="text-2xl font-bold mb-4">Job Details</h1>
       <div
         key="1"
         className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
