@@ -19,6 +19,9 @@ const UserSchema = new Schema(
     registeredPhone: {
       type: String,
     },
+    company:{
+      type: String,
+    },
     summary: {
       type: String,
       default: "",

@@ -84,11 +84,9 @@ export async function POST(req: NextRequest) {
               "Multitasking", "Event Planning", "Project Coordination", "Process Improvement"
             ]
 
-              Also give some suggestions to improve resume data/content
               The output must be in json format. (following is an example)
             {
                 skills: [Array of strings],
-                suggestions: [Array of strings]
             }
 
 

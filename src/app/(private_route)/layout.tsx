@@ -30,9 +30,11 @@ export default async function Privatelayout({ children }: Props) {
 
   const isAdmin = user?.role === "admin";
   const isDeo = user?.role === "deo";
+  const isEmployer = user?.role === "employer";
 
   if (isAdmin) redirect("/admin");
   if (isDeo) redirect("/deo");
+  if (isEmployer) redirect("/employer");
   if (!session?.user) {
     return (
         <Onboard/>

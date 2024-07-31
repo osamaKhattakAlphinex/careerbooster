@@ -104,6 +104,7 @@ interface UserDataSlice {
   expectedSalary: string;
   desiredJobTitle:string;
   locationPreference: string;
+  company?: string;
   phone?: string;
   email?: string;
   role?: string;
@@ -159,6 +160,7 @@ const initialState: UserDataSlice = {
   expectedSalary: "",
   desiredJobTitle: "",
   locationPreference: "",
+  company:"",
   phone: "",
   email: "",
   linkedin: "",

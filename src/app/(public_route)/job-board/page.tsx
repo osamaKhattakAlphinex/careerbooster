@@ -1,7 +1,6 @@
 import React from "react";
 import PageHeader from "@/components/PageHeader";
 import { Metadata } from "next";
-import Image from "next/image";
 import ComingSoon from "@/components/public-pages/job-board/ComingSoon";
 import UniqueFeatures from "@/components/public-pages/job-board/UniqueFeatures";
 import JobSeekers from "@/components/public-pages/job-board/JobSeekers";

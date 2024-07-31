@@ -219,6 +219,12 @@ const useHandler = () => {
     updateSaveHook.updateAndSaveOthers(updatedSection,recName);
   }
 
+  const handleUpdateInterests = (value:string, i: number,recName: string) => {
+    let updatedSection = [...resume[recName]];
+    updatedSection[i] = {...updatedSection[i], description: value };
+    updateSaveHook.updateAndSaveOthers(updatedSection,recName);
+  }
+
   return {
     handlers: {
       handleDeleteSkill,
@@ -239,7 +245,8 @@ const useHandler = () => {
       handleAddOthersAchivement,
       handleUpdateOthersAchivement,
       handleDeleteOthersAchivement,
-      handleAddNewDetails
+      handleAddNewDetails,
+      handleUpdateInterests
     },
   };
 };

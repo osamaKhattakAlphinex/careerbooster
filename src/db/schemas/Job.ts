@@ -27,6 +27,11 @@ const JobSchema = new Schema(
       type: mongoose.SchemaTypes.ObjectId,
       required: true,
     },
+    addedBy:{
+      type: String,
+      default: "deo",
+    },
+    applicationProfiles:[],
     link: String,
     skills: [],
     rejectMsg: String,

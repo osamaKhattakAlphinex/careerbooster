@@ -9,7 +9,7 @@ interface Props {
   children: ReactNode;
 }
 
-export default async function AdminLayout({ children }: Props) {
+export default async function DeoLayout({ children }: Props) {
   const session = await getServerSession(authOptions);
 
   const user = session?.user as { role: string } | undefined;

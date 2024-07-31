@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 
-const ResumeUploader = ({ setAiResumeKeywords, setAiResumeSuggestions }) => {
+const ResumeUploader = ({ setAiResumeKeywords }) => {
   const [file, setFile] = useState<any>(null);
   const userData = useSelector((state: RootState) => state.userData);
   const [fileError, setFileError] = useState<string>("");
@@ -96,7 +96,6 @@ const ResumeUploader = ({ setAiResumeKeywords, setAiResumeSuggestions }) => {
             ? data.result
             : JSON.parse(data.result);
         setAiResumeKeywords(obj.skills);
-        setAiResumeSuggestions(obj.suggestions);
         setUploadCompleteText("Search Completed Successfully");
         setFileUploading(false);
         setUploadComplete(true);
