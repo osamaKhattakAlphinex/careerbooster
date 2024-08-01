@@ -8,10 +8,10 @@ import React, { useState } from "react";
 const Menu = () => {
   
   return (
-    <div className="h-screen overflow-y-auto bg-gray-800 no-scrollbar">
+    <div className="h-screen overflow-y-auto bg-gray-50 dark:bg-gray-800 no-scrollbar">
       <div className="w-full h-full ">
         <div className="p-3 text-center sm:p-4">
-          <h1 className="text-base font-bold text-white sm:text-2xl">
+          <h1 className="text-base font-bold text-gray-950 dark:text-white sm:text-2xl">
             CareerBooster.AI
           </h1>
           <div className="flex flex-row items-center justify-center gap-2 mt-3">
@@ -63,12 +63,12 @@ const Menu = () => {
         </div>
         {/* Sidebar */}
         <ul className="flex flex-col p-0 pb-4 h-[calc(100%_-_140px)] text-sm sm:text-base">
-          <li className="p-2 mb-1 sm:p-4 hover:bg-gray-700 ">
+          <li className="p-2 mb-1 sm:p-4 hover:bg-gray-200 hover:dark:bg-gray-700 ">
             <Link
               href="/employer"
               className="text-white no-underline hover:no-underline hover:text-white/80"
             >
-              <span className="flex flex-row items-center justify-start gap-2 text-white cursor-pointer">
+              <span className="flex flex-row items-center justify-start gap-2 text-gray-950 dark:text-white cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -94,12 +94,12 @@ const Menu = () => {
           </li>
 
           {/* Other Menu Items */}
-          <li className="p-2 mb-1 sm:p-4 hover:bg-gray-700">
+          <li className="p-2 mb-1 sm:p-4 hover:bg-gray-200 hover:dark:bg-gray-700">
             <Link
               href="/employer/job-board"
               className="text-white no-underline hover:no-underline hover:text-white/80"
             >
-              <span className="flex flex-row items-center justify-start gap-2 text-white cursor-pointer">
+              <span className="flex flex-row items-center justify-start gap-2 text-gray-950 dark:text-white cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -119,25 +119,25 @@ const Menu = () => {
             </Link>
           </li>
 
-          <li className="p-2 mb-1 sm:p-4 hover:bg-gray-700">
+          <li className="p-2 mb-1 sm:p-4 hover:bg-gray-200 hover:dark:bg-gray-700">
             <Link
               href="/employer/job-profiles"
               className="text-white no-underline hover:no-underline hover:text-white/80"
             >
-              <span className="flex flex-row items-center justify-start gap-2 text-white cursor-pointer">
+              <span className="flex flex-row items-center justify-start gap-2 text-gray-950 dark:text-white cursor-pointer">
                 {userGroup}
                 Job Seeker Profiles
               </span>
             </Link>
           </li>
 
-          <li className="p-2 mb-1 sm:p-4 hover:bg-gray-700">
+          <li className="p-2 mb-1 sm:p-4 hover:bg-gray-200 hover:dark:bg-gray-700">
             <Link
               href="#"
               title="Coming Soon"
               className="text-white/40 no-underline hover:no-underline hover:text-white/80"
             >
-              <span className="flex flex-row items-center justify-start gap-2 text-white/40 cursor-pointer">
+              <span className="flex flex-row items-center justify-start gap-2 text-gray-950/40 dark:text-white/40 cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -158,8 +158,8 @@ const Menu = () => {
           </li>
         </ul>
         <div className="text-center">
-          <hr />
-          <span className="text-white/70">&copy; careerbooster.ai</span>
+          <hr/>
+          <span className="text-gray-950/70 dark:text-white/70 ">&copy; careerbooster.ai</span>
         </div>
       </div>
     </div>

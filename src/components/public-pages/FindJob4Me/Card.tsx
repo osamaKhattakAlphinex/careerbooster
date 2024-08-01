@@ -7,7 +7,7 @@ const montserrat_r = Montserrat({
 function Card() {
   return (
     <>
-      <div className="bg-[#E4ECF2] mt-20 rounded-l-3xl rounded-b-3xl md:p-6 xs:p-2 shadow-md  flex   md:w-[80%] xs:w-[95%] mx-auto dark:text-gray-400 text-gray-700">
+      <div className="bg-[#E4ECF2] mt-20 rounded-l-3xl rounded-b-3xl md:p-6 xs:p-2 shadow-md flex md:w-[80%] xs:w-[95%] mx-auto dark:text-gray-400 text-gray-700">
         <div className="flex md:flex-row xs:flex-col items-center ">
           <div className="md:w-1/3 xs:w-full flex justify-center items-center">
             <img
