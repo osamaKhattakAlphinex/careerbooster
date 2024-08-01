@@ -50,7 +50,15 @@ const cardDetail = [
     bgColor2: "to-orange-700",
     action: "launch",
   },
-
+  {
+    title: "AI Job Finder",
+    description: `Our AI finds fitting job matches across the web, saving you from multiple board searches.`,
+    link: "/ai-job-board",
+    icon: bagsIcon,
+    bgColor1: "from-[#ff0070]",
+    bgColor2: "to-[#fd73ff]",
+    action: "launch",
+  },
   {
     title: "Consulting Bids Generator",
     description: "Generate bids in seconds to secure your next consulting gig.",
@@ -81,15 +89,6 @@ const cardDetail = [
     icon: review,
     bgColor1: "from-cyan-600",
     bgColor2: "to-sky-300",
-    action: "coming soon",
-  },
-  {
-    title: "AI Job Finder",
-    description: `Our AI finds fitting job matches across the web, saving you from multiple board searches.`,
-    link: "#",
-    icon: bagsIcon,
-    bgColor1: "from-[#ff0070]",
-    bgColor2: "to-[#fd73ff]",
     action: "coming soon",
   },
   {
