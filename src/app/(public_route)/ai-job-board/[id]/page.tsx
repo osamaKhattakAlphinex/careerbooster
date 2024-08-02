@@ -116,7 +116,7 @@ export default function ViewJobPage({ params }: { params: { id: string } }) {
               : <span className="font-medium">{singleJob?.location}</span>
             </div>
           </div>
-          <div className="md:w-1/4 xs:w-fit flex justify-end md:ml-auto xs:mt-4 md:mx-0 xs:mx-auto">
+          <div className="md:w-1/4 xs:w-fit flex gap-4 justify-end md:ml-auto xs:mt-4 md:mx-0 xs:mx-auto">
             {singleJob?.link && (
               <Link
                 target="_blank"
