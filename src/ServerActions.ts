@@ -18,6 +18,9 @@ export async function getPackageID(){
 export async function getStripeKey(){
   return  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!;
 }
+export async function getWebsiteUrl(){
+  return  process.env.NEXTAUTH_URL!;
+}
 export async function getGHLApi(){
   return  process.env.NEXT_PUBLIC_GHL_API_URL!;
 }

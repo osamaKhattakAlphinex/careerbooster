@@ -133,8 +133,8 @@ const Menu = () => {
 
           <li className="p-2 mb-1 sm:p-4 hover:bg-gray-200 hover:dark:bg-gray-700">
             <Link
-              href="#"
-              title="Coming Soon"
+              href="/employer/find-talent"
+              // title="Coming Soon"
               className="text-white/40 no-underline hover:no-underline hover:text-white/80"
             >
               <span className="flex flex-row items-center justify-start gap-2 text-gray-950/40 dark:text-white/40 cursor-pointer">

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { refreshIconRotating } from "@/helpers/iconsProvider";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -34,7 +34,7 @@ const LoginForm = () => {
     }
   };
 
-  const handleBackspace = (index: any, e: any) => {
+  const handleBackspace = (index: any, e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.keyCode === 8 && index > 0 && otp[index] === "") {
       // Move focus to the previous input field
       otpInputsRefs.current[index - 1].focus();
