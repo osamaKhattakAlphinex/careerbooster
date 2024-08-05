@@ -22,6 +22,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import ApplicantProfiles from "./ApplicantProfiles";
+import { getWebsiteUrl } from "@/ServerActions";
 
 type Job = {
   _id: string;
@@ -274,8 +275,10 @@ const JobPortal = () => {
     {
       name: "Preview",
       type: "handler",
-      element: (rec: any) => {
-        router.push(`/ai-job-board/${rec._id}`);
+      element: async (rec: any) => {
+        const websiteUrl = await getWebsiteUrl()
+        window.open(`${websiteUrl}/ai-job-board/${rec._id}`)
+        // router.push(`/ai-job-board/${rec._id}`);
       },
       styles:
         "whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 no-underline",
@@ -294,6 +297,16 @@ const JobPortal = () => {
       type: "handler",
       element: (rec: any) => showApplicantProfiles(rec.applicationProfiles),
       styles: `whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-yellow-700 rounded-lg hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800 no-underline ${
+        deo.role === "employer" ? "" : "hidden"
+      }`,
+    },
+    {
+      name: "AI",
+      type: "handler",
+      element: (rec: any) => {
+        router.push(`/employer/find-talent/${rec._id}`);
+      },
+      styles: `whitespace-nowrap px-3 py-2 text-xs font-medium text-center text-white bg-pink-700 rounded-lg hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800 no-underline ${
         deo.role === "employer" ? "" : "hidden"
       }`,
     },

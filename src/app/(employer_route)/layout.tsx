@@ -39,7 +39,7 @@ export default async function EmployerLayout({ children }: Props) {
     <div className="absolute grid items-start justify-start w-screen grid-cols-12 overflow-x-hidden overflow-y-hidden">
       <EmployerSidebar />
 
-      <main className="h-screen col-span-12 p-10 overflow-y-scroll bg-gray-200 sm:col-span-10 max-w-7xl dark:bg-gray-950">
+      <main className="h-screen col-span-12 md:p-10 xs:p-4 overflow-y-scroll bg-gray-200 sm:col-span-10 max-w-7xl dark:bg-gray-950">
         {children}
       </main>
     </div>
