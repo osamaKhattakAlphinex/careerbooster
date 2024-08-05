@@ -111,8 +111,8 @@ const SingleJob = ({ singleJobId, employer = false }) => {
     <>
       <div
         className={`flex flex-col gap-4 md:mx-10 xs:mx-2 rounded-md shadow-lg dark:border dark:border-gray-100 dark:bg-black bg-gray-100 ${
-          employer ? "md:mt-0" : "md:mt-40"
-        } xs:mt-20 mb-10 md:p-10 xs:p-4`}
+          employer ? "md:mt-0 xs:mt-0" : "md:mt-40 xs:mt-20"
+        } mb-10 md:p-10 xs:p-4`}
       >
         <h2 className="text-gray-950 dark:text-gray-100 font-extrabold text-2xl md:text-left xs:text-center">
           {singleJob?.jobTitle}
@@ -174,7 +174,7 @@ const SingleJob = ({ singleJobId, employer = false }) => {
           </div>
         </div>
         <div
-          className="md:text-left xs:text-center  text-gray-950 dark:text-gray-100"
+          className="text-left text-gray-950 dark:text-gray-100"
           dangerouslySetInnerHTML={{
             __html: singleJob?.jobDescription,
           }}
@@ -211,7 +211,7 @@ const SingleJob = ({ singleJobId, employer = false }) => {
         </div>
       </div>
       {employer && showTalentProfiles && (
-        <div className="flex flex-col gap-6 md:mx-10 xs:mx-2 p-2 rounded-md shadow-lg dark:border dark:border-gray-100 dark:bg-black bg-gray-100">
+        <div className="flex flex-col gap-4 md:mx-10 xs:mx-2 rounded-md shadow-lg dark:border dark:border-gray-100 dark:bg-black bg-gray-100 mb-10 md:p-10 xs:p-4">
           <h2 className="text-gray-950 dark:text-gray-100 text-2xl md:text-left xs:text-center">
             Top Candidates for {singleJob?.jobTitle}
           </h2>

@@ -131,7 +131,7 @@ const Menu = () => {
             </Link>
           </li>
 
-          <li className="p-2 mb-1 sm:p-4 hover:bg-gray-200 hover:dark:bg-gray-700">
+          {/* <li className="p-2 mb-1 sm:p-4 hover:bg-gray-200 hover:dark:bg-gray-700">
             <Link
               href="/employer/find-talent"
               // title="Coming Soon"
@@ -155,7 +155,7 @@ const Menu = () => {
                 Find Talent 🔒
               </span>
             </Link>
-          </li>
+          </li> */}
         </ul>
         <div className="text-center">
           <hr/>
