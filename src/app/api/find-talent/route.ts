@@ -37,6 +37,7 @@ export async function POST(req: NextRequest) {
       const score = tfidf.tfidf(jobDescription, index + 1);
       return {
         score,
+        // normalizedScore: 0,
         userId: user._id,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -46,6 +47,15 @@ export async function POST(req: NextRequest) {
         locationPreference: user.locationPreference,
       };
     });
+
+    // Find the min and max scores
+    // const minScore = Math.min(...scores.map(s => s.score));
+    // const maxScore = Math.max(...scores.map(s => s.score));
+
+    // // Normalize the scores between 1 and 100
+    // scores.forEach(scoreObj => {
+    //   scoreObj.normalizedScore = ((scoreObj.score - minScore) / (maxScore - minScore)) * 99 + 1;
+    // });
 
     scores.sort((a, b) => b.score - a.score);
     return NextResponse.json(

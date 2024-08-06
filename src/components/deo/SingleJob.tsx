@@ -228,6 +228,10 @@ const SingleJob = ({ singleJobId, employer = false }) => {
                     <strong>{profile.jobTitle}</strong>
                   </p>
                   <br />
+                  {/* <p className="text-gray-600 mb-1">
+                    <strong>Profile Matching Score:</strong>{" "}
+                    {profile.score} out of 100
+                  </p> */}
                   <p className="text-gray-600 mb-1">
                     <strong>Desired Job Title:</strong>{" "}
                     {profile.desiredJobTitle}
