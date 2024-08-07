@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import natural from "natural";
 import User from "@/db/schemas/User";
-
+export const maxDuration = 300; // This function can run for a maximum of 5 minutes
+export const dynamic = "force-dynamic";
 export async function POST(req: NextRequest) {
   try {
     const { jobDescription } = await req.json();

@@ -4,6 +4,8 @@ import startDB from "@/lib/db";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import Job from "@/db/schemas/Job";
+export const maxDuration = 300; // This function can run for a maximum of 5 minutes
+export const dynamic = "force-dynamic";
 
 export const POST = async (req: NextRequest) => {
   const session = await getServerSession(authOptions);
