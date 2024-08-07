@@ -1,7 +1,8 @@
 import JobCategory from "@/db/schemas/JobCategory";
 import startDB from "@/lib/db";
 import { NextResponse } from "next/server";
-
+export const maxDuration = 300; // This function can run for a maximum of 5 minutes
+export const dynamic = "force-dynamic";
 export async function GET() {
     try {
       await startDB();

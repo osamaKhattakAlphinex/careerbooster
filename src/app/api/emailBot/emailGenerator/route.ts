@@ -20,13 +20,6 @@ import { getUserCreditsByEmail } from "@/helpers/getUserCreditsByEmail";
 import { updateToolUsage } from "@/helpers/updateToolUsage";
 import { encodingForModel } from "js-tiktoken";
 import { updateUserTokens } from "@/helpers/updateUserTokens";
-
-// PROMPT
-// Here is the Job description:
-// {{jobDescription}}
-
-// based on the provided data about user and job description write an amazing cover letter.
-
 // The answer must be formatted and returned as HTML
 export const maxDuration = 300; // This function can run for a maximum of 5 seconds
 export const dynamic = "force-dynamic";
