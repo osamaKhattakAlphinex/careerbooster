@@ -1,0 +1,45 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "@/styles/buttons.css";
+@import "@/styles/template_4.css";
+
+@import "@/styles/template_2.css";
+@layer components {
+  .form-control {
+    @apply w-full border  border-[#2e2f45] dark:focus-within:border-[#e6f85e] outline-none rounded-md px-3 py-2 mt-1 focus:ring-blue-500 focus:border-blue-500  bg-transparent;
+  }
+
+  .form {
+    @apply !border-[1px] dark:!border-[#2e2f45] border-gray-700 rounded-lg p-3 mb-2 md:w-auto xs:w-auto;
+  }
+
+  .form-btn {
+    @apply xs:w-full md:w-5/12 flex mt-3 flex-row gap-1 items-center justify-center text-blue-700 hover:text-white border-[1px] border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2;
+  }
+
+  .form-heading {
+    @apply flex items-center justify-between text-xl font-bold leading-tight tracking-tight xs:my-5 md:mt-2 dark:text-gray-100 text-gray-950;
+  }
+
+  .custom-card {
+    @apply w-[100%] mb-2 grid grid-cols-2 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 mt-4 xs:mt-2  gap-4 md:gap-2 lg:gap-4 xl:gap-6;
+  }
+
+  .link-list-t a {
+    @apply text-[#11121c] dark:text-gray-300 inline-block text-[0.875rem] py-1 px-0 no-underline;
+  }
+
+  .link-list-t a:hover {
+    @apply text-[#6a4dff] dark:text-[#e6f85e];
+  }
+
+  .h3-t {
+    @apply font-semibold text-[#000] dark:text-[#fff]  text-center leading-5 text-3xl;
+  }
+  .bg_color {
+    @apply bg-[#444440] text-gray-100 py-1 px-4 flex gap-2 rounded-sm;
+  }
+  .bg_color_9 {
+    @apply rounded-3xl xs:-mx-1 md:mx-0 text-gray-100 bg-[#043382] py-2 px-6 mt-6 mb-3 xs:px-2 sm:px-2 md:px-6 lg:px-6 w-fit;
+  }
+}

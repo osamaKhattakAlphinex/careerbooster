@@ -1,0 +1,12 @@
+{
+    "crons": [
+      {
+        "path": "/api/cron-jobs/send-job-alerts-daily",
+        "schedule": "0 12 * * *"
+      },
+      {
+        "path": "/api/cron-jobs/send-job-alerts-weekly",
+        "schedule": "0 12 * * 1"
+      }
+    ]
+}
